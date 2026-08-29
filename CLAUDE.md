@@ -45,6 +45,11 @@ also nicht umbenennen.
 | `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 82 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
+**Auszeichnung in Beispielen**: drei Stufen — `ok` (standardsprachlich), `ugs`
+(umgangssprachlich oder regional, verbreitet aber nicht für geschriebene Texte) und
+`nope` (falsch). `ugs` ist kein Fehler; wer eine regionale Form rot markiert, verstößt
+gegen Grundsatz 4 und bricht die Widerspruchsprüfung in `tests/suite.js`.
+
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
 
 **ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d.

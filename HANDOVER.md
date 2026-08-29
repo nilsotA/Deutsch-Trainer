@@ -64,6 +64,53 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Dritte Farbstufe: umgangssprachlich ist nicht falsch** (29.08.2026). Die App kannte in
+Beispielen nur zwei Auszeichnungen — `ok` (grün, richtig) und `nope` (rot, falsch). Alles
+dazwischen stand zwangsläufig in Rot. Grundsatz 4 verlangt aber, Regionales und
+Umgangssprachliches **einzuordnen statt abzustempeln, und überall gleich**.
+
+Das hatte echte Widersprüche zur Folge:
+
+- In `sa17` stand „das Auto von meinem Bruder“ in Rot und wurde **in derselben Zeile** als
+  umgangssprachlich bezeichnet.
+- „wegen dem Wetter“ stand in Rot, während `c:wegen`, `m01` und `satz-sprechen` es als
+  verbreitet einordnen. Der Duden führt den Dativ nach *wegen* als umgangssprachlich und
+  landschaftlich — ausdrücklich **nicht** als falsch.
+
+Neu ist die Stufe `.ugs` in der Farbe `--warn`, in beiden Themes definiert. Sechs Formen
+sind umgestellt (sieben Fundstellen). **Nicht** umgestellt, weil es echte Fehler sind:
+„mit dem Kollege“ (n-Deklination), „mehr besser“ (doppelter Komparativ), „von 1990–1995“.
+Die Regelansicht erklärt die drei Stufen jetzt in der Legende.
+
+**Warum es niemandem aufgefallen ist.** Die Widerspruchsprüfung in `tests/suite.js` liest
+nur *Worte* („ist falsch“), nicht *Auszeichnungen* — `strip()` entfernt die Tags. Die App
+fällt ihr Urteil aber auf beiden Wegen. Zwei neue Prüfungen schließen das: Eine rot
+markierte Form darf im unmittelbaren Umfeld nicht als umgangssprachlich bezeichnet werden,
+und umgekehrt darf keine `ugs`-Form anderswo „ist falsch“ heißen.
+
+**Alle 25 Variantenregeln sind belegt, `VAR_OFFEN` ist leer.** Dabei kam ein echter
+Kasusfehler heraus:
+
+> `gram-praepdat` führte **`ab`** unter „Diese Präpositionen verlangen immer den Dativ“.
+
+Das stimmt nicht. Mit Artikelwort steht der Dativ („ab dem nächsten Montag“), ohne Artikel
+gehen **beide** — der Duden führt „ab kommendem/auch kommenden Montag“. In Deutschland ist
+dort der Akkusativ üblich, in der Schweiz der Dativ. `ab` steht jetzt bei den schwankenden
+Fällen. Die waren ohnehin zu grob („dank, laut und binnen gehen mit Dativ und Genitiv —
+beides ist korrekt“) und sagen jetzt, welcher Fall wann üblich ist: *dank* im Plural meist
+Genitiv, *laut* heute meist Dativ und bei bloßem Plural zwingend („laut Berichten“),
+*binnen* mit Dativ üblich und Genitiv gehoben.
+
+`grammis`, `IDS Mannheim` und die `Variantengrammatik` zählen in `normen.js` jetzt als
+anerkannte Quellen — für regionale Fragen sind sie oft besser als der Duden.
+
+**Eine Falle beim Belegen selbst.** Mein eigener Belegsatz zu stehen/sitzen/liegen hat die
+Widerspruchsprüfung ausgelöst: „Keine der beiden Formen **ist falsch**“ enthält „ist falsch“,
+und die Wortliste sah die Verneinung nicht. Ein Freispruch ist kein Urteil — „nicht falsch“,
+„nie falsch“ und „keine … ist falsch“ zählen jetzt nicht mehr mit. „nicht korrekt“ bleibt
+bewusst ein hartes Urteil.
+
+
 **Die acht `z-`Regeln durchgesehen** (29.08.2026). Damit sind alle 17 Regeln der
 Zeichensetzung geprüft. Die vier Verdachtsfälle aus der letzten Ideenliste haben sich
 alle bestätigt — und zwei davon waren ernster als gedacht.
@@ -282,12 +329,10 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Die sieben unbelegten Variantenregeln.** `tests/normen.js` führt sie in `VAR_OFFEN`:
-   `gram-kongruenz`, `gram-alswie`, `satz-perfekt`, `satz-sprechen`, `gram-relkasus`,
-   `gram-genalltag`, `gram-praepdat`. Jede behauptet gegenüber Nils, dass mehr als eine Form
-   gilt, ohne sagen zu können, woher. Vorgehen: belegen, Quelle in die Regel schreiben, aus
-   `VAR_OFFEN` austragen — der Lauf erzwingt den letzten Schritt. Die Zeichensetzung ist
-   damit durch: alle 17 Regeln sind geprüft.
+1. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten wären
+   akademische Verben und Verwechslungspaare aus Nils' eigenen Texten. Das ist jetzt der
+   größte inhaltliche Hebel — die Regelseite ist durchgearbeitet: alle 17
+   Zeichensetzungsregeln geprüft, alle 25 Variantenregeln belegt, `VAR_OFFEN` leer.
 
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
