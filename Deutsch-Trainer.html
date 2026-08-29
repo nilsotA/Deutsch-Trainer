@@ -354,6 +354,8 @@ body.walk .walkbar .btn{font-size:19px;padding:20px 24px}
 mark.mk{padding:1px 3px;border-radius:4px;background:none}
 mark.mk-hart{background:var(--bad-soft);box-shadow:inset 0 -2px 0 var(--bad);color:var(--bad)}
 mark.mk-pruef{background:var(--warn-soft);box-shadow:inset 0 -2px 0 var(--warn);color:var(--warn)}
+/* Dritte Stufe wie bei den Beispielen: verbreitet, aber nicht standardsprachlich. */
+.mk-ugs{background:var(--gold-soft);box-shadow:inset 0 -2px 0 var(--gold);color:var(--gold)}
 mark.mk-stil{background:var(--gold-soft);box-shadow:inset 0 -2px 0 var(--gold);color:var(--gold)}
 mark.mk-form{background:var(--blue-soft);box-shadow:inset 0 -2px 0 var(--blue);color:var(--blue)}
 .fnd{padding:12px 0;border-bottom:1px solid var(--line2)}
@@ -7296,21 +7298,21 @@ function renderFortschritt(){
 
 /* ============================================================
    TEXTCHECK — Musterprüfung für eigene Texte
-   sev: hart = klarer Fehler · pruef = wahrscheinlich, bitte prüfen
+   sev: hart = klarer Fehler · ugs = verbreitet, aber nicht standardsprachlich · pruef = wahrscheinlich, bitte prüfen
         stil = Stilhinweis · form = Wirkung und Ton
    ============================================================ */
 const CHECKS = [
 
 /* ---------- HARTE FEHLER ---------- */
-{id:"x01",sev:"hart",re:/\bwegen\s+(dem|den|einem)\b/gi,t:"wegen + Genitiv",
+{id:"x01",sev:"ugs",re:/\bwegen\s+(dem|den|einem)\b/gi,t:"wegen + Genitiv",
  k:"„wegen“ verlangt standardsprachlich den Genitiv: <b>wegen des Wetters</b>. Der Dativ ist umgangssprachlich.",r:"gram-genitiv"},
-{id:"x02",sev:"hart",re:/\btrotz\s+(dem|den|einem)\b/gi,t:"trotz + Genitiv",
+{id:"x02",sev:"ugs",re:/\btrotz\s+(dem|den|einem)\b/gi,t:"trotz + Genitiv",
  k:"„trotz“ verlangt den Genitiv: <b>trotz des Regens</b>.",r:"gram-genitiv"},
-{id:"x03",sev:"hart",re:/\bwährend\s+(dem|den|einem)\b/gi,t:"während + Genitiv",
+{id:"x03",sev:"ugs",re:/\bwährend\s+(dem|den|einem)\b/gi,t:"während + Genitiv",
  k:"„während“ verlangt den Genitiv: <b>während der Vorlesung</b>.",r:"gram-genitiv"},
-{id:"x04",sev:"hart",re:/\b(größer|kleiner|besser|schlechter|schneller|langsamer|mehr|weniger|länger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter|weiter)\s+wie\b/gi,
+{id:"x04",sev:"ugs",re:/\b(größer|kleiner|besser|schlechter|schneller|langsamer|mehr|weniger|länger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter|weiter)\s+wie\b/gi,
  t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“.",r:"gram-alswie"},
-{id:"x05",sev:"hart",re:/\bals\s+wie\b/gi,t:"„als wie“",
+{id:"x05",sev:"ugs",re:/\bals\s+wie\b/gi,t:"„als wie“",
  k:"Nicht standardsprachlich. Es heißt entweder <b>als</b> (ungleich) oder <b>wie</b> (gleich).",r:"gram-alswie"},
 {id:"x06",sev:"hart",re:/\beinzigste[nrsm]?\b/gi,t:"„einzigste“",
  k:"„einzig“ ist ein Absolutadjektiv und lässt sich nicht steigern: <b>die einzige Möglichkeit</b>.",r:"stil-absolut"},
@@ -7331,7 +7333,7 @@ const CHECKS = [
 {id:"x18",sev:"hart",re:/\bseit\s+ihr\b[^,.!?;—–]*\?/gi,t:"seid ihr",k:"In der Frage ist die Verbform gemeint: <b>seid ihr</b>. Mit <i>seit</i> wäre es eine Zeitangabe oder eine Konjunktion — „seit ihr gewonnen habt“ ist dagegen richtig.",r:"recht-seit"},
 {id:"x19",sev:"pruef",re:/\b[A-ZÄÖÜ][a-zäöüß]+['’]s\s+[A-ZÄÖÜ]/g,t:"Apostroph im Genitiv?",
  k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s, ss, ß, tz, z, x steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Der Duden erlaubt den Apostroph, wenn er die Grundform eines Eigennamens verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“).",r:"recht-apostroph"},
-{id:"x20",sev:"hart",re:/\b([Rr]ufe|[Rr]ufst|[Rr]uft|[Rr]ief|[Rr]iefst|[Rr]iefen|[Aa]ngerufen)\s+(dir|mir|ihm|ihr|uns|euch|ihnen|Ihnen)\b/g,
+{id:"x20",sev:"ugs",re:/\b([Rr]ufe|[Rr]ufst|[Rr]uft|[Rr]ief|[Rr]iefst|[Rr]iefen|[Aa]ngerufen)\s+(dir|mir|ihm|ihr|uns|euch|ihnen|Ihnen)\b/g,
  t:"anrufen + Akkusativ",k:"Überregional verlangt „anrufen“ den Akkusativ: <b>Ich rufe dich an.</b> Der Dativ ist südwestdeutsch und schweizerisch verbreitet — außerhalb fällt er sofort auf.",r:"gram-akkverben"},
 {id:"x21",sev:"hart",re:/\b[Ii]nteressiert\s+(mir|dir|ihm|uns|euch)\b/g,t:"interessieren + Akkusativ",
  k:"„interessieren“ verlangt den Akkusativ: <b>Das interessiert mich.</b>",r:"gram-akkverben"},
@@ -7527,7 +7529,7 @@ function analyse(txt){
 }
 
 /* ---------- Ansicht ---------- */
-const SEVN = {hart:"Klarer Fehler", pruef:"Bitte prüfen", stil:"Stil", form:"Wirkung und Ton"};
+const SEVN = {hart:"Klarer Fehler", ugs:"Umgangssprachlich", pruef:"Bitte prüfen", stil:"Stil", form:"Wirkung und Ton"};
 let TC = {text:"", res:null, filter:""};
 
 function renderCheck(){
@@ -7537,7 +7539,7 @@ function renderCheck(){
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
       "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
-      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> 78 Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie rund <b>drei von vier</b> eingebauten Fehlern. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
+      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie rund <b>drei von vier</b> eingebauten Fehlern. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
       '<div class="spread" style="margin-bottom:10px"><div class="eyebrow" style="margin:0">Dein Text</div>'+
@@ -7574,7 +7576,7 @@ function renderCheck(){
 
 function drawCheck(){
   const {finds, m} = TC.res;
-  const byS = {hart:[],pruef:[],stil:[],form:[]};
+  const byS = {hart:[],ugs:[],pruef:[],stil:[],form:[]};
   finds.forEach(f=>byS[f.c.sev].push(f));
   const shown = TC.filter ? finds.filter(f=>f.c.sev===TC.filter) : finds;
 
@@ -7600,7 +7602,7 @@ function drawCheck(){
     const seen = {};
     return '<div class="card">'+
       '<div class="spread"><div class="eyebrow" style="margin:0">'+SEVN[sev]+"</div>"+
-      '<span class="kb '+(sev==="hart"?"kb-gen":sev==="pruef"?"kb-mix":"kb-dat")+'">'+list.length+"</span></div>"+
+      '<span class="kb '+(sev==="hart"?"kb-gen":sev==="pruef"||sev==="ugs"?"kb-mix":"kb-dat")+'">'+list.length+"</span></div>"+
       '<div style="margin-top:10px">'+ list.map(f=>{
         const k = f.c.id + "|" + f.txt;
         if(seen[k]) return "";
@@ -7638,13 +7640,13 @@ function drawCheck(){
       "Das sind Richtwerte, keine Grenzen — Fachtexte liegen naturgemäß höher.</p>"+
       '<div class="row" style="margin-top:14px" id="tcFilter">'+
         '<button class="chip'+(TC.filter===""?" on":"")+'" data-s="">Alle ('+finds.length+")</button>"+
-        ["hart","pruef","stil","form"].filter(s=>byS[s].length).map(s=>
+        ["hart","ugs","pruef","stil","form"].filter(s=>byS[s].length).map(s=>
           '<button class="chip'+(TC.filter===s?" on":"")+'" data-s="'+s+'">'+SEVN[s]+" ("+byS[s].length+")</button>").join("")+
       "</div>"+
     "</div>"+
     (TC.text.trim() ? '<div class="card"><div class="eyebrow">Dein Text mit Markierungen</div>'+
       '<div class="tctext">'+out.replace(/\n/g,"<br>")+"</div></div>" : "")+
-    (finds.length ? ["hart","pruef","stil","form"].filter(s=>!TC.filter||TC.filter===s).map(card).join("")
+    (finds.length ? ["hart","ugs","pruef","stil","form"].filter(s=>!TC.filter||TC.filter===s).map(card).join("")
       : '<div class="card center" style="padding:34px"><div style="font-size:34px;line-height:1">◆</div>'+
         '<h3 style="margin-top:8px">Keine Muster gefunden</h3>'+
         '<p class="muted small" style="margin-top:6px">Die Prüfung erkennt bekannte Muster — sie ersetzt kein Gegenlesen.</p></div>');

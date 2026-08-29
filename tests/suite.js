@@ -223,7 +223,7 @@ const LEHRSTUECK = {
   "w:scheinbar / anscheinend|y04": "Die Karte erklärt genau dieses Wortpaar.",
   "w:das Gleiche / dasselbe|y05": "Dieselbe Karte, dasselbe Muster."
 };
-const HARTE_SCHAERFE = ["hart", "pruef", "form"];
+const HARTE_SCHAERFE = ["hart", "ugs", "pruef", "form"];
 
 const fehlalarm = [], benutzt = new Set();
 let gekuerzt = 0;
@@ -239,7 +239,7 @@ korpus.forEach(([id, roh]) => {
     fehlalarm.push(f.sev + " " + f.id + " bei " + id + ": „" + t.slice(0, 46) + "“");
   });
 });
-P.ok("Keine Meldung auf korrektem Material (hart, pruef, form)", !fehlalarm.length,
+P.ok("Keine Meldung auf korrektem Material (hart, ugs, pruef, form)", !fehlalarm.length,
   fehlalarm.slice(0, 5).join(" · ") + (fehlalarm.length > 5 ? " …(" + fehlalarm.length + ")" : "")
   + " — beheben oder als Lehrstück eintragen");
 
@@ -387,6 +387,32 @@ const alleMuster = daten(w, "CHECKS_ALL.map(c=>c.id)");
 const stummeIds = alleMuster.filter(id => !belegteMuster.has(id));
 P.ok("Jedes Prüfmuster ist als wirksam belegt (" + alleMuster.length + ")",
   !stummeIds.length, stummeIds.join(", ") + " findet nirgends etwas — Beispielsatz in FEHLER nachtragen");
+
+/* Die App kennt in Beispielen drei Stufen — ok, ugs, nope — und im Textcheck seit
+   dieser Runde ebenfalls. Beide müssen dasselbe sagen: Was in einer Regel orange
+   als „verbreitet, aber nicht falsch“ steht, darf der Textcheck nicht als „Klarer
+   Fehler“ melden. Genau das tat er bei „wegen dem Wetter“, „größer wie“, „als wie“
+   und „Ich rufe dir an“ — vier Formen, die die App selbst als ugs auszeichnet. */
+const ugsFormenTC = [];
+[].concat(RA.map(r => r.b), SATZ.map(x => x.b)).forEach(h => {
+  const re = /<span class="ugs">([\s\S]{2,90}?)<\/span>/g;
+  let m;
+  while ((m = re.exec(String(h)))) {
+    const f = strip(m[1]).replace(/[„“]/g, "");
+    /* Die Legende in der Regelansicht zeichnet das Wort „orange“ selbst aus —
+       das ist keine Sprachform. */
+    if (f.length >= 6 && f !== "orange") ugsFormenTC.push(f);
+  }
+});
+const zuHart = [];
+[...new Set(ugsFormenTC)].forEach(f => {
+  daten(w, "analyse(" + JSON.stringify(f) + ").finds.map(x=>({id:x.c.id,sev:x.c.sev}))")
+    .filter(x => x.sev === "hart")
+    .forEach(x => zuHart.push(x.id + " meldet „" + f + "“ als klaren Fehler"));
+});
+P.ok("Kein hartes Muster meldet eine als umgangssprachlich ausgezeichnete Form ("
+  + [...new Set(ugsFormenTC)].length + " Formen)",
+  !zuHart.length, zuHart.join(" · "));
 
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
