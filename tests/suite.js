@@ -102,6 +102,61 @@ const streit = Object.keys(H).filter(z => WCH[z] &&
   [...new Set(H[z])].join() !== [...new Set(WCH[z])].join());
 P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, streit.join(" · "));
 
+/* Fehlerklasse: Die App fällt ihr Urteil auf zwei Wegen — mit Worten („ist falsch“) und
+   mit der Auszeichnung <span class="nope">. Die Prüfung oben liest nur die Worte, weil
+   strip() die Tags entfernt. So stand „das Auto von meinem Bruder“ in Rot und wurde in
+   derselben Zeile als umgangssprachlich bezeichnet; „wegen dem Wetter“ stand in Rot,
+   während drei andere Stellen es als verbreitet einordneten. Der Duden führt beide als
+   umgangssprachlich — also nicht als falsch.
+
+   Seitdem gibt es drei Stufen: ok (standardsprachlich), ugs (umgangssprachlich oder
+   regional, aber nicht falsch) und nope (falsch). Diese Prüfung hält sie auseinander. */
+const AUSZEICHNUNG = /<span class="(nope|ugs)">([\s\S]{2,120}?)<\/span>/g;
+const WEICHWORT = /\b(umgangssprachlich|landschaftlich|regional|südwestdeutsch|schweizerisch|österreichisch|gesprochen sehr verbreitet)\b/i;
+
+const rotUndWeich = [];
+const traeger = [];
+RA.forEach(r => traeger.push({ id: r.id, h: r.b }));
+SATZ.forEach(x => traeger.push({ id: x.id, h: x.b }));
+ALL.forEach(i => { traeger.push({ id: i.id, h: i.e }); traeger.push({ id: i.id, h: i.q }); });
+
+traeger.forEach(t => {
+  const h = String(t.h || "");
+  let m;
+  const re = new RegExp(AUSZEICHNUNG.source, "g");
+  while ((m = re.exec(h))) {
+    if (m[1] !== "nope") continue;
+    /* Nur das unmittelbare Umfeld derselben Auszeichnung, nicht der ganze Regeltext:
+       Ein Fehler darf in einer Regel stehen, die anderswo Regionales bespricht. */
+    const nah = strip(h.slice(m.index + m[0].length, m.index + m[0].length + 70));
+    if (WEICHWORT.test(nah)) rotUndWeich.push(t.id + ": „" + strip(m[2]).slice(0, 40) + "“");
+  }
+});
+P.ok("Keine rot markierte Form wird zugleich als umgangssprachlich bezeichnet",
+  !rotUndWeich.length, [...new Set(rotUndWeich)].join(" · ")
+  + " — entweder falsch (nope) oder umgangssprachlich (ugs), nicht beides");
+
+/* Die Gegenrichtung: Was die App als ugs auszeichnet, darf nirgends „ist falsch“ heißen. */
+const ugsFormen = [];
+traeger.forEach(t => {
+  const h = String(t.h || "");
+  let m;
+  const re = new RegExp(AUSZEICHNUNG.source, "g");
+  while ((m = re.exec(h))) if (m[1] === "ugs") ugsFormen.push(strip(m[2]).replace(/[„“]/g, "").toLowerCase());
+});
+const ugsAlsFalsch = [];
+stellen.forEach(s2 => {
+  const t = s2.t.toLowerCase();
+  [...new Set(ugsFormen)].forEach(f => {
+    if (f.length < 8) return;
+    const i = t.indexOf(f);
+    if (i < 0) return;
+    if (HART.test(s2.t.slice(Math.max(0, i - 90), i + f.length + 90))) ugsAlsFalsch.push(s2.id + ": „" + f.slice(0, 40) + "“");
+  });
+});
+P.ok("Keine als umgangssprachlich ausgezeichnete Form heißt anderswo falsch (" + [...new Set(ugsFormen)].length + " Formen)",
+  !ugsAlsFalsch.length, [...new Set(ugsAlsFalsch)].join(" · "));
+
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
 const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev}))");

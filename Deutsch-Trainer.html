@@ -152,6 +152,10 @@ hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 .acc .body .ex{background:var(--bg2);border:1px solid var(--line2);border-radius:9px;padding:11px 13px;margin:.6em 0;color:var(--ink)}
 .ok{color:var(--acc-ink);font-weight:650}
 .nope{color:var(--bad);font-weight:650}
+/* Dritte Stufe neben ok und nope: nicht standardsprachlich, aber auch nicht falsch.
+   Grundsatz 4 verlangt, Regionales und Umgangssprachliches einzuordnen statt abzustempeln —
+   dafür fehlte bis dahin die Auszeichnung, also stand beides in Rot. */
+.ugs{color:var(--warn);font-weight:650}
 .search{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);font-size:15px;margin-bottom:16px}
 .search:focus{outline:none;border-color:var(--acc)}
 
@@ -3642,9 +3646,9 @@ Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
 {id:"sa17",t:"Genitiv im Alltag — wo er wirklich hingehört",short:"Besitz, Genitivpräpositionen, feste Verben",b:`
 <p>Der Genitiv verschwindet in der gesprochenen Sprache — an drei Stellen lohnt er sich trotzdem, weil sein Fehlen auffällt:</p>
 <p><b>1. Besitz und Zugehörigkeit</b></p>
-<div class="ex"><span class="ok">das Auto meines Bruders</span> · <span class="nope">das Auto von meinem Bruder</span> (umgangssprachlich, in geschriebenen Texten vermeiden)</div>
+<div class="ex"><span class="ok">das Auto meines Bruders</span> · <span class="ugs">das Auto von meinem Bruder</span> (umgangssprachlich, in geschriebenen Texten vermeiden)</div>
 <p><b>2. Nach Genitivpräpositionen</b> — wegen, während, trotz, statt, innerhalb, aufgrund, mithilfe, anhand, angesichts, hinsichtlich, infolge</p>
-<div class="ex"><span class="ok">wegen des Wetters</span> · <span class="nope">wegen dem Wetter</span></div>
+<div class="ex"><span class="ok">wegen des Wetters</span> · <span class="ugs">wegen dem Wetter</span></div>
 <p><b>3. Nach festen Verben</b> — gedenken, bedürfen, sich bedienen, sich enthalten, sich rühmen, beschuldigen</p>
 <hr class="sep">
 <p><b>Wo der Genitiv nicht hingehört:</b></p>
@@ -3668,10 +3672,10 @@ Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
 </ul>
 <p><b>Fällt dagegen auf — hier lohnt die Aufmerksamkeit:</b></p>
 <ul>
-<li><span class="nope">„Ich rufe dir an“</span> statt „dich“ — überregional sofort hörbar (im Südwesten und in der Schweiz verbreitet)</li>
-<li><span class="nope">„größer wie“</span> statt „größer als“</li>
+<li><span class="ugs">„Ich rufe dir an“</span> statt „dich“ — überregional sofort hörbar (im Südwesten und in der Schweiz verbreitet)</li>
+<li><span class="ugs">„größer wie“</span> statt „größer als“</li>
 <li>Fehlende n-Deklination: <span class="nope">„mit dem Kollege“</span></li>
-<li>Doppeltes „würde“: <span class="nope">„wenn ich Zeit haben würde, würde ich …“</span></li>
+<li>Doppeltes „würde“: <span class="ugs">„wenn ich Zeit haben würde, würde ich …“</span></li>
 <li>Falsches Relativpronomen: <span class="nope">„der Mann, den ich geholfen habe“</span></li>
 <li>Satzabbruch mitten im Gedanken (siehe eigene Karte)</li>
 <li>Verlorene Satzklammer bei langen Sätzen</li>
@@ -3694,7 +3698,7 @@ Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
 <div class="ex">größer <b>als</b> ich · mehr <b>als</b> erwartet · anders <b>als</b> gedacht</div>
 <p><b>wie</b> bei Gleichheit:</p>
 <div class="ex">so groß <b>wie</b> ich · genauso gut <b>wie</b> gestern · doppelt so schnell <b>wie</b> vorher</div>
-<p><span class="nope">„größer wie“</span> ist regional weit verbreitet, gilt aber nicht als standardsprachlich — und wird von vielen sofort gehört. <span class="nope">„als wie“</span> ebenfalls nicht.</p>
+<p><span class="ugs">„größer wie“</span> ist regional weit verbreitet, gilt aber nicht als standardsprachlich — und wird von vielen sofort gehört. <span class="ugs">„als wie“</span> ebenfalls nicht.</p>
 <hr class="sep">
 <p><b>Steigerungsfallen:</b></p>
 <ul>
@@ -6149,6 +6153,7 @@ function drawRules(){
       "<li>Wo <b>Duden und DIN 5008</b> auseinandergehen — Tausendertrennung, Uhrzeit, Bis-Strich —, sind beide Konventionen genannt statt einer erfundenen Eindeutigkeit.</li>"+
       "<li><b>Stil ist keine Regel.</b> Hinweise zu Füllwörtern, Nominalstil oder Tonfall sind Empfehlungen; sie stehen in den Bereichen Stil und Formulierung, nicht in der Rechtschreibung.</li>"+
       "<li>Was <b>umgangssprachlich verbreitet, aber nicht standardsprachlich</b> ist, wird ausdrücklich so benannt — etwa „wegen dem Wetter“ oder „weil ich hab keine Zeit“.</li>"+
+      '<li><b>Die Farben in den Beispielen</b> haben drei Stufen: <span class="ok">grün</span> ist die standardsprachliche Form, <span class="ugs">orange</span> ist umgangssprachlich oder regional — verbreitet, aber nicht für geschriebene Texte —, und <span class="nope">rot</span> ist tatsächlich falsch. Orange ist kein Fehler.</li>'+
       "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung: Das amtliche Regelwerk gilt seit dem 1. Juli 2024 in neuer Fassung, und bei den Infinitivgruppen hat sich die Kommaregel geändert — eine erweiterte Infinitivgruppe wird jetzt immer abgetrennt. Diese Regel und die dazugehörige Übung standen bis dahin auf dem alten Stand und sind berichtigt. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
       "<li><b>Zusätzlich maschinell geprüft:</b> alle zehn Tabellen gegen die Standardparadigmen der Deklination und des Konjunktivs II, alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm. In der Zeichensetzung muss außerdem jede absolute Aussage, jede Kann-Regel und jede Jahreszahl einzeln eingetragen und belegt sein; ein eigener Prüflauf hält das nach und vergleicht die Regeln mit dem Spickzettel. Jede Regel, die hier ein ◆ Varianten trägt, muss eine Quelle nennen — sieben Regeln aus den Bereichen Grammatik und Satzbau tun das noch nicht und sind als offen vermerkt.</li>"+
       "<li><b>Widersprüche:</b> Eine laufende Prüfung meldet, wenn dasselbe Beispiel an einer Stelle als Fehler und an anderer als regionale Variante geführt wird. Wo Duden und amtliches Regelwerk mehrere Formen zulassen, steht das ausdrücklich da — auch dann, wenn eine Form empfohlen ist.</li>"+
