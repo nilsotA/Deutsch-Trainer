@@ -169,7 +169,21 @@ P.ok("Keine Satzform doppelt eine Übung", !doppelUeb.length,
 
 P.info(MIT.length + " Karten in Satzform (" + ALLE.length + " Fassungen) · " +
        OHNE.length + " in Etikettform");
-P.info(offen.length + " Fassungen ohne maschinell prüfbare Form: " + offen.slice(0, 8).join(", ") +
-       (offen.length > 8 ? " …" : ""));
+/* Was übrig bleibt, ist keine Lücke der Formentabelle, sondern eine andere Aufgabenart:
+   Dort steht nicht eine Fallform gegen eine andere, sondern eine Präposition gegen eine
+   andere („nach“ gegen „zu“). Über den Fall entscheidet das nicht — beide regieren den
+   Dativ —, also kann keine Formentabelle es beurteilen. Die Karten sind benannt, damit
+   eine neue unbeurteilbare Fassung auffällt, statt in derselben Zahl zu verschwinden. */
+const PRAEPWAHL = ["nach (Richtung)#1", "bei (Ort)#1"];
+const echtOffen = offen.filter(x => !PRAEPWAHL.includes(x));
+P.ok("Nur die bekannten Fassungen ohne prüfbare Form (" + offen.length + ")",
+  !echtOffen.length,
+  echtOffen.join(", ") + " — Stamm in tests/formen.js nachtragen oder hier eintragen");
+const wegPraep = PRAEPWAHL.filter(x => !offen.includes(x));
+P.ok("Die Liste der Präpositionswahl ist aktuell", !wegPraep.length,
+  wegPraep.join(", ") + " ist prüfbar geworden — aus PRAEPWAHL streichen");
+
+P.info(offen.length + " Fassungen ohne Fallform: " + offen.join(", ") +
+       " — dort wird die Präposition gewählt, nicht der Fall");
 
 P.abschluss();
