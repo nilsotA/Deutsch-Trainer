@@ -58,6 +58,30 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Achtung — zwei Sitzungen im selben Ordner** (29.08.2026). Eine zweite Claude-Code-Sitzung
+hat den alten Cowork-Ausgabeordner als „Stand aus vorherigem Chat“ über die Arbeit dieser
+Sitzung committet (`c6ff912`, −465 Zeilen): Satzform der Fallkarten, Retentionszahl und
+zwei Prüfläufe waren aus dem Arbeitsverzeichnis verschwunden. Der Inhalt lag noch in
+`300c665` und wurde von dort zurückgeholt. **Der Cowork-Ordner ist überholt — nicht mehr
+als Quelle verwenden.** Wer in diesem Projekt zu arbeiten anfängt: erst `git log` lesen.
+
+**Belege für die festen Verbpräpositionen** (29.08.2026, gegen DWDS geprüft):
+
+- `leiden an` fehlte in `gram-praep` ganz, aufgeführt war nur `leiden unter`. Die
+  Aufteilung an = Krankheit / unter = Umstand steht jetzt als Faustregel da, nicht als
+  feste Grenze: Das DWDS führt beide Präpositionen für seelisches Leiden gemeinsam
+  („an unglücklicher Liebe leiden“).
+- `bestehen auf` steht mit Dativ; der Akkusativ ist laut DWDS seltene Nebenform, also
+  nicht falsch. Steht jetzt in Regel und Fallkarte.
+- Die Wohin-/Wo-Probe in `gram-kasus` stand ohne Einschränkung da. Sie greift nur
+  räumlich — bei Thema („über den Trainer sprechen“) und Zeit („vor einem Jahr“) liegt
+  der Fall fest. Die Fallkarten wussten das längst, die Regel nicht.
+- `sich erinnern` transitiv ist bestätigt: DWDS sagt „landschaftlich, besonders
+  norddeutsch“. Die App lag richtig, die Aussage ist jetzt belegt.
+- **Nicht** ergänzt: ein Verwechslungspaar `nützen`/`nutzen`. Das DWDS führt beide als
+  Synonyme ohne saubere Kasustrennung — die Aussage wäre zu glatt gewesen.
+
+
 **Fallkarten in Satzform** (29.08.2026). Die Fallkarten fragten nach dem *Namen* des
 Falls; jetzt fragen sie nach der **Form im Satz**: „Ich helfe ___ beim Aufbau“ mit
 den Antworten *ihm* / *ihn*. Das ist die Form, die beim Sprechen gebraucht wird.
