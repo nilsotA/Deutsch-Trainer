@@ -17,7 +17,7 @@ npm test
 `node_modules/` ist nicht im Repo — `npm install` ist nach jedem frischen Checkout nötig
 und holt nur jsdom. Sonst gibt es keine Abhängigkeiten und keinen Build.
 
-Alle fünf Prüfläufe sind grün. Sie sind inzwischen einmal vollständig gelaufen —
+Alle sechs Prüfläufe sind grün. Sie sind inzwischen einmal vollständig gelaufen —
 der Vorbehalt aus der letzten Übergabe ist erledigt. Ein Fehlalarm war zu beheben,
 und zwar in der Prüfung, nicht in der App: Der Korpus für „korrektes Material“ in
 `tests/suite.js` enthielt die richtige Antwort von `z24` — „Ich rufe dir an“ statt
@@ -31,14 +31,20 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 331 |
+| Übungen | 372, davon 44 Tippaufgaben (unterwegs abfragbar: 328) |
 | Regeln | 117 |
 | Wortkarten | 116 |
-| Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
+| Fallkarten | 182, davon 164 in Satzform (173 Fassungen); abfragbar 165 |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 82 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~550 KB, eine Datei, kein Build |
+| Kartenbestand (`alleSchluessel()`) | 653 |
+| Dateigröße | ~596 KB, eine Datei, kein Build |
+
+Die Zahl 331 stand hier lange für die Übungen und stimmte nicht — `ALL.length` war schon
+vorher 371. Die Zahlen oben sind aus der laufenden App gerechnet, nicht abgeschrieben.
+Der Langzeitlauf erreicht 609 statt 653 Karten: Die Differenz sind genau die 44
+Tippaufgaben, die unterwegs herausgefiltert werden. Das ist so gewollt.
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +63,67 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Kommaregeln auf die Fassung 2024 gebracht** (29.08.2026). Das amtliche Regelwerk gilt
+seit dem **1. Juli 2024** in neuer Fassung, und im Kapitel Zeichensetzung hat sich die
+Kommaregel bei Infinitivgruppen geändert. Die App stand noch auf dem alten Stand.
+
+Neu (§ 73 der Fassung 2024): Eine **erweiterte** Infinitivgruppe — `zu` + Infinitiv und
+mindestens ein weiteres Wort — wird **immer** mit Komma abgetrennt, auch ohne Einleitewort
+und ohne hinweisendes Wort. Freigestellt bleibt das Komma nur bei der nicht erweiterten
+Gruppe, also bei bloßem `zu` + Infinitiv. Keine Kommas nach *brauchen, pflegen, scheinen*.
+
+- **`k20` lehrte die falsche Antwort.** Die Aufgabe „Er hat versucht(,) pünktlich zu sein“
+  hatte „Komma ist erlaubt, aber nicht zwingend“ als richtig markiert. „pünktlich zu sein“
+  ist erweitert — das Komma ist Pflicht. Die als falsch markierte Option war die richtige.
+- `komma-infinitiv` neu geschrieben: Unterscheidung erweitert / nicht erweitert, Datum der
+  Änderung, Ausnahme, Quelle im Text.
+- `k41` neu als Gegenprobe („Er hat versucht(,) zu kommen“ — nicht erweitert, freigestellt).
+  Ohne den Kontrast liegt Überkorrektur nahe.
+- Spickzettel und der Hinweistext von `y02` nachgezogen.
+
+**Die alte Terminologie war der eigentliche Fehler.** Die App nannte den freigestellten Fall
+„einfache Infinitivgruppe ohne Einleitewort“ und meinte damit das Fehlen des Einleitewortes.
+Das amtliche Kriterium ist aber die *Erweiterung*, nicht das Einleitewort. Wer das
+verwechselt, kommt bei „pünktlich zu sein“ zwangsläufig auf das falsche Ergebnis.
+
+**Neuer Prüflauf `tests/normen.js`.** Die Fehlerklasse: Eine normative Aussage steht an vier
+Stellen — Regel, Übung, Spickzettel, Textcheck — und veraltet an einer davon, ohne dass es
+auffällt. Der Lauf erzwingt keine Richtigkeit, sondern Bewusstheit:
+
+- Jede **absolute Aussage** (immer, nie, stets, grundsätzlich, ausnahmslos) in der
+  Zeichensetzung muss in `ABS_OK` eingetragen sein, mit Begründung. „fast immer“ zählt nicht.
+- Jede Regel mit **Kann-Aussage** muss eine Quelle nennen. Übungen und Prüfmuster erben den
+  Beleg über ihren Regelverweis.
+- Jede **Jahreszahl** in normativem Zusammenhang muss in `JAHR_OK` stehen. Beispielsätze wie
+  der Bis-Strich „1990–1995“ bleiben außen vor — der Kontext entscheidet.
+- Der **Spickzettel** wird gegen die Regeln gehalten, weil er von Hand wiederholt. Genau dort
+  hatte die alte Einteilung überlebt, nachdem die Regel schon ersetzt war.
+
+Gegen vier eingebaute Fehler geprüft: unbelegte Kann-Regel, alte Spickzettel-Einteilung,
+neue absolute Aussage, undatierte Jahresbehauptung. Alle vier fallen auf. Der Lauf hat beim
+Einschalten sofort zwei Fundstellen gemeldet, die vorher niemand angesehen hatte (`t06`,
+`y02`) — beide geprüft und eingetragen.
+
+**Weiter berichtigt und belegt:**
+
+- `komma-partizip` und `k29` sagten „seit 2006“. Die Freistellung stammt aus der Reform von
+  **1996**; die Fassung 2024 ändert daran nichts. Datum berichtigt, Beleg dazu.
+- `komma-nebensatz` hieß „Nebensätze werden **immer** abgetrennt“. Ergänzt sind die zwei
+  Fälle, die das Raster sprengen: der **uneingeleitete** Nebensatz („Er sagte, er komme
+  später“ — Verb an zweiter Stelle, Komma trotzdem) und die **formelhafte Verkürzung**, bei
+  der das Komma wegfallen darf (§ 76: „Sag(,) wenn möglich(,) vorher Bescheid“). Faustregel
+  laut Duden: ab etwa vier Wörtern Kommas setzen.
+- `komma-hauptsatz` sagte „Komma Pflicht“ zwischen zwei Hauptsätzen. **Semikolon und Punkt
+  gehen genauso** — nur gar kein Zeichen geht nicht. `k37` nachgezogen.
+- `komma-hauptsatz` und `k09` tragen den Beleg zur Freistellung von 1996.
+- `k19` sagte „Nebensätze werden immer abgetrennt“ — umformuliert.
+
+**Achtung bei Paragrafennummern.** Die Zählung des Regelwerks wurde 2024 neu vergeben. Ältere
+Fundstellen im Netz zitieren § 71–73 für die gleichrangigen Teilsätze, in der Fassung 2024 ist
+§ 73 die Infinitivregel. Wer eine Nummer übernimmt, muss die Fassung dazuschreiben. Steht auch
+als Hinweis in `komma-hauptsatz`.
+
 
 **Achtung — zwei Sitzungen im selben Ordner** (29.08.2026). Eine zweite Claude-Code-Sitzung
 hat den alten Cowork-Ausgabeordner als „Stand aus vorherigem Chat“ über die Arbeit dieser
@@ -146,6 +213,11 @@ Belegt und im Text kenntlich gemacht sind unter anderem:
 - „imstande/im Stande“, „zu Hause/zuhause“, „Portemonnaie/Portmonee“ (Varianten)
 - Groß-/Kleinschreibung nach Präposition: Wahl nur ohne Artikel
 - „bräuchte/brauchte“ (Zweifelsfall, beide vertretbar)
+- **Zeichensetzung (neu):** Komma bei erweiterten Infinitivgruppen Pflicht seit 1.7.2024
+  (Regelwerk 2024, § 73); Ausnahme nach *brauchen, pflegen, scheinen*; Freistellung bei
+  Partizipgruppen seit der Reform von **1996**, nicht 2006; Freistellung vor *und/oder*
+  zwischen Hauptsätzen seit 1996; formelhafte verkürzte Nebensätze dürfen ohne Komma
+  stehen (§ 76); „von 1990–1995“ mischt zwei Schreibweisen und bleibt falsch
 
 Der übrige Bestand beruht auf allgemeinem Sprachwissen und hat die maschinellen
 Prüfungen bestanden, ist aber nicht einzeln belegt. Der Absatz „Stand der Prüfung“
@@ -156,11 +228,26 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Belege für die Zeichensetzung.** `gram-praep` und `gram-kasus` sind erledigt
-   (siehe „Zuletzt geändert“). Offen sind die Zeichensetzungsregeln — Komma bei
-   Infinitivgruppen, Gedankenstrich, Doppelpunkt. Vorgehen wie gehabt: erst belegen,
-   dann Regel, Übung, Fallkarte und Textcheck angleichen, dann „Stand der Prüfung“
-   nachziehen.
+1. **Belege für die Zeichensetzung — Teil zwei.** Die **neun Kommaregeln** sind
+   durch (siehe „Zuletzt geändert“), abgesichert durch `tests/normen.js`. Offen sind
+   die **acht `z-`Regeln**. Beim Durchlesen sind vier Stellen aufgefallen, die ich
+   *nicht* geprüft habe — sie sind Kandidaten, keine bestätigten Fehler:
+
+   - `z-auslassung`: „Die Auslassungspunkte sind ein Zeichen (…), nicht drei Punkte
+     hintereinander.“ Typografisch stimmt das, aber das Regelwerk spricht von drei
+     Punkten. Die Aussage ist womöglich zu scharf.
+   - `z-doppelpunkt`: „Häufiger Fehler: Doppelpunkt nach einem Wort, das die Aufzählung
+     schon einleitet („bestehend aus: …“).“ Das ist vermutlich eine Stilempfehlung, kein
+     Fehler — dann verstößt die Formulierung gegen Grundsatz 3.
+   - `z-frage`: Ausrufezeichen nach der Briefanrede sei „veraltet“. Das Regelwerk lässt
+     es zu; „unüblich“ wäre vermutlich richtiger als „veraltet“.
+   - `komma-adjektive`: Die Und-Probe steht als eindeutiger Test da („die neue, rote
+     Trainingsjacke“ → Komma falsch). In Grenzfällen ist die Gleichrangigkeit aber
+     Auslegungssache. Prüfen, ob das ein `◆ Varianten`-Fall ist.
+
+   Vorgehen wie gehabt: erst belegen, dann Regel, Übung, Fallkarte und Textcheck
+   angleichen, dann „Stand der Prüfung“ nachziehen — und die Fundstelle in
+   `tests/normen.js` eintragen.
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.
@@ -178,6 +265,11 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
   BFP-Portfolio. Nützlich, wenn Texte nach ihm klingen sollen.
 - Web-Recherche für jede normative Aussage. Duden und DWDS liefern klare
   Variantenangaben, `grammis.ids-mannheim.de` gute Begründungen.
+- **Achtung in der Cloud-Sitzung:** Dort war der direkte Seitenabruf gesperrt
+  (`rechtschreibrat.com`, `duden.de`, `dwds.de`, `grammis`, Wikipedia — alle geblockt).
+  Nur die Websuche ging. Das reicht zum Belegen, kostet aber mehr Runden: mehrere
+  Suchen mit unterschiedlicher Formulierung, bis sich zwei bis drei unabhängige
+  Quellen decken. Lieber eine Suche mehr als eine Aussage geraten.
 
 ## Was schiefgehen kann
 

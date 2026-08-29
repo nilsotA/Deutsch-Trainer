@@ -19,11 +19,17 @@ const P = pruefer("A · Absolute Aussagen");
 const w = boot(null);
 const RA = daten(w, "RULES_ALL");
 const ALL = daten(w, "ALL");
+const CH = daten(w, "CHECKS_ALL.map(c=>({id:c.id,sev:c.sev,t:c.t,k:c.k,r:c.r}))");
 const strip = h => String(h).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
 /* Nur die Zeichensetzung. Die übrigen Kategorien sind nicht Gegenstand dieses Laufs;
    wer sie aufnimmt, muss ihre Fundstellen genauso einzeln eintragen. */
 const IMBLICK = c => c === "komma" || c === "zeichen";
+/* Prüfmuster tragen keine Kategorie, nur einen Regelverweis. */
+const komma_zeichen = rid => {
+  const r = RA.find(x => x.id === rid);
+  return !!r && IMBLICK(r.c);
+};
 
 /* ---------- A · Absolute Aussagen sind eingetragen ---------- */
 
@@ -35,7 +41,8 @@ const ABS_OK = {
   "komma-infinitiv": "Erweiterte Infinitivgruppe: Komma seit 1.7.2024 ohne Ausnahme — Regelwerk 2024, § 73.",
   "z-semikolon": "„ein Punkt ist nie falsch“ — zwei Hauptsätze dürfen immer als zwei Sätze stehen.",
   "z-schraeg": "Apostroph beim normalen Genitiv und im Plural: ausgeschlossen. Der zulässige Fall (Andrea’s) steht direkt darüber.",
-  "k01": "um/ohne/statt/anstatt/außer/als: Komma war schon vor 2024 Pflicht und ist es geblieben."
+  "k01": "um/ohne/statt/anstatt/außer/als: Komma war schon vor 2024 Pflicht und ist es geblieben.",
+  "t06": "„von 1990–1995“ mischt zwei Schreibweisen: Der Bis-Strich vertritt das Wort „bis“ (Duden). Steht „von“, muss „bis“ ausgeschrieben werden."
 };
 
 const absFund = [];
@@ -46,6 +53,13 @@ RA.filter(r => IMBLICK(r.c)).forEach(r => {
 ALL.filter(i => IMBLICK(i.c)).forEach(i => {
   const m = strip(i.e).match(ABSOLUT);
   if (m) absFund.push({ id: i.id, art: "Übung", woerter: [...new Set(m.map(x => x.toLowerCase()))] });
+});
+/* Der Textcheck ist die vierte Ebene. Sein Hinweistext behauptet dasselbe wie die
+   Regel und veraltet genauso leicht — y02 sagte nach dem 1.7.2024 noch die halbe
+   Wahrheit, weil dort nur die Einleitewörter standen. */
+CH.filter(c => komma_zeichen(c.r)).forEach(c => {
+  const m = strip(c.k).match(ABSOLUT);
+  if (m) absFund.push({ id: c.id, art: "Prüfmuster", woerter: [...new Set(m.map(x => x.toLowerCase()))] });
 });
 
 const absNeu = absFund.filter(f => !ABS_OK[f.id]);
@@ -79,6 +93,14 @@ const erbtNichts = kannUebungen.filter(i => {
 P.ok("Jede Übung mit Kann-Aussage hängt an einer belegten Regel (" + kannUebungen.length + ")",
   !erbtNichts.length, erbtNichts.map(i => i.id + "→" + i.r).join(","));
 
+const kannMuster = CH.filter(c => komma_zeichen(c.r) && KANN.test(strip(c.k)));
+const musterOhne = kannMuster.filter(c => {
+  const r = RA.find(x => x.id === c.r);
+  return !r || !BELEG.test(strip(r.b));
+});
+P.ok("Jedes Prüfmuster mit Kann-Aussage hängt an einer belegten Regel (" + kannMuster.length + ")",
+  !musterOhne.length, musterOhne.map(c => c.id + "→" + c.r).join(","));
+
 /* ---------- C · Jahreszahlen sind eingetragen ---------- */
 P.titel("C · Datierte Aussagen");
 
@@ -102,7 +124,8 @@ const JAHR_OK = {
   "komma-hauptsatz": "1996 — Freistellung des Kommas vor und/oder; 2024 Hinweis auf die neue Zählung.",
   "k09": "1996 — dieselbe Freistellung, Beleg steht in komma-hauptsatz.",
   "k20": "2024 — Datum der Änderung, Beleg steht in komma-infinitiv.",
-  "k29": "1996 — Beleg steht in komma-partizip."
+  "k29": "1996 — Beleg steht in komma-partizip.",
+  "y02": "2024 — Hinweistext des Textchecks nennt das Inkrafttreten; Beleg steht in komma-infinitiv."
 };
 
 const jahrFund = [];
@@ -113,6 +136,10 @@ RA.filter(r => IMBLICK(r.c)).forEach(r => {
 ALL.filter(i => IMBLICK(i.c)).forEach(i => {
   const m = jahre(strip(i.e));
   if (m) jahrFund.push({ id: i.id, art: "Übung", jahre: m });
+});
+CH.filter(c => komma_zeichen(c.r)).forEach(c => {
+  const m = jahre(strip(c.k));
+  if (m) jahrFund.push({ id: c.id, art: "Prüfmuster", jahre: m });
 });
 
 const jahrNeu = jahrFund.filter(f => !JAHR_OK[f.id]);

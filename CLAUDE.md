@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~590 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~596 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
@@ -35,7 +35,7 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 331 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 372 Übungen (44 davon Tippaufgaben) | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 116 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
@@ -108,7 +108,7 @@ entscheidbar ist. Drei Fallen bleiben deine:
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (652 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (653 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -160,7 +160,11 @@ Diese sind über Monate erarbeitet und teuer bezahlt — bitte einhalten:
 5. **Keine absoluten Aussagen ohne Prüfung.** „immer“, „nie“, „ausschließlich“ sind
    Warnsignale. Meist gibt es eine Ausnahme.
 6. **Gesprochen ≠ geschrieben.** Wo sich beides unterscheidet, beides benennen.
-7. Quellen: Duden, DWDS, Rat für deutsche Rechtschreibung, DIN 5008 (für Zahlen/Datum).
+7. **Regeln veralten.** Das amtliche Regelwerk wird fortgeschrieben — die Fassung 2024
+   hat die Kommaregel bei Infinitivgruppen geändert und die Paragrafen neu durchgezählt.
+   Wer eine Paragrafennummer nennt, schreibt die Fassung dazu. Wer eine Kann-Regel
+   schreibt, nennt die Quelle. `tests/normen.js` erzwingt beides für die Zeichensetzung.
+8. Quellen: Duden, DWDS, Rat für deutsche Rechtschreibung, DIN 5008 (für Zahlen/Datum).
    Belegte Aussagen dürfen im Text die Quelle nennen. Der Absatz „Stand der Prüfung“ im
    Regelwerk beschreibt ehrlich, was geprüft ist und was nicht — **aktuell halten**.
 
@@ -198,6 +202,7 @@ node tests/unterwegs.js   # Kartenmix, Automatik, Rückblick, Fehlerrunde
 node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
+node tests/normen.js      # absolute Aussagen, Kann-Regeln, Jahreszahlen, Spickzettel
 ```
 
 Jeder Lauf endet mit „Alles bestanden.“ oder einer Fehlerliste und Exitcode 1.
