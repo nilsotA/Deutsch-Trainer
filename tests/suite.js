@@ -250,6 +250,68 @@ P.ok("Kein totes Lehrstück in der Liste", !totesLehrstueck.length,
 if (gekuerzt) P.info(gekuerzt + " Einträge zitieren eine Falschform — dort nur der Text außerhalb der Zitate geprüft");
 P.info("Stilhinweise bleiben außen vor: Sie sollen auf korrektem Text ansprechen");
 
+/* Der Korpus oben besteht aus dem eigenen Bestand — er deckt nur ab, was die App
+   ohnehin enthält. Genau daran ist x18 vorbeigekommen: /\bseit\s+ihr\b/ ohne i-Flag
+   schlug hart auf „…, seit ihr gewonnen habt“ an — korrektes Deutsch — und schwieg bei
+   „Seit ihr schon da?“, dem eigentlichen Fehler. Weil nirgends in der App „seit ihr“
+   vorkam, fiel nichts auf.
+
+   Deshalb dieser zweite Korpus: von Hand geschriebene, zweifelsfrei richtige Sätze, die
+   die App nie gesehen hat. Sie decken die Bereiche ab, in denen die Muster arbeiten.
+   Kein Satz hier darf eine Meldung auslösen. Wer ein Muster ergänzt, sollte einen Satz
+   dazuschreiben, der knapp danebenliegt. */
+const SAUBER = [
+  "Seid ihr schon da?",
+  "Das ist so, seit ihr gewonnen habt.",
+  "Es geht bergauf, seit ihr Vater wieder trainiert.",
+  "Seit dem Praktikum weiß er, worauf es ankommt.",
+  "Wir sprechen mit dem Kollegen über den Trainingsplan.",
+  "Für den Praktikanten war die erste Woche anstrengend.",
+  "Er hat versucht, pünktlich zu sein.",
+  "Er hat versucht zu kommen.",
+  "Du brauchst nicht extra zu kommen.",
+  "Er scheint das Training zu genießen.",
+  "Er trainiert, um sich zu verbessern.",
+  "Wegen des Wetters fällt das Training aus.",
+  "Die Reflexion des Praktikums fiel kurz aus.",
+  "Die Halle, in der wir trainieren, wird saniert.",
+  "Er lief schneller als ich.",
+  "Sie ist so schnell wie ich.",
+  "Er lief schneller, als ich erwartet hatte.",
+  "Das Ergebnis ist eindeutig: Die Methode funktioniert.",
+  "Mitzubringen sind: Schuhe, Handtuch, Trinkflasche.",
+  "Wir haben Zeit bis nächsten Montag.",
+  "Er gab die Tasche samt allem Zubehör ab.",
+  "Ich helfe ihm beim Aufbau der Geräte.",
+  "Wir danken ihr für die Vertretung.",
+  "Von 1990 bis 1995 spielte er im Verein.",
+  "Der Zeitraum 1990–1995 ist gut belegt.",
+  "Des Weiteren fehlt die Auswertung der Fragebögen.",
+  "Im Allgemeinen sind die Ergebnisse stabil.",
+  "Sie war müde, trotzdem lief sie weiter.",
+  "Er packte die Tasche, und sie schloss die Tür.",
+  "Je länger er trainierte, desto ruhiger wurde sein Puls.",
+  "Vorausgesetzt, dass alle zusagen, findet der Ausflug statt.",
+  "Von der Hitze erschöpft, brach sie das Training ab.",
+  "Der Plan, täglich zu laufen, war ambitioniert.",
+  "Nicht die Technik war das Problem, sondern die Kondition.",
+  "Die Stichprobe umfasste 24 Schülerinnen und Schüler.",
+  "Er fragte, wann sie kommt.",
+  "Sie sagte: „Das machen wir anders.“",
+  "Er nannte das eine gute Idee.",
+  "Das Training fällt aus (wegen des Wetters).",
+  "Bitte melde dich, sobald du angekommen bist."
+];
+
+const fremdalarm = [];
+SAUBER.forEach(t => {
+  daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>({id:f.c.id,sev:f.c.sev}))")
+    .filter(f => HARTE_SCHAERFE.includes(f.sev))
+    .forEach(f => fremdalarm.push(f.sev + " " + f.id + ": „" + t + "“"));
+});
+P.ok("Keine Meldung auf fremdem korrektem Deutsch (" + SAUBER.length + " Sätze)",
+  !fremdalarm.length, fremdalarm.slice(0, 4).join(" · "));
+
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
 const d = w.document;

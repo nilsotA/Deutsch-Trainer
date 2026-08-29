@@ -7328,7 +7328,7 @@ const CHECKS = [
 {id:"x16",sev:"hart",re:/\bwieder\s+Erwarten\b/gi,t:"wider Erwarten",k:"<b>wider Erwarten</b> = entgegen der Erwartung.",r:"recht-wider"},
 {id:"x17",sev:"hart",re:/\bseid\s+(dem|der|einem|einer|zwei|drei|vier|fünf|vielen|langem|kurzem|gestern|heute|Anfang|Beginn|Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag|Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/gi,
  t:"seit statt seid",k:"<b>seit</b> bei Zeitangaben (Zei<b>t</b> → sei<b>t</b>). <b>seid</b> ist die Verbform: „ihr seid“.",r:"recht-seit"},
-{id:"x18",sev:"hart",re:/\bseit\s+ihr\b/g,t:"seid ihr",k:"Hier ist die Verbform gemeint: <b>seid ihr</b>.",r:"recht-seit"},
+{id:"x18",sev:"hart",re:/\bseit\s+ihr\b[^,.!?;—–]*\?/gi,t:"seid ihr",k:"In der Frage ist die Verbform gemeint: <b>seid ihr</b>. Mit <i>seit</i> wäre es eine Zeitangabe oder eine Konjunktion — „seit ihr gewonnen habt“ ist dagegen richtig.",r:"recht-seit"},
 {id:"x19",sev:"pruef",re:/\b[A-ZÄÖÜ][a-zäöüß]+['’]s\s+[A-ZÄÖÜ]/g,t:"Apostroph im Genitiv?",
  k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s, ss, ß, tz, z, x steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Der Duden erlaubt den Apostroph, wenn er die Grundform eines Eigennamens verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“).",r:"recht-apostroph"},
 {id:"x20",sev:"hart",re:/\b(rufe|rufst|ruft|rief|riefst|riefen|angerufen)\s+(dir|mir|ihm|ihr|uns|euch|ihnen|Ihnen)\b/g,
