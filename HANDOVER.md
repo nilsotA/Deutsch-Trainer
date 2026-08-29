@@ -64,6 +64,39 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Lernstand auf dem iPhone** (29.08.2026). Nils benutzt die App über ein **Lesezeichen
+in Safari**. Damit fällt sie unter die Sieben-Tage-Regel: Safari löscht seit iOS 13.4 den
+gesamten skriptbeschreibbaren Speicher einer Seite, die sieben Tage lang nicht besucht
+wurde — localStorage eingeschlossen.
+
+Das ist für diese App der schlimmste denkbare Fall, und der bestehende Schutz greift dabei
+**nicht**: Die Schreibwarnung (`#saveWarn`) meldet nur, wenn das *Schreiben* fehlschlägt.
+Nach einer Löschung schreibt der Browser weiterhin einwandfrei — er hat nur nichts mehr zu
+lesen. Die App sähe aus wie beim allerersten Start, ohne jede Meldung.
+
+Zwei Vorkehrungen:
+
+- `speicherBitten()` fragt beim Start `navigator.storage.persist()`. Abgesichert und still;
+  wo es die Schnittstelle nicht gibt, passiert nichts.
+- Der Datenbereich im Fortschritt sagt jetzt die Wahrheit über den Speicherzustand. Ohne
+  Zusage nennt er die Frist und den Ausweg: **Teilen → Zum Home-Bildschirm.** Eine dort
+  abgelegte Web-App zählt ihre eigenen Nutzungstage und fällt nicht unter die Frist
+  (so beschreibt es WebKit selbst). Ohne Zusage erinnert die App außerdem früher ans
+  Sichern — nach 5 statt 14 Übungstagen, und alle 14 statt alle 30 Tage.
+
+**Der Haken beim Umzug auf den Startbildschirm:** Eine Web-App dort bekommt einen **eigenen
+Speicher**, getrennt von Safari. Der bisherige Lernstand ist dort nicht vorhanden. Der Weg
+ist also: in Safari sichern, auf dem Startbildschirm ablegen, dort die Sicherung laden.
+Genau das steht auch im Hinweis.
+
+**Beim Prüfen selbst in die Falle getappt** (Abschnitt 6 der Arbeitsanweisung). Mein erster
+Probelauf griff auf `#v-fort` zu — die ID heißt `v-fortschritt`. Der Fallback war
+`document.body`, und dessen `textContent` enthält den **Quelltext des Skripts**. Der Test
+meldete den Hinweis als vorhanden und zeigte rohe Verkettungszeichen (`'+`) im „Text“. Der
+Prüflauf misst jetzt an `#statHost` und hat eine eigene Prüfung dagegen, dass keine rohe
+Verkettung im angezeigten Text landet.
+
+
 **Handy und Web-App** (29.08.2026). Die App war schon ordentlich für das Handy gebaut —
 44-px-Tippflächen, `100dvh`, Querlage-Abfragen, Eingabefelder mit 16 px gegen den
 iOS-Zoom. Zwei Dinge waren trotzdem kaputt, und beide unsichtbar:

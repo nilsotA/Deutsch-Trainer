@@ -11,7 +11,7 @@
    unten. Beide Fehler sind unsichtbar, solange niemand ein iPhone in die Hand
    nimmt. Abschnitt A prüft deshalb beides maschinell. */
 
-const { HTML, boot, daten, pruefer } = require("./setup");
+const { HTML, boot, daten, leererStand, tag, pruefer } = require("./setup");
 const P = pruefer("A · Viewport und sichere Ränder");
 
 const css = HTML.slice(HTML.indexOf("<style>") + 7, HTML.indexOf("</style>"));
@@ -186,5 +186,51 @@ while ((mf = reFeld.exec(css))) {
 }
 P.ok("Eingabefelder sind mindestens 16 px — sonst zoomt iOS hinein",
   !felder.length, felder.join(" · "));
+
+/* ---------- D · Lernstand auf dem iPhone ---------- */
+P.titel("D · Lernstand auf dem iPhone");
+
+/* Safari löscht seit iOS 13.4 den Speicher einer Seite, die sieben Tage lang nicht
+   besucht wurde. Das ist für diese App der schlimmste Fall — der Lernstand
+   verschwindet ohne Fehler und ohne Meldung, die Schreibwarnung greift nicht, weil
+   weiterhin geschrieben wird. Zwei Vorkehrungen, beide hier festgehalten. */
+P.ok("Der Browser wird um dauerhaften Speicher gebeten",
+  /navigator\.storage\.persist\(\)/.test(HTML));
+P.ok("Die Bitte ist abgesichert und läuft beim Start",
+  /if\(!navigator\.storage \|\| !navigator\.storage\.persist\) return;/.test(HTML)
+  && /speicherBitten\(\);/.test(HTML));
+
+/* Am konkreten Element messen, nicht an body.textContent — dort steht auch der
+   Quelltext des Skripts, und die Prüfung wäre grün, ohne etwas zu zeigen. */
+function fortschritt(stand) {
+  const w2 = boot(stand);
+  w2.eval('go("fortschritt")');
+  const el = w2.document.querySelector("#statHost");
+  return { w: w2, el, txt: el ? el.textContent.replace(/\s+/g, " ") : "" };
+}
+const tage7 = {};
+for (let i = 0; i < 7; i++) tage7[tag(-i)] = 1;
+const ohne = fortschritt(leererStand({ days: tage7, xp: 120 }));
+
+P.ok("Der Fortschritt hat einen Datenbereich", !!ohne.el);
+P.ok("Ohne Zusage wird der Startbildschirm empfohlen",
+  /Zum Home-Bildschirm/.test(ohne.txt));
+P.ok("Der Hinweis nennt die Sieben-Tage-Frist",
+  /sieben Tage/.test(ohne.txt));
+P.ok("Der Hinweis warnt vor dem eigenen Speicher des Startbildschirms",
+  /eigenen Speicher/.test(ohne.txt));
+P.ok("Ohne Zusage wird schon nach einer Woche zum Sichern geraten",
+  /Sicherung empfohlen/.test(ohne.txt));
+P.ok("Keine rohe Verkettung im angezeigten Text", !/'\+/.test(ohne.txt));
+
+/* Mit Zusage soll der beruhigende Satz stehen und die Erinnerung schweigen. */
+const mit = fortschritt(leererStand({ days: tage7, xp: 120 }));
+mit.w.eval('speicherDauerhaft = true;');
+mit.w.eval('go("fortschritt")');
+const mitTxt = mit.w.document.querySelector("#statHost").textContent.replace(/\s+/g, " ");
+P.ok("Mit Zusage steht der beruhigende Satz",
+  /nicht von selbst zu räumen/.test(mitTxt));
+P.ok("Mit Zusage schweigt die Erinnerung nach einer Woche",
+  !/Sicherung empfohlen/.test(mitTxt));
 
 P.abschluss();

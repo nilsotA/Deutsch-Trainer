@@ -5084,6 +5084,22 @@ const DAILY_EX = 10, DAILY_WORDS = 2;
 /* ---------- Speicher ---------- */
 const KEY = "deutschtrainer.v1";
 let mem = null;
+
+/* Safari löscht seit iOS 13.4 den Speicher einer Seite, die sieben Tage lang nicht
+   besucht wurde. Für den Lernstand ist das der schlimmste Fall: Er verschwindet ohne
+   Fehler und ohne Meldung — die App sähe aus wie beim allerersten Start. Der Schreib-
+   fehler weiter unten fängt das nicht, denn geschrieben wird ja weiterhin.
+   Zwei Dinge helfen. Erstens diese Bitte an den Browser. Zweitens der Startbildschirm:
+   Eine dort abgelegte Web-App zählt eigene Nutzungstage und fällt nicht unter die
+   Frist — ein Lesezeichen in Safari schon. Der Hinweis dazu steht im Fortschritt. */
+let speicherDauerhaft = null;          // null = keine Antwort, true/false = Zusage
+async function speicherBitten(){
+  try{
+    if(!navigator.storage || !navigator.storage.persist) return;
+    speicherDauerhaft = await navigator.storage.persisted();
+    if(!speicherDauerhaft) speicherDauerhaft = await navigator.storage.persist();
+  }catch(e){ speicherDauerhaft = null; }
+}
 function load(){
   const def = {xp:0,streak:0,best:0,last:null,cards:{},days:{},cat:{},writing:{},scenes:{},
                log:[],korr:{},level:null,levelDate:null,plan:null,lastExport:null,
@@ -6296,11 +6312,20 @@ function renderStats(sel){
       '<hr class="sep">'+
       '<div class="eyebrow">Daten</div>'+
       '<p class="tiny muted" style="margin:8px 0 12px">Alles liegt nur in diesem Browser. Sicher dir den Fortschritt, bevor du den Verlauf löschst oder das Gerät wechselst.</p>'+
+      (speicherDauerhaft === true
+        ? '<p class="tiny muted" style="margin:0 0 12px">Der Browser hat zugesagt, diesen Speicher nicht von selbst zu räumen.</p>'
+        : '<p class="tiny muted" style="margin:0 0 12px">Der Browser sichert diesen Speicher <b>nicht dauerhaft</b> zu. '+
+          'Safari auf dem iPhone löscht die Daten einer Seite, die sieben Tage lang nicht besucht wurde. '+
+          'Legst du die App über <b>Teilen → Zum Home-Bildschirm</b> ab, zählt sie eigene Nutzungstage und fällt nicht '+
+          'unter diese Frist. Sichere vorher deinen Fortschritt und lade ihn dort wieder — der Startbildschirm bekommt '+
+          'einen eigenen Speicher und startet sonst leer.</p>')+
       (function(){
         const tage = Object.keys(S.days||{}).length;
-        if(tage < 14) return "";
+        /* Ohne Zusage des Browsers früher und öfter erinnern. */
+        const streng = speicherDauerhaft !== true;
+        if(tage < (streng ? 5 : 14)) return "";
         const seit = S.lastExport ? daysBetween(S.lastExport, today()) : null;
-        if(seit !== null && seit < 30) return "";
+        if(seit !== null && seit < (streng ? 14 : 30)) return "";
         return '<div class="fb no" style="margin-bottom:12px"><b class="hd">Sicherung empfohlen</b>'+
           "Du übst seit "+tage+" Tagen"+(seit===null?" und hast noch nie gesichert."
             :" und hast zuletzt vor "+seit+" Tagen gesichert.")+
@@ -7988,6 +8013,7 @@ function webApp(){
 document.documentElement.setAttribute("data-theme", S.theme || "light");
 themeFarbe();
 webApp();
+speicherBitten();
 $("#themeBtn").onclick = ()=>{
   S.theme = (S.theme === "dark") ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", S.theme);
