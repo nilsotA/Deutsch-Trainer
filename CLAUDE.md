@@ -13,10 +13,11 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~550 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~590 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
-tests/                    Prüfläufe (Node + jsdom)
+tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
+                          Formentabelle, unabhängig von der App aufgestellt
 package.json              npm-Skripte für die Prüfläufe
 ```
 
@@ -38,7 +39,7 @@ also nicht umbenennen.
 | `WORDS` | 116 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
-| `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?}` · `t`: praep/wechsel/verb/verb2/verbpraep |
+| `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
 | `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 82 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
@@ -61,6 +62,38 @@ Drei Sorten, überall einheitlich:
 die aus Schlüsseln Fragen macht, muss darüber gehen** — sonst verschwindet wieder eine
 Kartensorte (ist zweimal passiert).
 
+### Fallkarten in Satzform
+
+Fallkarten fragen nach der **Form im Satz**, nicht nach dem Namen des Falls:
+„Ich helfe ___ beim Aufbau“ statt „Welchen Fall verlangt helfen?“. Das ist näher am
+Sprechen und der Regelfall — 164 der 165 abfragbaren Karten.
+
+Das Feld `s` trägt die Aufgabe: `s:[Satz mit genau einer Lücke, richtige Form, falsche Form …]`.
+Die **erste Option ist die richtige**; `caseQuestion()` mischt mit Tagesseed, damit sie nicht
+immer vorn steht. Karten ohne `s` bleiben bei der Etikettfrage.
+
+**Zwei Fassungen** trägt eine Karte als Liste von Listen: `s:[[Satz, richtig, falsch], […]]`.
+Der Tagesseed entscheidet, welche drankommt; über die Wochen kommen beide dran. Das brauchen
+die neun Wechselpräpositionen, weil eine Karte nur eine Richtung auf einmal abfragen kann.
+**Die Reihenfolge ist Absprache: erst wohin (Akkusativ), dann wo (Dativ).** `tests/fallform.js`
+leitet den erwarteten Fall daraus ab und prüft ihn — wer die Reihenfolge dreht, bricht die Prüfung.
+
+Ohne Satzform bleibt nur noch **`lehren`** (der Dativ der Person „kommt vor, gilt aber als
+schwächer“ — kein sicher falscher Ablenker möglich). Die Ausnahmenliste steht auch in
+`tests/fallform.js`; wächst sie, muss sie dort mitwachsen.
+
+**Beim Schreiben neuer Satzformen** ist die eine teure Frage: Ist der Ablenker *sicher*
+falsch? Der Prüflauf hält mit `tests/formen.js` dagegen — einer unabhängig aufgestellten
+Tabelle, welche Artikelform zu welchem Fall passt. Sie fängt aber nur, was maschinell
+entscheidbar ist. Drei Fallen bleiben deine:
+- **Femininum und Plural**: Dativ und Genitiv sehen gleich aus („der Verletzung“). Ein
+  Genitiv-Item darf dort keinen Dativ-Ablenker haben — den Akkusativ nehmen („die Verletzung“).
+- **Dokumentierte Ausnahmen**: Bei den Genitivpräpositionen ist der Dativ artikellos im
+  Singular und im Plural ohne erkennbare Genitivform korrekt („wegen Umbau“, „trotz Beweisen“).
+  Satz also immer mit Artikel bauen.
+- **Mehrdeutige Formen**: „den“ ist Akkusativ Singular und Dativ Plural. Die Prüfung kann
+  solche Ablenker nicht beurteilen und sagt das auch — sie zählt sie als ungeprüft.
+
 ### Lernlogik
 
 - Leitner, `BOXES = [1,3,7,16,35]` Tage. Auf Anhieb richtig → Fach 2 statt 1.
@@ -75,6 +108,25 @@ Kartensorte (ist zweimal passiert).
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
+- `alleSchluessel()` liefert den Gesamtbestand (652 Karten: Aufgaben, Wörter, Fälle).
+  **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
+  Ansichten verschiedene Zahlen.
+
+### Was sitzt — die Retentionszahl
+
+`retention()` teilt den Bestand in **sitzt sicher** (Fach ≥ `SICHER_AB` = 4), **im Aufbau**
+und **noch nicht dran**. Der Fortschritt zeigt das als drei Zahlen mit Stapelbalken.
+
+Die Zahl ist bewusst zurückhaltend. Fach 4 ist erreichbar, weil eine falsche Antwort auf
+Fach 1 zurücksetzt — wer dort steht, hat also mindestens drei richtige Antworten in Folge.
+Genau das steht auch in der App, und `tests/lernen.js` rechnet es über `grade()` nach,
+statt es zu glauben.
+
+**Was sie nicht sagt:** nichts über den *Abstand* zwischen den Antworten. Der Lernstand
+hält je Karte nur `{b, d, s, w}` fest; das Datum der vorletzten Antwort fehlt. Über
+`unterwegsRunde()` kann eine noch nicht fällige Karte am selben Tag erneut drankommen und
+ein Fach aufsteigen. Wer die Zahl strenger machen will, braucht ein zusätzliches Feld im
+Kartenzustand — und muss dann Export und Import mitziehen.
 
 ### Unterwegs-Modus (der Hauptanwendungsfall)
 
@@ -145,6 +197,7 @@ node tests/suite.js       # Daten, Widersprüche, Ansichten, Textcheck
 node tests/unterwegs.js   # Kartenmix, Automatik, Rückblick, Fehlerrunde
 node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
+node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
 ```
 
 Jeder Lauf endet mit „Alles bestanden.“ oder einer Fehlerliste und Exitcode 1.

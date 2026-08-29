@@ -145,4 +145,72 @@ P.titel("C · Langzeitlauf (180 Tage, 3 Runden am Tag)");
   P.ok("Rückstand bleibt beherrschbar", hoechstOffen < 260, hoechstOffen);
 }
 
+/* ---------- D · Was sitzt ---------- */
+P.titel("D · Was sitzt");
+{
+  const w = boot(leererStand());
+  const gesamt = daten(w, "alleSchluessel().length");
+  const K = daten(w, "alleSchluessel()");
+
+  const leer = daten(w, "retention()");
+  P.ok("Leerer Stand: nichts sitzt, nichts im Aufbau", leer.sicher === 0 && leer.aufbau === 0,
+    JSON.stringify(leer));
+  P.ok("Leerer Stand: alles steht noch aus", leer.neu === gesamt, leer.neu + "/" + gesamt);
+  P.info("Bestand: " + gesamt + " Karten");
+
+  /* Die Aussage im Fortschritt lautet: Fach 4 heißt drei richtige Antworten nacheinander.
+     Genau das wird hier über grade() nachgerechnet, nicht angenommen. */
+  const nachDrei = daten(w, '(function(){const k=' + JSON.stringify(K[0]) +
+    ';for(let i=0;i<3;i++) grade(k,true);return S.cards[k].b;})()');
+  P.ok("Drei richtige Antworten führen auf Fach 4", nachDrei === 4, "Fach " + nachDrei);
+  P.ok("Nach drei richtigen Antworten sitzt genau eine Karte",
+    daten(w, "retention().sicher") === 1, daten(w, "retention().sicher"));
+
+  const nachZwei = daten(w, '(function(){const k=' + JSON.stringify(K[1]) +
+    ';for(let i=0;i<2;i++) grade(k,true);return {b:S.cards[k].b,r:retention()};})()');
+  P.ok("Zwei richtige Antworten reichen nicht", nachZwei.b === 3 && nachZwei.r.sicher === 1,
+    "Fach " + nachZwei.b + ", sicher " + nachZwei.r.sicher);
+  P.ok("Die halb gelernte Karte zählt als im Aufbau", nachZwei.r.aufbau === 1, nachZwei.r.aufbau);
+
+  /* Eine falsche Antwort setzt auf Fach 1 zurück — dann darf die Zahl nicht stehen bleiben */
+  const nachFehler = daten(w, '(function(){grade(' + JSON.stringify(K[0]) + ',false);return retention();})()');
+  P.ok("Ein Fehler nimmt die Karte wieder heraus", nachFehler.sicher === 0, nachFehler.sicher);
+
+  const summe = daten(w, "(function(){const r=retention();return r.sicher+r.aufbau+r.neu===r.gesamt;})()");
+  P.ok("Die drei Zahlen ergeben den Bestand", summe);
+
+  /* Ein Schlüssel, den es nicht mehr gibt, darf die Zahl nicht aufblähen */
+  const fremd = daten(w, '(function(){S.cards["k-gibtsnicht"]={b:5,d:"2030-01-01",s:9,w:0};' +
+    'const r=retention();return r.sicher+r.aufbau+r.neu===r.gesamt&&r.gesamt===' + gesamt + ';})()');
+  P.ok("Unbekannte Schlüssel verfälschen nichts", fremd);
+}
+
+/* ---------- E · Die Anzeige nennt dieselbe Zahl ---------- */
+P.titel("E · Anzeige");
+{
+  const w = boot(leererStand());
+  const K = daten(w, "alleSchluessel()");
+  daten(w, '(function(){' + K.slice(0, 5).map(k =>
+    'for(let i=0;i<3;i++) grade(' + JSON.stringify(k) + ',true);').join("") + 'return 1;})()');
+  const r = daten(w, "retention()");
+  P.ok("Fünf Karten sitzen", r.sicher === 5, r.sicher);
+
+  const d = w.document;
+  [...d.querySelectorAll(".tabs button")].find(b => /Fortschritt/i.test(b.textContent)).click();
+  /* Am konkreten Element prüfen, nicht am Seitentext — sonst misst der Test das Falsche */
+  const block = [...d.querySelectorAll("#statHost .card")]
+    .find(c => /Was sitzt/i.test(c.querySelector(".eyebrow") ? c.querySelector(".eyebrow").textContent : ""));
+  P.ok("Der Block „Was sitzt“ steht im Fortschritt", !!block);
+  if (block) {
+    const zahlen = [...block.querySelectorAll(".stat b")].map(b => Number(b.textContent));
+    P.ok("Die Anzeige nennt dieselbe Zahl wie die Rechnung",
+      zahlen[0] === r.sicher && zahlen[1] === r.aufbau && zahlen[2] === r.neu,
+      zahlen.join("/") + " statt " + [r.sicher, r.aufbau, r.neu].join("/"));
+    const balken = block.querySelectorAll(".bar.stapel > i");
+    P.ok("Der Balken hat drei Abschnitte", balken.length === 3, balken.length);
+    P.ok("Der Balken erklärt sich im Text",
+      /Fach 4|drei richtige|3 richtige/i.test(block.textContent));
+  }
+}
+
 P.abschluss();

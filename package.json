@@ -4,13 +4,14 @@
   "private": true,
   "description": "Einzeldatei-Lernapp für sichere deutsche Alltagssprache — Karten, Regeln, Textcheck",
   "scripts": {
-    "test": "node tests/suite.js && node tests/inhalt.js && node tests/unterwegs.js && node tests/lernen.js",
+    "test": "node tests/suite.js && node tests/inhalt.js && node tests/fallform.js && node tests/unterwegs.js && node tests/lernen.js",
     "test:suite": "node tests/suite.js",
     "test:inhalt": "node tests/inhalt.js",
     "test:unterwegs": "node tests/unterwegs.js",
     "test:lernen": "node tests/lernen.js",
     "syntax": "node -e \"const fs=require('fs');fs.writeFileSync('/tmp/dt-check.js',fs.readFileSync('Deutsch-Trainer.html','utf8').split('<script>')[1].split('</'+'script>')[0])\" && node --check /tmp/dt-check.js && echo \"Syntax in Ordnung\"",
-    "oeffnen": "open Deutsch-Trainer.html || xdg-open Deutsch-Trainer.html"
+    "oeffnen": "open Deutsch-Trainer.html || xdg-open Deutsch-Trainer.html",
+    "test:fallform": "node tests/fallform.js"
   },
   "devDependencies": {
     "jsdom": "^24.0.0"
