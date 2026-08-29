@@ -175,4 +175,16 @@ const px = (s, p) => { const m = s.match(new RegExp(p + "\\s*:\\s*(\\d+)px")); r
 P.ok("Symbolknöpfe sind mindestens 44 px", px(iconbtn, "width") >= 44 && px(iconbtn, "height") >= 44,
   iconbtn.trim());
 
+/* iOS zoomt beim Antippen in jedes Feld unter 16 px hinein und zoomt nicht
+   von selbst zurück. Die App hält das bereits ein — die Prüfung hält es fest. */
+const felder = [];
+const reFeld = /([^{}]*(?:input|textarea|select)[^{}]*)\{([^}]*)\}/g;
+let mf;
+while ((mf = reFeld.exec(css))) {
+  const g = (mf[2].match(/font-size\s*:\s*([\d.]+)px/) || [])[1];
+  if (g && parseFloat(g) < 16) felder.push(mf[1].replace(/\s+/g, " ").trim() + " (" + g + "px)");
+}
+P.ok("Eingabefelder sind mindestens 16 px — sonst zoomt iOS hinein",
+  !felder.length, felder.join(" · "));
+
 P.abschluss();

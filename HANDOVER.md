@@ -17,7 +17,7 @@ npm test
 `node_modules/` ist nicht im Repo — `npm install` ist nach jedem frischen Checkout nötig
 und holt nur jsdom. Sonst gibt es keine Abhängigkeiten und keinen Build.
 
-Alle sechs Prüfläufe sind grün. Sie sind inzwischen einmal vollständig gelaufen —
+Alle sieben Prüfläufe sind grün. Sie sind inzwischen einmal vollständig gelaufen —
 der Vorbehalt aus der letzten Übergabe ist erledigt. Ein Fehlalarm war zu beheben,
 und zwar in der Prüfung, nicht in der App: Der Korpus für „korrektes Material“ in
 `tests/suite.js` enthielt die richtige Antwort von `z24` — „Ich rufe dir an“ statt
@@ -39,7 +39,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Prüfmuster im Textcheck | 82 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Kartenbestand (`alleSchluessel()`) | 653 |
-| Dateigröße | ~596 KB, eine Datei, kein Build |
+| Dateigröße | ~627 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
 
 Die Zahl 331 stand hier lange für die Übungen und stimmte nicht — `ALL.length` war schon
 vorher 371. Die Zahlen oben sind aus der laufenden App gerechnet, nicht abgeschrieben.
@@ -63,6 +63,59 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Handy und Web-App** (29.08.2026). Die App war schon ordentlich für das Handy gebaut —
+44-px-Tippflächen, `100dvh`, Querlage-Abfragen, Eingabefelder mit 16 px gegen den
+iOS-Zoom. Zwei Dinge waren trotzdem kaputt, und beide unsichtbar:
+
+> Die App hatte **sechs Regeln mit `env(safe-area-inset-…)` — und keine davon wirkte.**
+
+Die Insets liefern konstant 0, solange im Viewport-Meta `viewport-fit=cover` fehlt. Das
+fehlte. Auf dem iPhone lag die Unterwegs-Leiste damit unter dem Home-Indikator, obwohl die
+Regel dafür längst dastand. Beim Scharfschalten kam der zweite Fehler heraus:
+
+```css
+.srch input{padding:16px 16px calc(16px + env(safe-area-inset-top))}
+```
+
+Bei drei Werten ist der dritte das **untere** Padding — der Top-Inset saß also unten.
+Beides behoben, dazu neu: `.head` hält Abstand zur Statusleiste, `.wrap` weicht in Querlage
+seitlich der Notch aus.
+
+**Touchbedienung beim Gehen.** Drei Ärgernisse, die einhändig besonders stören:
+`overscroll-behavior` verhindert das versehentliche Neuladen mitten in der Runde,
+`-webkit-tap-highlight-color` den grauen Blitz auf jedem Tipp, `user-select` die
+Auswahllupe, wenn der Finger auf einer Antwort liegen bleibt. **Die Sperre liegt nur auf
+Bedienelementen** — Regeltexte und Beispiele bleiben markierbar, und der Prüflauf hält das
+fest.
+
+**Web-App-Auszeichnung.** `theme-color` (folgt dem hellen und dunklen Thema über
+`themeFarbe()`), die Apple- und die allgemeinen Meta-Angaben, Kurzname, Symbol.
+
+Das Symbol ist ein weißes Komma auf dem Grün der App, 512×512, als PNG von Hand erzeugt und
+eingebettet (5,7 KB). Vollflächiger Hintergrund, damit iOS und Android ihre eigene Maske
+darüberlegen können. **Der Generator liegt bewusst nicht im Repo** — das Bild ist das
+Ergebnis, nicht das Werkzeug; wer es ändern will, zeichnet neu.
+
+Das **Manifest entsteht zur Laufzeit als Blob**. Eine eigene Datei würde die
+Einzeldatei-Regel brechen; ein `data:`-Manifest kann `start_url` nicht auflösen, eine
+Blob-URL hat denselben Ursprung wie die Seite und kann es. Vom Dateisystem aus (`file:`)
+passiert bewusst nichts. Alles steht in einem `try` — die Auszeichnung ist Beiwerk.
+
+**Was noch fehlt, und warum es nicht an der App liegt:** Zum Installieren muss die Datei
+über **HTTPS ausgeliefert** werden. Aus dem Dateisystem heraus lässt sich weder unter iOS
+noch unter Android etwas zum Startbildschirm hinzufügen, was sich wie eine App verhält.
+Das ist eine Entscheidung über das Hosting, keine Codefrage — siehe Ideenliste.
+
+**Neuer Prüflauf `tests/mobil.js`.** Kern ist Abschnitt A: **Jeder Inset muss auf seiner
+eigenen Seite stehen.** Der Lauf zerlegt dafür auch Kurzschreibweisen (`padding` mit zwei,
+drei oder vier Werten) und sagt offen, was er nicht beurteilen kann. Dazu die
+Web-App-Angaben samt Gültigkeit von Manifest und PNG, die Touchregeln und die Feldgrößen.
+Gegen vier eingebaute Fehler geprüft.
+
+`setup.js` schreibt Blobs jetzt mit (`w.__blobs`), damit Prüfläufe hineinsehen können —
+Export und Manifest entstehen beide als Blob.
+
 
 **Dritte Farbstufe: umgangssprachlich ist nicht falsch** (29.08.2026). Die App kannte in
 Beispielen nur zwei Auszeichnungen — `ok` (grün, richtig) und `nope` (rot, falsch). Alles
@@ -329,15 +382,22 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten wären
-   akademische Verben und Verwechslungspaare aus Nils' eigenen Texten. Das ist jetzt der
-   größte inhaltliche Hebel — die Regelseite ist durchgearbeitet: alle 17
-   Zeichensetzungsregeln geprüft, alle 25 Variantenregeln belegt, `VAR_OFFEN` leer.
+1. **Die App über HTTPS ausliefern, damit sie installierbar wird.** Die Auszeichnung ist
+   fertig, es fehlt nur der Ort. Aus dem Dateisystem heraus kann weder iOS noch Android
+   etwas zum Startbildschirm hinzufügen, was sich wie eine App verhält. GitHub Pages wäre
+   der kurze Weg — das Repo ist allerdings privat, Pages für private Repos setzt einen
+   bezahlten Plan voraus. Sobald ein Ort feststeht, lohnt zusätzlich ein Service Worker
+   für echtes Offline-Caching; der braucht eine zweite Datei und bricht damit die
+   Einzeldatei-Regel — das ist bewusst zu entscheiden, nicht nebenbei.
 
-2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
+2. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten wären
+   akademische Verben und Verwechslungspaare aus Nils' eigenen Texten. Größter
+   inhaltlicher Hebel — die Regelseite ist durchgearbeitet.
+
+3. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.
-3. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten
+4. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten
    wären akademische Verben und Verwechslungspaare aus seinen eigenen Texten.
 4. **Satzformen für die zehn offenen Fassungen.** `bis`, `wider`, `je`, `pro`, `samt`
    und `zwecks` fragen über Adjektivendungen ab, `danken` und `zuhören` über „ihr“ —

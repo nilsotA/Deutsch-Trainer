@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~596 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~627 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
@@ -190,6 +190,13 @@ Für größere Umbauten ein Skript — aber:
   Textcheck-Muster tot in die Datei gekommen.
 - Nach jeder Änderung: `npm run syntax`, dann `npm test`.
 
+**Handy zuerst.** Nils übt unterwegs. `viewport-fit=cover` im Viewport-Meta ist die
+Voraussetzung dafür, dass `env(safe-area-inset-*)` überhaupt Werte liefert — ohne das
+sind alle Safe-Area-Regeln still wirkungslos. `tests/mobil.js` prüft das und dazu, dass
+jeder Inset auf seiner eigenen Seite steht (bei `padding` mit drei Werten ist der dritte
+unten, nicht oben). Das App-Symbol ist als PNG eingebettet; es gibt kein Werkzeug dafür
+im Repo.
+
 **Niemals ändern ohne Grund:**
 - Übungs-IDs, Wort- und Fallkartenschlüssel (= Lernstand)
 - den Kommentarbanner `ANWENDUNGSLOGIK` (Schnittstelle der Prüfläufe)
@@ -208,6 +215,7 @@ node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
 node tests/normen.js      # absolute Aussagen, Kann-Regeln, Jahreszahlen, Spickzettel
+node tests/mobil.js       # sichere Ränder, Web-App-Auszeichnung, Touchbedienung
 ```
 
 Jeder Lauf endet mit „Alles bestanden.“ oder einer Fehlerliste und Exitcode 1.
