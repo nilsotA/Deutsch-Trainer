@@ -1,7 +1,10 @@
 # Übergabe an Claude Code
 
-Das Projekt liegt seit dem 29.08.2026 unter `~/Claude/Projects/Deutsch-Trainer`.
-Die alte Kopie im Cowork-Ausgabeordner ist nur noch Sicherung.
+Seit dem 29.08.2026 liegt das Projekt in Git: `github.com/nilsotA/Deutsch-Trainer`
+(privat). Das Repo ist die maßgebliche Fassung — egal in welchem Verzeichnis oder auf
+welchem Rechner du es auscheckst. Auf Nils' Mac liegt eine Arbeitskopie unter
+`~/Claude/Projects/Deutsch-Trainer`; die Kopie im Cowork-Ausgabeordner ist nur noch
+Sicherung und wird nicht mehr gepflegt.
 
 ## Was du zuerst tun solltest
 
@@ -10,6 +13,9 @@ npm install
 npm run syntax
 npm test
 ```
+
+`node_modules/` ist nicht im Repo — `npm install` ist nach jedem frischen Checkout nötig
+und holt nur jsdom. Sonst gibt es keine Abhängigkeiten und keinen Build.
 
 Alle fünf Prüfläufe sind grün. Sie sind inzwischen einmal vollständig gelaufen —
 der Vorbehalt aus der letzten Übergabe ist erledigt. Ein Fehlalarm war zu beheben,
