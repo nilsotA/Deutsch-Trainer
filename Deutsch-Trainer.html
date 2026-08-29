@@ -675,7 +675,7 @@ const EX_A = [
  "Komma darf gesetzt werden, muss aber nicht",
  "Komma ist verboten",
  "Komma ist Pflicht"],a:0,
- e:"Seit 1996 ist das Komma vor „und“/„oder“ zwischen Hauptsätzen <b>fakultativ</b>. Setz es, wenn es die Gliederung klarer macht.",r:"komma-hauptsatz"},
+ e:"Seit der Reform von 1996 ist das Komma vor „und“/„oder“ zwischen Hauptsätzen <b>fakultativ</b> (Duden). Setz es, wenn es die Gliederung klarer macht.",r:"komma-hauptsatz"},
 
 {id:"k10",c:"komma",q:"Welcher Satz braucht zwingend ein Komma vor „und“?",o:[
  "Er wartete, bis es dunkel wurde, und ging dann los.",
@@ -722,7 +722,7 @@ const EX_A = [
 {id:"k19",c:"komma",q:"Welche Variante ist richtig?",o:[
  "Sie fragte, ob er mitkomme.",
  "Sie fragte ob er mitkomme."],a:0,
- e:"Nebensätze werden immer durch Komma abgetrennt — auch indirekte Fragesätze mit „ob“.",r:"komma-nebensatz"},
+ e:"Auch der indirekte Fragesatz mit „ob“ ist ein Nebensatz und wird abgetrennt. Ohne Komma ist der Satz falsch.",r:"komma-nebensatz"},
 
 {id:"k20",c:"komma",q:"„Er hat versucht(,) pünktlich zu sein.“",o:[
  "Komma ist Pflicht",
@@ -772,7 +772,7 @@ const EX_A = [
  "Von der Hitze erschöpft, brach sie das Training ab.",
  "Beides ist zulässig",
  "Von der Hitze erschöpft brach sie das Training ab."],a:1,
- e:"Bei Partizipgruppen ist das Komma seit 2006 <b>fakultativ</b>. Pflicht wird es nur bei Einschüben, Nachträgen oder wenn ein hinweisendes Wort vorausgeht.",r:"komma-partizip"},
+ e:"Bei Partizipgruppen ist das Komma seit der Reform von 1996 <b>fakultativ</b>. Pflicht wird es nur bei Einschüben, Nachträgen oder wenn ein hinweisendes Wort vorausgeht.",r:"komma-partizip"},
 
 {id:"k30",c:"komma",q:"„Es war ein guter(,) wenn auch anstrengender Tag.“",o:[
  "Komma nötig","Kein Komma"],a:0,
@@ -809,7 +809,7 @@ const EX_A = [
 
 {id:"k37",c:"komma",q:"„Sie war müde(,) trotzdem lief sie weiter.“",o:[
  "Komma nötig","Kein Komma"],a:0,
- e:"Hier stehen zwei Hauptsätze ohne verbindende Konjunktion nebeneinander. Zwischen ihnen ist ein Komma Pflicht („trotzdem“ ist ein Adverb, keine Konjunktion).",r:"komma-hauptsatz"},
+ e:"Zwei Hauptsätze ohne verbindende Konjunktion — dazwischen muss ein Zeichen stehen („trotzdem“ ist ein Adverb, keine Konjunktion). Das Komma ist der Normalfall; ein Semikolon oder ein Punkt wäre hier ebenfalls richtig.",r:"komma-hauptsatz"},
 
 {id:"k38",c:"komma",q:"Was ist richtig?",o:[
  "Der Kurs findet statt, sofern genug Anmeldungen eingehen.",
@@ -1399,8 +1399,8 @@ const WORDS = [
 const RULES = [
 
 /* ---------- KOMMA ---------- */
-{id:"komma-nebensatz",c:"komma",t:"Nebensätze werden immer abgetrennt",b:`
-<p>Die wichtigste Kommaregel überhaupt: Zwischen Haupt- und Nebensatz steht <b>immer</b> ein Komma — egal, in welcher Reihenfolge.</p>
+{id:"komma-nebensatz",c:"komma",t:"Nebensätze werden abgetrennt",b:`
+<p>Die wichtigste Kommaregel überhaupt: Zwischen Haupt- und Nebensatz steht ein Komma — egal, in welcher Reihenfolge. Ausnahmen sind selten und stehen unten.</p>
 <div class="ex">Er ging nach Hause<span class="ok">,</span> weil es regnete.<br>Weil es regnete<span class="ok">,</span> ging er nach Hause.</div>
 <p><b>Erkennungszeichen für Nebensätze:</b> Das gebeugte Verb steht am Ende. Eingeleitet werden sie von:</p>
 <ul>
@@ -1410,7 +1410,16 @@ const RULES = [
 <li>der Paarformel <code>je … desto</code> — der je-Teil ist ein Gliedsatz: „<b>Je</b> länger er trainierte<span class="ok">,</span> <b>desto</b> ruhiger wurde sein Puls.“</li>
 </ul>
 <p>Steckt der Nebensatz mitten im Satz, braucht er <b>zwei</b> Kommas. Das schließende wird am häufigsten vergessen.</p>
-<div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>`},
+<div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>
+<p><b>Zwei Nachträge zum Erkennungszeichen.</b> Es greift nicht bei jedem Nebensatz:</p>
+<ul>
+<li>Der <b>uneingeleitete</b> Nebensatz hat kein Einleitewort und das Verb an zweiter Stelle — abgetrennt wird er trotzdem:<br>
+<span class="ex">Er sagte<span class="ok">,</span> er komme später.</span></li>
+<li>Bei <b>formelhaft verkürzten</b> Nebensätzen darf das Komma wegfallen. Das ist die Ausnahme von der Regel oben:<br>
+<span class="ex">Sag <span class="ok">(,)</span> wenn möglich <span class="ok">(,)</span> vorher Bescheid.</span><br>
+Ebenso <i>wie besprochen</i>, <i>wie gesagt</i>, <i>wie üblich</i>. Wird die Wendung länger („wie heute Morgen am Telefon besprochen“), ist sie nicht mehr formelhaft und das Komma steht.</li>
+</ul>
+<p class="tiny muted">Belegt: Amtliches Regelwerk § 76 zu formelhaften verkürzten Nebensätzen (Duden, Sprachratgeber). Faustregel dort: ab etwa vier Wörtern Kommas setzen.</p>`},
 
 {id:"komma-infinitiv",c:"komma",t:"Infinitivgruppen mit „zu“",b:`
 <p>Hier hat sich die Regel geändert: Seit dem <b>1. Juli 2024</b> wird eine
@@ -1449,13 +1458,14 @@ der Gesellschaft für deutsche Sprache.</p>`},
 <p>In einer reinen Aufzählung steht vor dem abschließenden „und“ kein Komma — das englische „Oxford-Komma“ gibt es im Deutschen nicht. Ein Komma kann dort trotzdem auftauchen, wenn es einen eingeschobenen Nebensatz schließt: „Er kaufte Äpfel, Birnen, die er mochte, und Bananen.“</p>`},
 
 {id:"komma-hauptsatz",c:"komma",t:"Komma zwischen Hauptsätzen",b:`
-<p>Zwei vollständige Hauptsätze ohne verbindende Konjunktion: <b>Komma Pflicht</b>.</p>
+<p>Zwei vollständige Hauptsätze ohne verbindende Konjunktion müssen getrennt werden. Das Komma ist der Normalfall, <b>Semikolon oder Punkt gehen genauso</b> — nur gar kein Zeichen geht nicht.</p>
 <div class="ex">Sie war müde<span class="ok">,</span> trotzdem lief sie weiter.</div>
 <p>Achtung: <code>trotzdem, deshalb, dennoch, außerdem, allerdings</code> sind <b>Adverbien</b>, keine Konjunktionen — sie ersetzen das Komma nicht.</p>
 <p>Verbunden durch <code>und</code> oder <code>oder</code>: <b>Komma freigestellt</b>.</p>
 <div class="ex">Er packte die Tasche<span class="ok">(,)</span> und sie schloss die Tür.</div>
 <p><b>Ausnahme — hier ist es doch Pflicht:</b> wenn ein eingeschobener Nebensatz geschlossen werden muss.</p>
-<div class="ex">Er wartete<span class="ok">,</span> bis es dunkel wurde<span class="ok">,</span> und ging dann los.</div>`},
+<div class="ex">Er wartete<span class="ok">,</span> bis es dunkel wurde<span class="ok">,</span> und ging dann los.</div>
+<p class="tiny muted">Belegt: Die Reform von 1996 hat das Komma vor <i>und</i> und <i>oder</i> zwischen vollständigen Hauptsätzen freigestellt; es darf zur Verdeutlichung der Gliederung stehen (Duden, Sprachratgeber). Die Paragrafennummern des Regelwerks wurden 2024 neu vergeben — ältere Fundstellen zählen anders.</p>`},
 
 {id:"komma-einschub",c:"komma",t:"Einschübe, Appositionen, Nachträge",b:`
 <p>Alles, was den Satz unterbricht oder nachträglich erläutert, wird <b>beidseitig</b> abgetrennt. Merksatz: <i>Was du aufmachst, musst du schließen.</i></p>
@@ -1483,7 +1493,7 @@ der Gesellschaft für deutsche Sprache.</p>`},
 die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ klingt falsch, weil „rote Jacke“ eine Einheit bildet</div>`},
 
 {id:"komma-partizip",c:"komma",t:"Partizipgruppen",b:`
-<p>Seit 2006 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b>:</p>
+<p>Seit der Rechtschreibreform von 1996 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b>:</p>
 <div class="ex">Von der Hitze erschöpft<span class="ok">(,)</span> brach sie das Training ab.</div>
 <p><b>Pflicht</b> wird es nur, wenn die Gruppe …</p>
 <ul>
@@ -1491,7 +1501,8 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ kl
 <li>… nachgetragen wird: „Sie brach ab, völlig erschöpft.“</li>
 <li>… durch ein hinweisendes Wort angekündigt wird</li>
 </ul>
-<p>Empfehlung: setzen, wenn es die Lesbarkeit erhöht — das ist fast immer der Fall.</p>`},
+<p>Empfehlung: setzen, wenn es die Lesbarkeit erhöht — das ist fast immer der Fall.</p>
+<p class="tiny muted">Belegt: Die Reform von 1996 hat die Pflichtfälle auf Nachtrag und hinweisendes Wort zusammengezogen; sonst ist das Komma seither freigestellt. Die Fassung 2024 des Regelwerks ändert daran nichts — anders als bei den Infinitivgruppen.</p>`},
 
 {id:"komma-brief",c:"komma",t:"Anrede, Gruß, Datum",b:`
 <ul>
