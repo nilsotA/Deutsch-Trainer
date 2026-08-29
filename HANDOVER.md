@@ -64,6 +64,48 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ein hartes Muster stand genau verkehrt herum** (29.08.2026). Die zwei Kandidaten aus
+meiner eigenen Ideenliste — *seit/seid* und n-Deklination — gab es längst (`x17`, `x18`,
+`x23`). Die Notiz war geraten, nicht nachgesehen. Beim Nachsehen kam Schlimmeres heraus:
+
+```
+x18 alt:  /\bseit\s+ihr\b/g        (ohne i-Flag)
+
+  hart x18  „Das ist so, seit ihr gewonnen habt.“        ← korrektes Deutsch
+  hart x18  „Es geht bergauf, seit ihr Vater trainiert.“ ← korrektes Deutsch
+  still     „Seit ihr schon da?“                          ← der echte Fehler
+```
+
+Der Fehler steht fast immer am Satzanfang, also groß — kein Treffer. Getroffen hat es nur
+die Kleinschreibung mitten im Satz, und dort ist „seit ihr“ in aller Regel richtig. Ein
+**hartes** Muster, das korrektes Deutsch anklagt und den Fehler durchlässt.
+
+Neu: `/\bseit\s+ihr\b[^,.!?;—–]*\?/gi` — nur die Frageform ohne trennendes Zeichen. Vor
+dem Einbau isoliert gegen elf Fälle geprüft. **Eine Lücke bleibt bewusst:** „Seit ihr
+sicher, dass …?“ wird vom Komma abgeschnitten. Bei einem harten Muster ist Genauigkeit
+wichtiger als Vollständigkeit — ein falscher Vorwurf kostet mehr als ein übersehener Fehler.
+
+**Es war kein Einzelfall.** Acht weitere Muster hatten dieselbe blinde Stelle: `y03`
+(„Weil ich hab keine Zeit“), `x24` („In 2026“), `t06` („Von 1990–1995“), `y05` („Der
+gleiche Fehler“), `x23` („Dem Kollege“), `x21`, `x22`, `x20`. Alle geöffnet — jeweils nur
+der erste Buchstabe, etwa `[Ww]eil`. **Ein pauschales `i`-Flag wäre falsch:** `a05`
+(Genitivkette) und `x23` (Substantivliste) sind auf Großschreibung angewiesen und würden
+damit unbrauchbar.
+
+**Warum das überleben konnte — und was jetzt dagegen steht.** Der Fehlalarmkorpus bestand
+aus dem *eigenen Bestand* und deckt nur ab, was die App ohnehin enthält. „seit ihr“ kam
+nirgends vor, also fiel nichts auf. Zwei neue Korpora in `suite.js` ergänzen sich:
+
+- **40 richtige Sätze**, von Hand geschrieben, die die App nie gesehen hat. Kein Satz darf
+  eine Meldung auslösen.
+- **12 falsche Sätze** mit dem Muster, das sie fangen muss — jeweils **am Satzanfang**, in
+  der Schreibung, in der sie am ehesten vorkommen. Ein Muster, das nichts findet, fällt
+  sonst nirgends auf.
+
+Beide gegen eingebaute Fehler geprüft. **Wer ein Muster ergänzt, schreibt in beide Korpora
+einen Satz**: einen, der knapp danebenliegt, und einen, der getroffen werden muss.
+
+
 **Textcheck: erst das Netz, dann die Muster** (29.08.2026). `tests/suite.js` prüfte bis
 dahin nur die **harten** Muster gegen den eigenen korrekten Bestand. Die 23 `pruef`- und
 14 `form`-Muster liefen ohne Absicherung — wer dort ein Muster ergänzte, arbeitete ohne
@@ -538,12 +580,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck weiter schärfen — jetzt mit Netz.** Die Absicherung steht: Neue
-   `pruef`- und `form`-Muster fallen auf, wenn sie auf sauberem Text anschlagen. Damit
-   ist das Ergänzen weiterer Muster deutlich billiger geworden. Kandidaten wären
-   *seit/seid* (etwa „seit ihr“ statt „seid ihr“) und die n-Deklination
-   („mit dem Kollege“). Vorgehen wie bei `y11`: erst isoliert gegen erwünschte und
-   unerwünschte Fälle prüfen, dann einbauen. Stilmuster bleiben außen vor.
+3. **Textcheck weiter schärfen — jetzt mit doppeltem Netz.** Neue Muster werden gegen
+   40 richtige und 12 falsche Sätze gehalten. Vor dem nächsten Muster lohnt aber etwas
+   anderes: Der Fehlerkorpus deckt bisher nur **12 der 84 Muster** ab. Die übrigen sind
+   ungeprüft — es ist nicht bekannt, ob sie überhaupt greifen. Sie nach und nach mit je
+   einem Beispielsatz zu belegen, ist wertvoller als ein neues Muster. Dabei wird
+   vermutlich mehr auffallen: `x18` war halb tot, und niemand hat es gemerkt.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
