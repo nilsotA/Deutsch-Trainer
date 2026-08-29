@@ -312,6 +312,35 @@ SAUBER.forEach(t => {
 P.ok("Keine Meldung auf fremdem korrektem Deutsch (" + SAUBER.length + " Sätze)",
   !fremdalarm.length, fremdalarm.slice(0, 4).join(" · "));
 
+/* Die Gegenrichtung: Ein Muster, das nichts findet, fällt nirgends auf. Genau so
+   war x18 halb tot — und acht weitere Muster hatten dieselbe blinde Stelle: Ohne
+   i-Flag greifen sie nur mitten im Satz, nicht am Satzanfang. „Weil ich hab keine
+   Zeit“ wurde übersehen, „…, weil ich hab keine Zeit“ erkannt.
+
+   Jeder Eintrag hier ist ein bewusst falscher Satz mit dem Muster, das ihn fangen
+   muss — und steht in der Schreibung, in der er am ehesten vorkommt: am Satzanfang. */
+const FEHLER = [
+  ["Seit ihr schon da?", "x18"],
+  ["Weil ich hab keine Zeit, komme ich später.", "y03"],
+  ["In 2026 beginnt das neue Semester.", "x24"],
+  ["Von 1990–1995 spielte er im Verein.", "t06"],
+  ["Der gleiche Fehler ist uns schon zweimal passiert.", "y05"],
+  ["Dem Kollege habe ich das gesagt.", "x23"],
+  ["Interessiert dir das überhaupt?", "x21"],
+  ["Kostet mir das etwas?", "x22"],
+  ["Ruft mir bitte morgen an.", "x20"],
+  ["Die Reflektion des Praktikums war kurz.", "x27"],
+  ["Er hat versucht die Prüfung zu bestehen.", "y11"],
+  ["Seid dem Sommer trainiert er wieder.", "x17"]
+];
+const stummeMuster = [];
+FEHLER.forEach(([t, id]) => {
+  const ids = daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>f.c.id)");
+  if (!ids.includes(id)) stummeMuster.push(id + " findet nichts in „" + t + "“");
+});
+P.ok("Jedes benannte Muster greift auch am Satzanfang (" + FEHLER.length + " Fälle)",
+  !stummeMuster.length, stummeMuster.join(" · "));
+
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
 const d = w.document;
