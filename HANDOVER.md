@@ -64,6 +64,44 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die zehn ungeprüften Satzformen geschlossen** (29.08.2026). Acht von zehn sind jetzt
+maschinell abgedeckt, **163 → 171 von 173 Fassungen**. Die letzten zwei sind gar kein Fall
+für eine Formentabelle.
+
+Adjektive und Pronomen tragen dieselben Endungen wie die Artikel. `tests/formen.js` leitet
+sie deshalb jetzt aus **Stamm und Endung** ab, statt sie einzeln aufzuzählen:
+
+| Endung | Fälle | warum |
+|---|---|---|
+| `-em` | Dativ | stark, maskulin und neutrum |
+| `-en` | alle vier | Akk. mask., Dat. Plural, Nom. Plural schwach, Gen. Sing. schwach |
+| `-er` | N, D, G | **nie Akkusativ** |
+| `-es` | N, A, G | Nom./Akk. neutrum, dazu Genitiv |
+| `-e` | N, A | Dativ wäre -en oder -er, Genitiv -er oder -en |
+
+**Die Stämme stehen einzeln da** (`nächst`, `besser`, `angefangen`, `all`) — mit Absicht.
+Eine reine Endungsregel würde auf gewöhnliche Substantive zugreifen: „Trainer“ endet auf
+-er, ist aber keine Fallform. Wer eine Karte mit neuem Adjektiv schreibt, trägt den Stamm
+nach und bekommt sonst einen Fehler.
+
+Dazu die Personalpronomen: `ihr` ist Dativ feminin, zugleich Possessiv und zweite Person
+Plural (also N/A/D); `sie` ist **nie** Dativ. Damit sind `danken` und `zuhören` abgedeckt.
+
+**Offen bleiben zwei Fassungen — und das ist keine Lücke:** `nach (Richtung)` und
+`bei (Ort)`. Dort steht nicht eine Fallform gegen eine andere, sondern eine **Präposition
+gegen eine andere**. Beide regieren den Dativ; über den Fall entscheidet das nicht, also
+kann keine Formentabelle es beurteilen. Sie stehen namentlich in `PRAEPWAHL`, damit eine
+neue unbeurteilbare Fassung auffällt, statt in derselben Zahl zu verschwinden — und die
+Liste muss aktuell bleiben, sonst meldet der Lauf eine Karteileiche.
+
+Gegen drei eingebaute Fehler geprüft: Dativform als richtige Antwort bei einem
+Akkusativ-Item, zweiter Dativ als Ablenker, „sie“ als Dativ. Alle drei fallen auf — **die
+Erweiterung deckt nicht nur ab, sie entscheidet auch.**
+
+Nebenwirkung: `tests/inhalt.js` teilt dieselbe Tabelle und prüft jetzt 121 statt 115
+Fallkarten gegen ihre Beispiele.
+
+
 **Wortschatz von 116 auf 143 Karten** (29.08.2026). Gewählt entlang dessen, was Nils
 tatsächlich schreibt — Hausarbeiten, Praktikums- und Forschungsberichte, Reflexionen:
 
@@ -467,15 +505,15 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    Bedarf vorbei.
 
 3. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
-   Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
-   neue Muster muss gegen sauberen Text geprüft werden.
-4. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten
-   wären akademische Verben und Verwechslungspaare aus seinen eigenen Texten.
-4. **Satzformen für die zehn offenen Fassungen.** `bis`, `wider`, `je`, `pro`, `samt`
-   und `zwecks` fragen über Adjektivendungen ab, `danken` und `zuhören` über „ihr“ —
-   die Formentabelle in `tests/formen.js` kennt diese Formen nicht, sie sind also nur
-   von Hand geprüft. Entweder die Tabelle erweitern oder die Sätze auf Artikelformen
-   umstellen.
+   Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes neue
+   Muster muss gegen sauberen Text geprüft werden — und `tests/suite.js` prüft nur die
+   harten Muster auf Fehlalarm, nicht die weichen. Wer ein `pruef`-Muster ergänzt, sollte
+   die Prüfung mit ausweiten.
+
+**Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
+Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
+Web-App-Auszeichnung fürs Handy. Was davon offen blieb, steht oben in „Zuletzt geändert“
+jeweils mit Begründung.
 
 ## Werkzeug, das nützlich war
 
