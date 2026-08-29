@@ -64,6 +64,39 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Textcheck bekommt die dritte Stufe** (29.08.2026). Beim Prüfen der Trefferquote kam
+etwas Grundsätzlicheres heraus: Die App kennt in Beispielen drei Stufen — `ok`, `ugs`,
+`nope` —, der Textcheck kannte sie nicht. Dort stand alles Nichtstandardsprachliche als
+**„Klarer Fehler“**.
+
+Damit widersprach sich die App an vier Stellen selbst. Sie zeichnet „wegen dem Wetter“,
+„größer wie“, „als wie“ und „Ich rufe dir an“ **orange als verbreitet und nicht falsch**
+aus — und meldete dieselben Formen im Textcheck als klaren Fehler. Bei `x20` stand der
+Widerspruch sogar **im eigenen Hinweistext**: „Der Dativ ist südwestdeutsch und
+schweizerisch verbreitet“, Schärfegrad `hart`.
+
+Neu ist die Stufe **`ugs` („Umgangssprachlich“)** in `--gold`, mit eigener Markierung im
+Text, eigener Karte und eigenem Filterknopf. Sechs Muster umgestuft: `x01` (wegen), `x02`
+(trotz), `x03` (während), `x04` (größer wie), `x05` (als wie), `x20` (anrufen + Dativ).
+
+Für *trotz* und *während* gab es keinen App-internen Beleg, also nachgeschlagen: Der Duden
+führt den Dativ bei beiden als umgangssprachlich beziehungsweise landschaftlich, besonders
+süddeutsch — nicht als falsch. Bei Pluralen ohne erkennbaren Genitiv ist der Dativ sogar
+standardsprachlich nötig.
+
+**Neue Prüfung:** Kein hartes Muster darf eine Form melden, die in einer Regel oder
+Satzkarte orange ausgezeichnet ist. Die Fehlalarmprüfung deckt die neue Stufe mit ab —
+eine `ugs`-Meldung auf korrektem Standarddeutsch wäre genauso falsch wie eine harte.
+
+**Nebenbefund:** Der Erklärtext des Textchecks nannte fest verdrahtet „78 Muster“; es sind
+84. Die Zahl wird jetzt aus dem Bestand gerechnet.
+
+**Was das über die Trefferquote sagt:** Ich bin losgezogen, um zu prüfen, ob die harten
+Muster genug Varianten desselben Fehlers finden — und habe stattdessen festgestellt, dass
+sechs von ihnen den falschen Schärfegrad hatten. Die eigentliche Trefferquote ist damit
+**weiterhin ungeprüft**; sie steht in der Ideenliste.
+
+
 **Alle 84 Prüfmuster sind als wirksam belegt** (29.08.2026). Nach dem `x18`-Befund war
 offen, ob die übrigen Muster überhaupt greifen. Sie tun es größtenteils — und das ließ
 sich ohne Handarbeit zeigen: **Die Ablenker der Aufgaben und die Fehlersuchtexte sind
@@ -614,13 +647,13 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck weiter schärfen.** Die Absicherung steht jetzt in drei Richtungen (siehe
-   Tabelle oben), neue Muster sind damit billig geworden: Wer eins ergänzt, schreibt
-   einen Satz in `SAUBER`, der knapp danebenliegt, und einen in `FEHLER`, der getroffen
-   werden muss. Was noch **nicht** geprüft wird, ist die *Trefferquote* — ob ein Muster
-   die Fälle findet, die es finden sollte, statt nur einen. `x18` und `y10` waren beide
-   „wirksam“ im Sinne der neuen Prüfung und trotzdem halb blind. Wer hier weitermacht,
-   sollte pro Muster mehrere Formulierungen desselben Fehlers durchspielen.
+3. **Trefferquote der Muster.** Geprüft ist, dass jedes Muster *irgendwo* etwas findet —
+   nicht, dass es *alle* Formulierungen desselben Fehlers findet. `x18` und `y10` waren
+   beide „wirksam“ und trotzdem halb blind. Vorgehen: pro Muster drei bis vier Varianten
+   desselben Fehlers durchspielen. Beim ersten Anlauf dazu kam die Stufenfrage dazwischen
+   (siehe oben) — die Trefferquote selbst ist noch offen. Konkreter Anfang: Die
+   Genitivpräpositionen `x01`–`x03` fangen nur `dem/den/einem`, nicht `meinem`, `diesem`,
+   `keinem` und die übrigen Possessive.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die

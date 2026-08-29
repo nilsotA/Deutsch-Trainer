@@ -42,8 +42,10 @@ also nicht umbenennen.
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 82 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 84 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/ugs/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
+
+**Drei Stufen, zweimal**: Beispiele nutzen `ok`/`ugs`/`nope`, der Textcheck `hart`/`ugs`/… — beide müssen dasselbe sagen. Ein hartes Muster darf keine Form melden, die eine Regel orange auszeichnet; `tests/suite.js` prüft das.
 
 **Auszeichnung in Beispielen**: drei Stufen — `ok` (standardsprachlich), `ugs`
 (umgangssprachlich oder regional, verbreitet aber nicht für geschriebene Texte) und
