@@ -111,33 +111,19 @@ P.ok("Prüfmuster ohne Steuerzeichen (" + muster.length + ")", !kaputt.length, k
 const stumm = daten(w, 'CHECKS_ALL.filter(c=>{try{return "Probe".match(c.re)===undefined}catch(e){return true}}).map(c=>c.id)');
 P.ok("Alle Prüfmuster ausführbar", !stumm.length, stumm.join(","));
 
-/* Der eigene korrekte Bestand darf keine harten Meldungen auslösen.
-   Fehlerklasse „zitierte Falschform“: Manche richtigen Antworten benennen eine falsche
-   Form, statt selbst eine korrekte zu sein („Ich rufe dir an“ statt „dich“). Steht im
-   Eintrag ein Kontrastwort, zählt nur der Text außerhalb der Anführungszeichen als
-   korrektes Material. Zitate ohne Kontrastwort (Musterformulierungen, wörtliche Rede)
-   bleiben vollständig in der Prüfung. */
-const KONTRAST = /\b(statt|falsch)\b/i;
-const ohneZitat = t => KONTRAST.test(t)
-  ? t.replace(/„[^“]*“/g, " ").replace(/\s+/g, " ").trim()
-  : t;
-
+/* Der eigene korrekte Bestand darf keine harten Meldungen auslösen */
 const korpus = [];
 ALL.forEach(i => { if (i.t !== "fill") korpus.push(strip(i.o[i.a])); });
 CASEREF.forEach(e => korpus.push(e.ex));
 WORDS.forEach(x => korpus.push(x.ex));
 const fehlalarm = [];
-let gekuerzt = 0;
-korpus.forEach(roh => {
-  const t = ohneZitat(String(roh || ""));
-  if (t !== roh) gekuerzt++;
+korpus.forEach(t => {
   if (!t || t.length < 6) return;
   const treffer = daten(w, 'analyse(' + JSON.stringify(t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
   if (treffer.length) fehlalarm.push(treffer.join("/") + " bei „" + t.slice(0, 50) + "“");
 });
 P.ok("Keine harte Meldung auf korrektem Material", !fehlalarm.length,
   fehlalarm.slice(0, 5).join(" · ") + (fehlalarm.length > 5 ? " …(" + fehlalarm.length + ")" : ""));
-if (gekuerzt) P.info(gekuerzt + " Einträge zitieren eine Falschform — dort nur der Text außerhalb der Zitate geprüft");
 
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");

@@ -97,8 +97,6 @@ hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 
 .bar{height:7px;border-radius:99px;background:var(--line2);overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .35s cubic-bezier(.4,0,.2,1)}
-.bar.stapel{display:flex}
-.bar.stapel>i{border-radius:0}
 
 .tag{display:inline-block;padding:3px 9px;border-radius:7px;font-size:11.5px;font-weight:650;letter-spacing:.02em}
 .t-komma{background:var(--blue-soft);color:var(--blue)}
@@ -3208,131 +3206,131 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 const CASEREF = [
 
 /* ---------- PRÄPOSITIONEN MIT AKKUSATIV ---------- */
-{w:"durch",t:"praep",k:"Akkusativ",ex:"durch den Wald, durch die Stadt",s:["Wir laufen durch ___ Wald.","den","dem"]},
-{w:"für",t:"praep",k:"Akkusativ",ex:"für dich, für den Verein",s:["Das Trikot ist für ___ neuen Torwart.","den","dem"]},
-{w:"gegen",t:"praep",k:"Akkusativ",ex:"gegen die Wand, gegen ihn",s:["Der Ball prallt gegen ___ Pfosten.","den","dem"]},
-{w:"ohne",t:"praep",k:"Akkusativ",ex:"ohne mich, ohne den Ball",n:"Nach „ohne“ steht der Artikel oft gar nicht: „ohne Auto“.",s:["Wir starten ohne ___ Torwart.","den","dem"]},
-{w:"um",t:"praep",k:"Akkusativ",ex:"um den Platz, um acht Uhr",s:["Wir laufen zweimal um ___ Platz.","den","dem"]},
-{w:"bis",t:"praep",k:"Akkusativ",ex:"bis nächsten Montag",n:"Meist ohne Artikel („bis Montag“). Steht ein Artikel dabei, folgt oft eine zweite Präposition: „bis zum Montag“ (dann Dativ, weil „zu“ regiert).",s:["Wir haben Zeit bis ___ Montag.","nächsten","nächstem"]},
-{w:"entlang",t:"praep",k:"Akkusativ",ex:"den Fluss entlang",n:"Nachgestellt steht der Akkusativ. Vorangestellt verlangt der Duden den Genitiv („entlang des Flusses“), seltener den Dativ. Die nachgestellte Form ist die unproblematischere.",fall:true,s:["Wir joggen ___ Fluss entlang.","den","dem"]},
-{w:"wider",t:"praep",k:"Akkusativ",ex:"wider Erwarten, wider besseres Wissen",n:"Gehoben. Nicht mit „wieder“ (= erneut) verwechseln.",s:["Er handelte wider ___ Wissen.","besseres","besserem"]},
-{w:"je",t:"praep",k:"Akkusativ",ex:"je angefangenen Monat",s:["Es fällt eine Gebühr je ___ Monat an.","angefangenen","angefangenem"]},
-{w:"pro",t:"praep",k:"Akkusativ",ex:"pro Person, pro angefangene Stunde",s:["Die Halle kostet zehn Euro pro ___ Stunde.","angefangene","angefangener"]},
+{w:"durch",t:"praep",k:"Akkusativ",ex:"durch den Wald, durch die Stadt"},
+{w:"für",t:"praep",k:"Akkusativ",ex:"für dich, für den Verein"},
+{w:"gegen",t:"praep",k:"Akkusativ",ex:"gegen die Wand, gegen ihn"},
+{w:"ohne",t:"praep",k:"Akkusativ",ex:"ohne mich, ohne den Ball",n:"Nach „ohne“ steht der Artikel oft gar nicht: „ohne Auto“."},
+{w:"um",t:"praep",k:"Akkusativ",ex:"um den Platz, um acht Uhr"},
+{w:"bis",t:"praep",k:"Akkusativ",ex:"bis nächsten Montag",n:"Meist ohne Artikel („bis Montag“). Steht ein Artikel dabei, folgt oft eine zweite Präposition: „bis zum Montag“ (dann Dativ, weil „zu“ regiert)."},
+{w:"entlang",t:"praep",k:"Akkusativ",ex:"den Fluss entlang",n:"Nachgestellt steht der Akkusativ. Vorangestellt verlangt der Duden den Genitiv („entlang des Flusses“), seltener den Dativ. Die nachgestellte Form ist die unproblematischere.",fall:true},
+{w:"wider",t:"praep",k:"Akkusativ",ex:"wider Erwarten, wider besseres Wissen",n:"Gehoben. Nicht mit „wieder“ (= erneut) verwechseln."},
+{w:"je",t:"praep",k:"Akkusativ",ex:"je angefangenen Monat"},
+{w:"pro",t:"praep",k:"Akkusativ",ex:"pro Person, pro angefangene Stunde"},
 
 /* ---------- PRÄPOSITIONEN MIT DATIV ---------- */
-{w:"aus",t:"praep",k:"Dativ",ex:"aus dem Haus, aus Köln",s:["Er kommt gerade aus ___ Halle.","der","die"]},
-{w:"außer",t:"praep",k:"Dativ",ex:"außer mir, außer dem Trainer",n:"In festen Wendungen ohne Kasus: „außer Betrieb“, „außer Atem“.",s:["Außer ___ Trainer war niemand da.","dem","den"]},
-{w:"bei",t:"praep",k:"Dativ",ex:"bei meiner Schwester, beim Arzt",s:["Am Wochenende bin ich bei ___ Schwester.","meiner","meine"]},
-{w:"gegenüber",t:"praep",k:"Dativ",ex:"gegenüber dem Bahnhof, mir gegenüber",n:"Bei Personen meist nachgestellt: „ihm gegenüber“.",s:["Das Café liegt gegenüber ___ Bahnhof.","dem","den"]},
-{w:"mit",t:"praep",k:"Dativ",ex:"mit dem Rad, mit meinen Freunden",s:["Ich fahre mit ___ Rad zur Uni.","dem","das"]},
-{w:"nach",t:"praep",k:"Dativ",ex:"nach dem Training, nach Köln",s:["Nach ___ Spiel war ich platt.","dem","das"]},
-{w:"seit",t:"praep",k:"Dativ",ex:"seit einem Jahr, seit dem Umzug",n:"Nicht „seid“ — das ist die Verbform („ihr seid“).",s:["Ich trainiere seit ___ Jahr im Verein.","einem","ein"]},
-{w:"von",t:"praep",k:"Dativ",ex:"von meinem Bruder, vom Bahnhof",s:["Ich habe den Plan von ___ Bruder.","meinem","meinen"]},
-{w:"zu",t:"praep",k:"Dativ",ex:"zu dir, zum Arzt, zur Schule",s:["Nach dem Training fahre ich zu ___ Eltern.","meinen","meine"]},
-{w:"ab",t:"praep",k:"Dativ",ex:"ab dem ersten Mai, ab morgen",s:["Ab ___ ersten Mai gilt der neue Plan.","dem","den"]},
-{w:"entgegen",t:"praep",k:"Dativ",ex:"entgegen der Absprache, allen Erwartungen entgegen",s:["Entgegen ___ Absprache kam er später.","der","die"]},
-{w:"gemäß",t:"praep",k:"Dativ",ex:"gemäß der Vorschrift, der Vorschrift gemäß",s:["Gemäß ___ Vorschrift wird die Halle abgeschlossen.","der","die"]},
-{w:"zufolge",t:"praep",k:"Dativ",ex:"dem Bericht zufolge",n:"Nachgestellt mit Dativ. Vorangestellt mit Genitiv: „zufolge des Berichts“ (seltener).",fall:true,s:["___ Bericht zufolge fällt das Spiel aus.","Dem","Den"]},
-{w:"samt / nebst",t:"praep",k:"Dativ",ex:"samt allem Zubehör",s:["Er gab die Tasche samt ___ Zubehör ab.","allem","alles"]},
-{w:"binnen",t:"praep",k:"Dativ",ex:"binnen einer Woche",n:"Auch mit Genitiv möglich: „binnen eines Jahres“.",s:["Die Rückmeldung kommt binnen ___ Woche.","einer","eine"]},
-{w:"dank",t:"praep",k:"Dativ",ex:"dank deiner Hilfe, dank dem Zufall",n:"Beides zulässig — Dativ und Genitiv. Im Plural meist Genitiv: „dank guter Vorbereitung“.",s:["Dank ___ Hilfe hat es geklappt.","deiner","deine"]},
+{w:"aus",t:"praep",k:"Dativ",ex:"aus dem Haus, aus Köln"},
+{w:"außer",t:"praep",k:"Dativ",ex:"außer mir, außer dem Trainer",n:"In festen Wendungen ohne Kasus: „außer Betrieb“, „außer Atem“."},
+{w:"bei",t:"praep",k:"Dativ",ex:"bei meiner Schwester, beim Arzt"},
+{w:"gegenüber",t:"praep",k:"Dativ",ex:"gegenüber dem Bahnhof, mir gegenüber",n:"Bei Personen meist nachgestellt: „ihm gegenüber“."},
+{w:"mit",t:"praep",k:"Dativ",ex:"mit dem Rad, mit meinen Freunden"},
+{w:"nach",t:"praep",k:"Dativ",ex:"nach dem Training, nach Köln"},
+{w:"seit",t:"praep",k:"Dativ",ex:"seit einem Jahr, seit dem Umzug",n:"Nicht „seid“ — das ist die Verbform („ihr seid“)."},
+{w:"von",t:"praep",k:"Dativ",ex:"von meinem Bruder, vom Bahnhof"},
+{w:"zu",t:"praep",k:"Dativ",ex:"zu dir, zum Arzt, zur Schule"},
+{w:"ab",t:"praep",k:"Dativ",ex:"ab dem ersten Mai, ab morgen"},
+{w:"entgegen",t:"praep",k:"Dativ",ex:"entgegen der Absprache, allen Erwartungen entgegen"},
+{w:"gemäß",t:"praep",k:"Dativ",ex:"gemäß der Vorschrift, der Vorschrift gemäß"},
+{w:"zufolge",t:"praep",k:"Dativ",ex:"dem Bericht zufolge",n:"Nachgestellt mit Dativ. Vorangestellt mit Genitiv: „zufolge des Berichts“ (seltener).",fall:true},
+{w:"samt / nebst",t:"praep",k:"Dativ",ex:"samt allem Zubehör"},
+{w:"binnen",t:"praep",k:"Dativ",ex:"binnen einer Woche",n:"Auch mit Genitiv möglich: „binnen eines Jahres“."},
+{w:"dank",t:"praep",k:"Dativ",ex:"dank deiner Hilfe, dank dem Zufall",n:"Beides zulässig — Dativ und Genitiv. Im Plural meist Genitiv: „dank guter Vorbereitung“."},
 {w:"laut",t:"praep",k:"Dativ oder Genitiv",ex:"laut dem Bericht · laut des Berichts",n:"Beide Fälle sind korrekt; der Dativ ist gebräuchlicher. Ohne Artikel bleibt das Substantiv endungslos: „laut Vertrag“, „laut Aussage des Zeugen“ (der Genitiv gehört dort zu „Aussage“, nicht zu „laut“)."},
-{w:"nahe",t:"praep",k:"Dativ",ex:"nahe dem Ziel, nahe der Stadt",s:["Die Halle liegt nahe ___ Bahnhof.","dem","den"]},
-{w:"mitsamt",t:"praep",k:"Dativ",ex:"mitsamt der Ausrüstung",s:["Er gab die Tasche mitsamt ___ Ausrüstung ab.","der","die"]},
+{w:"nahe",t:"praep",k:"Dativ",ex:"nahe dem Ziel, nahe der Stadt"},
+{w:"mitsamt",t:"praep",k:"Dativ",ex:"mitsamt der Ausrüstung"},
 
 /* ---------- WECHSELPRÄPOSITIONEN ---------- */
-{w:"an",t:"wechsel",k:"Akk / Dat",ex:"Wohin? an die Wand (Akk) · Wo? an der Wand (Dat)",s:[["Ich hänge das Poster an ___ Wand.", "die", "der"], ["Das Poster hängt an ___ Wand.", "der", "die"]]},
-{w:"auf",t:"wechsel",k:"Akk / Dat",ex:"Wohin? auf den Tisch (Akk) · Wo? auf dem Tisch (Dat)",s:[["Ich stelle die Tasche auf ___ Bank.", "die", "der"], ["Die Tasche steht auf ___ Bank.", "der", "die"]]},
-{w:"hinter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? hinter das Haus · Wo? hinter dem Haus",s:[["Ich stelle das Rad hinter ___ Haus.", "das", "dem"], ["Das Rad steht hinter ___ Haus.", "dem", "das"]]},
-{w:"in",t:"wechsel",k:"Akk / Dat",ex:"Wohin? in die Halle · Wo? in der Halle",s:[["Wir fahren am Samstag in ___ Stadt.", "die", "der"], ["Wir wohnen seit Mai in ___ Stadt.", "der", "die"]]},
-{w:"neben",t:"wechsel",k:"Akk / Dat",ex:"Wohin? neben den Schrank · Wo? neben dem Schrank",s:[["Ich stelle den Stuhl neben ___ Schrank.", "den", "dem"], ["Der Stuhl steht neben ___ Schrank.", "dem", "den"]]},
-{w:"über",t:"wechsel",k:"Akk / Dat",ex:"Wohin? über die Straße · Wo? über der Tür",n:"Bei Themen immer Akkusativ: „über den Trainer sprechen“.",s:[["Ich hänge die Uhr über ___ Tür.", "die", "der"], ["Die Uhr hängt über ___ Tür.", "der", "die"]]},
-{w:"unter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? unter den Tisch · Wo? unter dem Tisch",s:[["Ich schiebe die Kiste unter ___ Tisch.", "den", "dem"], ["Die Kiste steht unter ___ Tisch.", "dem", "den"]]},
-{w:"vor",t:"wechsel",k:"Akk / Dat",ex:"Wohin? vor die Tür · Wo? vor der Tür",n:"Bei Zeitangaben immer Dativ: „vor einem Jahr“.",s:[["Ich stelle das Rad vor ___ Tür.", "die", "der"], ["Das Rad steht vor ___ Tür.", "der", "die"]]},
-{w:"zwischen",t:"wechsel",k:"Akk / Dat",ex:"Wohin? zwischen die Stühle · Wo? zwischen den Stühlen",s:[["Ich stelle die Tasche zwischen ___.", "die Stühle", "den Stühlen"], ["Die Tasche steht zwischen ___.", "den Stühlen", "die Stühle"]]},
+{w:"an",t:"wechsel",k:"Akk / Dat",ex:"Wohin? an die Wand (Akk) · Wo? an der Wand (Dat)"},
+{w:"auf",t:"wechsel",k:"Akk / Dat",ex:"Wohin? auf den Tisch (Akk) · Wo? auf dem Tisch (Dat)"},
+{w:"hinter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? hinter das Haus · Wo? hinter dem Haus"},
+{w:"in",t:"wechsel",k:"Akk / Dat",ex:"Wohin? in die Halle · Wo? in der Halle"},
+{w:"neben",t:"wechsel",k:"Akk / Dat",ex:"Wohin? neben den Schrank · Wo? neben dem Schrank"},
+{w:"über",t:"wechsel",k:"Akk / Dat",ex:"Wohin? über die Straße · Wo? über der Tür",n:"Bei Themen immer Akkusativ: „über den Trainer sprechen“."},
+{w:"unter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? unter den Tisch · Wo? unter dem Tisch"},
+{w:"vor",t:"wechsel",k:"Akk / Dat",ex:"Wohin? vor die Tür · Wo? vor der Tür",n:"Bei Zeitangaben immer Dativ: „vor einem Jahr“."},
+{w:"zwischen",t:"wechsel",k:"Akk / Dat",ex:"Wohin? zwischen die Stühle · Wo? zwischen den Stühlen"},
 
 /* ---------- PRÄPOSITIONEN MIT GENITIV ---------- */
-{w:"während",t:"praep",k:"Genitiv",ex:"während der Vorlesung, während des Spiels",s:["Während ___ habe ich mitgeschrieben.","des Vortrags","dem Vortrag"]},
-{w:"wegen",t:"praep",k:"Genitiv",ex:"wegen des schlechten Wetters",n:"„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet, gilt aber nicht als standardsprachlich. Ohne Artikel steht der Dativ: „wegen Umbau geschlossen“. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.",fall:true,s:["Wegen ___ haben wir abgesagt.","des schlechten Wetters","dem schlechten Wetter"]},
-{w:"trotz",t:"praep",k:"Genitiv",ex:"trotz des Regens",n:"Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus: „trotz Beweisen“. In Österreich ist „trotz dem“ verbreitet.",s:["Trotz ___ haben wir gewonnen.","des Rückstands","dem Rückstand"]},
-{w:"statt / anstatt",t:"praep",k:"Genitiv",ex:"statt des Trainings, anstatt eines Vortrags",s:["Statt ___ gab es eine Besprechung.","des Trainings","dem Training"]},
-{w:"innerhalb",t:"praep",k:"Genitiv",ex:"innerhalb einer Woche, innerhalb des Gebäudes",n:"Bei Zeitangaben ist „innerhalb von einer Woche“ ebenfalls üblich.",s:["Die Anmeldung läuft innerhalb ___.","einer Woche","eine Woche"]},
-{w:"außerhalb",t:"praep",k:"Genitiv",ex:"außerhalb der Öffnungszeiten",s:["Die Halle ist außerhalb ___ geschlossen.","der Öffnungszeiten","die Öffnungszeiten"]},
-{w:"oberhalb / unterhalb",t:"praep",k:"Genitiv",ex:"oberhalb des Knies, unterhalb der Grenze",s:["Der Schmerz sitzt oberhalb ___.","des Knies","dem Knie"]},
-{w:"diesseits / jenseits",t:"praep",k:"Genitiv",ex:"jenseits des Rheins",s:["Der Sportplatz liegt jenseits ___.","des Rheins","dem Rhein"]},
-{w:"aufgrund",t:"praep",k:"Genitiv",ex:"aufgrund der Verletzung",s:["Aufgrund ___ fällt er diese Woche aus.","der Verletzung","die Verletzung"]},
-{w:"mithilfe",t:"praep",k:"Genitiv",ex:"mithilfe eines Trainingsplans",s:["Mithilfe ___ hat er sich gesteigert.","eines Trainingsplans","einem Trainingsplan"]},
-{w:"anstelle",t:"praep",k:"Genitiv",ex:"anstelle der Trainerin",s:["Anstelle ___ hat der Co-Trainer geleitet.","der Trainerin","die Trainerin"]},
-{w:"anhand",t:"praep",k:"Genitiv",ex:"anhand der Daten",n:"Ohne erkennbaren Genitiv: „anhand von Beispielen“.",s:["Anhand ___ lässt sich der Fortschritt zeigen.","der Daten","die Daten"]},
-{w:"angesichts",t:"praep",k:"Genitiv",ex:"angesichts der Lage",s:["Angesichts ___ haben wir verschoben.","der Lage","die Lage"]},
-{w:"hinsichtlich / bezüglich",t:"praep",k:"Genitiv",ex:"hinsichtlich der Kosten, bezüglich Ihrer Anfrage",s:["Hinsichtlich ___ gibt es noch Fragen.","der Kosten","die Kosten"]},
-{w:"infolge",t:"praep",k:"Genitiv",ex:"infolge des Unfalls",s:["Infolge ___ fiel die Stunde aus.","des Unfalls","dem Unfall"]},
-{w:"zugunsten / zulasten",t:"praep",k:"Genitiv",ex:"zugunsten der Kinder",s:["Der Erlös geht zugunsten ___.","der Kinder","den Kindern"]},
-{w:"mangels / mittels",t:"praep",k:"Genitiv",ex:"mangels eines Beweises, mittels eines Tests",n:"Die Rektion schwankt: Ist der Genitiv nicht erkennbar — etwa im Plural ohne Artikel —, weicht man auf den Dativ aus: „mangels Beweisen“.",s:["Der Nachweis erfolgt mittels ___.","eines Tests","einem Test"]},
-{w:"seitens",t:"praep",k:"Genitiv",ex:"seitens der Schulleitung",s:["Seitens ___ gab es keine Einwände.","der Schulleitung","die Schulleitung"]},
-{w:"unweit / abseits / längs",t:"praep",k:"Genitiv",ex:"unweit des Bahnhofs, abseits der Strecke",n:"Bei „längs“ kommt daneben der Dativ vor („längs dem Weg“), er gilt aber als seltener.",s:["Wir wohnen unweit ___.","des Bahnhofs","dem Bahnhof"]},
-{w:"zwecks",t:"praep",k:"Genitiv",ex:"zwecks besserer Planung",s:["Wir treffen uns zwecks ___.","besserer Planung","bessere Planung"]},
+{w:"während",t:"praep",k:"Genitiv",ex:"während der Vorlesung, während des Spiels"},
+{w:"wegen",t:"praep",k:"Genitiv",ex:"wegen des schlechten Wetters",n:"„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet, gilt aber nicht als standardsprachlich. Ohne Artikel steht der Dativ: „wegen Umbau geschlossen“. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.",fall:true},
+{w:"trotz",t:"praep",k:"Genitiv",ex:"trotz des Regens",n:"Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus: „trotz Beweisen“. In Österreich ist „trotz dem“ verbreitet."},
+{w:"statt / anstatt",t:"praep",k:"Genitiv",ex:"statt des Trainings, anstatt eines Vortrags"},
+{w:"innerhalb",t:"praep",k:"Genitiv",ex:"innerhalb einer Woche, innerhalb des Gebäudes",n:"Bei Zeitangaben ist „innerhalb von einer Woche“ ebenfalls üblich."},
+{w:"außerhalb",t:"praep",k:"Genitiv",ex:"außerhalb der Öffnungszeiten"},
+{w:"oberhalb / unterhalb",t:"praep",k:"Genitiv",ex:"oberhalb des Knies, unterhalb der Grenze"},
+{w:"diesseits / jenseits",t:"praep",k:"Genitiv",ex:"jenseits des Rheins"},
+{w:"aufgrund",t:"praep",k:"Genitiv",ex:"aufgrund der Verletzung"},
+{w:"mithilfe",t:"praep",k:"Genitiv",ex:"mithilfe eines Trainingsplans"},
+{w:"anstelle",t:"praep",k:"Genitiv",ex:"anstelle der Trainerin"},
+{w:"anhand",t:"praep",k:"Genitiv",ex:"anhand der Daten",n:"Ohne erkennbaren Genitiv: „anhand von Beispielen“."},
+{w:"angesichts",t:"praep",k:"Genitiv",ex:"angesichts der Lage"},
+{w:"hinsichtlich / bezüglich",t:"praep",k:"Genitiv",ex:"hinsichtlich der Kosten, bezüglich Ihrer Anfrage"},
+{w:"infolge",t:"praep",k:"Genitiv",ex:"infolge des Unfalls"},
+{w:"zugunsten / zulasten",t:"praep",k:"Genitiv",ex:"zugunsten der Kinder"},
+{w:"mangels / mittels",t:"praep",k:"Genitiv",ex:"mangels eines Beweises, mittels eines Tests",n:"Die Rektion schwankt: Ist der Genitiv nicht erkennbar — etwa im Plural ohne Artikel —, weicht man auf den Dativ aus: „mangels Beweisen“."},
+{w:"seitens",t:"praep",k:"Genitiv",ex:"seitens der Schulleitung"},
+{w:"unweit / abseits / längs",t:"praep",k:"Genitiv",ex:"unweit des Bahnhofs, abseits der Strecke",n:"Bei „längs“ kommt daneben der Dativ vor („längs dem Weg“), er gilt aber als seltener."},
+{w:"zwecks",t:"praep",k:"Genitiv",ex:"zwecks besserer Planung"},
 
 /* ---------- VERBEN MIT DATIV ---------- */
-{w:"helfen",t:"verb",k:"Dativ",ex:"Ich helfe ihm.",n:"Verwechslungsgefahr mit „unterstützen“ (Akkusativ): „Ich unterstütze ihn.“",fall:true,s:["Ich helfe ___ beim Aufbau.","ihm","ihn"]},
-{w:"danken",t:"verb",k:"Dativ",ex:"Ich danke dir.",s:["Wir danken ___ für die Vertretung.","ihr","sie"]},
-{w:"gratulieren",t:"verb",k:"Dativ",ex:"Ich gratuliere Ihnen.",s:["Ich gratuliere ___ zum Sieg.","ihm","ihn"]},
-{w:"folgen",t:"verb",k:"Dativ",ex:"Ich folge dir.",n:"Aber „verfolgen“ steht mit Akkusativ: „Ich verfolge ihn.“",fall:true,s:["Ich folge ___ auf dem Rad.","ihm","ihn"]},
-{w:"gehören",t:"verb",k:"Dativ",ex:"Das Rad gehört mir.",s:["Das Rad da gehört ___.","mir","mich"]},
-{w:"begegnen",t:"verb",k:"Dativ",ex:"Ich bin ihm begegnet.",n:"Perfekt mit „sein“.",s:["Ich bin ___ in der Halle begegnet.","ihm","ihn"]},
-{w:"zuhören / zusehen / zuschauen",t:"verb",k:"Dativ",ex:"Ich höre dir zu.",s:["Ich höre ___ beim Vortrag zu.","ihr","sie"]},
-{w:"widersprechen",t:"verb",k:"Dativ",ex:"Ich widerspreche dir.",s:["Ich widerspreche ___ da ungern.","ihm","ihn"]},
-{w:"vertrauen / trauen",t:"verb",k:"Dativ",ex:"Ich vertraue dir.",s:["Beim Sichern vertraue ich ___ voll.","dir","dich"]},
-{w:"gefallen",t:"verb",k:"Dativ",ex:"Das Bild gefällt mir.",s:["Der neue Aufbau gefällt ___.","mir","mich"]},
-{w:"schaden / nützen",t:"verb",k:"Dativ",ex:"Das schadet dir.",s:["Zu viel Umfang schadet ___.","dir","dich"]},
-{w:"zustimmen",t:"verb",k:"Dativ",ex:"Ich stimme dir zu.",s:["Da stimme ich ___ zu.","dir","dich"]},
-{w:"ähneln / gleichen",t:"verb",k:"Dativ",ex:"Er ähnelt seinem Vater.",s:["Er ähnelt ___ Vater.","seinem","seinen"]},
-{w:"antworten",t:"verb",k:"Dativ",ex:"Ich antworte dir.",n:"Aber: „Ich beantworte die Frage“ (Akkusativ).",fall:true,s:["Ich antworte ___ heute noch.","dir","dich"]},
-{w:"glauben",t:"verb",k:"Dativ",ex:"Ich glaube dir.",n:"Person im Dativ, Sache im Akkusativ: „Ich glaube dir die Geschichte nicht.“",s:["Ich glaube ___ das sofort.","dir","dich"]},
-{w:"raten",t:"verb",k:"Dativ",ex:"Ich rate dir zu warten.",n:"Aber „beraten“ mit Akkusativ: „Ich berate dich.“",fall:true,s:["Ich rate ___ zu einer Pause.","dir","dich"]},
-{w:"gelingen / misslingen",t:"verb",k:"Dativ",ex:"Der Sprung ist mir gelungen.",s:["Der Sprung ist ___ endlich gelungen.","mir","mich"]},
-{w:"passieren / geschehen",t:"verb",k:"Dativ",ex:"Das ist mir passiert.",s:["Das ist ___ auch schon passiert.","mir","mich"]},
-{w:"fehlen",t:"verb",k:"Dativ",ex:"Du fehlst mir.",s:["Du fehlst ___ im Training.","mir","mich"]},
-{w:"einfallen",t:"verb",k:"Dativ",ex:"Mir fällt nichts ein.",s:["___ fällt dazu gerade nichts ein.","Mir","Mich"]},
-{w:"genügen / reichen",t:"verb",k:"Dativ",ex:"Das genügt mir.",s:["Eine Stunde genügt ___.","mir","mich"]},
-{w:"schmecken",t:"verb",k:"Dativ",ex:"Das schmeckt mir.",s:["Das Essen in der Mensa schmeckt ___.","mir","mich"]},
-{w:"passen",t:"verb",k:"Dativ",ex:"Der Termin passt mir.",s:["Der Termin passt ___ gut.","mir","mich"]},
-{w:"wehtun",t:"verb",k:"Dativ",ex:"Der Rücken tut mir weh.",s:["Nach dem Lauf tut ___ das Knie weh.","mir","mich"]},
-{w:"drohen",t:"verb",k:"Dativ",ex:"Er droht mir.",s:["Er droht ___ mit einer Beschwerde.","mir","mich"]},
-{w:"befehlen / verbieten / erlauben",t:"verb",k:"Dativ",ex:"Ich verbiete dir das.",s:["Der Trainer erlaubt ___ eine Pause.","mir","mich"]},
-{w:"verzeihen / vergeben",t:"verb",k:"Dativ",ex:"Ich verzeihe dir.",s:["Ich verzeihe ___ das.","dir","dich"]},
-{w:"dienen",t:"verb",k:"Dativ",ex:"Das dient dem Zweck.",s:["Das dient ___ Zweck.","dem","den"]},
-{w:"widerstehen",t:"verb",k:"Dativ",ex:"Ich widerstehe der Versuchung.",s:["Ich widerstehe ___ Versuchung.","der","die"]},
-{w:"beitreten / beistehen",t:"verb",k:"Dativ",ex:"Er ist dem Verein beigetreten.",s:["Er ist ___ Verein beigetreten.","dem","den"]},
-{w:"entsprechen",t:"verb",k:"Dativ",ex:"Das entspricht der Vorgabe.",s:["Das entspricht ___ Vorgabe.","der","die"]},
-{w:"unterliegen",t:"verb",k:"Dativ",ex:"Wir sind ihnen unterlegen.",s:["Wir sind ___ knapp unterlegen.","ihnen","sie"]},
-{w:"nachlaufen / nachgehen",t:"verb",k:"Dativ",ex:"Er läuft dem Ball nach.",s:["Er läuft ___ Ball nach.","dem","den"]},
-{w:"imponieren / auffallen",t:"verb",k:"Dativ",ex:"Das ist mir aufgefallen.",s:["Das ist ___ gleich aufgefallen.","mir","mich"]},
+{w:"helfen",t:"verb",k:"Dativ",ex:"Ich helfe ihm.",n:"Verwechslungsgefahr mit „unterstützen“ (Akkusativ): „Ich unterstütze ihn.“",fall:true},
+{w:"danken",t:"verb",k:"Dativ",ex:"Ich danke dir."},
+{w:"gratulieren",t:"verb",k:"Dativ",ex:"Ich gratuliere Ihnen."},
+{w:"folgen",t:"verb",k:"Dativ",ex:"Ich folge dir.",n:"Aber „verfolgen“ steht mit Akkusativ: „Ich verfolge ihn.“",fall:true},
+{w:"gehören",t:"verb",k:"Dativ",ex:"Das Rad gehört mir."},
+{w:"begegnen",t:"verb",k:"Dativ",ex:"Ich bin ihm begegnet.",n:"Perfekt mit „sein“."},
+{w:"zuhören / zusehen / zuschauen",t:"verb",k:"Dativ",ex:"Ich höre dir zu."},
+{w:"widersprechen",t:"verb",k:"Dativ",ex:"Ich widerspreche dir."},
+{w:"vertrauen / trauen",t:"verb",k:"Dativ",ex:"Ich vertraue dir."},
+{w:"gefallen",t:"verb",k:"Dativ",ex:"Das Bild gefällt mir."},
+{w:"schaden / nützen",t:"verb",k:"Dativ",ex:"Das schadet dir."},
+{w:"zustimmen",t:"verb",k:"Dativ",ex:"Ich stimme dir zu."},
+{w:"ähneln / gleichen",t:"verb",k:"Dativ",ex:"Er ähnelt seinem Vater."},
+{w:"antworten",t:"verb",k:"Dativ",ex:"Ich antworte dir.",n:"Aber: „Ich beantworte die Frage“ (Akkusativ).",fall:true},
+{w:"glauben",t:"verb",k:"Dativ",ex:"Ich glaube dir.",n:"Person im Dativ, Sache im Akkusativ: „Ich glaube dir die Geschichte nicht.“"},
+{w:"raten",t:"verb",k:"Dativ",ex:"Ich rate dir zu warten.",n:"Aber „beraten“ mit Akkusativ: „Ich berate dich.“",fall:true},
+{w:"gelingen / misslingen",t:"verb",k:"Dativ",ex:"Der Sprung ist mir gelungen."},
+{w:"passieren / geschehen",t:"verb",k:"Dativ",ex:"Das ist mir passiert."},
+{w:"fehlen",t:"verb",k:"Dativ",ex:"Du fehlst mir."},
+{w:"einfallen",t:"verb",k:"Dativ",ex:"Mir fällt nichts ein."},
+{w:"genügen / reichen",t:"verb",k:"Dativ",ex:"Das genügt mir."},
+{w:"schmecken",t:"verb",k:"Dativ",ex:"Das schmeckt mir."},
+{w:"passen",t:"verb",k:"Dativ",ex:"Der Termin passt mir."},
+{w:"wehtun",t:"verb",k:"Dativ",ex:"Der Rücken tut mir weh."},
+{w:"drohen",t:"verb",k:"Dativ",ex:"Er droht mir."},
+{w:"befehlen / verbieten / erlauben",t:"verb",k:"Dativ",ex:"Ich verbiete dir das."},
+{w:"verzeihen / vergeben",t:"verb",k:"Dativ",ex:"Ich verzeihe dir."},
+{w:"dienen",t:"verb",k:"Dativ",ex:"Das dient dem Zweck."},
+{w:"widerstehen",t:"verb",k:"Dativ",ex:"Ich widerstehe der Versuchung."},
+{w:"beitreten / beistehen",t:"verb",k:"Dativ",ex:"Er ist dem Verein beigetreten."},
+{w:"entsprechen",t:"verb",k:"Dativ",ex:"Das entspricht der Vorgabe."},
+{w:"unterliegen",t:"verb",k:"Dativ",ex:"Wir sind ihnen unterlegen."},
+{w:"nachlaufen / nachgehen",t:"verb",k:"Dativ",ex:"Er läuft dem Ball nach."},
+{w:"imponieren / auffallen",t:"verb",k:"Dativ",ex:"Das ist mir aufgefallen."},
 
 /* ---------- VERBEN, DIE OFT FALSCH IM DATIV STEHEN ---------- */
-{w:"anrufen",t:"verb",k:"Akkusativ",ex:"Ich rufe dich an.",n:"Überregional gilt der Akkusativ: „Ich rufe dich an.“ Der Dativ („Ich rufe dir an“) ist südwestdeutsch und schweizerisch verbreitet. Merke: Man ruft jemanden an, wie man jemanden fragt.",fall:true,s:["Ich rufe ___ nach dem Training an.","dich","dir"]},
-{w:"fragen",t:"verb",k:"Akkusativ",ex:"Ich frage dich.",n:"Nicht „Ich frage dir“. Bei zwei Objekten: „Ich frage dich etwas“ (zweimal Akkusativ).",fall:true,s:["Ich frage ___ gleich mal danach.","ihn","ihm"]},
-{w:"unterstützen",t:"verb",k:"Akkusativ",ex:"Ich unterstütze dich.",n:"Gegenstück zu „helfen“ (Dativ).",fall:true,s:["Ich unterstütze ___ beim Aufbau.","ihn","ihm"]},
-{w:"beraten",t:"verb",k:"Akkusativ",ex:"Ich berate dich.",n:"Gegenstück zu „raten“ (Dativ).",fall:true,s:["Die Dozentin berät ___ zur Hausarbeit.","mich","mir"]},
-{w:"beantworten",t:"verb",k:"Akkusativ",ex:"Ich beantworte die Frage.",n:"Gegenstück zu „antworten“ (Dativ).",fall:true,s:["Ich beantworte ___ Frage gleich.","die","der"]},
-{w:"kosten",t:"verb",k:"Akkusativ",ex:"Das kostet mich viel Zeit.",n:"Bei Preis und Zeit steht der Akkusativ; „kostet mir“ gilt als nicht voll anerkannt. In der Bedeutung „jemanden um etwas bringen“ ist der Dativ zulässig: „Das kostete ihm das Leben.“",fall:true,s:["Die Vorbereitung kostet ___ viel Zeit.","mich","mir"]},
+{w:"anrufen",t:"verb",k:"Akkusativ",ex:"Ich rufe dich an.",n:"Überregional gilt der Akkusativ: „Ich rufe dich an.“ Der Dativ („Ich rufe dir an“) ist südwestdeutsch und schweizerisch verbreitet. Merke: Man ruft jemanden an, wie man jemanden fragt.",fall:true},
+{w:"fragen",t:"verb",k:"Akkusativ",ex:"Ich frage dich.",n:"Nicht „Ich frage dir“. Bei zwei Objekten: „Ich frage dich etwas“ (zweimal Akkusativ).",fall:true},
+{w:"unterstützen",t:"verb",k:"Akkusativ",ex:"Ich unterstütze dich.",n:"Gegenstück zu „helfen“ (Dativ).",fall:true},
+{w:"beraten",t:"verb",k:"Akkusativ",ex:"Ich berate dich.",n:"Gegenstück zu „raten“ (Dativ).",fall:true},
+{w:"beantworten",t:"verb",k:"Akkusativ",ex:"Ich beantworte die Frage.",n:"Gegenstück zu „antworten“ (Dativ).",fall:true},
+{w:"kosten",t:"verb",k:"Akkusativ",ex:"Das kostet mich viel Zeit.",n:"Bei Preis und Zeit steht der Akkusativ; „kostet mir“ gilt als nicht voll anerkannt. In der Bedeutung „jemanden um etwas bringen“ ist der Dativ zulässig: „Das kostete ihm das Leben.“",fall:true},
 {w:"lehren",t:"verb",k:"Akkusativ",ex:"Er lehrt mich das Schwimmen.",n:"Standard sind zwei Akkusative; der Dativ der Person („Er lehrt mir das“) kommt vor, gilt aber als schwächer. Gegenstück: „beibringen“ mit Dativ — „Er bringt mir das Schwimmen bei.“",fall:true},
-{w:"nennen",t:"verb",k:"Akkusativ",ex:"Sie nennt ihn einen Feigling.",n:"Zwei Akkusative.",s:["Sie nennt ___ einen Dickkopf.","ihn","ihm"]},
-{w:"interessieren",t:"verb",k:"Akkusativ",ex:"Das interessiert mich.",n:"Nicht „interessiert mir“.",s:["Das Thema interessiert ___ sehr.","mich","mir"]},
-{w:"stören",t:"verb",k:"Akkusativ",ex:"Das stört mich.",s:["Der Lärm stört ___ beim Lernen.","mich","mir"]},
-{w:"treffen",t:"verb",k:"Akkusativ",ex:"Ich treffe dich morgen.",s:["Ich treffe ___ morgen in der Mensa.","dich","dir"]},
-{w:"verfolgen",t:"verb",k:"Akkusativ",ex:"Ich verfolge die Debatte.",s:["Ich verfolge ___ Debatte seit Wochen.","die","der"]},
-{w:"erinnern",t:"verb",k:"Akkusativ",ex:"Das erinnert mich an früher.",n:"Reflexiv mit Präposition: „Ich erinnere mich an das Spiel.“ Gehoben auch mit Genitiv: „Er erinnerte sich seines Lehrers.“ Die transitive Form „Ich erinnere das Spiel“ breitet sich vom Norden aus, gilt aber nicht als standardsprachlich.",fall:true,s:["Das erinnert ___ an die Schulzeit.","mich","mir"]},
+{w:"nennen",t:"verb",k:"Akkusativ",ex:"Sie nennt ihn einen Feigling.",n:"Zwei Akkusative."},
+{w:"interessieren",t:"verb",k:"Akkusativ",ex:"Das interessiert mich.",n:"Nicht „interessiert mir“."},
+{w:"stören",t:"verb",k:"Akkusativ",ex:"Das stört mich."},
+{w:"treffen",t:"verb",k:"Akkusativ",ex:"Ich treffe dich morgen."},
+{w:"verfolgen",t:"verb",k:"Akkusativ",ex:"Ich verfolge die Debatte."},
+{w:"erinnern",t:"verb",k:"Akkusativ",ex:"Das erinnert mich an früher.",n:"Reflexiv mit Präposition: „Ich erinnere mich an das Spiel.“ Gehoben auch mit Genitiv: „Er erinnerte sich seines Lehrers.“ Die transitive Form „Ich erinnere das Spiel“ breitet sich vom Norden aus, gilt aber nicht als standardsprachlich.",fall:true},
 
 /* ---------- VERBEN MIT GENITIV ---------- */
-{w:"gedenken",t:"verb",k:"Genitiv",ex:"Wir gedenken der Opfer.",s:["Wir gedenken ___.","der Opfer","den Opfern"]},
-{w:"bedürfen",t:"verb",k:"Genitiv",ex:"Das bedarf keiner Erklärung.",s:["Das bedarf ___.","keiner Erklärung","keine Erklärung"]},
-{w:"sich bedienen",t:"verb",k:"Genitiv",ex:"Er bedient sich eines Tricks.",s:["Er bedient sich ___.","eines Tricks","einem Trick"]},
-{w:"sich rühmen",t:"verb",k:"Genitiv",ex:"Sie rühmt sich ihrer Erfolge.",s:["Sie rühmt sich ___.","ihrer Erfolge","ihre Erfolge"]},
-{w:"sich enthalten",t:"verb",k:"Genitiv",ex:"Ich enthalte mich der Stimme.",s:["Ich enthalte mich ___.","der Stimme","die Stimme"]},
-{w:"sich schämen",t:"verb",k:"Genitiv",ex:"Er schämt sich seines Verhaltens.",n:"Der Genitiv ist gehoben. Alltagssprachlich steht die Präposition: „schämt sich für sein Verhalten“ — beides ist korrekt.",s:["Er schämt sich ___.","seines Verhaltens","sein Verhalten"]},
+{w:"gedenken",t:"verb",k:"Genitiv",ex:"Wir gedenken der Opfer."},
+{w:"bedürfen",t:"verb",k:"Genitiv",ex:"Das bedarf keiner Erklärung."},
+{w:"sich bedienen",t:"verb",k:"Genitiv",ex:"Er bedient sich eines Tricks."},
+{w:"sich rühmen",t:"verb",k:"Genitiv",ex:"Sie rühmt sich ihrer Erfolge."},
+{w:"sich enthalten",t:"verb",k:"Genitiv",ex:"Ich enthalte mich der Stimme."},
+{w:"sich schämen",t:"verb",k:"Genitiv",ex:"Er schämt sich seines Verhaltens.",n:"Der Genitiv ist gehoben. Alltagssprachlich steht die Präposition: „schämt sich für sein Verhalten“ — beides ist korrekt."},
 {w:"beschuldigen / verdächtigen / anklagen",t:"verb",k:"Akk + Genitiv",ex:"Man beschuldigt ihn des Betrugs."},
-{w:"sich vergewissern / sich annehmen",t:"verb",k:"Genitiv",ex:"Er nimmt sich der Sache an.",s:["Er nimmt sich ___ an.","der Sache","die Sache"]},
+{w:"sich vergewissern / sich annehmen",t:"verb",k:"Genitiv",ex:"Er nimmt sich der Sache an."},
 
 /* ---------- VERBEN MIT DATIV + AKKUSATIV ---------- */
 {w:"geben",t:"verb2",k:"Dat + Akk",ex:"Ich gebe dir das Buch.",n:"Merkformel: Wem gebe ich was? Person im Dativ, Sache im Akkusativ."},
@@ -3347,71 +3345,71 @@ const CASEREF = [
 {w:"wünschen",t:"verb2",k:"Dat + Akk",ex:"Ich wünsche dir alles Gute."},
 
 /* ---------- VERBEN MIT FESTER PRÄPOSITION ---------- */
-{w:"teilnehmen an",t:"verbpraep",k:"an + Dativ",ex:"Ich nehme an dem Wettkampf teil.",s:["Ich nehme an ___ Sitzung teil.","der","die"]},
-{w:"sich beteiligen an",t:"verbpraep",k:"an + Dativ",ex:"Sie beteiligt sich an der Diskussion.",s:["Sie beteiligt sich an ___ Diskussion.","der","die"]},
-{w:"zweifeln an",t:"verbpraep",k:"an + Dativ",ex:"Ich zweifle an der Methode.",s:["Ich zweifle an ___ Methode.","der","die"]},
-{w:"leiden an / unter",t:"verbpraep",k:"an / unter + Dativ",ex:"Er leidet an einer Krankheit. · Sie leidet unter dem Druck.",n:"„an“ bei Krankheiten, „unter“ bei Umständen.",fall:true,s:["Sie leidet unter ___ Druck.","dem","den"]},
-{w:"sich beziehen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Die Arbeit bezieht sich auf eine Studie.",s:["Die Arbeit bezieht sich auf ___ Studie.","eine","einer"]},
-{w:"hinweisen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich weise auf das Problem hin.",s:["Ich weise auf ___ Problem hin.","das","dem"]},
-{w:"achten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Achte auf deine Haltung.",n:"Aber „beachten“ ohne Präposition: „Beachte die Regel.“",fall:true,s:["Achte auf ___ Haltung.","deine","deiner"]},
-{w:"verzichten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich verzichte auf den Nachtisch.",s:["Ich verzichte auf ___ Nachtisch.","den","dem"]},
-{w:"warten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich warte auf dich.",s:["Ich warte auf ___ Bus.","den","dem"]},
-{w:"sich verlassen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich verlasse mich auf dich.",s:["Ich verlasse mich auf ___ Absprache.","die","der"]},
-{w:"sich freuen auf / über",t:"verbpraep",k:"auf / über + Akkusativ",ex:"Ich freue mich auf morgen (Zukunft). · Ich freue mich über dein Geschenk (schon da).",fall:true,s:["Ich freue mich über ___ Rückmeldung.","die","der"]},
-{w:"sich erinnern an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich erinnere mich an das Spiel.",s:["Ich erinnere mich an ___ Spiel.","das","dem"]},
-{w:"denken an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich denke an dich.",n:"Aber „denken über“ = eine Meinung haben: „Was denkst du darüber?“",s:["Ich denke oft an ___ Sommer.","den","dem"]},
-{w:"sich gewöhnen an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich gewöhne mich an den Rhythmus.",s:["Ich gewöhne mich an ___ Rhythmus.","den","dem"]},
-{w:"glauben an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich glaube an dich.",n:"Ohne Präposition steht der Dativ: „Ich glaube dir.“",fall:true,s:["Ich glaube an ___ Plan.","den","dem"]},
-{w:"bestehen aus / in / auf",t:"verbpraep",k:"aus, in + Dativ · auf + Dativ",ex:"Der Test besteht aus drei Teilen (Bestandteile). · Die Aufgabe besteht in der Auswertung (worin). · Er besteht auf seiner Meinung (beharren).",fall:true,s:["Die Aufgabe besteht in ___ Auswertung.","der","die"]},
-{w:"sich handeln um",t:"verbpraep",k:"um + Akkusativ",ex:"Es handelt sich um einen Fehler.",s:["Es handelt sich um ___ Fehler.","einen","einem"]},
-{w:"bitten um",t:"verbpraep",k:"um + Akkusativ",ex:"Ich bitte dich um Geduld.",s:["Ich bitte dich um ___ Moment Geduld.","einen","einem"]},
-{w:"sich kümmern um / sich sorgen um",t:"verbpraep",k:"um + Akkusativ",ex:"Ich kümmere mich um die Anmeldung.",s:["Ich kümmere mich um ___ Anmeldung.","die","der"]},
+{w:"teilnehmen an",t:"verbpraep",k:"an + Dativ",ex:"Ich nehme an dem Wettkampf teil."},
+{w:"sich beteiligen an",t:"verbpraep",k:"an + Dativ",ex:"Sie beteiligt sich an der Diskussion."},
+{w:"zweifeln an",t:"verbpraep",k:"an + Dativ",ex:"Ich zweifle an der Methode."},
+{w:"leiden an / unter",t:"verbpraep",k:"an / unter + Dativ",ex:"Er leidet an einer Krankheit. · Sie leidet unter dem Druck.",n:"„an“ bei Krankheiten, „unter“ bei Umständen.",fall:true},
+{w:"sich beziehen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Die Arbeit bezieht sich auf eine Studie."},
+{w:"hinweisen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich weise auf das Problem hin."},
+{w:"achten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Achte auf deine Haltung.",n:"Aber „beachten“ ohne Präposition: „Beachte die Regel.“",fall:true},
+{w:"verzichten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich verzichte auf den Nachtisch."},
+{w:"warten auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich warte auf dich."},
+{w:"sich verlassen auf",t:"verbpraep",k:"auf + Akkusativ",ex:"Ich verlasse mich auf dich."},
+{w:"sich freuen auf / über",t:"verbpraep",k:"auf / über + Akkusativ",ex:"Ich freue mich auf morgen (Zukunft). · Ich freue mich über dein Geschenk (schon da).",fall:true},
+{w:"sich erinnern an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich erinnere mich an das Spiel."},
+{w:"denken an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich denke an dich.",n:"Aber „denken über“ = eine Meinung haben: „Was denkst du darüber?“"},
+{w:"sich gewöhnen an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich gewöhne mich an den Rhythmus."},
+{w:"glauben an",t:"verbpraep",k:"an + Akkusativ",ex:"Ich glaube an dich.",n:"Ohne Präposition steht der Dativ: „Ich glaube dir.“",fall:true},
+{w:"bestehen aus / in / auf",t:"verbpraep",k:"aus, in + Dativ · auf + Dativ",ex:"Der Test besteht aus drei Teilen (Bestandteile). · Die Aufgabe besteht in der Auswertung (worin). · Er besteht auf seiner Meinung (beharren).",fall:true},
+{w:"sich handeln um",t:"verbpraep",k:"um + Akkusativ",ex:"Es handelt sich um einen Fehler."},
+{w:"bitten um",t:"verbpraep",k:"um + Akkusativ",ex:"Ich bitte dich um Geduld."},
+{w:"sich kümmern um / sich sorgen um",t:"verbpraep",k:"um + Akkusativ",ex:"Ich kümmere mich um die Anmeldung."},
 {w:"sich bewerben um / bei",t:"verbpraep",k:"um + Akk · bei + Dat",ex:"Ich bewerbe mich um die Stelle bei der Schule."},
-{w:"sich interessieren für",t:"verbpraep",k:"für + Akkusativ",ex:"Ich interessiere mich für Trainingslehre.",s:["Ich interessiere mich für ___ Thema.","das","dem"]},
-{w:"danken für / sorgen für",t:"verbpraep",k:"für + Akkusativ",ex:"Danke für deine Hilfe.",s:["Danke für ___ schnelle Rückmeldung.","die","der"]},
-{w:"sich ärgern über / sich beschweren über",t:"verbpraep",k:"über + Akkusativ",ex:"Ich ärgere mich über den Fehler.",n:"„sich beschweren bei“ nennt die Adresse: „bei der Leitung“.",s:["Ich ärgere mich über ___ Fehler.","den","dem"]},
+{w:"sich interessieren für",t:"verbpraep",k:"für + Akkusativ",ex:"Ich interessiere mich für Trainingslehre."},
+{w:"danken für / sorgen für",t:"verbpraep",k:"für + Akkusativ",ex:"Danke für deine Hilfe."},
+{w:"sich ärgern über / sich beschweren über",t:"verbpraep",k:"über + Akkusativ",ex:"Ich ärgere mich über den Fehler.",n:"„sich beschweren bei“ nennt die Adresse: „bei der Leitung“."},
 {w:"sprechen über / von",t:"verbpraep",k:"über + Akk · von + Dat",ex:"Wir sprechen über das Projekt. · Er spricht von seinen Plänen."},
 {w:"berichten über / von",t:"verbpraep",k:"über + Akk · von + Dat",ex:"Sie berichtet über die Studie."},
-{w:"nachdenken über / diskutieren über",t:"verbpraep",k:"über + Akkusativ",ex:"Ich denke über den Vorschlag nach.",s:["Ich denke über ___ Vorschlag nach.","den","dem"]},
-{w:"halten von",t:"verbpraep",k:"von + Dativ",ex:"Was hältst du von der Idee?",n:"„halten für“ = einschätzen als: „Ich halte das für richtig.“",fall:true,s:["Was hältst du von ___ Idee?","der","die"]},
-{w:"abhängen von / überzeugen von",t:"verbpraep",k:"von + Dativ",ex:"Das hängt vom Wetter ab.",s:["Das hängt von ___ Uhrzeit ab.","der","die"]},
-{w:"gehören zu / führen zu / beitragen zu",t:"verbpraep",k:"zu + Dativ",ex:"Das gehört zu meinen Aufgaben.",s:["Das gehört zu ___ Aufgaben.","meinen","meine"]},
-{w:"einladen zu / gratulieren zu",t:"verbpraep",k:"zu + Dativ",ex:"Ich lade dich zum Essen ein.",s:["Ich lade dich zu ___ Feier ein.","der","die"]},
-{w:"passen zu",t:"verbpraep",k:"zu + Dativ",ex:"Die Schuhe passen zu der Hose.",n:"„passen“ allein steht mit Dativ: „Die Schuhe passen mir.“",s:["Die Schuhe passen zu ___ Trikots.","den","die"]},
-{w:"rechnen mit / sich beschäftigen mit",t:"verbpraep",k:"mit + Dativ",ex:"Ich rechne mit Verzögerungen.",s:["Ich rechne mit ___ Verzögerung.","einer","eine"]},
-{w:"anfangen mit / aufhören mit",t:"verbpraep",k:"mit + Dativ",ex:"Ich fange mit dem Aufwärmen an.",s:["Ich fange mit ___ Aufwärmen an.","dem","das"]},
-{w:"vergleichen mit / telefonieren mit",t:"verbpraep",k:"mit + Dativ",ex:"Vergleich das mit dem Vorjahr.",s:["Vergleich das mit ___ Vorjahr.","dem","das"]},
-{w:"suchen nach / fragen nach / streben nach",t:"verbpraep",k:"nach + Dativ",ex:"Ich frage nach dem Weg.",s:["Ich frage nach ___ Weg.","dem","den"]},
-{w:"riechen nach / schmecken nach",t:"verbpraep",k:"nach + Dativ",ex:"Es riecht nach Regen.",s:["Die Halle riecht nach ___ Training.","dem","das"]},
-{w:"sich richten nach",t:"verbpraep",k:"nach + Dativ",ex:"Ich richte mich nach dir.",s:["Ich richte mich nach ___ Plan.","dem","den"]},
+{w:"nachdenken über / diskutieren über",t:"verbpraep",k:"über + Akkusativ",ex:"Ich denke über den Vorschlag nach."},
+{w:"halten von",t:"verbpraep",k:"von + Dativ",ex:"Was hältst du von der Idee?",n:"„halten für“ = einschätzen als: „Ich halte das für richtig.“",fall:true},
+{w:"abhängen von / überzeugen von",t:"verbpraep",k:"von + Dativ",ex:"Das hängt vom Wetter ab."},
+{w:"gehören zu / führen zu / beitragen zu",t:"verbpraep",k:"zu + Dativ",ex:"Das gehört zu meinen Aufgaben."},
+{w:"einladen zu / gratulieren zu",t:"verbpraep",k:"zu + Dativ",ex:"Ich lade dich zum Essen ein."},
+{w:"passen zu",t:"verbpraep",k:"zu + Dativ",ex:"Die Schuhe passen zu der Hose.",n:"„passen“ allein steht mit Dativ: „Die Schuhe passen mir.“"},
+{w:"rechnen mit / sich beschäftigen mit",t:"verbpraep",k:"mit + Dativ",ex:"Ich rechne mit Verzögerungen."},
+{w:"anfangen mit / aufhören mit",t:"verbpraep",k:"mit + Dativ",ex:"Ich fange mit dem Aufwärmen an."},
+{w:"vergleichen mit / telefonieren mit",t:"verbpraep",k:"mit + Dativ",ex:"Vergleich das mit dem Vorjahr."},
+{w:"suchen nach / fragen nach / streben nach",t:"verbpraep",k:"nach + Dativ",ex:"Ich frage nach dem Weg."},
+{w:"riechen nach / schmecken nach",t:"verbpraep",k:"nach + Dativ",ex:"Es riecht nach Regen."},
+{w:"sich richten nach",t:"verbpraep",k:"nach + Dativ",ex:"Ich richte mich nach dir."},
 
 /* ---------- REFLEXIVE VERBEN: DATIV ODER AKKUSATIV ---------- */
 {w:"sich waschen",t:"verb",k:"Akk oder Dat",ex:"Ich wasche mich. · Ich wasche mir die Hände.",n:"Kommt ein Akkusativobjekt dazu, wird das Reflexivpronomen zum Dativ. Gilt genauso für „sich kämmen“, „sich putzen“, „sich anziehen“.",fall:true},
 {w:"sich vorstellen",t:"verb",k:"Akk oder Dat",ex:"Ich stelle mich vor (Name nennen). · Ich stelle mir das vor (im Kopf).",n:"Zwei völlig verschiedene Bedeutungen — der Kasus entscheidet.",fall:true},
-{w:"sich etwas merken",t:"verb",k:"Dativ",ex:"Ich merke mir die Nummer.",s:["Ich merke ___ die Nummer.","mir","mich"]},
-{w:"sich etwas überlegen",t:"verb",k:"Dativ",ex:"Ich überlege mir das.",s:["Ich überlege ___ das noch mal.","mir","mich"]},
-{w:"sich etwas leisten",t:"verb",k:"Dativ",ex:"Das kann ich mir nicht leisten.",s:["Das kann ich ___ gerade nicht leisten.","mir","mich"]},
-{w:"sich etwas ansehen",t:"verb",k:"Dativ",ex:"Ich sehe mir das an.",s:["Ich sehe ___ die Aufzeichnung noch an.","mir","mich"]},
-{w:"sich beeilen / sich irren / sich erholen",t:"verb",k:"Akkusativ",ex:"Ich beeile mich.",s:["Nach der Prüfung erhole ich ___ erst mal.","mich","mir"]},
-{w:"sich weh tun",t:"verb",k:"Dativ",ex:"Ich habe mir wehgetan.",s:["Ich habe ___ am Knie wehgetan.","mir","mich"]},
+{w:"sich etwas merken",t:"verb",k:"Dativ",ex:"Ich merke mir die Nummer."},
+{w:"sich etwas überlegen",t:"verb",k:"Dativ",ex:"Ich überlege mir das."},
+{w:"sich etwas leisten",t:"verb",k:"Dativ",ex:"Das kann ich mir nicht leisten."},
+{w:"sich etwas ansehen",t:"verb",k:"Dativ",ex:"Ich sehe mir das an."},
+{w:"sich beeilen / sich irren / sich erholen",t:"verb",k:"Akkusativ",ex:"Ich beeile mich."},
+{w:"sich weh tun",t:"verb",k:"Dativ",ex:"Ich habe mir wehgetan."},
 
 /* ---------- RICHTUNGSANGABEN: NACH, ZU, IN, AUF ---------- */
-{w:"nach (Richtung)",t:"praep",k:"Dativ",ex:"nach Köln, nach Hause, nach Italien",n:"Bei Städten und den meisten Ländern ohne Artikel. Mit Artikel geht „in“: in die Schweiz, in die Türkei, in die USA.",fall:true,s:["Wir fahren im Sommer ___ Italien.","nach","zu"]},
-{w:"zu (Richtung)",t:"praep",k:"Dativ",ex:"zum Bahnhof, zur Schule, zu Aldi",n:"Bei Personen und Einrichtungen. „Ich gehe zum Arzt“, nicht „nach dem Arzt“.",s:["Ich gehe kurz ___ Bäcker.","zum","nach dem"]},
-{w:"in (Richtung)",t:"wechsel",k:"Akkusativ",ex:"in die Halle, in den Wald, in die Schweiz",n:"Wenn man hineingeht. „Ich gehe in die Schule“ (ins Gebäude) vs. „Ich gehe zur Schule“ (Richtung / als Schüler).",s:["Wir fahren im Sommer in ___ Schweiz.", "die", "der"]},
-{w:"auf (Richtung)",t:"wechsel",k:"Akkusativ",ex:"auf die Post, auf den Markt, aufs Land",n:"Bei Ämtern, Plätzen und offenen Flächen.",s:["Ich gehe kurz auf ___ Markt.", "den", "dem"]},
-{w:"bei (Ort)",t:"praep",k:"Dativ",ex:"bei meiner Schwester, beim Arzt",n:"Antwort auf „wo?“, nicht auf „wohin?“ — dafür steht „zu“.",s:["Heute Abend bin ich ___ meiner Schwester.","bei","zu"]},
+{w:"nach (Richtung)",t:"praep",k:"Dativ",ex:"nach Köln, nach Hause, nach Italien",n:"Bei Städten und den meisten Ländern ohne Artikel. Mit Artikel geht „in“: in die Schweiz, in die Türkei, in die USA.",fall:true},
+{w:"zu (Richtung)",t:"praep",k:"Dativ",ex:"zum Bahnhof, zur Schule, zu Aldi",n:"Bei Personen und Einrichtungen. „Ich gehe zum Arzt“, nicht „nach dem Arzt“."},
+{w:"in (Richtung)",t:"wechsel",k:"Akkusativ",ex:"in die Halle, in den Wald, in die Schweiz",n:"Wenn man hineingeht. „Ich gehe in die Schule“ (ins Gebäude) vs. „Ich gehe zur Schule“ (Richtung / als Schüler)."},
+{w:"auf (Richtung)",t:"wechsel",k:"Akkusativ",ex:"auf die Post, auf den Markt, aufs Land",n:"Bei Ämtern, Plätzen und offenen Flächen."},
+{w:"bei (Ort)",t:"praep",k:"Dativ",ex:"bei meiner Schwester, beim Arzt",n:"Antwort auf „wo?“, nicht auf „wohin?“ — dafür steht „zu“."},
 
 /* ---------- WECHSELVERBEN: DAS VERB ENTSCHEIDET ÜBER DEN FALL ---------- */
-{w:"legen — wohin",t:"verb",k:"Akkusativ",ex:"Ich lege das Handy auf den Tisch.",n:"Schwach: legte, hat gelegt. Immer mit Akkusativobjekt — und die Ortsangabe steht ebenfalls im Akkusativ.",fall:true,s:["Ich lege das Handy auf ___ Tisch.","den","dem"]},
-{w:"liegen — wo",t:"verb",k:"Dativ",ex:"Das Handy liegt auf dem Tisch.",n:"Stark: lag, hat gelegen. Kein Objekt — die Ortsangabe steht im Dativ.",fall:true,s:["Das Handy liegt auf ___ Tisch.","dem","den"]},
-{w:"stellen — wohin",t:"verb",k:"Akkusativ",ex:"Ich stelle die Flasche in den Kühlschrank.",n:"Schwach: stellte, hat gestellt. Etwas irgendwohin bringen.",fall:true,s:["Ich stelle die Flasche in ___ Kühlschrank.","den","dem"]},
-{w:"stehen — wo",t:"verb",k:"Dativ",ex:"Die Flasche steht im Kühlschrank.",n:"Stark: stand, hat gestanden (süddeutsch und österreichisch auch: ist gestanden).",fall:true,s:["Die Flasche steht in ___ Kühlschrank.","dem","den"]},
-{w:"setzen — wohin",t:"verb",k:"Akkusativ",ex:"Ich setze mich auf die Bank.",n:"Schwach: setzte, hat gesetzt. Auch reflexiv: sich setzen (Akkusativ).",fall:true,s:["Ich setze mich auf ___ Bank.","die","der"]},
-{w:"sitzen — wo",t:"verb",k:"Dativ",ex:"Ich sitze auf der Bank.",n:"Stark: saß, hat gesessen (süddeutsch und österreichisch auch: ist gesessen).",fall:true,s:["Ich sitze auf ___ Bank.","der","die"]},
-{w:"hängen (hängte) — wohin",t:"verb",k:"Akkusativ",ex:"Ich hänge die Jacke an den Haken.",n:"Das schwache „hängen“: hängte, hat gehängt. Mit Akkusativobjekt.",fall:true,s:["Ich hänge die Jacke an ___ Haken.","den","dem"]},
-{w:"hängen (hing) — wo",t:"verb",k:"Dativ",ex:"Die Jacke hängt an dem Haken.",n:"Das starke „hängen“: hing, hat gehangen. Ohne Objekt.",fall:true,s:["Die Jacke hängt an ___ Haken.","dem","den"]},
-{w:"stecken — wo",t:"verb",k:"Dativ",ex:"Der Schlüssel steckt im Schloss.",n:"Als „wohin“-Verb dagegen Akkusativ: „Ich stecke den Schlüssel ins Schloss.“",fall:true,s:["Der Schlüssel steckt in ___ Schloss.","dem","das"]}
+{w:"legen — wohin",t:"verb",k:"Akkusativ",ex:"Ich lege das Handy auf den Tisch.",n:"Schwach: legte, hat gelegt. Immer mit Akkusativobjekt — und die Ortsangabe steht ebenfalls im Akkusativ.",fall:true},
+{w:"liegen — wo",t:"verb",k:"Dativ",ex:"Das Handy liegt auf dem Tisch.",n:"Stark: lag, hat gelegen. Kein Objekt — die Ortsangabe steht im Dativ.",fall:true},
+{w:"stellen — wohin",t:"verb",k:"Akkusativ",ex:"Ich stelle die Flasche in den Kühlschrank.",n:"Schwach: stellte, hat gestellt. Etwas irgendwohin bringen.",fall:true},
+{w:"stehen — wo",t:"verb",k:"Dativ",ex:"Die Flasche steht im Kühlschrank.",n:"Stark: stand, hat gestanden (süddeutsch und österreichisch auch: ist gestanden).",fall:true},
+{w:"setzen — wohin",t:"verb",k:"Akkusativ",ex:"Ich setze mich auf die Bank.",n:"Schwach: setzte, hat gesetzt. Auch reflexiv: sich setzen (Akkusativ).",fall:true},
+{w:"sitzen — wo",t:"verb",k:"Dativ",ex:"Ich sitze auf der Bank.",n:"Stark: saß, hat gesessen (süddeutsch und österreichisch auch: ist gesessen).",fall:true},
+{w:"hängen (hängte) — wohin",t:"verb",k:"Akkusativ",ex:"Ich hänge die Jacke an den Haken.",n:"Das schwache „hängen“: hängte, hat gehängt. Mit Akkusativobjekt.",fall:true},
+{w:"hängen (hing) — wo",t:"verb",k:"Dativ",ex:"Die Jacke hängt an dem Haken.",n:"Das starke „hängen“: hing, hat gehangen. Ohne Objekt.",fall:true},
+{w:"stecken — wo",t:"verb",k:"Dativ",ex:"Der Schlüssel steckt im Schloss.",n:"Als „wohin“-Verb dagegen Akkusativ: „Ich stecke den Schlüssel ins Schloss.“",fall:true}
 ];
 
 /* ============================================================
@@ -5090,31 +5088,6 @@ function ruleById(id){ return RULES_ALL.find(r=>r.id===id); }
 /* ---------- Kartenmodell ---------- */
 function cardOf(id){ return S.cards[id] || {b:0,d:null,s:0,w:0}; }
 function isDue(id){ const c=S.cards[id]; return c && c.d && c.d <= today(); }
-
-/* Alle Karten, die es überhaupt gibt — Aufgaben, Wörter, Fälle. Eine Stelle, damit
-   Fortschritt und Kartenansicht dieselbe Zahl nennen. */
-function alleSchluessel(){
-  return ALL.map(i=>i.id)
-    .concat(WORDS.map(x=>"w:"+x.w))
-    .concat(drillPool().map(e=>"c:"+e.w));
-}
-
-/* Was sitzt. Gezählt wird nach Leitner-Fach, nicht nach Trefferquote: Eine falsche
-   Antwort setzt eine Karte auf Fach 1 zurück, wer in Fach 4 steht, hat also mindestens
-   dreimal nacheinander richtig geantwortet. Mehr gibt der gespeicherte Stand nicht her —
-   und mehr behauptet die Zahl deshalb auch nicht. Vor allem sagt sie nichts über den
-   Abstand zwischen den Antworten, weil der nirgends festgehalten wird. */
-const SICHER_AB = 4;
-function retention(){
-  const alle = alleSchluessel();
-  let sicher = 0, aufbau = 0;
-  alle.forEach(k=>{
-    const c = S.cards[k];
-    if(!c) return;
-    if((c.b||0) >= SICHER_AB) sicher++; else aufbau++;
-  });
-  return {sicher, aufbau, neu: alle.length - sicher - aufbau, gesamt: alle.length};
-}
 function grade(id,ok,cat,rule){
   const c = cardOf(id);
   // Auf Anhieb richtig? Dann überspringt die Karte das erste Fach.
@@ -5909,7 +5882,7 @@ function renderCards(){
         boxes.map((v,i)=>'<div class="stat"><b>'+v+"</b><span>Fach "+(i+1)+" · alle "+BOXES[i]+" Tage</span></div>").join("")+
       "</div>"+
       '<p class="tiny muted" style="margin-top:10px">'+known+" Karten sitzen (Fach 4–5) · "+
-      Object.keys(S.cards).length+" von "+alleSchluessel().length+" Karten überhaupt schon gesehen.</p>"+
+      Object.keys(S.cards).length+" von "+(ALL.length+WORDS.length+drillPool().length)+" Karten überhaupt schon gesehen.</p>"+
     "</div>"+
     '<div class="card">'+
       '<div class="eyebrow">Wortschatz nachschlagen</div>'+
@@ -6171,27 +6144,7 @@ function renderStats(sel){
   }).filter(x=>x.t>=5).sort((a,b)=>a.p-b.p);
   const weak = ranked[0];
 
-  const ret = retention();
-  const anteil = n => ret.gesamt ? (n / ret.gesamt * 100).toFixed(1) + "%" : "0%";
-
   $(sel || "#statHost").innerHTML =
-    '<div class="card">'+
-      '<div class="eyebrow">Was sitzt</div>'+
-      '<div class="grid2" style="margin-top:10px">'+
-        '<div class="stat"><b>'+ret.sicher+'</b><span>sitzt sicher</span></div>'+
-        '<div class="stat"><b>'+ret.aufbau+'</b><span>im Aufbau</span></div>'+
-        '<div class="stat"><b>'+ret.neu+'</b><span>noch nicht dran</span></div>'+
-      "</div>"+
-      '<div class="bar stapel" style="margin-top:13px">'+
-        '<i style="width:'+anteil(ret.sicher)+';background:var(--acc)"></i>'+
-        '<i style="width:'+anteil(ret.aufbau)+';background:var(--gold)"></i>'+
-        '<i style="width:'+anteil(ret.neu)+';background:var(--line2)"></i>'+
-      "</div>"+
-      '<p class="tiny muted" style="margin-top:9px">Sicher heißt Fach '+SICHER_AB+' oder '+BOXES.length+
-        ": mindestens "+(SICHER_AB-1)+" richtige Antworten nacheinander, nächste Wiederholung in "+
-        BOXES[SICHER_AB-1]+" oder "+BOXES[BOXES.length-1]+" Tagen. Eine falsche Antwort setzt eine Karte "+
-        "auf Fach 1 zurück — die Zahl fällt also wieder, wenn etwas nicht mehr sitzt.</p>"+
-    "</div>"+
     '<div class="card">'+
       '<div class="eyebrow">Überblick</div>'+
       '<div class="grid2" style="margin-top:10px">'+
@@ -6535,53 +6488,25 @@ let ST = {tab:"faelle", typ:"", kas:"", nurFallen:false};
 
 /* ---------- Fall aus dem Eintrag ableiten (für den Drill) ---------- */
 function drillCase(e){
+  if(e.t === "wechsel") return "Akkusativ oder Dativ";
   if(e.t === "verb2") return null;
   const k = e.k;
+  if(/oder/.test(k)) return null;
   const hasA = /Akkusativ|Akk\b/.test(k), hasD = /Dativ|Dat\b/.test(k), hasG = /Genitiv|Gen\b/.test(k);
-  const eindeutig = !/oder/.test(k) && [hasA,hasD,hasG].filter(Boolean).length === 1;
-  const name = () => hasA ? "Akkusativ" : hasD ? "Dativ" : "Genitiv";
-  /* Wechselpräpositionen lassen beide Fälle zu — „an“, „auf“, „in“ tragen k = „Akk / Dat“.
-     „in (Richtung)“ und „auf (Richtung)“ stehen dagegen fest im Akkusativ, und ihr k sagt
-     das auch. Vorher gewann für alle t="wechsel" pauschal „Akkusativ oder Dativ“; auf
-     diesen beiden Karten widersprach die richtige Antwort damit der Erklärung darunter. */
-  if(e.t === "wechsel") return eindeutig ? name() : "Akkusativ oder Dativ";
-  return eindeutig ? name() : null;
+  if([hasA,hasD,hasG].filter(Boolean).length !== 1) return null;
+  return hasA ? "Akkusativ" : hasD ? "Dativ" : "Genitiv";
 }
 const DRILLOPTS = ["Akkusativ","Dativ","Genitiv","Akkusativ oder Dativ"];
 
 function caseQuestion(e){
   const ans = drillCase(e);
-  const leise = t => "<br><span style='opacity:.85'>"+esc(t)+"</span>";
-  const kopf = "<b>"+esc(e.w)+"</b> → "+esc(e.k);
-  const notiz = e.n ? leise(e.n) : "";
-  const nachweis = kopf + leise(e.ex) + notiz;
-  /* Satzform statt Etikett: Die Karte fragt nach der Form im Satz — „Ich helfe ___ beim Aufbau“ —
-     statt nach dem Namen des Falls. Das ist näher am Sprechen und inzwischen der Regelfall.
-     e.s = [Satz mit genau einer Lücke, richtige Form, falsche Form …]; die erste Option ist die
-     richtige. Gemischt wird wie bei den Übungen mit Tagesseed, damit sie nicht immer vorn steht.
-     Karten ohne e.s bleiben bei der Etikettfrage: Wechselpräpositionen, deren Antwort
-     „Akkusativ oder Dativ“ lautet, und Zweifelsfälle, bei denen kein Ablenker sicher falsch wäre. */
-  const fassungen = Array.isArray(e.s) && e.s.length
-    ? (Array.isArray(e.s[0]) ? e.s : [e.s]).filter(f => Array.isArray(f) && f.length > 2)
-    : [];
-  if(fassungen.length){
-    const r = rng(hash("c:"+e.w+"|"+today()));
-    /* Wechselpräpositionen tragen zwei Fassungen: wohin (Akkusativ) und wo (Dativ).
-       Welche drankommt, entscheidet der Tagesseed — über die Wochen kommen beide dran.
-       Eine Karte kann nur eine Richtung auf einmal abfragen, beide gehören aber geübt. */
-    const f = fassungen[Math.floor(r() * fassungen.length)];
-    const roh = f.slice(1);
-    const order = shuffle(roh.map((_,i)=>i), r);
-    const luecke = t => esc(f[0]).replace("___", () => t);
-    return {key:"c:"+e.w, cat:"gram", type:"mc", q:luecke("<b>___</b>"),
-      opts:order.map(i=>roh[i]), ans:order.indexOf(0), rule:"gram-kasusfinden",
-      exp:luecke("<b>"+esc(roh[0])+"</b>")+"<br>"+kopf+notiz};
-  }
   const frage = e.t === "verb" || e.t === "verbpraep"
     ? "Welchen Fall verlangt <em>" + esc(e.w) + "</em>?"
     : "Welcher Fall folgt auf <em>" + esc(e.w) + "</em>?";
   return {key:"c:"+e.w, cat:"gram", type:"mc", q:frage, opts:DRILLOPTS.slice(),
-    ans:DRILLOPTS.indexOf(ans), rule:"gram-kasusfinden", exp:nachweis};
+    ans:DRILLOPTS.indexOf(ans), rule:"gram-kasusfinden",
+    exp:"<b>"+esc(e.w)+"</b> → "+esc(e.k)+"<br><span style='opacity:.85'>"+esc(e.ex)+"</span>"+
+        (e.n ? "<br><span style='opacity:.85'>"+esc(e.n)+"</span>" : "")};
 }
 /* Alle Fall-Einträge, die sich abfragen lassen */
 function drillPool(){ return CASEREF.filter(e=>drillCase(e)); }
