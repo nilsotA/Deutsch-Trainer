@@ -87,6 +87,11 @@ SATZ.forEach(x => zu(x.id, x.b));
 
 const HART = /\b(ist falsch|sind falsch|falsch:|nicht korrekt|geht nicht|gibt es nicht)\b/i;
 const WEICH = /\b(landschaftlich|regional|süddeutsch|südwestdeutsch|schweizerisch|österreichisch|umgangssprachlich|zulässig|beides|standardsprachlich|gebräuchlich|verbreitet)\b/i;
+/* „nicht falsch“ und „keine der beiden Formen ist falsch“ sind Freisprüche, keine Urteile.
+   Ohne diese Ausnahme meldet der Lauf jeden Beleg, der eine Form ausdrücklich in Schutz
+   nimmt — genau das ist beim Beleg zu stehen/sitzen/liegen passiert. „nicht korrekt“ bleibt
+   bewusst ein hartes Urteil und wird hier nicht erfasst. */
+const FREISPRUCH = /\b(nicht|nie)\s+falsch\b|\bkein\w*\b[^.;!?]{0,45}?\b(ist|sind)\s+falsch\b/i;
 const H = {}, WCH = {};
 stellen.forEach(s => {
   const re = /„([^“]{4,60})“/g;
@@ -94,7 +99,7 @@ stellen.forEach(s => {
   while ((m = re.exec(s.t))) {
     const z = m[1].toLowerCase().replace(/\s+/g, " ").trim();
     const u = s.t.slice(Math.max(0, m.index - 90), m.index + m[1].length + 90);
-    if (HART.test(u)) (H[z] = H[z] || []).push(s.id);
+    if (HART.test(u) && !FREISPRUCH.test(u)) (H[z] = H[z] || []).push(s.id);
     if (WEICH.test(u)) (WCH[z] = WCH[z] || []).push(s.id);
   }
 });

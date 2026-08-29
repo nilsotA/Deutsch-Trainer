@@ -76,7 +76,7 @@ P.ok("Keine Karteileiche in der Liste", !absTot.length,
 P.titel("B · Kann-Regeln sind belegt");
 
 const KANN = /\b(freigestellt|fakultativ|wahlfrei|kann (?:gesetzt|stehen|entfallen|weggelassen))\b/i;
-const BELEG = /\b(Duden|DWDS|Regelwerk|Rat für deutsche Rechtschreibung|DIN 5008|Gesellschaft für deutsche Sprache|Reform von \d{4})\b/;
+const BELEG = /\b(Duden|DWDS|Regelwerk|Rat für deutsche Rechtschreibung|DIN 5008|Gesellschaft für deutsche Sprache|grammis|IDS Mannheim|Variantengrammatik|Reform von \d{4})\b/;
 
 const kannRegeln = RA.filter(r => IMBLICK(r.c) && KANN.test(strip(r.b)));
 const ohneBeleg = kannRegeln.filter(r => !BELEG.test(strip(r.b)));
@@ -189,13 +189,11 @@ P.titel("E · Varianten");
    Abzeichen selbst, mit ihrer eigenen Wortliste; hier wird genau diese Menge geprüft. */
 const varianten = daten(w, "RULES_ALL.filter(hatVarianten).map(r=>r.id)");
 
-/* Altlast: Diese Variantenregeln standen schon ohne Quelle da, als der Lauf entstand.
-   Sie sind nicht geprüft — die Liste ist eine Schuld, kein Freibrief. Sie darf schrumpfen,
-   aber nicht wachsen: Eine neue Variantenregel ohne Beleg fällt unten auf. */
-const VAR_OFFEN = [
-  "gram-kongruenz", "gram-alswie", "satz-perfekt", "satz-sprechen",
-  "gram-relkasus", "gram-genalltag", "gram-praepdat"
-];
+/* Altlast, inzwischen abgetragen: Hier standen sieben Variantenregeln ohne Quelle.
+   Alle sieben sind belegt, die Liste ist leer — und soll es bleiben. Wer eine neue
+   Variantenregel ohne Beleg schreibt, bekommt unten einen Fehler und muss nachschlagen
+   oder den Fall hier bewusst eintragen. */
+const VAR_OFFEN = [];
 
 const varOhne = varianten.filter(id => {
   const r = RA.find(x => x.id === id);
