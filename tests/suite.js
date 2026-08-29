@@ -331,15 +331,62 @@ const FEHLER = [
   ["Ruft mir bitte morgen an.", "x20"],
   ["Die Reflektion des Praktikums war kurz.", "x27"],
   ["Er hat versucht die Prüfung zu bestehen.", "y11"],
-  ["Seid dem Sommer trainiert er wieder.", "x17"]
+  ["Seid dem Sommer trainiert er wieder.", "x17"],
+  ["Während dem Training hat er sich verletzt.", "x03"],
+  ["Er ist schneller als wie ich.", "x05"],
+  ["Das war die optimalste Lösung.", "x07"],
+  ["Ich möchte dem wiedersprechen.", "x15"],
+  ["Mit freundlichen Grüßen,\nNils Otten", "x25"],
+  ["Die Quote lag bei 80% der Gruppe.", "t03"],
+  ["Er trainiert täglich um seine Ausdauer zu verbessern.", "y02"],
+  ["Der Trainer, wo das gesagt hat, ist neu.", "y10"],
+  ["Er wollte noch etwas sagen...", "t08"],
+  ["Das Training - bei Regen in der Halle - beginnt um 17 Uhr.", "t10"],
+  ["Ich bin wahrscheinlich zu blöd für diese Aufgabe.", "a07"],
+  ["Wenn das Verfahren zur Anwendung kommt, ändert sich wenig.", "s02"],
+  ["Ob das Sinn macht, weiß ich nicht.", "s06"],
+  ["Der Plan wurde von dem Trainer geändert.", "a03"],
+  ["Die Auswertung der Fragebögen hat gezeigt, dass die Gruppe im Verlauf der Intervention deutlich motivierter war als zu Beginn, was sich sowohl in der Anwesenheit als auch in der Bereitschaft zeigte, zusätzliche Einheiten mitzumachen und dabei über das geforderte Maß hinauszugehen.", "a04"],
+  ["Ich hoffe, es geht Ihnen gut.", "f10"],
+  ["Es tut mir leid, falls das missverständlich war.", "f12"],
+  ["Ich versuche, den Bericht bis Freitag fertigzustellen.", "f13"],
+  ["Nicht schlecht für den ersten Versuch.", "f14"]
 ];
 const stummeMuster = [];
+const belegteMuster = new Set();
 FEHLER.forEach(([t, id]) => {
   const ids = daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>f.c.id)");
+  ids.forEach(x => belegteMuster.add(x));
   if (!ids.includes(id)) stummeMuster.push(id + " findet nichts in „" + t + "“");
 });
 P.ok("Jedes benannte Muster greift auch am Satzanfang (" + FEHLER.length + " Fälle)",
   !stummeMuster.length, stummeMuster.join(" · "));
+
+/* Kein Muster darf stumm bleiben. Die Hauptquelle ist der eigene Bestand an falschem
+   Material — die Ablenker der Aufgaben und die Fehlersuchtexte sind bewusst fehlerhaftes
+   Deutsch und belegen den Großteil der Muster von selbst, ohne Pflege. Was dort nicht
+   vorkommt, steht oben im Handkorpus.
+
+   Warum das nötig ist: x18 war halb tot und y10 fand seine eigene Musterformulierung
+   nicht („der Mann, wo das gesagt hat“ — genau der Satz steht in gram-relkasus). Ein
+   Muster, das nichts findet, fällt sonst nirgends auf. */
+ALL.forEach(i => {
+  if (i.t === "fill") return;
+  i.o.forEach((o, n) => {
+    if (n === i.a) return;
+    const t = strip(o);
+    if (t.length < 4) return;
+    daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>f.c.id)").forEach(x => belegteMuster.add(x));
+  });
+});
+KORREKTUR.forEach(t => {
+  daten(w, "analyse(" + JSON.stringify(t.txt) + ").finds.map(f=>f.c.id)").forEach(x => belegteMuster.add(x));
+});
+
+const alleMuster = daten(w, "CHECKS_ALL.map(c=>c.id)");
+const stummeIds = alleMuster.filter(id => !belegteMuster.has(id));
+P.ok("Jedes Prüfmuster ist als wirksam belegt (" + alleMuster.length + ")",
+  !stummeIds.length, stummeIds.join(", ") + " findet nirgends etwas — Beispielsatz in FEHLER nachtragen");
 
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");

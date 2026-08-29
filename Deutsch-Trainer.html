@@ -7365,7 +7365,7 @@ const CHECKS = [
  t:"Nach etwas/nichts/alles groß?",k:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das Adjektiv substantiviert: etwas <b>N</b>eues, nichts <b>B</b>esonderes, alles <b>G</b>ute.",r:"gross-subst"},
 {id:"y09",sev:"pruef",re:/\b(hoffe|denke|glaube|meine|sagte|sagt|sagen|finde|merke|wusste|bedeutet|zeigt|heißt|ist|war|bleibt|scheint|erklärt|betont|behauptet|vermute)\s+das\s+(ich|du|er|sie|es|wir|ihr|man|sich|der|die|das|ein|eine|einen|einem|dem|den|mein|sein|ihr)\b/g,
  t:"das oder dass?",k:"Ersatzprobe: Lässt sich „dieses/welches“ einsetzen? Wenn nein, ist es die Konjunktion <b>dass</b>.",r:"recht-dass"},
-{id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(hat|ist|war|kann|will|soll|wird|macht|sagt)\b/g,
+{id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(?:ge[a-zäöüß]+\s+)?(hat|ist|war|kann|will|soll|wird|macht|sagt|hatte)\b/g,
  t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relativ"},
 {id:"y11",sev:"pruef",
  re:/\b(versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|gebeten|bereit|vorhat|vorhatte)\s+([^,.;:!?]{3,45}?)\s+zu\s+[a-zäöüß]+en\b/g,
