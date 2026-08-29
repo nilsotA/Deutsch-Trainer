@@ -725,10 +725,10 @@ const EX_A = [
  e:"Nebensätze werden immer durch Komma abgetrennt — auch indirekte Fragesätze mit „ob“.",r:"komma-nebensatz"},
 
 {id:"k20",c:"komma",q:"„Er hat versucht(,) pünktlich zu sein.“",o:[
- "Komma ist erlaubt, aber nicht zwingend",
  "Komma ist Pflicht",
+ "Komma ist erlaubt, aber nicht zwingend",
  "Komma ist falsch"],a:0,
- e:"Bei einfachen Infinitivgruppen ohne Einleitewort ist das Komma <b>fakultativ</b>. Empfehlung: setzen, wenn der Satz sonst schwer lesbar wird.",r:"komma-infinitiv"},
+ e:"„pünktlich zu sein“ ist eine <b>erweiterte</b> Infinitivgruppe — zu + Infinitiv und noch ein Wort. Seit dem 1. Juli 2024 steht dort ein Komma, auch ohne Einleitewort. Früher war es freigestellt.",r:"komma-infinitiv"},
 
 {id:"k21",c:"komma",q:"Welcher Satz ist korrekt?",o:[
  "Nein, das sehe ich anders.",
@@ -825,6 +825,12 @@ const EX_A = [
  "Ja — der Einschub wird beidseitig abgetrennt",
  "Nein — „wie erwartet“ steht ohne Kommas"],a:0,
  e:"Als eingeschobener Zusatz mitten im Satz wird „wie erwartet“ abgetrennt. Ohne Einschub: „Er hat wie erwartet gewonnen.“ ist ebenfalls möglich.",r:"komma-einschub"},
+
+{id:"k41",c:"komma",q:"„Er hat versucht(,) zu kommen.“",o:[
+ "Komma ist erlaubt, aber nicht zwingend",
+ "Komma ist Pflicht",
+ "Komma ist falsch"],a:0,
+ e:"„zu kommen“ ist <b>nicht erweitert</b> — bloß zu + Infinitiv, kein weiteres Wort. Dort bleibt das Komma freigestellt. Sobald ein Wort dazukommt („pünktlich zu kommen“), ist es Pflicht.",r:"komma-infinitiv"},
 
 /* ---------- GROSS- UND KLEINSCHREIBUNG ---------- */
 {id:"g01",c:"gross",q:"Was ist korrekt?",o:["des Weiteren","des weiteren"],a:0,
@@ -1407,19 +1413,30 @@ const RULES = [
 <div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>`},
 
 {id:"komma-infinitiv",c:"komma",t:"Infinitivgruppen mit „zu“",b:`
-<p><b>Komma ist Pflicht</b>, wenn die Infinitivgruppe …</p>
+<p>Hier hat sich die Regel geändert: Seit dem <b>1. Juli 2024</b> wird eine
+<b>erweiterte Infinitivgruppe immer mit Komma abgetrennt</b>. Vorher war das Komma in
+vielen dieser Fälle freigestellt — wer es so gelernt hat, lernt es an dieser Stelle neu.</p>
+<p><b>Erweitert</b> heißt: <code>zu</code> + Infinitiv und mindestens ein weiteres Wort.</p>
 <ul>
-<li>… mit <code>um, ohne, statt, anstatt, außer, als</code> eingeleitet wird<br>
-<span class="ex">Er trainiert<span class="ok">,</span> um sich zu verbessern.</span></li>
-<li>… von einem <b>Substantiv</b> abhängt<br>
-<span class="ex">Der Plan<span class="ok">,</span> täglich zu laufen<span class="ok">,</span> war ambitioniert.</span></li>
-<li>… von einem <b>hinweisenden Wort</b> angekündigt oder aufgenommen wird<br>
-<span class="ex">Daran<span class="ok">,</span> pünktlich zu sein<span class="ok">,</span> denkt er nie.</span></li>
-<li>… als <b>Einschub</b> mitten im Satz steht.</li>
+<li><b>erweitert:</b> <i>pünktlich zu sein</i> · <i>die Prüfung zu bestehen</i> · <i>ihn nicht hereinzulassen</i></li>
+<li><b>nicht erweitert:</b> <i>zu sein</i> · <i>zu bestehen</i> · <i>hereinzulassen</i></li>
 </ul>
-<p><b>Komma ist freigestellt</b> bei einfachen Infinitivgruppen ohne Einleitewort:</p>
-<div class="ex">Er hat versucht<span class="ok">(,)</span> pünktlich zu sein.</div>
-<p><b>Merksatz für die Pflichtfälle:</b> <i>um, ohne, statt, anstatt, außer, als</i> — sechs Wörter, ein Komma.</p>`},
+<p>Bei der erweiterten Gruppe steht das Komma also auch dann, wenn kein Einleitewort davorsteht:</p>
+<div class="ex">Er hat versucht<span class="ok">,</span> pünktlich zu sein.</div>
+<p>Steht die Gruppe mitten im Satz, wird sie beidseitig abgetrennt:</p>
+<div class="ex">Der Plan<span class="ok">,</span> täglich zu laufen<span class="ok">,</span> war ambitioniert.</div>
+<p>Mit Einleitewort war das Komma schon vorher Pflicht — daran ändert sich nichts:</p>
+<div class="ex">Er trainiert<span class="ok">,</span> um sich zu verbessern.</div>
+<p><b>Merksatz:</b> <i>um, ohne, statt, anstatt, außer, als</i> — sechs Wörter, ein Komma.</p>
+<p><b>Freigestellt</b> bleibt das Komma bei der nicht erweiterten Gruppe, also bei bloßem
+<code>zu</code> + Infinitiv:</p>
+<div class="ex">Er hat versucht<span class="ok">(,)</span> zu kommen.</div>
+<p><b>Ausnahme:</b> Nach <code>brauchen, pflegen, scheinen</code> steht kein Komma. Der
+zu-Infinitiv bildet dort mit dem Verb eine Einheit und ist kein eigener Satz.</p>
+<div class="ex">Du brauchst nicht extra zu kommen.<br>Er scheint das Training zu genießen.</div>
+<p class="tiny muted">Belegt: Amtliches Regelwerk in der Fassung 2024, § 73, in Kraft seit
+1. Juli 2024 (Rat für deutsche Rechtschreibung); Abgrenzung erweitert/nicht erweitert nach
+der Gesellschaft für deutsche Sprache.</p>`},
 
 {id:"komma-aufzaehlung",c:"komma",t:"Aufzählungen und Konjunktionen",b:`
 <p>Gleichrangige Teile werden durch Komma getrennt — außer, es steht schon eine Konjunktion dazwischen.</p>
@@ -7696,12 +7713,12 @@ function cheatHTML(){
   '<table class="ch-t"><tbody>'+
   '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) · '+
   'Relativsatz · Einschub beidseitig · vor <i>aber, sondern, doch, jedoch</i> · vor <i>das heißt, und zwar, zum Beispiel</i> · '+
-  'Infinitiv mit <i>um, ohne, statt, anstatt, außer, als</i> · zwei Hauptsätze ohne Konjunktion</td></tr>'+
+  'erweiterte Infinitivgruppe, auch ohne Einleitewort (seit 2024) · zwei Hauptsätze ohne Konjunktion</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
   '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“) · nach der Grußformel</td></tr>'+
-  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · einfache Infinitivgruppe ohne Einleitewort · Partizipgruppe</td></tr>'+
+  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · nicht erweiterte Infinitivgruppe (bloß <i>zu</i> + Infinitiv) · Partizipgruppe</td></tr>'+
   '</tbody></table>'+
-  '<p class="ch-n"><b>Merksatz für die Pflicht-Infinitive:</b> um, ohne, statt, anstatt, außer, als. '+
+  '<p class="ch-n"><b>Erweitert</b> heißt: <i>zu</i> + Infinitiv und mindestens ein weiteres Wort — dann Komma. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+
 
   '<section class="ch-sec"><h2>2 · Präpositionen nach Fall</h2>'+
