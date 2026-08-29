@@ -156,9 +156,11 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Weitere Belege.** Die reichweitenstärksten Regeln sind geprüft; als Nächstes
-   lohnen `gram-praep` (feste Verbpräpositionen), `gram-kasus` (Dativverben) und
-   die Zeichensetzungsregeln.
+1. **Belege für die Zeichensetzung.** `gram-praep` und `gram-kasus` sind erledigt
+   (siehe „Zuletzt geändert“). Offen sind die Zeichensetzungsregeln — Komma bei
+   Infinitivgruppen, Gedankenstrich, Doppelpunkt. Vorgehen wie gehabt: erst belegen,
+   dann Regel, Übung, Fallkarte und Textcheck angleichen, dann „Stand der Prüfung“
+   nachziehen.
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.
