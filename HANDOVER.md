@@ -33,12 +33,12 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 |---|---|
 | Übungen | 372, davon 44 Tippaufgaben (unterwegs abfragbar: 328) |
 | Regeln | 117 |
-| Wortkarten | 116 |
+| Wortkarten | 143 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen); abfragbar 165 |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 82 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Kartenbestand (`alleSchluessel()`) | 653 |
+| Kartenbestand (`alleSchluessel()`) | 680 |
 | Dateigröße | ~627 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
 
 Die Zahl 331 stand hier lange für die Übungen und stimmte nicht — `ALL.length` war schon
@@ -63,6 +63,42 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Wortschatz von 116 auf 143 Karten** (29.08.2026). Gewählt entlang dessen, was Nils
+tatsächlich schreibt — Hausarbeiten, Praktikums- und Forschungsberichte, Reflexionen:
+
+- **Neun Verwechslungspaare.** Die verhindern Fehler, nicht nur Lücken:
+  Reflexion/reflektieren, Korrelation/Kausalität, Hypothese/These, wieder/wider,
+  seit/seid, Effekt/Affekt, Prävention/Intervention, quantitativ/qualitativ,
+  Methode/Methodik.
+- **Zehn Verben des Argumentierens:** verorten, erörtern, darlegen, herleiten, abgrenzen,
+  gegenüberstellen, veranschaulichen, gewichten, präzisieren, aufgreifen.
+- **Acht Begriffe der empirischen Arbeit:** Befund, Stichprobe, Konstrukt, Implikation,
+  Spannungsfeld, Indikator, Genese, Evidenz.
+
+Zwei Karten sind belegt statt behauptet. **„Reflektion“ ist laut Duden eine
+Falschschreibung** — das Substantiv kommt über das französische *réflexion* von *reflexio*,
+das Verb von *reflectere*, daher x gegen kt. Für ein Portfolio voller Reflexionen die
+nützlichste Karte des Stapels. Und **„Evidenz“ hat zwei Bedeutungen**: bildungssprachlich
+die unmittelbare Einsichtigkeit, daneben — über das englische *evidence* — den empirischen
+Beleg. Der Duden führt die zweite für Medizin und Pharmazie; manchen gilt sie als
+Anglizismus, in der Wissenschaft ist sie samt „evidenzbasiert“ etabliert. Beides steht auf
+der Karte, nichts davon als falsch.
+
+Bei *qualitativ* steht bewusst ein **Stilhinweis statt eines Verbots**: „qualitativ
+hochwertig“ ist verbreitet, „hochwertig“ genügt — Empfehlung, kein Fehler (Grundsatz 3).
+
+**Dabei ein stiller Anzeigefehler gefunden.** Die Karte „kompliziert / komplex“ trug HTML
+im Tücken-Feld. Das Feld geht bei der Ausgabe durch `esc()`, also stand dort wörtlich
+`<b>fachliche</b>` auf dem Bildschirm. Kein Fehler, den ein Syntaxlauf sieht — und mir wäre
+er beinahe selbst passiert, weil ich in einer neuen Karte dasselbe getan hatte.
+
+Neue Prüfung in `suite.js`: **Kein Feld, das escapet ausgegeben wird, darf HTML enthalten.**
+Geprüft werden Wortkarten, Fallkarten, Regeltitel und Satzkarten-Titel. Regeltexte (`r.b`)
+und Satzkarten-Rümpfe (`x.b`) sind ausgenommen — die sind absichtlich HTML und werden nicht
+escapet. Welche Felder escapet werden, lässt sich im Skript an den `esc(...)`-Aufrufen
+ablesen; wer ein Feld neu escapet ausgibt, sollte es in die Liste aufnehmen.
+
 
 **Der Lernstand auf dem iPhone** (29.08.2026). Nils benutzt die App über ein **Lesezeichen
 in Safari**. Damit fällt sie unter die Sieben-Tage-Regel: Safari löscht seit iOS 13.4 den
@@ -423,9 +459,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    für echtes Offline-Caching; der braucht eine zweite Datei und bricht damit die
    Einzeldatei-Regel — das ist bewusst zu entscheiden, nicht nebenbei.
 
-2. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten wären
-   akademische Verben und Verwechslungspaare aus Nils' eigenen Texten. Größter
-   inhaltlicher Hebel — die Regelseite ist durchgearbeitet.
+2. **Wortschatz weiter ausbauen.** 143 Karten sind ein guter Grundstock, aber der
+   Bestand ist stark auf wissenschaftliches Schreiben ausgerichtet. Was fehlt, sind
+   Wörter aus dem *mündlichen* Register — Nils unterrichtet und spricht in Praktika, und
+   die App ist auf Alltagssprache angelegt. Am ergiebigsten wären Verwechslungspaare aus
+   seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
+   Bedarf vorbei.
 
 3. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
