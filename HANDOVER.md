@@ -36,7 +36,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 143 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen); abfragbar 165 |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 82 |
+| Prüfmuster im Textcheck | 84 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Kartenbestand (`alleSchluessel()`) | 680 |
 | Dateigröße | ~627 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
@@ -63,6 +63,40 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Textcheck: erst das Netz, dann die Muster** (29.08.2026). `tests/suite.js` prüfte bis
+dahin nur die **harten** Muster gegen den eigenen korrekten Bestand. Die 23 `pruef`- und
+14 `form`-Muster liefen ohne Absicherung — wer dort ein Muster ergänzte, arbeitete ohne
+Netz.
+
+**Die angekündigte Ausweitung „auf alle weichen Muster“ wäre so falsch gewesen.** Beim
+Messen zeigte sich: Stilhinweise *sollen* auf korrektem Text ansprechen. „man muss“,
+Füllwörter und „Es gibt“ am Satzanfang sind einwandfreies Deutsch, über das die App
+trotzdem etwas sagen will. Sie einzubeziehen hieße, die App entgegen Grundsatz 3
+umzuschreiben. Die Prüfung deckt jetzt **hart, pruef und form** ab und lässt **stil**
+bewusst aus — mit dieser Begründung im Test, damit es niemand später „repariert“.
+
+Die drei verbliebenen Treffer sind **Lehrstücke**: Karten, die das Phänomen selbst
+behandeln und es enthalten müssen. Die Wortkarte zu *scheinbar/anscheinend* kommt ohne
+„scheinbar“ nicht aus. Sie stehen einzeln in `LEHRSTUECK`, je mit Grund; löst ein Eintrag
+nichts mehr aus, meldet der Lauf ihn als Karteileiche.
+
+**Zwei neue Prüfmuster** (82 → 84), beide an dem, was in dieser Sitzung dazukam:
+
+- **`y11`** (pruef) erkennt eine erweiterte Infinitivgruppe ohne Komma. Vorher fing nur
+  `y02` den Fall „um … zu“ — die eigentliche Änderung von 2024 war ungedeckt. Vor dem
+  Einbau **isoliert gegen zwölf Fälle geprüft**: trifft „Er hat versucht die Prüfung zu
+  bestehen“, bleibt still bei gesetztem Komma, bei bloßem *zu* + Infinitiv und bei den
+  Ausnahmen nach *brauchen* und *scheinen*.
+- **`x27`** (hart) erkennt „Reflektion“.
+
+Beide lösen auf dem eigenen korrekten Bestand nichts aus — geprüft durch das Netz von
+oben, das genau dafür zuerst gespannt wurde.
+
+**`normen.js` hat dabei mein eigenes Muster gefangen:** Der Hinweis von `y11` enthält
+„immer“ und „2024“. Beides ist belegt und eingetragen, statt die Prüfung zu umgehen. Die
+Registrierpflicht greift also auch gegen den, der sie geschrieben hat.
+
 
 **Die zehn ungeprüften Satzformen geschlossen** (29.08.2026). Acht von zehn sind jetzt
 maschinell abgedeckt, **163 → 171 von 173 Fassungen**. Die letzten zwei sind gar kein Fall
@@ -504,11 +538,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
-   Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes neue
-   Muster muss gegen sauberen Text geprüft werden — und `tests/suite.js` prüft nur die
-   harten Muster auf Fehlalarm, nicht die weichen. Wer ein `pruef`-Muster ergänzt, sollte
-   die Prüfung mit ausweiten.
+3. **Textcheck weiter schärfen — jetzt mit Netz.** Die Absicherung steht: Neue
+   `pruef`- und `form`-Muster fallen auf, wenn sie auf sauberem Text anschlagen. Damit
+   ist das Ergänzen weiterer Muster deutlich billiger geworden. Kandidaten wären
+   *seit/seid* (etwa „seit ihr“ statt „seid ihr“) und die n-Deklination
+   („mit dem Kollege“). Vorgehen wie bei `y11`: erst isoliert gegen erwünschte und
+   unerwünschte Fälle prüfen, dann einbauen. Stilmuster bleiben außen vor.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
