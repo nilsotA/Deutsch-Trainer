@@ -42,7 +42,8 @@ const ABS_OK = {
   "z-semikolon": "„ein Punkt ist nie falsch“ — zwei Hauptsätze dürfen immer als zwei Sätze stehen.",
   "z-schraeg": "Apostroph beim normalen Genitiv und im Plural: ausgeschlossen. Der zulässige Fall (Andrea’s) steht direkt darüber.",
   "k01": "um/ohne/statt/anstatt/außer/als: Komma war schon vor 2024 Pflicht und ist es geblieben.",
-  "t06": "„von 1990–1995“ mischt zwei Schreibweisen: Der Bis-Strich vertritt das Wort „bis“ (Duden). Steht „von“, muss „bis“ ausgeschrieben werden."
+  "t06": "„von 1990–1995“ mischt zwei Schreibweisen: Der Bis-Strich vertritt das Wort „bis“ (Duden). Steht „von“, muss „bis“ ausgeschrieben werden.",
+  "y11": "Erweiterte Infinitivgruppe: seit 1.7.2024 immer mit Komma — Regelwerk 2024, § 73. Beleg steht in komma-infinitiv."
 };
 
 const absFund = [];
@@ -125,7 +126,8 @@ const JAHR_OK = {
   "k09": "1996 — dieselbe Freistellung, Beleg steht in komma-hauptsatz.",
   "k20": "2024 — Datum der Änderung, Beleg steht in komma-infinitiv.",
   "k29": "1996 — Beleg steht in komma-partizip.",
-  "y02": "2024 — Hinweistext des Textchecks nennt das Inkrafttreten; Beleg steht in komma-infinitiv."
+  "y02": "2024 — Hinweistext des Textchecks nennt das Inkrafttreten; Beleg steht in komma-infinitiv.",
+  "y11": "2024 — dasselbe Datum im Hinweis des neuen Prüfmusters zur Infinitivgruppe."
 };
 
 const jahrFund = [];

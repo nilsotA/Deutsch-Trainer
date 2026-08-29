@@ -203,21 +203,52 @@ const ohneZitat = t => KONTRAST.test(t)
   : t;
 
 const korpus = [];
-ALL.forEach(i => { if (i.t !== "fill") korpus.push(strip(i.o[i.a])); });
-CASEREF.forEach(e => korpus.push(e.ex));
-WORDS.forEach(x => korpus.push(x.ex));
-const fehlalarm = [];
+ALL.forEach(i => { if (i.t !== "fill") korpus.push([i.id, strip(i.o[i.a])]); });
+CASEREF.forEach(e => korpus.push(["c:" + e.w, e.ex]));
+WORDS.forEach(x => korpus.push(["w:" + x.w, x.ex]));
+
+/* Geprüft werden hart, pruef und form — nicht stil.
+
+   Stilhinweise sollen auf korrektem Text ansprechen: „man muss“, Füllwörter, „Es gibt“
+   am Satzanfang sind einwandfreies Deutsch, über das die App trotzdem etwas sagen will.
+   Sie hier einzubeziehen hieße, die App entgegen Grundsatz 3 umzuschreiben — Stil ist
+   keine Regel. Die drei anderen Schärfegrade behaupten dagegen ein Problem, und eine
+   Meldung auf sauberem Text kostet dort Vertrauen.
+
+   Ausgenommen sind Lehrstücke: Karten, die das Phänomen selbst behandeln, müssen es
+   enthalten. Die Wortkarte zu scheinbar/anscheinend kommt ohne „scheinbar“ nicht aus.
+   Solche Paare stehen hier einzeln, damit ein neues nicht unbemerkt dazukommt. */
+const LEHRSTUECK = {
+  "f25|a06": "Die Aufgabe lehrt Beobachtung statt Bewertung und muss „unzuverlässig“ zeigen.",
+  "w:scheinbar / anscheinend|y04": "Die Karte erklärt genau dieses Wortpaar.",
+  "w:das Gleiche / dasselbe|y05": "Dieselbe Karte, dasselbe Muster."
+};
+const HARTE_SCHAERFE = ["hart", "pruef", "form"];
+
+const fehlalarm = [], benutzt = new Set();
 let gekuerzt = 0;
-korpus.forEach(roh => {
+korpus.forEach(([id, roh]) => {
   const t = ohneZitat(String(roh || ""));
   if (t !== roh) gekuerzt++;
   if (!t || t.length < 6) return;
-  const treffer = daten(w, 'analyse(' + JSON.stringify(t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
-  if (treffer.length) fehlalarm.push(treffer.join("/") + " bei „" + t.slice(0, 50) + "“");
+  const treffer = daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>({id:f.c.id,sev:f.c.sev}))")
+    .filter(f => HARTE_SCHAERFE.includes(f.sev));
+  treffer.forEach(f => {
+    const schluessel = id + "|" + f.id;
+    if (LEHRSTUECK[schluessel]) { benutzt.add(schluessel); return; }
+    fehlalarm.push(f.sev + " " + f.id + " bei " + id + ": „" + t.slice(0, 46) + "“");
+  });
 });
-P.ok("Keine harte Meldung auf korrektem Material", !fehlalarm.length,
-  fehlalarm.slice(0, 5).join(" · ") + (fehlalarm.length > 5 ? " …(" + fehlalarm.length + ")" : ""));
+P.ok("Keine Meldung auf korrektem Material (hart, pruef, form)", !fehlalarm.length,
+  fehlalarm.slice(0, 5).join(" · ") + (fehlalarm.length > 5 ? " …(" + fehlalarm.length + ")" : "")
+  + " — beheben oder als Lehrstück eintragen");
+
+const totesLehrstueck = Object.keys(LEHRSTUECK).filter(k => !benutzt.has(k));
+P.ok("Kein totes Lehrstück in der Liste", !totesLehrstueck.length,
+  totesLehrstueck.join(", ") + " löst nichts mehr aus — aus LEHRSTUECK streichen");
+
 if (gekuerzt) P.info(gekuerzt + " Einträge zitieren eine Falschform — dort nur der Text außerhalb der Zitate geprüft");
+P.info("Stilhinweise bleiben außen vor: Sie sollen auf korrektem Text ansprechen");
 
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");

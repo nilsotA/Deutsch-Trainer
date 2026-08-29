@@ -7367,6 +7367,16 @@ const CHECKS = [
  t:"das oder dass?",k:"Ersatzprobe: Lässt sich „dieses/welches“ einsetzen? Wenn nein, ist es die Konjunktion <b>dass</b>.",r:"recht-dass"},
 {id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(hat|ist|war|kann|will|soll|wird|macht|sagt)\b/g,
  t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relativ"},
+{id:"y11",sev:"pruef",
+ re:/\b(versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|gebeten|bereit|vorhat|vorhatte)\s+([^,.;:!?]{3,45}?)\s+zu\s+[a-zäöüß]+en\b/g,
+ t:"Komma vor der Infinitivgruppe?",
+ k:"Seit dem 1. Juli 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt — auch ohne Einleitewort: <b>Er hat versucht, pünktlich zu sein.</b> Erweitert heißt: zu + Infinitiv und mindestens ein weiteres Wort. Bei bloßem <i>zu</i> + Infinitiv („versucht zu kommen“) bleibt das Komma freigestellt.",
+ r:"komma-infinitiv"},
+
+{id:"x27",sev:"hart",re:/\bReflektion(en)?\b/g,
+ t:"Reflektion",
+ k:"Das Substantiv heißt <b>Reflexion</b>, mit x. Nur das Verb schreibt sich mit kt: <b>reflektieren</b>. Der Duden führt „Reflektion“ als Falschschreibung.",
+ r:"recht-klassiker"},
 
 /* ---------- STIL ---------- */
 {id:"s01",sev:"stil",re:/\b(eigentlich|irgendwie|quasi|sozusagen|letztendlich|schlussendlich|halt|durchaus|gewissermaßen|praktisch|im Grunde|an dieser Stelle|in diesem Kontext|im Rahmen dessen)\b/gi,
