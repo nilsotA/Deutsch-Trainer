@@ -1375,7 +1375,7 @@ const WORDS = [
 {w:"effektiv / effizient",p:"Paar",d:"effektiv = wirksam, erreicht das Ziel · effizient = wirtschaftlich, mit wenig Aufwand",ex:"Effektiv ist, das Richtige zu tun; effizient, es richtig zu tun.",s:"—"},
 {w:"tendenziell / tendenziös",p:"Paar",d:"tendenziell = der Tendenz nach · tendenziös = parteiisch gefärbt",ex:"Die Werte steigen tendenziell. — Der Bericht ist tendenziös.",s:"—"},
 {w:"sensibel / sensitiv",p:"Paar",d:"sensibel = empfindsam, feinfühlig · sensitiv = überempfindlich, extrem reizempfindlich — und fachsprachlich: fein reagierend",ex:"Ein sensibler Umgang; ein sensitives Testverfahren.",s:"—",t:"„sensitiv“ ist nicht auf Technik beschränkt; es gilt auch für Personen im Sinne von überempfindlich. Die Bedeutungen überschneiden sich stark."},
-{w:"kompliziert / komplex",p:"Paar",d:"kompliziert = schwer zu durchschauen, aber auflösbar · komplex = aus vielen wechselwirkenden Teilen bestehend",ex:"Eine Uhr ist kompliziert, ein Ökosystem ist komplex.",s:"—",t:"Das ist eine <b>fachliche</b> Unterscheidung aus der Systemtheorie, keine des Wörterbuchs — im Alltag werden beide Wörter weitgehend gleich gebraucht. In Fachtexten ist sie trotzdem nützlich."},
+{w:"kompliziert / komplex",p:"Paar",d:"kompliziert = schwer zu durchschauen, aber auflösbar · komplex = aus vielen wechselwirkenden Teilen bestehend",ex:"Eine Uhr ist kompliziert, ein Ökosystem ist komplex.",s:"—",t:"Das ist eine fachliche Unterscheidung aus der Systemtheorie, keine des Wörterbuchs — im Alltag werden beide Wörter weitgehend gleich gebraucht. In Fachtexten ist sie trotzdem nützlich."},
 {w:"scheuen / scheuern",p:"Paar",d:"scheuen = meiden, zurückschrecken · scheuern = reiben, wund reiben",ex:"Er scheut den Wettkampf. — Der Riemen scheuert.",s:"—"},
 {w:"anhand / anhand von",p:"Paar",d:"anhand + Genitiv („anhand der Daten“) · „anhand von“ nur, wenn der Genitiv nicht erkennbar ist",ex:"anhand der Ergebnisse — anhand von Beispielen",s:"—"},
 {w:"selbständig / selbstständig",p:"Paar",d:"Beide Schreibungen sind korrekt; „selbstständig“ ist die Duden-Empfehlung",ex:"Die Gruppe arbeitete selbstständig.",s:"eigenverantwortlich"},
@@ -1412,7 +1412,37 @@ const WORDS = [
 {w:"beipflichten",p:"Verb",d:"ausdrücklich zustimmen",ex:"Diesem Punkt ist beizupflichten.",s:"zustimmen, beistimmen"},
 {w:"einräumen",p:"Verb",d:"eine Schwäche der eigenen Position zugeben",ex:"Einzuräumen ist, dass die Stichprobe klein bleibt.",s:"zugestehen, konzedieren"},
 {w:"vorwegnehmen",p:"Verb",d:"etwas Späteres schon jetzt aussprechen",ex:"Um das Ergebnis vorwegzunehmen: Der Effekt blieb aus.",s:"antizipieren"},
-{w:"hinterfragen",p:"Verb",d:"kritisch auf die Voraussetzungen hin prüfen",ex:"Diese Selbstverständlichkeit gilt es zu hinterfragen.",s:"infrage stellen, prüfen"}
+{w:"hinterfragen",p:"Verb",d:"kritisch auf die Voraussetzungen hin prüfen",ex:"Diese Selbstverständlichkeit gilt es zu hinterfragen.",s:"infrage stellen, prüfen"},
+
+/* Ergänzt für das wissenschaftliche Schreiben: Verwechslungspaare, Verben des
+   Argumentierens und Begriffe aus der empirischen Arbeit. */
+{w:"die Reflexion / reflektieren",p:"Paar",d:"Das Substantiv schreibt sich mit x, das Verb mit kt",ex:"Die Reflexion des Praktikums fiel kurz aus, weil er zu wenig reflektiert hatte.",s:"—",t:"„Reflektion“ ist laut Duden eine Falschschreibung. Das Substantiv kommt über das französische réflexion vom lateinischen reflexio, das Verb von reflectere — daher der Unterschied."},
+{w:"Korrelation / Kausalität",p:"Paar",d:"Korrelation = zwei Größen verändern sich gemeinsam · Kausalität = die eine bewirkt die andere",ex:"Wer mehr trainiert, schläft besser — das ist eine Korrelation, noch keine Kausalität.",s:"—",t:"Aus einem Zusammenhang folgt keine Ursache. Der häufigste Fehlschluss in Forschungsberichten."},
+{w:"Hypothese / These",p:"Paar",d:"Hypothese = begründete Vermutung, die geprüft werden soll · These = Behauptung, die vertreten und belegt wird",ex:"Die Hypothese wurde am Datensatz geprüft; die These trägt die ganze Arbeit.",s:"—"},
+{w:"wieder / wider",p:"Paar",d:"wieder = noch einmal, erneut · wider = gegen",ex:"Er versuchte es wieder — wider alle Erwartung klappte es.",s:"—",t:"Merkhilfe: „wider“ ohne e steht gegen etwas — widersprechen, widerlegen, zuwider."},
+{w:"seit / seid",p:"Paar",d:"seit = Zeitangabe · seid = Form von „sein“ (ihr seid)",ex:"Seit dem Praktikum wisst ihr, wie anstrengend das ist — ihr seid trotzdem geblieben.",s:"—"},
+{w:"Effekt / Affekt",p:"Paar",d:"Effekt = Wirkung, Ergebnis · Affekt = heftige, kurz aufwallende Gemütsbewegung",ex:"Das Training zeigte einen deutlichen Effekt; die Reaktion auf die Niederlage war reiner Affekt.",s:"—"},
+{w:"Prävention / Intervention",p:"Paar",d:"Prävention = vorbeugen, bevor etwas eintritt · Intervention = eingreifen, wenn es eingetreten ist",ex:"Aufwärmen ist Prävention, die Behandlung der Zerrung ist Intervention.",s:"—"},
+{w:"quantitativ / qualitativ",p:"Paar",d:"quantitativ = auf Mengen und Zahlen bezogen · qualitativ = auf Beschaffenheit und Sinn bezogen",ex:"Die Fragebögen werteten wir quantitativ aus, die Interviews qualitativ.",s:"—",t:"„qualitativ“ allein sagt nichts über die Güte. „Qualitativ hochwertig“ ist verbreitet, aber „hochwertig“ genügt."},
+{w:"Methode / Methodik",p:"Paar",d:"Methode = das einzelne Verfahren · Methodik = die Gesamtheit der Verfahren und ihre Begründung",ex:"Das Interview ist die Methode; die Methodik erklärt, warum es gewählt wurde.",s:"—"},
+{w:"verorten",p:"Verb",d:"einer Position oder einem Zusammenhang zuordnen",ex:"Die Studie lässt sich in der Trainingswissenschaft verorten.",s:"einordnen, zuordnen"},
+{w:"erörtern",p:"Verb",d:"eine Frage von mehreren Seiten durchsprechen und abwägen",ex:"Im dritten Kapitel wird erörtert, ob Noten die Motivation fördern.",s:"abwägen, diskutieren"},
+{w:"darlegen",p:"Verb",d:"geordnet und nachvollziehbar auseinandersetzen",ex:"Er legt dar, wie die Gruppen zusammengestellt wurden.",s:"ausführen, erläutern"},
+{w:"herleiten",p:"Verb",d:"aus Vorhandenem schrittweise gewinnen",ex:"Die Fragestellung ist aus dem Forschungsstand hergeleitet.",s:"ableiten, entwickeln"},
+{w:"abgrenzen",p:"Verb",d:"deutlich machen, was gerade nicht gemeint ist",ex:"Der Begriff Belastung ist von Beanspruchung abzugrenzen.",s:"unterscheiden, trennen"},
+{w:"gegenüberstellen",p:"Verb",d:"zwei Dinge nebeneinanderlegen, damit die Unterschiede sichtbar werden",ex:"Beide Trainingspläne werden gegenübergestellt.",s:"vergleichen, kontrastieren"},
+{w:"veranschaulichen",p:"Verb",d:"mit Beispiel oder Bild greifbar machen",ex:"Ein Video veranschaulicht den Bewegungsablauf besser als jede Beschreibung.",s:"verdeutlichen, illustrieren"},
+{w:"gewichten",p:"Verb",d:"nach Bedeutung ordnen, statt alles gleich zu behandeln",ex:"Die Kriterien sind unterschiedlich zu gewichten.",s:"abstufen, priorisieren"},
+{w:"präzisieren",p:"Verb",d:"eine Aussage genauer fassen",ex:"Die Fragestellung wurde nach dem Vorgespräch präzisiert.",s:"schärfen, konkretisieren"},
+{w:"aufgreifen",p:"Verb",d:"einen früheren Gedanken wiederaufnehmen und weiterführen",ex:"Der Schluss greift die Eingangsfrage wieder auf.",s:"wiederaufnehmen, anknüpfen"},
+{w:"der Befund",p:"Subst.",d:"das Ergebnis einer Untersuchung, bevor es gedeutet wird",ex:"Der Befund war eindeutig, die Erklärung dafür nicht.",s:"Ergebnis, Resultat"},
+{w:"die Stichprobe",p:"Subst.",d:"der untersuchte Ausschnitt aus einer größeren Gruppe",ex:"Die Stichprobe umfasste 24 Schülerinnen und Schüler einer Jahrgangsstufe.",s:"Auswahl, Teilerhebung"},
+{w:"das Konstrukt",p:"Subst.",d:"eine gedachte Größe, die sich nicht unmittelbar messen lässt",ex:"Motivation ist ein Konstrukt; messbar sind nur ihre Anzeichen.",s:"Modellgröße, Begriffsbildung"},
+{w:"die Implikation",p:"Subst.",d:"das, was eine Aussage mitbedeutet, ohne es auszusprechen",ex:"Die Implikation dieser Forderung ist mehr Aufwand für die Lehrkraft.",s:"Folgerung, Mitbedeutung"},
+{w:"das Spannungsfeld",p:"Subst.",d:"der Bereich zwischen zwei Ansprüchen, die einander widersprechen",ex:"Sportunterricht steht im Spannungsfeld zwischen Leistung und Teilhabe.",s:"Widerstreit, Zwiespalt"},
+{w:"der Indikator",p:"Subst.",d:"ein beobachtbares Zeichen für etwas, das selbst nicht sichtbar ist",ex:"Die Herzfrequenz ist ein Indikator für die Belastung.",s:"Anzeichen, Kennwert"},
+{w:"die Genese",p:"Subst.",d:"die Entstehung und Entwicklung einer Sache",ex:"Die Genese des Konflikts reicht bis in die erste Woche zurück.",s:"Entstehung, Werdegang"},
+{w:"die Evidenz",p:"Subst.",d:"zwei Bedeutungen: unmittelbare Einsichtigkeit — und, aus dem Englischen übernommen, der empirische Beleg",ex:"Für diese Trainingsmethode gibt es bisher kaum Evidenz.",s:"Einsichtigkeit; Beleg, Nachweis",t:"Der Duden führt bildungssprachlich „das Evidentsein, unmittelbare Einsichtigkeit“ und daneben, aus Medizin und Pharmazie, den empirisch erbrachten Wirksamkeitsnachweis. Die zweite Bedeutung kam über das englische evidence und gilt manchen als Anglizismus; in der Wissenschaft ist sie samt „evidenzbasiert“ längst etabliert."}
 
 ];
 /* ============================================================

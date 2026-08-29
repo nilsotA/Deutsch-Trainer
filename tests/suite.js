@@ -53,6 +53,26 @@ KORREKTUR.forEach(t => {
 P.ok("Korrekturmarkierungen auffindbar (" + KORREKTUR.reduce((a, t) => a + t.errs.length, 0) + ")",
   fehlmark === 0 && dopmark === 0, fehlmark + " nicht gefunden / " + dopmark + " doppelt");
 
+/* Fehlerklasse: HTML in einem Feld, das bei der Ausgabe durch esc() geht.
+   Die Auszeichnung erscheint dann wörtlich auf dem Bildschirm — „<b>fachliche</b>“
+   statt fett. Kein Fehler, den ein Syntaxlauf sieht, und in der Wortliste stand er
+   unbemerkt drin. Regeltexte (r.b) und Satzkarten (x.b) sind ausgenommen: Die sind
+   absichtlich HTML und werden nicht escapet. */
+const ROH = /<\/?[a-z][a-z0-9]*(\s[^<>]*)?>/i;
+const escapt = [
+  ["Wortkarte", WORDS, ["w", "p", "d", "ex", "s", "t"], x => x.w],
+  ["Fallkarte", CASEREF, ["w", "t", "k", "ex", "n"], x => x.w],
+  ["Regeltitel", RA, ["t"], x => x.id],
+  ["Satzkarte", SATZ, ["t", "short"], x => x.id]
+];
+const roh = [];
+escapt.forEach(([art, liste, felder, id]) => {
+  (liste || []).forEach(x => felder.forEach(f => {
+    if (x && x[f] && ROH.test(String(x[f]))) roh.push(art + " " + id(x) + "." + f);
+  }));
+});
+P.ok("Keine HTML-Auszeichnung in Feldern, die escapet werden", !roh.length, roh.join(" · "));
+
 /* ---------- B · Formulierung der Aufgaben ---------- */
 P.titel("B · Formulierung");
 const POS = /\b(Fassung [ABC]\b|Option [ABC]\b|die (erste|zweite|dritte) (Fassung|Variante|Version|Option|Antwort))/i;
