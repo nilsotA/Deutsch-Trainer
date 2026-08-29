@@ -64,6 +64,60 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die acht `z-`Regeln durchgesehen** (29.08.2026). Damit sind alle 17 Regeln der
+Zeichensetzung geprüft. Die vier Verdachtsfälle aus der letzten Ideenliste haben sich
+alle bestätigt — und zwei davon waren ernster als gedacht.
+
+**`p20` verstieß gegen Grundsatz 2 (kein Ablenker darf richtig sein).**
+
+> „Was steht heute nach der Anrede im Brief?“ — Ablenker: *Ein Ausrufezeichen*, *Nichts*
+
+Beide sind nicht sicher falsch: Der Duden lässt das Ausrufezeichen weiterhin zu (es wirkt
+nur aus der Zeit gefallen), und in der Schweiz steht nach der Anredezeile gewöhnlich gar
+kein Zeichen. Zwei von drei Optionen waren also vertretbar. Die Aufgabe fragt jetzt nach
+der DIN 5008 für Geschäftsbriefe — dort ist das Komma eindeutig vorgesehen — und die
+Ablenker sind *Ausrufezeichen* und *Punkt*, wobei der Punkt in keiner Fassung richtig ist.
+`z-frage` und `komma-brief` sagen die Variante jetzt beide dazu, samt Schweizer Gebrauch.
+
+**`k17` markierte eine zulässige Fassung als falsch.**
+
+> „Er trug die neue, rote Trainingsjacke.“ — als falsch markiert
+
+Der Duden sagt aber ausdrücklich, dass die Schreibende in Zweifelsfällen *durch Setzen oder
+Weglassen verdeutlichen kann, was gemeint ist*. „neue rote Jacke“ ist genau so ein Fall:
+ohne Komma die neue unter den roten, mit Komma neu und rot. Die Aufgabe steht jetzt auf
+`das neue akademische Jahr` — ein fester Begriff, bei dem die Und-Probe eindeutig scheitert.
+`komma-adjektive` beschreibt den Auslegungsbereich jetzt und trägt dafür das ◆ Varianten.
+
+**Zwei Stellen waren Stil, die als Regel dastanden** (Grundsatz 3):
+
+- `z-auslassung`: „Die Auslassungspunkte sind ein Zeichen (…), nicht drei Punkte
+  hintereinander.“ Das amtliche Regelwerk spricht in § 99 selbst von **drei Punkten** und
+  regelt ihren Gebrauch, nicht ihre Kodierung. Dass … ein eigenes Zeichen ist, ist eine
+  typografische Empfehlung — richtig, aber keine Rechtschreibregel. Drei getippte Punkte
+  sind kein Fehler, nur die schlechtere Form. `p17` und das Prüfmuster nachgezogen.
+- `z-doppelpunkt`: „Häufiger Fehler: Doppelpunkt nach einem Wort, das die Aufzählung schon
+  einleitet.“ Eine Regel, die ihn dort verbietet, gibt es nicht — die Suche fand keine.
+  Steht jetzt als Stilhinweis da. `p06` fragt weiter „Was ist hier überflüssig?“, was schon
+  vorher die richtige Formulierung war.
+
+**Neuer Abschnitt E in `tests/normen.js`: Variantenregeln nennen eine Quelle.** Er gilt für
+den **ganzen Bestand**, nicht nur die Zeichensetzung. Begründung: Wenn die App ein
+◆ Varianten an eine Regel heftet, behauptet sie „hier gilt mehr als eine Form“ — die
+schärfste Aussage, die sie über eine Streitfrage machen kann. Geprüft wird genau die Menge,
+die die App selbst mit `hatVarianten()` auszeichnet.
+
+Dabei kam eine Altlast heraus: **Sieben von 25 Variantenregeln stehen ohne Quelle da** —
+`gram-kongruenz`, `gram-alswie`, `satz-perfekt`, `satz-sprechen`, `gram-relkasus`,
+`gram-genalltag`, `gram-praepdat`. Sie stehen in `VAR_OFFEN` als sichtbare Schuld. Die Liste
+**darf schrumpfen, aber nicht wachsen**: Eine neue Variantenregel ohne Beleg fällt auf, und
+wer eine der sieben belegt, muss sie austragen — sonst meldet der Lauf eine Karteileiche.
+Beide Richtungen sind gegen eingebaute Fehler geprüft.
+
+Das ist die naheliegendste nächste Arbeit: sieben Regeln, klar benannt, mit einem Prüflauf,
+der den Fortschritt selbst nachhält.
+
+
 **Kommaregeln auf die Fassung 2024 gebracht** (29.08.2026). Das amtliche Regelwerk gilt
 seit dem **1. Juli 2024** in neuer Fassung, und im Kapitel Zeichensetzung hat sich die
 Kommaregel bei Infinitivgruppen geändert. Die App stand noch auf dem alten Stand.
@@ -228,26 +282,13 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Belege für die Zeichensetzung — Teil zwei.** Die **neun Kommaregeln** sind
-   durch (siehe „Zuletzt geändert“), abgesichert durch `tests/normen.js`. Offen sind
-   die **acht `z-`Regeln**. Beim Durchlesen sind vier Stellen aufgefallen, die ich
-   *nicht* geprüft habe — sie sind Kandidaten, keine bestätigten Fehler:
+1. **Die sieben unbelegten Variantenregeln.** `tests/normen.js` führt sie in `VAR_OFFEN`:
+   `gram-kongruenz`, `gram-alswie`, `satz-perfekt`, `satz-sprechen`, `gram-relkasus`,
+   `gram-genalltag`, `gram-praepdat`. Jede behauptet gegenüber Nils, dass mehr als eine Form
+   gilt, ohne sagen zu können, woher. Vorgehen: belegen, Quelle in die Regel schreiben, aus
+   `VAR_OFFEN` austragen — der Lauf erzwingt den letzten Schritt. Die Zeichensetzung ist
+   damit durch: alle 17 Regeln sind geprüft.
 
-   - `z-auslassung`: „Die Auslassungspunkte sind ein Zeichen (…), nicht drei Punkte
-     hintereinander.“ Typografisch stimmt das, aber das Regelwerk spricht von drei
-     Punkten. Die Aussage ist womöglich zu scharf.
-   - `z-doppelpunkt`: „Häufiger Fehler: Doppelpunkt nach einem Wort, das die Aufzählung
-     schon einleitet („bestehend aus: …“).“ Das ist vermutlich eine Stilempfehlung, kein
-     Fehler — dann verstößt die Formulierung gegen Grundsatz 3.
-   - `z-frage`: Ausrufezeichen nach der Briefanrede sei „veraltet“. Das Regelwerk lässt
-     es zu; „unüblich“ wäre vermutlich richtiger als „veraltet“.
-   - `komma-adjektive`: Die Und-Probe steht als eindeutiger Test da („die neue, rote
-     Trainingsjacke“ → Komma falsch). In Grenzfällen ist die Gleichrangigkeit aber
-     Auslegungssache. Prüfen, ob das ein `◆ Varianten`-Fall ist.
-
-   Vorgehen wie gehabt: erst belegen, dann Regel, Übung, Fallkarte und Textcheck
-   angleichen, dann „Stand der Prüfung“ nachziehen — und die Fundstelle in
-   `tests/normen.js` eintragen.
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.

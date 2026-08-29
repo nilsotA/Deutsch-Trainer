@@ -711,9 +711,9 @@ const EX_A = [
  e:"Gleichrangige Adjektive bekommen ein Komma. <b>Probe:</b> Lässt sich „und“ einsetzen („lang und anstrengend“), ist ein Komma richtig.",r:"komma-adjektive"},
 
 {id:"k17",c:"komma",q:"Komma zwischen den beiden Adjektiven?",o:[
- "Er trug die neue rote Trainingsjacke.",
- "Er trug die neue, rote Trainingsjacke."],a:0,
- e:"„rote Trainingsjacke“ bildet eine Einheit, „neu“ bezieht sich auf diese Einheit. „Die neue und rote Jacke“ klingt schief → kein Komma.",r:"komma-adjektive"},
+ "Im Oktober beginnt das neue akademische Jahr.",
+ "Im Oktober beginnt das neue, akademische Jahr."],a:0,
+ e:"„akademisches Jahr“ ist ein fester Begriff, „neu“ bezieht sich auf diese Einheit. Die Und-Probe scheitert: „neu und akademisch“ ergibt keinen Sinn → kein Komma. Vorsicht bei lockereren Paaren wie „neue rote Jacke“ — dort sind beide Fassungen richtig, sie sagen nur Verschiedenes.",r:"komma-adjektive"},
 
 {id:"k18",c:"komma",q:"Wie viele Kommas fehlen? „Als er ankam war die Halle schon voll und der Trainer wartete bereits.“",o:[
  "Eines — nach „ankam“","Zwei","Keines"],a:0,
@@ -1490,7 +1490,12 @@ der Gesellschaft für deutsche Sprache.</p>`},
 <p>Gleichrangige Adjektive bekommen ein Komma, nicht gleichrangige nicht.</p>
 <p><b>Und-Probe:</b> Lässt sich zwischen den Adjektiven „und“ einsetzen, ohne dass der Satz schief klingt, gehört ein Komma hin.</p>
 <div class="ex">ein langer<span class="ok">,</span> anstrengender Lauf → „lang und anstrengend“ ✓<br>
-die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ klingt falsch, weil „rote Jacke“ eine Einheit bildet</div>`},
+das neue<span class="nope">,</span> akademische Jahr → „neu und akademisch“ ergibt keinen Sinn, weil „akademisches Jahr“ ein fester Begriff ist</div>
+<p><b>Wo die Probe nicht entscheidet.</b> Bei festen Verbindungen wie <i>akademisches Jahr</i> oder <i>französischer Rotwein</i> ist der Fall klar. Dazwischen liegt ein breiter Bereich, in dem beides geht — und das Komma ist dort keine Rechtschreibfrage, sondern deine Aussage:</p>
+<div class="ex">die neue rote Trainingsjacke → die neue unter den roten<br>
+die neue<span class="ok">,</span> rote Trainingsjacke → sie ist neu und sie ist rot</div>
+<p>Beides ist zulässig. Wer das Komma setzt, zählt auf; wer es weglässt, behandelt <i>rote Trainingsjacke</i> als Einheit.</p>
+<p class="tiny muted">Belegt: Duden, Sprachratgeber „Komma zwischen Adjektiven“ — bei gleichrangigen Adjektiven mit aufzählendem Charakter ist das Komma Pflicht; in Zweifelsfällen kann die Schreibende durch Setzen oder Weglassen verdeutlichen, was gemeint ist.</p>`},
 
 {id:"komma-partizip",c:"komma",t:"Partizipgruppen",b:`
 <p>Seit der Rechtschreibreform von 1996 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b>:</p>
@@ -1510,6 +1515,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ kl
 <span class="ex">Sehr geehrte Frau Weber<span class="ok">,</span><br>vielen Dank für Ihre Rückmeldung.</span></li>
 <li>Nach der Grußformel steht <b>kein</b> Satzzeichen:<br>
 <span class="ex">Mit freundlichen Grüßen<span class="nope">,</span><br>Nils Otten</span></li>
+<li>Das Komma ist die empfohlene Form, nicht die einzige: Der Duden lässt nach der Anrede weiterhin ein <b>Ausrufezeichen</b> zu („Sehr geehrte Damen und Herren!“). Es wirkt heute aus der Zeit gefallen, und die DIN 5008 sieht für Geschäftsbriefe das Komma vor. In der Schweiz steht nach der Anredezeile oft <b>gar kein Zeichen</b>. Nach dem Ausrufezeichen geht es übrigens <b>groß</b> weiter.</li>
 <li>Zwischen Ort und Datum steht ein Komma: <span class="ex">Köln<span class="ok">,</span> den 12. Mai 2026</span></li>
 <li>Mehrteilige Datumsangabe im Satz — schließendes Komma möglich:<br>
 <span class="ex">Am Montag<span class="ok">,</span> dem 12. Mai<span class="ok">,</span> beginnt der Kurs.</span></li>
@@ -4572,7 +4578,7 @@ const RULES_ZEICHEN = [
 Folgt eine <b>Aufzählung oder Wortgruppe</b> → <span class="ok">klein</span><br>
 „Mitzubringen sind: <b>S</b>chuhe, Handtuch …“ — hier groß, weil Substantive; sonst klein:<br>
 „Die Lage ist klar: <b>k</b>eine Chance.“</div>
-<p><b>Häufiger Fehler:</b> Doppelpunkt nach einem Wort, das die Aufzählung schon einleitet — „bestehend aus: …“ oder „nämlich: …“ braucht keinen.</p>`},
+<p><b>Stilhinweis:</b> Nach einem Wort, das die Aufzählung schon einleitet, trägt der Doppelpunkt nichts bei — „bestehend aus: …“ oder „nämlich: …“ kommen ohne ihn aus. Eine Regel, die ihn dort verbietet, gibt es nicht; es liest sich nur glatter ohne.</p>`},
 
 {id:"z-gedankenstrich",c:"zeichen",t:"Gedankenstrich und Bindestrich",b:`
 <p>Zwei verschiedene Zeichen, die ständig verwechselt werden.</p>
@@ -4625,7 +4631,8 @@ Gehört das Fragezeichen zum Rahmensatz, steht es außen: <span class="ex">Hast 
 <p><b>Stilhinweis:</b> Was in Klammern steht, wird beim Lesen übersprungen. Wichtiges gehört nicht in Klammern.</p>`},
 
 {id:"z-auslassung",c:"zeichen",t:"Auslassungspunkte",b:`
-<p>Die Auslassungspunkte sind <b>ein Zeichen</b> (…), nicht drei Punkte hintereinander.</p>
+<p>Mit <b>drei Punkten</b> zeigst du an, dass in einem Wort, Satz oder Text etwas ausgelassen ist. So steht es im Regelwerk — das Zeichen heißt deshalb <i>Auslassungspunkte</i>.</p>
+<p><b>Typografisch</b> nimmst du dafür besser das eigene Zeichen … statt drei getippter Punkte. Es hält den richtigen Abstand und kann nicht am Zeilenende auseinandergerissen werden. Drei einzelne Punkte sind kein Rechtschreibfehler, nur die schlechtere Form.</p>
 <ul>
 <li><b>Ganzes Wort fehlt</b> → Leerzeichen davor: <span class="ex">Er wollte noch sagen, dass …</span></li>
 <li><b>Wortteil fehlt</b> → direkt angeschlossen: <span class="ex">Verdammt noch m…!</span></li>
@@ -4634,7 +4641,8 @@ Gehört das Fragezeichen zum Rahmensatz, steht es außen: <span class="ex">Hast 
 <p><b>Kein vierter Punkt:</b> Stehen die Auslassungspunkte am Satzende, ersetzen sie den Schlusspunkt.</p>
 <div class="ex"><span class="ok">Er zögerte und sagte dann …</span> · <span class="nope">… .</span></div>
 <p><b>Aber:</b> Frage- und Ausrufezeichen bleiben erhalten („Und dann …?“). Und stehen die Auslassungspunkte in einer Klammer, entfällt der Schlusspunkt des Satzes nicht.</p>
-<p><b>Eingabe:</b> Mac <code>Alt + .</code> · Windows <code>Alt + 0133</code>. Die meisten Programme wandeln drei Punkte automatisch um.</p>`},
+<p><b>Eingabe:</b> Mac <code>Alt + .</code> · Windows <code>Alt + 0133</code>. Die meisten Programme wandeln drei Punkte automatisch um.</p>
+<p class="tiny muted">Belegt: Das amtliche Regelwerk spricht in § 99 von drei Punkten und regelt ihren Gebrauch, nicht ihre Kodierung. Dass … ein eigenes Zeichen ist, ist eine typografische Empfehlung (Duden, Typografie-Fachliteratur) — keine Rechtschreibregel.</p>`},
 
 {id:"z-frage",c:"zeichen",t:"Frage- und Ausrufezeichen",b:`
 <p><b>Nach einer indirekten Frage steht kein Fragezeichen</b> — das ist der häufigste Fehler:</p>
@@ -4642,7 +4650,7 @@ Gehört das Fragezeichen zum Rahmensatz, steht es außen: <span class="ex">Hast 
 <p>Das Fragezeichen steht nur bei der direkten Frage: <span class="ex">Wann kommst du?</span></p>
 <p><b>Mehrere Fragen hintereinander</b> können einzeln oder gemeinsam abgeschlossen werden:</p>
 <div class="ex">Wer kommt? Wann? Wohin?<br>Wer, wann und wohin?</div>
-<p><b>Ausrufezeichen sparsam.</b> Nach der Anrede in Briefen ist es veraltet — dort steht ein Komma. In Fachtexten und Mails wirkt es schnell schrill; eine Häufung (!!!) fällt negativ auf.</p>
+<p><b>Ausrufezeichen sparsam.</b> Nach der Anrede in Briefen ist es zulässig, wirkt aber aus der Zeit gefallen; die DIN 5008 sieht für Geschäftsbriefe das Komma vor. In Fachtexten und Mails wirkt es schnell schrill; eine Häufung (!!!) fällt negativ auf.</p>
 <p><b>Kombinationen</b> wie <code>?!</code> sind in informellen Texten üblich, in formellen nicht.</p>`},
 
 {id:"z-schraeg",c:"zeichen",t:"Schrägstrich, Apostroph, Sonderzeichen",b:`
@@ -4768,7 +4776,7 @@ const EX_E = [
 {id:"p06",c:"zeichen",q:"Was ist hier überflüssig? „Der Kurs besteht aus: drei Modulen.“",o:[
  "Der Doppelpunkt",
  "Nichts","Das Komma"],a:0,
- e:"Ein Doppelpunkt nach einer Präposition oder einem einleitenden Wort ist unnötig. Entweder „Der Kurs besteht aus drei Modulen“ oder „Der Kurs besteht aus folgenden Teilen: …“",r:"z-doppelpunkt"},
+ e:"Nach einer Präposition trägt der Doppelpunkt nichts bei. Entweder „Der Kurs besteht aus drei Modulen“ oder „Der Kurs besteht aus folgenden Teilen: …“ — beides liest sich besser. Verboten ist der Doppelpunkt dort nicht, er ist nur überflüssig.",r:"z-doppelpunkt"},
 
 {id:"p07",c:"zeichen",q:"Welches Zeichen steht bei „1990–1995“?",o:[
  "Der Gedankenstrich (Halbgeviertstrich), ohne Leerzeichen",
@@ -4824,7 +4832,7 @@ const EX_E = [
  e:"Steht die Klammer <b>innerhalb</b> des Satzes, kommt der Punkt danach. Nur wenn ein ganzer Satz eingeklammert ist, steht er innen: „(Der Platz ist gesperrt.)“",r:"z-klammern"},
 
 {id:"p17",c:"zeichen",q:"Wie viele Punkte hat das Auslassungszeichen?",o:["Genau drei","Beliebig viele","Vier am Satzende"],a:0,
- e:"Die Auslassungspunkte (…) sind <b>ein Zeichen</b>. Am Satzende ersetzen sie den Schlusspunkt — ein vierter Punkt ist falsch.",r:"z-auslassung"},
+ e:"Es sind <b>genau drei</b> Punkte — so steht es im Regelwerk. Am Satzende ersetzen sie den Schlusspunkt, ein vierter Punkt ist falsch. Ob du das eigene Zeichen … oder drei getippte Punkte nimmst, ist Typografie, keine Rechtschreibung.",r:"z-auslassung"},
 
 {id:"p18",c:"zeichen",q:"Wie kennzeichnet man eine Auslassung im Zitat?",o:[
  "Mit eckigen Klammern: […]",
@@ -4837,8 +4845,8 @@ const EX_E = [
  "Er fragte, wann sie kommt?"],a:0,
  e:"Nach einer <b>indirekten Frage</b> steht ein Punkt. Das Fragezeichen gehört nur zur direkten Frage: „Wann kommst du?“",r:"z-frage"},
 
-{id:"p20",c:"zeichen",q:"Was steht heute nach der Anrede im Brief?",o:["Ein Komma","Ein Ausrufezeichen","Nichts"],a:0,
- e:"Das Ausrufezeichen nach der Anrede ist veraltet. Heute steht ein <b>Komma</b>, danach geht es klein weiter.",r:"z-frage"},
+{id:"p20",c:"zeichen",q:"Was sieht die DIN 5008 für Geschäftsbriefe nach der Anrede vor?",o:["Ein Komma","Ein Ausrufezeichen","Einen Punkt"],a:0,
+ e:"Die DIN 5008 sieht das <b>Komma</b> vor; danach geht es klein weiter. Das Ausrufezeichen ist laut Duden weiterhin zulässig, wirkt aber deutlich aus der Zeit gefallen — in der Schweiz steht nach der Anredezeile oft gar kein Zeichen. Ein Punkt ist an dieser Stelle in keiner Fassung richtig.",r:"z-frage"},
 
 {id:"p21",c:"zeichen",q:"Wie schreibt man den Schrägstrich bei Wortgruppen?",o:[
  "Mit Leerzeichen: „Institut A / Institut B“",
@@ -6142,7 +6150,7 @@ function drawRules(){
       "<li><b>Stil ist keine Regel.</b> Hinweise zu Füllwörtern, Nominalstil oder Tonfall sind Empfehlungen; sie stehen in den Bereichen Stil und Formulierung, nicht in der Rechtschreibung.</li>"+
       "<li>Was <b>umgangssprachlich verbreitet, aber nicht standardsprachlich</b> ist, wird ausdrücklich so benannt — etwa „wegen dem Wetter“ oder „weil ich hab keine Zeit“.</li>"+
       "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung: Das amtliche Regelwerk gilt seit dem 1. Juli 2024 in neuer Fassung, und bei den Infinitivgruppen hat sich die Kommaregel geändert — eine erweiterte Infinitivgruppe wird jetzt immer abgetrennt. Diese Regel und die dazugehörige Übung standen bis dahin auf dem alten Stand und sind berichtigt. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
-      "<li><b>Zusätzlich maschinell geprüft:</b> alle zehn Tabellen gegen die Standardparadigmen der Deklination und des Konjunktivs II, alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm. In der Zeichensetzung muss außerdem jede absolute Aussage, jede Kann-Regel und jede Jahreszahl einzeln eingetragen und belegt sein; ein eigener Prüflauf hält das nach und vergleicht die Regeln mit dem Spickzettel.</li>"+
+      "<li><b>Zusätzlich maschinell geprüft:</b> alle zehn Tabellen gegen die Standardparadigmen der Deklination und des Konjunktivs II, alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm. In der Zeichensetzung muss außerdem jede absolute Aussage, jede Kann-Regel und jede Jahreszahl einzeln eingetragen und belegt sein; ein eigener Prüflauf hält das nach und vergleicht die Regeln mit dem Spickzettel. Jede Regel, die hier ein ◆ Varianten trägt, muss eine Quelle nennen — sieben Regeln aus den Bereichen Grammatik und Satzbau tun das noch nicht und sind als offen vermerkt.</li>"+
       "<li><b>Widersprüche:</b> Eine laufende Prüfung meldet, wenn dasselbe Beispiel an einer Stelle als Fehler und an anderer als regionale Variante geführt wird. Wo Duden und amtliches Regelwerk mehrere Formen zulassen, steht das ausdrücklich da — auch dann, wenn eine Form empfohlen ist.</li>"+
     "</ul></div>";
   $("#ruleHost").innerHTML = (q||ruleFilter||ruleVar ? "" : hinweis) + (hits.length
@@ -7336,7 +7344,7 @@ const CHECKS_Z = [
 {id:"t06",sev:"hart",re:/\bvon\s+\d{1,4}\s*[–—-]\s*\d{1,4}/g,t:"„von“ mit Bis-Strich",
  k:"Entweder <b>von … bis …</b> oder <b>1990–1995</b> — nie gemischt.",r:"z-gedankenstrich"},
 {id:"t08",sev:"pruef",re:/\.\.\./g,t:"Drei Punkte statt Auslassungszeichen",
- k:"Die Auslassungspunkte sind <b>ein Zeichen</b> (…). Mac: Alt + Punkt, Windows: Alt + 0133.",r:"z-auslassung"},
+ k:"Für die Auslassungspunkte gibt es ein eigenes Zeichen: … Es hält den Abstand und bricht am Zeilenende nicht auseinander. Drei getippte Punkte sind kein Fehler, nur die schlechtere Form. Mac: Alt + Punkt, Windows: Alt + 0133.",r:"z-auslassung"},
 {id:"t09",sev:"pruef",re:/(?<![\d-])(?!\d{4}-\d{2}-\d{2})\d{1,4}\s*-\s*\d{1,4}(?![\d-])/g,t:"Bindestrich als Bis-Strich",
  k:"Bereichsangaben bekommen den langen Strich ohne Leerzeichen: <b>8–10 Uhr</b>, <b>1990–1995</b>.",r:"z-gedankenstrich"},
 {id:"t10",sev:"pruef",re:/[a-zäöüß]\s-\s[a-zäöüß]/g,t:"Bindestrich als Gedankenstrich",

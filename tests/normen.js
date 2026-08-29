@@ -179,4 +179,37 @@ const HTML = require("./setup").HTML;
 P.ok("Alte Einteilung „einfache Infinitivgruppe ohne Einleitewort“ ist raus",
   !/einfache[nr]? Infinitivgruppen? ohne Einleitewort/i.test(HTML));
 
+/* ---------- E · Variantenregeln nennen eine Quelle ---------- */
+P.titel("E · Varianten");
+
+/* Dieser Abschnitt gilt für den ganzen Bestand, nicht nur die Zeichensetzung.
+   Wenn die App dem Nutzer ein ◆ Varianten an die Regel heftet, behauptet sie: Hier gilt
+   mehr als eine Form. Das ist die schärfste Aussage, die sie über eine Streitfrage machen
+   kann — sie sollte sagen können, woher sie das weiß. Die App entscheidet über das
+   Abzeichen selbst, mit ihrer eigenen Wortliste; hier wird genau diese Menge geprüft. */
+const varianten = daten(w, "RULES_ALL.filter(hatVarianten).map(r=>r.id)");
+
+/* Altlast: Diese Variantenregeln standen schon ohne Quelle da, als der Lauf entstand.
+   Sie sind nicht geprüft — die Liste ist eine Schuld, kein Freibrief. Sie darf schrumpfen,
+   aber nicht wachsen: Eine neue Variantenregel ohne Beleg fällt unten auf. */
+const VAR_OFFEN = [
+  "gram-kongruenz", "gram-alswie", "satz-perfekt", "satz-sprechen",
+  "gram-relkasus", "gram-genalltag", "gram-praepdat"
+];
+
+const varOhne = varianten.filter(id => {
+  const r = RA.find(x => x.id === id);
+  return r && !BELEG.test(strip(r.b));
+});
+const varNeu = varOhne.filter(id => !VAR_OFFEN.includes(id));
+P.ok("Keine neue Variantenregel ohne Quelle (" + varianten.length + " mit ◆ Varianten)",
+  !varNeu.length, varNeu.join(",") + " — belegen oder in VAR_OFFEN eintragen");
+
+const varErledigt = VAR_OFFEN.filter(id => !varOhne.includes(id));
+P.ok("VAR_OFFEN enthält nur noch offene Fälle", !varErledigt.length,
+  varErledigt.join(",") + " ist belegt oder keine Variantenregel mehr — aus VAR_OFFEN streichen");
+
+P.info("noch ohne Quelle: " + varOhne.length + " von " + varianten.length
+  + (varOhne.length ? " (" + varOhne.join(", ") + ")" : ""));
+
 P.abschluss();
