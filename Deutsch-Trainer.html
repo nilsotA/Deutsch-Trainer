@@ -2,10 +2,18 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Persönlicher Deutsch-Trainer: Rechtschreibung, Zeichensetzung, Kasus, Satzbau, Stil und Formulierung.">
 <title>Deutsch-Trainer</title>
+<!-- Auf dem Handy zum Startbildschirm hinzufügbar. Die Farbe wird beim
+     Themenwechsel nachgezogen, siehe themeFarbe(). -->
+<meta name="theme-color" content="#f7f5f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Deutsch">
+<link rel="apple-touch-icon" href="data:image/png;base64,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gAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAAAgAPwQAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAACAAAQAACAAAAABAAAkNT+H2y5Z5n6+RsUAAAAAElFTkSuQmCC">
 <style>
 :root{
   --bg:#f7f5f1; --bg2:#fffefb; --card:#ffffff; --ink:#1c1f1d; --ink2:#5a615c;
@@ -42,10 +50,14 @@ h1,h2,h3,h4{margin:0;line-height:1.25;font-weight:650;letter-spacing:-.01em}
 p{margin:0 0 .8em}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 input,textarea,select{font:inherit;color:inherit}
-.wrap{max-width:820px;margin:0 auto;padding:0 18px 80px}
+.wrap{max-width:820px;margin:0 auto;
+  /* In Querlage schneidet die Notch seitlich ins Bild. */
+  padding:0 calc(18px + env(safe-area-inset-right)) 80px calc(18px + env(safe-area-inset-left))}
 
 /* ---------- Kopf ---------- */
-.head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);
+  /* Im installierten Zustand liegt die Statusleiste über der Seite. */
+  padding-top:env(safe-area-inset-top)}
 .head-in{max-width:820px;margin:0 auto;padding:14px 18px 0;display:flex;align-items:center;gap:14px}
 .brand{display:flex;align-items:baseline;gap:9px;margin-right:auto;min-width:0}
 .brand b{font-size:19px;font-weight:700;letter-spacing:-.02em}
@@ -439,6 +451,12 @@ table.ch-t.sm td{padding-right:14px}
    ============================================================ */
 @media(hover:none){
   button,.chip,.tab,.sub,.opt,.cp,.regbtn,.tok,.crit li,.acc>button{touch-action:manipulation}
+  /* Beim Gehen wird oft ungenau getippt und dabei gewischt. Drei Ärgernisse:
+     das Pull-to-Refresh mitten in der Runde, der graue Blitz auf jedem Tipp und
+     die Textauswahl mit Lupe, wenn der Finger auf einer Antwort liegen bleibt. */
+  html,body{overscroll-behavior-y:contain}
+  button,.chip,.tab,.sub,.opt,.cp,.regbtn,.tok,.acc>button{-webkit-tap-highlight-color:transparent}
+  button,.chip,.tab,.sub,.opt,.regbtn,.acc>button{-webkit-user-select:none;user-select:none}
   .chip{padding:12px 16px;font-size:14px}
   .btn.sm{padding:12px 17px;font-size:14px}
   .iconbtn{width:44px;height:44px;font-size:17px}
@@ -458,7 +476,7 @@ table.ch-t.sm td{padding-right:14px}
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%}
   body{overflow-x:hidden}
-  .wrap{padding:0 13px calc(70px + env(safe-area-inset-bottom))}
+  .wrap{padding:0 calc(13px + env(safe-area-inset-right)) calc(70px + env(safe-area-inset-bottom)) calc(13px + env(safe-area-inset-left))}
   .head-in{padding:11px 13px 0;gap:9px}
   .tabs{padding:8px 13px 0}
   .brand b{font-size:17px}
@@ -507,7 +525,7 @@ table.ch-t.sm td{padding-right:14px}
 
   /* Suchfenster als Vollbild */
   .srch{margin:0;border-radius:0;height:100dvh;max-width:none;display:flex;flex-direction:column}
-  .srch input{padding:16px 16px calc(16px + env(safe-area-inset-top))}
+  .srch input{padding:calc(16px + env(safe-area-inset-top)) 16px 16px}
   .srch-out{flex:1;max-height:none}
   .sres{padding:14px 16px}
   .sres-k{width:70px;font-size:10px}
@@ -7927,11 +7945,53 @@ function renderAll(){
   renderHeute(); renderSchreiben(); renderRegelnNav(); updHud();
 }
 
+/* ---------- Web-App-Auszeichnung ----------
+   Die App ist eine einzelne Datei ohne Server. Ein Manifest als eigene Datei würde das
+   brechen, und ein data:-Manifest kann start_url nicht auflösen. Deshalb wird es zur
+   Laufzeit als Blob gebaut: Dessen URL hat denselben Ursprung wie die Seite, also lässt
+   sich start_url relativ auflösen. Vom Dateisystem aus (file:) ist nichts installierbar,
+   dort passiert bewusst nichts. Die Auszeichnung ist Beiwerk — sie darf die App unter
+   keinen Umständen aufhalten, deshalb steht alles in einem try. */
+const APP_FARBE = {light:"#f7f5f1", dark:"#14171a"};
+function themeFarbe(){
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute("content", APP_FARBE[S.theme === "dark" ? "dark" : "light"]);
+}
+function webApp(){
+  try{
+    const icon = document.querySelector('link[rel="apple-touch-icon"]');
+    if(!icon) return;
+    /* Das Symbol für den Browser-Tab aus demselben Bild, statt es zweimal einzubetten. */
+    if(!document.querySelector('link[rel="icon"]')){
+      const f = document.createElement("link");
+      f.rel = "icon"; f.type = "image/png"; f.href = icon.href;
+      document.head.appendChild(f);
+    }
+    if(!/^https?:$/.test(location.protocol)) return;
+    const manifest = {
+      name:"Deutsch-Trainer", short_name:"Deutsch", lang:"de", dir:"ltr",
+      description:"Persönlicher Deutsch-Trainer: Rechtschreibung, Zeichensetzung, Kasus, Satzbau, Stil.",
+      start_url:location.pathname, scope:location.pathname,
+      display:"standalone", orientation:"portrait-primary",
+      background_color:APP_FARBE.light,
+      theme_color:APP_FARBE[S.theme === "dark" ? "dark" : "light"],
+      icons:[{src:icon.href, sizes:"512x512", type:"image/png", purpose:"any maskable"}]
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:"application/manifest+json"}));
+    const l = document.createElement("link");
+    l.rel = "manifest"; l.href = url;
+    document.head.appendChild(l);
+  }catch(e){}
+}
+
 /* Start */
 document.documentElement.setAttribute("data-theme", S.theme || "light");
+themeFarbe();
+webApp();
 $("#themeBtn").onclick = ()=>{
   S.theme = (S.theme === "dark") ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", S.theme);
+  themeFarbe();
   save();
 };
 $("#dateLbl").textContent = new Date().toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});

@@ -31,6 +31,16 @@ function boot(stand, optionen = {}) {
       w.confirm = () => true;
       w.HTMLElement.prototype.scrollIntoView = () => {};
       w.HTMLAnchorElement.prototype.click = function () {};
+      /* Blobs mitschreiben, damit Prüfläufe hineinsehen können — der Export und
+         das Web-App-Manifest entstehen beide als Blob. */
+      const EchtBlob = w.Blob;
+      w.Blob = function (teile, opt) {
+        (w.__blobs = w.__blobs || []).push({
+          typ: (opt || {}).type || "",
+          text: (teile || []).map(String).join("")
+        });
+        return new EchtBlob(teile, opt);
+      };
       w.URL.createObjectURL = () => "blob:x";
       w.URL.revokeObjectURL = () => {};
       w.navigator.vibrate = () => true;
