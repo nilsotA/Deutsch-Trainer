@@ -64,6 +64,40 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Alle 84 Prüfmuster sind als wirksam belegt** (29.08.2026). Nach dem `x18`-Befund war
+offen, ob die übrigen Muster überhaupt greifen. Sie tun es größtenteils — und das ließ
+sich ohne Handarbeit zeigen: **Die Ablenker der Aufgaben und die Fehlersuchtexte sind
+bewusst fehlerhaftes Deutsch.** 60 der 84 Muster belegen sich daran von selbst, ohne
+Pflege.
+
+Für die übrigen 19 habe ich je einen Satz geschrieben und vor dem Einbau getestet.
+18 griffen sofort. Einer nicht:
+
+```
+y10 alt:  /,\s*wo\s+[a-zäöüß]+\s+(hat|ist|war|kann|…)\b/g
+still bei „Der Trainer, wo das gesagt hat, ist neu.“
+```
+
+Zwischen „wo“ und dem gebeugten Verb war nur **ein** Wort erlaubt; die häufigste Form ist
+aber das Perfekt. Das Bemerkenswerte: **Genau dieser Satz steht als Beispiel in der Regel
+`gram-relkasus`.** Das Muster fand die eigene Musterformulierung der App nicht. Jetzt ist
+ein Partizip dazwischen erlaubt — „wo wir trainieren“ und „wo die Halle steht“ bleiben
+weiter still.
+
+**Neue Prüfung:** Jedes Prüfmuster muss irgendwo etwas finden — im eigenen falschen
+Material oder im Handkorpus. Die Hauptquelle pflegt sich selbst mit; nur was dort nicht
+vorkommt, braucht einen Satz von Hand. Der Handkorpus ist von 12 auf **31 Sätze**
+gewachsen.
+
+Damit stehen im Textcheck jetzt drei Prüfungen nebeneinander, die sich ergänzen:
+
+| Prüfung | Frage | Quelle |
+|---|---|---|
+| Fehlalarm eigener Bestand | Meldet ein Muster auf eigenem korrektem Text? | 653 Einträge |
+| Fehlalarm fremder Text | Meldet es auf Deutsch, das die App nie sah? | 40 Sätze von Hand |
+| Wirksamkeit | Findet es überhaupt irgendwo etwas? | Ablenker + Fehlersuchtexte + 31 Sätze |
+
+
 **Ein hartes Muster stand genau verkehrt herum** (29.08.2026). Die zwei Kandidaten aus
 meiner eigenen Ideenliste — *seit/seid* und n-Deklination — gab es längst (`x17`, `x18`,
 `x23`). Die Notiz war geraten, nicht nachgesehen. Beim Nachsehen kam Schlimmeres heraus:
@@ -580,12 +614,13 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck weiter schärfen — jetzt mit doppeltem Netz.** Neue Muster werden gegen
-   40 richtige und 12 falsche Sätze gehalten. Vor dem nächsten Muster lohnt aber etwas
-   anderes: Der Fehlerkorpus deckt bisher nur **12 der 84 Muster** ab. Die übrigen sind
-   ungeprüft — es ist nicht bekannt, ob sie überhaupt greifen. Sie nach und nach mit je
-   einem Beispielsatz zu belegen, ist wertvoller als ein neues Muster. Dabei wird
-   vermutlich mehr auffallen: `x18` war halb tot, und niemand hat es gemerkt.
+3. **Textcheck weiter schärfen.** Die Absicherung steht jetzt in drei Richtungen (siehe
+   Tabelle oben), neue Muster sind damit billig geworden: Wer eins ergänzt, schreibt
+   einen Satz in `SAUBER`, der knapp danebenliegt, und einen in `FEHLER`, der getroffen
+   werden muss. Was noch **nicht** geprüft wird, ist die *Trefferquote* — ob ein Muster
+   die Fälle findet, die es finden sollte, statt nur einen. `x18` und `y10` waren beide
+   „wirksam“ im Sinne der neuen Prüfung und trotzdem halb blind. Wer hier weitermacht,
+   sollte pro Muster mehrere Formulierungen desselben Fehlers durchspielen.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
