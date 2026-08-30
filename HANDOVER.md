@@ -64,6 +64,46 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Alle 84 Prüfmuster sind durchgeprüft** (29.08.2026). Die letzten 29 — 15 `stil`, 14
+`form` — waren anders gelagert: Ein Fehlalarm ist dort begrifflich nicht möglich, weil
+Stilhinweise auf korrektem Text ansprechen **sollen**. Geprüft wurde deshalb Trefferquote
+und **Streubreite**.
+
+**Streubreite, gemessen an 12.679 Wörtern echtem Fließtext** (den Regeltexten der App):
+
+```
+a04  3,6 Meldungen je 1000 Wörter   (sehr lange Sätze)
+s01  1,8                            (Füllwörter)
+s08  0,9                            (vage Mengenangaben)
+alle übrigen  unter 0,9
+```
+
+Zwei Muster hatte ich vorab im Verdacht, zu breit zu streuen — `s08` („deutlich, mehrere,
+oft“) und `f13` („Ich versuche“). **Beide Verdachtsmomente waren falsch.** Das breiteste
+Muster ist `a04`, und 6,6 Prozent aller Sätze als „sehr lang“ zu melden ist für einen
+Hinweis dieser Art angemessen. Kein Muster streut zu breit.
+
+**Trefferquote: 28 von 29.** `s02` nicht:
+
+```
+still  „Das Verfahren kommt im Training zur Anwendung.“
+```
+
+Das Muster verlangte die Reihenfolge „zur Anwendung kommt“ — das ist die
+**Nebensatzstellung**. Im Hauptsatz steht das gebeugte Verb an zweiter Stelle und das
+Streckverb am Ende, und das ist die häufigere Form. Beide Stellungen sind jetzt erfasst,
+dazu „findet Anwendung“ neben „Anwendung findet“. „Er findet die Anwendung gut“ bleibt
+still — dort ist *Anwendung* ein gewöhnliches Objekt.
+
+Korpora: **73 richtige Sätze, 85 Varianten.**
+
+**Eine Warnung aus eigener Erfahrung:** Meine erste Probe für `s02` löste keinen Fehler
+aus — die Mutation hatte gar nicht gegriffen, weil der Anker nicht passte. Das sah aus
+wie eine bestandene Probe und war keine. **Eine Mutation, die still fehlschlägt, ist kein
+Beleg.** Jedes Probeskript sollte prüfen, dass sein Anker genau einmal vorkommt, und sonst
+abbrechen — wie die Patch-Skripte es tun.
+
+
 **Die 22 `pruef`-Muster durchgeprüft — vier Befunde** (29.08.2026).
 
 **`y08` war in beide Richtungen falsch:**
@@ -793,13 +833,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck: `stil` und `form`.** Die 30 harten, 6 umgangssprachlichen und 22
-   `pruef`-Muster sind durchgeprüft. Offen sind die **15 `stil`- und 14 `form`-Muster**.
-   Dort ist die Lage anders: Sie *sollen* auf korrektem Text ansprechen, ein Fehlalarm
-   im engeren Sinn ist dort nicht möglich. Zu prüfen ist deshalb nur die **Trefferquote**
-   — ob ein Stilhinweis die Fälle findet, für die er gedacht ist — und ob er nicht so
-   breit streut, dass er in jedem Text erscheint. Für `s01` (Füllwörter) und `a04`
-   (lange Sätze) lohnt ein Blick auf die Häufigkeit in einem echten Text von Nils.
+3. **Textcheck: neue Muster ergänzen.** Alle 84 vorhandenen Muster sind in beide
+   Richtungen durchgeprüft; die Absicherung steht (73 richtige Sätze, 85 Varianten,
+   Wirksamkeit, Stufenabgleich). Neue Muster sind damit billig geworden. Was noch fehlt,
+   ist Material aus **Nils' eigenen Texten**: Welche Fehler macht er tatsächlich? Der
+   Textcheck ist auf allgemeine Stolperstellen gebaut, nicht auf seine. Ein Kapitel aus
+   einem Bericht würde mehr bringen als zehn weitere allgemeine Muster.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
