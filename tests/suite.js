@@ -413,7 +413,18 @@ const ECHT_FALSCH = [
   ["Auch spontane Aktionen können klappen, wenn man aktiv auf die Jugendlichen zugeht und diese animiert auch Freunden davon zu erzählen.", "y11"],
   ["Jugendliche lernen am besten die Konflikte unter sich zu lösen.", "y11"],
   ["Diese Erfahrungen helfen mir meine Lehrer-Persönlichkeit aufzubauen.", "y11"],
-  ["Er hat versucht pünktlich zu sein.", "y11"]
+  ["Er hat versucht pünktlich zu sein.", "y11"],
+  /* Zweite Lieferung: vier E-Mails, die Nils tatsächlich geschrieben hat.
+     Dieselbe Fehlerklasse wie oben, nur schärfer — in 132 Wörtern standen
+     zwölf Fehler, von denen der Textcheck vorher fünf fand. */
+  ["Sie meinten ja wir können Ihnen bezüglich der Punkte schreiben.", "y13"],
+  ["Ich wollte nachfragen wie viele Punkte ich aktuell habe.", "y12"],
+  ["Ich wollte nachfragen wieviele Punkte ich aktuell habe.", "x28"],
+  ["Wir konnten nicht kommen, weil wir verhindert waren zur Übung zu gehen.", "y11"],
+  ["Ich habe die Punkte für die Algebra/Zahlentheorie Übungsblätter nachgefragt.", "y14"],
+  ["Guten Tag,\n\nWir hatten die Tage telefoniert.", "a01"],
+  ["Sehr geehrter Herr Weber,\n\nIch kann heute leider nicht kommen.", "a01"],
+  ["Ich hatte vergessen nach dem Feiern meine Jacke abzuholen.", "y11"]
 ];
 const echtStumm = [];
 ECHT_FALSCH.forEach(([t, id]) => {
@@ -448,7 +459,22 @@ const ECHT_RICHTIG = [
   "Ebenfalls ist mir aufgefallen, wie schnell man eine authentische und angemessene Bindung zu den Jugendlichen aufbaut.",
   "Für meinen späteren Lehrerberuf nehme ich mit, dass die Schüler*innen Konflikte am besten lernen, unter sich zu lösen.",
   "Termin mit den Betreuern absprechen und Material und Zeitplan vorbereiten.",
-  "Motivierte Kinder und Jugendliche, welche die Bewegungsangebote nutzen würden."
+  "Motivierte Kinder und Jugendliche, welche die Bewegungsangebote nutzen würden.",
+  "Sie meinten ja, wir können Ihnen bezüglich der Punkte schreiben.",
+  "Ich wollte nachfragen, wie viele Punkte ich aktuell habe.",
+  "Wir konnten nicht kommen, weil wir verhindert waren, zur Übung zu gehen.",
+  "Ich habe die Punkte für die Algebra-/Zahlentheorie-Übungsblätter nachgefragt.",
+  "Guten Tag,\n\nwir hatten die Tage telefoniert.",
+  "Sehr geehrter Herr Weber,\n\nleider kann ich heute nicht am Kurs teilnehmen, da ich mir beim Training eine Verletzung zugezogen habe.",
+  "Ich hatte vergessen, nach dem Feiern meine Jacke abzuholen.",
+  "Ich darf diese frühestens nächste Woche wieder belasten.",
+  "Meinen Bon, der die Abgabe bestätigt, habe ich auch noch.",
+  /* Nicht erweitert: die Infinitivgruppe ist bloß „aufzustehen“, das Pronomen
+     gehört zu „geholfen“. Dort ist das Komma frei — y11 darf nicht anschlagen. */
+  "Der Trainer hat mir geholfen aufzustehen.",
+  "Die Deutsche Sporthochschule Köln bildet Lehrkräfte aus.",
+  "Das Fach Sport/Deutsch studiere ich auf Lehramt.",
+  "Er hat gefragt, das wievielte Turnier das war."
 ];
 const echtAlarm = [];
 ECHT_RICHTIG.forEach(t => {
@@ -563,7 +589,30 @@ const VARIANTEN = {
         "Er weiß ob er kommen kann.",
         "Sie fragt warum das so ist.",
         "Ich verstehe nicht wieso das nicht klappt.",
-        "Er zeigt uns wie man den Ball annimmt."]
+        "Er zeigt uns wie man den Ball annimmt.",
+        "Ich wollte nachfragen wie viele Punkte ich habe.",
+        "Ich weiß nicht wie oft du trainierst.",
+        "Ich weiß wo er trainiert.",
+        "Er hat erklärt was man dabei beachten muss."],
+  y13: ["Sie meinten ja wir können Ihnen schreiben.",
+        "Er sagte er kommt später.",
+        "Ich dachte du hast das schon erledigt.",
+        "Sie glaubte es wird schon klappen.",
+        "Er meinte wir sollen früher da sein."],
+  y14: ["Ich habe die Algebra/Zahlentheorie Übungsblätter abgegeben.",
+        "Der Sport/Deutsch Lehrer ist neu.",
+        "Die Trainer/Betreuer Besprechung fällt aus."],
+  x28: ["Wieviel Zeit bleibt noch?",
+        "Ich weiß nicht wieviele kommen.",
+        "Wieviele Punkte fehlen mir?",
+        "Auf wievielen Blättern steht das?"],
+  /* Die Anrede-Prüfung kannte nur Höflichkeitsfloskeln. Nils fängt seine Mails
+     mit „Wir“, „Ich“ oder „Leider“ an — das kommt hier dazu. */
+  a01: ["Guten Tag,\n\nWir hatten die Tage telefoniert.",
+        "Guten Tag,\n\nIch hatte etwas vergessen.",
+        "Sehr geehrter Herr Weber,\n\nLeider kann ich nicht kommen.",
+        "Hallo Anna,\n\nDer Termin passt mir gut.",
+        "Sehr geehrte Frau Weber,\n\nHeute war das Training ausgefallen."]
 };
 const luecken = [];
 let varianten = 0;

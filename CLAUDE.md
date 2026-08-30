@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~625 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~632 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
@@ -35,14 +35,14 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 375 Übungen (44 davon Tippaufgaben) | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 381 Übungen (44 davon Tippaufgaben) | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 143 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 85 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/ugs/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 88 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/ugs/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Drei Stufen, zweimal**: Beispiele nutzen `ok`/`ugs`/`nope`, der Textcheck `hart`/`ugs`/… — beide müssen dasselbe sagen. Ein hartes Muster darf keine Form melden, die eine Regel orange auszeichnet; `tests/suite.js` prüft das.
@@ -121,7 +121,7 @@ entscheidbar ist. Drei Fallen bleiben deine:
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (683 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (689 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -242,6 +242,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Beim Hören identisch | 39 Aufgaben klangen gleich. `hoerHinweis()` löst das — bei neuen Aufgaben mitprüfen. |
 | Stiller Speicherfehler | Fortschritt weg ohne Meldung. Jetzt Warnbanner. |
 | Test misst das Falsche | Ein Test suchte „Speicher“ und fand das Wort woanders auf der Seite — grün, obwohl kaputt. Immer am konkreten Element prüfen, nicht an `body.textContent`. |
+| Muster nur an einer Textsorte gemessen | Vier eigene E-Mails von Nils: 16 Fehler, der Textcheck fand fünf. Die Anredeprüfung kannte nur Höflichkeitsfloskeln („Vielen Dank“), nicht seinen Einstieg („Wir hatten …“). Jede neue Textsorte bringt eigene Fehler — Aufsatz ≠ Brief. |
 | Muster nur an Einzelsätzen gemessen | Der Textcheck fand in Nils' eigenem Portfolio (862 Wörter) **null** Treffer — sieben fehlende Kommas standen drin. Konstruierte Prüfsätze finden solche Lücken nicht, weil sie mit denselben Wörtern gebaut werden wie das Muster. `tests/suite.js` prüft jetzt an echtem Fließtext. |
 | Patch landet nicht | Siehe Abschnitt 4. |
 | `\b` in Python | Siehe Abschnitt 4. |

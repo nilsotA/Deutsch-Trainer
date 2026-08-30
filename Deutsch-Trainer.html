@@ -874,6 +874,18 @@ const EX_A = [
  "Komma ist falsch"],a:0,
  e:"Auch das ist eine <b>erweiterte</b> Infinitivgruppe — nur steckt das <i>zu</i> im trennbaren Verb: auf<b>zu</b>bauen. Davor stehen weitere Wörter, also wird abgetrennt. Ohne Zusatz („helfen mir aufzubauen“) wäre das Komma freigestellt.",r:"komma-infinitiv"},
 
+{id:"k45",c:"komma",q:"Wie viele Kommas fehlen? „Meinen Bon der die Abgabe bestätigt habe ich auch noch.“",o:[
+ "zwei — vor und nach dem Relativsatz",
+ "eins — nur vor „der“",
+ "keins"],a:0,
+ e:"„der die Abgabe bestätigt“ steht mitten im Satz und wird deshalb <b>beidseitig</b> abgetrennt: „Meinen Bon<b>,</b> der die Abgabe bestätigt<b>,</b> habe ich auch noch.“ Das schließende Komma wird am häufigsten vergessen.",r:"komma-nebensatz"},
+
+{id:"k46",c:"komma",q:"„Sie meinten ja(,) wir können Ihnen schreiben.“",o:[
+ "Komma ist Pflicht",
+ "Komma ist freigestellt",
+ "Komma ist falsch"],a:0,
+ e:"„wir können Ihnen schreiben“ ist ein <b>uneingeleiteter</b> Nebensatz: kein Einleitewort, das Verb an zweiter Stelle. Abgetrennt wird er trotzdem. Erkennungszeichen ist hier das zweite eigene Subjekt mit eigenem gebeugtem Verb.",r:"komma-nebensatz"},
+
 /* ---------- GROSS- UND KLEINSCHREIBUNG ---------- */
 {id:"g01",c:"gross",q:"Was ist korrekt?",o:["des Weiteren","des weiteren"],a:0,
  e:"Substantivierungen nach Artikel oder Präposition werden großgeschrieben: <b>des Weiteren, im Allgemeinen, im Folgenden, im Übrigen, im Wesentlichen</b>.",r:"gross-subst"},
@@ -1112,6 +1124,29 @@ const EX_B = [
 
 {id:"r25",c:"recht",q:"Korrekt ist …",o:["Know-how","Knowhow"],a:0,
  e:"Mehrteilige Fremdwörter werden mit Bindestrich gekoppelt: Know-how, Kick-off, Make-up.",r:"recht-bindestrich"},
+
+{id:"r26",c:"recht",q:"Die Jacke der Marke Diesel — wie schreibt man das?",o:[
+ "mit Bindestrich: Diesel-Jacke",
+ "mit Leerzeichen: Diesel Jacke",
+ "beides ist zulässig"],a:0,
+ e:"Zwei Substantive, die zusammen einen Begriff bilden, hängen zusammen — als ein Wort oder mit Bindestrich. Bei Marken und Eigennamen ist der Bindestrich die übliche Form. Ein Leerzeichen dazwischen gibt es im Deutschen nicht; das ist eine Gewohnheit aus dem Englischen.",r:"recht-bindestrich"},
+
+{id:"r27",c:"recht",q:"Die Anbindung an den Shop-Anbieter Shopify — wie schreibt man das?",o:[
+ "mit Bindestrich: Shopify-Integration",
+ "mit Leerzeichen: Shopify Integration"],a:0,
+ e:"Auch mit einem fremdsprachigen Markennamen bleibt es ein Kompositum: <b>Shopify-Integration</b>. Der Bindestrich hält den Namen lesbar — „Shopifyintegration“ wäre regelkonform, aber schwer zu entziffern.",r:"recht-bindestrich"},
+
+{id:"r28",c:"recht",q:"Übungsblätter zu Algebra und Zahlentheorie, mit Schrägstrich geschrieben — wo stehen Bindestriche?",o:[
+ "an beiden Teilen: Algebra-/Zahlentheorie-Übungsblätter",
+ "nirgends: Algebra/Zahlentheorie Übungsblätter",
+ "nur am ersten Teil: Algebra-/Zahlentheorie Übungsblätter"],a:0,
+ e:"Beide Teile hängen am Grundwort, also bekommt jeder einen Bindestrich. Der erste endet auf einem Bindestrich vor dem Schrägstrich, der zweite hängt direkt am Grundwort.",r:"recht-bindestrich"},
+
+{id:"r29",c:"recht",q:"Wie viele Punkte fehlen? — Wie schreibt man „wieviel“?",o:[
+ "immer getrennt: wie viel, wie viele",
+ "immer zusammen: wieviel, wieviele",
+ "beides ist zulässig"],a:0,
+ e:"Seit der Reform von 1996 gilt die Getrenntschreibung. Zusammen bleiben nur <b>wievielte</b> (fragt nach der Reihenfolge: „das wievielte Turnier?“) und <b>wievielmal</b> (fragt nach der Häufigkeit).",r:"getrennt-praep"},
 
 /* ---------- GRAMMATIK ---------- */
 {id:"m01",c:"gram",q:"Welcher Kasus folgt auf „wegen“?",o:["Genitiv","Dativ","Akkusativ"],a:0,
@@ -1699,7 +1734,15 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <li><b>Aneinanderreihungen:</b> Auf-die-lange-Bank-Schieben</li>
 <li><b>Gleiche Buchstaben treffen aufeinander:</b> Kaffee-Ersatz (auch ohne zulässig)</li>
 </ul>
-<p>Kein Bindestrich bei normalen deutschen Komposita: <code>Trainingsplan</code>, nicht „Trainings-Plan“.</p>`},
+<p>Kein Bindestrich bei normalen deutschen Komposita: <code>Trainingsplan</code>, nicht „Trainings-Plan“.</p>
+<p><b>Und kein Leerzeichen.</b> Zwei Substantive, die zusammen einen Begriff bilden, werden zusammengeschrieben oder mit Bindestrich verbunden. Ein Leerzeichen dazwischen ist keine dritte Möglichkeit:</p>
+<div class="ex"><span class="nope">Algebra Punkte</span> → <span class="ok">Algebra-Punkte</span><br>
+<span class="nope">Shopify Integration</span> → <span class="ok">Shopify-Integration</span><br>
+<span class="nope">Diesel Jacke</span> → <span class="ok">Diesel-Jacke</span></div>
+<p>Bei Marken und Eigennamen ist der Bindestrich die übliche Form und meist die lesbarere; Zusammenschreibung wäre bei einfachen Namen ebenfalls regelkonform („Goethehaus“). Ohne Namen im Spiel wird schlicht zusammengeschrieben: <code>Übungsblatt</code>, <code>Trainingsplan</code>.</p>
+<p><b>Schrägstrich vor gemeinsamem Grundwort:</b> Beide Teile hängen am Grundwort, also bekommen beide einen Bindestrich.</p>
+<div class="ex"><span class="nope">Algebra/Zahlentheorie Übungsblätter</span> → <span class="ok">Algebra-/Zahlentheorie-Übungsblätter</span></div>
+<p class="tiny muted">Belegt: Duden, Rechtschreibregeln zu Bindestrich und zu Namen; grammis (IDS Mannheim) zu Zusammensetzungen mit Eigennamen. Die englische Schreibgewohnheit („customer service“) überträgt sich nicht — im Deutschen bleibt das Kompositum ein Wort.</p>`},
 
 {id:"recht-klassiker",c:"recht",t:"Die häufigsten Rechtschreibfallen",b:`
 <div class="ex">
@@ -5412,7 +5455,7 @@ function sprechbar(t){
     .replace(/(\d)\s*%/g,"$1 Prozent")
     .replace(/(\d)\s*°/g,"$1 Grad")
     .replace(/§/g,"Paragraf ")
-    .replace(/(\p{L})\s*\/\s*(\p{L})/gu,"$1 oder $2")
+    .replace(/(\p{L})-?\s*\/\s*(\p{L})/gu,"$1 oder $2")   // auch „Algebra-/Zahlentheorie-“
     .replace(/(,\s*){2,}/g,", ")     // doppelte Pausen zusammenfassen
     .replace(/\s+/g," ").trim();
 }
@@ -7388,16 +7431,33 @@ const CHECKS = [
 {id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(?:ge[a-zäöüß]+\s+)?(hat|ist|war|kann|will|soll|wird|macht|sagt|hatte)\b/g,
  t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relativ"},
 {id:"y11",sev:"pruef",
- re:/(?<!\bzu\s)\b(versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|gebeten|bereit|vorhat|vorhatte|lernen|lernt|lerne|gelernt|helfen|hilft|half|geholfen|animiert|animieren|erlaubt|erlauben|empfohlen|empfiehlt|geraten|verspricht|versprochen|schafft|geschafft|anbietet|bietet)\s+([^,.;:!?—–()]{3,45}?)\s+(?:zu\s+(?!(?:seinen|meinen|deinen|ihren|unseren|euren|diesen|jenen|allen|beiden|welchen|denen|dessen|einigen|manchen|vielen|wenigen|anderen|solchen|keinen|großen|kleinen|neuen|alten)\b)(?:[a-zäöüß]+e[rl]?n|sein|tun)|[a-zäöüß]{2,}zu(?:[a-zäöüß]{2,}e[rl]?n|sein|tun))\b/g,
+ re:/(?<!\bzu\s)\b(?:(?:helfen|hilft|half|geholfen|erlaubt|erlauben|empfohlen|empfiehlt|geraten|verspricht|versprochen|gebeten|animiert|animieren|anbietet|bietet)\s+(?!(?:mir|dir|uns|euch|ihm|ihr|ihnen|mich|dich|sich|es)\s+(?:zu\s|[a-zäöüß]{2,}zu))|(?:versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|bereit|vorhat|vorhatte|lernen|lernt|lerne|gelernt|schafft|geschafft|verhindert|gezwungen|froh|erfreut|gewillt|imstande|fähig|schwer|leicht|wichtig|nötig|möglich)\s+)([^,.;:!?—–()]{3,45}?)\s+(?:zu\s+(?!(?:seinen|meinen|deinen|ihren|unseren|euren|diesen|jenen|allen|beiden|welchen|denen|dessen|einigen|manchen|vielen|wenigen|anderen|solchen|keinen|großen|kleinen|neuen|alten)\b)(?:[a-zäöüß]+e[rl]?n|sein|tun)|[a-zäöüß]{2,}zu(?:[a-zäöüß]{2,}e[rl]?n|sein|tun))\b/g,
  t:"Komma vor der Infinitivgruppe?",
  k:"Seit dem 1. Juli 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt — auch ohne Einleitewort: <b>Er hat versucht, pünktlich zu sein.</b> Erweitert heißt: zu + Infinitiv und mindestens ein weiteres Wort. Bei bloßem <i>zu</i> + Infinitiv („versucht zu kommen“) bleibt das Komma freigestellt.",
  r:"komma-infinitiv"},
 
 {id:"y12",sev:"pruef",
- re:/\b(weiß|weißt|wissen|wusste|sehe|sieht|sehen|sah|zeige|zeigt|zeigen|erkläre|erklärt|erklären|verstehe|versteht|verstehen|frage|fragt|fragen|fragte|beobachten|beobachtet|einschätzen|schätzen|lernen|lernt|merken|merkt|entscheiden|entscheidet|prüfen|prüft|überlegen|überlegt|kann|können|konnte|konnten)(?:\s+(?:mir|dir|uns|euch|ihm|ihr|ihnen|mich|dich|sich|nicht|nie|kaum|noch|genau|bereits|schon)){0,2}\s+(wie|ob|warum|wann|wieso|weshalb|woher|wohin)\s+(man|ich|du|er|sie|es|wir|ihr|die|der|das)\b/g,
+ re:/\b(weiß|weißt|wissen|wusste|sehe|sieht|sehen|sah|zeige|zeigt|zeigen|erkläre|erklärt|erklären|verstehe|versteht|verstehen|frage|fragt|fragen|fragte|beobachten|beobachtet|einschätzen|schätzen|lernen|lernt|merken|merkt|entscheiden|entscheidet|prüfen|prüft|überlegen|überlegt|nachfragen|nachfragt|nachsehen|nachschauen|erfahren|herausfinden|mitteilen|sagen|sagt|kann|können|konnte|konnten)(?:\s+(?:mir|dir|uns|euch|ihm|ihr|ihnen|mich|dich|sich|nicht|nie|kaum|noch|genau|bereits|schon|mal|kurz|einmal)){0,2}\s+(?:(?:wie\s+oft|wie\s+lange|wie\s+viele?[mnrs]?|wie|ob|warum|wann|wieso|weshalb|woher|wohin|was|wer|wo|welche)\s+(?:man|ich|du|er|sie|es|wir|ihr|die|der|das)\b|(?:wie\s+viele?[mnrs]?|wieviele?[mnrs]?|wie\s+oft|welche[rsnm]?)\s+[A-ZÄÖÜ][a-zäöüß]{2,})/g,
  t:"Komma vor der indirekten Frage?",
  k:"Eine indirekte Frage ist ein Nebensatz — davor steht ein Komma: <b>Ich kann besser einschätzen, wie man damit umgeht.</b> Erkennungszeichen: ein Fragewort (wie, ob, warum …) und das gebeugte Verb am Ende des Nebensatzes. Steht das Fragewort dagegen als Vergleich („schnell wie ein Profi“), ist es kein Nebensatz und es kommt kein Komma.",
  r:"komma-nebensatz"},
+
+{id:"y13",sev:"pruef",
+ re:/\b(meinten|meinte|sagte|sagten|sagt|dachte|dachten|hoffe|hoffte|glaube|glaubte|denke|finde|fand|weiß|wusste|schrieb|schrieben|erklärte|antwortete)\s+(?:ja|doch|schon|mal|damals|neulich)?\s*(ich|du|er|es|wir|man)\s+(kann|kannst|können|konnte|konnten|könnte|könnten|habe|hast|hat|haben|hatte|hatten|hätte|hätten|bin|bist|ist|sind|war|waren|wäre|wären|werde|wirst|wird|werden|muss|musst|müssen|musste|mussten|soll|sollst|sollen|sollte|sollten|will|willst|wollen|wollte|wollten|darf|darfst|dürfen|durfte|möchte|möchten|mag|mögen|kommt|kommen|komme|geht|gehen|gehe|macht|machen|mache|brauche|braucht|brauchen|bleibt|bleiben|gibt|geben|sehe|sieht|sehen|finde|findet|weiß|wissen)\b/g,
+ t:"Komma vor dem uneingeleiteten Nebensatz?",
+ k:"Auch ein Nebensatz <b>ohne</b> Einleitewort wird abgetrennt: „Sie meinten<b>,</b> wir können Ihnen schreiben.“ Das übliche Erkennungszeichen greift hier nicht — das Verb steht nicht am Ende. Woran du ihn erkennst: ein zweites eigenes Subjekt mit eigenem gebeugtem Verb.",
+ r:"komma-nebensatz"},
+
+{id:"y14",sev:"pruef",
+ re:/\b[A-ZÄÖÜ][a-zäöüß]{2,}\/[A-ZÄÖÜ][a-zäöüß]{2,}\s+[A-ZÄÖÜ][a-zäöüß]{3,}/g,
+ t:"Bindestriche bei der Schrägstrichfügung?",
+ k:"Stehen zwei Wörter mit Schrägstrich vor einem gemeinsamen Grundwort, gehören beide mit Bindestrich daran: <b>Algebra-/Zahlentheorie-Übungsblätter</b>. Ein Leerzeichen davor trennt das Grundwort ab — dann steht das Kompositum auseinander.",
+ r:"recht-bindestrich"},
+
+{id:"x28",sev:"hart",re:/\bwieviel(?!te|mal)(e[mnrs]?)?\b/gi,
+ t:"wieviel",
+ k:"Seit der Reform von 1996 getrennt: <b>wie viel</b>, <b>wie viele</b>. Zusammen bleiben nur <b>wievielte</b> (nach der Reihenfolge) und <b>wievielmal</b> (nach der Häufigkeit).",
+ r:"getrennt-praep"},
 
 {id:"x27",sev:"hart",re:/\bReflektion(en)?\b/g,
  t:"Reflektion",
@@ -7482,7 +7542,7 @@ const CHECKS_Z = [
  k:"Nach einer indirekten Frage steht ein Punkt: <b>Er fragte, wann sie kommt.</b>",r:"z-frage"}
 ];
 const CHECKS_N = [
-{id:"a01",sev:"hart",re:/(?:^|\n)\s*(?:Sehr geehrte[rs]?|Hallo|Liebe[rs]?|Lieber|Guten Tag|Moin|Hi)\b[^,\n]{0,45},\s*\n?\s*(Vielen|Herzlichen|Besten|Danke|Hiermit|Anbei|Bezugnehmend|Wie|Bitte|Gerne|Gern|Leider|Zunächst|Entschuldigen|Können|Könnten|Hätten|Würden|Dürfte|Darf|Nach|Mit|Für|Bei|Im|Am|Zur|Zum|Aufgrund|Wegen)\b/g,
+{id:"a01",sev:"hart",re:/(?:^|\n)\s*(?:Sehr geehrte[rs]?|Hallo|Liebe[rs]?|Lieber|Guten Tag|Guten Morgen|Guten Abend|Moin|Hi)\b[^,\n]{0,45},\s*\n?\s*(Vielen|Herzlichen|Besten|Danke|Hiermit|Anbei|Bezugnehmend|Wie|Bitte|Gerne|Gern|Leider|Zunächst|Entschuldigen|Können|Könnten|Hätten|Würden|Dürfte|Darf|Nach|Mit|Für|Bei|Im|Am|Zur|Zum|Aufgrund|Wegen|Ich|Wir|Du|Er|Es|Man|Der|Die|Das|Den|Dem|Ein|Eine|Einen|Einem|Mein|Meine|Meinen|Meinem|Unser|Unsere|Und|Aber|Auch|Nur|Schon|Jetzt|Hier|Dann|Deshalb|Deswegen|Daher|Falls|Weil|Wenn|Da|Nachdem|Sobald|Vielleicht|Eventuell|Ebenfalls|Voraussichtlich|Kurz|Erst|Bereits|Momentan|Aktuell|Gestern|Heute)\b/g,
  t:"Großschreibung nach der Anrede",
  k:"Nach dem Anredekomma geht es <b>klein</b> weiter — der Satz beginnt erst dort: „Sehr geehrte Frau Weber,<br>vielen Dank für Ihre Rückmeldung.“",r:"komma-brief"},
 {id:"a02",sev:"stil",re:/\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b(?:[^.!?]{0,45}\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b){2}/g,

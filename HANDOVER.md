@@ -31,15 +31,15 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 375, davon 44 Tippaufgaben (unterwegs abfragbar: 331) |
+| Übungen | 381, davon 44 Tippaufgaben (unterwegs abfragbar: 337) |
 | Regeln | 117 |
 | Wortkarten | 143 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen); abfragbar 165 |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 85 |
+| Prüfmuster im Textcheck | 88 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Kartenbestand (`alleSchluessel()`) | 683 |
-| Dateigröße | ~625 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
+| Kartenbestand (`alleSchluessel()`) | 689 |
+| Dateigröße | ~632 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
 
 Die Zahl 331 stand hier lange für die Übungen und stimmte nicht — `ALL.length` war schon
 vorher 371. Die Zahlen oben sind aus der laufenden App gerechnet, nicht abgeschrieben.
@@ -63,6 +63,84 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vier eigene E-Mails von Nils durchgemessen** (30.08.2026). Direkt nach dem Portfolio
+hat er vier echte Mails geliefert — an einen Dozenten, an einen Kursleiter, an einen
+Shop-Anbieter, an eine Garderobe. 132 Wörter, **16 Fehler**. Der Textcheck fand
+vorher **fünf**.
+
+```
+vorher gefunden   3× Komma nach der Grußformel · 1× Großschreibung nach der Anrede
+                  1× erweiterte Infinitivgruppe
+jetzt zusätzlich  3× Großschreibung nach der Anrede · 1× uneingeleiteter Nebensatz
+                  1× indirekte Frage · 1× erweiterte Infinitivgruppe
+                  1× „wieviele“ · 1× Schrägstrichfügung
+offen geblieben   3× Leerzeichen im Kompositum · 1× eingeschobener Relativsatz
+```
+
+Gegenprobe: die vier Mails korrigiert durchgeschickt — **keine einzige Meldung**.
+
+### Was daran neu war
+
+- **`a01` kannte nur Höflichkeitsfloskeln.** Nach dem Anredekomma geht es klein weiter;
+  das Muster suchte „Vielen Dank“, „Leider“, „Bitte“. Nils fängt mit „Wir“, „Ich“,
+  „Heute“ an. Drei von vier Mails fielen durch. Die Liste hat jetzt Pronomen, Artikel
+  und Konjunktionen dazu — alles Wörter, die im Satzinneren nie großgeschrieben werden.
+  „Sie“, „Ihr“, „Ihre“ bleiben bewusst draußen, die sind als Anredeform korrekt groß,
+  und Substantive ebenfalls.
+- **`y11` musste geteilt werden.** Beim Prüfen fiel die eigene Aufgabe `k44` auf:
+  „helfen mir aufzubauen“ ist **nicht** erweitert — das Pronomen gehört zu „helfen“,
+  nicht zur Infinitivgruppe, also ist das Komma dort frei. Verben mit Objektplatz
+  (helfen, erlauben, raten, bitten, anbieten …) stehen jetzt in einer eigenen Gruppe,
+  in der ein einzelnes Pronomen vor dem Infinitiv nicht als Erweiterung zählt. Dazu
+  neu: prädikative Adjektive („verhindert sind zur Übung zu kommen“).
+- **`y12` um „wie viele Punkte“ erweitert.** Der erste Entwurf verlangte hinter dem
+  Fragewort ein Pronomen — „nachfragen wie viele Punkte ich habe“ hat dort ein
+  Substantiv. Zweiter Zweig dafür.
+- **`y13` neu: uneingeleiteter Nebensatz.** „Sie meinten ja wir können Ihnen
+  schreiben.“ Kein Einleitewort, Verb an zweiter Stelle — das übliche Erkennungszeichen
+  greift nicht, abgetrennt wird trotzdem.
+- **`y14` neu: Schrägstrichfügung.** „Algebra/Zahlentheorie Übungsblättern“ →
+  „Algebra-/Zahlentheorie-Übungsblätter“.
+- **`x28` neu: „wieviel“.** Seit 1996 getrennt. Zusammen bleiben nur „wievielte“ und
+  „wievielmal“ — die stehen im Rückblick der Regex ausgenommen. Die App lehrte die
+  Getrenntschreibung längst in zwei Aufgaben; nur der Textcheck kannte sie nicht.
+
+### Ein Fehler, den kein Muster findet
+
+**Das Leerzeichen im Kompositum** — „Algebra Punkte“, „Shopify Integration“,
+„Diesel Jacke“. Dreimal in vier Mails, sein häufigster Fehler in diesem Material.
+Ich habe kein Muster dafür geschrieben, und das ist eine bewusste Entscheidung:
+Zwei großgeschriebene Wörter nebeneinander sind im Deutschen der Normalfall — „Herr
+Otten“, „Deutsche Sporthochschule Köln“, „Mit freundlichen Grüßen“, „Apple Watch“.
+Ein Regex kann „Diesel Jacke“ davon nicht trennen, und ein Muster, das bei jedem
+Namen anschlägt, macht den Textcheck unbrauchbar. Erfasst ist nur die eine sicher
+entscheidbare Teilmenge: die Schrägstrichfügung (`y14`).
+
+Stattdessen steht der Fehler jetzt auf der Lehrseite: die Regel `recht-bindestrich`
+hat einen Abschnitt dazu bekommen, dazu drei Aufgaben (`r26`, `r27`, `r28`).
+
+### Sechs neue Aufgaben
+
+`r26` Marke + Substantiv · `r27` fremdsprachiger Markenname · `r28` Schrägstrichfügung ·
+`r29` wie viel · `k45` eingeschobener Relativsatz (zwei Kommas, das schließende fehlt
+ihm) · `k46` uneingeleiteter Nebensatz.
+
+Bei `r26`–`r28` hat die Hörbarkeitsprüfung zugeschlagen: „Diesel-Jacke“ und
+„Diesel Jacke“ klingen beim Vorlesen gleich. Die Antworten benennen den Unterschied
+jetzt vorweg („mit Bindestrich: …“). Nebenbei kam heraus, dass `sprechbar()` den
+Bindestrich vor einem Schrägstrich nicht lesen konnte — „Algebra-/Zahlentheorie-“
+wird jetzt als „Algebra oder Zahlentheorie-“ vorgelesen.
+
+### Was die zweite Lieferung über die erste sagt
+
+Beim Portfolio war die Ausbeute zwei blinde Stellen. Bei vier kurzen Mails waren es
+fünf, plus ein Fehler in einer Aufgabe, die ich in derselben Sitzung selbst
+geschrieben hatte. **Das Verhältnis kippt nicht: Jeder neue echte Text findet etwas.**
+Prüfsätze, die derselbe Kopf schreibt wie das Muster, können das nicht leisten.
+Was sich dagegen ändert, ist die Art der Funde — bei den Mails ging es nicht mehr um
+Zeichensetzung allein, sondern um Briefform (Anrede, Grußformel) und Wortbildung.
+Andere Textsorte, andere Fehler. Eine Hausarbeit wäre die nächste sinnvolle Sorte.
 
 **Der Textcheck an Nils' eigenem Text gemessen** (30.08.2026). Bis hierher war jedes
 Muster an konstruierten Sätzen geprüft — 73 richtige, 31 falsche, 85 Varianten, alle
@@ -225,7 +303,7 @@ Korpora: **61 richtige Sätze, 69 Varianten.**
 
 ### Bilanz der Textcheck-Runden
 
-Sechs Anläufe, und das Bild ist vollständig genug für eine Aussage:
+Sieben Anläufe, und das Bild ist vollständig genug für eine Aussage:
 
 | Fund | Muster |
 |---|---|
@@ -235,6 +313,7 @@ Sechs Anläufe, und das Bild ist vollständig genug für eine Aussage:
 | Übersah gebeugte Formen | `x08`, `x09`, `x10`, `x14` |
 | Fand die eigene Musterformulierung nicht | `y10` |
 | Kannte die Wörter nicht, die Nils wirklich schreibt | `y11` |
+| Kannte nur eine Textsorte (Aufsatz, nicht Brief) | `a01` |
 
 **Die Ursache ist immer dieselbe:** Ein Regex keilt auf ein Wort, ohne den Kontext zu
 prüfen. „seit ihr“, „seid dem“, „in 2000“, „mass“, „uns“ — jedes davon ist in einer Lesart
@@ -909,11 +988,21 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    wieder etwas, das kein Prüfsatz je gefunden hätte. Die Auswertung ist Routine
    geworden: Text durch `analyse()`, Funde gegenlesen, Lücken benennen, Muster
    nachziehen, Sätze in den Abschnitt „Fließtext“ in `tests/suite.js` aufnehmen.
+   Bisher geliefert: das BFP-Portfolio und vier E-Mails. Am ergiebigsten wäre als
+   Nächstes eine **Hausarbeit** — wieder eine andere Textsorte, also voraussichtlich
+   wieder andere Fehler.
 
-4. **Textcheck: neue Muster ergänzen.** Alle 85 vorhandenen Muster sind in beide
-   Richtungen durchgeprüft; die Absicherung steht (73 richtige Sätze, 101 Varianten,
-   26 Fließtextsätze, Wirksamkeit, Stufenabgleich). Neue Muster sind damit billig
+4. **Textcheck: neue Muster ergänzen.** Alle 88 vorhandenen Muster sind in beide
+   Richtungen durchgeprüft; die Absicherung steht (73 richtige Sätze, 122 Varianten,
+   47 Fließtextsätze, Wirksamkeit, Stufenabgleich). Neue Muster sind damit billig
    geworden — was fehlt, ist nicht Technik, sondern Material. Siehe Punkt 3.
+
+5. **Das Leerzeichen im Kompositum maschinell erfassen.** Offen und schwierig, siehe
+   oben. Ein Weg wäre eine Liste von Marken- und Fremdwörtern, hinter denen ein
+   großgeschriebenes deutsches Wort fast immer ein Kompositum ist. Vor jeder solchen
+   Liste steht aber die Frage, wie „Apple Watch“ und „Google Maps“ herausfallen —
+   das sind Produktnamen und richtig geschrieben. Ohne belastbare Antwort darauf
+   lieber gar kein Muster.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
