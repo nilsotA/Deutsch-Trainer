@@ -856,6 +856,24 @@ const EX_A = [
  "Komma ist falsch"],a:0,
  e:"„zu kommen“ ist <b>nicht erweitert</b> — bloß zu + Infinitiv, kein weiteres Wort. Dort bleibt das Komma freigestellt. Sobald ein Wort dazukommt („pünktlich zu kommen“), ist es Pflicht.",r:"komma-infinitiv"},
 
+{id:"k42",c:"komma",q:"„Ich kann jetzt besser einschätzen(,) wie man mit einer unruhigen Gruppe umgeht.“",o:[
+ "Komma ist Pflicht",
+ "Komma ist freigestellt",
+ "Komma ist falsch"],a:0,
+ e:"„wie man mit einer unruhigen Gruppe umgeht“ ist eine <b>indirekte Frage</b>: eingeleitet von einem Fragewort, gebeugtes Verb am Ende. Das ist ein Nebensatz — und Nebensätze werden abgetrennt.",r:"komma-nebensatz"},
+
+{id:"k43",c:"komma",q:"„Er wirft den Ball(,) wie ein Profi.“",o:[
+ "Kein Komma — hinter „wie“ steht kein gebeugtes Verb",
+ "Komma ist Pflicht — „wie“ leitet einen Nebensatz ein",
+ "Komma ist Pflicht — „wie“ steht nach einem Verb"],a:0,
+ e:"Hinter „wie“ steht hier nur ein Satzteil („ein Profi“), kein gebeugtes Verb. Erst mit Verb wird daraus ein Nebensatz: „Er wirft den Ball<b>,</b> wie er es im Training gelernt hat.“",r:"komma-vergleich"},
+
+{id:"k44",c:"komma",q:"„Diese Erfahrungen helfen mir(,) meine Rolle als Lehrer aufzubauen.“",o:[
+ "Komma ist Pflicht",
+ "Komma ist freigestellt",
+ "Komma ist falsch"],a:0,
+ e:"Auch das ist eine <b>erweiterte</b> Infinitivgruppe — nur steckt das <i>zu</i> im trennbaren Verb: auf<b>zu</b>bauen. Davor stehen weitere Wörter, also wird abgetrennt. Ohne Zusatz („helfen mir aufzubauen“) wäre das Komma freigestellt.",r:"komma-infinitiv"},
+
 /* ---------- GROSS- UND KLEINSCHREIBUNG ---------- */
 {id:"g01",c:"gross",q:"Was ist korrekt?",o:["des Weiteren","des weiteren"],a:0,
  e:"Substantivierungen nach Artikel oder Präposition werden großgeschrieben: <b>des Weiteren, im Allgemeinen, im Folgenden, im Übrigen, im Wesentlichen</b>.",r:"gross-subst"},
@@ -7370,10 +7388,16 @@ const CHECKS = [
 {id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(?:ge[a-zäöüß]+\s+)?(hat|ist|war|kann|will|soll|wird|macht|sagt|hatte)\b/g,
  t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relativ"},
 {id:"y11",sev:"pruef",
- re:/\b(versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|gebeten|bereit|vorhat|vorhatte)\s+([^,.;:!?]{3,45}?)\s+zu\s+[a-zäöüß]+en\b/g,
+ re:/(?<!\bzu\s)\b(versucht|versuchte|beschlossen|beschloss|vorgeschlagen|geplant|angefangen|begonnen|aufgehört|vergessen|gelungen|entschlossen|gebeten|bereit|vorhat|vorhatte|lernen|lernt|lerne|gelernt|helfen|hilft|half|geholfen|animiert|animieren|erlaubt|erlauben|empfohlen|empfiehlt|geraten|verspricht|versprochen|schafft|geschafft|anbietet|bietet)\s+([^,.;:!?—–()]{3,45}?)\s+(?:zu\s+(?!(?:seinen|meinen|deinen|ihren|unseren|euren|diesen|jenen|allen|beiden|welchen|denen|dessen|einigen|manchen|vielen|wenigen|anderen|solchen|keinen|großen|kleinen|neuen|alten)\b)(?:[a-zäöüß]+e[rl]?n|sein|tun)|[a-zäöüß]{2,}zu(?:[a-zäöüß]{2,}e[rl]?n|sein|tun))\b/g,
  t:"Komma vor der Infinitivgruppe?",
  k:"Seit dem 1. Juli 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt — auch ohne Einleitewort: <b>Er hat versucht, pünktlich zu sein.</b> Erweitert heißt: zu + Infinitiv und mindestens ein weiteres Wort. Bei bloßem <i>zu</i> + Infinitiv („versucht zu kommen“) bleibt das Komma freigestellt.",
  r:"komma-infinitiv"},
+
+{id:"y12",sev:"pruef",
+ re:/\b(weiß|weißt|wissen|wusste|sehe|sieht|sehen|sah|zeige|zeigt|zeigen|erkläre|erklärt|erklären|verstehe|versteht|verstehen|frage|fragt|fragen|fragte|beobachten|beobachtet|einschätzen|schätzen|lernen|lernt|merken|merkt|entscheiden|entscheidet|prüfen|prüft|überlegen|überlegt|kann|können|konnte|konnten)(?:\s+(?:mir|dir|uns|euch|ihm|ihr|ihnen|mich|dich|sich|nicht|nie|kaum|noch|genau|bereits|schon)){0,2}\s+(wie|ob|warum|wann|wieso|weshalb|woher|wohin)\s+(man|ich|du|er|sie|es|wir|ihr|die|der|das)\b/g,
+ t:"Komma vor der indirekten Frage?",
+ k:"Eine indirekte Frage ist ein Nebensatz — davor steht ein Komma: <b>Ich kann besser einschätzen, wie man damit umgeht.</b> Erkennungszeichen: ein Fragewort (wie, ob, warum …) und das gebeugte Verb am Ende des Nebensatzes. Steht das Fragewort dagegen als Vergleich („schnell wie ein Profi“), ist es kein Nebensatz und es kommt kein Komma.",
+ r:"komma-nebensatz"},
 
 {id:"x27",sev:"hart",re:/\bReflektion(en)?\b/g,
  t:"Reflektion",

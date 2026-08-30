@@ -395,6 +395,70 @@ FEHLER.forEach(([t, id]) => {
 P.ok("Jedes benannte Muster greift auch am Satzanfang (" + FEHLER.length + " Fälle)",
   !stummeMuster.length, stummeMuster.join(" · "));
 
+/* Bis hierher wurde jedes Muster an konstruierten Einzelsätzen gemessen — und genau
+   das hat eine Fehlerklasse verdeckt. Über Nils' eigenes Portfolio (854 Wörter echter
+   Fließtext) fand der Textcheck null Treffer, obwohl beim Lesen sechs Kommafehler zu
+   sehen sind. Die Verbliste in y11 kannte allgemeine Verben (versucht, beschlossen),
+   aber keines der Verben, die er tatsächlich schreibt (lernen, helfen, animiert), und
+   trennbare Infinitive („aufzubauen“) konnte das Muster gar nicht treffen. Für die
+   fehlende indirekte Frage gab es überhaupt kein Muster.
+
+   Konstruierte Sätze finden solche Lücken nicht, weil sie mit denselben Wörtern gebaut
+   werden wie das Muster. Deshalb steht hier echter Text: links der Satz, wie er im
+   Portfolio steht, rechts das Muster, das ihn finden muss. */
+const ECHT_FALSCH = [
+  ["Sodass ich schon Erfahrungen habe und besser einschätzen kann wie man mit Schüler*innen umgeht.", "y12"],
+  ["In der Praxis möchte ich lernen Gruppendynamiken besser erkennen zu können.", "y11"],
+  ["Ich habe versucht zu beobachten wie die Betreuer*innen mit solchen Gruppendynamiken umgehen.", "y12"],
+  ["Auch spontane Aktionen können klappen, wenn man aktiv auf die Jugendlichen zugeht und diese animiert auch Freunden davon zu erzählen.", "y11"],
+  ["Jugendliche lernen am besten die Konflikte unter sich zu lösen.", "y11"],
+  ["Diese Erfahrungen helfen mir meine Lehrer-Persönlichkeit aufzubauen.", "y11"],
+  ["Er hat versucht pünktlich zu sein.", "y11"]
+];
+const echtStumm = [];
+ECHT_FALSCH.forEach(([t, id]) => {
+  const ids = daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>f.c.id)");
+  ids.forEach(x => belegteMuster.add(x));
+  if (!ids.includes(id)) echtStumm.push(id + " findet nichts in „" + t + "“");
+});
+P.ok("Die Fehler aus echtem Fließtext werden gefunden (" + ECHT_FALSCH.length + " Sätze)",
+  !echtStumm.length, echtStumm.join(" · "));
+
+/* Die Gegenprobe: dieselben Sätze richtig gesetzt, dazu unveränderte Absätze aus dem
+   Portfolio. Hier darf kein Muster mehr etwas als Fehler oder als prüfenswert melden.
+   Geprüft werden nur die Stufen hart und pruef — ugs, stil und form beschreiben Ton
+   und Register und dürfen auf einem persönlich gehaltenen Praktikumsbericht durchaus
+   anschlagen; das ist kein Fehlalarm. */
+const ECHT_RICHTIG = [
+  "Sodass ich schon Erfahrungen habe und besser einschätzen kann, wie man mit Schüler*innen umgeht.",
+  "In der Praxis möchte ich lernen, Gruppendynamiken besser erkennen zu können.",
+  "Ich habe versucht zu beobachten, wie die Betreuer*innen mit solchen Gruppendynamiken umgehen.",
+  "Auch spontane Aktionen können klappen, wenn man aktiv auf die Jugendlichen zugeht und diese animiert, auch Freunden davon zu erzählen.",
+  "Jugendliche lernen am besten, die Konflikte unter sich zu lösen.",
+  "Diese Erfahrungen helfen mir, meine Lehrer-Persönlichkeit aufzubauen.",
+  "Er hat versucht, pünktlich zu sein.",
+  "Zu meinen Aufgaben gehören die Betreuung der Kinder und Jugendlichen, die Kinder und Jugendlichen zu animieren und dafür zu sorgen, dass eventuelle persönliche Konflikte angemessen gelöst werden.",
+  "Ich erwarte in meinem Berufsfeldpraktikum, dass ich einen Einblick in die pädagogische Arbeit mit Kindern und Jugendlichen außerhalb vom Schulkontext erhalte.",
+  "Wie geht man mit sozial benachteiligten Kindern und Jugendlichen um?",
+  "Ich möchte Erfahrungen sammeln zu den zuvor erwähnten Fragen und somit meinen Kommunikationsstil hinterfragen.",
+  "Ich würde gerne Sport-Angebote während meines Praktikums anbieten und leiten.",
+  "Eine größere Jugendgruppe hatte einen Konflikt untereinander, bei dem es um Eifersucht und andere Punkte ging.",
+  "Es haben mehr Kinder und Jugendliche mitgemacht, als ich gedacht hätte.",
+  "Ich konnte mir einen Kommunikationsstil aneignen, der auf Augenhöhe mit den Jugendlichen ist, aber trotzdem eine gewisse Distanz wahrt.",
+  "Ebenfalls ist mir aufgefallen, wie schnell man eine authentische und angemessene Bindung zu den Jugendlichen aufbaut.",
+  "Für meinen späteren Lehrerberuf nehme ich mit, dass die Schüler*innen Konflikte am besten lernen, unter sich zu lösen.",
+  "Termin mit den Betreuern absprechen und Material und Zeitplan vorbereiten.",
+  "Motivierte Kinder und Jugendliche, welche die Bewegungsangebote nutzen würden."
+];
+const echtAlarm = [];
+ECHT_RICHTIG.forEach(t => {
+  daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>({id:f.c.id,sev:f.c.sev}))")
+    .filter(f => f.sev === "hart" || f.sev === "pruef")
+    .forEach(f => echtAlarm.push(f.sev + " " + f.id + ": „" + t + "“"));
+});
+P.ok("Keine Meldung auf richtig gesetztem Fließtext (" + ECHT_RICHTIG.length + " Sätze)",
+  !echtAlarm.length, echtAlarm.slice(0, 4).join(" · "));
+
 /* Kein Muster darf stumm bleiben. Die Hauptquelle ist der eigene Bestand an falschem
    Material — die Ablenker der Aufgaben und die Fehlersuchtexte sind bewusst fehlerhaftes
    Deutsch und belegen den Großteil der Muster von selbst, ohne Pflege. Was dort nicht
@@ -481,7 +545,25 @@ const VARIANTEN = {
         "Wenn das Verfahren zur Anwendung kommt, ändert sich wenig.",
         "Neue Geräte kommen ab Mai zum Einsatz.",
         "Wir ziehen einen Wechsel in Erwägung.",
-        "Die Methode findet breite Anwendung."]
+        "Die Methode findet breite Anwendung."],
+  /* y11 kannte nur allgemeine Verben und nur Infinitive auf -en. Die Reihe hier
+     deckt beides ab: die Verben aus echtem Text und die trennbaren Infinitive. */
+  y11: ["Er hat versucht die Prüfung zu bestehen.",
+        "Er hat versucht pünktlich zu sein.",
+        "Ich habe vergessen die Tür abzuschließen.",
+        "Sie hat mich gebeten das Material vorzubereiten.",
+        "Wir haben angefangen die Halle aufzuräumen.",
+        "Ich möchte lernen Gruppendynamiken besser zu erkennen.",
+        "Diese Erfahrungen helfen mir meine Rolle aufzubauen.",
+        "Er hat mir geraten das Praktikum zu verlängern.",
+        "Der Verein bietet an das Turnier zu wiederholen.",
+        "Sie hat es geschafft die Gruppe zu beruhigen."],
+  y12: ["Ich kann besser einschätzen wie man damit umgeht.",
+        "Wir beobachten wie die Betreuer damit umgehen.",
+        "Er weiß ob er kommen kann.",
+        "Sie fragt warum das so ist.",
+        "Ich verstehe nicht wieso das nicht klappt.",
+        "Er zeigt uns wie man den Ball annimmt."]
 };
 const luecken = [];
 let varianten = 0;

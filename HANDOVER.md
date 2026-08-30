@@ -31,15 +31,15 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 372, davon 44 Tippaufgaben (unterwegs abfragbar: 328) |
+| Übungen | 375, davon 44 Tippaufgaben (unterwegs abfragbar: 331) |
 | Regeln | 117 |
 | Wortkarten | 143 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen); abfragbar 165 |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 84 |
+| Prüfmuster im Textcheck | 85 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Kartenbestand (`alleSchluessel()`) | 680 |
-| Dateigröße | ~627 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
+| Kartenbestand (`alleSchluessel()`) | 683 |
+| Dateigröße | ~625 KB, eine Datei, kein Build (davon 8 KB App-Symbol) |
 
 Die Zahl 331 stand hier lange für die Übungen und stimmte nicht — `ALL.length` war schon
 vorher 371. Die Zahlen oben sind aus der laufenden App gerechnet, nicht abgeschrieben.
@@ -63,6 +63,69 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Der Textcheck an Nils' eigenem Text gemessen** (30.08.2026). Bis hierher war jedes
+Muster an konstruierten Sätzen geprüft — 73 richtige, 31 falsche, 85 Varianten, alle
+von mir geschrieben. Diese Runde hat den Textcheck zum ersten Mal über einen echten,
+zusammenhängenden Text von Nils laufen lassen: sein BFP-Portfolio, 862 Wörter.
+
+**Ergebnis vorher: null Meldungen.** Beim Lesen stehen sieben fehlende Kommas darin.
+
+```
+übersehen  „… besser einschätzen kann wie man mit Schüler*innen umgeht.“
+übersehen  „… möchte ich lernen Gruppendynamiken besser erkennen zu können.“
+übersehen  „… und zu beobachten wie die Betreuer*innen … umgehen.“
+übersehen  „… und diese animiert auch Freunden davon zu erzählen.“
+übersehen  „… am besten lernen die Konflikte unter sich zu lösen.“
+übersehen  „… Konflikte am besten lernen unter sich zu lösen.“
+übersehen  „… helfen mir meine Lehrer-Persönlichkeit aufzubauen.“
+```
+
+Drei Ursachen, alle vom selben Typ:
+
+- **`y11` kannte die falschen Verben.** In der Liste standen *versucht, beschlossen,
+  vorgeschlagen* — allgemeine Verben, die ich beim Schreiben des Musters im Kopf hatte.
+  Nils schreibt *lernen*, *helfen*, *animiert*. Kein einziges davon war drin.
+- **`y11` konnte trennbare Infinitive nicht treffen.** `zu\s+[a-zäöüß]+en` findet
+  „zu lösen“, aber nicht „aufzubauen“ — dort steckt das *zu* im Wort. Dabei steht
+  „hereinzulassen“ als Beispiel in der eigenen Regel.
+- **Für die fehlende indirekte Frage gab es überhaupt kein Muster.** „einschätzen kann
+  wie man …“ ist ein Nebensatz ohne Komma und kommt bei ihm zweimal vor.
+
+Dazu zwei Lücken, die erst die Trefferquotenreihe gezeigt hat: `-ern`/`-eln`-Infinitive
+(*verlängern*, *sammeln*) fielen durch, und `y12` ließ kein Wort zwischen Verb und
+Fragewort zu („zeigt **uns** wie man …“, „verstehe **nicht** wieso …“).
+
+**Nachher: sieben Meldungen, alle sieben echt, kein Fehlalarm.** Gegengeprüft an
+73 richtigen Sätzen, 297 Regelbeispielen und 21.792 Wörtern App-Text — dort meldet
+keines der beiden Muster etwas.
+
+Zwei Fehlalarme hat die Gegenprobe unterwegs abgefangen, bevor etwas in die Datei kam:
+
+```
+„die Kinder zu animieren und dafür zu sorgen“      zwei koordinierte Infinitivgruppen,
+                                                   kein Komma dazwischen
+„helfen steht mit Dativ — im Gegensatz zu unterstützen“   „zu“ ist hier Präposition
+```
+
+Der erste ist mit einem Rückblick `(?<!\bzu\s)` erledigt: Steht *zu* vor dem Verb, ist
+das Verb selbst ein Infinitiv und nicht das regierende Verb. Den zweiten löst der
+Gedankenstrich in der Sperrliste der Zwischenzeichen — ein Halbgeviertstrich trennt
+Teilsätze genauso wie ein Komma.
+
+**Neue Prüfung: Abschnitt „Fließtext“ in `tests/suite.js`.** Sieben echte Sätze, die
+gefunden werden müssen, und 19 richtig gesetzte, bei denen nichts anschlagen darf.
+Geprüft werden dort nur `hart` und `pruef` — `ugs`, `stil` und `form` beschreiben Ton
+und Register und dürfen auf einem persönlich gehaltenen Praktikumsbericht ansprechen.
+
+**Drei neue Aufgaben** zu genau diesen beiden Fehlern: `k42` (indirekte Frage),
+`k43` (Vergleich mit *wie* ohne Verb — die Gegenprobe) und `k44` (erweiterte
+Infinitivgruppe mit trennbarem Verb).
+
+**Was das grundsätzlich heißt:** Prüfsätze, die derselbe Kopf schreibt wie das Muster,
+verwenden dieselben Wörter — und finden deshalb genau die Lücken nicht, die zählen.
+Fremder Text ist die einzige ehrliche Messung. Wenn Nils weitere eigene Texte hat,
+sind sie das wertvollste Prüfmaterial im Projekt.
 
 **Alle 84 Prüfmuster sind durchgeprüft** (29.08.2026). Die letzten 29 — 15 `stil`, 14
 `form` — waren anders gelagert: Ein Fehlalarm ist dort begrifflich nicht möglich, weil
@@ -162,7 +225,7 @@ Korpora: **61 richtige Sätze, 69 Varianten.**
 
 ### Bilanz der Textcheck-Runden
 
-Fünf Anläufe, und das Bild ist vollständig genug für eine Aussage:
+Sechs Anläufe, und das Bild ist vollständig genug für eine Aussage:
 
 | Fund | Muster |
 |---|---|
@@ -171,11 +234,15 @@ Fünf Anläufe, und das Bild ist vollständig genug für eine Aussage:
 | Übersah den Fehler am Satzanfang | `y03`, `x20`–`x24`, `t06`, `y05`, `x23` |
 | Übersah gebeugte Formen | `x08`, `x09`, `x10`, `x14` |
 | Fand die eigene Musterformulierung nicht | `y10` |
+| Kannte die Wörter nicht, die Nils wirklich schreibt | `y11` |
 
 **Die Ursache ist immer dieselbe:** Ein Regex keilt auf ein Wort, ohne den Kontext zu
 prüfen. „seit ihr“, „seid dem“, „in 2000“, „mass“, „uns“ — jedes davon ist in einer Lesart
 ein Fehler und in einer anderen einwandfrei. Wer ein Muster schreibt, sollte zuerst fragen:
-**In welchem korrekten Satz kommt diese Zeichenfolge auch vor?**
+**In welchem korrekten Satz kommt diese Zeichenfolge auch vor?** Und seit der
+sechsten Runde die Gegenfrage dazu: **Welche Wörter benutzt Nils für diesen Fehler —
+und nicht ich?** Die erste Frage verhindert Fehlalarme, die zweite verhindert Lücken.
+Nur die zweite lässt sich an konstruierten Sätzen nicht beantworten.
 
 
 **Zwei weitere Fehlalarme, vier Beugungslücken** (29.08.2026). Die Suche in den übrigen
@@ -831,14 +898,22 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    Wörter aus dem *mündlichen* Register — Nils unterrichtet und spricht in Praktika, und
    die App ist auf Alltagssprache angelegt. Am ergiebigsten wären Verwechslungspaare aus
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
-   Bedarf vorbei.
+   Bedarf vorbei. Das BFP-Portfolio taugt dafür nur bedingt — es ist zu kurz und zu
+   sauber im Wortschatz; die Fehler darin sind Zeichensetzung, keine Wortwahl.
 
-3. **Textcheck: neue Muster ergänzen.** Alle 84 vorhandenen Muster sind in beide
-   Richtungen durchgeprüft; die Absicherung steht (73 richtige Sätze, 85 Varianten,
-   Wirksamkeit, Stufenabgleich). Neue Muster sind damit billig geworden. Was noch fehlt,
-   ist Material aus **Nils' eigenen Texten**: Welche Fehler macht er tatsächlich? Der
-   Textcheck ist auf allgemeine Stolperstellen gebaut, nicht auf seine. Ein Kapitel aus
-   einem Bericht würde mehr bringen als zehn weitere allgemeine Muster.
+3. **Mehr eigene Texte von Nils.** Das ist inzwischen der mit Abstand ergiebigste
+   Punkt der Liste, und er kostet ihn wenig: eine Hausarbeit, ein Bericht, ein längerer
+   Chatverlauf. Das BFP-Portfolio allein hat zwei blinde Stellen im Textcheck aufgedeckt
+   und drei Aufgaben hervorgebracht — nach fünf Runden Prüfung an konstruierten Sätzen,
+   die alle grün waren. Ein zweiter echter Text findet mit hoher Wahrscheinlichkeit
+   wieder etwas, das kein Prüfsatz je gefunden hätte. Die Auswertung ist Routine
+   geworden: Text durch `analyse()`, Funde gegenlesen, Lücken benennen, Muster
+   nachziehen, Sätze in den Abschnitt „Fließtext“ in `tests/suite.js` aufnehmen.
+
+4. **Textcheck: neue Muster ergänzen.** Alle 85 vorhandenen Muster sind in beide
+   Richtungen durchgeprüft; die Absicherung steht (73 richtige Sätze, 101 Varianten,
+   26 Fließtextsätze, Wirksamkeit, Stufenabgleich). Neue Muster sind damit billig
+   geworden — was fehlt, ist nicht Technik, sondern Material. Siehe Punkt 3.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
