@@ -7361,9 +7361,9 @@ const CHECKS = [
  k:"<b>derselbe</b> = ein und dasselbe Exemplar. <b>der gleiche</b> = von gleicher Art. Prüf, was gemeint ist.",r:"gram-derselbe"},
 {id:"y06",sev:"pruef",re:/\bwürde[nst]?\b[^.!?]{0,80}\bwürde[nst]?\b/g,t:"Doppeltes „würde“",
  k:"Wo die eigene Konjunktiv-II-Form existiert, ist sie kürzer und sicherer: <b>Wenn ich Zeit hätte, käme ich.</b>",r:"satz-konjunktiv"},
-{id:"y07",sev:"pruef",re:/\b(?:[Dd]es|[Ii]m|[Vv]or|[Ss]eit|[Oo]hne|[Zz]um|[Aa]uf dem)\s+(weiteren|folgenden|allgemeinen|übrigen|wesentlichen|einzelnen|nachhinein|voraus|klaren|großen|ganzen|öfteren|kurzem|langem|weiteres|laufenden)\b/g,
+{id:"y07",sev:"pruef",re:/\b(?:[Dd]es|[Ii]m|[Vv]or|[Ss]eit|[Oo]hne|[Zz]um|[Aa]uf dem)\s+(weiteren|folgenden|allgemeinen|übrigen|wesentlichen|einzelnen|nachhinein|voraus|klaren|großen|ganzen|öfteren|kurzem|langem|weiteres|laufenden)\b(?!\s+[A-ZÄÖÜ])/g,
  t:"Substantivierung großschreiben?",k:"Nach Präposition und Artikel wird substantiviert und großgeschrieben: <b>des Weiteren, im Folgenden, im Allgemeinen, im Voraus, im Nachhinein</b>.",r:"gross-subst"},
-{id:"y08",sev:"pruef",re:/\b(etwas|nichts|alles|viel|wenig)\s+(?!andere|anderes|weitere|weiteres|gleiche|meiste|mehr|übrige)[a-zäöüß]{4,}(es|e)\b/g,
+{id:"y08",sev:"pruef",re:/\b([Ee]twas|[Nn]ichts|[Aa]lles|[Vv]iel|[Ww]enig)\s+(?!anderes|weiteres|gleiches|meistes|übriges)[a-zäöüß]{2,}es\b/g,
  t:"Nach etwas/nichts/alles groß?",k:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das Adjektiv substantiviert: etwas <b>N</b>eues, nichts <b>B</b>esonderes, alles <b>G</b>ute.",r:"gross-subst"},
 {id:"y09",sev:"pruef",re:/\b(hoffe|denke|glaube|meine|sagte|sagt|sagen|finde|merke|wusste|bedeutet|zeigt|heißt|ist|war|bleibt|scheint|erklärt|betont|behauptet|vermute)\s+das\s+(ich|du|er|sie|es|wir|ihr|man|sich|der|die|das|ein|eine|einen|einem|dem|den|mein|sein|ihr)\b/g,
  t:"das oder dass?",k:"Ersatzprobe: Lässt sich „dieses/welches“ einsetzen? Wenn nein, ist es die Konjunktion <b>dass</b>.",r:"recht-dass"},
@@ -7454,7 +7454,7 @@ const CHECKS_Z = [
  k:"Der Einschub bekommt den langen Gedankenstrich: <b>Der Plan – so gut er war – scheiterte.</b>",r:"z-gedankenstrich"},
 {id:"t11",sev:"pruef",re:/\bS\.\d|\bAbb\.\d|\bTab\.\d|\bNr\.\d|\bAbs\.\d/g,t:"Leerzeichen nach dem Kürzel",
  k:"Zwischen Kürzel und Zahl steht ein Leerzeichen: <b>S. 12</b>, <b>Abb. 3</b>, <b>Nr. 7</b>.",r:"n-quellen"},
-{id:"t12",sev:"pruef",re:/\bfragte[^.!?]{2,60}\?/g,t:"Fragezeichen nach indirekter Frage?",
+{id:"t12",sev:"pruef",re:/\bfragte\b[^,.!?]{0,20},[^.!?]{2,60}\?/g,t:"Fragezeichen nach indirekter Frage?",
  k:"Nach einer indirekten Frage steht ein Punkt: <b>Er fragte, wann sie kommt.</b>",r:"z-frage"}
 ];
 const CHECKS_N = [
@@ -7473,7 +7473,7 @@ const CHECKS_N = [
 {id:"a05",sev:"stil",re:/\b(der|des|dem)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+/g,
  t:"Genitivkette",
  k:"Drei Genitive hintereinander lesen sich zäh. Bilde ein Kompositum oder verbalisiere: „die Ergebnisse der Teilnehmerbefragung auswerten“.",r:"stil-genitivkette"},
-{id:"a06",sev:"pruef",re:/\b(faul|unmotiviert|unzuverlässig|schlampig|desinteressiert)\b/gi,
+{id:"a06",sev:"pruef",re:/\b(unmotiviert|unzuverlässig|schlampig|desinteressiert)\b|(?<!\b(?:Obst|Ei|Eier|Apfel|Äpfel|Holz|Zahn|Zähne|Kompromiss|Zauber)\b[^.!?]{0,15})\bfaul\b/gi,
  t:"Etikett statt Beobachtung",
  k:"Solche Wörter bewerten die Person, statt Verhalten zu beschreiben. In Rückmeldungen und Gesprächen erzeugen sie Abwehr: „dreimal ohne Sportsachen erschienen“ statt „faul“.",r:"form-kritik"},
 {id:"a07",sev:"pruef",re:/\bich bin (wahrscheinlich |vielleicht )?(zu )?(blöd|dumm|doof|schwer von Begriff)\b/gi,

@@ -321,7 +321,17 @@ const SAUBER = [
   "Das spiegelt die Lage wider.",
   "Er nutzt z. B. Intervalle im Training.",
   "Der Kurs kostet 20 % mehr als geplant.",
-  "Nach § 5 der Prüfungsordnung ist das zulässig."
+  "Nach § 5 der Prüfungsordnung ist das zulässig.",
+  "Im weiteren Verlauf wurde es ruhiger.",
+  "Im folgenden Kapitel steht die Auswertung.",
+  "Sie sprach etwas leise.",
+  "Er hat viel bessere Chancen.",
+  "Wer fragte das?",
+  "Das Obst ist faul geworden.",
+  "Die Temperatur lag bei 12 °C.",
+  "Siehe S. 12 und Abb. 3.",
+  "Mit wem hast du gesprochen?",
+  "Er hat viel Gutes bewirkt."
 ];
 
 const fremdalarm = [];
@@ -460,7 +470,11 @@ const VARIANTEN = {
   x16: ["Wieder Erwarten hat es geklappt."],
   t02: ["Er nutzt z.B. Intervalle.", "Das gilt d.h. für alle."],
   t03: ["Der Kurs kostet 20% mehr.", "Nur 5% blieben übrig."],
-  t04: ["Nach §5 der Ordnung.", "Siehe §12 Absatz 3."]
+  t04: ["Nach §5 der Ordnung.", "Siehe §12 Absatz 3."],
+  y07: ["Im weiteren fehlt die Auswertung.", "Des weiteren fehlt etwas.", "Im allgemeinen stimmt das."],
+  y08: ["Er hat etwas neues ausprobiert.", "Da war nichts gutes dabei.", "Alles wichtiges steht drin."],
+  t12: ["Er fragte, wann sie kommt?", "Sie fragte ihn, ob er kommt?"],
+  a06: ["Der Schüler ist faul.", "Die Gruppe wirkt unmotiviert.", "Er arbeitet schlampig."]
 };
 const luecken = [];
 let varianten = 0;
