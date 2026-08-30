@@ -64,6 +64,45 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Trefferquote: Sechs Muster fanden die Hälfte ihrer Fälle nicht** (29.08.2026).
+
+```
+x01 wegen      2/8      x04 Komparativ  3/14
+x02 trotz      2/5      x17 seid        2/7
+x03 während    2/5      x23 n-Dekl      2/10
+```
+
+Die Genitivpräpositionen fingen nur `dem/den/einem` — **„wegen meinem Bruder“, die
+häufigere Form, lief durch.** `x04` kannte 18 Komparative, die Hälfte der geläufigen
+fehlte. `x23` kannte 28 schwache Maskulina ohne *Nachbar*, *Dozent*, *Referent*.
+
+**Schwerer wiegt `x17`.** Das Muster meldete fünf korrekte Sätze als klaren Fehler:
+
+```
+hart x17  „Ihr seid dem Verein beigetreten.“    ← korrektes Deutsch
+hart x17  „Ihr seid der Einladung gefolgt.“     ← korrektes Deutsch
+hart x17  „Ihr seid Anfang Mai dabei gewesen.“  ← korrektes Deutsch
+```
+
+Dort ist „seid“ die **Verbform** und „dem“ ein Dativobjekt, keine Zeitangabe. Dasselbe
+Muster wie bei `x18`: auf ein Wort gekeilt, ohne den Kontext zu prüfen. Neu blockt ein
+Rückblick auf ein vorangehendes „ihr“ die Verbform aus; die verwechselte Präposition am
+Satzanfang bleibt erfasst. Gegen elf Fälle geprüft.
+
+Alle sechs Muster jetzt vollständig: **47 von 47 Varianten.** Bewusst draußen geblieben:
+„trotz allem“ (standardsprachlich) und *Erbe* (»dem Erbe« ist als Neutrum korrekt).
+
+**Zwei neue Absicherungen:** eine Trefferquotenprüfung mit 39 Varianten — wer eine
+Wortliste in einem Muster erweitert, erweitert die Reihe mit — und sechs Sätze mehr im
+sauberen Korpus, darunter die `x17`-Falle.
+
+**Damit ist ein Bild vollständig:** Drei harte Muster — `x18`, `x17` und (als Schärfegrad)
+`x01`/`x04`/`x05`/`x20` — haben Nils korrektes oder bloß umgangssprachliches Deutsch als
+Fehler angezeigt. Alle drei Befunde kamen erst heraus, als jemand gezielt danach suchte;
+keiner davon wäre im Betrieb aufgefallen, weil ein Textcheck, der zu viel meldet, wie ein
+gründlicher Textcheck aussieht.
+
+
 **Der Textcheck bekommt die dritte Stufe** (29.08.2026). Beim Prüfen der Trefferquote kam
 etwas Grundsätzlicheres heraus: Die App kennt in Beispielen drei Stufen — `ok`, `ugs`,
 `nope` —, der Textcheck kannte sie nicht. Dort stand alles Nichtstandardsprachliche als
@@ -647,13 +686,13 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Trefferquote der Muster.** Geprüft ist, dass jedes Muster *irgendwo* etwas findet —
-   nicht, dass es *alle* Formulierungen desselben Fehlers findet. `x18` und `y10` waren
-   beide „wirksam“ und trotzdem halb blind. Vorgehen: pro Muster drei bis vier Varianten
-   desselben Fehlers durchspielen. Beim ersten Anlauf dazu kam die Stufenfrage dazwischen
-   (siehe oben) — die Trefferquote selbst ist noch offen. Konkreter Anfang: Die
-   Genitivpräpositionen `x01`–`x03` fangen nur `dem/den/einem`, nicht `meinem`, `diesem`,
-   `keinem` und die übrigen Possessive.
+3. **Trefferquote der übrigen Muster.** Geprüft sind die sechs mit Wortlisten
+   (`x01`–`x04`, `x17`, `x23`). Die restlichen rund 25 harten und umgangssprachlichen
+   Muster sind nur mit *einem* Beispielsatz belegt. Nach drei Funden in drei Anläufen ist
+   die Erwartung klar: Da liegt noch mehr. Vorgehen wie gehabt — pro Muster vier bis fünf
+   Varianten schreiben, prüfen, Lücken schließen, Varianten in `VARIANTEN` eintragen.
+   Besonders lohnend sind Muster, die auf ein einzelnes Wort keilen: Genau dort saßen
+   `x17` und `x18`.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
