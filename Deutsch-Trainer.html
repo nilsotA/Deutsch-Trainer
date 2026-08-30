@@ -7383,7 +7383,7 @@ const CHECKS = [
 /* ---------- STIL ---------- */
 {id:"s01",sev:"stil",re:/\b(eigentlich|irgendwie|quasi|sozusagen|letztendlich|schlussendlich|halt|durchaus|gewissermaßen|praktisch|im Grunde|an dieser Stelle|in diesem Kontext|im Rahmen dessen)\b/gi,
  t:"Füllwort",k:"Streich es testweise. Bleibt der Satz gleich, war es überflüssig.",r:"stil-fuellwort"},
-{id:"s02",sev:"stil",re:/\b(zur\s+Anwendung\s+(kommt|kommen|kam)|in\s+Erwägung\s+(ziehen|gezogen)|zur\s+Durchführung\s+(bringen|gebracht)|Anwendung\s+(findet|finden)|eine\s+Prüfung\s+(vornehmen|vorgenommen)|zum\s+Einsatz\s+(kommt|kommen)|Verwendung\s+(findet|finden))\b/gi,
+{id:"s02",sev:"stil",re:/\b(?:(?:zur\s+Anwendung|zum\s+Einsatz)\s+(?:kommt|kommen|kam|kamen)|(?:kommt|kommen|kam|kamen)\s+[^.!?]{0,45}?\b(?:zur\s+Anwendung|zum\s+Einsatz)|in\s+Erwägung\s+(?:ziehen|gezogen|zieht)|(?:ziehen|zieht|zog|gezogen)\s+[^.!?]{0,45}?\bin\s+Erwägung|zur\s+Durchführung\s+(?:bringen|gebracht)|(?:Anwendung|Verwendung)\s+(?:findet|finden|fand)|(?:findet|finden|fand)\s+(?:(?!die\s|das\s|eine\s|der\s)[a-zäöüß]+\s+){0,2}(?:Anwendung|Verwendung)|eine\s+Prüfung\s+(?:vornehmen|vorgenommen|vornimmt))\b/gi,
  t:"Streckverb",k:"Das einfache Verb ist fast immer stärker: anwenden, erwägen, durchführen, prüfen, einsetzen, verwenden.",r:"stil-nominal"},
 {id:"s03",sev:"stil",re:/\b(bereits\s+schon|schon\s+bereits|eventuell\s+vielleicht|vielleicht\s+eventuell|kleines\s+Detail|runder\s+Kreis|weißer\s+Schimmel|neu\s+renoviert|persönlich\s+anwesend|gemeinsames\s+Miteinander|zurzeit\s+momentan|alter\s+Greis|tote\s+Leiche)\b/gi,
  t:"Doppelung",k:"Zweimal dasselbe sagen wirkt unbeholfen. Eines der beiden Wörter reicht.",r:"stil-pleonasmus"},

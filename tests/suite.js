@@ -331,7 +331,9 @@ const SAUBER = [
   "Die Temperatur lag bei 12 °C.",
   "Siehe S. 12 und Abb. 3.",
   "Mit wem hast du gesprochen?",
-  "Er hat viel Gutes bewirkt."
+  "Er hat viel Gutes bewirkt.",
+  "Er findet die Anwendung gut.",
+  "Das Verfahren wird im Training angewendet."
 ];
 
 const fremdalarm = [];
@@ -474,7 +476,12 @@ const VARIANTEN = {
   y07: ["Im weiteren fehlt die Auswertung.", "Des weiteren fehlt etwas.", "Im allgemeinen stimmt das."],
   y08: ["Er hat etwas neues ausprobiert.", "Da war nichts gutes dabei.", "Alles wichtiges steht drin."],
   t12: ["Er fragte, wann sie kommt?", "Sie fragte ihn, ob er kommt?"],
-  a06: ["Der Schüler ist faul.", "Die Gruppe wirkt unmotiviert.", "Er arbeitet schlampig."]
+  a06: ["Der Schüler ist faul.", "Die Gruppe wirkt unmotiviert.", "Er arbeitet schlampig."],
+  s02: ["Das Verfahren kommt im Training zur Anwendung.",
+        "Wenn das Verfahren zur Anwendung kommt, ändert sich wenig.",
+        "Neue Geräte kommen ab Mai zum Einsatz.",
+        "Wir ziehen einen Wechsel in Erwägung.",
+        "Die Methode findet breite Anwendung."]
 };
 const luecken = [];
 let varianten = 0;
