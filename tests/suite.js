@@ -310,7 +310,18 @@ const SAUBER = [
   "Das Trainingslager fand in 2000 Metern Höhe statt.",
   "Er mass die Strecke sorgfältig aus.",
   "Die Standarten der Vereine wehten am Eingang.",
-  "Er trainiert voraussichtlich bis Ostern weiter."
+  "Er trainiert voraussichtlich bis Ostern weiter.",
+  "Das interessiert uns sehr.",
+  "Das interessiert euch bestimmt auch.",
+  "Das kostet uns viel Zeit.",
+  "Er ruft uns zu, dass es losgeht.",
+  "Sie rief mir nach, ich solle warten.",
+  "Wider Erwarten hat es geklappt.",
+  "Er will dem Vorschlag widersprechen.",
+  "Das spiegelt die Lage wider.",
+  "Er nutzt z. B. Intervalle im Training.",
+  "Der Kurs kostet 20 % mehr als geplant.",
+  "Nach § 5 der Prüfungsordnung ist das zulässig."
 ];
 
 const fremdalarm = [];
@@ -441,7 +452,15 @@ const VARIANTEN = {
   x09: ["Das läuft seperat.", "Zwei seperate Listen.", "im seperaten Bereich"],
   x10: ["Er hat kein Rückrad.", "Das Rückrads war das Problem."],
   x14: ["Das war nicht vorraus zu sehen.", "Vorraussichtlich klappt es."],
-  x24: ["In 2026 beginnt das Semester.", "Das war in 2025.", "in 2021 erschien die Studie"]
+  x24: ["In 2026 beginnt das Semester.", "Das war in 2025.", "in 2021 erschien die Studie"],
+  x20: ["Ich rufe dir später an.", "Ruf mir an!", "Ich habe dir angerufen.", "Sie ruft ihm gleich an."],
+  x21: ["Das interessiert mir nicht.", "Das interessiert dir doch nicht."],
+  x22: ["Das kostet mir zu viel.", "Das kostet dir nur Zeit."],
+  x15: ["Ich möchte dem wiedersprechen.", "Das wiederlegt die These.", "Es wiederspiegelt die Lage."],
+  x16: ["Wieder Erwarten hat es geklappt."],
+  t02: ["Er nutzt z.B. Intervalle.", "Das gilt d.h. für alle."],
+  t03: ["Der Kurs kostet 20% mehr.", "Nur 5% blieben übrig."],
+  t04: ["Nach §5 der Ordnung.", "Siehe §12 Absatz 3."]
 };
 const luecken = [];
 let varianten = 0;
