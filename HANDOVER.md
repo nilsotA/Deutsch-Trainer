@@ -64,6 +64,37 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die 22 `pruef`-Muster durchgeprüft — vier Befunde** (29.08.2026).
+
+**`y08` war in beide Richtungen falsch:**
+
+```
+pruef y08  „Sie sprach etwas leise.“          ← korrekt, Adverb
+pruef y08  „Er hat viel bessere Chancen.“     ← korrekt, Adjektiv vor Substantiv
+still      „Er hat etwas neues ausprobiert.“  ← der eigentliche Fehler
+```
+
+Ursache: Das Muster verlangte **vier Zeichen vor der Endung** — „neu“ hat drei, also fiel
+der Hauptfall durch. Und es nahm die Endung `-e` mit, die bei Adverbien und attributiven
+Adjektiven steht. Substantivierte Adjektive nach *etwas, nichts, alles* tragen **`-es`**;
+das trennt sauber. Dazu den Satzanfang geöffnet, sonst wäre „Alles wichtiges …“ weiter
+durchgelaufen.
+
+`y07` meldete „Im weiteren Verlauf“ und „Im folgenden Kapitel“ — dort ist das Wort ein
+Adjektiv vor einem Substantiv. Folgt ein großgeschriebenes Wort, ist es keine
+Substantivierung.
+
+`t12` meldete jede direkte Frage mit „fragte“: **„Wer fragte das?“ ist korrekt.** Die
+indirekte Frage hat ein Komma vor dem Fragewort.
+
+`a06` meldete „Das Obst ist **faul** geworden“ — wörtliche Bedeutung, kein Etikett für
+Menschen. Die übrigen vier Wörter der Liste gibt es nur über Personen.
+
+Die übrigen 18 `pruef`-Muster sind in beiden Richtungen geprüft und sauber.
+
+Korpora: **71 richtige Sätze, 80 Varianten.**
+
+
 **Drei Muster verwechselten Dativ und Akkusativ** (29.08.2026). Die letzte Runde durch die
 harten Muster fand noch drei Fehlalarmklassen, alle mit derselben Ursache: **„uns“ und
 „euch“ sind Dativ und Akkusativ zugleich.**
@@ -762,12 +793,13 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Textcheck: die weichen Muster.** Die 30 harten und 6 umgangssprachlichen Muster sind
-   durchgeprüft. Ungeprüft sind die 22 `pruef`-, 15 `stil`- und 14 `form`-Muster. Dort ist
-   ein Fehlalarm weniger schlimm — sie behaupten nichts —, aber ein `pruef`-Muster, das
-   ständig auf korrektem Text anspringt, macht den Textcheck unbrauchbar. Vorgehen wie
-   gehabt, mit der Frage zuerst: **In welchem korrekten Satz kommt diese Zeichenfolge
-   auch vor?**
+3. **Textcheck: `stil` und `form`.** Die 30 harten, 6 umgangssprachlichen und 22
+   `pruef`-Muster sind durchgeprüft. Offen sind die **15 `stil`- und 14 `form`-Muster**.
+   Dort ist die Lage anders: Sie *sollen* auf korrektem Text ansprechen, ein Fehlalarm
+   im engeren Sinn ist dort nicht möglich. Zu prüfen ist deshalb nur die **Trefferquote**
+   — ob ein Stilhinweis die Fälle findet, für die er gedacht ist — und ob er nicht so
+   breit streut, dass er in jedem Text erscheint. Für `s01` (Füllwörter) und `a04`
+   (lange Sätze) lohnt ein Blick auf die Häufigkeit in einem echten Text von Nils.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
