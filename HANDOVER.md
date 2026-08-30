@@ -64,6 +64,39 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zwei weitere Fehlalarme, vier Beugungslücken** (29.08.2026). Die Suche in den übrigen
+harten Mustern hat wieder in beide Richtungen etwas gefunden.
+
+```
+hart x24  „Das Trainingslager fand in 2000 Metern Höhe statt.“   ← korrekt
+hart x26  „Er mass die Strecke sorgfältig aus.“                  ← korrekt
+```
+
+`x24` sollte den Anglizismus „in 2026“ fangen und nahm **jede Zahl zwischen 1900 und
+2099 nach „in“** — auch Höhenangaben, die im Sport nicht selten sind. Folgt ein
+großgeschriebenes Wort, ist es eine Menge und kein Jahr; das schließt Maßangaben aus,
+ohne „In 2026 beginnt …“ zu verlieren.
+
+`x26` führte **„mass“ als Schweizer Schreibung** — es ist aber das Präteritum von
+*messen*. Als Schweizer Form käme es großgeschrieben als Substantiv; das ist den
+Fehlalarm nicht wert, also gestrichen.
+
+**Beugungslücken:** Vier Muster endeten auf `\b` und übersahen jede gebeugte Form —
+„Standarts“, „seperate“, „vorraussichtlich“, „Rückrads“. Alle vier geöffnet.
+
+Bei *Standart* bleibt es bewusst bei der s-Form: **„Standarte“ und „Standarten“ sind
+eigene, richtige Wörter.** Das wäre beim ersten Entwurf beinahe ein neuer Fehlalarm
+geworden — der Isolationstest hat ihn vor dem Einbau gefangen. Das ist der Grund, warum
+neue Muster erst isoliert geprüft und dann eingebaut werden.
+
+Korpora: **50 richtige Sätze, 51 Varianten.**
+
+**Zwischenstand der Fehlalarmsuche.** Fünf harte Muster haben Nils korrektes Deutsch als
+Fehler angezeigt: `x18` (seit ihr), `x17` (Ihr seid dem …), `x24` (in 2000 Metern),
+`x26` (er mass) — dazu vier Muster mit zu scharfem Schärfegrad. Vier Anläufe, jedes Mal
+ein Fund. Wer weitersucht, wird vermutlich weiter fündig.
+
+
 **Trefferquote: Sechs Muster fanden die Hälfte ihrer Fälle nicht** (29.08.2026).
 
 ```
@@ -686,13 +719,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Trefferquote der übrigen Muster.** Geprüft sind die sechs mit Wortlisten
-   (`x01`–`x04`, `x17`, `x23`). Die restlichen rund 25 harten und umgangssprachlichen
-   Muster sind nur mit *einem* Beispielsatz belegt. Nach drei Funden in drei Anläufen ist
-   die Erwartung klar: Da liegt noch mehr. Vorgehen wie gehabt — pro Muster vier bis fünf
-   Varianten schreiben, prüfen, Lücken schließen, Varianten in `VARIANTEN` eintragen.
-   Besonders lohnend sind Muster, die auf ein einzelnes Wort keilen: Genau dort saßen
-   `x17` und `x18`.
+3. **Trefferquote — der Rest.** Geprüft sind jetzt elf Muster mit Varianten
+   (`x01`–`x04`, `x08`–`x10`, `x14`, `x17`, `x23`, `x24`). Offen bleiben rund fünfzehn,
+   darunter `a01` (Großschreibung nach der Anrede), `t01` (englische Anführungszeichen),
+   `t02` (Abkürzungen), `x15`/`x16` (wider/wieder), `x20`–`x22`, `x25`, `x27`. Vorgehen
+   unverändert: vier bis fünf Varianten je Muster, **und dazu jeweils ein korrekter Satz,
+   der knapp danebenliegt** — die Fehlalarme fielen bisher öfter auf als die Lücken.
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
