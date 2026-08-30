@@ -300,7 +300,13 @@ const SAUBER = [
   "Sie sagte: „Das machen wir anders.“",
   "Er nannte das eine gute Idee.",
   "Das Training fällt aus (wegen des Wetters).",
-  "Bitte melde dich, sobald du angekommen bist."
+  "Bitte melde dich, sobald du angekommen bist.",
+  "Ihr seid dem Verein beigetreten.",
+  "Ihr seid der Einladung gefolgt.",
+  "Ihr alle seid dem Verein beigetreten.",
+  "Ihr seid Anfang Mai dabei gewesen.",
+  "Trotz allem hat er weitergemacht.",
+  "Wir sprechen mit dem Kollegen über den Ablauf."
 ];
 
 const fremdalarm = [];
@@ -410,6 +416,36 @@ const zuHart = [];
     .filter(x => x.sev === "hart")
     .forEach(x => zuHart.push(x.id + " meldet „" + f + "“ als klaren Fehler"));
 });
+/* Wirksamkeit ist nicht Trefferquote. Ein Muster kann eine Formulierung finden und
+   fünf andere desselben Fehlers durchlassen — x01 fing „wegen dem“, aber nicht „wegen
+   meinem“, und das ist die häufigere Form. Hier steht je Muster eine Reihe von
+   Varianten; alle müssen greifen. Wer eine Wortliste in einem Muster erweitert,
+   erweitert hier die Reihe mit. */
+const VARIANTEN = {
+  x01: ["wegen dem Wetter", "wegen einem Fehler", "wegen meinem Bruder", "wegen seinem Knie",
+        "wegen ihrem Auto", "wegen diesem Problem", "wegen unserem Plan", "wegen keinem Grund"],
+  x02: ["trotz dem Regen", "trotz einem Sieg", "trotz meinem Einsatz", "trotz diesem Ergebnis"],
+  x03: ["während dem Training", "während einem Spiel", "während meinem Praktikum",
+        "während diesem Semester"],
+  x04: ["größer wie", "schneller wie", "besser wie", "billiger wie", "teurer wie",
+        "leichter wie", "früher wie", "später wie", "schöner wie", "lieber wie", "einfacher wie"],
+  x17: ["Seid dem Sommer trainiert er wieder.", "Seid letztem Jahr läuft es besser.",
+        "Seid Wochen ist die Halle gesperrt.", "Seid Montag ist er zurück."],
+  x23: ["mit dem Kollege", "für den Mensch", "dem Nachbar", "den Doktorand", "dem Dozent",
+        "den Referent", "dem Elefant", "den Absolvent"]
+};
+const luecken = [];
+let varianten = 0;
+Object.entries(VARIANTEN).forEach(([id, liste]) => {
+  liste.forEach(t => {
+    varianten++;
+    const ids = daten(w, "analyse(" + JSON.stringify(t) + ").finds.map(f=>f.c.id)");
+    if (!ids.includes(id)) luecken.push(id + " übersieht „" + t + "“");
+  });
+});
+P.ok("Die Muster finden auch die anderen Formen desselben Fehlers (" + varianten + " Varianten)",
+  !luecken.length, luecken.slice(0, 5).join(" · "));
+
 P.ok("Kein hartes Muster meldet eine als umgangssprachlich ausgezeichnete Form ("
   + [...new Set(ugsFormenTC)].length + " Formen)",
   !zuHart.length, zuHart.join(" · "));
