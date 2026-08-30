@@ -64,6 +64,49 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Drei Muster verwechselten Dativ und Akkusativ** (29.08.2026). Die letzte Runde durch die
+harten Muster fand noch drei Fehlalarmklassen, alle mit derselben Ursache: **„uns“ und
+„euch“ sind Dativ und Akkusativ zugleich.**
+
+```
+hart  x21  „Das interessiert uns sehr.“        ← korrekt, uns ist Akkusativ
+pruef x22  „Das kostet uns viel Zeit.“         ← korrekt
+ugs   x20  „Er ruft uns zu, dass es losgeht.“  ← korrekt, zurufen + Dativ
+```
+
+*interessieren* und *kosten* verlangen den **Akkusativ** der Person — und genau der steht
+in diesen Sätzen. Eindeutig dativisch sind nur *mir, dir, ihm, ihnen*.
+
+`x20` hatte zusätzlich ein Verbproblem: Es prüfte nur „rufen + Dativ“ und traf damit
+*zurufen* und *nachrufen*, die den Dativ zu Recht verlangen. Gemeint ist *anrufen* — bei
+den finiten Formen erkennbar am abgetrennten „an“, beim Partizip an der Wortstellung.
+**Nebenwirkung: Das Muster fängt jetzt auch den Imperativ „Ruf mir an!“**, die häufigste
+Form dieses Fehlers, die vorher durchlief.
+
+Die übrigen zwölf Muster (`x05`–`x07`, `x11`–`x13`, `x15`, `x16`, `x25`, `x27`, `t01`–`t04`,
+`t06`, `a01`) sind in beiden Richtungen durchgeprüft und **sauber**. Damit ist die Suche
+auf der Ebene der harten und umgangssprachlichen Muster ausgeschöpft.
+
+Korpora: **61 richtige Sätze, 69 Varianten.**
+
+### Bilanz der Textcheck-Runden
+
+Fünf Anläufe, und das Bild ist vollständig genug für eine Aussage:
+
+| Fund | Muster |
+|---|---|
+| Meldete korrektes Deutsch als Fehler | `x18`, `x17`, `x24`, `x26`, `x21`, `x22`, `x20` |
+| Zu scharfer Schärfegrad (ugs als „Fehler“) | `x01`, `x02`, `x03`, `x04`, `x05`, `x20` |
+| Übersah den Fehler am Satzanfang | `y03`, `x20`–`x24`, `t06`, `y05`, `x23` |
+| Übersah gebeugte Formen | `x08`, `x09`, `x10`, `x14` |
+| Fand die eigene Musterformulierung nicht | `y10` |
+
+**Die Ursache ist immer dieselbe:** Ein Regex keilt auf ein Wort, ohne den Kontext zu
+prüfen. „seit ihr“, „seid dem“, „in 2000“, „mass“, „uns“ — jedes davon ist in einer Lesart
+ein Fehler und in einer anderen einwandfrei. Wer ein Muster schreibt, sollte zuerst fragen:
+**In welchem korrekten Satz kommt diese Zeichenfolge auch vor?**
+
+
 **Zwei weitere Fehlalarme, vier Beugungslücken** (29.08.2026). Die Suche in den übrigen
 harten Mustern hat wieder in beide Richtungen etwas gefunden.
 
@@ -719,12 +762,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    seinen eigenen Texten; dafür müsste er ein paar davon beisteuern, sonst rät man am
    Bedarf vorbei.
 
-3. **Trefferquote — der Rest.** Geprüft sind jetzt elf Muster mit Varianten
-   (`x01`–`x04`, `x08`–`x10`, `x14`, `x17`, `x23`, `x24`). Offen bleiben rund fünfzehn,
-   darunter `a01` (Großschreibung nach der Anrede), `t01` (englische Anführungszeichen),
-   `t02` (Abkürzungen), `x15`/`x16` (wider/wieder), `x20`–`x22`, `x25`, `x27`. Vorgehen
-   unverändert: vier bis fünf Varianten je Muster, **und dazu jeweils ein korrekter Satz,
-   der knapp danebenliegt** — die Fehlalarme fielen bisher öfter auf als die Lücken.
+3. **Textcheck: die weichen Muster.** Die 30 harten und 6 umgangssprachlichen Muster sind
+   durchgeprüft. Ungeprüft sind die 22 `pruef`-, 15 `stil`- und 14 `form`-Muster. Dort ist
+   ein Fehlalarm weniger schlimm — sie behaupten nichts —, aber ein `pruef`-Muster, das
+   ständig auf korrektem Text anspringt, macht den Textcheck unbrauchbar. Vorgehen wie
+   gehabt, mit der Frage zuerst: **In welchem korrekten Satz kommt diese Zeichenfolge
+   auch vor?**
 
 **Erledigt und deshalb hier gestrichen:** die Belege für die Zeichensetzung (alle 17
 Regeln), die sieben unbelegten Variantenregeln, die zehn ungeprüften Satzformen und die
