@@ -306,7 +306,11 @@ const SAUBER = [
   "Ihr alle seid dem Verein beigetreten.",
   "Ihr seid Anfang Mai dabei gewesen.",
   "Trotz allem hat er weitergemacht.",
-  "Wir sprechen mit dem Kollegen über den Ablauf."
+  "Wir sprechen mit dem Kollegen über den Ablauf.",
+  "Das Trainingslager fand in 2000 Metern Höhe statt.",
+  "Er mass die Strecke sorgfältig aus.",
+  "Die Standarten der Vereine wehten am Eingang.",
+  "Er trainiert voraussichtlich bis Ostern weiter."
 ];
 
 const fremdalarm = [];
@@ -432,7 +436,12 @@ const VARIANTEN = {
   x17: ["Seid dem Sommer trainiert er wieder.", "Seid letztem Jahr läuft es besser.",
         "Seid Wochen ist die Halle gesperrt.", "Seid Montag ist er zurück."],
   x23: ["mit dem Kollege", "für den Mensch", "dem Nachbar", "den Doktorand", "dem Dozent",
-        "den Referent", "dem Elefant", "den Absolvent"]
+        "den Referent", "dem Elefant", "den Absolvent"],
+  x08: ["Das ist kein Standart.", "Die Standarts sind hoch."],
+  x09: ["Das läuft seperat.", "Zwei seperate Listen.", "im seperaten Bereich"],
+  x10: ["Er hat kein Rückrad.", "Das Rückrads war das Problem."],
+  x14: ["Das war nicht vorraus zu sehen.", "Vorraussichtlich klappt es."],
+  x24: ["In 2026 beginnt das Semester.", "Das war in 2025.", "in 2021 erschien die Studie"]
 };
 const luecken = [];
 let varianten = 0;
