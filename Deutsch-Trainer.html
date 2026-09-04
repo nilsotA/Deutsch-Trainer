@@ -763,7 +763,7 @@ const EX_A = [
 {id:"k27",c:"komma",q:"Was ist korrekt?",o:[
  "Vorausgesetzt, dass alle zusagen, findet der Ausflug statt.",
  "Vorausgesetzt dass alle zusagen findet der Ausflug statt."],a:0,
- e:"Pflicht ist das Komma nach „zusagen“: Es schließt den vorangestellten Nebensatz, und genau das fehlt in der falschen Fassung. Das Komma zwischen „vorausgesetzt“ und „dass“ ist dagegen freigestellt, ebenso bei „angenommen(,) dass“ und „ausgenommen(,) wenn“. Erst bei längeren Einleitungen steht es fest: „gesetzt den Fall, dass“, „es sei denn, dass“.",r:"komma-nebensatz"},
+ e:"Pflicht ist das Komma nach „zusagen“: Es schließt den vorangestellten Nebensatz, und genau das fehlt in der falschen Fassung. Das Komma zwischen „vorausgesetzt“ und „dass“ ist dagegen freigestellt, ebenso bei „angenommen(,) dass“, „ausgenommen(,) wenn“ und „je nachdem(,) ob“. Erst bei längeren Einleitungen steht es fest: „gesetzt den Fall, dass“, „es sei denn, dass“.",r:"komma-nebensatz"},
 
 {id:"k28",c:"komma",q:"Wie viele Kommas braucht dieser Satz? „Er sagte dass er komme wenn er Zeit habe.“",o:["Zwei","Eines","Drei"],a:0,
  e:"Jeder Nebensatz wird abgetrennt: „Er sagte, dass er komme, wenn er Zeit habe.“",r:"komma-nebensatz"},
@@ -1426,8 +1426,8 @@ const RULES = [
 <div class="ex">Er ging nach Hause<span class="ok">,</span> weil es regnete.<br>Weil es regnete<span class="ok">,</span> ging er nach Hause.</div>
 <p><b>Erkennungszeichen:</b> Meist steht das gebeugte Verb am Ende, und ein Einleitewort geht voran:</p>
 <ul>
-<li>Konjunktionen: <code>weil, dass, ob, wenn, als, damit, obwohl, während, bevor, nachdem, sobald, solange, sofern, falls, indem, sodass</code> — auch <code>so dass</code> ist zulässig, dann steht das Komma vor „so“</li>
-<li>Relativpronomen und -adverbien: <code>der, die, das, welcher, dessen, deren, wo, wobei, womit</code></li>
+<li>Konjunktionen: <code>weil, dass, ob, wenn, als, damit, obwohl, während, bevor, nachdem, sobald, solange, sofern, falls, indem, sodass</code> — auch <code>so dass</code> ist zulässig; leiten beide Wörter zusammen den Nebensatz ein, steht das Komma vor „so“ („Er war verletzt<span class="ok">,</span> so dass er aussetzte“), gehört „so“ zum Hauptsatz, bleibt es vor „dass“ („so müde<span class="ok">,</span> dass er einschlief“)</li>
+<li>Relativpronomen und -adverbien: <code>der, die, das, welcher, dessen, deren, wo, wobei, womit</code> — „Er erklärte die Aufgabe<span class="ok">,</span> wobei er mehrfach unterbrochen wurde.“</li>
 <li>Fragewörtern in indirekten Fragen: <code>wer, was, wie, wo, warum</code></li>
 <li>der Paarformel <code>je … desto</code> — der je-Teil ist ein Gliedsatz: „<b>Je</b> länger er trainierte<span class="ok">,</span> <b>desto</b> ruhiger wurde sein Puls.“</li>
 </ul>
@@ -7317,7 +7317,7 @@ const CHECKS = [
 
 /* ---------- BITTE PRÜFEN ---------- */
 {id:"y01",sev:"pruef",re:/\b(?!(?:ohne|statt|anstatt|außer|und|oder|so|sondern|aber|denn|damit|dazu|davon|dadurch|als|nur|auch|selbst|gerade|nicht|besonders|insbesondere|allem|kaum|einfach|erst|noch|kurz|gleich|lange|sofort|je|immer|vorausgesetzt|angenommen|ausgenommen|geschweige)\b)[a-zäöüß]+\s+(weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem)\b/gi,
- t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ vor dem ersten Wort der Fügung. Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
+ t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ vor dem ersten Wort der Fügung, außer du betonst das erste Wort als Teil des Hauptsatzes („Ich komme nur, wenn du kommst“). Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
 {id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?)\szu\s+[a-zäöüß]+(en|eln|ern)\b/g,
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
 {id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
