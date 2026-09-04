@@ -104,6 +104,12 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
 ### Lernlogik
 
 - Leitner, `BOXES = [1,3,7,16,35]` Tage. Auf Anhieb richtig → Fach 2 statt 1.
+- **Ändert sich die richtige Antwort einer Karte**, kommt ihre ID mit dem Datum in
+  `NEU_GELERNT`. `regelAenderungen()` setzt sie beim Laden und nach dem Import einmal auf
+  Fach 1 und macht sie sofort fällig, wenn die letzte Antwort (Fälligkeit minus
+  Fachintervall) vor dem Datum liegt. Sonst hat Nils die alte Antwort gelernt und sieht die
+  neue erst in Wochen. Geprüft in `tests/lernen.js`, Abschnitt F. Nur die Erklärung ändern
+  braucht das nicht.
 - Speicher: `localStorage["deutschtrainer.v1"]`, bei Fehlschlag Fallback in den Arbeitsspeicher
   plus sichtbare Warnung (`#saveWarn`).
 - `TAGESZIEL = 12` Karten für die Serie, gezählt in `tagesZiel()` aus `grade()` heraus —

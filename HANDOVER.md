@@ -83,6 +83,13 @@ diesen Seiten und über die Zusammenfassung der Änderungen des Rechtschreibrats
 - **Bis-Strich:** bestätigt, auch für DIN 5008:2020 (mit Leerzeichen, gilt dort auch
   für den Streckenstrich). Ergänzt: „4- bis 6-Zimmer-Wohnung“ statt „4–6-Zimmer-Wohnung“,
   Bis-Strich nur zwischen Zahlen und Einzelbuchstaben.
+- **Geänderte Antwort wird neu gelernt.** Bei `k20` ist die richtige Antwort eine andere
+  als vor dem 04.09.2026. Neu: `NEU_GELERNT = {k20: "2026-09-04"}` und
+  `regelAenderungen()` — beim Laden und nach dem Import kommt eine solche Karte einmal auf
+  Fach 1 zurück und ist sofort fällig, wenn ihre letzte Antwort vor dem Datum lag. Der
+  Lernstand hält das Datum nicht, es ergibt sich aus Fälligkeit minus Fachintervall.
+  Der Vermerk `S.neu` verhindert Wiederholung und wandert mit Export und Import.
+  `tests/lernen.js`, Abschnitt F, prüft das inklusive Import einer alten Sicherung.
 - **Dabei gefunden:** zwei Textcheck-Muster trugen dieselbe Kennung `y05`. Die alte
   (gleich/derselbe) behält sie, `tests/suite.js` prüft jetzt dauerhaft, dass
   Prüfmuster-Kennungen eindeutig sind.

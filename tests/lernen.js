@@ -213,4 +213,53 @@ P.titel("E · Anzeige");
   }
 }
 
+/* ---------- F · Geänderte Antwort ---------- */
+P.titel("F · Regeländerung");
+/* Fehlerklasse „alte Antwort sitzt“: Ändert sich die richtige Antwort einer Karte,
+   hat Nils sie mit der alten Antwort gelernt. Sie muss einmal zurück auf Fach 1. */
+{
+  const geaendert = daten(boot(leererStand()), "NEU_GELERNT");
+  const ids = Object.keys(geaendert);
+  P.ok("Die Liste geänderter Karten ist gefüllt", ids.length > 0);
+  const id = ids[0], datum = geaendert[id];
+  const heute = daten(boot(leererStand()), "today()");
+  const vorher = daten(boot(leererStand()), "addDays(" + JSON.stringify(datum) + ",-1)");
+  /* Fach 4, zuletzt am Tag vor der Änderung beantwortet: Fälligkeit = damals + 16 Tage */
+  const alt = { b: 4, s: 3, w: 0, d: daten(boot(leererStand()), "addDays(" + JSON.stringify(vorher) + ",16)") };
+  /* Fach 2, heute beantwortet: Fälligkeit = heute + 3 Tage */
+  const frisch = { b: 2, s: 1, w: 0, d: daten(boot(leererStand()), "addDays(" + JSON.stringify(heute) + ",3)") };
+  const anderes = { b: 4, s: 3, w: 0, d: alt.d };
+
+  const stand = leererStand();
+  stand.cards[id] = Object.assign({}, alt);
+  stand.cards["k01"] = Object.assign({}, anderes);
+  const w = boot(stand);
+  const c = daten(w, "S.cards[" + JSON.stringify(id) + "]");
+  P.ok("Vor der Änderung gelernt → zurück auf Fach 1", c.b === 1, JSON.stringify(c));
+  P.ok("… und sofort fällig", c.d === heute && daten(w, "isDue(" + JSON.stringify(id) + ")") === true, c.d);
+  P.ok("Zählungen bleiben", c.s === 3 && c.w === 0);
+  P.ok("Andere Karten bleiben unberührt", daten(w, "S.cards.k01.b") === 4);
+  P.ok("Die Änderung ist als angewendet vermerkt", daten(w, "S.neu[" + JSON.stringify(id) + "]") === datum);
+  P.ok("Der Lernstand ist gespeichert",
+    JSON.parse(w.localStorage.getItem("deutschtrainer.v1")).cards[id].b === 1);
+
+  /* Zweiter Start: nicht noch einmal zurücksetzen, auch nicht nach richtiger Antwort */
+  daten(w, "(function(){grade(" + JSON.stringify(id) + ",true);return 1;})()");
+  const nachher = JSON.parse(w.localStorage.getItem("deutschtrainer.v1"));
+  const w2 = boot(nachher);
+  P.ok("Beim nächsten Start bleibt das neue Fach", daten(w2, "S.cards[" + JSON.stringify(id) + "].b") === 2);
+
+  /* Nach der Änderung beantwortet: nichts passiert */
+  const stand2 = leererStand();
+  stand2.cards[id] = Object.assign({}, frisch);
+  const w3 = boot(stand2);
+  P.ok("Nach der Änderung gelernt → bleibt", daten(w3, "S.cards[" + JSON.stringify(id) + "].b") === 2);
+
+  /* Import einer alten Sicherung wendet die Änderung ebenfalls an */
+  const w4 = boot(leererStand());
+  const sicherung = leererStand(); sicherung.cards[id] = Object.assign({}, alt);
+  daten(w4, "(function(){S=Object.assign(load()," + JSON.stringify(sicherung) + ");save();return regelAenderungen();})()");
+  P.ok("Nach dem Import einer alten Sicherung zurückgesetzt", daten(w4, "S.cards[" + JSON.stringify(id) + "].b") === 1);
+}
+
 P.abschluss();
