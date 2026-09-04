@@ -715,14 +715,14 @@ const EX_A = [
  "Er trug die neue, rote Trainingsjacke."],a:0,
  e:"„rote Trainingsjacke“ bildet eine Einheit, „neu“ bezieht sich auf diese Einheit. „Die neue und rote Jacke“ klingt schief → kein Komma.",r:"komma-adjektive"},
 
-{id:"k18",c:"komma",q:"Wie viele Kommas fehlen? „Als er ankam war die Halle schon voll und der Trainer wartete bereits.“",o:[
- "Eines — nach „ankam“","Zwei","Keines"],a:0,
- e:"Der vorangestellte Nebensatz „Als er ankam“ wird abgetrennt. Vor dem „und“ ist das Komma fakultativ.",r:"komma-nebensatz"},
+{id:"k18",c:"komma",q:"Wie viele Kommas sind hier Pflicht? „Als er ankam war die Halle schon voll und der Trainer wartete bereits.“",o:[
+ "Eines — nach „ankam“","Zwei — nach „ankam“ und vor „und“","Keines"],a:0,
+ e:"Der vorangestellte Nebensatz „Als er ankam“ wird abgetrennt. Vor dem „und“ zwischen den beiden Hauptsätzen darfst du ein Komma setzen, musst es aber nicht — Pflicht ist nur das eine.",r:"komma-nebensatz"},
 
 {id:"k19",c:"komma",q:"Welche Variante ist richtig?",o:[
  "Sie fragte, ob er mitkomme.",
  "Sie fragte ob er mitkomme."],a:0,
- e:"Nebensätze werden immer durch Komma abgetrennt — auch indirekte Fragesätze mit „ob“.",r:"komma-nebensatz"},
+ e:"Nebensätze werden durch Komma abgetrennt — auch indirekte Fragesätze mit „ob“.",r:"komma-nebensatz"},
 
 {id:"k20",c:"komma",q:"„Er hat versucht(,) pünktlich zu sein.“",o:[
  "Komma ist Pflicht",
@@ -763,7 +763,7 @@ const EX_A = [
 {id:"k27",c:"komma",q:"Was ist korrekt?",o:[
  "Vorausgesetzt, dass alle zusagen, findet der Ausflug statt.",
  "Vorausgesetzt dass alle zusagen findet der Ausflug statt."],a:0,
- e:"„vorausgesetzt, dass“, „angenommen, dass“, „ausgenommen, wenn“ — das Komma trennt das Signalwort vom Nebensatz, und der Nebensatz wird hinten geschlossen.",r:"komma-nebensatz"},
+ e:"Pflicht ist das Komma nach „zusagen“: Es schließt den vorangestellten Nebensatz, und genau das fehlt in der falschen Fassung. Das Komma zwischen „vorausgesetzt“ und „dass“ ist dagegen freigestellt, ebenso bei „angenommen(,) dass“ und „ausgenommen(,) wenn“. Erst bei längeren Einleitungen steht es fest: „gesetzt den Fall, dass“, „es sei denn, dass“.",r:"komma-nebensatz"},
 
 {id:"k28",c:"komma",q:"Wie viele Kommas braucht dieser Satz? „Er sagte dass er komme wenn er Zeit habe.“",o:["Zwei","Eines","Drei"],a:0,
  e:"Jeder Nebensatz wird abgetrennt: „Er sagte, dass er komme, wenn er Zeit habe.“",r:"komma-nebensatz"},
@@ -776,7 +776,7 @@ const EX_A = [
 
 {id:"k30",c:"komma",q:"„Es war ein guter(,) wenn auch anstrengender Tag.“",o:[
  "Komma nötig","Kein Komma"],a:0,
- e:"„wenn auch“, „wenngleich“, „obschon“ leiten einen eingeschobenen Nebensatz ein — Komma davor.",r:"komma-nebensatz"},
+ e:"„wenn auch anstrengender“ ist ein verkürzter Nebensatz ohne eigenes Verb (gemeint: wenn er auch anstrengend war) und wird wie ein Zusatz abgetrennt — das Komma steht vor der ganzen Fügung „wenn auch“. Ein schließendes Komma entfällt nur, weil direkt das Substantiv „Tag“ folgt. Genauso: „ein guter, wenn auch teurer Schläger“, „eine klare, wenngleich harte Ansage“.",r:"komma-nebensatz"},
 
 {id:"k31",c:"komma",q:"Welcher Satz ist richtig?",o:[
  "Wir bieten verschiedene Kurse an, zum Beispiel Yoga und Pilates.",
@@ -1421,18 +1421,28 @@ const WORDS = [
 const RULES = [
 
 /* ---------- KOMMA ---------- */
-{id:"komma-nebensatz",c:"komma",t:"Nebensätze werden immer abgetrennt",b:`
-<p>Die wichtigste Kommaregel überhaupt: Zwischen Haupt- und Nebensatz steht <b>immer</b> ein Komma — egal, in welcher Reihenfolge.</p>
+{id:"komma-nebensatz",c:"komma",t:"Nebensätze werden mit Komma abgetrennt",b:`
+<p>Die wichtigste Kommaregel überhaupt: Zwischen Haupt- und Nebensatz steht ein Komma — egal, in welcher Reihenfolge.</p>
 <div class="ex">Er ging nach Hause<span class="ok">,</span> weil es regnete.<br>Weil es regnete<span class="ok">,</span> ging er nach Hause.</div>
-<p><b>Erkennungszeichen für Nebensätze:</b> Das gebeugte Verb steht am Ende. Eingeleitet werden sie von:</p>
+<p><b>Erkennungszeichen:</b> Meist steht das gebeugte Verb am Ende, und ein Einleitewort geht voran:</p>
 <ul>
-<li>Konjunktionen: <code>weil, dass, ob, wenn, als, damit, obwohl, während, bevor, nachdem, sobald, solange, sofern, falls, indem, sodass</code></li>
-<li>Relativpronomen: <code>der, die, das, welcher, dessen, deren</code></li>
+<li>Konjunktionen: <code>weil, dass, ob, wenn, als, damit, obwohl, während, bevor, nachdem, sobald, solange, sofern, falls, indem, sodass</code> — auch <code>so dass</code> ist zulässig, dann steht das Komma vor „so“</li>
+<li>Relativpronomen und -adverbien: <code>der, die, das, welcher, dessen, deren, wo, wobei, womit</code></li>
 <li>Fragewörtern in indirekten Fragen: <code>wer, was, wie, wo, warum</code></li>
 <li>der Paarformel <code>je … desto</code> — der je-Teil ist ein Gliedsatz: „<b>Je</b> länger er trainierte<span class="ok">,</span> <b>desto</b> ruhiger wurde sein Puls.“</li>
 </ul>
-<p>Steckt der Nebensatz mitten im Satz, braucht er <b>zwei</b> Kommas. Das schließende wird am häufigsten vergessen.</p>
-<div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>`},
+<p class="tiny muted">„als“, „während“ und „damit“ stehen auch ohne Nebensatz — „größer als ich“, „während des Spiels“ —, dann kein Komma.</p>
+<p><b>Das Komma steht auch ohne diese Zeichen:</b> beim Nebensatz ohne Einleitewort und beim verkürzten Nebensatz ohne eigenes Verb.</p>
+<div class="ex">Ich hoffe<span class="ok">,</span> du verstehst mich.<br>Er meinte<span class="ok">,</span> er habe die Vorlage geschickt.<br>Kommt der Bus zu spät<span class="ok">,</span> fangen wir ohne dich an.<br>Es war ein guter<span class="ok">,</span> wenn auch anstrengender Tag.</div>
+<p>Steckt der Nebensatz mitten im Satz, braucht er <b>zwei</b> Kommas. Das schließende wird leicht vergessen.</p>
+<div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>
+<p><b>Zwei Ausnahmen:</b></p>
+<ul>
+<li>Bei kurzen <b>Formeln</b> aus einem verkürzten Nebensatz ist das Komma freigestellt: „Wie besprochen<span class="ok">(,)</span> schicke ich dir den Trainingsplan.“ · „Wir erledigen das<span class="ok">(,)</span> wenn möglich<span class="ok">(,)</span> heute noch.“ Wird die Formel länger und konkret, steht es wieder: „Wie gestern nach dem Training besprochen<span class="ok">,</span> schicke ich dir den Plan.“</li>
+<li>Zwischen zwei <b>gleichrangigen Nebensätzen</b>, die „und“ oder „oder“ verbindet, steht kein Komma: „Ich hoffe<span class="ok">,</span> dass du kommst<span class="nope">,</span> und dass du Zeit hast.“</li>
+</ul>
+<p><b>Mehrteilige Einleitungen:</b> Bei „auch wenn“, „nur weil“, „gerade weil“, „kurz bevor“ steht das Komma vor der ganzen Fügung: „Ich bleibe<span class="ok">,</span> nur weil du fragst.“ In „vorausgesetzt(,) dass“, „angenommen(,) dass“, „ausgenommen(,) wenn“ ist das Komma zwischen den beiden Teilen freigestellt; erst bei längeren Einleitungen steht es fest: „es sei denn<span class="ok">,</span> dass“, „gesetzt den Fall<span class="ok">,</span> dass“.</p>
+<p class="tiny muted">Quellen: Duden, Rechtschreibregeln zum Komma und Sprachratgeber (formelhafte verkürzte Nebensätze, mehrteilige Nebensatzeinleitungen); Amtliches Regelwerk 2024, Abschnitt Komma.</p>`},
 
 {id:"komma-infinitiv",c:"komma",t:"Infinitivgruppen mit „zu“",b:`
 <p><b>Seit dem 1. Juli 2024 gilt:</b> Eine <b>erweiterte</b> Infinitivgruppe — „zu“ + Verb plus mindestens ein weiteres Wort — wird <b>immer</b> mit Komma abgetrennt. Das amtliche Regelwerk (§ 73) zählt sie seitdem zu den Nebensätzen; das Komma ist dort keine Kann-Regel mehr.</p>
@@ -4419,7 +4429,7 @@ errs:[
 txt:"Hallo Marek, ich hake kurz wegen den Stationenplänen nach. Wie bereits mehrfach erwähnt brauche ich sie bis Freitag. Ich habe schon mit dem Kollege aus der Fachschaft gesprochen und er meinte das er dir die Vorlage geschickt hat. Falls du es nicht schaffst ruf mich einfach an. Ich kann dir dann helfen oder ich mache einen Rohentwurf, den du dann korrigierst. Danke im Vorraus und viele Grüße, Nils",
 errs:[
  {w:"den",nth:1,ok:"der Stationenpläne",k:"„wegen“ verlangt den Genitiv: „wegen der Stationenpläne“.",r:"gram-genitiv",c:"gram"},
- {w:"erwähnt",ok:"erwähnt, (und besser ganz streichen)",k:"Zwei Dinge: Vor dem Hauptsatz fehlt das Komma — und „wie bereits mehrfach erwähnt“ ist ein Vorwurf, der Rechtfertigung statt Zuarbeit erzeugt.",r:"form-nachhaken",c:"form"},
+ {w:"erwähnt",ok:"(streichen)",k:"„Wie bereits mehrfach erwähnt“ ist ein Vorwurf, der Rechtfertigung statt Zuarbeit erzeugt — streich es. Zum Komma danach: Bei so einer kurzen Formel ist es freigestellt („Wie besprochen(,) …“); setz es trotzdem, dann liest sich der Satz leichter.",r:"form-nachhaken",c:"form"},
  {w:"Kollege",ok:"Kollegen",k:"n-Deklination: „der Kollege“ heißt im Dativ „dem Kollegen“.",r:"gram-ndekl",c:"gram"},
  {w:"das",nth:1,ok:"dass",k:"Konjunktion → „dass“.",r:"recht-dass",c:"recht"},
  {w:"meinte",ok:"meinte,",k:"Vor dem Nebensatz mit „dass“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
@@ -4496,7 +4506,7 @@ errs:[
  {w:"dir",nth:2,ok:"dich",k:"„interessieren“ verlangt den Akkusativ: „das interessiert dich nicht“.",r:"gram-akkverben",c:"gram"},
  {w:"änderst",ok:"änderst,",k:"Der vorangestellte Nebensatz wird durch Komma abgetrennt.",r:"komma-nebensatz",c:"komma"},
  {w:"weiss",ok:"weiß",k:"ß nach langem Vokal: weiß, heiß, Maß.",r:"recht-sz",c:"recht"},
- {w:"hoffe",nth:1,ok:"hoffe,",k:"Vor dem Nebensatz fehlt das Komma.",r:"komma-nebensatz",c:"komma"}
+ {w:"hoffe",nth:1,ok:"hoffe,",k:"„du verstehst mich“ ist ein Nebensatz ohne Einleitewort — das Komma steht trotzdem.",r:"komma-nebensatz",c:"komma"}
 ]},
 
 {id:"kt10",t:"Zusammenfassung eines Fachtexts",ctx:"Wissenschaftlicher Text",lvl:"schwer",
@@ -7278,8 +7288,8 @@ const CHECKS = [
  k:"Nach langem Vokal oder Diphthong steht <b>ß</b>: Grüße, weiß, heiß, draußen, Straße, groß, Maß, außer, Fußball. (In der Schweiz gilt durchgängig ss.)",r:"recht-sz"},
 
 /* ---------- BITTE PRÜFEN ---------- */
-{id:"y01",sev:"pruef",re:/\b(?!(?:ohne|statt|anstatt|außer|und|oder|so|sondern|aber|denn|damit|dazu|davon|dadurch)\b)[a-zäöüß]+\s+(weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem)\b/g,
- t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht ein Komma — hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
+{id:"y01",sev:"pruef",re:/\b(?!(?:ohne|statt|anstatt|außer|und|oder|so|sondern|aber|denn|damit|dazu|davon|dadurch|als|nur|auch|selbst|gerade|nicht|besonders|insbesondere|allem|kaum|einfach|erst|noch|kurz|gleich|lange|sofort|je|immer|vorausgesetzt|angenommen|ausgenommen|geschweige)\b)[a-zäöüß]+\s+(weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem)\b/gi,
+ t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ vor dem ersten Wort der Fügung. Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
 {id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?)\szu\s+[a-zäöüß]+(en|eln|ern)\b/g,
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
 {id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
@@ -7754,12 +7764,12 @@ function cheatHTML(){
 
   '<section class="ch-sec"><h2>1 · Komma — die sechs Fälle</h2>'+
   '<table class="ch-t"><tbody>'+
-  '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) · '+
+  '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) — auch ohne Einleitewort („Ich hoffe, du kommst“) · '+
   'Relativsatz · Einschub beidseitig · vor <i>aber, sondern, doch, jedoch</i> · vor <i>das heißt, und zwar, zum Beispiel</i> · '+
   'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion</td></tr>'+
-  '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
+  '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen · zwischen zwei Nebensätzen, die <i>und</i> verbindet · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
   '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
-  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe</td></tr>'+
+  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · Komma in „vorausgesetzt(,) dass“</td></tr>'+
   '</tbody></table>'+
   '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · mit brauchen, scheinen, haben, sein → keins. Vor um, ohne, statt, anstatt, außer, als stand es schon immer. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+
