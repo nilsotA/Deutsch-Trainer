@@ -699,21 +699,21 @@ const EX_A = [
 {id:"k14",c:"komma",q:"Welche Anrede ist korrekt formatiert?",o:[
  "Sehr geehrte Frau Dr. Weber, → vielen Dank für Ihre Rückmeldung.",
  "Sehr geehrte Frau Dr. Weber, → Vielen Dank für Ihre Rückmeldung."],a:0,
- e:"Nach dem Anredekomma geht es <b>klein</b> weiter — der Satz beginnt erst dort.",r:"komma-brief"},
+ e:"Nach dem Anredekomma geht es <b>klein</b> weiter: Die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab — hier fängt kein neuer Satz an. Nur Nomen, Namen und Sie/Ihre bleiben groß.",r:"komma-brief"},
 
 {id:"k15",c:"komma",q:"Was folgt nach „Mit freundlichen Grüßen“?",o:[
  "Kein Satzzeichen","Ein Komma","Ein Punkt"],a:0,
  e:"Die Grußformel steht ohne Satzzeichen. Danach folgt der Name in der nächsten Zeile.",r:"komma-brief"},
 
-{id:"k16",c:"komma",q:"Welcher Satz ist korrekt?",o:[
+{id:"k16",c:"komma",q:"Der Lauf ist lang und anstrengend, beides gleichwertig. Welcher Satz sagt genau das?",o:[
  "Ein langer, anstrengender Lauf lag vor ihm.",
  "Ein langer anstrengender Lauf lag vor ihm."],a:0,
- e:"Gleichrangige Adjektive bekommen ein Komma. <b>Probe:</b> Lässt sich „und“ einsetzen („lang und anstrengend“), ist ein Komma richtig.",r:"komma-adjektive"},
+ e:"Beide Adjektive beschreiben den Lauf gleichermaßen, also gleichrangig: Komma. <b>Probe:</b> „lang und anstrengend“ lässt sich einsetzen. Ohne Komma hieße es etwas anderes: der lange unter den anstrengenden Läufen.",r:"komma-adjektive"},
 
-{id:"k17",c:"komma",q:"Komma zwischen den beiden Adjektiven?",o:[
+{id:"k17",c:"komma",q:"Die rote Trainingsjacke ist neu. Wie schreibst du es?",o:[
  "Er trug die neue rote Trainingsjacke.",
  "Er trug die neue, rote Trainingsjacke."],a:0,
- e:"„rote Trainingsjacke“ bildet eine Einheit, „neu“ bezieht sich auf diese Einheit. „Die neue und rote Jacke“ klingt schief → kein Komma.",r:"komma-adjektive"},
+ e:"„rote Trainingsjacke“ ist eine Einheit aus Farbe und Substantiv, „neu“ bestimmt diese Einheit näher — kein Komma. So auch bei Material, Herkunft und Zugehörigkeit. Mit Komma würdest du „neu und rot“ als zwei gleichwertige Merkmale hervorheben, hier nicht gemeint.",r:"komma-adjektive"},
 
 {id:"k18",c:"komma",q:"Wie viele Kommas sind hier Pflicht? „Als er ankam war die Halle schon voll und der Trainer wartete bereits.“",o:[
  "Eines — nach „ankam“","Zwei — nach „ankam“ und vor „und“","Keines"],a:0,
@@ -1495,17 +1495,24 @@ const RULES = [
 <p class="tiny muted"><b>Ausnahme vom Merksatz:</b> Sitzt die Erläuterung zwischen Adjektiv und Substantiv oder zwischen den Verbteilen, fällt das schließende Komma weg: „eine kurze<span class="ok">,</span> das heißt fünfminütige Pause“ (Duden). Seit 2024 darf es auch entfallen, wenn eine nachgestellte Erläuterung als verkürztes Satzglied gilt: „Viele Vereine<span class="ok">,</span> vor allem kleine<span class="ok">(,)</span> waren vertreten“ (Rat für deutsche Rechtschreibung, Überblick der Änderungen 2024). Quellen: Duden, Rechtschreibregeln zum Komma und Sprachratgeber (Zusätze, Beinamen, formelhafte Nebensätze); Amtliches Regelwerk 2024.</p>`},
 
 {id:"komma-vergleich",c:"komma",t:"Vergleiche mit „als“ und „wie“",b:`
-<p><b>Kein Komma</b>, wenn nur ein Satzteil folgt:</p>
-<div class="ex">Er lief schneller als ich.<br>Die Gruppe war größer als erwartet.</div>
+<p><b>Kein Komma</b> nach dem Komparativ, wenn nur ein Wort, eine Wortgruppe oder ein Partizip folgt:</p>
+<div class="ex">Er lief schneller als ich.<br>Die Gruppe war größer als erwartet.<br>Sie lief so schnell wie möglich.</div>
 <p><b>Komma</b>, wenn ein vollständiger Nebensatz folgt (mit eigenem gebeugtem Verb):</p>
-<div class="ex">Er lief schneller<span class="ok">,</span> als ich erwartet hatte.</div>
-<p><b>Test:</b> Steht hinter „als“ oder „wie“ ein gebeugtes Verb? Dann Komma.</p>`},
+<div class="ex">Er lief schneller<span class="ok">,</span> als ich erwartet hatte.<br>Sie lief so schnell<span class="ok">,</span> wie sie konnte.</div>
+<p><b>Komma auch</b> vor „als“ oder „wie“ mit einem Infinitiv und „zu“ — „als“ gehört zu den sechs Einleitewörtern, vor denen das Komma immer steht:</p>
+<div class="ex">Es gibt nichts Besseres<span class="ok">,</span> als nach dem Training zu duschen.<br>Ihm blieb nichts anderes übrig<span class="ok">,</span> als aufzugeben.</div>
+<p><b>Test:</b> Steht hinter „als“ oder „wie“ ein gebeugtes Verb oder ein Infinitiv mit „zu“? Dann Komma. Folgt nach dem Komparativ nur ein Wort oder eine Wortgruppe? Dann keins.</p>
+<p><b>Freigestellt</b> ist das Komma, wenn ein Vergleich ohne Verb als Zusatz eingeschoben ist oder eine feste Formel bildet: „Wir gewannen<span class="ok">(,)</span> wie letztes Jahr<span class="ok">(,)</span> das Turnier.“ · „Die Regel lautet<span class="ok">(,)</span> wie folgt.“ · „Wie besprochen<span class="ok">(,)</span> schicke ich dir den Plan.“</p>
+<p class="tiny muted">Quellen: Duden, Sprachratgeber „Das Komma vor wie und als“ und „Kommasetzung bei Vergleichen“; Amtliches Regelwerk 2024 (Infinitivgruppen mit „als“).</p>`},
 
 {id:"komma-adjektive",c:"komma",t:"Komma zwischen Adjektiven",b:`
-<p>Gleichrangige Adjektive bekommen ein Komma, nicht gleichrangige nicht.</p>
-<p><b>Und-Probe:</b> Lässt sich zwischen den Adjektiven „und“ einsetzen, ohne dass der Satz schief klingt, gehört ein Komma hin.</p>
+<p>Gleichrangige Adjektive bekommen ein Komma, nicht gleichrangige nicht. Gleichrangig heißt: Beide Adjektive beschreiben das Substantiv unabhängig voneinander. Nicht gleichrangig: Das letzte Adjektiv bildet mit dem Substantiv eine Einheit, das erste bestimmt diese Einheit näher.</p>
+<p><b>Zwei Proben:</b> Lässt sich „und“ einsetzen, ohne dass sich der Sinn ändert, steht ein Komma. Lassen sich die Adjektive vertauschen („ein anstrengender, langer Lauf“), ebenfalls. Geht beides nicht, kein Komma.</p>
 <div class="ex">ein langer<span class="ok">,</span> anstrengender Lauf → „lang und anstrengend“ ✓<br>
-die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ klingt falsch, weil „rote Jacke“ eine Einheit bildet</div>`},
+die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjacke“ ist die Einheit, „neu“ bestimmt sie näher</div>
+<p><b>Solche Einheiten</b> bilden vor allem Adjektive für <b>Farbe, Material, Herkunft und Zugehörigkeit</b>: das neue rote Trikot, der alte hölzerne Barren, ein bekannter spanischer Trainer, die aktuelle amtliche Prüfungsordnung. Ebenso nach <b>Zahlwörtern und unbestimmten Fürwörtern</b>: viele gute Spieler, alle anderen Gruppen, die beiden neuen Trainer.</p>
+<p><b>Das Komma kann die Bedeutung verschieben.</b> Dann sind beide Schreibungen richtig und meinen etwas anderes: „neue<span class="ok">,</span> umweltfreundliche Verfahren“ sind neu und umweltfreundlich; „neue umweltfreundliche Verfahren“ sind die neuen unter den umweltfreundlichen (Beispiel aus dem Regelwerk). Genauso „aus anderen<span class="ok">,</span> zuverlässigen Quellen“ — die ersten waren es nicht.</p>
+<p class="tiny muted">Quellen: Amtliches Regelwerk 2024, Abschnitt Komma bei Reihungen; Duden, Sprachratgeber „Komma zwischen Adjektiven“.</p>`},
 
 {id:"komma-partizip",c:"komma",t:"Partizipgruppen",b:`
 <p>Seit der Rechtschreibreform von 1996 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b> — die Fassungen von 2006 und 2024 haben das beibehalten:</p>
@@ -1521,14 +1528,18 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ kl
 
 {id:"komma-brief",c:"komma",t:"Anrede, Gruß, Datum",b:`
 <ul>
-<li>Nach der Anrede steht ein Komma, danach geht es <b>klein</b> weiter:<br>
-<span class="ex">Sehr geehrte Frau Weber<span class="ok">,</span><br>vielen Dank für Ihre Rückmeldung.</span></li>
+<li>Nach der Anrede steht ein Komma, danach geht es <b>klein</b> weiter — nur Nomen, Namen und Sie/Ihnen/Ihre bleiben groß:<br>
+<span class="ex">Sehr geehrte Frau Weber<span class="ok">,</span><br>vielen Dank für Ihre Rückmeldung.</span><br>
+<span class="ex">Sehr geehrte Frau Weber<span class="ok">,</span><br>Ihre Rückmeldung habe ich erhalten.</span><br>
+<span class="tiny muted">Ein Ausrufezeichen nach der Anrede ist zulässig, wirkt aber veraltet; dann geht es groß weiter. In der Schweiz steht nach der Anrede meist gar kein Zeichen, danach groß.</span></li>
 <li>Nach der Grußformel steht <b>kein</b> Satzzeichen:<br>
-<span class="ex">Mit freundlichen Grüßen<span class="nope">,</span><br>Nils Otten</span></li>
-<li>Zwischen Ort und Datum steht ein Komma: <span class="ex">Köln<span class="ok">,</span> den 12. Mai 2026</span></li>
+<span class="ex">Mit freundlichen Grüßen<span class="nope">,</span><br>Nils Otten</span><br>
+<span class="tiny muted">Ist die Grußformel Teil des Schlusssatzes, schreibst du sie klein, weil sie mitten im Satz steht: „Ich freue mich auf das Gespräch und verbleibe mit freundlichen Grüßen“ — der Name folgt in der nächsten Zeile.</span></li>
+<li>Zwischen Ort und Datum steht ein Komma: <span class="ex">Köln<span class="ok">,</span> den 12. Mai 2026</span> — ebenso richtig und heute üblicher ohne „den“: <span class="ex">Köln<span class="ok">,</span> 12. Mai 2026</span></li>
 <li>Mehrteilige Datumsangabe im Satz — das schließende Komma ist seit dem Regelwerk 2024 <b>Pflicht</b> (vorher freigestellt, ältere Ratgeber sagen noch „kann“):<br>
-<span class="ex">Am Montag<span class="ok">,</span> dem 12. Mai<span class="ok">,</span> beginnt der Kurs.</span></li>
-</ul>`},
+<span class="ex">Am Montag<span class="ok">,</span> dem 12. Mai<span class="ok">,</span> beginnt der Kurs.</span> — mit „dem“ oder „den“, beides geht.</li>
+</ul>
+<p class="tiny muted">Quellen: Duden, Sprachratgeber zu Anrede, Grußformel und Datum; GfdS; Rat für deutsche Rechtschreibung, Überblick der Änderungen 2024.</p>`},
 
 /* ---------- GROSS-/KLEINSCHREIBUNG ---------- */
 {id:"gross-subst",c:"gross",t:"Substantivierungen erkennen",b:`
@@ -2712,7 +2723,7 @@ const EX_C = [
 {id:"f05",c:"form",q:"Wie beginnst du den Text nach dem Anredekomma?",o:[
  "klein — „vielen Dank für Ihre Rückmeldung.“",
  "groß — „Vielen Dank für Ihre Rückmeldung.“"],a:0,
- e:"Nach dem Anredekomma geht es <b>klein</b> weiter. Der Satz beginnt erst dort und wird durch das Komma nur unterbrochen.",r:"komma-brief"},
+ e:"Nach dem Anredekomma geht es <b>klein</b> weiter: Die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab. Nur Nomen, Namen und Sie/Ihre bleiben groß.",r:"komma-brief"},
 
 /* ---------- BITTEN ---------- */
 {id:"f06",c:"form",q:"Welche Fassung kommt bei einer vielbeschäftigten Dozentin besser an?",o:[
@@ -4544,8 +4555,8 @@ errs:[
 {id:"kt12",t:"Beobachtungsprotokoll",ctx:"Praxisbericht",lvl:"schwer",
 txt:"Die Beobachtung fand am Dienstag den 12. Mai statt. Anwesend waren 24 Schülerinnen und Schüler, wovon 22 aktiv teilnahmen. Der Lehrer erklärte die Aufgabe wobei er mehrfach unterbrochen wurde. Auffällig war das die Gruppe in der hinteren Hallenhälfte weniger Anweisungen bekam wie die vordere. Nachdem die Übung beendet war, wurde eine Reflexionsrunde durchgeführt. Der Lehrer hat den Schülern, denen er zuvor geholfen hat, nochmal das Selbe erklärt. Die Stunde endete pünktlich um 11:30 Uhr.",
 errs:[
- {w:"Dienstag",nth:1,ok:"Dienstag,",k:"Bei mehrteiligen Datumsangaben steht ein Komma: „am Dienstag, dem 12. Mai“.",r:"komma-brief",c:"komma"},
- {w:"den",nth:1,ok:"dem",k:"Die Apposition steht im selben Fall wie das Bezugswort: „am Dienstag, dem 12. Mai“ (Dativ).",r:"gram-kasus",c:"gram"},
+ {w:"Dienstag",nth:1,ok:"Dienstag,",k:"Bei mehrteiligen Datumsangaben steht ein Komma: „am Dienstag, den 12. Mai“ — auch „dem“ ist richtig.",r:"komma-brief",c:"komma"},
+ {w:"Mai",ok:"Mai,",k:"Das schließende Komma nach der Datumsangabe ist seit dem Regelwerk 2024 Pflicht: „am Dienstag, den 12. Mai, statt“.",r:"komma-brief",c:"komma"},
  {w:"Aufgabe",nth:1,ok:"Aufgabe,",k:"Vor dem Nebensatz mit „wobei“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"das",nth:1,ok:"dass",k:"Konjunktion → „dass“.",r:"recht-dass",c:"recht"},
  {w:"war",ok:"war,",k:"Vor dem Nebensatz mit „dass“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
@@ -4609,22 +4620,28 @@ Folgt eine <b>Aufzählung oder Wortgruppe</b> → <span class="ok">klein</span><
 {id:"z-anfuehrung",c:"zeichen",t:"Anführungszeichen",b:`
 <p>Im Deutschen stehen die Anführungszeichen <b>unten und oben</b>:</p>
 <div class="ex">Deutsch: <b>„Text“</b> (unten 99 · oben 66)<br>
-Einfach (Zitat im Zitat): <b>‚Text‘</b><br>
-Guillemets, ebenfalls korrekt: <b>»Text«</b> (Deutschland) · <b>«Text»</b> (Schweiz)<br>
-<span class="nope">"Text"</span> — englische Zollzeichen, im gesetzten Text falsch</div>
+Einfach (Zitat im Zitat): <b>‚Text‘</b> — bei Guillemets <b>›Text‹</b><br>
+Guillemets, ebenfalls korrekt: <b>»Text«</b> (Deutschland, Österreich) · <b>«Text»</b> (Schweiz)<br>
+<span class="nope">"Text"</span> — gerade Zollzeichen von der Tastatur, keine Anführungszeichen; in gesetztem Text (Hausarbeit, Bewerbung, Druck) falsch<br>
+<span class="nope">“Text”</span> — englische Anführungszeichen, beide oben (66 … 99), im Deutschen ebenfalls falsch</div>
 <p><b>Wo steht der Punkt?</b></p>
 <ul>
-<li><b>Ganzer Satz zitiert</b> → Satzzeichen <b>innen</b>, danach kein weiterer Punkt:<br>
-<span class="ex">Er sagte: „Ich komme später.“</span></li>
+<li><b>Ganzer Satz nach Doppelpunkt zitiert</b> → Satzzeichen <b>innen</b>, danach kein weiterer Punkt:<br>
+<span class="ex">Er sagte: „Ich komme später.“</span><br>
+<span class="tiny muted">Steckt der zitierte Satz als Satzglied mitten im Rahmensatz, behält der Rahmensatz seinen Punkt: Mich nervt sein dauerndes „Ich kann nicht mehr!“. (Beispiel aus dem Regelwerk)</span></li>
 <li><b>Nur ein Teil zitiert</b> → Punkt <b>außen</b>:<br>
 <span class="ex">Er nannte das eine „gute Idee“.</span></li>
 <li><b>Redebegleitsatz folgt</b> → Komma statt Punkt, außerhalb der Anführung:<br>
 <span class="ex">„Ich komme später“, sagte er.</span></li>
+<li><b>Begleitsatz eingeschoben</b> → beide Kommas außerhalb der Anführung, der zweite Teil beginnt klein:<br>
+<span class="ex">„Morgen früh“, sagte die Trainerin, „ist Ausdauer dran.“</span></li>
 <li>Frage- und Ausrufezeichen bleiben beim Zitat, <b>wenn sie dazugehören</b>:<br>
 <span class="ex">„Kommst du?“, fragte sie.</span><br>
-Gehört das Fragezeichen zum Rahmensatz, steht es außen: <span class="ex">Hast du „Faust“ gelesen?</span></li>
+Gehört das Fragezeichen zum Rahmensatz, steht es außen: <span class="ex">Hast du „Faust“ gelesen?</span><br>
+Enden Zitat und Rahmensatz beide mit Frage- oder Ausrufezeichen, stehen beide: <span class="ex">Kennst du den Roman „Quo vadis?“?</span></li>
 </ul>
-<p><b>Weitere Verwendung:</b> Werktitel, ironische Distanzierung, Hervorhebung eines Ausdrucks. Für Betonung nimmt man besser <i>kursiv</i> — Anführungszeichen lesen sich sonst wie Ironie.</p>`},
+<p><b>Weitere Verwendung:</b> Werktitel, Wörter, über die du etwas sagst („Die Präposition ‚ohne‘ verlangt den Akkusativ“), ironische Distanzierung. <b>Stilhinweis:</b> Für bloße Betonung eignet sich <i>kursiv</i> meist besser — Anführungszeichen dürfen zwar hervorheben, lesen sich im Fließtext aber schnell wie Distanzierung oder Ironie: Er hat sich „bemüht“.</p>
+<p class="tiny muted">Quellen: Amtliches Regelwerk (Abschnitt Anführungszeichen), Duden. Die Form der Zeichen — „…“, »…« — regelt die Typografie, nicht die Rechtschreibung.</p>`},
 
 {id:"z-klammern",c:"zeichen",t:"Klammern",b:`
 <p><b>Runde Klammern</b> für Zusätze, Erläuterungen und Quellenangaben:</p>
@@ -4808,16 +4825,16 @@ const EX_E = [
  "Der lange Gedankenstrich"],a:0,
  e:"Wortkopplungen bekommen den kurzen <b>Bindestrich</b>: E-Mail, Know-how, 100-Meter-Lauf.",r:"z-gedankenstrich"},
 
-{id:"p11",c:"zeichen",q:"Welche Anführungszeichen sind im Deutschen richtig?",o:[
+{id:"p11",c:"zeichen",q:"Welche Anführungszeichen sind im gedruckten Deutsch richtig?",o:[
  "„Text“ — unten und oben",
- "\"Text\" — beidseitig oben",
- "'Text' — einfach"],a:0,
- e:"Deutsche Anführungszeichen stehen <b>unten und oben</b> („…“). Auch Guillemets (»…«) sind korrekt. Die geraden Zollzeichen (\"…\") sind englisch.",r:"z-anfuehrung"},
+ "\"Text\" — gerade Zollzeichen von der Tastatur",
+ "“Text” — beide oben, englisch"],a:0,
+ e:"Deutsche Anführungszeichen stehen <b>unten und oben</b> („…“). Auch Guillemets (»…«) sind korrekt. Die geraden Striche (\"…\") sind Zollzeichen von der Tastatur, keine Anführungszeichen; die englischen Anführungszeichen (“…”) stehen beide oben.",r:"z-anfuehrung"},
 
 {id:"p12",c:"zeichen",q:"Wo steht der Punkt? Er sagte: „Ich komme später___",o:[
  "„Ich komme später.“ — Punkt innen, danach nichts",
  "„Ich komme später“. — Punkt außen"],a:0,
- e:"Ist ein <b>ganzer Satz</b> zitiert, steht das Satzzeichen innerhalb der Anführung — und danach kein weiterer Punkt.",r:"z-anfuehrung"},
+ e:"Ist ein <b>ganzer Satz</b> nach dem Doppelpunkt zitiert, steht das Satzzeichen innerhalb der Anführung — und danach kein weiterer Punkt. Steckt das Zitat als Satzglied mitten im Rahmensatz, behält der Rahmensatz seinen Punkt: Mich nervt sein dauerndes „Ich kann nicht mehr!“.",r:"z-anfuehrung"},
 
 {id:"p13",c:"zeichen",q:"Wo steht der Punkt? Er nannte das eine „gute Idee___",o:[
  "„gute Idee“. — Punkt außen",
@@ -4825,9 +4842,9 @@ const EX_E = [
  e:"Ist nur ein <b>Teil</b> zitiert, gehört der Punkt zum umgebenden Satz und steht außen.",r:"z-anfuehrung"},
 
 {id:"p14",c:"zeichen",q:"Welche Fassung stimmt bei Redebegleitsatz?",o:[
- "„Ich komme später“, sagte er.",
- "„Ich komme später.“, sagte er.",
- "„Ich komme später,“ sagte er."],a:0,
+ "„Ich komme später“, sagte er. — Komma außen",
+ "„Ich komme später.“, sagte er. — Punkt innen und Komma",
+ "„Ich komme später,“ sagte er. — Komma innen"],a:0,
  e:"Der Punkt weicht dem <b>Komma</b>, und das Komma steht außerhalb der Anführung. Frage- und Ausrufezeichen bleiben dagegen drinnen: „Kommst du?“, fragte sie.",r:"z-anfuehrung"},
 
 {id:"p15",c:"zeichen",q:"Wofür stehen eckige Klammern?",o:[
@@ -4855,8 +4872,8 @@ const EX_E = [
  "Er fragte, wann sie kommt?"],a:0,
  e:"Nach einer <b>indirekten Frage</b> steht ein Punkt. Das Fragezeichen gehört nur zur direkten Frage: „Wann kommst du?“",r:"z-frage"},
 
-{id:"p20",c:"zeichen",q:"Was steht heute nach der Anrede im Brief?",o:["Ein Komma","Ein Ausrufezeichen","Nichts"],a:0,
- e:"Das Ausrufezeichen nach der Anrede ist veraltet. Heute steht ein <b>Komma</b>, danach geht es klein weiter.",r:"z-frage"},
+{id:"p20",c:"zeichen",q:"Was ist in Deutschland heute nach der Anrede im Brief üblich?",o:["Ein Komma","Ein Ausrufezeichen","Nichts"],a:0,
+ e:"Ein <b>Komma</b>, danach geht es klein weiter. Das Ausrufezeichen ist zulässig, aber veraltet — danach ginge es groß weiter. Gar kein Zeichen ist die Schweizer Gewohnheit.",r:"z-frage"},
 
 {id:"p21",c:"zeichen",q:"Wie schreibt man den Schrägstrich bei Wortgruppen?",o:[
  "Mit Leerzeichen: „Institut A / Institut B“",
@@ -4867,9 +4884,9 @@ const EX_E = [
  "Andreas’ Buch","Peter’s Auto","Foto’s"],a:0,
  e:"Nur bei Namen auf <b>s, ss, ß, tz, z, x</b> steht ein Apostroph — und dann ohne s. Der normale Genitiv und alle Plurale kommen ohne aus.",r:"z-schraeg"},
 
-{id:"p23",c:"zeichen",q:"Was ist das bessere Hervorhebungsmittel im Fließtext?",o:[
+{id:"p23",c:"zeichen",q:"Du willst ein Wort im Fließtext nur betonen. Welches Mittel liest sich am eindeutigsten? (Stilfrage)",o:[
  "Kursiv","Anführungszeichen","Großbuchstaben"],a:0,
- e:"Anführungszeichen lesen sich schnell als ironische Distanzierung. Für echte Hervorhebung nimm <i>Kursiv</i>.",r:"z-anfuehrung"},
+ e:"Anführungszeichen sind zur Hervorhebung erlaubt: für Wörter, über die du etwas sagst, oder für ironische Distanz. Genau deshalb wirken sie bei bloßer Betonung schnell ironisch. Kursiv ist da eindeutiger — eine Stilempfehlung, keine Regel. Großbuchstaben wirken wie Schreien.",r:"z-anfuehrung"},
 
 {id:"p24",c:"zeichen",q:"Welcher Einschub ist am stärksten abgesetzt?",o:[
  "Klammer","Gedankenstrich","Komma"],a:0,
@@ -5010,9 +5027,9 @@ const EX_E = [
  "im Folgenden","im folgenden","Beides ist zulässig"],a:0,
  e:"Nach Präposition und Artikel liegt eine Substantivierung vor — nur <b>im Folgenden</b> ist richtig. Anders als bei „vor Kurzem/vor kurzem“ gibt es hier keine Wahl.",r:"gross-subst"},
 
-{id:"v05",c:"zeichen",q:"Welche Anführungszeichen gehören in einen deutschen Text?",o:[
+{id:"v05",c:"zeichen",q:"Welche Anführungszeichen gehören in einen gesetzten deutschen Text, etwa Hausarbeit oder Bewerbung?",o:[
  "„Text“ oder »Text«","Gerade Zollzeichen","Beides ist zulässig"],a:0,
- e:"Die geraden Zollzeichen stammen aus der Schreibmaschine und sind im gesetzten deutschen Text nicht korrekt.",r:"z-anfuehrung"},
+ e:"Die geraden Zollzeichen stammen von der Schreibmaschine und sind im gesetzten deutschen Text nicht korrekt. Sie sind auch keine englischen Anführungszeichen — die stehen beide oben (“…”).",r:"z-anfuehrung"},
 
 {id:"v06",c:"zahlen",q:"Wie schreibt man die Prozentangabe?",o:[
  "20 %","20%","Beides ist zulässig"],a:0,
@@ -7293,7 +7310,7 @@ const CHECKS = [
  t:"n-Deklination",k:"Diese Substantive bekommen in allen Fällen außer dem Nominativ ein <b>-en</b>: „mit dem Kolleg<b>en</b>“, „für den Mensch<b>en</b>“.",r:"gram-ndekl"},
 {id:"x24",sev:"hart",re:/\bin\s+(19|20)\d{2}\b/g,t:"„in 2026“",
  k:"Übernahme aus dem Englischen. Korrekt: <b>2026</b> oder <b>im Jahr 2026</b>.",r:"stil-anglizismus"},
-{id:"x25",sev:"hart",re:/\bGrüßen,\s*$|\bGrüßen,\s*\n|\bGrüße,\s*$|\bGrüße,\s*\n/gm,t:"Komma nach der Grußformel",
+{id:"x25",sev:"hart",re:/\b(?:Grüßen|Grüße|Gruß),[ \t]*(?:$|(?:[A-ZÄÖÜ][\wäöüß.-]*[ \t]*){1,3}$)/gm,t:"Komma nach der Grußformel",
  k:"Nach „Mit freundlichen Grüßen“ steht <b>kein</b> Satzzeichen.",r:"komma-brief"},
 {id:"x26",sev:"hart",re:/\b(grüsse|grüssen|weiss|weisst|heiss|heisst|draussen|strasse|strassen|gross|grosse|grosser|grossen|grösser|mass|ausser|ausserdem|fussball|fuss|spass|schliesslich|müssen wir das schliessen)\b/gi,t:"ß statt ss",
  k:"Nach langem Vokal oder Diphthong steht <b>ß</b>: Grüße, weiß, heiß, draußen, Straße, groß, Maß, außer, Fußball. (In der Schweiz gilt durchgängig ss.)",r:"recht-sz"},
@@ -7376,8 +7393,10 @@ const CHECKS = [
 ];
 
 const CHECKS_Z = [
-{id:"t01",sev:"hart",re:/"[^"\n]{2,80}"/g,t:"Englische Anführungszeichen",
- k:"Im Deutschen stehen die Anführungszeichen unten und oben: <b>„Text“</b>. Auch »Text« ist korrekt. Die geraden Zollzeichen sind englisch.",r:"z-anfuehrung"},
+{id:"t01",sev:"pruef",re:/"[^"\n]{2,80}"/g,t:"Gerade Anführungszeichen",
+ k:"Im gesetzten Text stehen die Anführungszeichen unten und oben: <b>„Text“</b>. Auch »Text« ist korrekt. Die geraden Zollzeichen von der Tastatur gehören dort nicht hin; in Chat und schneller Mail fallen sie nicht ins Gewicht.",r:"z-anfuehrung"},
+{id:"t13",sev:"pruef",re:/“[^„“”\n]{2,80}”/g,t:"Englische Anführungszeichen",
+ k:"“Text” mit beiden Zeichen oben ist die englische Form — meist eine Autokorrektur auf Englisch. Deutsch: <b>„Text“</b> oder »Text«.",r:"z-anfuehrung"},
 {id:"t02",sev:"hart",re:/\b(z\.B\.|d\.h\.|u\.a\.|i\.d\.R\.|z\.T\.|u\.Ä\.|o\.Ä\.|s\.o\.|s\.u\.)/g,t:"Leerzeichen in der Abkürzung",
  k:"Mehrteilige Abkürzungen werden getrennt: <b>z. B., d. h., u. a., i. d. R., z. T.</b>",r:"n-abkuerzung"},
 {id:"t03",sev:"hart",re:/\d%/g,t:"Leerzeichen vor dem Prozentzeichen",
@@ -7400,9 +7419,9 @@ const CHECKS_Z = [
  k:"Nach einer indirekten Frage steht ein Punkt: <b>Er fragte, wann sie kommt.</b>",r:"z-frage"}
 ];
 const CHECKS_N = [
-{id:"a01",sev:"hart",re:/(?:^|\n)\s*(?:Sehr geehrte[rs]?|Hallo|Liebe[rs]?|Lieber|Guten Tag|Moin|Hi)\b[^,\n]{0,45},\s*\n?\s*(Vielen|Herzlichen|Besten|Danke|Hiermit|Anbei|Bezugnehmend|Wie|Bitte|Gerne|Gern|Leider|Zunächst|Entschuldigen|Können|Könnten|Hätten|Würden|Dürfte|Darf|Nach|Mit|Für|Bei|Im|Am|Zur|Zum|Aufgrund|Wegen)\b/g,
+{id:"a01",sev:"hart",re:/(?:^|\n)\s*(?:Sehr geehrte[rs]?|Hallo|Liebe[rs]?|Lieber|Guten Tag|Moin|Hi)\b(?![^,\n]*Grüße),?[^,\n]{0,45},\s*\n?\s*(Vielen|Herzlichen|Besten|Danke|Hiermit|Anbei|Bezugnehmend|Wie|Bitte|Gerne|Gern|Leider|Zunächst|Entschuldigen|Können|Könnten|Hätten|Würden|Dürfte|Darf|Nach|Mit|Für|Bei|Im|Am|Zur|Zum|Aufgrund|Wegen|Ich|Wir|Es|Der|Die|Das|Ein|Eine|Da|Heute|Gestern|Seit|Über|Ab|Als|Wenn|Falls|Weil|Nachdem|Sobald|Ja|Nein|Schön|Sehr|Kurz)\b/g,
  t:"Großschreibung nach der Anrede",
- k:"Nach dem Anredekomma geht es <b>klein</b> weiter — der Satz beginnt erst dort: „Sehr geehrte Frau Weber,<br>vielen Dank für Ihre Rückmeldung.“",r:"komma-brief"},
+ k:"Nach dem Anredekomma geht es <b>klein</b> weiter — die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab: „Sehr geehrte Frau Weber,<br>vielen Dank für Ihre Rückmeldung.“ Nur Nomen, Namen und Sie/Ihre bleiben groß.",r:"komma-brief"},
 {id:"a02",sev:"stil",re:/\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b(?:[^.!?]{0,45}\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b){2}/g,
  t:"Nominalstil-Kette",
  k:"Drei Substantive auf -ung/-heit/-keit dicht beieinander. Löse die Handlung ins Verb auf: „Die Durchführung der Untersuchung erfolgte“ → „Wir untersuchten“.",r:"stil-nominal"},
@@ -7777,10 +7796,10 @@ function cheatHTML(){
   '<table class="ch-t"><tbody>'+
   '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) — auch ohne Einleitewort („Ich hoffe, du kommst“) · '+
   'Relativsatz · Einschub beidseitig, auch nach dem Datum („am Montag, dem 3. Juni, um 9 Uhr“) · vor <i>aber, sondern, doch, jedoch, denn</i> · vor <i>das heißt, und zwar, zum Beispiel</i> als Nachtrag · '+
-  'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion</td></tr>'+
+  'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion · zwischen gleichrangigen Adjektiven, Und-Probe („ein langer, anstrengender Lauf“), nicht wenn das letzte Adjektiv zum Substantiv gehört („die neue rote Jacke“)</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen — außer, davor schließt ein Einschub oder Nebensatz · zwischen zwei Nebensätzen, die <i>und</i> verbindet · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
-  '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
-  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · vor <i>wie zum Beispiel</i> · Komma in „vorausgesetzt(,) dass“</td></tr>'+
+  '<i>entweder … oder</i> · Vergleich nach dem Komparativ ohne Verb („größer als ich“), aber Komma vor <i>als/wie</i> + zu-Infinitiv („nichts anderes übrig, als aufzugeben“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
+  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · eingeschobener Vergleich ohne Verb („wie letztes Jahr“) · vor <i>wie zum Beispiel</i> · Komma in „vorausgesetzt(,) dass“</td></tr>'+
   '</tbody></table>'+
   '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · mit brauchen, scheinen, haben, sein → keins. Vor um, ohne, statt, anstatt, außer, als stand es schon immer. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+
@@ -7883,7 +7902,7 @@ function cheatHTML(){
   '<tr><th>Bindestrich -</th><td>Wortkopplung, ohne Leerzeichen: E-Mail, 100-Meter-Lauf</td></tr>'+
   '<tr><th>Gedankenstrich –</th><td>Einschub, <b>mit</b> Leerzeichen: Der Plan – so gut er war – scheiterte.</td></tr>'+
   '<tr><th>Bis-Strich –</th><td><b>ohne</b> Leerzeichen: 1990–1995 · 8–10 Uhr · Köln–Berlin. Mit „von“ muss „bis“ ausgeschrieben werden.</td></tr>'+
-  '<tr><th>Anführung</th><td>„Text“ oder »Text« · Zitat im Zitat: ‚Text‘ · nie gerade Zollzeichen</td></tr>'+
+  '<tr><th>Anführung</th><td>„Text“ oder »Text« · Zitat im Zitat: ‚Text‘ (bei Guillemets ›Text‹) · in gesetztem Text keine geraden Zollzeichen</td></tr>'+
   '<tr><th>Punkt im Zitat</th><td>Ganzer Satz zitiert → innen: Er sagte: „Ich komme.“ · Teilzitat → außen: eine „gute Idee“. · Redebegleitsatz → Komma außen: „Ich komme“, sagte er.</td></tr>'+
   '<tr><th>Klammern</th><td>Rund für Zusätze · eckig nur für Eingriffe in Zitate: […], [sic]. Punkt außen, außer der ganze Satz steht in Klammern.</td></tr>'+
   '<tr><th>Auslassung …</th><td>Ein Zeichen, kein dreifacher Punkt. Am Satzende ersetzt es den Schlusspunkt. Im Zitat: […]</td></tr>'+
