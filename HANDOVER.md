@@ -36,7 +36,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 116 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 84 |
+| Prüfmuster im Textcheck | 85 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Dateigröße | ~600 KB, eine Datei, kein Build |
 
@@ -94,11 +94,43 @@ stehen in den Commit-Nachrichten; die wichtigsten Funde:
   `t01` von „hart“ auf „prüfen“ (Typografie, keine Rechtschreibung), `a01` und `x25`
   erkennen mehr Formen. Alle gegen den sauberen Bestand geprüft, null Fehlalarme.
 
+**Dritter Block: die fünf übrigen Zeichenregeln** (`z-klammern`, `z-auslassung`,
+`z-frage`, `z-schraeg`, `z-semikolon`), gleiches Vorgehen. Die wichtigsten Funde:
+
+- **Fragezeichen:** Das Schlusszeichen richtet sich nach dem ganzen Satz, nicht nach dem
+  Nebensatz. „Weißt du, wann sie kommt?“ behält das Fragezeichen — die App lehrte „nur bei
+  direkter Frage“, womit Nils in Mails an Dozenten („Können Sie mir sagen, ob …?“) den
+  Punkt gesetzt hätte. Regel, `p19`, `t12`, Spickzettel.
+- **Klammern:** Punkt innen nur bei einem Klammersatz, der für sich steht; eingeschoben
+  in einen anderen Satz fällt sein Punkt weg, Frage- und Ausrufezeichen bleiben, das Komma
+  des Satzes steht nach der Klammer (Regelwerk-Beispiele). `p16` war beim Vorlesen nicht
+  lösbar (Klammern werden nicht mitgesprochen), fragt jetzt nach der Position.
+  `p15`: „Für Quellenangaben“ war als Ablenker nicht sicher falsch (numerische
+  Zitierstile: [12]).
+- **Auslassungspunkte:** Rechtschreiblich drei Punkte, das eigene Zeichen ist
+  Typografie; eckige Klammern im Zitat sind Zitierkonvention, das Regelwerk zeigt
+  Auslassungen ohne Klammern. `p18`: runde Klammern waren als Ablenker nicht sicher
+  falsch. Neues hartes Muster `t14` für den Punkt nach Auslassungspunkten.
+- **Schrägstrich/Apostroph:** Leerzeichen beim Schrägstrich zwischen Wortgruppen sind
+  DIN-Konvention, das Regelwerk schreibt selbst „das Semikolon/der Strichpunkt“ —
+  `p21` umgebaut („Beides geht“), in `NEU_GELERNT`. Apostroph: „ce“ ergänzt (Alice’ Idee,
+  stand in `recht-apostroph` schon richtig), vierter Fall Newton’sche/newtonsche Gesetze,
+  Ladennamen präzisiert, „20%ig“ statt des Fehlbeispiels „20-prozentig“ (`t03` lässt
+  „100%ig“ jetzt durch). `recht-apostroph` und `r10` auf das typografische ’ umgestellt.
+- **Semikolon:** nie Pflicht; in der Aufzählung ersetzt es das Komma, nicht der Punkt
+  („der ist nie falsch“ galt nur zwischen Sätzen). Gedankenstrich als dritte Möglichkeit.
+- **Neue Fehlerklasse im Prüflauf** (`tests/inhalt.js`, Abschnitt D): Unterscheiden sich
+  zwei Optionen beim Hören nur durch ein Satzzeichen, muss der Hörhinweis es beim Namen
+  nennen. Gefunden: `p03` (Semikolon, der Hinweis zählte nur Kommas) und `q12` („8:30“
+  meldete „ohne Trennzeichen“). `hoerHinweis()` kennt jetzt Semikolon und Doppelpunkt,
+  `zahlHinweis()` den Doppelpunkt in Uhrzeiten.
+
 Was die Belegagenten nicht erreichen konnten: duden.de, rechtschreibrat.com, dwds.de,
 grammis und Wikipedia sind aus der Umgebung nur über Suchtreffer lesbar. Die
 Paragraphennummern des Regelwerks 2024 sind deshalb nur dort genannt, wo sie mehrfach
-bestätigt sind (§ 73 Infinitivgruppen). Offen aus diesem Durchgang: `z-klammern`,
-`z-auslassung`, `z-frage`, `z-schraeg`, `z-semikolon` (Sucher liefen noch).
+bestätigt sind (§ 73 Infinitivgruppen). Ein Prüfer hatte den Volltext der Fassung
+2006/2018 als lokale Textdatei — die Zitate daraus sind in den Commit-Nachrichten
+und Urteilen im Workflow-Journal nachlesbar, nicht in der App.
 
 **Zeichensetzung belegt, Infinitivkomma auf den Stand von 2024** (04.09.2026).
 Punkt 1 der Ideenliste. Duden, Rechtschreibrat, DWDS und grammis sind aus der

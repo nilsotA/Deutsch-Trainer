@@ -42,7 +42,7 @@ also nicht umbenennen.
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 84 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 85 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
@@ -150,7 +150,10 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - Vorlesen über `sprechFrage(q)` → `sprechbar()`. **`hoerHinweis()` ist Pflicht:**
   Antworten, die sich nur in Schreibung oder Zeichensetzung unterscheiden, klingen gleich
   („des Weiteren“ / „des weiteren“). Der Hinweis benennt den Unterschied
-  („Weiteren groß“, „Komma nach größer“, „mit Bindestrich“).
+  („Weiteren groß“, „Komma nach größer“, „mit Bindestrich“, „Semikolon nach hell“,
+  „8 Doppelpunkt 30“). Klammern werden nicht mitgesprochen — eine Aufgabe, die nur an
+  der Klammer hängt, muss die Position in Worten abfragen (`p16`). `tests/inhalt.js`
+  prüft, dass der Hinweis das unterscheidende Zeichen beim Namen nennt.
 - Nach richtiger Antwort schaltet die App selbst weiter (`autoAn`/`autoAus`), beim Vorlesen
   erst nach dem Satzende. Abbrechen per Tipp, abschaltbar über ⏩.
 - Rundenende zeigt die Fehler nach Regel gebündelt, antippbar ins Regelwerk.

@@ -112,4 +112,24 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 });
 P.ok("Keine unlesbaren Sonderzeichen im Sprechtext", restZeichen.size === 0, [...restZeichen].join(" "));
 
+/* Fehlerklasse „Hinweis nennt das falsche Zeichen“: Unterscheiden sich zwei Optionen beim
+   Hören nur durch ein Satzzeichen, muss der Hörhinweis genau dieses Zeichen beim Namen
+   nennen. Bei p03 nannte er nur die Kommas — der Hörer hätte sie zählen müssen, um die
+   Fassung mit Semikolons zu erkennen. */
+const ZEICHEN = { ";": "Semikolon", ":": "Doppelpunkt", "?": "Fragezeichen", "!": "Ausrufezeichen" };
+const flach = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+const stummeZeichen = [];
+ALL.filter(i => i.t !== "fill").forEach(i => {
+  i.o.forEach((a, k) => i.o.forEach((b, m) => {
+    if (m <= k || flach(a) !== flach(b)) return;
+    Object.keys(ZEICHEN).forEach(z => {
+      if (a.includes(z) === b.includes(z)) return;
+      const mit = a.includes(z) ? a : b;
+      const hinweis = w.eval("hoerHinweis(" + JSON.stringify(mit) + "," + JSON.stringify(i.o) + ")");
+      if (!hinweis.includes(ZEICHEN[z])) stummeZeichen.push(i.id + " (" + ZEICHEN[z] + ")");
+    });
+  }));
+});
+P.ok("Der Hörhinweis nennt das unterscheidende Zeichen", !stummeZeichen.length, stummeZeichen.join(", "));
+
 P.abschluss();
