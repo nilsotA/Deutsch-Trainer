@@ -154,10 +154,10 @@ prüft diesen Widerspruch dauerhaft mit.
 Abdeckung, dass beide Fassungen drankommen, und dass der ausgefüllte richtige Satz keine
 harte Textcheck-Meldung auslöst. Der Kern ist aber `tests/formen.js`: eine unabhängig
 aufgestellte Tabelle, welche Artikelform zu welchem Fall passt — vorher nur in `inhalt.js`,
-jetzt von beiden Läufen geteilt. Damit sind **163 der 173 Fassungen maschinell gegen ihren
-Fall geprüft** und 66 Ablenker als eindeutig falsch bestätigt. Die restlichen zehn sind
-Adjektivformen und die drei Karten zur Präpositionswahl; der Lauf sagt das offen dazu,
-statt Deckung vorzutäuschen.
+jetzt von beiden Läufen geteilt. Damit waren zunächst **163 der 173 Fassungen maschinell gegen ihren
+Fall geprüft** und 66 Ablenker als eindeutig falsch bestätigt; seit dem 04.09.2026 sind es
+171 Fassungen und 123 Ablenker (siehe Ideenliste, Punkt 4). Der Lauf nennt die zwei
+verbleibenden Fassungen offen, statt Deckung vorzutäuschen.
 
 Davor (aus der letzten Sitzung, inzwischen geprüft):
 
@@ -207,11 +207,17 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    neue Muster muss gegen sauberen Text geprüft werden.
 3. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten
    wären akademische Verben und Verwechslungspaare aus seinen eigenen Texten.
-4. **Satzformen für die zehn offenen Fassungen.** `bis`, `wider`, `je`, `pro`, `samt`
-   und `zwecks` fragen über Adjektivendungen ab, `danken` und `zuhören` über „ihr“ —
-   die Formentabelle in `tests/formen.js` kennt diese Formen nicht, sie sind also nur
-   von Hand geprüft. Entweder die Tabelle erweitern oder die Sätze auf Artikelformen
-   umstellen.
+4. **Erledigt (04.09.2026): die zehn offenen Fassungen sind maschinell geprüft.** Die
+   Formentabelle kennt jetzt die artikellosen Adjektivformen der Karten (`nächsten`,
+   `besseres`, `angefangene` …, stark gebeugt, mit Kommentar zur Mehrdeutigkeit von „-en“)
+   und eine zweite Tabelle `PRONOMEN` (er, sie, es, wir, ihr), die nur in `fallform.js`
+   gilt — in Beispielsätzen wäre „sie“ meist Subjekt und würde `inhalt.js` verfälschen.
+   Die Ablenkerprüfung zählt einen Ablenker jetzt auch dann als sicher falsch, wenn
+   keine seiner Lesarten den verlangten Fall enthält („sie“ für einen Dativ); vorher
+   waren nur eindeutige Formen entscheidbar. Stand: 171 von 173 Fassungen gegen ihren
+   Fall geprüft (vorher 163), 123 Ablenker entschieden (vorher 66), `inhalt.js` prüft
+   121 statt 115 Beispiele. Offen bleiben nur `nach (Richtung)` und `bei (Ort)`, wo die
+   Präposition wechselt statt der Form — dort sagt der Fall nichts über richtig und falsch.
 
 ## Werkzeug, das nützlich war
 

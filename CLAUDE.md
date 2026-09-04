@@ -91,8 +91,15 @@ entscheidbar ist. Drei Fallen bleiben deine:
 - **Dokumentierte Ausnahmen**: Bei den Genitivpräpositionen ist der Dativ artikellos im
   Singular und im Plural ohne erkennbare Genitivform korrekt („wegen Umbau“, „trotz Beweisen“).
   Satz also immer mit Artikel bauen.
-- **Mehrdeutige Formen**: „den“ ist Akkusativ Singular und Dativ Plural. Die Prüfung kann
-  solche Ablenker nicht beurteilen und sagt das auch — sie zählt sie als ungeprüft.
+- **Mehrdeutige Formen**: „den“ ist Akkusativ Singular und Dativ Plural. Enthält eine
+  Lesart des Ablenkers den verlangten Fall, kann die Prüfung ihn nicht beurteilen und zählt
+  ihn als ungeprüft. Enthält keine Lesart den Fall, gilt er als sicher falsch.
+
+Die Tabelle kennt Artikel, Pronomen in Objektform, Verschmelzungen (im, ans) und die
+artikellosen Adjektivformen der Karten in starker Beugung. Persönliche Pronomen, die auch
+Subjekt sein können (er, sie, es, wir, ihr), stehen in der zweiten Tabelle `PRONOMEN`, die
+nur `fallform.js` verwendet — dort steht das Wort selbst in der Lücke. `inhalt.js` prüft
+Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
 
 ### Lernlogik
 

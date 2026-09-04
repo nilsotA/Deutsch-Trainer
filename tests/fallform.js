@@ -3,7 +3,9 @@
    richtige Form zum Fall der Karte passt und kein Ablenker in Wahrheit richtig ist. */
 
 const { boot, daten, pruefer } = require("./setup");
-const { FORM, NAME } = require("./formen");
+const { FORM, PRONOMEN, NAME } = require("./formen");
+/* Hier steht das Wort selbst in der Lücke — Pronomen sind also Objektformen, nie Subjekt. */
+const FORMEN = Object.assign({}, FORM, PRONOMEN);
 const P = pruefer("A · Form der Satzaufgaben");
 
 const w = boot(null);
@@ -55,7 +57,7 @@ function sollFall(x) {
   if (x.e.t === "wechsel" && x.von === 2) return x.i === 0 ? "A" : "D";
   return null;
 }
-const traeger = t => String(t).toLowerCase().replace(/[^a-zäöüß ]/g, " ").split(/\s+/).filter(y => FORM[y]);
+const traeger = t => String(t).toLowerCase().replace(/[^a-zäöüß ]/g, " ").split(/\s+/).filter(y => FORMEN[y]);
 
 let gedeckt = 0;
 const falscheForm = [], offen = [];
@@ -64,7 +66,7 @@ ALLE.forEach(x => {
   const tr = soll ? traeger(x.richtig) : [];
   if (!soll || !tr.length) { offen.push(x.e.w + "#" + (x.i + 1)); return; }
   gedeckt++;
-  if (!tr.some(y => FORM[y].includes(soll)))
+  if (!tr.some(y => FORMEN[y].includes(soll)))
     falscheForm.push(x.e.w + "#" + (x.i + 1) + ": „" + x.richtig + "“ ist kein " + NAME[soll]);
 });
 P.ok("Die richtige Form passt zum Fall der Karte (" + gedeckt + " geprüft)",
@@ -74,8 +76,9 @@ P.ok("Die richtige Form passt zum Fall der Karte (" + gedeckt + " geprüft)",
    Verglichen wird nur, wo beide Optionen reine Fallformen sind — also dieselbe Wortgruppe
    in verschiedenen Fällen. Wechselt stattdessen die Präposition („zum“ gegen „nach dem“),
    entscheidet nicht der Fall über richtig und falsch, und der Vergleich sagt nichts.
-   Mehrdeutige Formen — „den“ ist Akkusativ Singular und Dativ Plural — bleiben ebenfalls
-   ungeprüft; beides steht unten in der Zahl. */
+   Mehrdeutige Formen — „den“ ist Akkusativ Singular und Dativ Plural — bleiben ungeprüft,
+   wenn der verlangte Fall unter ihren Lesarten ist. Enthält keine Lesart den Fall („sie“
+   für einen Dativ), ist der Ablenker sicher falsch und zählt als entschieden. */
 const wortzahl = t => String(t).toLowerCase().replace(/[^a-zäöüß ]/g, " ").split(/\s+/).filter(Boolean).length;
 const reineForm = t => wortzahl(t) > 0 && traeger(t).length === wortzahl(t);
 let entschieden = 0;
@@ -85,9 +88,11 @@ ALLE.forEach(x => {
   if (!soll || !reineForm(x.richtig)) return;
   x.falsch.forEach(o => {
     const tr = traeger(o);
-    if (!reineForm(o) || tr.length !== 1 || FORM[tr[0]].length !== 1) return;
+    if (!reineForm(o) || tr.length !== 1) return;
+    const lesarten = FORMEN[tr[0]];
+    if (lesarten.includes(soll) && lesarten.length !== 1) return;
     entschieden++;
-    if (FORM[tr[0]][0] === soll)
+    if (lesarten.length === 1 && lesarten[0] === soll)
       zweitRichtig.push(x.e.w + "#" + (x.i + 1) + ": „" + o + "“ ist auch " + NAME[soll]);
   });
 });

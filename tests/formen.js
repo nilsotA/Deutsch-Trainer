@@ -19,8 +19,26 @@ const FORM = {
   im: ["D"], am: ["D"], beim: ["D"], zum: ["D"], zur: ["D"], vom: ["D"],
   vorm: ["D"], hinterm: ["D"], unterm: ["D"], "überm": ["D"],
   ins: ["A"], ans: ["A"], aufs: ["A"], durchs: ["A"], "fürs": ["A"], ums: ["A"],
-  "übers": ["A"], unters: ["A"], hinters: ["A"]
+  "übers": ["A"], unters: ["A"], hinters: ["A"],
+
+  /* Artikellose Adjektive und „all-“ in starker Beugung — die Fälle, die die Form ohne
+     Artikel tragen kann. Nötig für Präpositionen, die meist ohne Artikel stehen (bis, je,
+     pro, wider, samt, zwecks). Steht ein Artikel davor, entscheidet der Artikel; die Tabelle
+     bleibt dann richtig, weil sie nur sagt, was die Form tragen KANN. „-en“ ist wie „den“
+     mehrdeutig: Akkusativ Singular, Dativ Plural, Genitiv Maskulinum/Neutrum. */
+  "nächsten": ["A", "D", "G"], "nächstem": ["D"],
+  besseres: ["N", "A"], besserem: ["D"], besserer: ["N", "D", "G"], bessere: ["N", "A"],
+  angefangenen: ["A", "D", "G"], angefangenem: ["D"], angefangene: ["N", "A"], angefangener: ["N", "D", "G"],
+  allem: ["D"], alles: ["N", "A"]
+};
+
+/* Persönliche Pronomen, die auch Subjekt sein können. Sie gelten nur dort, wo das Wort
+   selbst die Antwort ist (Satzform der Fallkarten). In Beispielsätzen wäre „sie“ meist
+   das Subjekt und würde die Prüfung des Objektfalls verfälschen — deshalb nicht in FORM.
+   „ihr“ ist Dativ Femininum, daneben Nominativ Plural (ihr seid) und Possessiv (ihr Ball). */
+const PRONOMEN = {
+  er: ["N"], sie: ["N", "A"], es: ["N", "A"], wir: ["N"], ihr: ["N", "A", "D"]
 };
 const NAME = { N: "Nominativ", A: "Akkusativ", D: "Dativ", G: "Genitiv" };
 
-module.exports = { FORM, NAME };
+module.exports = { FORM, PRONOMEN, NAME };
