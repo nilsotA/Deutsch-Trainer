@@ -36,7 +36,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 116 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 83 |
+| Prüfmuster im Textcheck | 84 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Dateigröße | ~600 KB, eine Datei, kein Build |
 
@@ -57,6 +57,48 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Zweiter Durchgang Zeichensetzung: sieben weitere Regeln belegt** (04.09.2026, abends).
+Vorgehen: Für jede Regel zwei unabhängige Belegagenten (Faktenprüfung; Absolutheit,
+Änderungen 2024, Widersprüche, Ablenker), Befunde zusammengeführt, die Kernaussagen
+zusätzlich selbst per Suche geprüft, dann umgesetzt. Die gegnerische Prüfung der Funde
+(drei Prüfer je Regel) lief beim Schreiben dieser Zeilen noch — Abweichungen werden
+nachgetragen. Belegt sind jetzt `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`,
+`komma-vergleich`, `komma-adjektive`, `komma-brief`, `z-anfuehrung`. Die Einzelheiten
+stehen in den Commit-Nachrichten; die wichtigsten Funde:
+
+- **Zweite Änderung von 2024 gefunden:** Das schließende Komma nach mehrteiligen
+  Datumsangaben („Am Montag, dem 12. Mai, beginnt …“) ist seit 2024 Pflicht. Die App
+  sagte „möglich“ (`komma-brief`, `k25`); `n-datum` sagte es schon richtig. Ebenfalls
+  2024: Nachgestellte Erläuterungen als verkürztes Satzglied dürfen ohne schließendes
+  Komma stehen (`komma-einschub`, als Randnotiz).
+- **Drei Übungen mit richtigem Ablenker** (Grundsatz 2): `k18` („Zwei“ Kommas waren
+  auch richtig, das Komma vor „und“ ist frei), `p25` („Komma“ zwischen zwei
+  Hauptsätzen ist richtig, die Übung nannte nur das Semikolon), `p11` (die einfachen
+  Anführungszeichen ‚…‘ sind beim Vorlesen von den geraden nicht zu unterscheiden und
+  als Zitat im Zitat korrekt). Umgebaut, IDs behalten; `p25` in `NEU_GELERNT`.
+- **Fehlersuche kt12** wertete „am Dienstag, den 12. Mai“ als Kasusfehler („dem“),
+  obwohl `n-datum` beide Formen zulässt — gestrichen; stattdessen fehlt dort das seit
+  2024 verbindliche schließende Komma. `kt03` wertete das fehlende Komma nach „Wie
+  bereits mehrfach erwähnt“ als Fehler — bei kurzen Formeln ist es frei.
+- **„immer“ und „alles“ abgeschwächt**, wo Duden und Regelwerk Freiräume lassen:
+  Formeln („wie besprochen(,)“), „vorausgesetzt(,) dass“, Kurzformeln als Zusatz
+  („Er hat(,) wie erwartet(,) gewonnen“), enge Appositionen ohne Komma, Adjektivkomma
+  als Bedeutungsträger („neue, umweltfreundliche“ ≠ „neue umweltfreundliche“).
+- **Lücken geschlossen:** Nebensatz ohne Einleitewort („Ich hoffe, du kommst“), „denn“
+  (fehlte in der ganzen App), mehrteilige Einleitungen („nur weil“ → Komma vor der
+  Fügung), Komma vor „als“ mit zu-Infinitiv, gerade Zollzeichen sind Tastaturzeichen,
+  die englischen Anführungszeichen stehen beide oben (“…“).
+- **Textcheck:** `y01` (Nebensatz) kennt mehrteilige Einleitungen, `y11` neu
+  (erweiterte Infinitivgruppe ohne Komma), `t13` neu (englische Anführungszeichen),
+  `t01` von „hart“ auf „prüfen“ (Typografie, keine Rechtschreibung), `a01` und `x25`
+  erkennen mehr Formen. Alle gegen den sauberen Bestand geprüft, null Fehlalarme.
+
+Was die Belegagenten nicht erreichen konnten: duden.de, rechtschreibrat.com, dwds.de,
+grammis und Wikipedia sind aus der Umgebung nur über Suchtreffer lesbar. Die
+Paragraphennummern des Regelwerks 2024 sind deshalb nur dort genannt, wo sie mehrfach
+bestätigt sind (§ 73 Infinitivgruppen). Offen aus diesem Durchgang: `z-klammern`,
+`z-auslassung`, `z-frage`, `z-schraeg`, `z-semikolon` (Sucher liefen noch).
 
 **Zeichensetzung belegt, Infinitivkomma auf den Stand von 2024** (04.09.2026).
 Punkt 1 der Ideenliste. Duden, Rechtschreibrat, DWDS und grammis sind aus der
