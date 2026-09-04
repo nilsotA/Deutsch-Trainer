@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 331 |
+| Übungen | 336 |
 | Regeln | 117 |
 | Wortkarten | 116 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 82 |
+| Prüfmuster im Textcheck | 83 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~550 KB, eine Datei, kein Build |
+| Dateigröße | ~600 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,40 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Zeichensetzung belegt, Infinitivkomma auf den Stand von 2024** (04.09.2026).
+Punkt 1 der Ideenliste. Duden, Rechtschreibrat, DWDS und grammis sind aus der
+Sitzungsumgebung nicht direkt abrufbar (Proxy), belegt wurde über Suchtreffer auf
+diesen Seiten und über die Zusammenfassung der Änderungen des Rechtschreibrats
+(`RfdR_Amtliches-Regelwerk_2024_UeberblickAenderungen.pdf`), Duden-Handreichung zur
+29. Auflage, GfdS, lehrerfreund. Ergebnis:
+
+- **Infinitivgruppen — die App war auf dem Stand von 2006.** Seit 1. Juli 2024 ist das
+  Komma bei *erweiterten* Infinitivgruppen Pflicht (Regelwerk § 73, Infinitivgruppen
+  zählen jetzt zu den Nebensätzen). Frei bleibt nur der bloße Infinitiv („Er hofft(,)
+  zu gewinnen“). Kein Komma, wenn der Infinitiv mit sein, haben, brauchen, pflegen,
+  scheinen (übertragen: drohen, versprechen) ein Prädikat bildet (§ 73 E4). Neu ist auch
+  die ausdrückliche Kommapflicht bei Abhängigkeit von Adjektiv oder Partizip.
+  Geändert: Regel `komma-infinitiv` neu geschrieben, Übung `k20` gedreht (Pflicht statt
+  fakultativ, richtige Antwort steht jetzt vorn, ID unverändert), `k01` ergänzt, fünf
+  neue Übungen `j01–j05` (neues Präfix), Textcheck-Muster `y11` (prüfen, nicht hart:
+  Verb + erweiterte Infinitivgruppe ohne Komma; null Treffer im sauberen Bestand),
+  Spickzettel Abschnitt 1, „Stand der Prüfung“.
+- **Partizipgruppen:** Komma seit **1996** frei, nicht seit 2006; 2024 beibehalten.
+  Regel und `k29` korrigiert.
+- **Doppelpunkt:** bestätigt. Liste der Ankündigungswörter ergänzt (nämlich, zum
+  Beispiel, wie, und zwar, das heißt, unter anderem, also), Beispiel dazu.
+- **Bis-Strich:** bestätigt, auch für DIN 5008:2020 (mit Leerzeichen, gilt dort auch
+  für den Streckenstrich). Ergänzt: „4- bis 6-Zimmer-Wohnung“ statt „4–6-Zimmer-Wohnung“,
+  Bis-Strich nur zwischen Zahlen und Einzelbuchstaben.
+- **Dabei gefunden:** zwei Textcheck-Muster trugen dieselbe Kennung `y05`. Die alte
+  (gleich/derselbe) behält sie, `tests/suite.js` prüft jetzt dauerhaft, dass
+  Prüfmuster-Kennungen eindeutig sind.
+
+Nicht geändert: `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`, `komma-vergleich`,
+`komma-adjektive`, `komma-brief`, `z-anfuehrung`, `z-klammern`, `z-auslassung`, `z-frage`,
+`z-schraeg`, `z-semikolon` — nicht einzeln belegt, nur gelesen; nichts Auffälliges.
+Die 2024 neu nummerierten Paragraphen sind in der App nur bei `komma-infinitiv` zitiert.
 
 **Achtung — zwei Sitzungen im selben Ordner** (29.08.2026). Eine zweite Claude-Code-Sitzung
 hat den alten Cowork-Ausgabeordner als „Stand aus vorherigem Chat“ über die Arbeit dieser
@@ -146,6 +180,11 @@ Belegt und im Text kenntlich gemacht sind unter anderem:
 - „imstande/im Stande“, „zu Hause/zuhause“, „Portemonnaie/Portmonee“ (Varianten)
 - Groß-/Kleinschreibung nach Präposition: Wahl nur ohne Artikel
 - „bräuchte/brauchte“ (Zweifelsfall, beide vertretbar)
+- Komma bei erweiterten Infinitivgruppen: seit 2024 Pflicht (Regelwerk § 73); bloßer
+  Infinitiv frei; kein Komma nach sein/haben/brauchen/pflegen/scheinen (§ 73 E4)
+- Partizipgruppen: Komma seit 1996 frei, 2024 beibehalten
+- Doppelpunkt: entbehrlich nach nämlich/zum Beispiel/und zwar; groß danach nur bei Ganzsatz
+- Bis-Strich: Duden ohne, DIN 5008 (auch 2020) mit Leerzeichen; nicht mit „von“ kombinieren
 
 Der übrige Bestand beruht auf allgemeinem Sprachwissen und hat die maschinellen
 Prüfungen bestanden, ist aber nicht einzeln belegt. Der Absatz „Stand der Prüfung“
@@ -156,11 +195,13 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Belege für die Zeichensetzung.** `gram-praep` und `gram-kasus` sind erledigt
-   (siehe „Zuletzt geändert“). Offen sind die Zeichensetzungsregeln — Komma bei
-   Infinitivgruppen, Gedankenstrich, Doppelpunkt. Vorgehen wie gehabt: erst belegen,
-   dann Regel, Übung, Fallkarte und Textcheck angleichen, dann „Stand der Prüfung“
-   nachziehen.
+1. **Restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
+   Doppelpunkt und Bis-Strich sind erledigt (siehe „Zuletzt geändert“). Offen:
+   `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`, `komma-vergleich`,
+   `komma-adjektive`, `komma-brief` und die übrigen `z-`-Regeln gegen das Regelwerk
+   von 2024 lesen — die Kommaregeln sind dort neu nummeriert, und „Komma bei Nebensätzen
+   mit und/oder“ könnte sich verschoben haben. Vorgehen wie gehabt: erst belegen, dann
+   Regel, Übung, Fallkarte und Textcheck angleichen, dann „Stand der Prüfung“ nachziehen.
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.

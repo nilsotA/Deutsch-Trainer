@@ -634,7 +634,7 @@ const EX_A = [
 {id:"k01",c:"komma",q:"Welche Variante ist richtig?",o:[
  "Er trainiert jeden Morgen, um seine Ausdauer zu verbessern.",
  "Er trainiert jeden Morgen um seine Ausdauer zu verbessern."],a:0,
- e:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma. Das ist keine Kann-Regel.",r:"komma-infinitiv"},
+ e:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma. Das war schon vor 2024 keine Kann-Regel — seitdem gilt das Komma bei jeder erweiterten Infinitivgruppe.",r:"komma-infinitiv"},
 
 {id:"k02",c:"komma",q:"Wo ist das Komma korrekt gesetzt?",o:[
  "Der Plan, jeden Tag zehn Kilometer zu laufen, war ambitioniert.",
@@ -725,10 +725,10 @@ const EX_A = [
  e:"Nebensätze werden immer durch Komma abgetrennt — auch indirekte Fragesätze mit „ob“.",r:"komma-nebensatz"},
 
 {id:"k20",c:"komma",q:"„Er hat versucht(,) pünktlich zu sein.“",o:[
- "Komma ist erlaubt, aber nicht zwingend",
  "Komma ist Pflicht",
+ "Komma ist erlaubt, aber nicht zwingend",
  "Komma ist falsch"],a:0,
- e:"Bei einfachen Infinitivgruppen ohne Einleitewort ist das Komma <b>fakultativ</b>. Empfehlung: setzen, wenn der Satz sonst schwer lesbar wird.",r:"komma-infinitiv"},
+ e:"„pünktlich zu sein“ ist eine <b>erweiterte</b> Infinitivgruppe. Seit dem Regelwerk von 2024 ist das Komma dort Pflicht — davor war es freigestellt, deshalb steht in älteren Büchern noch „kann“. Frei bleibt nur der bloße Infinitiv: „Er hofft(,) zu gewinnen.“",r:"komma-infinitiv"},
 
 {id:"k21",c:"komma",q:"Welcher Satz ist korrekt?",o:[
  "Nein, das sehe ich anders.",
@@ -772,7 +772,7 @@ const EX_A = [
  "Von der Hitze erschöpft, brach sie das Training ab.",
  "Beides ist zulässig",
  "Von der Hitze erschöpft brach sie das Training ab."],a:1,
- e:"Bei Partizipgruppen ist das Komma seit 2006 <b>fakultativ</b>. Pflicht wird es nur bei Einschüben, Nachträgen oder wenn ein hinweisendes Wort vorausgeht.",r:"komma-partizip"},
+ e:"Bei Partizipgruppen ist das Komma seit der Reform von 1996 <b>fakultativ</b>, auch nach dem Regelwerk von 2024. Pflicht wird es nur bei Einschüben, Nachträgen oder wenn ein hinweisendes Wort vorausgeht.",r:"komma-partizip"},
 
 {id:"k30",c:"komma",q:"„Es war ein guter(,) wenn auch anstrengender Tag.“",o:[
  "Komma nötig","Kein Komma"],a:0,
@@ -916,7 +916,35 @@ const EX_A = [
  e:"Feste Wendung mit Substantivierung → groß. Häufiger Fehler in E-Mails.",r:"gross-subst"},
 
 {id:"g30",c:"gross",q:"Korrekt ist …",o:["Er hat es des Öfteren erwähnt.","Er hat es des öfteren erwähnt."],a:0,
- e:"Substantiviertes Adjektiv im Genitiv → groß: <b>des Öfteren</b>.",r:"gross-subst"}
+ e:"Substantiviertes Adjektiv im Genitiv → groß: <b>des Öfteren</b>.",r:"gross-subst"},
+
+/* Infinitivgruppen nach dem Regelwerk von 2024 */
+{id:"j01",c:"komma",q:"Welche Variante ist richtig?",o:[
+ "Sie hat vor, im Sommer nach Köln zu ziehen.",
+ "Sie hat vor im Sommer nach Köln zu ziehen."],a:0,
+ e:"„im Sommer nach Köln zu ziehen“ ist eine <b>erweiterte</b> Infinitivgruppe. Seit 2024 ist das Komma dort Pflicht, kein Einleitewort nötig.",r:"komma-infinitiv"},
+
+{id:"j02",c:"komma",q:"„Du brauchst nicht(,) zu kommen.“",o:[
+ "Kein Komma — „brauchen … zu“ bildet ein Prädikat",
+ "Komma ist Pflicht",
+ "Komma ist freigestellt"],a:0,
+ e:"Der Infinitiv bildet mit <b>brauchen</b> ein mehrteiliges Prädikat, wie mit sein, haben, pflegen, scheinen. Dann ist es keine satzwertige Infinitivgruppe, und es steht <b>kein</b> Komma.",r:"komma-infinitiv"},
+
+{id:"j03",c:"komma",q:"Welcher Satz ist korrekt?",o:[
+ "Sie scheint das Spiel zu gewinnen.",
+ "Sie scheint, das Spiel zu gewinnen."],a:0,
+ e:"Mit <b>scheinen</b> gehört der Infinitiv zum Prädikat: „scheint … zu gewinnen“ ist ein Verb in zwei Teilen. Kein Komma, obwohl die Gruppe erweitert ist.",r:"komma-infinitiv"},
+
+{id:"j04",c:"komma",q:"„Er hofft(,) zu gewinnen.“",o:[
+ "Komma ist freigestellt",
+ "Komma ist Pflicht",
+ "Komma ist falsch"],a:0,
+ e:"Ein <b>bloßer</b> Infinitiv — nur „zu“ + Verb — ist der einzige Fall, in dem das Komma seit 2024 noch frei ist. Sobald ein Wort dazukommt („Er hofft, das Spiel zu gewinnen“), ist es Pflicht.",r:"komma-infinitiv"},
+
+{id:"j05",c:"komma",q:"Welche Variante ist richtig?",o:[
+ "Er war froh, das Training geschafft zu haben.",
+ "Er war froh das Training geschafft zu haben."],a:0,
+ e:"Erweiterte Infinitivgruppe, abhängig vom Adjektiv „froh“. Das Regelwerk von 2024 nennt die Abhängigkeit von Adjektiv oder Partizip ausdrücklich als Kommafall — und erweitert ist die Gruppe ohnehin.",r:"komma-infinitiv"}
 
 ];
 /* ============================================================
@@ -1407,19 +1435,15 @@ const RULES = [
 <div class="ex">Die Halle<span class="ok">,</span> in der wir trainieren<span class="ok">,</span> wird saniert.</div>`},
 
 {id:"komma-infinitiv",c:"komma",t:"Infinitivgruppen mit „zu“",b:`
-<p><b>Komma ist Pflicht</b>, wenn die Infinitivgruppe …</p>
-<ul>
-<li>… mit <code>um, ohne, statt, anstatt, außer, als</code> eingeleitet wird<br>
-<span class="ex">Er trainiert<span class="ok">,</span> um sich zu verbessern.</span></li>
-<li>… von einem <b>Substantiv</b> abhängt<br>
-<span class="ex">Der Plan<span class="ok">,</span> täglich zu laufen<span class="ok">,</span> war ambitioniert.</span></li>
-<li>… von einem <b>hinweisenden Wort</b> angekündigt oder aufgenommen wird<br>
-<span class="ex">Daran<span class="ok">,</span> pünktlich zu sein<span class="ok">,</span> denkt er nie.</span></li>
-<li>… als <b>Einschub</b> mitten im Satz steht.</li>
-</ul>
-<p><b>Komma ist freigestellt</b> bei einfachen Infinitivgruppen ohne Einleitewort:</p>
-<div class="ex">Er hat versucht<span class="ok">(,)</span> pünktlich zu sein.</div>
-<p><b>Merksatz für die Pflichtfälle:</b> <i>um, ohne, statt, anstatt, außer, als</i> — sechs Wörter, ein Komma.</p>`},
+<p><b>Seit dem 1. Juli 2024 gilt:</b> Eine <b>erweiterte</b> Infinitivgruppe — „zu“ + Verb plus mindestens ein weiteres Wort — wird <b>immer</b> mit Komma abgetrennt. Das amtliche Regelwerk (§ 73) zählt sie seitdem zu den Nebensätzen; das Komma ist dort keine Kann-Regel mehr.</p>
+<div class="ex">Er hat versucht<span class="ok">,</span> pünktlich zu sein.<br>Sie plant<span class="ok">,</span> im Sommer nach Köln zu ziehen.<br>Der Plan<span class="ok">,</span> täglich zu laufen<span class="ok">,</span> war ambitioniert.<br>Er trainiert<span class="ok">,</span> um sich zu verbessern.</div>
+<p><b>Die sechs Einleitewörter</b> <code>um, ohne, statt, anstatt, außer, als</code> bleiben der sicherste Merkposten: Vor ihnen stand das Komma schon immer, auch vor 2024. Dasselbe galt schon vorher, wenn die Infinitivgruppe von einem <b>Substantiv</b> („der Plan, …“) oder einem <b>hinweisenden Wort</b> abhängt: „Daran<span class="ok">,</span> pünktlich zu sein<span class="ok">,</span> denkt er nie.“</p>
+<p><b>Komma ist freigestellt</b> nur noch beim <b>bloßen</b> Infinitiv, also „zu“ + Verb ohne alles:</p>
+<div class="ex">Er hofft<span class="ok">(,)</span> zu gewinnen. · Sie plant<span class="ok">(,)</span> zu verreisen.</div>
+<p><b>Kein Komma</b> steht, wenn der Infinitiv mit dem übergeordneten Verb ein <b>mehrteiliges Prädikat</b> bildet. Das ist der Fall bei <code>sein, haben, brauchen, pflegen, scheinen</code> und, übertragen gebraucht, <code>drohen, versprechen</code> (§ 73 E4):</p>
+<div class="ex">Du brauchst nicht<span class="nope">,</span> zu kommen.<br>Sie scheint das Spiel<span class="nope">,</span> zu gewinnen.<br>Er hat noch<span class="nope">,</span> zu arbeiten.<br>Das Wetter droht<span class="nope">,</span> schlecht zu werden.</div>
+<p class="tiny muted">Von 2006 bis 2024 war das Komma bei einfachen Infinitivgruppen ohne Einleitewort freigestellt. Viele Lehrbücher und Korrekturprogramme zeigen noch diesen Stand. Für Schule und Verwaltung ist die Fassung von 2024 verbindlich, und das Komma zu setzen war auch vorher nie falsch. Quelle: Rat für deutsche Rechtschreibung, Amtliches Regelwerk 2024, § 73; Duden, 29. Auflage.</p>
+<p><b>Merksatz:</b> Erweitert → Komma. Nur „zu“ + Verb → frei. Mit brauchen, scheinen, haben, sein → keins.</p>`},
 
 {id:"komma-aufzaehlung",c:"komma",t:"Aufzählungen und Konjunktionen",b:`
 <p>Gleichrangige Teile werden durch Komma getrennt — außer, es steht schon eine Konjunktion dazwischen.</p>
@@ -1466,7 +1490,7 @@ const RULES = [
 die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ klingt falsch, weil „rote Jacke“ eine Einheit bildet</div>`},
 
 {id:"komma-partizip",c:"komma",t:"Partizipgruppen",b:`
-<p>Seit 2006 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b>:</p>
+<p>Seit der Rechtschreibreform von 1996 ist das Komma bei Partizip- und Adjektivgruppen <b>freigestellt</b> — die Fassungen von 2006 und 2024 haben das beibehalten:</p>
 <div class="ex">Von der Hitze erschöpft<span class="ok">(,)</span> brach sie das Training ab.</div>
 <p><b>Pflicht</b> wird es nur, wenn die Gruppe …</p>
 <ul>
@@ -1474,7 +1498,8 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „neu und rot“ kl
 <li>… nachgetragen wird: „Sie brach ab, völlig erschöpft.“</li>
 <li>… durch ein hinweisendes Wort angekündigt wird</li>
 </ul>
-<p>Empfehlung: setzen, wenn es die Lesbarkeit erhöht — das ist fast immer der Fall.</p>`},
+<p>Empfehlung: setzen, wenn es die Lesbarkeit erhöht — das ist fast immer der Fall.</p>
+<p class="tiny muted">Nicht verwechseln mit Infinitivgruppen: Dort ist das Komma seit 2024 bei jeder erweiterten Gruppe Pflicht. Die Partizipgruppe blieb frei. Quelle: Amtliches Regelwerk 2024, Abschnitt Komma.</p>`},
 
 {id:"komma-brief",c:"komma",t:"Anrede, Gruß, Datum",b:`
 <ul>
@@ -1947,7 +1972,7 @@ model:`<p>Hallo Julia,</p>
 {id:"w13",k:"Argumentation",t:"Ein Konzept in einer Analogie erklären",min:15,words:"150–220",
 p:"Erkläre einen Fachbegriff aus deinem Studium über eine <b>Analogie</b> aus einem völlig anderen Lebensbereich. Nenne am Ende explizit, wo die Analogie <b>nicht</b> mehr trägt.",
 crit:["Fachbegriff zuerst knapp fachlich definiert","Analogie stammt aus einem anderen Feld","Mindestens zwei Aspekte werden übertragen","Grenze der Analogie klar benannt","Keine Fachbegriffe in der Analogie selbst"],
-tip:"Die Grenze der Analogie zu benennen ist der eigentliche Denkschritt. Sie zeigt, dass du das Bild beherrschst und nicht umgekehrt.",
+tip:"Der eigentliche Denkschritt ist, die Grenze der Analogie zu benennen. Sie zeigt, dass du das Bild beherrschst und nicht umgekehrt.",
 model:`<p><b>Superkompensation</b> bezeichnet den Vorgang, dass der Körper nach einer Belastung nicht nur das Ausgangsniveau wiederherstellt, sondern es kurzzeitig übertrifft — vorausgesetzt, die Erholung ist ausreichend lang.</p>
 <p>Man kann sich das wie das Auffüllen eines Kontos vorstellen, bei dem die Bank nach jeder Abhebung etwas mehr zurückzahlt, als abgehoben wurde — allerdings nur, wenn man ihr die Zeit für die Buchung lässt. Wer sofort wieder abhebt, sammelt keinen Bonus, sondern Schulden. Wer zu lange wartet, verliert den Bonus wieder, weil er verfällt.</p>
 <p>Zwei Dinge trägt das Bild: Es macht deutlich, warum Pausen kein Trainingsausfall sind, und es erklärt, warum sowohl zu häufiges als auch zu seltenes Training den Effekt verfehlt.</p>
@@ -4544,7 +4569,9 @@ const RULES_ZEICHEN = [
 Folgt eine <b>Aufzählung oder Wortgruppe</b> → <span class="ok">klein</span><br>
 „Mitzubringen sind: <b>S</b>chuhe, Handtuch …“ — hier groß, weil Substantive; sonst klein:<br>
 „Die Lage ist klar: <b>k</b>eine Chance.“</div>
-<p><b>Häufiger Fehler:</b> Doppelpunkt nach einem Wort, das die Aufzählung schon einleitet — „bestehend aus: …“ oder „nämlich: …“ braucht keinen.</p>`},
+<p><b>Häufiger Fehler:</b> Doppelpunkt nach einem Wort, das die Aufzählung schon ankündigt. Nach <code>nämlich, zum Beispiel, wie, und zwar, das heißt, unter anderem, also</code> und nach einer Präposition („bestehend aus: …“) ist er entbehrlich — die Ankündigung steht ja schon da.</p>
+<div class="ex">Das Training findet an drei Tagen statt<span class="ok">,</span> nämlich<span class="nope">:</span> Montag, Mittwoch und Freitag.</div>
+<p class="tiny muted">Geprüft gegen den Duden (Regeln zum Doppelpunkt, Sprachratgeber) und das Amtliche Regelwerk 2024: Doppelpunkt vor Aufzählungen, wörtlicher Rede und Erläuterungen; groß danach nur bei Ganzsatz oder Zitat, sonst klein.</p>`},
 
 {id:"z-gedankenstrich",c:"zeichen",t:"Gedankenstrich und Bindestrich",b:`
 <p>Zwei verschiedene Zeichen, die ständig verwechselt werden.</p>
@@ -4557,7 +4584,8 @@ Folgt eine <b>Aufzählung oder Wortgruppe</b> → <span class="ok">klein</span><
 <div class="ex">Sie kam zurück – und blieb.<br>Das Training – bei Regen in der Halle – beginnt um 17 Uhr.</div>
 <p><b>Der Bis-Strich</b> steht ohne Leerzeichen. <b>Wichtig:</b> Steht „von“ davor, muss „bis“ ausgeschrieben werden.</p>
 <div class="ex"><span class="ok">von 1990 bis 1995</span> · <span class="ok">1990–1995</span> · <span class="nope">von 1990–1995</span></div>
-<p><b>Randnotiz:</b> Die Duden-Redaktion setzt den Bis-Strich ohne Leerzeichen, die Norm DIN 5008 dagegen mit geschütztem Leerzeichen (8 – 10 Uhr). Für Fließtext ist die Duden-Variante die verbreitetere.</p>
+<p><b>Bis-Strich trifft Ergänzungsstrich:</b> Dann „bis“ ausschreiben — „4- bis 6-Zimmer-Wohnung“, nicht „4–6-Zimmer-Wohnung“. Und zwischen Wörtern lieber ausschreiben („Montag bis Freitag“); der Bis-Strich gehört zwischen Zahlen, Ziffern und Einzelbuchstaben.</p>
+<p><b>Randnotiz:</b> Die Duden-Redaktion setzt Bis-Strich und Streckenstrich ohne Leerzeichen (8–10 Uhr, Köln–Berlin), die Norm DIN 5008 dagegen — auch in der Fassung von 2020 — mit geschütztem Leerzeichen (8 – 10 Uhr, Köln – Berlin). Beides ist korrekt; für Fließtext ist die Duden-Variante die verbreitetere, in Geschäftsbriefen nach DIN gilt die Norm. Die Regeln zu „von … bis“ und zum Gedankenstrich mit Leerzeichen stammen aus dem Duden.</p>
 <p><b>Eingabe:</b> Mac <code>Alt + Minus</code> · Windows <code>Strg + Minus</code> (Ziffernblock) oder <code>Alt + 0150</code>. In vielen Programmen wandelt die Autokorrektur „Wort - Wort“ automatisch um.</p>`},
 
 {id:"z-anfuehrung",c:"zeichen",t:"Anführungszeichen",b:`
@@ -6113,7 +6141,7 @@ function drawRules(){
       "<li>Wo <b>Duden und DIN 5008</b> auseinandergehen — Tausendertrennung, Uhrzeit, Bis-Strich —, sind beide Konventionen genannt statt einer erfundenen Eindeutigkeit.</li>"+
       "<li><b>Stil ist keine Regel.</b> Hinweise zu Füllwörtern, Nominalstil oder Tonfall sind Empfehlungen; sie stehen in den Bereichen Stil und Formulierung, nicht in der Rechtschreibung.</li>"+
       "<li>Was <b>umgangssprachlich verbreitet, aber nicht standardsprachlich</b> ist, wird ausdrücklich so benannt — etwa „wegen dem Wetter“ oder „weil ich hab keine Zeit“.</li>"+
-      "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
+      "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung: Das Komma bei erweiterten Infinitivgruppen ist seit dem Regelwerk von 2024 Pflicht, nicht mehr freigestellt (§ 73); die App war hier auf dem Stand von 2006 und ist nachgezogen. Partizipgruppen bleiben frei, seit 1996. Der Doppelpunkt nach „nämlich“ oder „zum Beispiel“ ist entbehrlich, die Großschreibung danach hängt am Ganzsatz. Beim Bis-Strich gehen Duden (ohne Leerzeichen) und DIN 5008 (mit) auseinander, beides ist korrekt. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
       "<li><b>Zusätzlich maschinell geprüft:</b> alle zehn Tabellen gegen die Standardparadigmen der Deklination und des Konjunktivs II, alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm.</li>"+
       "<li><b>Widersprüche:</b> Eine laufende Prüfung meldet, wenn dasselbe Beispiel an einer Stelle als Fehler und an anderer als regionale Variante geführt wird. Wo Duden und amtliches Regelwerk mehrere Formen zulassen, steht das ausdrücklich da — auch dann, wenn eine Form empfohlen ist.</li>"+
     "</ul></div>";
@@ -7224,6 +7252,8 @@ const CHECKS = [
  t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht ein Komma — hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
 {id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?)\szu\s+[a-zäöüß]+(en|eln|ern)\b/g,
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
+{id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
+ t:"Komma vor der Infinitivgruppe?",k:"Seit 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt: „Er hat versucht<b>,</b> pünktlich zu sein.“ Hier scheint keines zu stehen. Prüf die Stelle — nach brauchen, scheinen, haben und sein steht dagegen keins.",r:"komma-infinitiv"},
 {id:"y03",sev:"pruef",re:/\bweil\s+(ich|du|er|sie|es|wir|ihr|man)\s+(bin|bist|ist|sind|seid|hab|habe|hast|hat|haben|habt|kann|kannst|will|willst|muss|musst|wird|werde|war|warst|waren|hatte|hattest|möchte|soll)\b/g,
  t:"„weil“ mit Hauptsatzstellung",k:"Nach „weil“ wandert das gebeugte Verb ans Satzende: <b>…, weil ich keine Zeit habe.</b> Gesprochen ist die Hauptsatzstellung verbreitet, schriftlich fällt sie auf.",r:"satz-nebensatz"},
 {id:"y04",sev:"pruef",re:/\bscheinbar\b/gi,t:"scheinbar oder anscheinend?",
@@ -7696,12 +7726,12 @@ function cheatHTML(){
   '<table class="ch-t"><tbody>'+
   '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) · '+
   'Relativsatz · Einschub beidseitig · vor <i>aber, sondern, doch, jedoch</i> · vor <i>das heißt, und zwar, zum Beispiel</i> · '+
-  'Infinitiv mit <i>um, ohne, statt, anstatt, außer, als</i> · zwei Hauptsätze ohne Konjunktion</td></tr>'+
+  'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
-  '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“) · nach der Grußformel</td></tr>'+
-  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · einfache Infinitivgruppe ohne Einleitewort · Partizipgruppe</td></tr>'+
+  '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
+  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe</td></tr>'+
   '</tbody></table>'+
-  '<p class="ch-n"><b>Merksatz für die Pflicht-Infinitive:</b> um, ohne, statt, anstatt, außer, als. '+
+  '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · mit brauchen, scheinen, haben, sein → keins. Vor um, ohne, statt, anstatt, außer, als stand es schon immer. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+
 
   '<section class="ch-sec"><h2>2 · Präpositionen nach Fall</h2>'+

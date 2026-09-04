@@ -35,19 +35,19 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 331 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 336 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 116 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 82 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 83 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
 
-**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d.
+**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d, j (j = Infinitivgruppen nach dem Regelwerk 2024).
 Neue Blöcke bekommen ein neues Präfix. IDs sind Kartenschlüssel im Lernstand —
 **niemals vergeben, umbenennen oder wiederverwenden**, sonst verliert Nils Fortschritt.
 
@@ -108,7 +108,7 @@ entscheidbar ist. Drei Fallen bleiben deine:
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (652 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (657 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -161,6 +161,11 @@ Diese sind über Monate erarbeitet und teuer bezahlt — bitte einhalten:
    Warnsignale. Meist gibt es eine Ausnahme.
 6. **Gesprochen ≠ geschrieben.** Wo sich beides unterscheidet, beides benennen.
 7. Quellen: Duden, DWDS, Rat für deutsche Rechtschreibung, DIN 5008 (für Zahlen/Datum).
+   **Maßgeblich ist das Amtliche Regelwerk in der Fassung von 2024** (in Kraft seit
+   1. Juli 2024, verbindlich für Schule und Verwaltung — also für Nils' Beruf). Es hat
+   die Kommaregeln neu nummeriert und das Komma bei erweiterten Infinitivgruppen zur
+   Pflicht gemacht. Ältere Quellen (Stand 2006) sagen dort noch „freigestellt“ — beim
+   Belegen auf das Datum der Quelle achten.
    Belegte Aussagen dürfen im Text die Quelle nennen. Der Absatz „Stand der Prüfung“ im
    Regelwerk beschreibt ehrlich, was geprüft ist und was nicht — **aktuell halten**.
 

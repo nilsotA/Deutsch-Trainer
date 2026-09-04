@@ -21,6 +21,13 @@ P.ok("Aufgaben-IDs eindeutig (" + ALL.length + ")", doppelt === 0, doppelt);
 
 const rids = new Set(RA.map(r => r.id));
 P.ok("Regel-IDs eindeutig (" + RA.length + ")", rids.size === RA.length);
+
+/* Fehlerklasse „doppelte Prüfmuster-Kennung“: Zwei Muster mit derselben id sind in der
+   Ansicht nicht auseinanderzuhalten, und wer nach der id filtert, sieht das falsche. */
+const CHECKS = daten(w, "CHECKS_ALL.map(c => ({id: c.id, sev: c.sev}))");
+const cids = new Set(CHECKS.map(c => c.id));
+P.ok("Prüfmuster-IDs eindeutig (" + CHECKS.length + ")", cids.size === CHECKS.length,
+  CHECKS.map(c => c.id).filter((x, k, a) => a.indexOf(x) !== k).join(","));
 P.ok("Regelverweise gültig", ALL.filter(i => i.r && !rids.has(i.r)).length === 0,
   ALL.filter(i => i.r && !rids.has(i.r)).map(i => i.id).join(","));
 P.ok("Jede Aufgabe hat einen Regelverweis", ALL.filter(i => !i.r).length === 0,
