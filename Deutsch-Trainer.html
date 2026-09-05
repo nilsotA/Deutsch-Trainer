@@ -839,8 +839,8 @@ const EX_A = [
 {id:"g04",c:"gross",q:"Korrekt ist …",o:["Heute Morgen war es kalt.","Heute morgen war es kalt."],a:0,
  e:"Tageszeiten nach heute/gestern/morgen sind Substantive: <b>heute Morgen, gestern Abend, morgen Nachmittag</b>.",r:"gross-zeit"},
 
-{id:"g05",c:"gross",q:"Groß oder klein?",o:["morgen früh","morgen Früh"],a:0,
- e:"„früh“ ist hier ein Adverb, kein Substantiv — deshalb klein; das ist die Duden-Empfehlung. „morgen Früh“ ist ebenfalls zulässig, geht aber auf das süddeutsch-österreichische Substantiv „die Früh“ zurück.",r:"gross-zeit"},
+{id:"g05",c:"gross",q:"Wie schreibt man?",o:["Beides ist zulässig","morgen früh","morgen Früh"],a:0,
+ e:"Der Duden führt <b>morgen früh</b> als Standardform — „früh“ ist hier ein Adverb, kein Substantiv. <b>morgen Früh</b> ist ebenfalls zulässig und geht auf das süddeutsch-österreichische Substantiv „die Früh“ zurück. Für Schule und Verwaltung in Deutschland nimmst du „morgen früh“.",r:"gross-zeit"},
 
 {id:"g06",c:"gross",q:"Was ist richtig?",o:["Er gab sein Bestes.","Er gab sein bestes."],a:0,
  e:"Mit Artikel/Possessivpronomen wird substantiviert: <b>sein Bestes</b>. Ohne: „Er lief am besten.“ (Frage „wie?“ → klein)",r:"gross-subst"},
@@ -851,14 +851,14 @@ const EX_A = [
 {id:"g08",c:"gross",q:"Korrekt ist …",o:["jeder Einzelne","jeder einzelne"],a:0,
  e:"Bezieht sich „Einzelne“ auf Personen und steht substantivisch, wird es großgeschrieben: „Jeder Einzelne zählt.“ Auch: „im Einzelnen“.",r:"gross-subst"},
 
-{id:"g09",c:"gross",q:"Wie schreibt man?",o:["Rad fahren","radfahren","Radfahren" ],a:0,
- e:"Seit der Rechtschreibreform getrennt und groß: <b>Rad fahren</b> (wie Auto fahren). Als Substantiv: „das Radfahren“.",r:"getrennt-verb"},
+{id:"g09",c:"gross",q:"Am Wochenende will ich …",o:["Rad fahren","radfahren","Radfahren" ],a:0,
+ e:"Als Verb getrennt und das Substantiv groß: <b>Rad fahren</b> (wie Auto fahren) — auch „ich fahre Rad“. Nur als Substantiv ein Wort: „das Radfahren macht Spaß“; nach „will ich“ steht aber das Verb.",r:"getrennt-verb"},
 
 {id:"g10",c:"gross",q:"Was ist richtig?",o:["Es tut mir leid.","Es tut mir Leid."],a:0,
  e:"In getrennter Stellung wird „leid“ kleingeschrieben. Zusammen: „Das wird dir noch <b>leidtun</b>.“",r:"gross-wendung"},
 
-{id:"g11",c:"gross",q:"Korrekt ist …",o:["Beides ist zulässig","recht haben","Recht haben"],a:0,
- e:"Der Duden erlaubt <b>recht haben</b> und <b>Recht haben</b>. Gleiches gilt für recht/Recht behalten und recht/Recht bekommen.",r:"gross-wendung"},
+{id:"g11",c:"gross",q:"Was gilt für „recht haben“?",o:["Beides ist zulässig","Nur klein: recht haben","Nur groß: Recht haben"],a:0,
+ e:"Regelwerk und Duden erlauben <b>recht haben</b> und <b>Recht haben</b>. Gleiches gilt für recht/Recht behalten, bekommen und geben. Nach „sein“ nur klein: „Das ist mir recht.“",r:"gross-wendung"},
 
 {id:"g12",c:"gross",q:"Wie ist es richtig?",o:["Das lasse ich nicht außer Acht.","Das lasse ich nicht außer acht."],a:0,
  e:"In festen Wendungen mit Präposition bleibt das Substantiv groß: <b>außer Acht lassen, in Kauf nehmen, in Betracht ziehen, zu Rate ziehen</b>.",r:"gross-wendung"},
@@ -873,7 +873,7 @@ const EX_A = [
  e:"Präposition + Artikel signalisiert Substantivierung → groß. Ebenso: <b>im Voraus, im Wesentlichen, im Klaren</b>.",r:"gross-subst"},
 
 {id:"g16",c:"gross",q:"Was ist korrekt?",o:["zum einen … zum anderen","zum Einen … zum Anderen"],a:0,
- e:"Diese Gliederungsformel bleibt klein — Ausnahme zur sonstigen Regel. Ebenso: „zum wiederholten Mal“ (Mal groß, weil Substantiv).",r:"gross-subst"},
+ e:"Kleinschreibung nach der Regel für die Zahladjektive (ein, andere, viel, wenig): „zum einen … zum anderen“, „die einen, die anderen“. Ebenso: „zum wiederholten Mal“ — „Mal“ ist ein Substantiv und bleibt groß.",r:"gross-subst"},
 
 {id:"g17",c:"gross",q:"Wie schreibt man?",o:["Beides ist zulässig","vor Kurzem","vor kurzem"],a:0,
  e:"Der Duden lässt beides zu, empfiehlt aber die Großschreibung: <b>vor Kurzem</b>. Gleiches gilt für „seit Langem“ und „ohne Weiteres“.",r:"gross-subst"},
@@ -898,7 +898,7 @@ const EX_A = [
  e:"Nach „nichts“ steht das substantivierte Adjektiv groß. Merke die Reihe: alles, etwas, nichts, viel, wenig.",r:"gross-subst"},
 
 {id:"g24",c:"gross",q:"Wie schreibt man?",o:["Angst haben","angst haben"],a:0,
- e:"„Angst“ ist ein Substantiv → groß. <b>Klein</b> wird es, wo es sich wie ein Adjektiv verhält: „mir wird angst und bange“, „jemandem angst machen“ (daneben ist auch „Angst machen“ zulässig).",r:"gross-wendung"},
+ e:"„Angst“ ist ein Substantiv → groß: Angst haben, jemandem Angst machen. <b>Klein</b> nur nach sein, bleiben, werden, wo es sich wie ein Adjektiv verhält: „mir ist angst“, „ihm wird angst und bange“.",r:"gross-wendung"},
 
 {id:"g25",c:"gross",q:"Was ist richtig?",o:["Wir gehen heute Abend essen.","Wir gehen heute abend essen."],a:0,
  e:"Tageszeit-Substantiv nach „heute“ → groß. <b>Klein</b> bleibt das Adverb „früh“: heute früh, morgen früh, gestern früh.",r:"gross-zeit"},
@@ -954,8 +954,8 @@ const EX_A = [
 const EX_B = [
 
 /* ---------- GETRENNT- UND ZUSAMMENSCHREIBUNG ---------- */
-{id:"t01",c:"getrennt",q:"Was ist korrekt?",o:["Beides ist zulässig","sodass","so dass"],a:0,
- e:"Der Duden führt <b>sodass</b> und <b>so dass</b> gleichberechtigt. Wähl eine Variante und bleib im Text dabei.",r:"getrennt-konj"},
+{id:"t01",c:"getrennt",q:"Welche Aussage stimmt?",o:["Beides ist zulässig","Nur zusammen: sodass","Nur getrennt: so dass"],a:0,
+ e:"Das Regelwerk stellt <b>sodass</b> und <b>so dass</b> frei, der Duden empfiehlt die Zusammenschreibung. Wähl eine Variante und bleib im Text dabei.",r:"getrennt-konj"},
 
 {id:"t02",c:"getrennt",q:"Wie schreibt man?",o:["zurzeit (= momentan)","zur Zeit (= momentan)"],a:0,
  e:"<b>zurzeit</b> = derzeit, momentan. <b>zur Zeit</b> nur mit Genitiv: „zur Zeit Goethes“.",r:"getrennt-praep"},
@@ -963,7 +963,7 @@ const EX_B = [
 {id:"t03",c:"getrennt",q:"Korrekt ist …",o:["Wie viel kostet das?","Wieviel kostet das?"],a:0,
  e:"<b>wie viel</b> wird immer getrennt geschrieben — ausnahmslos. „wieviel“ ist seit 1996 falsch.",r:"getrennt-praep"},
 
-{id:"t04",c:"getrennt",q:"Was stimmt?",o:["Beides ist zulässig","kennenlernen","kennen lernen"],a:0,
+{id:"t04",c:"getrennt",q:"Wie schreibt man „kennenlernen“?",o:["Beides ist zulässig","Nur zusammen: kennenlernen","Nur getrennt: kennen lernen"],a:0,
  e:"Beide Schreibungen sind erlaubt; der Duden empfiehlt <b>kennenlernen</b>.",r:"getrennt-verb"},
 
 {id:"t05",c:"getrennt",q:"Wie schreibt man?",o:["Beides ist zulässig","aufgrund","auf Grund"],a:0,
@@ -1090,8 +1090,8 @@ const EX_B = [
 {id:"r24",c:"recht",q:"Welche Variante ist korrekt?",o:["E-Mail","Email","EMail"],a:0,
  e:"<b>E-Mail</b> mit Bindestrich. „Email“ ohne Bindestrich bezeichnet den Schmelzüberzug (das Email).",r:"recht-bindestrich"},
 
-{id:"r25",c:"recht",q:"Korrekt ist …",o:["Know-how","Knowhow"],a:0,
- e:"Mehrteilige Fremdwörter werden mit Bindestrich gekoppelt: Know-how, Kick-off, Make-up.",r:"recht-bindestrich"},
+{id:"r25",c:"recht",q:"Korrekt ist …",o:["Know-how","Know-How"],a:0,
+ e:"Englische Bildungen aus Verb und Adverb bekommen den Bindestrich, das zweite Wort bleibt <b>klein</b>: Know-how, Kick-off, Make-up. Die Zusammenschreibung ist bei einigen ebenfalls zulässig (Countdown, Comeback, Knowhow) — ein großes „How“ nicht.",r:"recht-bindestrich"},
 
 /* ---------- GRAMMATIK ---------- */
 {id:"m01",c:"gram",q:"Welcher Kasus folgt auf „wegen“?",o:["Genitiv","Dativ","Akkusativ"],a:0,
@@ -1603,15 +1603,17 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 {id:"gross-wendung",c:"gross",t:"Feste Wendungen mit Substantiv",b:`
 <p>Steckt ein echtes Substantiv in der Wendung, bleibt es groß:</p>
 <div class="ex">außer Acht lassen · in Kauf nehmen · in Betracht ziehen · zu Rate ziehen · in Bezug auf · nach Hause · zu Hause · Angst haben · Rad fahren</div>
-<p><b>Klein</b> bleiben verblasste Substantive und Adjektive in Verbverbindungen:</p>
-<div class="ex">Es tut mir leid. · Ihm wird angst und bange. · Er macht mir angst. · Er ist pleite.</div>
-<p class="tiny muted">Bei „angst machen“ lässt der Duden daneben die Großschreibung zu; bei „Angst haben“ ist nur die Großschreibung richtig.</p>
+<p><b>Klein</b> bleiben verblasste Substantive und Adjektive — aber nur nach <code>sein, bleiben, werden</code> (und bei „leidtun“):</p>
+<div class="ex">Es tut mir leid. · Mir ist angst. · Ihm wird angst und bange. · Er ist pleite. · Das ist mir recht.</div>
+<p class="tiny muted">Mit anderen Verben bleibt das Substantiv groß: <b>Angst haben</b>, <b>jemandem Angst machen</b>. „angst machen“ war die Schreibung vor 1996; Duden und Regelwerk führen heute nur die Großschreibung.</p>
 <p><b>Beides erlaubt:</b> <code>recht haben / Recht haben</code>, <code>recht behalten / Recht behalten</code>.</p>`},
 
 {id:"gross-sprachen",c:"gross",t:"Sprachbezeichnungen",b:`
 <p><b>Groß</b> als Substantiv: <code>Deutsch lernen, auf Deutsch, mein Deutsch, ins Englische übersetzen</code></p>
-<p><b>Klein</b> als Adjektiv: <code>die deutsche Sprache, deutsche Grammatik, er spricht deutsch (= auf deutsche Art, selten)</code></p>
-<p>Faustregel: Frage „Was?“ → groß. Frage „Wie?“ → klein.</p>`},
+<p><b>Klein</b> als Adjektiv: <code>die deutsche Sprache, deutsche Grammatik, ein deutscher Meister</code></p>
+<p>Nach <i>sprechen, reden, schreiben, sich unterhalten</i> geht beides, je nach Sinn:</p>
+<div class="ex">Sie spricht gut Deutsch. → sie beherrscht die Sprache (was?)<br>Die Trainerin hat deutsch gesprochen. → in deutscher Sprache, nicht englisch (wie?)</div>
+<p>Faustregel: Frage „Was?“ → groß. Frage „Wie?“ → klein. Mit <i>können</i> und nach <i>auf</i> oder <i>in</i> immer groß: <code>Er kann gut Deutsch · auf Deutsch · in Deutsch abgefasst</code></p>`},
 
 /* ---------- GETRENNT / ZUSAMMEN ---------- */
 {id:"getrennt-praep",c:"getrennt",t:"Präposition + Substantiv",b:`
@@ -2679,7 +2681,7 @@ const SCENES = [
  alt:"Wichtig auch, was <i>nicht</i> gesagt wird: keine Diagnose („Vielleicht schämt sie sich?“), kein Vorwurf, keine Handlungsanweisung an die Mutter."},
 
 {id:"sc05",ctx:"uni",t:"Die Gruppenarbeit, in der du alles machst",
- s:"Drei Wochen vor Abgabe hast du zwei von drei Kapiteln geschrieben. Die anderen beiden reagieren freundlich, aber liefern nichts. Ihr müsst euch bald wieder sehen.",
+ s:"Drei Wochen vor Abgabe hast du zwei von drei Kapiteln geschrieben. Die anderen beiden reagieren freundlich, aber liefern nichts. Ihr müsst euch bald wiedersehen.",
  ask:"Schreib die Nachricht an die Gruppe.",
  model:"<p>Hallo ihr zwei,</p><p>ich will kurz Klarheit schaffen, bevor es eng wird. Stand jetzt: Einleitung und Methodik sind fertig (von mir), Ergebnisse und Diskussion fehlen noch.</p><p>Mein Vorschlag: Lena übernimmt die Ergebnisse, Tim die Diskussion, beides bis zum 20. Dann habe ich eine Woche, um alles zusammenzuziehen.</p><p>Wenn das bei euch nicht geht, sagt mir das bitte bis Freitag — dann planen wir anders. Ich möchte nur nicht in der letzten Woche feststellen, dass nichts da ist.</p><p>Viele Grüße<br>Nils</p>",
  why:"Kein Vorwurf, aber auch keine Beschönigung: Der Stand wird nüchtern benannt, inklusive „von mir“. Dann kommt das, was fehlt — ein konkreter Vorschlag mit Namen und Datum. Der letzte Absatz benennt die Sorge offen, ohne jemandem etwas zu unterstellen.",
@@ -4504,7 +4506,7 @@ errs:[
  {w:"erklärt",ok:"erklärt,",k:"Vor dem Nebensatz mit „während“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"vielleicht",ok:"(streichen)",k:"„würde sagen“ + „vielleicht“ + „eventuell“ — drei Abschwächungen. Eine genügt.",r:"stil-hedging",c:"stil"},
  {w:"mal",nth:1,ok:"Mal",k:"„Beim nächsten Mal“ — „Mal“ ist hier ein Substantiv nach Präposition und Artikel.",r:"gross-subst",c:"gross"},
- {w:"Ausserdem",ok:"Außerdem",k:"Nach langem Vokal steht ß: außer, außerdem, außen.",r:"recht-sz",c:"recht"},
+ {w:"Ausserdem",ok:"Außerdem",k:"Nach dem Diphthong au steht ß: außer, außerdem, außen.",r:"recht-sz",c:"recht"},
  {w:"den",nth:1,ok:"dem",k:"„helfen“ verlangt den Dativ. Probe: „Ich habe ihm geholfen“ → „dem Schüler, dem ich geholfen habe“.",r:"gram-relkasus",c:"gram"}
 ]},
 
@@ -4512,8 +4514,7 @@ errs:[
 txt:"Sehr geehrte Eltern, im Rahmen dieses Schreibens möchte ich Sie an dieser Stelle darüber informieren, dass die Sportwoche vom 12. bis 16. Juni stattfindet. Ihr Kind benötigt wetterfeste Kleidung, feste Schuhe und eine Trinkflasche. Bitte geben Sie Ihrem Kind auch etwas kleines zu essen mit. Die Anmeldung muss bis zum 30. Mai vorliegen, ansonsten kann Ihr Kind leider nicht teilnehmen an der Veranstaltung. Bei Rückfragen stehe ich Ihnen jederzeit gerne zur Verfügung. Mit freundlichen Grüßen",
 errs:[
  {w:"Rahmen",ok:"(streichen)",k:"„Im Rahmen dieses Schreibens möchte ich Sie an dieser Stelle darüber informieren“ — vier Floskeln vor dem Anliegen. „Die Sportwoche findet vom 12. bis 16. Juni statt.“ genügt.",r:"form-mailaufbau",c:"form"},
- {w:"kleines",ok:"Kleines",k:"Nach „etwas“ wird das Adjektiv substantiviert und großgeschrieben: etwas Kleines, etwas Neues, nichts Besonderes.",r:"gross-subst",c:"gross"},
- {w:"essen",ok:"Essen",k:"„etwas Kleines zu Essen“ — hier ist „Essen“ substantiviert.",r:"gross-subst",c:"gross"},
+ {w:"kleines",ok:"Kleines",k:"Nach „etwas“ wird das Adjektiv substantiviert und großgeschrieben: etwas Kleines, etwas Neues, nichts Besonderes. „zu essen“ bleibt dagegen klein — Infinitiv mit „zu“, keine Substantivierung; groß nur mit Artikel: „etwas zum Essen“.",r:"gross-subst",c:"gross"},
  {w:"teilnehmen",ok:"an der Veranstaltung teilnehmen",k:"Satzklammer: Bei trennbaren Verben gehört der zweite Teil ans Satzende — „nicht an der Veranstaltung teilnehmen“.",r:"satz-klammer",c:"satz"},
  {w:"Rückfragen",ok:"(mit Information füllen)",k:"„Bei Rückfragen stehe ich jederzeit gerne zur Verfügung“ ist reine Bausteinsprache. Nutz den Platz für etwas Konkretes — etwa die Telefonzeiten.",r:"form-floskel",c:"form"}
 ]},
@@ -4563,7 +4564,7 @@ errs:[
  {w:"machst",nth:1,ok:"„Ich werde wütend, wenn …“",k:"Du-Botschaft: „Du machst mich wütend“ schreibt dem anderen die Kontrolle über deine Gefühle zu. Die Ich-Botschaft ist nicht bestreitbar.",r:"form-kritik",c:"form"},
  {w:"dir",nth:2,ok:"dich",k:"„interessieren“ verlangt den Akkusativ: „das interessiert dich nicht“.",r:"gram-akkverben",c:"gram"},
  {w:"änderst",ok:"änderst,",k:"Der vorangestellte Nebensatz wird durch Komma abgetrennt.",r:"komma-nebensatz",c:"komma"},
- {w:"weiss",ok:"weiß",k:"ß nach langem Vokal: weiß, heiß, Maß.",r:"recht-sz",c:"recht"},
+ {w:"weiss",ok:"weiß",k:"Nach dem Diphthong ei steht ß: weiß, heiß — wie nach langem Vokal: Maß, Straße.",r:"recht-sz",c:"recht"},
  {w:"hoffe",nth:1,ok:"hoffe,",k:"„du verstehst mich“ ist ein Nebensatz ohne Einleitewort — das Komma steht trotzdem.",r:"komma-nebensatz",c:"komma"}
 ]},
 
@@ -5138,7 +5139,8 @@ const BOXES = [1,3,7,16,35];         // Leitner-Intervalle in Tagen
 const NEU_GELERNT = {
   k20: "2026-09-04",  // Komma bei erweiterten Infinitivgruppen: seit dem Regelwerk 2024 Pflicht, vorher frei
   p25: "2026-09-04",  // Semikolon-Übung: der Ablenker „Komma“ war ebenfalls richtig, jetzt „Komma oder Semikolon“
-  p21: "2026-09-04"   // Schrägstrich bei Wortgruppen: Leerzeichen sind DIN-Konvention, nicht Regel; jetzt „Beides geht“
+  p21: "2026-09-04",  // Schrägstrich bei Wortgruppen: Leerzeichen sind DIN-Konvention, nicht Regel; jetzt „Beides geht“
+  g05: "2026-09-05"   // morgen früh: „morgen Früh“ ist ebenfalls zulässig, richtige Antwort jetzt „Beides ist zulässig“
 };
 const SRS_RUNDE = 20;                // höchstens so viele Karten je Wiederholungsrunde
 const TAGESZIEL = 12;                // so viele Karten am Tag zählen als erledigt
@@ -7363,10 +7365,10 @@ const CHECKS = [
 {id:"x14",sev:"hart",re:/\bvorraus\b/gi,t:"Voraus",k:"<b>voraus</b> mit einem r; in „im Voraus“ zusätzlich groß.",r:"gross-subst"},
 {id:"x15",sev:"hart",re:/\bwieder(sprechen|sprichst|spricht|legen|legt|legte|spiegel)/gi,t:"wider statt wieder",
  k:"<b>wider</b> = gegen: widersprechen, widerlegen, widerspiegeln. <b>wieder</b> = erneut.",r:"recht-wider"},
-{id:"x16",sev:"hart",re:/\bwieder\s+Erwarten\b/gi,t:"wider Erwarten",k:"<b>wider Erwarten</b> = entgegen der Erwartung.",r:"recht-wider"},
-{id:"x17",sev:"hart",re:/\bseid\s+(dem|der|einem|einer|zwei|drei|vier|fünf|vielen|langem|kurzem|gestern|heute|Anfang|Beginn|Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag|Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/gi,
- t:"seit statt seid",k:"<b>seit</b> bei Zeitangaben (Zei<b>t</b> → sei<b>t</b>). <b>seid</b> ist die Verbform: „ihr seid“.",r:"recht-seit"},
-{id:"x18",sev:"hart",re:/\bseit\s+ihr\b/g,t:"seid ihr",k:"Hier ist die Verbform gemeint: <b>seid ihr</b>.",r:"recht-seit"},
+{id:"x16",sev:"hart",re:/\b[Ww]ieder\s+Erwarten\b/g,t:"wider Erwarten",k:"<b>wider Erwarten</b> = entgegen der Erwartung. Das Verb bleibt klein und mit ie: „Wir dürfen die Klasse wieder erwarten.“",r:"recht-wider"},
+{id:"x17",sev:"pruef",re:/(?<!\b(?:ihr|beide|alle|wir)\s)\bseid\s+(dem|der|einem|einer|zwei|drei|vier|fünf|vielen|langem|kurzem|Anfang|Beginn|Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag|Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/gi,
+ t:"seit oder seid?",k:"Zeitangabe? Dann <b>seit</b> (Zei<b>t</b> → sei<b>t</b>): „seit dem letzten Spiel“. Form von „sein“? Dann bleibt <b>seid</b>: „Ihr seid dem Gegner überlegen“, „Seid Montag pünktlich da“.",r:"recht-seit"},
+{id:"x18",sev:"pruef",re:/\bseit\s+ihr\b/gi,t:"seit ihr oder seid ihr?",k:"Frage oder Aussage mit „sein“? Dann die Verbform: <b>Seid ihr</b> bereit? Im Zeitsatz bleibt <b>seit</b> richtig: „seit ihr zusammen trainiert“, „seit ihr Knie wieder hält“.",r:"recht-seit"},
 {id:"x19",sev:"pruef",re:/\b[A-ZÄÖÜ][a-zäöüß]+['’]s\s+[A-ZÄÖÜ]/g,t:"Apostroph im Genitiv?",
  k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce) steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Regelwerk und Duden erlauben den Apostroph, wenn er in einem Namen wie einem Ladennamen die Grundform verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“).",r:"recht-apostroph"},
 {id:"x20",sev:"hart",re:/\b(rufe|rufst|ruft|rief|riefst|riefen|angerufen)\s+(dir|mir|ihm|ihr|uns|euch|ihnen|Ihnen)\b/g,
@@ -7399,8 +7401,10 @@ const CHECKS = [
  k:"<b>derselbe</b> = ein und dasselbe Exemplar. <b>der gleiche</b> = von gleicher Art. Prüf, was gemeint ist.",r:"gram-derselbe"},
 {id:"y06",sev:"pruef",re:/\bwürde[nst]?\b[^.!?]{0,80}\bwürde[nst]?\b/g,t:"Doppeltes „würde“",
  k:"Wo die eigene Konjunktiv-II-Form existiert, ist sie kürzer und sicherer: <b>Wenn ich Zeit hätte, käme ich.</b>",r:"satz-konjunktiv"},
-{id:"y07",sev:"pruef",re:/\b(?:[Dd]es|[Ii]m|[Vv]or|[Ss]eit|[Oo]hne|[Zz]um|[Aa]uf dem)\s+(weiteren|folgenden|allgemeinen|übrigen|wesentlichen|einzelnen|nachhinein|voraus|klaren|großen|ganzen|öfteren|kurzem|langem|weiteres|laufenden)\b/g,
- t:"Substantivierung großschreiben?",k:"Nach Präposition und Artikel wird substantiviert und großgeschrieben: <b>des Weiteren, im Folgenden, im Allgemeinen, im Voraus, im Nachhinein</b>.",r:"gross-subst"},
+{id:"y07",sev:"pruef",re:/\b(?:[Dd]es|[Ii]m|[Zz]um|[Aa]uf dem)\s+(weiteren|folgenden|allgemeinen|übrigen|wesentlichen|einzelnen|nachhinein|voraus|klaren|öfteren|laufenden)\b(?!\s+[A-ZÄÖÜ])/g,
+ t:"Substantivierung großschreiben?",k:"Nach Präposition und Artikel wird substantiviert und großgeschrieben: <b>des Weiteren, im Folgenden, im Allgemeinen, im Voraus, im Nachhinein</b>. Folgt ein Substantiv, bleibt es klein: „im weiteren Verlauf“, „im folgenden Kapitel“.",r:"gross-subst"},
+{id:"y12",sev:"stil",re:/\b(?:[Vv]or|[Ss]eit|[Bb]innen)\s+(kurzem|langem|längerem)\b|\b(?:[Oo]hne|[Vv]on|[Bb]ei)\s+(weiteres|weitem)\b/g,
+ t:"vor Kurzem oder vor kurzem?",k:"Ohne Artikel ist beides zulässig: <b>vor Kurzem</b> und <b>vor kurzem</b>, ebenso „seit Langem“, „ohne Weiteres“, „bei Weitem“. Der Duden empfiehlt die Großschreibung. Entscheide dich und bleib im Text dabei.",r:"gross-subst"},
 {id:"y08",sev:"pruef",re:/\b(etwas|nichts|alles|viel|wenig)\s+(?!andere|anderes|weitere|weiteres|gleiche|meiste|mehr|übrige)[a-zäöüß]{4,}(es|e)\b/g,
  t:"Nach etwas/nichts/alles groß?",k:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das Adjektiv substantiviert: etwas <b>N</b>eues, nichts <b>B</b>esonderes, alles <b>G</b>ute.",r:"gross-subst"},
 {id:"y09",sev:"pruef",re:/\b(hoffe|denke|glaube|meine|sagte|sagt|sagen|finde|merke|wusste|bedeutet|zeigt|heißt|ist|war|bleibt|scheint|erklärt|betont|behauptet|vermute)\s+das\s+(ich|du|er|sie|es|wir|ihr|man|sich|der|die|das|ein|eine|einen|einem|dem|den|mein|sein|ihr)\b/g,
