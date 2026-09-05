@@ -33,7 +33,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 |---|---|
 | Übungen | 336 |
 | Regeln | 117 |
-| Wortkarten | 116 |
+| Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 85 |
@@ -286,8 +286,20 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.
-3. **Wortschatz erweitern.** 116 Karten sind wenig für vier Semester. Kandidaten
-   wären akademische Verben und Verwechslungspaare aus seinen eigenen Texten.
+3. **Erledigt (05.09.2026): 39 neue Wortkarten, jetzt 155.** Vier Sammler mit
+   verschiedenen Blickwinkeln (Wissenschaftssprache, Verwechslungspaare, präzise
+   Wörter statt Allerweltsvokabeln, Urteilsadjektive) haben 48 Karten mit Duden- oder
+   DWDS-Beleg vorgeschlagen; je Sammlung haben zwei Prüfer (Bedeutung und Quelle;
+   Sprache und Nutzen) jede Karte einzeln beurteilt und kleine Mängel korrigiert.
+   Acht Karten fielen: zu banal für einen Muttersprachler (plädieren, Konsens,
+   fordern/fördern, verfrüht, nachlässig, ausgewogen), Kollision mit „explizieren“
+   (darlegen), unsaubere Trennung (unverständlich/unverstanden). Neu unter anderem:
+   implizieren, extrapolieren, nivellieren, das Konstrukt, die Signifikanz, die Empirie,
+   formal/formell, rational/rationell, physisch/physikalisch, geistig/geistlich,
+   ideal/ideell, verifizieren/falsifizieren, erörtern, veranschaulichen, gewichten,
+   resümieren, erwidern, aufweisen, hinreichend, mutmaßlich, vertretbar, allenfalls.
+   Weitere Kandidaten am besten aus Nils' eigenen Texten; die Sammler-Prompts stehen
+   im Workflow-Skript `wortschatz-erweitern` der Sitzung.
 4. **Erledigt (04.09.2026): die zehn offenen Fassungen sind maschinell geprüft.** Die
    Formentabelle kennt jetzt die artikellosen Adjektivformen der Karten (`nächsten`,
    `besseres`, `angefangene` …, stark gebeugt, mit Kommentar zur Mehrdeutigkeit von „-en“)

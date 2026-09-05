@@ -36,7 +36,7 @@ also nicht umbenennen.
 | Konstante | Inhalt | Schema |
 |---|---|---|
 | `EX_A … EX_E` → `ALL` | 336 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
-| `WORDS` | 116 Wortschatzkarten | `{w, p, d, ex, s, t}` |
+| `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
@@ -121,7 +121,7 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (657 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (696 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
