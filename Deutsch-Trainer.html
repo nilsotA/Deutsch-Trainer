@@ -809,7 +809,7 @@ const EX_A = [
 
 {id:"k37",c:"komma",q:"„Sie war müde(,) trotzdem lief sie weiter.“",o:[
  "Komma nötig","Kein Komma"],a:0,
- e:"Hier stehen zwei Hauptsätze ohne verbindende Konjunktion nebeneinander. Zwischen ihnen ist ein Satzzeichen Pflicht, in der Regel das Komma („trotzdem“ ist ein Adverb, keine Konjunktion wie „und“). Ein Semikolon ginge auch.",r:"komma-hauptsatz"},
+ e:"Hier stehen zwei Hauptsätze ohne verbindende Konjunktion nebeneinander („trotzdem“ ist ein Adverb, keine Konjunktion wie „und“). Ganz ohne Zeichen geht es nicht — das Komma ist der Normalfall, Semikolon oder Punkt gehen ebenso.",r:"komma-hauptsatz"},
 
 {id:"k38",c:"komma",q:"Was ist richtig?",o:[
  "Der Kurs findet statt, sofern genug Anmeldungen eingehen.",
@@ -839,7 +839,7 @@ const EX_A = [
 {id:"g04",c:"gross",q:"Korrekt ist …",o:["Heute Morgen war es kalt.","Heute morgen war es kalt."],a:0,
  e:"Tageszeiten nach heute/gestern/morgen sind Substantive: <b>heute Morgen, gestern Abend, morgen Nachmittag</b>.",r:"gross-zeit"},
 
-{id:"g05",c:"gross",q:"Wie schreibt man?",o:["Beides ist zulässig","morgen früh","morgen Früh"],a:0,
+{id:"g05",c:"gross",q:"Was gilt für „morgen früh“ und „morgen Früh“?",o:["Beides ist zulässig, empfohlen ist die Kleinschreibung","Nur die Kleinschreibung ist zulässig","Nur die Großschreibung ist zulässig"],a:0,
  e:"Der Duden führt <b>morgen früh</b> als Standardform — „früh“ ist hier ein Adverb, kein Substantiv. <b>morgen Früh</b> ist ebenfalls zulässig und geht auf das süddeutsch-österreichische Substantiv „die Früh“ zurück. Für Schule und Verwaltung in Deutschland nimmst du „morgen früh“.",r:"gross-zeit"},
 
 {id:"g06",c:"gross",q:"Was ist richtig?",o:["Er gab sein Bestes.","Er gab sein bestes."],a:0,
@@ -1103,7 +1103,7 @@ const EX_B = [
 {id:"m03",c:"gram",q:"Welche Form ist richtig?",o:["trotz des schlechten Wetters","trotz dem schlechten Wetter"],a:0,
  e:"<b>trotz</b> + Genitiv. (Beim Plural ohne erkennbaren Genitiv weicht man auf den Dativ aus: „trotz Beweisen“.)",r:"gram-genitiv"},
 
-{id:"m04",c:"gram",q:"Wie lautet die indirekte Rede? „Er sagte: ‚Ich bin müde.‘“",o:[
+{id:"m04",c:"gram",q:"Wie gibst du das neutral wieder? „Er sagte: ‚Ich bin müde.‘“",o:[
  "Er sagte, er sei müde.","Er sagte, er ist müde.","Er sagte, er wäre müde."],a:0,
  e:"In der indirekten Rede steht der <b>Konjunktiv I</b> („sei“). Auf den Konjunktiv II („wäre“) weicht man vor allem dann aus, wenn Konjunktiv I mit dem Indikativ zusammenfällt — daneben auch, um Zweifel am Gesagten zu markieren.",r:"gram-konjunktiv"},
 
@@ -1152,7 +1152,7 @@ const EX_B = [
 {id:"m16",c:"gram",q:"Welche Form ist richtig?",o:["meinetwegen","wegen mir","meinerwegen"],a:0,
  e:"Bei Pronomen bildet man die Form auf -etwegen: <b>meinetwegen, deinetwegen, seinetwegen, unsertwegen</b>. „wegen mir“ ist umgangssprachlich.",r:"gram-genitiv"},
 
-{id:"m17",c:"gram",q:"Was stimmt?",o:[
+{id:"m17",c:"gram",q:"Welche Form gilt überregional?",o:[
  "Ich erinnere mich an das Spiel.","Ich erinnere das Spiel."],a:0,
  e:"Standardsprachlich reflexiv mit Präposition: <b>sich erinnern an</b>. Die transitive Form ist norddeutsch-regional.",r:"gram-praep"},
 
@@ -1240,9 +1240,9 @@ const EX_B = [
  "Die Belastung stieg deutlich an."],a:0,
  e:"Konkrete Zahlen schlagen wertende Adverbien. „Deutlich“, „erheblich“, „relativ“ sind ohne Bezugsgröße bedeutungslos.",r:"stil-konkret"},
 
-{id:"s12",c:"stil",q:"Welcher Genitiv ist zu viel? „die Auswertung der Ergebnisse der Befragung der Teilnehmenden“",o:[
- "Genitivkette","Alles korrekt","Der erste Genitiv"],a:0,
- e:"Grammatisch richtig, stilistisch zäh. Besser: „die Ergebnisse der Teilnehmerbefragung auswerten“.",r:"stil-genitivkette"},
+{id:"s12",c:"stil",q:"Was ist an „die Auswertung der Ergebnisse der Befragung der Teilnehmenden“ zu bemängeln?",o:[
+ "Eine Genitivkette — richtig, aber zäh","Der zweite Genitiv müsste ein Dativ sein","Nach „Auswertung“ fehlt ein Komma"],a:0,
+ e:"Grammatisch ist die Fügung in Ordnung, zu lesen ist sie mühsam. Besser: „die Ergebnisse der Teilnehmerbefragung auswerten“. Das ist eine Empfehlung zur Lesbarkeit, keine Regel.",r:"stil-genitivkette"},
 
 {id:"s13",c:"stil",q:"Was ist der Unterschied zwischen „effektiv“ und „effizient“?",o:[
  "effektiv = wirksam, effizient = wirtschaftlich",
@@ -1495,7 +1495,8 @@ const RULES = [
 
 {id:"komma-aufzaehlung",c:"komma",t:"Aufzählungen und Konjunktionen",b:`
 <p>Gleichrangige Teile werden durch Komma getrennt — außer, es steht schon eine Konjunktion dazwischen.</p>
-<p><b>Komma steht vor:</b> <code>aber, sondern, doch, jedoch, denn, allein</code> — und vor <code>das heißt, und zwar, nämlich, zum Beispiel</code>, wenn sie eine Erläuterung anhängen („Wir treffen uns morgen, das heißt am Dienstag“; mitten im Satz kein Komma: „Wir bieten zum Beispiel Yoga an“)</p>
+<p><b>Komma steht vor:</b> <code>aber, sondern, doch, jedoch, denn, allein</code>, solange sie zwei gleichrangige Teile verbinden — und vor <code>das heißt, und zwar, nämlich, zum Beispiel</code>, wenn sie eine Erläuterung anhängen („Wir treffen uns morgen, das heißt am Dienstag“; mitten im Satz kein Komma: „Wir bieten zum Beispiel Yoga an“)</p>
+<p class="tiny muted">Dieselben Wörter stehen auch als Adverb oder Partikel mitten im Satz. Dann verbinden sie nichts, und es steht kein Komma: „Er kam jedoch zu spät.“ · „Das Aufwärmen war aber kurz.“ · „Bewegung allein reicht nicht.“ Probe: Lässt sich das Wort im Satz verschieben, ist es ein Adverb.</p>
 <div class="ex">Nicht die Technik war das Problem<span class="ok">,</span> sondern die Kondition.</div>
 <p><b>Kein Komma steht vor:</b> <code>und, oder, beziehungsweise, sowie, wie, entweder … oder, weder … noch, sowohl … als auch</code></p>
 <p class="tiny muted">Das gilt für <b>als</b> und <b>wie</b> nur beim bloßen Vergleich („größer als erwartet“). Folgt ein ganzer Nebensatz mit gebeugtem Verb oder ein Infinitiv mit „zu“, steht das Komma: „schneller<b>,</b> als ich erwartet hatte“, „nichts anderes übrig<b>,</b> als aufzugeben“.</p>
@@ -1637,7 +1638,8 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <p>Zusammen nur, wenn das Substantiv verblasst ist: <code>eislaufen · stattfinden · teilnehmen · standhalten · leidtun</code>.</p>
 <p><b>Partikel + Verb</b> — ein Wort, Betonung vorn:</p>
 <div class="ex">zurechtkommen · zusammenarbeiten · wiedersehen · feststellen · hinterfragen</div>
-<p>Getrennt nur, wenn das Adverb selbst betont ist und seine eigene Bedeutung behält: „Wir wollen heute <b>zusammen</b> arbeiten“ (= gemeinsam), „Er will es <b>wieder</b> sehen“ (= erneut).</p>
+<p>Getrennt nur, wenn das Adverb selbst betont ist und seine eigene Bedeutung behält: „Wir wollen heute <b>zusammen</b> arbeiten“ (= gemeinsam), „Er will den Film <b>wieder</b> sehen“ (= noch einmal ansehen).</p>
+<p class="tiny muted"><b>wiedersehen</b> im Sinn von „sich erneut treffen“ ist dagegen ein Wort. Dass es in „Wir sehen uns morgen wieder“ auseinandersteht, ist die normale Trennung jedes Partikelverbs, keine Getrenntschreibung — „erneut“ allein taugt also nicht als Probe.</p>
 <p><b>Mit „sein“ immer getrennt:</b> <code>dabei sein · fertig sein · vorbei sein · zufrieden sein</code>. <b>Zwei Verben getrennt:</b> <code>schwimmen gehen · laufen lernen · sitzen bleiben</code>.</p>
 <p><b>Beides erlaubt:</b> <code>kennenlernen / kennen lernen</code> (Duden empfiehlt zusammen), <code>gutgehen / gut gehen</code> — erweitert oder gesteigert nur getrennt: „sehr gut gehen“, „besser gehen“. Bei übertragener Bedeutung mit <i>bleiben</i> und <i>lassen</i> ebenfalls beides: <code>sitzenbleiben / sitzen bleiben</code> (nicht versetzt werden), <code>stehenlassen / stehen lassen</code>, <code>liegenlassen / liegen lassen</code> (nicht beachten). Wörtlich nur getrennt: „Er blieb auf der Bank sitzen.“</p>
 <p><b>Wichtig:</b> Trennbare Verben stehen im Hauptsatz ohnehin auseinander — „Er kommt gut <b>zurecht</b>.“ Das ist keine Getrenntschreibung, sondern die Verbklammer. Im Nebensatz, im Partizip und im zu-Infinitiv bleibt es ein Wort: „weil er gut zurechtkommt“, „zurechtgekommen“, „um zurechtzukommen“. Untrennbare Verben wie <code>hinterfragen</code> bleiben in jeder Stellung ein Wort: „Sie hinterfragt die Aufstellung.“</p>`},
@@ -1713,7 +1715,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <span class="ok">Standard</span> (nicht Standart) · <span class="ok">separat</span> (nicht seperat) · <span class="ok">Rhythmus</span> · <span class="ok">Rückgrat</span> (nicht Rückrad) ·
 <span class="ok">aus dem Stegreif</span> · <span class="ok">Tipp</span> · <span class="ok">Stopp</span> · <span class="ok">nummerieren</span> · <span class="ok">Interesse</span> ·
 <span class="ok">brillant</span> · <span class="ok">Konsens</span> · <span class="ok">Portemonnaie</span> (eingedeutscht auch <span class="ok">Portmonee</span>) · <span class="ok">Repertoire</span> · <span class="ok">Aggression</span> ·
-<span class="ok">Adresse</span> (ein d) · <span class="ok">Appell</span> · <span class="ok">Grammatik</span> (ein m) · <span class="ok">Kongress</span> · <span class="ok">Terrasse</span>
+<span class="ok">Adresse</span> (ein d) · <span class="ok">Appell</span> · <span class="ok">Grammatik</span> (zwei m, ein t) · <span class="ok">Kongress</span> · <span class="ok">Terrasse</span>
 </div>
 <p><b>Verlängerungsprobe</b> bei Auslauten: Tod/tot → „des Todes“ vs. „er ist tot“; Rad/Rat → „Räder“ vs. „Ratschlag“; angestrengt → „anstrengen“.</p>`},
 
@@ -1756,7 +1758,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <div class="ex">der Praktikant → dem Praktikant<span class="ok">en</span><br>der Mensch → des Mensch<span class="ok">en</span><br>der Junge → den Jung<span class="ok">en</span></div>
 <p><b>Dazu gehören:</b> Personenbezeichnungen auf <code>-ant, -ent, -ist, -at, -oge, -graf, -soph</code> (Praktikant, Student, Journalist, Kandidat, Pädagoge) sowie <code>Mensch, Herr, Junge, Kollege, Experte, Athlet, Bauer, Nachbar, Kunde, Zeuge</code>.</p>
 <p>„Ich habe mit dem Kollege gesprochen“ ist einer der häufigsten Fehler in Alltagstexten.</p>
-<p><b>Ausnahme:</b> Bei <code>Nachbar</code> lässt der Duden beide Beugungen zu — „dem Nachbarn“ wie „dem Nachbar“.</p>`},
+<p><b>Zwei Sonderfälle:</b> Bei <code>Nachbar</code> lässt der Duden beide Beugungen zu — „dem Nachbarn“ wie „dem Nachbar“. Und <code>Herr</code> bekommt im Singular nur ein -n: „mit Herrn Weber“, im Plural dann -en: „Sehr geehrte Damen und Herren“.</p>`},
 
 {id:"gram-plural",c:"gram",t:"Plural von Fremdwörtern",b:`
 <div class="ex">
@@ -2865,7 +2867,7 @@ const EX_C = [
  "„Ich habe die Kontrollgruppe doppelt gezählt. Die korrigierte Fassung kommt bis morgen Mittag.“",
  "„Es ist zu einem Fehler bei der Auswertung gekommen.“",
  "„Mir ist da ein kleiner Fehler unterlaufen.“"],a:0,
- e:"Das <b>Passiv ohne Verursacher</b> klingt wie Ausweichen, die Verkleinerung („kleiner Fehler“) wie Beschönigung. Belastbar ist: Was war mein Anteil? Was folgt? Bis wann?",r:"form-fehler"},
+ e:"Die unpersönliche Fassung <b>ohne Verursacher</b> klingt wie Ausweichen, die Verkleinerung („kleiner Fehler“) wie Beschönigung. Belastbar ist: Was war mein Anteil? Was folgt? Bis wann?",r:"form-fehler"},
 
 {id:"f20",c:"form",q:"Was ist an „Es tut mir leid, falls sich jemand angegriffen gefühlt haben sollte“ falsch?",o:[
  "Drei Ausweichmanöver",
@@ -2962,7 +2964,7 @@ const EX_C = [
  "Durch eine klare Formulierung","Durch Wiederholung der Ansage"],a:0,
  e:"Wer ankündigt, abends nicht mehr zu antworten, und dann doch sofort reagiert, <b>löscht die Ansage</b>. Formulierungen helfen — tragen aber nur, wenn das Verhalten folgt.",r:"form-grenzen"},
 
-{id:"f38",c:"form",q:"Du musst ein Gespräch beenden. Was gehört dazu?",o:[
+{id:"f38",c:"form",q:"Du vertagst ein Gespräch. Was verhindert, dass es wie ein Abbruch wirkt?",o:[
  "Ein Anschluss: „Lass uns morgen weitermachen.“",
  "Eine Entschuldigung","Eine Zusammenfassung"],a:0,
  e:"Ein Gespräch, das <b>vertagt</b> wird, endet ohne Kränkung; eines, das abbricht, nicht. Der Anschluss kostet einen halben Satz.",r:"form-grenzen"},
@@ -2989,7 +2991,7 @@ const EX_C = [
  "Entschuldigung — Nachricht — Erklärung"],a:0,
  e:"Menschen kommen mit schlechten Nachrichten zurecht — <b>nicht aber mit Unklarheit</b>. Die Nachricht hinter Absätzen zu verstecken oder sie weichzuzeichnen, verlängert nur die Unsicherheit.",r:"form-schlechtenachricht"},
 
-{id:"f43",c:"form",q:"Was ist an „Ich würde sagen, dass das eventuell ein möglicher Ansatz sein könnte“ falsch?",o:[
+{id:"f43",c:"form",q:"Was ist das Problem an „Ich würde sagen, dass das eventuell ein möglicher Ansatz sein könnte“?",o:[
  "Fünffach abgesichert — der Satz behauptet nichts mehr",
  "Er ist zu direkt","Der Konjunktiv ist falsch gebildet"],a:0,
  e:"Nicht widerlegbar, aber auch nicht brauchbar. <b>Eine Absicherung pro Aussage</b>, und wähl die passende Stärke: „Das halte ich für den besseren Weg, weil …“",r:"stil-hedging"},
@@ -3134,7 +3136,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <div class="ex"><span class="ok">Ich habe bei der Auswertung die Kontrollgruppe doppelt gezählt. Der Effekt fällt dadurch zu groß aus. Die korrigierte Fassung schicke ich bis morgen Mittag.</span></div>
 <p><b>Die vier Fluchtwege — alle erkennbar:</b></p>
 <ul>
-<li><span class="nope">Passiv ohne Verursacher:</span> „Es ist zu einem Fehler gekommen.“</li>
+<li><span class="nope">Ohne Verursacher:</span> „Es ist zu einem Fehler gekommen.“</li>
 <li><span class="nope">Verkleinerung:</span> „Mir ist ein kleiner Fehler unterlaufen.“</li>
 <li><span class="nope">Verschiebung:</span> „Es tut mir leid, falls sich jemand angegriffen gefühlt hat.“</li>
 <li><span class="nope">Das „aber“:</span> „Sorry, aber du hattest ja auch …“ — hebt die Entschuldigung im selben Satz auf.</li>
@@ -3999,7 +4001,7 @@ const EX_D = [
 
 /* ---------- KASUS: VERBEN ---------- */
 {id:"n11",c:"gram",q:"Ergänze: „Ich rufe ___ morgen an.“",t:"fill",a:["dich"],
- e:"<b>anrufen</b> verlangt den Akkusativ. „Ich rufe dir an“ ist einer der häufigsten Fehler im gesprochenen Deutsch. Merke: Man ruft jemanden an, wie man jemanden fragt.",r:"gram-akkverben"},
+ e:"<b>anrufen</b> verlangt überregional den Akkusativ. „Ich rufe dir an“ ist im Südwesten und in der Schweiz verbreitet, außerhalb fällt es auf. Merke: Man ruft jemanden an, wie man jemanden fragt.",r:"gram-akkverben"},
 
 {id:"n12",c:"gram",q:"Ergänze: „Kannst du ___ kurz helfen?“",t:"fill",a:["mir"],
  e:"<b>helfen</b> steht mit Dativ — im Gegensatz zu <b>unterstützen</b> (Akkusativ): „Kannst du mich unterstützen?“",r:"gram-kasus"},
@@ -4079,7 +4081,7 @@ const EX_D = [
  e:"„treffen“ verlangt Akkusativ. Probe: „Ich habe <i>ihn</i> getroffen“ → <b>den</b>.",r:"gram-relkasus"},
 
 {id:"n33",c:"gram",q:"Ergänze: „Die Leute, ___ wir geschrieben haben, antworten nicht.“",t:"fill",a:["denen"],
- e:"„schreiben“ + Person = Dativ, und im Plural heißt das Relativpronomen <b>denen</b> — die einzige Form, die vom bestimmten Artikel abweicht.",r:"gram-relkasus"},
+ e:"„schreiben“ + Person = Dativ, und im Dativ Plural heißt das Relativpronomen <b>denen</b>, nicht „den“. Im Genitiv weicht es ebenfalls ab: <b>deren</b> im Plural und Femininum, <b>dessen</b> im Maskulinum und Neutrum.",r:"gram-relkasus"},
 
 {id:"n34",c:"gram",q:"Ergänze: „Die Trainerin, ___ Methoden umstritten sind, hat gekündigt.“",t:"fill",a:["deren"],
  e:"Femininum Singular Genitiv → <b>deren</b>. Maskulin und Neutrum → <b>dessen</b>. Merke: deren für die Frau und für alle im Plural.",r:"gram-relativ"},
@@ -4095,7 +4097,7 @@ const EX_D = [
  "Morgen ich gehe ins Training."],a:0,
  e:"Im <b>Aussagesatz</b> steht das gebeugte Verb an zweiter Position. Steht etwas anderes als das Subjekt auf Position 1, rutscht das Subjekt automatisch hinter das Verb. (Vorn steht das Verb nur in der Ja/Nein-Frage und im Imperativ.)",r:"satz-v2"},
 
-{id:"z02",c:"satz",q:"Welche Fassung stimmt?",o:[
+{id:"z02",c:"satz",q:"Welche Fassung gehört in einen geschriebenen Text?",o:[
  "Ich bleibe zu Hause, weil ich müde bin.",
  "Ich bleibe zu Hause, weil ich bin müde."],a:0,
  e:"Nach <b>weil</b> wandert das gebeugte Verb ans Satzende. Die Fassung „weil ich bin müde“ ist gesprochen sehr verbreitet — im formellen Rahmen aber auffällig.",r:"satz-nebensatz"},
@@ -4116,10 +4118,10 @@ const EX_D = [
  "Ich fahre mit dem Zug nach Berlin morgen wegen des Wettkampfs."],a:0,
  e:"<b>Te-Ka-Mo-Lo:</b> temporal (wann) — kausal (warum) — modal (wie) — lokal (wohin). Abweichen ist erlaubt, setzt dann aber eine Betonung.",r:"satz-tekamolo"},
 
-{id:"z07",c:"satz",q:"Welche Stellung ist richtig?",o:[
+{id:"z07",c:"satz",q:"Welche Stellung ist die neutrale?",o:[
  "Ich gebe dem Trainer den Ball.",
  "Ich gebe den Ball dem Trainer."],a:0,
- e:"Zwei Substantive → <b>Dativ vor Akkusativ</b>. „Ich gebe den Ball dem Trainer“ ist nicht falsch, betont aber den Ball besonders.",r:"satz-dativakk"},
+ e:"Zwei Substantive → <b>Dativ vor Akkusativ</b>. Die andere Reihenfolge ist nicht falsch, sie rückt den Ball nach hinten und betont ihn dadurch.",r:"satz-dativakk"},
 
 {id:"z08",c:"satz",q:"Welche Stellung ist richtig?",o:[
  "Ich gebe ihn ihm.","Ich gebe ihm ihn."],a:0,
@@ -4192,7 +4194,7 @@ const EX_D = [
  "„Ich rufe dir an“ statt „dich“",
  "„wegen dem Wetter“ statt Genitiv",
  "„Ich hab gesagt“ statt „Ich sagte“"],a:0,
- e:"Der Kasusfehler bei „anrufen“ wird sofort gehört. Genitiv-Ersatz und Perfekt statt Präteritum sind in der gesprochenen Sprache dagegen völlig normal.",r:"satz-sprechen"},
+ e:"Der Dativ bei „anrufen“ wird außerhalb des Südwestens sofort gehört. Genitiv-Ersatz und Perfekt statt Präteritum sind in der gesprochenen Sprache dagegen überall normal.",r:"satz-sprechen"},
 
 {id:"z25",c:"satz",q:"Welche Ersetzung ist im Gespräch sinnvoller als ein Füllwort?",o:[
  "Eine Sekunde Pause",
@@ -4397,7 +4399,7 @@ const RULES_SATZ = SATZ_RULEMAP.map(m => ({
 })).concat([
 
 {id:"gram-praepakk",c:"gram",t:"Präpositionen mit Akkusativ",b:`
-<p>Diese Präpositionen verlangen <b>immer</b> den Akkusativ — ohne Ausnahme, ohne Nachdenken:</p>
+<p>Diese Präpositionen verlangen den <b>Akkusativ</b>. Bei den fünf häufigen musst du nicht nachdenken; bei <i>bis</i>, <i>entlang</i> und <i>wider</i> steht unten, was zu beachten ist:</p>
 <div class="ex"><b>durch · für · gegen · ohne · um · bis · entlang · wider</b></div>
 <p><b>Merkspruch:</b> „durch für gegen ohne um“ — fünf Wörter im Rhythmus, der Rest ist selten.</p>
 <div class="ex">durch <b>den</b> Wald · für <b>dich</b> · gegen <b>die</b> Wand · ohne <b>mich</b> · um <b>den</b> Platz</div>
@@ -4464,7 +4466,7 @@ dazu: ab · entgegen · gemäß · zufolge · samt · nebst · nahe · mitsamt</
 „Ich habe den Kollegen getroffen.“ → „Ich habe <b>ihn</b> getroffen.“ → Akkusativ ✓</div>
 <p><b>Die Reihenfolge der Entscheidung</b> beim Sprechen:</p>
 <ol>
-<li>Steht eine <b>Präposition</b> davor? Dann entscheidet sie — Verb egal.</li>
+<li>Steht eine <b>Präposition</b> davor? Dann entscheidet meist sie — außer bei fest ans Verb gebundenen Präpositionen: „teilnehmen an“ steht mit Dativ, „glauben an“ mit Akkusativ, dieselbe Präposition. Die stehen in der Fall-Referenz.</li>
 <li>Sonst entscheidet das <b>Verb</b>.</li>
 <li>Bei Wechselpräpositionen: „wohin?“ → Akkusativ, „wo?“ → Dativ.</li>
 </ol>`}
@@ -5536,12 +5538,40 @@ function klangHinweise(mein, alle){
   });
   return raus;
 }
+/* Auslautverhärtung: am Silbenende klingen g und k, d und t, b und p gleich.
+   „angestrengt“ und „angestrenkt“ sind beim Hören nicht zu unterscheiden, stehen aber
+   nicht in KLANGPAAR — sie sind kein festes Paar, sondern eine Bauart. Der Hinweis nennt
+   den Buchstaben; verraten wird dadurch nichts, weil sprechFrage() ihn an jede Option
+   hängt. Wörter, die schon in KLANGPAAR stehen, bleiben dort. */
+const auslautGleich = w => String(w).toLowerCase()
+  .replace(/g(?=[tsz]|$)/g, "k").replace(/d(?=[tsz]|$)/g, "t").replace(/b(?=[tsz]|$)/g, "p");
+function auslautHinweise(mein, alle){
+  const wort = t => String(t).toLowerCase().replace(/[^\p{L}]+/gu, " ").trim().split(/\s+/);
+  const meine = wort(mein), raus = [];
+  alle.filter(a => a !== mein).forEach(a => {
+    const fremd = wort(a);
+    meine.forEach((w, i) => {
+      const gegen = fremd[i];
+      if(!gegen || gegen === w || w.length < 4 || w.length !== gegen.length) return;
+      if(KLANGPAAR[w] || KLANGPAAR[gegen]) return;
+      if(auslautGleich(w) !== auslautGleich(gegen)) return;
+      for(let k = 0; k < w.length; k++){
+        if(w[k] !== gegen[k]){
+          const h = w + " mit " + w[k];
+          if(!raus.includes(h)) raus.push(h);
+          break;
+        }
+      }
+    });
+  });
+  return raus;
+}
 function hoerHinweis(opt, alle){
   const roh   = t => strip(t).replace(/\s+/g," ").trim();
   const flach = t => nurZeichen(roh(t)).toLowerCase();
   const mein  = roh(opt);
   const gleich = alle.map(roh).filter(x => x !== mein && flach(x) === flach(mein));
-  const klang = klangHinweise(mein, alle.map(roh));
+  const klang = klangHinweise(mein, alle.map(roh)).concat(auslautHinweise(mein, alle.map(roh)));
   if(!gleich.length) return klang.length ? " " + klang.join(", ") + "." : "";
   const hin = klang.slice();
   const zu = x => { if(x && !hin.includes(x)) hin.push(x); };
@@ -7463,7 +7493,7 @@ const CHECKS = [
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
 {id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
  t:"Komma vor der Infinitivgruppe?",k:"Seit 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt: „Er hat versucht<b>,</b> pünktlich zu sein.“ Hier scheint keines zu stehen. Prüf die Stelle — nach brauchen, scheinen, haben und sein steht dagegen keins.",r:"komma-infinitiv"},
-{id:"y03",sev:"pruef",re:/\bweil\s+(ich|du|er|sie|es|wir|ihr|man)\s+(bin|bist|ist|sind|seid|hab|habe|hast|hat|haben|habt|kann|kannst|will|willst|muss|musst|wird|werde|war|warst|waren|hatte|hattest|möchte|soll)\b/g,
+{id:"y03",sev:"pruef",re:/\bweil\s+(ich|du|er|sie|es|wir|ihr|man)\s+(bin|bist|ist|sind|seid|hab|habe|hast|hat|haben|habt|kann|kannst|will|willst|muss|musst|wird|werde|war|warst|waren|hatte|hattest|möchte|soll)\b(?![^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen|sehen|hören|helfen)\s*[,.!?;]|[^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen)\s*$)/g,
  t:"„weil“ mit Hauptsatzstellung",k:"Nach „weil“ wandert das gebeugte Verb ans Satzende: <b>…, weil ich keine Zeit habe.</b> Gesprochen ist die Hauptsatzstellung verbreitet, schriftlich fällt sie auf.",r:"satz-nebensatz"},
 {id:"y04",sev:"pruef",re:/\bscheinbar\b/gi,t:"scheinbar oder anscheinend?",
  k:"<b>scheinbar</b> = nur dem Schein nach, in Wirklichkeit nicht. <b>anscheinend</b> = allem Anschein nach, vermutlich. Prüf, was du meinst.",r:"recht-verwechsel"},
@@ -7940,7 +7970,7 @@ function cheatHTML(){
   '<section class="ch-sec"><h2>1 · Komma — die sechs Fälle</h2>'+
   '<table class="ch-t"><tbody>'+
   '<tr><th>Immer</th><td>Nebensatz (weil, dass, ob, wenn, obwohl, damit, während, bevor, nachdem, sobald, falls) — auch ohne Einleitewort („Ich hoffe, du kommst“) · '+
-  'Relativsatz · Einschub beidseitig, auch nach dem Datum („am Montag, dem 3. Juni, um 9 Uhr“), Ausnahme: Erläuterung zwischen Adjektiv und Substantiv („eine kurze, das heißt fünfminütige Pause“) · vor <i>aber, sondern, doch, jedoch, denn</i> · vor <i>das heißt, und zwar, zum Beispiel</i> als Nachtrag · '+
+  'Relativsatz · Einschub beidseitig, auch nach dem Datum („am Montag, dem 3. Juni, um 9 Uhr“), Ausnahme: Erläuterung zwischen Adjektiv und Substantiv („eine kurze, das heißt fünfminütige Pause“) · vor <i>aber, sondern, doch, jedoch, denn</i> als Verbinder (als Adverb mitten im Satz keins: „Er kam jedoch zu spät“) · vor <i>das heißt, und zwar, zum Beispiel</i> als Nachtrag · '+
   'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion (Komma, Semikolon oder Punkt — nur nichts geht nicht) · zwischen gleichrangigen Adjektiven, Und-Probe („ein langer, anstrengender Lauf“), nicht wenn das letzte Adjektiv zum Substantiv gehört („die neue rote Jacke“)</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen — außer, davor schließt ein Einschub oder Nebensatz · zwischen zwei Nebensätzen, die <i>und</i> verbindet · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
   '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“, „so gut wie du“), aber Komma vor <i>als/wie</i> + zu-Infinitiv („nichts anderes übrig, als aufzugeben“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
@@ -8021,7 +8051,7 @@ function cheatHTML(){
   'zur Durchführung bringen → durchführen · eine Prüfung vornehmen → prüfen</td></tr>'+
   '<tr><th>Doppelungen</th><td>bereits schon · eventuell vielleicht · kleines Detail · neu renoviert · '+
   'persönlich anwesend · gemeinsames Miteinander</td></tr>'+
-  '<tr><th>Nicht steigern</th><td>optimal · maximal · minimal · ideal · einzig · total · tot · leer · voll</td></tr>'+
+  '<tr><th>Nicht steigern</th><td>optimal · maximal · minimal · ideal · einzig · total · tot · schwanger</td></tr>'+
   '<tr><th>Faustregeln</th><td>Ein Gedanke pro Satz · 12–18 Wörter im Schnitt · höchstens acht Wörter zwischen den Verbteilen · '+
   'starkes Verb statt zwei Adjektive · „man“ durch „ich“ oder „wir“ ersetzen</td></tr>'+
   '</tbody></table></section>'+
