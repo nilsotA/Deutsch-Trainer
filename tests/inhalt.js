@@ -132,4 +132,23 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 });
 P.ok("Der Hörhinweis nennt das unterscheidende Zeichen", !stummeZeichen.length, stummeZeichen.join(", "));
 
+/* Fehlerklasse „gleich klingende Wörter ohne Hinweis“: „Seid ihr bereit?“ und „Seit ihr
+   bereit?“ werden identisch vorgelesen. Steht ein Paar aus KLANGPAAR in zwei Optionen an
+   derselben Stelle, muss der Hörhinweis die Schreibung benennen. */
+const PAARE = daten(w, "Object.keys(KLANGPAAR)");
+const wortliste = t => String(t).toLowerCase().replace(/[^\p{L}]+/gu, " ").trim().split(/\s+/);
+const stummePaare = [];
+ALL.filter(i => i.t !== "fill").forEach(i => {
+  i.o.forEach((a, k) => i.o.forEach((b, m) => {
+    if (m <= k) return;
+    const ohneTags = t => String(t).replace(/<[^>]*>/g, " ");
+    const wa = wortliste(ohneTags(a)), wb = wortliste(ohneTags(b));
+    const treffer = wa.some((x, n) => PAARE.includes(x) && wb[n] && wb[n] !== x && PAARE.includes(wb[n]));
+    if (!treffer) return;
+    const hinweis = w.eval("hoerHinweis(" + JSON.stringify(a) + "," + JSON.stringify(i.o) + ")");
+    if (!hinweis.trim()) stummePaare.push(i.id);
+  }));
+});
+P.ok("Gleich klingende Wörter bekommen einen Hörhinweis", !stummePaare.length, stummePaare.join(", "));
+
 P.abschluss();
