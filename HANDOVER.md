@@ -58,6 +58,77 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Widerspruchslauf über alle 117 Regeln (05.09.2026).** Ohne Suchbudget ist Faktenprüfung
+nicht möglich — also wurde nach dem gesucht, was ohne Quelle entscheidbar ist: Stellen, an
+denen die App sich selbst widerspricht. 26 Prüfer haben jede Regel gegen ihre Übungen,
+Prüfmuster, Fehlersuche-Markierungen, Karten und den Spickzettel gelesen; jeder Fund musste
+mit zwei wörtlichen Zitaten belegt sein, die nicht beide gelten können. 149 Meldungen, davon
+29 abgearbeitet. **Die übrigen 120 stehen in `FUNDE-offen.md`** — ungeprüft, mit Anleitung.
+
+Vier Prüfmuster waren kaputt, alle mechanisch über `analyse()` nachgestellt:
+
+- **`x04`** (Komparativ mit „wie“, hart) meldete „Wir machen weiter wie geplant“, „Das
+  Training geht weiter wie besprochen“ und „Er trainiert nicht mehr wie früher“ als klaren
+  Fehler. „weiter“ ist raus, „mehr“ und „länger“ greifen nicht mehr nach nicht/nie/kaum,
+  feste Fügungen sind ausgenommen.
+- **`x20`** (anrufen + Dativ, hart) prüfte nicht „anrufen“, sondern jede Form von „rufen“
+  plus Dativpronomen — „Die Trainerin ruft ihr Kind“, „Er ruft ihr zu“, „Warum ruft ihr uns
+  nicht an?“ und „Sie rief ihm nach“ bekamen „klarer Fehler“. Jetzt mit „an“ im Satz
+  verlangt, ohne „ihr“, ohne „uns“ und „euch“ (in beiden Fällen gleich), und auf `pruef`
+  herabgestuft: Die App führt den Dativ selbst als südwestdeutsch und schweizerisch.
+- **Tote Alternativen.** `\b` ist in JavaScript an `[A-Za-z0-9_]` gebunden, ä ö ü ß zählen
+  dort nicht als Wortzeichen. Deshalb konnten **„älter“ und „öfter“ in `x04`, „äusserst“ in
+  `x26` und „über“ in `a08` nie treffen** — ohne Syntaxfehler, ohne roten Lauf.
+  `tests/suite.js` erkennt die Klasse jetzt dauerhaft, mit Positiv- und Gegenprobe.
+- **`a03`** fand den Satz nicht, den sein eigener Hinweistext als Beispiel nennt: Partizipien
+  trennbarer Verben („ausgefüllt“) beginnen nicht mit „ge“. Dieselbe Lücke saß in der
+  **Passiv-Kennzahl der Schreibwerkstatt** — ein Text aus vier Passivsätzen wurde mit
+  0 Prozent Passivanteil ausgewiesen. Jetzt 100.
+- **`y03`** meldete den doppelten Infinitiv („weil ich habe arbeiten müssen“), den die
+  eigene Übung `z11` als die richtige Fassung lehrt.
+
+Inhaltlich abgearbeitet, nach Grundsatz sortiert:
+
+- **Grundsatz 2 (kein Ablenker darf richtig sein):** `z07` wertete „Ich gebe den Ball dem
+  Trainer“ als falsch, während die eigene Erklärung ihn „nicht falsch“ nennt. `g05` bot
+  beide zulässigen Schreibungen als falsche Optionen an. `f38` wertete „Eine Zusammenfassung“
+  als falsch — die Nachbarkarte `form-absprachen` empfiehlt genau das. `m04` schloss den
+  Konjunktiv II aus, den die eigene Erklärung zulässt. `s12` fragte nach einem Genitiv und
+  antwortete „Genitivkette“.
+- **Grundsatz 4 (regional statt falsch):** „Ich rufe dir an“ hieß in `n11` „einer der
+  häufigsten Fehler“ und in `z24` „Kasusfehler“, an vier anderen Stellen dagegen
+  südwestdeutsch. `m17` und `z02` ebenso. Jetzt überall gleich eingeordnet.
+- **Grundsatz 5 (keine absoluten Aussagen):** `komma-aufzaehlung` und der Spickzettel führten
+  aber/doch/jedoch ohne die Einschränkung, die die eigene Übung `k11` kennt und die die App
+  in ihrem Fließtext vierzigfach anwendet. `gram-praepakk` sagte „ohne Ausnahme“ und führte
+  zwei Zeilen später `entlang` mit Genitiv auf. `gram-kasusfinden` sagte „Präposition
+  entscheidet, Verb egal“ — „teilnehmen an“ steht mit Dativ, „glauben an“ mit Akkusativ.
+  `n33` nannte „denen“ die einzige vom Artikel abweichende Form.
+- **Grundsatz 3 (Stil ist keine Regel):** `f43` fragte, was an gestapelter Absicherung
+  „falsch“ sei, obwohl `stil-hedging` sie ausdrücklich für keinen Fehler erklärt. Die
+  Fehlersuche nannte alle Markierungen „Fehler“, obwohl ein Drittel Stil und Formulierung
+  ist — sie heißen jetzt „Stellen, die besser gehen“. In `kt10` verlangte eine Markierung
+  „problematisch“ statt „nicht ganz unproblematisch“, was `stil-verneinung` als legitime
+  Litotes führt und die Aussage stärker macht als das Original.
+- **Sonstige Widersprüche:** `getrennt-verb` machte „erneut“ zur Probe für
+  Getrenntschreibung, während `t12` dieselbe Bedeutung dem einen Wort „wiedersehen“
+  zuordnet. `gram-ndekl` führte Herr ohne den Sonderfall, den die App selbst schreibt
+  (Singular -n, Plural -en). „durchführen“ stand in `stil-nominal` als Warnsignal und in
+  `stil-verben` als Ziel. `form-loben` nannte eine Präpositionalgruppe einen Nebensatz.
+  Der Spickzettel führte leer und voll als nicht steigerbar, die die Regel ausnimmt.
+  **„Grammatik (ein m)“** stand als Merkhilfe da — so gelesen führt sie zu „Gramatik“.
+  `f19` nannte „Es ist zu einem Fehler gekommen“ ein Passiv; es ist Perfekt Aktiv, und der
+  eigene Passivzähler der App gibt dafür 0.
+
+**Unterwegs:** `hoerHinweis()` nennt jetzt auch die Auslautverhärtung. „angestrengt“ und
+„angestrenkt“ klingen gleich, standen aber nicht in `KLANGPAAR` — sie sind kein festes Paar,
+sondern eine Bauart (g/k, d/t, b/p am Silbenende). Der Hinweis hängt an jeder Option und
+verrät deshalb nichts. Betrifft `r04`, `r18`, `v02`. **Nicht** gelöst: Paare wie
+„Tipp/Tip“, „Rhythmus/Rythmus“, „nummerieren/numerieren“ — ob die Sprachausgabe sie
+unterscheidet, hängt an der Vokallänge und ist ohne Hörprobe nicht zu entscheiden. Lieber
+offen als geraten.
+
+
 **Vierter Durchgang — Zahlen, Uhrzeit, Datum (05.09.2026).** Neun Regeln waren aus dem
 Workflow des dritten Durchgangs übrig geblieben (das Modellkontingent lief mitten im Lauf
 aus). Sieben davon sind einzeln geprüft worden. **Wichtig für die nächste Sitzung:** Das

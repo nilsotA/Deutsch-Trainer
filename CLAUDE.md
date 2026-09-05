@@ -16,6 +16,7 @@ nie raten.
 Deutsch-Trainer.html      die komplette App (~590 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
+FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
                           Formentabelle, unabhängig von der App aufgestellt
 package.json              npm-Skripte für die Prüfläufe

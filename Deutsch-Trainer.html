@@ -1829,7 +1829,7 @@ sich freuen <b>auf</b> (Zukunft) / <b>über</b> (schon da) · halten <b>von</b> 
 <p>Deutsche Fachtexte neigen dazu, Handlungen in Substantive zu verwandeln. Das Ergebnis ist grammatisch korrekt und schwer lesbar.</p>
 <div class="ex"><span class="nope">Die Durchführung der Untersuchung der Belastung erfolgte durch uns.</span><br>
 <span class="ok">Wir untersuchten die Belastung.</span></div>
-<p><b>Warnsignale:</b> Substantive auf <code>-ung, -heit, -keit, -nis, -ion</code> in Ketten; Blassverben wie <i>erfolgen, durchführen, vornehmen, stattfinden</i>.</p>
+<p><b>Warnsignale:</b> Substantive auf <code>-ung, -heit, -keit, -nis, -ion</code> in Ketten; Blassverben wie <i>erfolgen, durchführen, vornehmen, stattfinden</i>. <i>durchführen</i> ist besser als „zur Durchführung bringen“, bleibt aber blass — wo ein genaues Verb existiert, nimm das: „wir befragten“ statt „wir führten eine Befragung durch“.</p>
 <p><b>Streckverben ersetzen:</b></p>
 <div class="ex">zur Anwendung kommen → angewendet werden<br>in Erwägung ziehen → erwägen<br>zur Durchführung bringen → durchführen<br>eine Prüfung vornehmen → prüfen<br>Kritik üben an → kritisieren</div>`},
 
@@ -1845,7 +1845,7 @@ sich freuen <b>auf</b> (Zukunft) / <b>über</b> (schon da) · halten <b>von</b> 
 
 {id:"stil-verben",c:"stil",t:"Präzise Verben wählen",b:`
 <p>Ein starkes Verb ersetzt zwei Adjektive. Ersetze Allerweltsverben durch spezifische:</p>
-<div class="ex">machen → durchführen, erstellen, verursachen, bewirken<br>
+<div class="ex">machen → erstellen, verursachen, bewirken, herstellen<br>
 sein → gelten als, darstellen, bedeuten<br>
 haben → verfügen über, aufweisen, besitzen<br>
 geben → liefern, bieten, ermöglichen<br>
@@ -2604,7 +2604,7 @@ const PAIRS = [
  note:"Konkretes Angebot mit Opt-out statt vages Angebot mit Opt-in. Das ist der ganze Unterschied."},
 
 {id:"pr18",ctx:"beruf",bad:"Nicht schlecht für den ersten Versuch.",
- why:"Als Lob gemeint, als Einschränkung gehört. Der Nebensatz nimmt zurück, was der Hauptsatz gibt.",
+ why:"Als Lob gemeint, als Einschränkung gehört. Der Zusatz nimmt zurück, was das Lob gibt.",
  good:"Die Struktur war klar und die Übergänge haben gesessen. Das hat die Gruppe getragen.",
  note:"Konkretes Lob wirkt. Relativierendes Lob wirkt auch — nur anders, als du willst."},
 
@@ -3209,7 +3209,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <li><span class="nope">„Für deine Verhältnisse gut.“</span> — herablassend, auch wenn nett gemeint</li>
 <li><span class="nope">Lob nur als Einleitung zur Kritik</span> — das durchschaut jeder nach dem zweiten Mal</li>
 </ul>
-<p>Der Nebensatz nimmt zurück, was der Hauptsatz gibt. Wenn du loben willst, lob — und kritisier später separat.</p>`},
+<p>Der Zusatz nimmt zurück, was das Lob gibt. Wenn du loben willst, lob — und kritisier später separat.</p>`},
 
 {id:"form-grenzen",c:"form",t:"Grenzen setzen",b:`
 <p><b>Bei Überlastung: keine Absage, sondern eine Priorisierungsfrage.</b> Sie ist schwer abzulehnen, zeigt Überblick statt Überforderung und gibt die Entscheidung dorthin zurück, wo sie hingehört.</p>
@@ -4595,7 +4595,7 @@ errs:[
  {w:"fragt",nth:1,ok:"fragt,",k:"Vor dem indirekten Fragesatz mit „ob“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"scheinbar",ok:"anscheinend",k:"„scheinbar“ heißt: in Wirklichkeit nicht. Gemeint ist „anscheinend“ (= allem Anschein nach).",r:"recht-verwechsel",c:"recht"},
  {w:"macht",nth:1,ok:"ergibt Sinn / ist schlüssig",k:"„Sinn machen“ ist eine Lehnübersetzung. In wissenschaftlichen Texten: „Sinn ergeben“ oder „schlüssig sein“.",r:"stil-anglizismus",c:"stil"},
- {w:"unproblematisch.",ok:"problematisch.",k:"Doppelte Verneinung („nicht ganz unproblematisch“) wirkt zögerlich und braucht einen zusätzlichen Denkschritt.",r:"stil-verneinung",c:"stil"},
+ {w:"unproblematisch.",ok:"diskussionswürdig.",k:"Als Litotes ist „nicht ganz unproblematisch“ zulässig — hier stapeln sich aber drei Abschwächungen in einer Fügung: nicht, ganz und un-. Eine genügt.",r:"stil-hedging",c:"stil"},
  {w:"gibt",nth:1,ok:"Studien zeigen, dass …",k:"„Es gibt Studien, die zeigen“ schiebt einen Leerlauf vor den eigentlichen Satz.",r:"stil-esgibt",c:"stil"},
  {w:"das",nth:2,ok:"dass",k:"Konjunktion → „dass“. (Das erste „das“ im Text ist ein Artikel: „das Verhältnis“ — das ist richtig so.)",r:"recht-dass",c:"recht"},
 {w:"zeigen",ok:"zeigen,",k:"Vor dem Nebensatz mit „dass“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"}, 
@@ -7074,7 +7074,7 @@ function drawKorr(){
         '<span class="tiny muted">'+t.lvl+"</span>"+
       "</div>"+
       "<h2>"+esc(t.t)+"</h2>"+
-      '<p class="small muted" style="margin-top:6px">Dieser Text enthält <b>'+total+" Fehler</b>. Klick sie an."+
+      '<p class="small muted" style="margin-top:6px">Dieser Text enthält <b>'+total+" Stellen</b>, die besser gehen — echte Fehler und Formulierungen. Klick sie an."+
         (done?"":" Ein zweiter Klick nimmt die Markierung zurück.")+"</p>"+
       '<div class="korrtext" id="ktText">'+body+"</div>"+
       (done ? "" :
@@ -7090,7 +7090,7 @@ function drawKorr(){
         (wrong ? '<p class="small muted" style="margin-top:6px">'+wrong+
           (wrong===1?" Markierung war unnötig":" Markierungen waren unnötig")+" — orange hinterlegt.</p>" : "")+
         '<hr class="sep">'+
-        '<div class="eyebrow">Alle Fehler im Detail</div>'+
+        '<div class="eyebrow">Alle Stellen im Detail</div>'+
         '<div style="margin-top:10px">'+ t.errs.map((e,n)=>{
           const idx = Object.keys(map).find(k=>map[k]===e);
           const found = idx !== undefined && marked.has(+idx);
