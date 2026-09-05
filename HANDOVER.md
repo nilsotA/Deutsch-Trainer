@@ -105,6 +105,28 @@ Zwei neue Prüfungen, beide nach dem Muster „Fehlerklasse statt Einzelfix“:
   nur darin, klingen sie beim Vorlesen gleich. Auch hier eine Positivprobe mit dem Paar aus
   `q03`, das die Prüfung nötig gemacht hat.
 
+Nachgezogen im selben Durchgang, ebenfalls ohne neue Tatsachenbehauptung:
+
+- `n-abkuerzung`: „Mit Punkt stehen Abkürzungen, die man als volles Wort ausspricht“ ist auf
+  „in aller Regel“ abgeschwächt, und dass die Zuordnung nicht lückenlos ist, steht jetzt da.
+  Der Absatz „Am Satzende steht nur ein Punkt“ nennt jetzt auch den Fall, der sich aus der
+  eigenen Regel `z-frage` ergibt: Frage- und Ausrufezeichen bleiben stehen
+  („Ist er Regierungsrat a. D.?“). „In wissenschaftlichen Texten gilt“ war eine Behauptung
+  ohne Quelle und ist eine Empfehlung geworden; `q25` fragt entsprechend nach dem Rat, nicht
+  nach einer Regel.
+- `n-quellen`: „a. a. O. ist heute unüblich“ → „wird seltener verwendet; viele Leitfäden
+  raten davon ab“.
+
+Eine dritte Prüfung kam dazu: `tests/suite.js` lässt jetzt auch die **292
+Musterformulierungen der Schreibwerkstatt** (`PHRASES`, `PAIRS.good`) und die korrigierten
+Fehlersuchtexte gegen die harten Muster laufen — Nils soll die Bausteine abschreiben, ein
+hartes Muster darf sie nicht anstreichen. Dazu die Prüfung, dass **jede Fehlermarkierung im
+Text auffindbar ist**: `korrErrIdx()` sucht das Wort als ganzes Token, findet es nichts, ist
+der Fehler unanklickbar, zählt aber in der Gesamtzahl — Nils käme nie auf 100 Prozent.
+Aktuell stimmt alles. Zwölf Fehlersuchtexte ersetzen mehrteilig („dem → des Zeitplans“) oder
+tragen statt einer Form eine Anweisung („(Beobachtung statt Etikett)“); dort ist die
+korrigierte Fassung nicht rekonstruierbar, der Lauf sagt das ausdrücklich.
+
 **Offen aus diesem Durchgang** — belegt, aber nicht übernommen, weil die Quelle fehlt.
 Jeder Punkt braucht einen Lauf mit freiem Suchkontingent, dann Regel, Übung, Textcheck und
 Spickzettel in einem Zug:

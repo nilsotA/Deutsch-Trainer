@@ -202,6 +202,55 @@ proben.forEach(pr => {
 P.ok("Keine harte Meldung auf den Beispielen der Regeln", !regelAlarm.length,
   regelAlarm.slice(0, 5).join(" · ") + (regelAlarm.length > 5 ? " …(" + regelAlarm.length + ")" : ""));
 
+/* Dritter korrekter Bestand: die Musterformulierungen der Schreibwerkstatt (PHRASES,
+   PAIRS.good) und die Fehlersuchtexte in ihrer korrigierten Fassung. Nils soll die
+   Bausteine abschreiben — ein hartes Muster darf sie nicht anstreichen.
+   Bei den Fehlersuchtexten wird nur eingesetzt, was der Text auch wirklich ersetzt:
+   Texte mit einer mehrteiligen Ersetzung (dem → des Zeitplans) oder einer Anweisung
+   statt einer Form ((Beobachtung statt Etikett)) bleiben außen vor. */
+const PHRASES = daten(w, "PHRASES");
+const PAIRS = daten(w, "PAIRS");
+const vorlagen = [];
+PHRASES.forEach(ph => Object.keys(ph.lv || {}).forEach(stufe =>
+  (ph.lv[stufe] || []).forEach(t => vorlagen.push({ id: "ph:" + ph.id, t: strip(t) }))));
+PAIRS.forEach(pr => vorlagen.push({ id: "pr:" + pr.id, t: strip(pr.good) }));
+let korrOffen = 0;
+KORREKTUR.forEach(t => {
+  if (t.errs.some(e => /\s/.test(String(e.ok)))) { korrOffen++; return; }
+  const toks = String(t.txt).split(/\s+/);
+  t.errs.forEach(e => {
+    const nth = e.nth || 1;
+    let c = 0;
+    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { toks[i] = e.ok; break; }
+  });
+  vorlagen.push({ id: t.id + " korrigiert", t: toks.join(" ") });
+});
+P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 250, vorlagen.length);
+const vorlagenAlarm = [];
+vorlagen.forEach(m => {
+  if (m.t.length < 8) return;
+  const f = daten(w, 'analyse(' + JSON.stringify(m.t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
+  if (f.length) vorlagenAlarm.push(f.join("/") + " in " + m.id + ": „" + m.t.slice(0, 50) + "“");
+});
+P.ok("Keine harte Meldung auf den Musterformulierungen", !vorlagenAlarm.length,
+  vorlagenAlarm.slice(0, 5).join(" · ") + (vorlagenAlarm.length > 5 ? " …(" + vorlagenAlarm.length + ")" : ""));
+if (korrOffen) P.info(korrOffen + " Fehlersuchtexte ersetzen mehrteilig — dort ist die korrigierte Fassung nicht rekonstruierbar");
+
+/* Jede Markierung muss im Text auffindbar sein: korrErrIdx() sucht das Wort als ganzes
+   Token. Findet es nichts, ist der Fehler unanklickbar, zählt aber in der Gesamtzahl —
+   Nils kommt dann nie auf 100 Prozent. */
+const unauffindbar = [];
+KORREKTUR.forEach(t => {
+  const toks = String(t.txt).split(/\s+/);
+  t.errs.forEach(e => {
+    const nth = e.nth || 1;
+    let c = 0;
+    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w) c++;
+    if (c < nth) unauffindbar.push(t.id + ": „" + e.w + "“ (" + nth + ". von " + c + ")");
+  });
+});
+P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauffindbar.join(" · "));
+
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
 const d = w.document;
