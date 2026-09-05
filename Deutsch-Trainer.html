@@ -7400,7 +7400,7 @@ const CHECKS = [
  k:"„trotz“ verlangt den Genitiv: <b>trotz des Regens</b>.",r:"gram-genitiv"},
 {id:"x03",sev:"hart",re:/\bwährend\s+(dem|den|einem)\b/gi,t:"während + Genitiv",
  k:"„während“ verlangt den Genitiv: <b>während der Vorlesung</b>.",r:"gram-genitiv"},
-{id:"x04",sev:"hart",re:/\b(größer|kleiner|besser|schlechter|schneller|langsamer|mehr|weniger|länger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter|weiter)\s+wie\b/gi,
+{id:"x04",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:(?:größer|kleiner|besser|schlechter|schneller|langsamer|weniger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter)|(?<!nicht )(?<!nie )(?<!kaum )(?<!nichts )(?:mehr|länger))\s+wie\b(?!\s+(?:geplant|besprochen|vereinbart|abgesprochen|verabredet|angekündigt|gewohnt|gehabt|folgt|immer|üblich|bisher|zuvor|oben|unten|erwartet|beschrieben|gesagt|erwähnt|versprochen))/gi,
  t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“.",r:"gram-alswie"},
 {id:"x05",sev:"hart",re:/\bals\s+wie\b/gi,t:"„als wie“",
  k:"Nicht standardsprachlich. Es heißt entweder <b>als</b> (ungleich) oder <b>wie</b> (gleich).",r:"gram-alswie"},
@@ -7423,8 +7423,8 @@ const CHECKS = [
 {id:"x18",sev:"pruef",re:/\bseit\s+ihr\b/gi,t:"seit ihr oder seid ihr?",k:"Frage oder Aussage mit „sein“? Dann die Verbform: <b>Seid ihr</b> bereit? Im Zeitsatz bleibt <b>seit</b> richtig: „seit ihr zusammen trainiert“, „seit ihr Knie wieder hält“.",r:"recht-seit"},
 {id:"x19",sev:"pruef",re:/\b(?!(?:Geht|Gibt|Hab|Hat|Ist|Wird|War|Wenn|Wie|Wo|Was|Macht|Kommt|Tut|Lass|Nimm|Sag|Zeig|Pack|Halt|Klappt|Läuft|Passt|Reicht|Sonst|Dann|Jetzt)['’]s\b)[A-ZÄÖÜ][a-zäöüß]+['’]s\s+[A-ZÄÖÜ]/g,t:"Apostroph im Genitiv?",
  k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce) steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Regelwerk und Duden erlauben den Apostroph, wenn er in einem Namen wie einem Ladennamen die Grundform verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“). Bei Auslassungen wie „geht’s“, „gibt’s“, „wenn’s“ ist der Apostroph ohnehin richtig.",r:"recht-apostroph"},
-{id:"x20",sev:"hart",re:/\b(rufe|rufst|ruft|rief|riefst|riefen|angerufen)\s+(dir|mir|ihm|ihr|uns|euch|ihnen|Ihnen)\b/g,
- t:"anrufen + Akkusativ",k:"Überregional verlangt „anrufen“ den Akkusativ: <b>Ich rufe dich an.</b> Der Dativ ist südwestdeutsch und schweizerisch verbreitet — außerhalb fällt er sofort auf.",r:"gram-akkverben"},
+{id:"x20",sev:"pruef",re:/\b(?:[Rr]uf|[Rr]ufe|[Rr]ufst|[Rr]uft|[Rr]ief|[Rr]iefst|[Rr]ieft|[Rr]iefen)(?:\s+(?:du|er|sie|es|wir|Sie))?\s+(?:dir|mir|ihm|ihnen|Ihnen)\b(?=[^.!?]*\ban\b)|\b(?:dir|mir|ihm|ihnen|Ihnen)\s+angerufen\b/g,
+ t:"anrufen + Akkusativ",k:"Überregional verlangt „anrufen“ den Akkusativ: <b>Ich rufe dich an.</b> Der Dativ ist südwestdeutsch und schweizerisch verbreitet — außerhalb fällt er auf, falsch ist er nicht. Bei <i>zurufen</i> und <i>nachrufen</i> steht der Dativ überall richtig. „uns“ und „euch“ sind in beiden Fällen gleich — dort sieht man es der Form nicht an.",r:"gram-akkverben"},
 {id:"x21",sev:"hart",re:/\binteressiert\s+(mir|dir|ihm|uns|euch)\b/g,t:"interessieren + Akkusativ",
  k:"„interessieren“ verlangt den Akkusativ: <b>Das interessiert mich.</b>",r:"gram-akkverben"},
 {id:"x22",sev:"pruef",re:/\bkostet\s+(mir|dir|ihm|uns|euch)\b/g,t:"kosten + Akkusativ?",
@@ -7453,7 +7453,7 @@ const CHECKS = [
  k:"<b>nichtsdestotrotz</b> schreibst du zusammen. Der Duden führt es als umgangssprachlich; in Hausarbeiten nimm <b>dennoch</b>, <b>trotzdem</b> oder <b>nichtsdestoweniger</b>.",r:"getrennt-konj"},
 {id:"x32",sev:"pruef",re:/\b(?:auf|in)\s+(?:gut\s+)?(?:deutsch|englisch|französisch|spanisch|italienisch)\b(?!-)/g,t:"Sprachbezeichnung nach Präposition",
  k:"Ist die Sprache gemeint, steht sie groß: <b>auf Deutsch, in Englisch, auf gut Deutsch</b>. Klein bleibt das Adjektiv vor einem Substantiv oder Partizip: „auf deutsch besetztem Gebiet“.",r:"gross-sprachen"},
-{id:"x26",sev:"hart",re:/\b(?:[Gg]rüsse|[Gg]rüssen|weiss|weisst|heiss|heisst|[Dd]raussen|[Ss]trasse|[Ss]trassen|gross|grosse|grosser|grossen|grösser|[Gg]rösse|[Aa]usser|[Aa]usserdem|[Ff]ussball|fuss|[Ss]pass|[Ss]chliesslich|[Ss]chliessen|schliesst|[Hh]eissen|[Gg]eniessen|regelmässig|gemäss|[Mm]assnahme|[Mm]assnahmen|fleissig|äusserst|[Aa]usserhalb|einigermassen|verhältnismässig)\b/g,t:"ß statt ss",
+{id:"x26",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:[Gg]rüsse|[Gg]rüssen|weiss|weisst|heiss|heisst|[Dd]raussen|[Ss]trasse|[Ss]trassen|gross|grosse|grosser|grossen|grösser|[Gg]rösse|[Aa]usser|[Aa]usserdem|[Ff]ussball|fuss|[Ss]pass|[Ss]chliesslich|[Ss]chliessen|schliesst|[Hh]eissen|[Gg]eniessen|regelmässig|gemäss|[Mm]assnahme|[Mm]assnahmen|fleissig|äusserst|[Aa]usserhalb|einigermassen|verhältnismässig)\b/g,t:"ß statt ss",
  k:"Nach langem Vokal oder Diphthong steht <b>ß</b>: Grüße, weiß, heiß, draußen, Straße, groß, außer, Fußball. In der Schweiz und in Liechtenstein gilt durchgängig ss; in Großbuchstaben steht ohnehin SS (STRASSE).",r:"recht-sz"},
 
 /* ---------- BITTE PRÜFEN ---------- */
@@ -7570,7 +7570,7 @@ const CHECKS_N = [
 {id:"a02",sev:"stil",re:/\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b(?:[^.!?]{0,45}\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b){2}/g,
  t:"Nominalstil-Kette",
  k:"Drei Substantive auf -ung/-heit/-keit dicht beieinander. Löse die Handlung ins Verb auf: „Die Durchführung der Untersuchung erfolgte“ → „Wir untersuchten“.",r:"stil-nominal"},
-{id:"a03",sev:"stil",re:/\b(wurde|wurden)\s+(?:[^.!?]{0,40}?)\bvon\s+(?:dem|der|den|einem|einer|meinen?|unseren?)\b[^.!?]{0,40}?\bge[a-zäöüß]+(t|en)\b/g,
+{id:"a03",sev:"stil",re:/\b(wurde|wurden)\s+(?:[^.!?]{0,40}?)\bvon\s+(?:dem|der|den|einem|einer|meinen?|unseren?)\b[^.!?]{0,40}?\b(?:(?:[a-zäöüß]{2,7}ge|ge)[a-zäöüß]{2,}(?:t|en)|(?:be|er|ver|ent|emp|zer|miss|über|unter)[a-zäöüß]{3,}(?:t|en)|[a-zäöüß]{3,}iert)\b/g,
  t:"Passiv mit genanntem Handelnden",
  k:"Wenn der Handelnde ohnehin dasteht, ist das Aktiv kürzer und klarer: „Der Fragebogen wurde von den Teilnehmenden ausgefüllt“ → „Die Teilnehmenden füllten den Fragebogen aus“.",r:"stil-passiv"},
 {id:"a04",sev:"stil",re:/[A-ZÄÖÜ][^.!?]{230,}[.!?]/g,
@@ -7587,7 +7587,7 @@ const CHECKS_N = [
  k:"Die Entwertung vorweg färbt auf die Antwort ab. Eine präzise Frage zeigt, dass du bis zu einem bestimmten Punkt gekommen bist.",r:"form-nachfragen"},
 
 /* ---------- gesprochen statt geschrieben ---------- */
-{id:"a08",sev:"pruef",re:/\b(mit|an|auf|über|von|nach|aus|bei|zu|um|durch|gegen|für|in)\s+was\b(?!\s+für)/gi,
+{id:"a08",sev:"pruef",re:/(?<![\wäöüßÄÖÜ])(mit|an|auf|über|von|nach|aus|bei|zu|um|durch|gegen|für|in)\s+was\b(?!\s+für)/gi,
  t:"Fragewort mit wo(r)-",
  k:"Bei Sachen bildet man das Fragewort mit <b>wo(r)-</b>: womit, woran, worauf, wovon, worüber. „Mit was“ ist gesprochen geläufig, im Text besser „womit“.",r:"satz-frage"},
 
@@ -7626,7 +7626,7 @@ function analyse(txt){
   const avg = sl.length ? Math.round(sl.reduce((a,b)=>a+b,0)/sl.length) : 0;
   const fuell = words.filter(x=>FUELL.includes(x.toLowerCase().replace(/[.,;:!?]/g,""))).length;
   const nom = (txt.match(/[a-zäöü]{3,}(ung|heit|keit|nis|ion)\b/gi)||[]).length;
-  const pas = sents.filter(s=>/\b(wurde|wurden|wird|werden)\b[^.!?]*\b(ge[a-zäöüß]+t|ge[a-zäöüß]+en|[a-zäöüß]+iert)\b/i.test(s)).length;
+  const pas = sents.filter(s=>/\b(wurde|wurden|wird|werden)\b[^.!?]*\b((?:[a-zäöüß]{2,7}ge|ge)[a-zäöüß]{2,}(?:t|en)|(?:be|er|ver|ent|emp|zer|miss|über|unter)[a-zäöüß]{3,}(?:t|en)|[a-zäöüß]{3,}iert)\b/i.test(s)).length;
 
   return {finds, m:{words:words.length, sents:sents.length, avg, lang, fuell, nom, pas,
     fuellQ: words.length ? Math.round(fuell/words.length*1000)/10 : 0,

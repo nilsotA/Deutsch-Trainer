@@ -139,6 +139,55 @@ P.ok("Prüfmuster ohne Steuerzeichen (" + muster.length + ")", !kaputt.length, k
 const stumm = daten(w, 'CHECKS_ALL.filter(c=>{try{return "Probe".match(c.re)===undefined}catch(e){return true}}).map(c=>c.id)');
 P.ok("Alle Prüfmuster ausführbar", !stumm.length, stumm.join(","));
 
+/* Fehlerklasse „tote Alternative“: \b ist in JavaScript an [A-Za-z0-9_] gebunden —
+   ä, ö, ü und ß zählen dort nicht als Wortzeichen. Steht \b direkt vor „älter“ oder
+   direkt hinter einem Wort auf „ß“, ist die Grenze nie erfüllt: die Alternative kann
+   nicht mehr treffen, ohne dass die Syntax bricht oder ein Lauf rot wird. Genau so
+   waren „älter“ und „öfter“ in x04, „äusserst“ in x26 und „über“ in a08 stumm. */
+function altsNachGrenze(src, i) {
+  let j = i;
+  if (src[j] !== "(") return null;
+  j++;
+  if (src.startsWith("?:", j)) j += 2;
+  else if (src.startsWith("?<", j) || src.startsWith("?=", j) || src.startsWith("?!", j)) return null;
+  let tiefe = 1, klasse = false, teil = "";
+  const alts = [];
+  for (; j < src.length; j++) {
+    const ch = src[j];
+    if (src[j - 1] === "\\") { teil += ch; continue; }
+    if (klasse) { teil += ch; if (ch === "]") klasse = false; continue; }
+    if (ch === "[") { klasse = true; teil += ch; continue; }
+    if (ch === "(") { tiefe++; teil += ch; continue; }
+    if (ch === ")") { tiefe--; if (!tiefe) { alts.push(teil); break; } teil += ch; continue; }
+    if (ch === "|" && tiefe === 1) { alts.push(teil); teil = ""; continue; }
+    teil += ch;
+  }
+  return alts;
+}
+const NICHTASCII = /[^\x00-\x7F]/;
+const toteGrenzen = c => {
+  const src = c.re, raus = [];
+  for (let i = 0; i + 1 < src.length; i++) {
+    if (src[i] !== "\\" || src[i + 1] !== "b") continue;
+    if (i > 0 && src[i - 1] === "\\") continue;
+    const nach = src.slice(i + 2);
+    if (NICHTASCII.test(nach[0] || "")) raus.push("vor „" + nach.slice(0, 12) + "“");
+    (altsNachGrenze(src, i + 2) || []).forEach(a => {
+      if (NICHTASCII.test(a[0] || "")) raus.push("vor Alternative „" + a.slice(0, 14) + "“");
+    });
+    if (NICHTASCII.test(src.slice(0, i).slice(-1))) raus.push("hinter „" + src.slice(0, i).slice(-12) + "“");
+  }
+  return raus;
+};
+/* Positivprobe und Gegenprobe: der Erkenner muss anschlagen und darf sich beruhigen lassen. */
+P.ok("Der Grenzen-Erkenner findet ein bekanntes totes Muster",
+  toteGrenzen({ re: String(/\b(alt|älter)\s+wie\b/g) }).length > 0, "Positivprobe blieb stumm");
+P.ok("… und meldet das reparierte Muster nicht mehr",
+  toteGrenzen({ re: String(/(?<![\wäöüß])(alt|älter)\s+wie\b/g) }).length === 0, "Gegenprobe schlug an");
+const stumpf = [];
+muster.forEach(c => toteGrenzen(c).forEach(x => stumpf.push(c.id + ": \\b " + x)));
+P.ok("Kein \\b vor oder hinter Umlaut und ß (tote Alternative)", !stumpf.length, stumpf.join(" · "));
+
 /* Der eigene korrekte Bestand darf keine harten Meldungen auslösen.
    Fehlerklasse „zitierte Falschform“: Manche richtigen Antworten benennen eine falsche
    Form, statt selbst eine korrekte zu sein („Ich rufe dir an“ statt „dich“). Steht im
