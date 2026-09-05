@@ -177,7 +177,11 @@ const RB = daten(w, "RULES_ALL.map(r=>({id:r.id,b:r.b}))")
   .concat(daten(w, "SATZ.map(x=>({id:x.id,b:x.b}))"))
   .concat(daten(w, "TABLES.map(x=>({id:x.id,b:x.b}))"));
 const ohneNope = h => String(h).replace(/<(span|div) class="nope">[\s\S]*?<\/\1>/g, " ");
-const GEGEN = /→|\bnicht\b|\bstatt\b|\bfalsch\b/i;
+/* Gegenbeispiel-Marker: der Pfeil, und „nicht/statt/falsch“ nur dort, wo sie als
+   Kontrastformel stehen — in Klammern, in Anführungszeichen oder mit Doppelpunkt.
+   Ein schlichtes „nicht“ im Satz („Du brauchst nicht zu kommen“) ist eine normale
+   Verneinung; wer danach ausschließt, verliert 49 korrekte Beispiele stillschweigend. */
+const GEGEN = /→|[(„]\s*(?:nicht|statt|falsch)\b|\b(?:nicht|statt|falsch):/i;
 const proben = [];
 RB.forEach(r => {
   const re = /<(span|div) class="(ok|ex)">([\s\S]*?)<\/\1>/g;
@@ -193,7 +197,7 @@ RB.forEach(r => {
    sonst misst die Prüfung nichts (siehe CLAUDE.md, Abschnitt 6). */
 const probeAn = daten(w, 'analyse("Das ist ein Standart im Verein.").finds.filter(f=>f.c.sev==="hart").length');
 P.ok("Die Beispielprüfung schlägt bei einem echten Fehler an", probeAn > 0, "Positivprobe blieb stumm");
-P.ok("Genug Beispiele in den Regeln gefunden (" + proben.length + ")", proben.length >= 300, proben.length);
+P.ok("Genug Beispiele in den Regeln gefunden (" + proben.length + ")", proben.length >= 450, proben.length);
 const regelAlarm = [];
 proben.forEach(pr => {
   const f = daten(w, 'analyse(' + JSON.stringify(pr.t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
