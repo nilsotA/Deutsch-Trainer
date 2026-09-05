@@ -35,14 +35,14 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 336 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 376 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
-| `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 85 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `KORREKTUR` | 12 Fehlersuchtexte / 86 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 95 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
@@ -222,6 +222,11 @@ node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit
 ```
 
 Jeder Lauf endet mit „Alles bestanden.“ oder einer Fehlerliste und Exitcode 1.
+
+**Die Zahlen in dieser Datei prüft `tests/suite.js` mit.** Wer Übungen, Wortkarten,
+Regeln, Fallkarten, Prüfmuster oder Fehlersuchtexte hinzufügt, ändert die Tabelle in
+Abschnitt 2 mit — sonst schlägt der Lauf fehl. (Die Zahl der Übungen stand hier lange
+falsch: 331 statt 371.)
 
 **Neue Prüfung statt Einzelfix.** Wenn ein Fehler gefunden wird, erst die *Fehlerklasse*
 benennen, dann eine Prüfung dafür schreiben, dann alle Fundstellen beheben. Die Prüfung

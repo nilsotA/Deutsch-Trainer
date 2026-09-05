@@ -22,6 +22,27 @@ P.ok("Aufgaben-IDs eindeutig (" + ALL.length + ")", doppelt === 0, doppelt);
 const rids = new Set(RA.map(r => r.id));
 P.ok("Regel-IDs eindeutig (" + RA.length + ")", rids.size === RA.length);
 
+/* Fehlerklasse „veraltete Zahl in der Anleitung“: Die Tabelle in CLAUDE.md nannte
+   331 Übungen, tatsächlich waren es 371. Wer sich beim Ergänzen daran orientiert,
+   rechnet mit falschen Größen. Die Zahlen werden hier gegen die App geprüft. */
+const fs = require("fs");
+const path = require("path");
+const doku = fs.readFileSync(path.join(__dirname, "..", "CLAUDE.md"), "utf8");
+const zahl = re => { const m = doku.match(re); return m ? Number(m[1]) : null; };
+const dokuZahlen = [
+  ["Übungen", zahl(/\|\s*`EX_A … EX_E` → `ALL`\s*\|\s*(\d+) Übungen/), daten(w, "ALL.length")],
+  ["Wortkarten", zahl(/\|\s*`WORDS`\s*\|\s*(\d+) Wortschatzkarten/), daten(w, "WORDS.length")],
+  ["Regeln", zahl(/→ `RULES_ALL`\s*\|\s*(\d+) Regeln/), daten(w, "RULES_ALL.length")],
+  ["Fallkarten", zahl(/\|\s*`CASEREF`\s*\|\s*(\d+) Fallkarten/), daten(w, "CASEREF.length")],
+  ["Prüfmuster", zahl(/→ `CHECKS_ALL`\s*\|\s*(\d+) Prüfmuster/), daten(w, "CHECKS_ALL.length")],
+  ["Fehlersuchtexte", zahl(/\|\s*`KORREKTUR`\s*\|\s*(\d+) Fehlersuchtexte/), daten(w, "KORREKTUR.length")],
+  ["Fehlermarkierungen", zahl(/Fehlersuchtexte \/ (\d+) Fehler/), daten(w, "KORREKTUR.reduce((a,t)=>a+t.errs.length,0)")],
+  ["Gesamtbestand", zahl(/Gesamtbestand \((\d+) Karten/), daten(w, "alleSchluessel().length")],
+];
+const dokuSchief = dokuZahlen.filter(([, dok, app]) => dok !== app)
+  .map(([was, d, a]) => was + ": CLAUDE.md " + d + ", App " + a);
+P.ok("Die Zahlen in CLAUDE.md stimmen mit der App überein", !dokuSchief.length, dokuSchief.join(" · "));
+
 /* Fehlerklasse „doppelte Prüfmuster-Kennung“: Zwei Muster mit derselben id sind in der
    Ansicht nicht auseinanderzuhalten, und wer nach der id filtert, sieht das falsche. */
 const CHECKS = daten(w, "CHECKS_ALL.map(c => ({id: c.id, sev: c.sev}))");
