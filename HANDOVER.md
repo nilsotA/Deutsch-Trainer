@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 336 |
+| Übungen | 376 |
 | Regeln | 117 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 85 |
-| Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~600 KB, eine Datei, kein Build |
+| Prüfmuster im Textcheck | 95 |
+| Fehlersuchtexte | 12 mit 86 markierten Fehlern |
+| Dateigröße | ~660 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,50 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Dritter Durchgang: Rechtschreibung, Groß- und Kleinschreibung, Getrennt- und
+Zusammenschreibung** (05.09.2026). Gleiches Vorgehen wie bei der Zeichensetzung: zwei
+unabhängige Belegagenten je Regel, Zusammenführung, eigene Nachprüfung. Belegt sind
+`gross-subst`, `gross-zeit`, `gross-wendung`, `gross-sprachen`, `getrennt-praep`,
+`getrennt-verb`, `getrennt-konj`, `recht-dass`, `recht-seit`, `recht-wider`, `recht-sz`,
+`recht-apostroph`, `recht-bindestrich`. Die schwersten Funde:
+
+- **Fünf harte Textcheck-Muster meldeten korrekte Sätze als Fehler.** `x17` beanstandete
+  „Ihr seid dem Trainer dankbar“, „Ihr seid heute dran“, „Seid heute pünktlich“ — die
+  normale Anrede an eine Mannschaft. `x18` beanstandete „seit ihr zusammen trainiert“ und
+  fand die eigentliche Fehlerform „Seit ihr bereit?“ wegen des fehlenden i-Flags nicht.
+  `x16` beanstandete wegen des i-Flags das korrekte Verb „wieder erwarten“. `x26` meldete
+  „KÖLNER STRASSE“, „GROSSE PAUSE“, „Frau Weiss“ und „Herr Gross“, `x19` die Auslassung
+  „Geht’s Peter gut?“ als Genitiv-Apostroph. Alle behoben und lokal nachgerechnet.
+- **Die Fehlersuche verlangte einen Fehler.** Im Elternbrief war „etwas Kleines zu essen“
+  als „zu Essen“ markiert. „zu essen“ ist ein Infinitiv mit „zu“ und bleibt klein (Duden:
+  „Etwas zu essen brauchen wir am nötigsten“). Markierung gestrichen, daher 86 statt 87
+  Fehler.
+- **Zwei Sachfehler in den Regeln:** `gross-wendung` führte „Er macht mir angst“ als klein
+  mit groß als Nebenform — Regelwerk und Duden kennen nur „jemandem Angst machen“, klein
+  ist auf sein/bleiben/werden beschränkt. `gross-sprachen` gab der Kleinschreibung die
+  Bedeutung „auf deutsche Art“ statt „in deutscher Sprache“.
+- **`recht-sz` war zu grob:** Die Regel hing nur an der Vokallänge. Sie gilt aber nur für
+  das scharfe s — „reisen“, „Hase“, „lesen“ haben langen Vokal und ein einfaches s. Dazu
+  fehlten die kurzen Ausnahmen (das, was, bis, Bus) und die Versalienregel (SS, seit 2017
+  auch ẞ).
+- **`recht-bindestrich` fehlten beide Pflichtgruppen:** Einzelbuchstaben und Abkürzungen
+  (E-Mail, Kfz-Werkstatt) und die Durchkopplung (E-Mail-Adresse, Erste-Hilfe-Kurs).
+- **Vierzehn Übungen hatten einen Ablenker, der selbst zulässig war** (Grundsatz 2): g05
+  (morgen Früh), g08, g09 (das Radfahren), g11 (recht/Recht haben), g17, t01 (sodass),
+  t04 (kennenlernen), t05, t06, t09, t14, t19, r24 (Email als Schmelzüberzug), r25
+  (Knowhow). Umgebaut nach dem Hausmuster „Nur: …“ oder mit Satzkontext; nur g05 brauchte
+  einen Eintrag in `NEU_GELERNT`.
+- **Unterwegs nicht lösbar:** „Seid ihr bereit?“ und „Seit ihr bereit?“ werden identisch
+  vorgelesen, ebenso „wider/wieder Erwarten“. Neu sind `KLANGPAAR` und `klangHinweise()`
+  — der Hörhinweis nennt jetzt die Schreibung („seid mit d am Ende“). `tests/inhalt.js`
+  prüft diese Fehlerklasse dauerhaft.
+- **Zehn neue Prüfmuster:** x27 (heute abend), x28 (tut mir Leid), x29 (in bezug auf),
+  x30 (wieviel, zuviel, irgend etwas), x31 (nichts desto trotz), x32 (auf deutsch),
+  x33 (erwiedern), x34 (widerholen), x35 (Plural mit Apostroph), y12 (vor Kurzem als
+  Variantenhinweis). Alle gegen den sauberen Bestand geprüft.
+- **Die Zahlen in dieser Übergabe waren veraltet:** 331 statt 371 Übungen, 116 statt 155
+  Wortkarten. `tests/suite.js` prüft die Tabelle in CLAUDE.md jetzt gegen die App.
 
 **Zweiter Durchgang Zeichensetzung: sieben weitere Regeln belegt** (04.09.2026, abends).
 Vorgehen: Für jede Regel zwei unabhängige Belegagenten (Faktenprüfung; Absolutheit,
@@ -282,7 +326,14 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-1. **Restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
+1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
+   Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.
+   Offen sind die 23 Grammatikregeln (`gram-*`), die 14 Satzbauregeln (`satz-*`), die
+   17 Stilregeln (`stil-*`) und die 26 Formulierungsregeln (`form-*`) — bei den letzten
+   beiden Gruppen geht es weniger um Belege als um die Frage, ob Empfehlungen als
+   Empfehlungen gekennzeichnet sind (Grundsatz 3). Vorgehen wie gehabt.
+
+2. **Aus der alten Liste: restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
    Doppelpunkt und Bis-Strich sind erledigt (siehe „Zuletzt geändert“). Offen:
    `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`, `komma-vergleich`,
    `komma-adjektive`, `komma-brief` und die übrigen `z-`-Regeln gegen das Regelwerk
