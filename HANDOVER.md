@@ -61,9 +61,13 @@ bestimmt und sollte auch weiter der Maßstab sein:
 **Zweiter Durchgang Zeichensetzung: sieben weitere Regeln belegt** (04.09.2026, abends).
 Vorgehen: Für jede Regel zwei unabhängige Belegagenten (Faktenprüfung; Absolutheit,
 Änderungen 2024, Widersprüche, Ablenker), Befunde zusammengeführt, die Kernaussagen
-zusätzlich selbst per Suche geprüft, dann umgesetzt. Die gegnerische Prüfung der Funde
-(drei Prüfer je Regel) lief beim Schreiben dieser Zeilen noch — Abweichungen werden
-nachgetragen. Belegt sind jetzt `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`,
+zusätzlich selbst per Suche geprüft, dann umgesetzt. Danach drei gegnerische Prüfer je
+Regel (Verteidiger des alten Textes, Prüfer des Ersatztextes, Quellenprüfer):
+209 Urteile, 185 halten. Die 24 übrigen sind fast alle „bereits umgesetzt“ (Verteidiger,
+die gegen den schon geänderten Dateistand urteilten) oder „unbelegt, nicht übernehmen“
+(APA-Semikolon, Paragraphenzählung 2024, Gliederungsziffern „1.)“); kein Fund wurde
+inhaltlich zurückgewiesen. Die Präzisierungen der Prüfer sind eingearbeitet, die
+Urteile liegen im Workflow-Journal der Sitzung. Belegt sind jetzt `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`,
 `komma-vergleich`, `komma-adjektive`, `komma-brief`, `z-anfuehrung`. Die Einzelheiten
 stehen in den Commit-Nachrichten; die wichtigsten Funde:
 
@@ -171,7 +175,9 @@ diesen Seiten und über die Zusammenfassung der Änderungen des Rechtschreibrats
 Nicht geändert: `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`, `komma-vergleich`,
 `komma-adjektive`, `komma-brief`, `z-anfuehrung`, `z-klammern`, `z-auslassung`, `z-frage`,
 `z-schraeg`, `z-semikolon` — nicht einzeln belegt, nur gelesen; nichts Auffälliges.
-Die 2024 neu nummerierten Paragraphen sind in der App nur bei `komma-infinitiv` zitiert.
+Die 2024 neu nummerierten Paragraphen sind in der App nur bei `komma-infinitiv` zitiert;
+alle anderen Regeln nennen bewusst keine Nummern, weil die Zählung der Fassung 2024 dort
+nicht verifiziert werden konnte (ein Prüfer hatte den Volltext der Fassung 2018 lokal).
 
 **Achtung — zwei Sitzungen im selben Ordner** (29.08.2026). Eine zweite Claude-Code-Sitzung
 hat den alten Cowork-Ausgabeordner als „Stand aus vorherigem Chat“ über die Arbeit dieser
