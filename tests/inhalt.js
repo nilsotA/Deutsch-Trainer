@@ -119,17 +119,22 @@ P.ok("Keine unlesbaren Sonderzeichen im Sprechtext", restZeichen.size === 0, [..
 const ZEICHEN = { ";": "Semikolon", ":": "Doppelpunkt", "?": "Fragezeichen", "!": "Ausrufezeichen" };
 const flach = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 const stummeZeichen = [];
+let zeichenPaare = 0;
 ALL.filter(i => i.t !== "fill").forEach(i => {
   i.o.forEach((a, k) => i.o.forEach((b, m) => {
     if (m <= k || flach(a) !== flach(b)) return;
     Object.keys(ZEICHEN).forEach(z => {
       if (a.includes(z) === b.includes(z)) return;
+      zeichenPaare++;
       const mit = a.includes(z) ? a : b;
       const hinweis = w.eval("hoerHinweis(" + JSON.stringify(mit) + "," + JSON.stringify(i.o) + ")");
       if (!hinweis.includes(ZEICHEN[z])) stummeZeichen.push(i.id + " (" + ZEICHEN[z] + ")");
     });
   }));
 });
+/* Die Prüfung sieht sich nur wenige Paare an. Fällt der Filter auf null, wäre sie stumm
+   grün — deshalb die Untergrenze und die sichtbare Zahl. */
+P.ok("Die Zeichenprüfung findet überhaupt Paare (" + zeichenPaare + ")", zeichenPaare >= 1, "kein Paar geprüft");
 P.ok("Der Hörhinweis nennt das unterscheidende Zeichen", !stummeZeichen.length, stummeZeichen.join(", "));
 
 /* Fehlerklasse „gleich klingende Wörter ohne Hinweis“: „Seid ihr bereit?“ und „Seit ihr
@@ -138,6 +143,7 @@ P.ok("Der Hörhinweis nennt das unterscheidende Zeichen", !stummeZeichen.length,
 const PAARE = daten(w, "Object.keys(KLANGPAAR)");
 const wortliste = t => String(t).toLowerCase().replace(/[^\p{L}]+/gu, " ").trim().split(/\s+/);
 const stummePaare = [];
+let klangPaare = 0;
 ALL.filter(i => i.t !== "fill").forEach(i => {
   i.o.forEach((a, k) => i.o.forEach((b, m) => {
     if (m <= k) return;
@@ -145,10 +151,12 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
     const wa = wortliste(ohneTags(a)), wb = wortliste(ohneTags(b));
     const treffer = wa.some((x, n) => PAARE.includes(x) && wb[n] && wb[n] !== x && PAARE.includes(wb[n]));
     if (!treffer) return;
+    klangPaare++;
     const hinweis = w.eval("hoerHinweis(" + JSON.stringify(a) + "," + JSON.stringify(i.o) + ")");
     if (!hinweis.trim()) stummePaare.push(i.id);
   }));
 });
+P.ok("Die Klangprüfung findet überhaupt Paare (" + klangPaare + ")", klangPaare >= 1, "kein Paar geprüft");
 P.ok("Gleich klingende Wörter bekommen einen Hörhinweis", !stummePaare.length, stummePaare.join(", "));
 
 /* Fehlerklasse „Ziffer gegen ausgeschriebene Zahl“: „24 Personen nahmen teil“ und
