@@ -127,6 +127,20 @@ Aktuell stimmt alles. Zwölf Fehlersuchtexte ersetzen mehrteilig („dem → des
 tragen statt einer Form eine Anweisung („(Beobachtung statt Etikett)“); dort ist die
 korrigierte Fassung nicht rekonstruierbar, der Lauf sagt das ausdrücklich.
 
+Nach dem Rendern im Browser noch einmal nachgezogen — zwei Stellen, an denen ich beim
+Umformulieren selbst zu weit gegangen war beziehungsweise eine Liste stehen ließ, die die
+App an anderer Stelle nicht deckt:
+
+- `n-gliederung`: „Nur wo Zahlen in einer Tabelle untereinanderstehen, gliederst du sie mit“
+  wäre eine neue Behauptung gewesen und hätte „1.000“ zur Falschform gemacht. Der Absatz
+  sagt jetzt „bleiben meist ungegliedert“ und nennt die gegliederte Form als das, was einem
+  in Spalten begegnet.
+- `stil-absolut` führte zwölf Adjektive als nicht steigerbar auf — die beiden Übungen `r05`
+  und `s17` nennen aber nur sieben davon, und das harte Muster `x07` erfasst fünf. Die Regel
+  war also strenger als alles, was die App selbst prüft und lehrt. Die Liste ist auf die enge,
+  sichere Auswahl zusammengezogen, „voll“, „leer“ und „rund“ stehen jetzt als das da, was sie
+  sind: in festen Wendungen steigerbar.
+
 **Offen aus diesem Durchgang** — belegt, aber nicht übernommen, weil die Quelle fehlt.
 Jeder Punkt braucht einen Lauf mit freiem Suchkontingent, dann Regel, Übung, Textcheck und
 Spickzettel in einem Zug:
