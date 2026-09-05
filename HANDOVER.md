@@ -58,6 +58,86 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vierter Durchgang — Zahlen, Uhrzeit, Datum (05.09.2026).** Neun Regeln waren aus dem
+Workflow des dritten Durchgangs übrig geblieben (das Modellkontingent lief mitten im Lauf
+aus). Sieben davon sind einzeln geprüft worden. **Wichtig für die nächste Sitzung:** Das
+Websuchbudget der Sitzung (200 Anfragen) und danach das Modellkontingent waren erschöpft,
+bevor die Prüfung fertig war. Übernommen wurden deshalb **nur Befunde, die ohne Quelle
+entscheidbar sind** — Widersprüche im Bestand selbst und Aussagen, die zurückgenommen statt
+neu behauptet werden. Alles, was eine neue Tatsachenbehauptung gewesen wäre, steht unten
+unter „Offen“ und wartet auf einen Lauf mit freiem Suchkontingent.
+
+Geändert:
+
+- **`n-uhrzeit`.** `q12` markierte „um 8:30 Uhr“ als falsch, während die eigene Erklärung
+  zwei Zeilen weiter „Beides ist korrekt“ sagte. Die Frage nennt jetzt die Quelle
+  („Welche Uhrzeitschreibung folgt dem Duden?“), die richtige Antwort ist unverändert.
+  `q13` ebenso: „um 8.00 Uhr“ ist keine Falschform, die Frage geht jetzt auf die knappere
+  Form. Die Regelkarte gab für Tabellen „08:30“ an, `q13` für dieselben Tabellen „08.00“ —
+  beide Formen stehen jetzt nebeneinander.
+- **`n-gliederung`.** „1000 oder 1.000“ stand als erstes Beispiel direkt unter dem Satz
+  „Ab fünf Stellen wird gegliedert“. Vierstellige Zahlen haben jetzt einen eigenen Absatz.
+  „Telefonnummern werden nicht gegliedert“ und „Mio. und Mrd. nur in Tabellen“ waren nicht
+  belegbar und sind gestrichen beziehungsweise als Empfehlung gekennzeichnet. Die Zuschreibung
+  „Duden = Punkt, DIN 5008 = schmales Leerzeichen“ ließ sich in keine Richtung belegen und
+  nennt jetzt beide Zeichen ohne Quelle. `q26` wertete mit „1.500.000“ eine korrekt
+  geschriebene Zahl als Ablenker ab — die Frage fragt jetzt nach der Lesbarkeit.
+- **`n-ziffern`.** `q03` stellte „Vierundzwanzig Personen nahmen teil.“ gegen
+  „24 Personen nahmen teil.“ — **unterwegs klingen beide gleich**, die Sprachausgabe liest
+  „24“ als „vierundzwanzig“. Dazu ist der Ablenker keine Falschform. Die Aufgabe fragt jetzt
+  nach der Empfehlung und hat drei hörbar verschiedene Optionen. Die Absoluta „Immer Ziffern“
+  und „Immer Wörter“ sind abgeschwächt, `q02` sagt jetzt, woran die Ziffer wirklich hängt
+  (abgekürzte Einheit).
+- **`x24`** (hart, „in 2026“) meldete auch **korrekte Sätze**: „Das Lager fand in 2000 Metern
+  Höhe statt“ schlug an. Das Muster schließt jetzt folgende Einheiten und Substantive aus,
+  erkennt dafür den Satzanfang („In 1995 …“) und steht auf `pruef` — die Regel dahinter ist
+  eine Stilregel, und Grundsatz 3 sagt, Stil ist keine Regel.
+
+Zwei neue Prüfungen, beide nach dem Muster „Fehlerklasse statt Einzelfix“:
+
+- `tests/suite.js`: **Die Beispiele der Regeln laufen jetzt gegen die harten Muster.** Bisher
+  wurden nur die richtigen Antworten der Übungen geprüft; die 477 Beispiele aus
+  `class="ok"` und `class="ex"` in Regeln, Satzbaukarten und Tabellen blieben außen vor.
+  Gegenbeispiele (`class="nope"`, Zeilen mit Pfeil, „nicht“, „statt“, „falsch“) sind
+  ausgenommen. Dazu eine Positivprobe und eine Untergrenze für die Zahl der Beispiele,
+  damit die Prüfung nicht stumm grün wird.
+- `tests/inhalt.js`: **Ziffer gegen ausgeschriebene Zahl.** Unterscheiden sich zwei Optionen
+  nur darin, klingen sie beim Vorlesen gleich. Auch hier eine Positivprobe mit dem Paar aus
+  `q03`, das die Prüfung nötig gemacht hat.
+
+**Offen aus diesem Durchgang** — belegt, aber nicht übernommen, weil die Quelle fehlt.
+Jeder Punkt braucht einen Lauf mit freiem Suchkontingent, dann Regel, Übung, Textcheck und
+Spickzettel in einem Zug:
+
+- `n-gliederung`: Wie schreibt die DIN 5008 Telefonnummern (Vorwahl, Leerzeichen, Rufnummer,
+  Durchwahl mit Bindestrich)? Und sieht sie bei Geldbeträgen wirklich den Punkt vor? Beides
+  wäre eine Ergänzung, die die App im Alltag braucht.
+- `n-uhrzeit`: Gilt die DIN-Schreibung nur für Tabellen oder für Briefe und Mails insgesamt?
+  Fehlen `h` und `min` für Zeitmessungen im Sport?
+- `n-ziffern`: Der Duden soll die Zwölf-Regel für überholt erklären und stattdessen die
+  Silbenzahl empfehlen. Wenn das stimmt, gehört es in die Regel.
+- `n-datum`: Die führende Null (05.05.2026) ist eine DIN-Vorgabe, keine Rechtschreibregel —
+  die App trennt das an den Nachbarstellen sauber, hier nicht. Dazu fehlen beim schließenden
+  Komma die zwei Grenzen, die `komma-brief` schon kennt.
+- `n-abkuerzung`: „Mit Punkt stehen Abkürzungen, die man als volles Wort ausspricht“ ist zu
+  glatt (RücklVO, GmbH). `q20` deckt nur den Aussagesatz ab — nach „a. D.?“ bleibt das
+  Fragezeichen. `q25` („im Fließtext ausschreiben, in Klammern abkürzen“) ist unbelegt, damit
+  ist der Ablenker nicht sicher falsch. `t02` fehlen `Z.B.`, `D.h.`, `u.U.`, `v.a.`, `z.Hd.`
+  — `e.V.` bewusst nicht, weil Vereinsnamen so eingetragen sind.
+- `n-quellen`: „a. a. O. ist heute unüblich“ ist zu absolut. Bei Gliederungsziffern fehlt das
+  System ohne Schlusspunkt (2.1 Stichprobe). „ebd.“ meint auch dieselbe Seite. `t11` kennt
+  nur fünf der acht Kürzel, die die Regel selbst aufführt.
+- `recht-verwechsel`: Zwei Ablenker sind womöglich zulässig — „Sie war scheinbar krank“
+  (`r11`) und „Sie ist zumindest 18“ (`m21`). Beide würden die richtige Antwort ändern,
+  brauchen also einen `NEU_GELERNT`-Eintrag. Die Regelzeile zu „dasselbe / das gleiche“
+  widerspricht der eigenen Wortkarte, die die Grenze schon als verwischt beschreibt.
+- `recht-klassiker` und `n-einheiten` sind gar nicht erst geprüft worden.
+- Vorbereitet liegt außerdem die Faktenlage der `gram-*`-Regeln: Beim Durchsehen fielen
+  `gram-praepakk` („immer den Akkusativ — ohne Ausnahme“, aber `entlang` steht vorangestellt
+  mit Dativ oder Genitiv) und `gram-praepdat` („immer den Dativ“, aber `außer Landes`,
+  schwankendes `ab`) auf. Beides ist **nicht** geprüft und **nicht** geändert — nur notiert.
+
+
 **Dritter Durchgang: Rechtschreibung, Groß- und Kleinschreibung, Getrennt- und
 Zusammenschreibung** (05.09.2026). Gleiches Vorgehen wie bei der Zeichensetzung: zwei
 unabhängige Belegagenten je Regel, Zusammenführung, eigene Nachprüfung. Belegt sind
@@ -264,7 +344,7 @@ schwächer“ — also gibt es keinen sicher falschen Ablenker.
 
 **Retentionszahl im Fortschritt** (29.08.2026). Ganz oben in der Übersicht stehen jetzt
 drei Zahlen statt nur XP: **sitzt sicher · im Aufbau · noch nicht dran**, dazu ein
-Stapelbalken über den ganzen Bestand von 652 Karten.
+Stapelbalken über den ganzen Bestand (damals 652, heute 696 Karten).
 
 Sicher heißt Fach 4 oder 5. Das ist keine willkürliche Grenze: Eine falsche Antwort setzt
 eine Karte auf Fach 1 zurück, wer in Fach 4 steht, hat also mindestens dreimal nacheinander
@@ -340,10 +420,10 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    von 2024 lesen — die Kommaregeln sind dort neu nummeriert, und „Komma bei Nebensätzen
    mit und/oder“ könnte sich verschoben haben. Vorgehen wie gehabt: erst belegen, dann
    Regel, Übung, Fallkarte und Textcheck angleichen, dann „Stand der Prüfung“ nachziehen.
-2. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
+3. **Textcheck weiter schärfen.** Trefferquote im eigenen Fehlerkorpus ist gut,
    Fehlalarme auf sauberem Text bei null. Weitere Muster sind möglich, aber jedes
    neue Muster muss gegen sauberen Text geprüft werden.
-3. **Erledigt (05.09.2026): 39 neue Wortkarten, jetzt 155.** Vier Sammler mit
+4. **Erledigt (05.09.2026): 39 neue Wortkarten, jetzt 155.** Vier Sammler mit
    verschiedenen Blickwinkeln (Wissenschaftssprache, Verwechslungspaare, präzise
    Wörter statt Allerweltsvokabeln, Urteilsadjektive) haben 48 Karten mit Duden- oder
    DWDS-Beleg vorgeschlagen; je Sammlung haben zwei Prüfer (Bedeutung und Quelle;
@@ -357,7 +437,7 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    resümieren, erwidern, aufweisen, hinreichend, mutmaßlich, vertretbar, allenfalls.
    Weitere Kandidaten am besten aus Nils' eigenen Texten; die Sammler-Prompts stehen
    im Workflow-Skript `wortschatz-erweitern` der Sitzung.
-4. **Erledigt (04.09.2026): die zehn offenen Fassungen sind maschinell geprüft.** Die
+5. **Erledigt (04.09.2026): die zehn offenen Fassungen sind maschinell geprüft.** Die
    Formentabelle kennt jetzt die artikellosen Adjektivformen der Karten (`nächsten`,
    `besseres`, `angefangene` …, stark gebeugt, mit Kommentar zur Mehrdeutigkeit von „-en“)
    und eine zweite Tabelle `PRONOMEN` (er, sie, es, wir, ihr), die nur in `fallform.js`

@@ -228,6 +228,13 @@ Regeln, Fallkarten, Prüfmuster oder Fehlersuchtexte hinzufügt, ändert die Tab
 Abschnitt 2 mit — sonst schlägt der Lauf fehl. (Die Zahl der Übungen stand hier lange
 falsch: 331 statt 371.)
 
+**Zwei Prüfungen sichern die häufigsten Inhaltsfehler ab.** `tests/suite.js` lässt alle
+Beispiele der Regeln (`class="ok"`, `class="ex"`) gegen die harten Textcheck-Muster laufen —
+ein hartes Muster darf nicht melden, was die App selbst als richtig zeigt. `tests/inhalt.js`
+prüft zusätzlich, dass sich zwei Optionen nicht nur in Ziffer gegen ausgeschriebene Zahl
+unterscheiden; unterwegs klingt das gleich. Beide tragen eine Positivprobe, damit sie nicht
+stumm grün werden.
+
 **Neue Prüfung statt Einzelfix.** Wenn ein Fehler gefunden wird, erst die *Fehlerklasse*
 benennen, dann eine Prüfung dafür schreiben, dann alle Fundstellen beheben. Die Prüfung
 bleibt. So sind die vorhandenen Prüfläufe entstanden.

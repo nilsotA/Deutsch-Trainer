@@ -151,4 +151,35 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 });
 P.ok("Gleich klingende Wörter bekommen einen Hörhinweis", !stummePaare.length, stummePaare.join(", "));
 
+/* Fehlerklasse „Ziffer gegen ausgeschriebene Zahl“: „24 Personen nahmen teil“ und
+   „Vierundzwanzig Personen nahmen teil“ werden von der Sprachausgabe wortgleich
+   vorgelesen — unterwegs ist die Aufgabe damit nicht lösbar (q03 war so gebaut).
+   Geprüft wird, ob zwei Optionen sich nur in Ziffer gegen Zahlwort unterscheiden.
+   Die längeren Zahlwörter stehen zuerst, sonst zerlegt „drei“ das Wort „dreißig“. */
+const ZAHLWORT = new RegExp("\\b(?:(?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)?und)?"
+  + "(?:dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn|dreißig|vierzig|fünfzig"
+  + "|sechzig|siebzig|achtzig|neunzig|zwanzig|hundert|tausend|zwölf|zehn|elf|null|eine|ein[esrnm]?"
+  + "|zwei|drei|vier|fünf|sechs|sieben|acht|neun)\\b", "gi");
+const zahlKern = t => String(t).replace(/<[^>]*>/g, " ").replace(/\d+([.,]\d+)?/g, " ")
+  .replace(ZAHLWORT, " ").replace(/[^\wäöüÄÖÜß ]/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+const gleichNachZahl = (a, b) => {
+  if (/\d/.test(String(a)) === /\d/.test(String(b))) return false;
+  const ka = zahlKern(a);
+  return ka.length >= 4 && ka === zahlKern(b);
+};
+/* Positivprobe: Das Paar, das die Prüfung überhaupt erst nötig gemacht hat. */
+P.ok("Die Zifferprobe erkennt das Paar aus q03",
+  gleichNachZahl("Vierundzwanzig Personen nahmen teil.", "24 Personen nahmen teil."),
+  "Positivprobe blieb stumm");
+const zifferStumm = [];
+ALL.filter(i => i.t !== "fill").forEach(i => {
+  i.o.forEach((a, k) => i.o.forEach((b, m) => {
+    if (m <= k || !gleichNachZahl(a, b)) return;
+    const hinweis = w.eval("hoerHinweis(" + JSON.stringify(a) + "," + JSON.stringify(i.o) + ")");
+    if (!hinweis.trim()) zifferStumm.push(i.id + ": „" + a + "“ / „" + b + "“");
+  }));
+});
+P.ok("Ziffer und ausgeschriebene Zahl klingen nicht gleich", !zifferStumm.length,
+  zifferStumm.join(" · "));
+
 P.abschluss();
