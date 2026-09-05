@@ -167,6 +167,41 @@ P.ok("Keine harte Meldung auf korrektem Material", !fehlalarm.length,
   fehlalarm.slice(0, 5).join(" · ") + (fehlalarm.length > 5 ? " …(" + fehlalarm.length + ")" : ""));
 if (gekuerzt) P.info(gekuerzt + " Einträge zitieren eine Falschform — dort nur der Text außerhalb der Zitate geprüft");
 
+/* Fehlerklasse „hartes Muster gegen die eigene Regel“: Ein hartes Prüfmuster meldete
+   Schreibungen als Fehler, die die App in ihren Regeltexten selbst als richtig zeigt
+   (x16, x17, x18, x19, x26 taten das). Die Beispiele der Regeln sind der zweite
+   korrekte Bestand neben den Antworten — hier werden sie mitgeprüft.
+   Nicht geprüft wird, was als Gegenbeispiel dasteht: Inhalte von class="nope" und
+   Zeilen mit Pfeil, „nicht“, „statt“ oder „falsch“ zeigen absichtlich die Falschform. */
+const RB = daten(w, "RULES_ALL.map(r=>({id:r.id,b:r.b}))")
+  .concat(daten(w, "SATZ.map(x=>({id:x.id,b:x.b}))"))
+  .concat(daten(w, "TABLES.map(x=>({id:x.id,b:x.b}))"));
+const ohneNope = h => String(h).replace(/<(span|div) class="nope">[\s\S]*?<\/\1>/g, " ");
+const GEGEN = /→|\bnicht\b|\bstatt\b|\bfalsch\b/i;
+const proben = [];
+RB.forEach(r => {
+  const re = /<(span|div) class="(ok|ex)">([\s\S]*?)<\/\1>/g;
+  let m;
+  while ((m = re.exec(ohneNope(r.b)))) {
+    strip(String(m[3]).replace(/<br\s*\/?>/g, " · ")).split(/\s·\s|\s\|\s/).forEach(t => {
+      t = t.trim();
+      if (t.length >= 8 && !GEGEN.test(t)) proben.push({ id: r.id, t });
+    });
+  }
+});
+/* Positivprobe: Der Weg Beispiel → analyse() → harte Meldung muss überhaupt anschlagen,
+   sonst misst die Prüfung nichts (siehe CLAUDE.md, Abschnitt 6). */
+const probeAn = daten(w, 'analyse("Das ist ein Standart im Verein.").finds.filter(f=>f.c.sev==="hart").length');
+P.ok("Die Beispielprüfung schlägt bei einem echten Fehler an", probeAn > 0, "Positivprobe blieb stumm");
+P.ok("Genug Beispiele in den Regeln gefunden (" + proben.length + ")", proben.length >= 300, proben.length);
+const regelAlarm = [];
+proben.forEach(pr => {
+  const f = daten(w, 'analyse(' + JSON.stringify(pr.t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
+  if (f.length) regelAlarm.push(f.join("/") + " in " + pr.id + ": „" + pr.t.slice(0, 50) + "“");
+});
+P.ok("Keine harte Meldung auf den Beispielen der Regeln", !regelAlarm.length,
+  regelAlarm.slice(0, 5).join(" · ") + (regelAlarm.length > 5 ? " …(" + regelAlarm.length + ")" : ""));
+
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
 const d = w.document;
