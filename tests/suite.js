@@ -218,6 +218,12 @@ const vorlagen = [];
 PHRASES.forEach(ph => Object.keys(ph.lv || {}).forEach(stufe =>
   (ph.lv[stufe] || []).forEach(t => vorlagen.push({ id: "ph:" + ph.id, t: strip(t) }))));
 PAIRS.forEach(pr => vorlagen.push({ id: "pr:" + pr.id, t: strip(pr.good) }));
+/* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
+   Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
+   korrektes Deutsch vorgesetzt bekommt. */
+daten(w, "SCENES").forEach(sc => { if (sc.s) vorlagen.push({ id: "sc:" + sc.id, t: strip(sc.s) }); });
+daten(w, "PROMPTS").forEach(pr => { if (pr.p) vorlagen.push({ id: "w:" + pr.id, t: strip(pr.p) }); });
+WORDS.forEach(x => { if (x.d) vorlagen.push({ id: "w:" + x.w + " (Erläuterung)", t: strip(x.d) }); });
 let korrOffen = 0;
 KORREKTUR.forEach(t => {
   if (t.errs.some(e => /\s/.test(String(e.ok)))) { korrOffen++; return; }
@@ -229,7 +235,7 @@ KORREKTUR.forEach(t => {
   });
   vorlagen.push({ id: t.id + " korrigiert", t: toks.join(" ") });
 });
-P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 250, vorlagen.length);
+P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 430, vorlagen.length);
 const vorlagenAlarm = [];
 vorlagen.forEach(m => {
   if (m.t.length < 8) return;
