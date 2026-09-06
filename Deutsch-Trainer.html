@@ -843,7 +843,7 @@ const EX_A = [
  e:"Der Duden führt <b>morgen früh</b> als Standardform — „früh“ ist hier ein Adverb, kein Substantiv. <b>morgen Früh</b> ist ebenfalls zulässig und geht auf das süddeutsch-österreichische Substantiv „die Früh“ zurück. Für Schule und Verwaltung in Deutschland nimmst du „morgen früh“.",r:"gross-zeit"},
 
 {id:"g06",c:"gross",q:"Was ist richtig?",o:["Er gab sein Bestes.","Er gab sein bestes."],a:0,
- e:"Mit Artikel/Possessivpronomen wird substantiviert: <b>sein Bestes</b>. Ohne: „Er lief am besten.“ (Frage „wie?“ → klein)",r:"gross-subst"},
+ e:"Mit Artikel oder Possessivpronomen wird substantiviert: <b>sein Bestes</b>. Bei <b>am</b> + Superlativ entscheidet die Frage: „wie?“ bleibt klein („Er lief am besten“), „woran?“ wird groß („Es fehlt am Nötigsten“).",r:"gross-subst"},
 
 {id:"g07",c:"gross",q:"Welche Schreibung stimmt?",o:["die meisten Teilnehmenden","die Meisten Teilnehmenden"],a:0,
  e:"„meiste“ bleibt hier ein Zahladjektiv vor einem Substantiv → klein. Auch allein stehend meist klein: „die meisten wissen das“.",r:"gross-subst"},
@@ -991,7 +991,7 @@ const EX_B = [
  e:"„zusammenarbeiten“ (= kooperieren) ist ein trennbares Verb: Im Hauptsatz steht „zusammen“ hinten, im Infinitiv ist es ein Wort — „Wir wollen enger zusammenarbeiten.“ Meint „zusammen“ nur „gemeinsam“, ist es ein Adverb und bleibt getrennt: „Wir wollen heute zusammen arbeiten.“",r:"getrennt-verb"},
 
 {id:"t12",c:"getrennt",q:"Was ist richtig?",o:["Wir sehen uns morgen wieder.","Wir sehen uns morgen Wieder."],a:0,
- e:"„wiedersehen“ = erneut treffen (ein Wort im Infinitiv), getrennt in finiter Stellung. Nicht verwechseln mit „wider“ (= gegen).",r:"recht-wider"},
+ e:"„wieder“ ist hier der abgetrennte Teil von <b>wiedersehen</b> (= sich erneut treffen) und kein Substantiv — deshalb klein. Groß stünde es nur, wenn es wie ein Substantiv gebraucht wäre.",r:"gross-subst"},
 
 {id:"t13",c:"getrennt",q:"Wie schreibt man?",o:["Es bleibt noch etwas übrig.","Es bleibt noch etwas Übrig."],a:0,
  e:"Regelfall getrennt: <b>übrig bleiben</b>. „übrig“ ist ein Adjektiv und bleibt klein — großgeschrieben wäre es nur als Substantiv, und das gibt es hier nicht.",r:"getrennt-verb"},
@@ -1015,7 +1015,7 @@ const EX_B = [
  e:"Der Duden führt „zugrunde“ und „zu Grunde“ nebeneinander, empfiehlt aber <b>zugrunde</b>.",r:"getrennt-praep"},
 
 {id:"t20",c:"getrennt",q:"Korrekt ist …",o:["Er blieb sitzen.","Er blieb Sitzen."],a:0,
- e:"Wörtlich getrennt: „Er blieb sitzen.“ In der Schulbedeutung (nicht versetzt werden) sind beide Schreibungen zulässig: sitzenbleiben / sitzen bleiben. Großgeschrieben wird „sitzen“ nie — es ist ein Verb.",r:"getrennt-verb"},
+ e:"Wörtlich getrennt: „Er blieb sitzen.“ In der Schulbedeutung (nicht versetzt werden) sind beide Schreibungen zulässig: sitzenbleiben / sitzen bleiben. Groß wird „Sitzen“ nur als Substantivierung mit Artikel: „das lange Sitzen in der Vorlesung“. Neben „blieb“ steht es als Verb und bleibt klein.",r:"getrennt-verb"},
 
 /* ---------- RECHTSCHREIBUNG & ZWEIFELSFÄLLE ---------- */
 {id:"r01",c:"recht",q:"Setze richtig ein: „Ich hoffe, ___ du kommst.“",t:"fill",a:["dass"],
@@ -1043,9 +1043,9 @@ const EX_B = [
  e:"<b>separat</b> — von lat. separare (trennen). Eselsbrücke: „par“ wie in „Paar“ trennen.",r:"recht-klassiker"},
 
 {id:"r09",c:"recht",q:"Welche Form ist richtig?",o:["Peters Trainingsplan","Peter's Trainingsplan"],a:0,
- e:"Im laufenden Text steht das Genitiv-s <b>ohne</b> Apostroph: Peters Trainingsplan. „Peter’s“ folgt dem englischen Muster. Zulässig ist der Apostroph nur, wenn die Fügung selbst ein Name ist — etwa ein Laden- oder Firmenname: „Andrea’s Blumenladen“.",r:"recht-apostroph"},
+ e:"Im laufenden Text steht das Genitiv-s <b>ohne</b> Apostroph: Peters Trainingsplan. „Peter’s“ folgt dem englischen Muster. Vor einem angehängten Genitiv-s ist der Apostroph nur zulässig, wenn die Fügung selbst ein Name ist — etwa ein Laden- oder Firmenname: „Andrea’s Blumenladen“. Endet der Name auf einen s-Laut und steht kein Artikel davor, tritt der Apostroph an die Stelle des s: Nils’ Plan.",r:"recht-apostroph"},
 
-{id:"r10",c:"recht",q:"Wie bildet man den Genitiv von „Nils“?",o:["Nils’ Trainingsplan","Nils’s Trainingsplan","Nils Trainingsplan"],a:0,
+{id:"r10",c:"recht",q:"Wie bildet man den Genitiv von „Nils“?",o:["Nils’ Trainingsplan","Nils Trainingsplan"],a:0,
  e:"Endet ein Name auf <b>s, ss, ß, tz, z, x, ce</b> und steht kein Artikel davor, setzt man nur einen Apostroph, kein zusätzliches s: Andreas’ Buch, Max’ Rad, Nils’ Plan. Mit Artikel bleibt er ohne: der Plan des Nils.",r:"recht-apostroph"},
 
 {id:"r11",c:"recht",q:"Was stimmt?",o:["Sie war anscheinend krank.","Sie war scheinbar krank."],a:0,
@@ -1117,7 +1117,7 @@ const EX_B = [
 
 {id:"m07",c:"gram",q:"Welche Form ist richtig?",o:[
  "Ich habe mit dem Praktikanten gesprochen.","Ich habe mit dem Praktikant gesprochen."],a:0,
- e:"<b>n-Deklination</b>: Der Praktikant bekommt in allen Fällen außer dem Nominativ ein -en. Ebenso: der Mensch, der Junge, der Kollege, der Experte, der Athlet, der Pädagoge.",r:"gram-ndekl"},
+ e:"<b>n-Deklination</b>: Der Praktikant bekommt in allen Fällen außer dem Nominativ Singular ein -en. Ebenso: der Mensch, der Junge, der Kollege, der Experte, der Athlet, der Pädagoge.",r:"gram-ndekl"},
 
 {id:"m08",c:"gram",q:"Korrekt ist …",o:[
  "Er half dem Jungen.","Er half dem Junge."],a:0,
@@ -1253,7 +1253,7 @@ const EX_B = [
 {id:"s14",c:"stil",q:"Welche Fassung passt besser in eine Hausarbeit?",o:[
  "Die Ergebnisse deuten darauf hin, dass …",
  "Man sieht ja klar, dass …"],a:0,
- e:"Wissenschaftliche Sprache ist <b>zurückhaltend im Anspruch, präzise im Ausdruck</b>. Vermeide „man“, „ja“, „klar“, „natürlich“.",r:"stil-wissenschaft"},
+ e:"Wissenschaftliche Sprache ist <b>zurückhaltend im Anspruch, präzise im Ausdruck</b>. „Ja“ und „klar“ sind hier Umgangssprache; „man“ stört dort, wo ein konkreter Träger gemeint ist — die Autorin, die Trainerin, du selbst.",r:"stil-wissenschaft"},
 
 {id:"s15",c:"stil",q:"Was stört hier? „In diesem Kontext möchte ich anmerken, dass die Thematik durchaus als relevant erachtet werden kann.“",o:[
  "Aufgeblähte Floskeln ohne Aussage",
@@ -1483,7 +1483,7 @@ const RULES = [
 <p class="tiny muted">Quellen: Duden, Rechtschreibregeln zum Komma und Sprachratgeber (formelhafte verkürzte Nebensätze, mehrteilige Nebensatzeinleitungen); Amtliches Regelwerk 2024, Abschnitt Komma.</p>`},
 
 {id:"komma-infinitiv",c:"komma",t:"Infinitivgruppen mit „zu“",b:`
-<p><b>Seit dem 1. Juli 2024 gilt:</b> Eine <b>erweiterte</b> Infinitivgruppe — „zu“ + Verb plus mindestens ein weiteres Wort — wird <b>immer</b> mit Komma abgetrennt. Das amtliche Regelwerk (§ 73) zählt sie seitdem zu den Nebensätzen; das Komma ist dort keine Kann-Regel mehr.</p>
+<p><b>Seit dem 1. Juli 2024 gilt:</b> Eine <b>erweiterte</b> Infinitivgruppe — „zu“ + Verb plus mindestens ein weiteres Wort — wird mit Komma abgetrennt, sofern sie nicht mit dem übergeordneten Verb ein mehrteiliges Prädikat bildet (Ausnahme weiter unten). Das amtliche Regelwerk (§ 73) zählt sie seitdem zu den Nebensätzen; das Komma ist dort keine Kann-Regel mehr.</p>
 <div class="ex">Er hat versucht<span class="ok">,</span> pünktlich zu sein.<br>Sie plant<span class="ok">,</span> im Sommer nach Köln zu ziehen.<br>Der Plan<span class="ok">,</span> täglich zu laufen<span class="ok">,</span> war ambitioniert.<br>Er trainiert<span class="ok">,</span> um sich zu verbessern.</div>
 <p><b>Die sechs Einleitewörter</b> <code>um, ohne, statt, anstatt, außer, als</code> bleiben der sicherste Merkposten: Vor ihnen stand das Komma schon immer, auch vor 2024. Dasselbe galt schon vorher, wenn die Infinitivgruppe von einem <b>Substantiv</b> („der Plan, …“) oder einem <b>hinweisenden Wort</b> abhängt: „Daran<span class="ok">,</span> pünktlich zu sein<span class="ok">,</span> denkt er nie.“</p>
 <p><b>Komma ist freigestellt</b> nur noch beim <b>bloßen</b> Infinitiv, also „zu“ + Verb ohne alles:</p>
@@ -1491,7 +1491,7 @@ const RULES = [
 <p><b>Kein Komma</b> steht, wenn der Infinitiv mit dem übergeordneten Verb ein <b>mehrteiliges Prädikat</b> bildet. Das ist der Fall bei <code>sein, haben, brauchen, pflegen, scheinen</code> und, übertragen gebraucht, <code>drohen, versprechen</code> (§ 73 E4):</p>
 <div class="ex">Du brauchst nicht<span class="nope">,</span> zu kommen.<br>Sie scheint das Spiel<span class="nope">,</span> zu gewinnen.<br>Er hat noch<span class="nope">,</span> zu arbeiten.<br>Das Wetter droht<span class="nope">,</span> schlecht zu werden.</div>
 <p class="tiny muted">Von 2006 bis 2024 war das Komma bei einfachen Infinitivgruppen ohne Einleitewort freigestellt. Viele Lehrbücher und Korrekturprogramme zeigen noch diesen Stand. Für Schule und Verwaltung ist die Fassung von 2024 verbindlich, und das Komma zu setzen war auch vorher nie falsch. Quelle: Rat für deutsche Rechtschreibung, Amtliches Regelwerk 2024, § 73; Duden, 29. Auflage.</p>
-<p><b>Merksatz:</b> Erweitert → Komma. Nur „zu“ + Verb → frei. Mit brauchen, scheinen, haben, sein → keins.</p>`},
+<p><b>Merksatz:</b> Erweitert → Komma. Nur „zu“ + Verb → frei. Mehrteiliges Prädikat mit sein, haben, brauchen, pflegen, scheinen und übertragenem drohen, versprechen → keins, auch wenn die Gruppe erweitert ist.</p>`},
 
 {id:"komma-aufzaehlung",c:"komma",t:"Aufzählungen und Konjunktionen",b:`
 <p>Gleichrangige Teile werden durch Komma getrennt — außer, es steht schon eine Konjunktion dazwischen.</p>
@@ -1501,7 +1501,7 @@ const RULES = [
 <p><b>Kein Komma steht vor:</b> <code>und, oder, beziehungsweise, sowie, wie, entweder … oder, weder … noch, sowohl … als auch</code></p>
 <p class="tiny muted">Das gilt für <b>als</b> und <b>wie</b> nur beim bloßen Vergleich („größer als erwartet“). Folgt ein ganzer Nebensatz mit gebeugtem Verb oder ein Infinitiv mit „zu“, steht das Komma: „schneller<b>,</b> als ich erwartet hatte“, „nichts anderes übrig<b>,</b> als aufzugeben“.</p>
 <div class="ex">Sie ist sowohl schnell<span class="nope">,</span> als auch ausdauernd. → ohne Komma</div>
-<p><b>Zwei Ausnahmen:</b> Verbinden die Paarformeln ganze <b>Nebensätze</b>, sind Kommas Pflicht — „Er bemerkte sowohl<span class="ok">,</span> dass er zu kurz gesprungen war<span class="ok">,</span> als auch<span class="ok">,</span> dass die Katze schneller war.“ Zwischen zwei <b>Hauptsätzen</b> darf zur Verdeutlichung ein Komma stehen.</p>
+<p><b>Zwei Ausnahmen:</b> Verbinden die Paarformeln ganze <b>Nebensätze</b>, sind Kommas Pflicht — „Er bemerkte sowohl<span class="ok">,</span> dass er zu kurz gesprungen war<span class="ok">,</span> als auch<span class="ok">,</span> dass die Katze schneller war.“ Zwischen zwei <b>Hauptsätzen</b> ist das Komma freigestellt — setz es, wenn es die Gliederung deutlicher macht.</p>
 <p>In einer reinen Aufzählung steht vor dem abschließenden „und“ kein Komma — das englische „Oxford-Komma“ gibt es im Deutschen nicht. Ein Komma kann dort trotzdem auftauchen, wenn es einen eingeschobenen Nebensatz schließt: „Er kaufte Äpfel, Birnen, die er mochte, und Bananen.“</p>`},
 
 {id:"komma-hauptsatz",c:"komma",t:"Komma zwischen Hauptsätzen",b:`
@@ -1540,7 +1540,7 @@ const RULES = [
 <div class="ex">Er lief schneller<span class="ok">,</span> als ich erwartet hatte.<br>Sie lief so schnell<span class="ok">,</span> wie sie konnte.</div>
 <p><b>Komma auch</b> vor „als“ oder „wie“ mit einem Infinitiv und „zu“ — „als“ gehört zu den sechs Einleitewörtern, vor denen das Komma immer steht:</p>
 <div class="ex">Es gibt nichts Besseres<span class="ok">,</span> als nach dem Training zu duschen.<br>Ihm blieb nichts anderes übrig<span class="ok">,</span> als aufzugeben.</div>
-<p><b>Test:</b> Steht hinter „als“ oder „wie“ ein gebeugtes Verb oder ein Infinitiv mit „zu“? Dann Komma. Folgt nach „als“ oder „wie“ nur ein Wort oder eine Wortgruppe? Dann keins.</p>
+<p><b>Test</b> für den Vergleich, der sich an ein vorangehendes Wort anschließt („schneller als …“, „so schnell wie …“, „nichts anderes als …“): Steht hinter „als“ oder „wie“ ein gebeugtes Verb oder ein Infinitiv mit „zu“? Dann Komma. Folgt nur ein Wort oder eine Wortgruppe? Dann keins. Feste Formeln („wie folgt“, „wie besprochen“) und ein Vergleich, den du als Einschub kennzeichnest, fallen nicht darunter — dazu der nächste Absatz.</p>
 <p><b>Freigestellt</b> ist das Komma bei einer festen Formel und bei einem Vergleich ohne Verb, den du als Einschub kennzeichnen willst. Normalfall ist ohne Komma: „Wie letztes Jahr gewannen wir das Turnier.“ Als betonter Einschub mit Kommas auf beiden Seiten, nie nur eins: „Wir gewannen<span class="ok">,</span> wie letztes Jahr<span class="ok">,</span> das Turnier.“ · „Die Regel lautet<span class="ok">(,)</span> wie folgt.“ · „Wie besprochen<span class="ok">(,)</span> schicke ich dir den Plan.“ Hinter einem Vergleichswort bleibt es ohne Komma: „größer als erwartet“.</p>
 <p class="tiny muted">Quellen: Duden, Sprachratgeber „Das Komma vor wie und als“ und „Kommasetzung bei Vergleichen“; Amtliches Regelwerk 2024 (Infinitivgruppen mit „als“).</p>`},
 
@@ -1596,7 +1596,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 {id:"gross-zeit",c:"gross",t:"Zeitangaben groß oder klein?",b:`
 <ul>
 <li><b>Groß</b> — Tageszeiten nach <code>vorgestern, gestern, heute, morgen, übermorgen</code>: <code>heute Morgen, gestern Abend, morgen Nachmittag, heute Nacht, übermorgen Mittag</code></li>
-<li><b>Klein</b> — das Adverb „früh“: <code>morgen früh</code> (Duden-Empfehlung; „morgen Früh“ ist zulässig, süddeutsch-österreichisch geprägt)</li>
+<li><b>Klein</b> — das Adverb „früh“: <code>morgen früh</code> (Duden-Empfehlung; „morgen Früh“ ist ebenfalls zulässig, süddeutsch-österreichisch geprägt)</li>
 <li><b>Groß</b> — Wochentage, Monate und Anfang/Mitte/Ende: <code>am Freitag, Ende Mai, Mitte Juni, Anfang nächster Woche</code></li>
 <li><b>Klein</b> — Adverbien auf -s: <code>montags, abends, freitags, morgens</code></li>
 <li><b>Zusammen und groß</b>, wenn Wochentag und Tageszeit ein Substantiv bilden: <code>am Montagmorgen, jeden Sonntagabend</code> — als Adverb klein: <code>montagabends</code> (auch: montags abends). Ausnahme „früh“: <code>Montag früh</code> getrennt und klein.</li>
@@ -1616,7 +1616,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <p><b>Klein</b> als Adjektiv: <code>die deutsche Sprache, deutsche Grammatik, ein deutscher Meister</code></p>
 <p>Nach <i>sprechen, reden, schreiben, sich unterhalten</i> geht beides, je nach Sinn:</p>
 <div class="ex">Sie spricht gut Deutsch. → sie beherrscht die Sprache (was?)<br>Die Trainerin hat deutsch gesprochen. → in deutscher Sprache, nicht englisch (wie?)</div>
-<p>Faustregel: Frage „Was?“ → groß. Frage „Wie?“ → klein. Mit <i>können</i> und nach <i>auf</i> oder <i>in</i> immer groß: <code>Er kann gut Deutsch · auf Deutsch · in Deutsch abgefasst</code></p>
+<p>Faustregel: Frage „Was?“ → groß. Frage „Wie?“ → klein. Mit <i>können</i> und nach <i>auf</i> oder <i>in</i> in der Regel groß: <code>Er kann gut Deutsch · auf Deutsch · in Deutsch abgefasst</code>. Folgt ein Substantiv oder Partizip, steht dort das Adjektiv und bleibt klein: <code>auf deutsch besetztem Gebiet</code></p>
 <p><b>Groß im Eigennamen:</b> <code>Deutsche Sporthochschule Köln, Deutscher Fußball-Bund, Deutsche Bahn</code> — hier gehört das Adjektiv zum Namen. Sonst klein: <code>die deutsche Nationalmannschaft</code></p>`},
 
 /* ---------- GETRENNT / ZUSAMMEN ---------- */
@@ -1637,7 +1637,8 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <div class="ex">Rad fahren · Auto fahren · Schlittschuh laufen · Klavier spielen</div>
 <p>Zusammen nur, wenn das Substantiv verblasst ist: <code>eislaufen · stattfinden · teilnehmen · standhalten · leidtun</code>.</p>
 <p><b>Partikel + Verb</b> — ein Wort, Betonung vorn:</p>
-<div class="ex">zurechtkommen · zusammenarbeiten · wiedersehen · feststellen · hinterfragen</div>
+<div class="ex">zurechtkommen · zusammenarbeiten · wiedersehen · feststellen</div>
+<p class="tiny muted">Die Betonung vorn ist zugleich die Probe auf trennbar. Untrennbare Verben wie <code>hinterfragen</code> sind auch ein Wort, aber nicht vorn betont — mehr dazu unten.</p>
 <p>Getrennt nur, wenn das Adverb selbst betont ist und seine eigene Bedeutung behält: „Wir wollen heute <b>zusammen</b> arbeiten“ (= gemeinsam), „Er will den Film <b>wieder</b> sehen“ (= noch einmal ansehen).</p>
 <p class="tiny muted"><b>wiedersehen</b> im Sinn von „sich erneut treffen“ ist dagegen ein Wort. Dass es in „Wir sehen uns morgen wieder“ auseinandersteht, ist die normale Trennung jedes Partikelverbs, keine Getrenntschreibung — „erneut“ allein taugt also nicht als Probe.</p>
 <p><b>Mit „sein“ immer getrennt:</b> <code>dabei sein · fertig sein · vorbei sein · zufrieden sein</code>. <b>Zwei Verben getrennt:</b> <code>schwimmen gehen · laufen lernen · sitzen bleiben</code>.</p>
@@ -1659,7 +1660,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <div class="ex">Das Training<span class="ok">,</span> das (= welches) er absolviert hat, war hart. → <b>das</b><br>
 Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b>dass</b></div>
 <p><b>das</b> ist Artikel, Demonstrativpronomen oder Relativpronomen. <b>dass</b> ist eine Konjunktion und leitet immer einen Nebensatz ein.</p>
-<p><b>Feste Verbindungen:</b> Folgt ein Nebensatz, steht auch dort <i>dass</i>: <code>sodass</code> (auch: so dass), <code>ohne dass</code>, <code>anstatt dass</code>, <code>als dass</code>, <code>kaum dass</code>. Umgekehrt bleibt <b>das heißt</b> (d. h.) bei einem s — „dies heißt“ passt.</p>`},
+<p><b>Feste Verbindungen:</b> Folgt ein Nebensatz, steht auch dort <i>dass</i>: <code>sodass</code> (auch: <code>so dass</code>; beides zulässig, der Duden empfiehlt <code>sodass</code>), <code>ohne dass</code>, <code>anstatt dass</code>, <code>als dass</code>, <code>kaum dass</code>. Umgekehrt bleibt <b>das heißt</b> (d. h.) bei einem s — „dies heißt“ passt.</p>`},
 
 {id:"recht-seit",c:"recht",t:"seit oder seid?",b:`
 <p><b>seit</b> = Zeit. Merke: Zei<b>t</b> → sei<b>t</b>. Präposition oder Konjunktion: „seit gestern“, „seit er trainiert“.</p>
@@ -1668,8 +1669,8 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 {id:"recht-wider",c:"recht",t:"wider oder wieder?",b:`
 <p><b>wider</b> = gegen: <code>widersprechen, widerlegen, widerspiegeln, widerstehen, wider Erwarten, das Widerwort</code></p>
 <p><b>wieder</b> = erneut, noch einmal: <code>wiederholen, wiedersehen, wiederkommen, wiederum</code></p>
-<p><p>Tückisch: <b>widerspiegeln, Widerhall, Widerschein</b> — hier heißt „wider“ nicht „gegen“, sondern „zurück“ (zurückwerfen, zurückschallen), trotzdem ohne e. Merk dir die drei als Ausnahmen.</p>
-<p>Ebenfalls mit i: <code>der Widerstand, der Widerspruch, widerrufen, widerfahren, erwidern</code> (nicht „erwiedern“). Mit ie: <code>wiedergeben, die Wiedergabe, wiederherstellen, die Wiederholung, wiederbekommen</code>.</p> <b>widerspiegeln</b> (= gegen etwas spiegeln) trotz „wieder“-Klang.</p>`},
+<p>Tückisch: <b>widerspiegeln, Widerhall, Widerschein</b> — hier heißt „wider“ nicht „gegen“, sondern „zurück“ (zurückwerfen, zurückschallen), trotzdem ohne e. Merk dir die drei als Ausnahmen.</p>
+<p>Ebenfalls mit i: <code>der Widerstand, der Widerspruch, widerrufen, widerfahren, erwidern</code> (nicht „erwiedern“). Mit ie: <code>wiedergeben, die Wiedergabe, wiederherstellen, die Wiederholung, wiederbekommen</code>.</p>`},
 
 {id:"recht-sz",c:"recht",t:"ss oder ß?",b:`
 <p>Die Regel gilt für das <b>scharfe (stimmlose) s</b> und hängt am <b>Vokal davor</b>:</p>
@@ -1681,7 +1682,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <p><b>Ein paar kurze Wörter</b> haben trotz kurzem Vokal nur ein s: <code>das, was, bis, des, plus, Bus</code> (aber: die Busse). Bei <i>das/dass</i> hilft darum nicht der Klang, sondern die Ersatzprobe.</p>
 <p><b>Probe:</b> Sprich das Wort langsam. Klingt das s <b>scharf</b> und der Vokal davor gedehnt, steht ß. Klingt das s weich, bleibt es ein einfaches s.</p>
 <p>Klassisches Paar: <code>Masse</code> (kurz) vs. <code>Maße</code> (lang), <code>Buße</code> vs. <code>Busse</code>.</p>
-<p><b>In Großbuchstaben</b> steht SS: STRASSE, FUSSBALL. Seit 2017 ist daneben das große ẞ zulässig: STRAẞE.</p>
+<p><b>In Großbuchstaben</b> steht SS: STRASSE, FUSSBALL. Seit 2017 ist daneben das große ẞ zulässig: STRAẞE — beide Schreibungen sind erlaubt.</p>
 <p>In der <b>Schweiz</b> und in Liechtenstein steht statt ß durchgängig ss (Strasse, Grüsse, gross). Das Regelwerk lässt das dort ausdrücklich zu; in Deutschland und Österreich gilt es als Fehler.</p>`},
 
 {id:"recht-apostroph",c:"recht",t:"Apostroph — die Deppen-Falle",b:`
@@ -1714,7 +1715,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <div class="ex">
 <span class="ok">Standard</span> (nicht Standart) · <span class="ok">separat</span> (nicht seperat) · <span class="ok">Rhythmus</span> · <span class="ok">Rückgrat</span> (nicht Rückrad) ·
 <span class="ok">aus dem Stegreif</span> · <span class="ok">Tipp</span> · <span class="ok">Stopp</span> · <span class="ok">nummerieren</span> · <span class="ok">Interesse</span> ·
-<span class="ok">brillant</span> · <span class="ok">Konsens</span> · <span class="ok">Portemonnaie</span> (eingedeutscht auch <span class="ok">Portmonee</span>) · <span class="ok">Repertoire</span> · <span class="ok">Aggression</span> ·
+<span class="ok">brillant</span> · <span class="ok">Konsens</span> · <span class="ok">Portemonnaie</span> (eingedeutscht ist <span class="ok">Portmonee</span> ebenfalls zulässig) · <span class="ok">Repertoire</span> · <span class="ok">Aggression</span> ·
 <span class="ok">Adresse</span> (ein d) · <span class="ok">Appell</span> · <span class="ok">Grammatik</span> (zwei m, ein t) · <span class="ok">Kongress</span> · <span class="ok">Terrasse</span>
 </div>
 <p><b>Verlängerungsprobe</b> bei Auslauten: Tod/tot → „des Todes“ vs. „er ist tot“; Rad/Rat → „Räder“ vs. „Ratschlag“; angestrengt → „anstrengen“.</p>`},
@@ -1740,8 +1741,8 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <ul>
 <li>Artikelloses Substantiv im Singular: „wegen Umbau geschlossen“</li>
 <li>Plural ohne erkennbare Genitivform: „trotz Beweisen“</li>
-<li>Pronomen: nicht „wegen mir“, sondern <b>meinetwegen</b></li>
 </ul>
+<p><b>Bei Pronomen</b> steht standardsprachlich die Form auf -etwegen: <b>meinetwegen, deinetwegen, seinetwegen</b>. „Wegen mir“ ist gesprochen verbreitet, geschrieben bleibt „meinetwegen“ die sichere Wahl.</p>
 <p><b>Verben mit Genitiv:</b> gedenken, bedürfen, sich bedienen, sich rühmen, sich enthalten, harren.</p>`},
 
 {id:"gram-konjunktiv",c:"gram",t:"Konjunktiv I und II",b:`
@@ -1754,7 +1755,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <p>„würde“ ist dann berechtigt, wenn die eigene Form altertümlich klingt („hülfe“, „stürbe“).</p>`},
 
 {id:"gram-ndekl",c:"gram",t:"n-Deklination (schwache Maskulina)",b:`
-<p>Eine Gruppe männlicher Substantive bekommt in <b>allen Fällen außer dem Nominativ</b> ein -en:</p>
+<p>Eine Gruppe männlicher Substantive bekommt in <b>allen Fällen außer dem Nominativ Singular</b> ein -en:</p>
 <div class="ex">der Praktikant → dem Praktikant<span class="ok">en</span><br>der Mensch → des Mensch<span class="ok">en</span><br>der Junge → den Jung<span class="ok">en</span></div>
 <p><b>Dazu gehören:</b> Personenbezeichnungen auf <code>-ant, -ent, -ist, -at, -oge, -graf, -soph</code> (Praktikant, Student, Journalist, Kandidat, Pädagoge) sowie <code>Mensch, Herr, Junge, Kollege, Experte, Athlet, Bauer, Nachbar, Kunde, Zeuge</code>.</p>
 <p>„Ich habe mit dem Kollege gesprochen“ ist einer der häufigsten Fehler in Alltagstexten.</p>
@@ -1864,7 +1865,8 @@ sagen → erläutern, einwenden, betonen, einräumen, feststellen</div>
 <div class="ex"><span class="nope">Es gibt viele Studien, die zeigen, dass …</span> → <span class="ok">Viele Studien zeigen, dass …</span><br>
 <span class="nope">Es ist so, dass die Belastung steigt.</span> → <span class="ok">Die Belastung steigt.</span><br>
 <span class="nope">An dieser Stelle sei erwähnt, dass …</span> → <span class="ok">…</span></div>
-<p>Faustregel: Der erste Satzteil sollte das Thema nennen — nicht ankündigen, dass gleich ein Thema kommt.</p>`},
+<p>Faustregel: Der erste Satzteil sollte das Thema nennen — nicht ankündigen, dass gleich ein Thema kommt.</p>
+<p><b>Nicht gemeint</b> ist die echte Existenzaussage: „Es gibt keine verbindliche Regel“ oder „Es gibt nichts Besseres, als nach dem Training zu duschen“ kündigen kein Thema an, sondern sagen die Sache selbst. Der Textcheck meldet die Wendung pauschal, also prüf, welche der beiden Bauformen vorliegt.</p>`},
 
 {id:"stil-schachtel",c:"stil",t:"Schachtelsätze entwirren",b:`
 <p>Deutsch erlaubt tiefe Verschachtelung. Lesbar ist sie deshalb nicht.</p>
@@ -2239,7 +2241,7 @@ tip:"Ein Satz reicht. Noch besser: Dank statt Entschuldigung — „Danke fürs 
 lv:{f:["Der Fehler in der Auswertung liegt bei mir. Ich habe die Daten der Kontrollgruppe doppelt gezählt. Die korrigierte Fassung schicke ich bis morgen Mittag."],
     n:["Das war mein Fehler — ich habe die falsche Datei geschickt. Hier die richtige.","Ich habe den Termin schlicht vergessen. Das tut mir leid, ich hole es nach."],
     l:["Mein Fehler, sorry. Ich bring das in Ordnung."]},
-no:["„Es ist zu einem Fehler gekommen.“ — Passiv ohne Verursacher wirkt wie Ausweichen.",
+no:["„Es ist zu einem Fehler gekommen.“ — Nominalstil ohne Verursacher wirkt wie Ausweichen.",
     "„Tut mir leid, falls sich jemand gestört gefühlt hat.“ — verschiebt die Verantwortung zum Empfänger.",
     "Entschuldigung und Rechtfertigung im selben Satz: „Sorry, aber du hattest ja auch …“"],
 tip:"Die belastbare Entschuldigung hat drei Teile: Was war mein Anteil? Was folgt daraus? Bis wann? Kein „aber“ dazwischen."},
@@ -2265,7 +2267,7 @@ tip:"Benenne den <b>Punkt</b>, an dem du aussteigst. Widerspruch, der zeigt, wo 
 {id:"ph20",g:"Widersprechen",f:"Zustimmen und einschränken",ctx:["uni","beruf"],
 lv:{f:["Im Grundsatz stimme ich zu. Offen bleibt für mich allerdings die Frage, wie …","Das trifft für den Regelfall zu — bei kleinen Gruppen sehe ich es anders."],
     n:["Da hast du recht. Nur bei einem Punkt bin ich unsicher: …","Stimmt größtenteils — außer bei …"],
-    l:["Ja, aber nur, solange …","Grundsätzlich schon. Bei X wird's schwierig."]},
+    l:["Ja, da bin ich dabei. Nur solange die Gruppe klein bleibt.","Grundsätzlich schon. Bei X wird's schwierig."]},
 no:["„Ja, aber“ als Standardformel — der Zuhörer hört nur noch das „aber“ und überhört die Zustimmung."],
 tip:"Setz die Zustimmung in einen eigenen Satz, bevor die Einschränkung kommt. Ein Punkt statt eines „aber“ ändert die Wirkung erheblich."},
 
@@ -2281,7 +2283,7 @@ tip:"„Vielleicht übersehe ich etwas“ ist keine Selbstverkleinerung, sondern
 {id:"ph22",g:"Kritik äußern",f:"Verhalten ansprechen",ctx:["beruf","privat"],
 lv:{f:["Mir ist aufgefallen, dass die Protokolle in den letzten drei Wochen jeweils erst nach der Folgesitzung vorlagen. Woran liegt das?"],
     n:["Mir ist aufgefallen, dass du die letzten drei Male zu spät gekommen bist. Was ist da los?","Ich möchte etwas ansprechen, das mich stört: …"],
-    l:["Kann ich dir was sagen, das mich nervt? Du kommst in letzter Zeit oft zu spät."]},
+    l:["Kann ich dir was sagen, das mich nervt? Du bist diesen Monat dreimal zu spät zum Training gekommen."]},
 no:["„Du bist immer unpünktlich.“ — „immer“ ist fast nie wahr und provoziert Widerspruch statt Einsicht.",
     "„Alle finden, dass …“ — anonyme Verstärkung wirkt feige.",
     "„Du bist unzuverlässig.“ — Etikett statt Beobachtung."],
@@ -2293,7 +2295,7 @@ lv:{f:["Das führt dazu, dass ich die Auswertung nicht rechtzeitig beginnen kann
     l:["Das macht mich fertig, ehrlich gesagt.","Ich fühl mich dann wie das fünfte Rad."]},
 no:["„Du machst mich wütend.“ — schreibt dem anderen die Kontrolle über deine Gefühle zu.",
     "„Das ist respektlos.“ — Bewertung, die eine Verteidigung erzwingt."],
-tip:"Die Ich-Botschaft ist kein Wohlfühl-Trick: Sie ist die einzige Aussage, die dein Gegenüber nicht bestreiten kann. Über deine Wirkung weißt nur du Bescheid."},
+tip:"Die Ich-Botschaft ist kein Wohlfühl-Trick: Über deine Wirkung weißt nur du Bescheid, deshalb kann dein Gegenüber sie kaum bestreiten — genauso wenig wie eine zählbare Beobachtung."},
 
 {id:"ph24",g:"Kritik äußern",f:"Wunsch statt Vorwurf",ctx:["beruf","privat"],
 lv:{f:["Ich möchte Sie bitten, mir eine kurze Nachricht zu schicken, wenn es später wird.","Für die weitere Zusammenarbeit wäre mir wichtig, dass Absprachen schriftlich festgehalten werden."],
@@ -2397,7 +2399,7 @@ lv:{f:["ich muss Ihnen leider mitteilen, dass der Antrag nicht bewilligt wurde. 
     l:["Schlechte Nachricht: Es hat nicht geklappt. Aber ich hab schon einen Plan B."]},
 no:["Die schlechte Nachricht hinter drei Absätzen Vorrede verstecken.",
     "Sie so weichzeichnen, dass der Empfänger sie überliest.",
-    "„Leider muss ich Ihnen mitteilen, dass es zu einer Nichtbewilligung gekommen ist.“ — Passiv und Nominalstil erhöhen die Distanz genau da, wo Klarheit gebraucht wird."],
+    "„Leider muss ich Ihnen mitteilen, dass es zu einer Nichtbewilligung gekommen ist.“ — Nominalstil ohne Verursacher erhöht die Distanz genau da, wo Klarheit gebraucht wird."],
 tip:"Reihenfolge: Nachricht, Grund, nächster Schritt. Nicht umgekehrt. Menschen können mit schlechten Nachrichten umgehen — nicht aber mit Unklarheit."},
 
 {id:"ph36",g:"Schwierige Nachrichten",f:"Kondolenz",ctx:["privat","beruf"],
@@ -2539,7 +2541,7 @@ const PAIRS = [
  note:"Zählbare Beobachtung + Wirkung auf dich. Beides ist nicht bestreitbar."},
 
 {id:"pr05",ctx:"beruf",bad:"Es ist zu einem Fehler bei der Auswertung gekommen.",
- why:"Passiv ohne Verursacher. Klingt, als sei der Fehler vom Himmel gefallen — und genau so wird es gelesen: als Ausweichen.",
+ why:"Nominalstil ohne Verursacher. Klingt, als sei der Fehler vom Himmel gefallen — und genau so wird es gelesen: als Ausweichen.",
  good:"Ich habe bei der Auswertung die Kontrollgruppe doppelt gezählt. Die korrigierte Fassung kommt bis morgen Mittag.",
  note:"Wer den Fehler benennt, gewinnt Vertrauen. Wer ihn verschleiert, verliert es doppelt."},
 
@@ -2719,7 +2721,7 @@ const SCENES = [
  s:"Ein guter Freund sagt seit Monaten kurzfristig Verabredungen ab, meist per Nachricht eine Stunde vorher. Du magst ihn, aber du hast keine Lust mehr, dich darauf einzustellen.",
  ask:"Formuliere, wie du es ansprichst — persönlich, nicht schriftlich.",
  model:"<p>„Ich will dir was sagen, und das ist mir ein bisschen unangenehm.</p><p>Du hast in den letzten Monaten viermal kurzfristig abgesagt — zuletzt am Samstag, eine Stunde vorher. Ich weiß, dass bei dir gerade viel los ist.</p><p>Trotzdem geht mir das nach. Ich fange an, unsere Verabredungen nicht mehr fest einzuplanen, und das gefällt mir nicht, weil ich dich gern sehe.</p><p>Mein Wunsch wäre: Sag lieber gleich ab, wenn du merkst, dass es nicht wird — auch drei Tage vorher. Das wäre für mich viel leichter als kurz vorher.“</p>",
- why:"Der Aufbau ist der klassische Vierschritt: Beobachtung (zählbar, mit Beispiel), Anerkennung des Kontexts, eigene Wirkung („ich plane nicht mehr fest ein“), konkreter Wunsch. Entscheidend ist, dass die Wirkung ehrlich benannt wird — und dass der Wunsch machbar ist. „Sag nicht mehr ab“ wäre unerfüllbar, „sag früher ab“ nicht.",
+ why:"Der Aufbau ist der Vierschritt, mit vorgezogenem Kontext: Beobachtung (zählbar, mit Beispiel), Anerkennung des Kontexts, eigene Wirkung („ich plane nicht mehr fest ein“), konkreter Wunsch — das „Trotzdem“ braucht die Entlastung davor. Entscheidend ist, dass die Wirkung ehrlich benannt wird — und dass der Wunsch machbar ist. „Sag nicht mehr ab“ wäre unerfüllbar, „sag früher ab“ nicht.",
  alt:"Das Eingangssignal „das ist mir unangenehm“ ist kein Zögern, sondern ein Rahmen: Es sagt dem anderen, dass gleich etwas Wichtiges kommt, und senkt die Abwehr."},
 
 {id:"sc08",ctx:"uni",t:"Der Fehler, der auffliegen wird",
@@ -2727,7 +2729,7 @@ const SCENES = [
  ask:"Schreib die Mail an die betreuende Person.",
  model:"<p>Sehr geehrte Frau Dr. Weber,</p><p>ich habe in meiner abgegebenen Hausarbeit einen Fehler gefunden und möchte Sie darüber informieren, bevor Sie mit der Korrektur beginnen.</p><p>In der Auswertung auf Seite 14 habe ich die Kontrollgruppe doppelt gezählt. Dadurch fällt der berichtete Effekt deutlich zu groß aus; korrekt gerechnet liegt er bei 4 statt bei 9 Prozent. Die Interpretation in Kapitel 5 muss ich entsprechend anpassen.</p><p>Ich habe eine korrigierte Fassung erstellt und würde sie Ihnen gern zusenden. Falls eine nachträgliche Korrektur nicht zulässig ist, verstehe ich das — mir war wichtig, dass Sie es von mir erfahren.</p><p>Mit freundlichen Grüßen<br>Nils Otten</p>",
  why:"Die Mail macht drei Dinge richtig: Sie benennt den Fehler konkret und beziffert die Folge, statt ihn abzuschwächen. Sie bietet eine Lösung an, statt um Nachsicht zu bitten. Und der letzte Satz akzeptiert im Voraus, dass die Korrektur abgelehnt werden kann — das macht die Mail glaubwürdig statt taktisch.",
- alt:"Was hier schaden würde: „Mir ist ein kleiner Fehler unterlaufen“ (Verkleinerung), „Es ist zu einem Fehler gekommen“ (Passiv) oder eine Erklärung, warum es passiert ist, vor der Sache selbst."},
+ alt:"Was hier schaden würde: „Mir ist ein kleiner Fehler unterlaufen“ (Verkleinerung), „Es ist zu einem Fehler gekommen“ (Nominalstil ohne Verursacher) oder eine Erklärung, warum es passiert ist, vor der Sache selbst."},
 
 {id:"sc09",ctx:"beruf",t:"Die Anfrage, die du gern annehmen würdest — aber nicht kannst",
  s:"Du wirst gefragt, ob du im kommenden Halbjahr eine AG übernimmst. Du willst es eigentlich, hast aber schon zwei Verpflichtungen und dein Examen vor der Brust.",
@@ -2799,7 +2801,7 @@ const EX_C = [
  e:"„wollte“, „mal“, „vielleicht“, „eventuell“ — jedes für sich in Ordnung, gestapelt entwerten sie die Bitte. <b>Eine Absicherung reicht:</b> „Hätten Sie kommende Woche Zeit?“",r:"form-hedging"},
 
 {id:"f08",c:"form",q:"Wie formulierst du eine Frist am wirksamsten?",o:[
- "„bis Mittwoch, den 5. August",
+ "„bis Mittwoch, den 5. August“",
  "„so schnell wie möglich“",
  "„zeitnah“"],a:0,
  e:"<b>Datum plus Grund.</b> „So schnell wie möglich“ und „zeitnah“ sind Dringlichkeitsgefühle, keine Informationen — jeder legt sie anders aus.",r:"form-frist"},
@@ -2846,7 +2848,7 @@ const EX_C = [
  e:"Auch wenn es stimmt: Der Vorwurf verschiebt das Gespräch auf die Schuldfrage. Besser: <b>Ausstiegstür anbieten</b> („vermutlich untergegangen“), Frist nennen, Grund nennen.",r:"form-nachhaken"},
 
 {id:"f16",c:"form",q:"Du hakst zum ersten Mal nach. Welche Formulierung erhält die Beziehung und bringt schneller eine Antwort?",o:[
- "„Vermutlich ist meine Mail im Alltag untergegangen",
+ "„Vermutlich ist meine Mail im Alltag untergegangen“",
  "„Ich warte immer noch auf Ihre Antwort.“",
  "„Falls Sie es vergessen haben sollten …“"],a:0,
  e:"Die <b>Ausstiegstür</b> lässt dem anderen das Gesicht. „Ich warte immer noch“ macht ihn zum Schuldigen, „falls Sie vergessen haben“ ist passiv-aggressiv.",r:"form-nachhaken"},
@@ -3087,7 +3089,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <p>Die Ausstiegstür erhöht die Zusagequote, weil sie das Nein billig macht. Wer Verfügbarkeit unterstellt („Du hast doch bestimmt Zeit“), erzeugt Widerstand.</p>`},
 
 {id:"form-frist",c:"form",t:"Fristen nennen",b:`
-<p><b>Immer ein Datum, nie eine Dringlichkeitsstufe.</b></p>
+<p><b>Nenn einen Zeitpunkt, keine Dringlichkeitsstufe.</b> Wie genau der Zeitpunkt sein muss, hängt vom Ton und vom Abstand ab: In lockeren und normalen Mails reicht der Wochentag („bis Freitag“), förmlich oder bei einem Termin weiter voraus nimmst du das volle Datum.</p>
 <div class="ex"><span class="nope">so schnell wie möglich · zeitnah · bald · dringend</span><br>
 <span class="ok">bis Mittwoch, den 5. August</span></div>
 <p>Und dazu <b>warum</b>: „Danach läuft die Anmeldefrist ab.“ Das verwandelt eine Forderung in eine Information.</p>
@@ -3098,7 +3100,8 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <div class="ex"><span class="nope">Ich <b>wollte mal</b> fragen, ob Sie <b>vielleicht eventuell</b> Zeit hätten.</span><br>
 <span class="ok">Hätten Sie kommende Woche Zeit für ein kurzes Gespräch?</span></div>
 <p><b>Regel: eine Absicherung pro Satz.</b> Der Konjunktiv „hätten“ trägt die Höflichkeit allein.</p>
-<p><b>Typische Stapler:</b> wollte, mal, vielleicht, eventuell, eigentlich, irgendwie, kurz, ganz kurz, nur.</p>
+<p><b>Typische Stapler:</b> wollte, mal, vielleicht, eventuell, eigentlich, irgendwie, ganz kurz, nur.</p>
+<p>Bei „kurz“ kommt es auf die Rolle an: Wenn es das Anliegen kleinredet, wirkt es wie die anderen Stapler („Ich hätte da mal ganz kurz eine Frage“). Als Angabe zur Dauer ist es eine Information und bleibt: „Zeit für ein kurzes Gespräch“, „über eine kurze Rückmeldung würde ich mich freuen“.</p>
 <p><b>Verkleinerungen</b> wirken genauso: „eine ganz kurze kleine Frage“ entwertet dein Anliegen im Voraus. Wenn die Frage so klein ist — warum sollte man sie beantworten? Falsch ist das nicht, es kostet dich nur Wirkung.</p>`},
 
 {id:"form-absagen",c:"form",t:"Absagen ohne schlechtes Gewissen",b:`
@@ -3159,14 +3162,14 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <span class="ex">„Du bist diese Woche dreimal später gekommen als abgemacht.“</span></p>
 <p><b>2. Wirkung</b> — was das bei dir auslöst<br>
 <span class="ex">„Das bringt mich in Zeitdruck.“</span></p>
-<p><b>3. Anerkennung des Kontexts</b> — optional, aber wirksam<br>
+<p><b>3. Anerkennung des Kontexts</b> — optional, aber wirksam; sie kann auch vor der Wirkung stehen<br>
 <span class="ex">„Ich weiß, dass bei dir gerade viel los ist.“</span></p>
 <p><b>4. Konkreter Wunsch</b> — erfüllbar formuliert<br>
 <span class="ex">„Sag mir kurz Bescheid, wenn es später wird.“</span></p>
 <hr class="sep">
 <p><b>Beobachtung ≠ Bewertung.</b> „Dreimal zu spät“ ist eine Beobachtung, „unzuverlässig“ ein Etikett. Über Beobachtungen kann man reden, über Etiketten nur streiten.</p>
 <p><b>„Immer“ und „nie“</b> sind die größten Konfliktverstärker der deutschen Sprache. Sie sind fast nie wahr — der andere sucht die Ausnahme und diskutiert über sie.</p>
-<p><b>Die Ich-Botschaft</b> ist kein Wohlfühl-Trick: Sie ist die einzige Aussage, die dein Gegenüber nicht bestreiten kann. „Du machst mich wütend“ schreibt ihm die Kontrolle über deine Gefühle zu — „Ich werde wütend, wenn …“ nicht.</p>
+<p><b>Die Ich-Botschaft</b> ist kein Wohlfühl-Trick: Über deine eigene Wirkung weißt nur du Bescheid, deshalb kann dein Gegenüber sie kaum bestreiten — genauso wenig wie eine zählbare Beobachtung. „Du machst mich wütend“ schreibt ihm die Kontrolle über deine Gefühle zu — „Ich werde wütend, wenn …“ nicht.</p>
 <p><b>Ohne Wunsch keine Kritik.</b> Wer nur beschreibt, was stört, lässt Unmut im Raum — und der ändert nichts.</p>`},
 
 {id:"form-kritikannehmen",c:"form",t:"Kritik annehmen",b:`
@@ -3239,7 +3242,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <li>Die Nachricht hinter drei Absätzen Vorrede verstecken</li>
 <li>Sie so weichzeichnen, dass der Empfänger sie überliest</li>
 </ul>
-<p>Und: Ausgerechnet hier greifen viele zu Passiv und Nominalstil („Es ist zu einer Nichtbewilligung gekommen“). Beides erhöht die Distanz genau da, wo Klarheit gebraucht wird.</p>`},
+<p>Und: Ausgerechnet hier greifen viele zu Nominalstil und Wendungen ohne Verursacher („Es ist zu einer Nichtbewilligung gekommen“). Das erhöht die Distanz genau da, wo Klarheit gebraucht wird.</p>`},
 
 {id:"form-floskel",c:"form",t:"Bausteinsprache ersetzen",b:`
 <p>Diese Sätze sagen nichts, was nicht ohnehin gilt:</p>
@@ -3362,7 +3365,7 @@ const CASEREF = [
 {w:"an",t:"wechsel",k:"Akk / Dat",ex:"Wohin? an die Wand (Akk) · Wo? an der Wand (Dat)",s:[["Ich hänge das Poster an ___ Wand.", "die", "der"], ["Das Poster hängt an ___ Wand.", "der", "die"]]},
 {w:"auf",t:"wechsel",k:"Akk / Dat",ex:"Wohin? auf den Tisch (Akk) · Wo? auf dem Tisch (Dat)",s:[["Ich stelle die Tasche auf ___ Bank.", "die", "der"], ["Die Tasche steht auf ___ Bank.", "der", "die"]]},
 {w:"hinter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? hinter das Haus · Wo? hinter dem Haus",s:[["Ich stelle das Rad hinter ___ Haus.", "das", "dem"], ["Das Rad steht hinter ___ Haus.", "dem", "das"]]},
-{w:"in",t:"wechsel",k:"Akk / Dat",ex:"Wohin? in die Halle · Wo? in der Halle",s:[["Wir fahren am Samstag in ___ Stadt.", "die", "der"], ["Wir wohnen seit Mai in ___ Stadt.", "der", "die"]]},
+{w:"in",t:"wechsel",k:"Akk / Dat",ex:"Wohin? in die Halle · Wo? in der Halle",s:[["Ich lege den Zettel in ___ Mappe.", "die", "der"], ["Wir wohnen seit Mai in ___ Stadt.", "der", "die"]]},
 {w:"neben",t:"wechsel",k:"Akk / Dat",ex:"Wohin? neben den Schrank · Wo? neben dem Schrank",s:[["Ich stelle den Stuhl neben ___ Schrank.", "den", "dem"], ["Der Stuhl steht neben ___ Schrank.", "dem", "den"]]},
 {w:"über",t:"wechsel",k:"Akk / Dat",ex:"Wohin? über die Straße · Wo? über der Tür",n:"Bei Themen immer Akkusativ: „über den Trainer sprechen“.",s:[["Ich hänge die Uhr über ___ Tür.", "die", "der"], ["Die Uhr hängt über ___ Tür.", "der", "die"]]},
 {w:"unter",t:"wechsel",k:"Akk / Dat",ex:"Wohin? unter den Tisch · Wo? unter dem Tisch",s:[["Ich schiebe die Kiste unter ___ Tisch.", "den", "dem"], ["Die Kiste steht unter ___ Tisch.", "dem", "den"]]},
@@ -3664,7 +3667,8 @@ Ich <b>habe</b> mich beeilt. (reflexiv)</div>
 <p>Für den Alltag reichen ein Dutzend Formen. Sie sind kürzer als die „würde“-Umschreibung und wirken weniger umständlich:</p>
 <div class="ex">haben → <b>hätte</b> · sein → <b>wäre</b> · werden → <b>würde</b><br>
 können → <b>könnte</b> · müssen → <b>müsste</b> · dürfen → <b>dürfte</b> · sollen → <b>sollte</b> · mögen → <b>möchte</b><br>
-wissen → <b>wüsste</b> · gehen → <b>ginge</b> · kommen → <b>käme</b> · tun → <b>täte</b> · brauchen → <b>bräuchte</b></div>
+wissen → <b>wüsste</b> · gehen → <b>ginge</b> · kommen → <b>käme</b> · tun → <b>täte</b> · brauchen → <b>bräuchte</b> / <b>brauchte</b></div>
+<p><b>Zu „brauchen“:</b> Regelgerecht wäre <b>brauchte</b> — „brauchen“ ist ein schwaches Verb. Durchgesetzt hat sich <b>bräuchte</b>, weil die Umlautform den Konjunktiv vom gleichlautenden Präteritum unterscheidet; der Duden führt sie als standardsprachlich, andere Sprachpflegestellen sehen das enger. Beide Formen sind vertretbar.</p>
 <p><b>Empfehlung:</b> Wo die eigene Form existiert und gebräuchlich ist, nimm sie. Die „würde“-Umschreibung ist nicht falsch — nur oft länger. Unentbehrlich bleibt sie, wo die eigene Form altertümlich klingt („würde helfen“ statt „hülfe“).</p>
 <div class="ex"><span class="ok">Wenn ich Zeit hätte, käme ich.</span><br>
 <span class="nope">Wenn ich Zeit haben würde, würde ich kommen.</span></div>
@@ -3677,6 +3681,8 @@ wissen → <b>wüsste</b> · gehen → <b>ginge</b> · kommen → <b>käme</b> �
 <div class="ex"><b>der</b> gut<b>e</b> Trainer · <b>dem</b> gut<b>en</b> Trainer · <b>die</b> gut<b>en</b> Trainer</div>
 <p><b>Kein Artikel da</b> → das Adjektiv übernimmt die volle Artikelendung:</p>
 <div class="ex">gut<b>er</b> Kaffee · mit gut<b>em</b> Kaffee · gut<b>e</b> Laune</div>
+<p><b>Eine Ausnahme:</b> Im Genitiv Singular maskulin und neutral endet das Adjektiv auf <b>-en</b>, nicht auf -es:</p>
+<div class="ex">trotz gut<b>en</b> Trainings · wegen schlecht<b>en</b> Wetters</div>
 <p><b>Unbestimmter Artikel</b> → gemischt, weil „ein“ in drei Formen kein Signal trägt:</p>
 <div class="ex"><b>ein</b> gut<b>er</b> Trainer (ein zeigt nichts → Adjektiv trägt -er)<br>
 <b>einen</b> gut<b>en</b> Trainer (einen zeigt schon Akkusativ → nur -en)</div>
@@ -3707,7 +3713,7 @@ Ich schicke <b>Ihnen</b> <b>die Unterlagen</b>.</div>
 <li><b>beibringen</b> ist das Dativ-Gegenstück zu „lehren“: „Er bringt <b>mir</b> das Schwimmen bei.“</li>
 </ul>`},
 
-{id:"sa16",t:"Wechselpräpositionen: wo oder wohin?",short:"Bewegung → Akkusativ, Ort → Dativ",b:`
+{id:"sa16",t:"Wechselpräpositionen: wo oder wohin?",short:"wohin? → Akkusativ · wo? → Dativ · Verbtest statt Bewegungstest",b:`
 <p>Neun Präpositionen können beides: <code>an, auf, hinter, in, neben, über, unter, vor, zwischen</code>.</p>
 <div class="ex"><b>Wohin?</b> Richtung, Bewegung mit Ziel → <b>Akkusativ</b><br>
 Ich stelle das Glas <b>auf den</b> Tisch. · Ich gehe <b>in die</b> Halle.<br><br>
@@ -3792,8 +3798,10 @@ Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
 <div class="ex">Ich wasche <b>mich</b>. (kein weiteres Objekt → Akkusativ)<br>
 Ich wasche <b>mir</b> die Hände. (Akkusativobjekt da → Reflexiv wird Dativ)</div>
 <p><b>Gleiches Muster:</b> sich kämmen, sich putzen, sich anziehen, sich verletzen.</p>
-<p><b>Nur Dativ</b> — hier steht immer ein Akkusativobjekt dabei:</p>
-<div class="ex">sich etwas merken · sich etwas überlegen · sich etwas vorstellen · sich etwas ansehen · sich etwas leisten · sich etwas einbilden · sich wehtun</div>
+<p><b>Nur Dativ</b> — bei diesen steht ein Akkusativobjekt dabei:</p>
+<div class="ex">sich etwas merken · sich etwas überlegen · sich etwas vorstellen · sich etwas ansehen · sich etwas leisten · sich etwas einbilden</div>
+<p><b>Auch nur Dativ, aber ohne Akkusativobjekt:</b> sich wehtun.</p>
+<div class="ex">Ich habe <b>mir</b> am Knie wehgetan.</div>
 <p><b>Nur Akkusativ:</b> sich beeilen, sich irren, sich erholen, sich freuen, sich schämen, sich ärgern, sich erinnern, sich setzen.</p>
 <p><b>Bedeutungsunterschied merken:</b><br>
 „Ich stelle <b>mich</b> vor.“ = Ich sage meinen Namen.<br>
@@ -3824,10 +3832,13 @@ Sie hat gefragt, <b>ob</b> du Zeit <b>hast</b>. (ohne Fragewort → „ob“)</d
 <b>Wenn</b> ich morgen Zeit habe, komme ich vorbei. (Zukunft)<br>
 <b>Wenn</b> du willst, fangen wir früher an. (Bedingung)</div>
 <p><b>Der Test:</b> Lässt sich <b>„damals, dieses eine Mal“</b> einsetzen? Dann <b>als</b>. Passt <b>„jedes Mal“</b> oder <b>„falls“</b>? Dann <b>wenn</b>.</p>
-<p><b>wann</b> ist das dritte Wort — es fragt nach dem Zeitpunkt und steht nur in direkten und indirekten <b>Fragen</b>:</p>
+<p><b>wann</b> ist das dritte Wort — es fragt nach dem Zeitpunkt und steht in direkten und indirekten <b>Fragen</b>:</p>
 <div class="ex"><b>Wann</b> fängt das Training an?<br>
 Ich weiß nicht, <b>wann</b> das Training anfängt.<br>
-<span style="opacity:.75">Nicht:</span> <s>Wann ich klein war …</s></div>`},
+<span style="opacity:.75">Nicht:</span> <s>Wann ich klein war …</s></div>
+<p>Daneben gibt es die feste Fügung <b>wann immer</b> („zu jedem Zeitpunkt, zu dem“) — keine Frage und trotzdem richtig. Für den schlichten Zeitsatz bleibt es bei <b>wenn</b> oder <b>als</b>:</p>
+<div class="ex">Melde dich, <b>wann immer</b> du willst.<br>
+<b>Wann immer</b> ich Zeit habe, gehe ich schwimmen.</div>`},
 
 {id:"sa24",c:"gram",t:"Verbformen, bei denen viele schwanken",short:"Ohne Objekt stark (hing, erschrak), mit Objekt schwach (hängte, erschreckte)",b:`
 <p>Einige Verben haben zwei Formen, die im Sprachgebrauch durcheinandergeraten. Hier ist beides gebräuchlich — aber nicht beides gilt gleich.</p>
@@ -3920,7 +3931,7 @@ const TABLES = [
 <tr><th>Dativ</th><td>dem</td><td>dem</td><td>der</td><td class="hl">denen</td></tr>
 <tr><th>Genitiv</th><td class="hl">dessen</td><td class="hl">dessen</td><td class="hl">deren</td><td class="hl">deren</td></tr>
 </tbody></table>
-<p class="tiny muted">Nur vier Formen weichen vom bestimmten Artikel ab: <b>denen</b> im Dativ Plural sowie <b>dessen / deren</b> im Genitiv. Alles andere ist identisch mit der, die, das.</p>`},
+<p class="tiny muted">Nur drei Formen weichen vom bestimmten Artikel ab: <b>denen</b> im Dativ Plural sowie <b>dessen / deren</b> im Genitiv. Alles andere ist identisch mit der, die, das.</p>`},
 
 {id:"tb08",t:"Fragewörter nach Fall",b:`
 <table class="dt"><thead><tr><th>Fall</th><th>Person</th><th>Sache</th><th>Beispiel</th></tr></thead><tbody>
@@ -4095,7 +4106,7 @@ const EX_D = [
 {id:"z01",c:"satz",q:"Welcher Satz ist richtig?",o:[
  "Morgen gehe ich ins Training.",
  "Morgen ich gehe ins Training."],a:0,
- e:"Im <b>Aussagesatz</b> steht das gebeugte Verb an zweiter Position. Steht etwas anderes als das Subjekt auf Position 1, rutscht das Subjekt automatisch hinter das Verb. (Vorn steht das Verb nur in der Ja/Nein-Frage und im Imperativ.)",r:"satz-v2"},
+ e:"Im <b>Aussagesatz</b> steht das gebeugte Verb an zweiter Position. Steht etwas anderes als das Subjekt auf Position 1, rutscht das Subjekt automatisch hinter das Verb. (Vorn steht das Verb in der Ja/Nein-Frage, im Imperativ und im uneingeleiteten Bedingungssatz: „Kommt er, dann gehen wir“.)",r:"satz-v2"},
 
 {id:"z02",c:"satz",q:"Welche Fassung gehört in einen geschriebenen Text?",o:[
  "Ich bleibe zu Hause, weil ich müde bin.",
@@ -4411,9 +4422,10 @@ const RULES_SATZ = SATZ_RULEMAP.map(m => ({
 </ul>`},
 
 {id:"gram-praepdat",c:"gram",t:"Präpositionen mit Dativ",b:`
-<p>Diese Präpositionen verlangen <b>immer</b> den Dativ:</p>
+<p>Diese Präpositionen verlangen den <b>Dativ</b>:</p>
 <div class="ex"><b>aus · außer · bei · gegenüber · mit · nach · seit · von · zu</b><br>
 dazu: ab · entgegen · gemäß · zufolge · samt · nebst · nahe · mitsamt</div>
+<p><b>Zwei fallen aus der Reihe:</b> <code>zufolge</code> steht nachgestellt mit Dativ („dem Bericht zufolge“), vorangestellt mit Genitiv („zufolge des Berichts“, seltener). <code>außer</code> steht in festen Wendungen ohne Kasus: „außer Betrieb“, „außer Atem“.</p>
 <p><b>Merkspruch:</b> „aus außer bei gegenüber mit nach seit von zu“ — als Reihe auswendig gelernt, spart es beim Sprechen jede Überlegung.</p>
 <div class="ex">aus <b>dem</b> Haus · bei <b>meiner</b> Schwester · mit <b>dem</b> Rad · nach <b>dem</b> Training · seit <b>einem</b> Jahr · von <b>meinem</b> Bruder · zu <b>dir</b></div>
 <p><b>Schwankende Fälle:</b> <code>dank</code>, <code>laut</code> und <code>binnen</code> gehen mit Dativ <i>und</i> Genitiv — beides ist korrekt.</p>
@@ -4523,7 +4535,7 @@ errs:[
 txt:"Die Klasse war heute Morgen ziemlich unmotiviert und faul. Ich hatte die Regeln erklärt während die Schüler die Bälle schon in der Hand hielten. Rückblickend würde ich sagen, dass ich die Erklärung vielleicht eventuell zu lang gemacht habe. Beim nächsten mal gebe ich die Bälle erst nach der Erklärung aus. Ausserdem war die Spielform für 24 Personen einfach zu eng angelegt. Ich habe dem Schüler, den ich geholfen habe, zusätzlich eine Aufgabe gegeben. Das hat gut funktioniert und ich werde das wieder so machen.",
 errs:[
  {w:"unmotiviert",ok:"(Beobachtung statt Etikett)",k:"„Unmotiviert“ ist eine Bewertung, keine Beobachtung. In einer Reflexion gehört zuerst hin, was sichtbar war: „Drei Schülerinnen standen am Rand.“",r:"form-kritik",c:"form"},
- {w:"faul.",ok:"(Beobachtung statt Etikett)",k:"Zweites Etikett im selben Satz. Beobachtbares Verhalten beschreiben statt die Person zu bewerten.",r:"form-kritik",c:"form"},
+ {w:"faul.",ok:"(Beobachtung statt Etikett)",k:"Zweites Etikett im selben Satz. Beobachtbares Verhalten beschreiben, statt die Person zu bewerten.",r:"form-kritik",c:"form"},
  {w:"erklärt",ok:"erklärt,",k:"Vor dem Nebensatz mit „während“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"vielleicht",ok:"(streichen)",k:"„würde sagen“ + „vielleicht“ + „eventuell“ — drei Abschwächungen. Eine genügt.",r:"stil-hedging",c:"stil"},
  {w:"mal",nth:1,ok:"Mal",k:"„Beim nächsten Mal“ — „Mal“ ist hier ein Substantiv nach Präposition und Artikel.",r:"gross-subst",c:"gross"},
@@ -4565,9 +4577,9 @@ errs:[
 ]},
 
 {id:"kt08",t:"Absage an eine Anfrage",ctx:"E-Mail, kollegial",lvl:"leicht",
-txt:"Hallo Frau Braun, vielen Dank für die Anfrage. Ich schaue mal ob ich es zeitlich hinbekomme, aber ich glaube das es eher schwierig wird, weil ich habe schon zwei andere Projekte. Es tut mir wirklich unglaublich Leid, dass ich Sie damit vielleicht enttäusche, und ich hoffe sehr, dass Sie mir das nicht übel nehmen. Falls Sie jemand anderen finden wäre das natürlich auch in Ordnung für mich. Viele Grüsse, Nils",
+txt:"Hallo Frau Braun, vielen Dank für die Anfrage. Ich schaue mal, ob ich es zeitlich hinbekomme, aber ich glaube das es eher schwierig wird, weil ich habe schon zwei andere Projekte. Es tut mir wirklich unglaublich Leid, dass ich Sie damit vielleicht enttäusche, und ich hoffe sehr, dass Sie mir das nicht übel nehmen. Falls Sie jemand anderen finden wäre das natürlich auch in Ordnung für mich. Viele Grüsse, Nils",
 errs:[
- {w:"mal",nth:1,ok:"(klare Absage)",k:"„Ich schaue mal“ ist ein Vielleicht, das keins ist. Es erzeugt nur Nachfragen — ein klares Nein ist respektvoller.",r:"form-absagen",c:"form"},
+ {w:"mal,",nth:1,ok:"(klare Absage)",k:"„Ich schaue mal“ ist ein Vielleicht, das keins ist. Es erzeugt nur Nachfragen — ein klares Nein ist respektvoller.",r:"form-absagen",c:"form"},
  {w:"das",nth:1,ok:"dass",k:"Konjunktion → „dass“.",r:"recht-dass",c:"recht"},
  {w:"glaube",ok:"glaube,",k:"Vor dem Nebensatz mit „dass“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"habe",nth:1,ok:"…, weil ich schon zwei andere Projekte habe.",k:"Nach „weil“ wandert das gebeugte Verb ans Satzende. Die Hauptsatzstellung ist gesprochen verbreitet, schriftlich aber auffällig.",r:"satz-nebensatz",c:"satz"},
@@ -4813,7 +4825,7 @@ Enden Zitat und Rahmensatz beide mit Frage- oder Ausrufezeichen, stehen beide: <
 <p><b>Volle Stunden</b> brauchen im Fließtext keine Nullen: <b>um 8 Uhr</b>. Mit Nullen schreibst du sie, wo Zahlen untereinanderstehen und die Spalten stimmen sollen: 08.00 oder 08:00. Beides ist korrekt, die kurze Form ist im Fließtext die knappere.</p>
 <p><b>Zeitspannen:</b></p>
 <div class="ex"><span class="ok">von 9 bis 11 Uhr</span> · <span class="ok">9–11 Uhr</span> · <span class="nope">von 9–11 Uhr</span></div>
-<p><b>Tageszeiten ausschreiben</b> statt 24-Stunden-Angaben zu mischen: „am Abend“ statt „um 20 Uhr abends“.</p>`},
+<p><b>Tageszeiten ausschreiben</b>, statt 24-Stunden-Angaben zu mischen: „am Abend“ statt „um 20 Uhr abends“.</p>`},
 
 {id:"n-datum",c:"zahlen",t:"Datum",b:`
 <p><b>Im Fließtext</b> ausgeschrieben, mit Punkt nach der Ordnungszahl:</p>
@@ -6363,7 +6375,7 @@ function drawRules(){
       "<li>Was <b>umgangssprachlich verbreitet, aber nicht standardsprachlich</b> ist, wird ausdrücklich so benannt — etwa „wegen dem Wetter“ oder „weil ich hab keine Zeit“.</li>"+
       "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung, Regel für Regel gegen Duden, GfdS und das Regelwerk 2024 gelesen: Das Komma bei erweiterten Infinitivgruppen ist seit 2024 Pflicht (§ 73), das schließende Komma nach mehrteiligen Datumsangaben ebenfalls — die App war an beiden Stellen auf dem Stand von 2006 und ist nachgezogen. Abgeschwächt wurden absolute Aussagen, wo Duden oder Regelwerk Freiräume lassen: kurze Formeln wie „wie besprochen“, das Komma in „vorausgesetzt(,) dass“, Kurzformeln als Zusatz, das Komma vor „und“ zwischen Hauptsätzen, das Adjektivkomma als Bedeutungsträger. Ergänzt: Nebensätze ohne Einleitewort, „denn“, mehrteilige Einleitungen („nur weil“), Komma vor „als“ mit zu-Infinitiv, gerade Zollzeichen sind keine englischen Anführungszeichen. Sechs Übungen hatten einen Ablenker, der laut Duden, Regelwerk oder Zitierkonvention ebenfalls richtig war (k18, p25, p11, p15, p18, p21) — behoben. Frage-, Ausrufezeichen, Klammern, Auslassungspunkte und Semikolon sind gegen den Regeltext geprüft; die Paragraphenzählung der Fassung 2024 ist dort nicht verifiziert, deshalb nennen die Regeln keine Nummern. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
       "<li><b>Zahlen, Uhrzeit, Datum:</b> Hier stehen Duden und DIN 5008 nebeneinander, und die App hat mehrfach eine Konvention als Regel ausgegeben. Korrigiert: Die Uhrzeit mit Doppelpunkt (8:30) und die volle Stunde mit Nullen (8.00 Uhr) sind zulässige Schreibungen und standen als Fehler da; „1000“ stand als Beispiel unter dem Satz „ab fünf Stellen wird gegliedert“; „Telefonnummern werden nicht gegliedert“ ließ sich nicht belegen und ist gestrichen; „Mio. und Mrd. nur in Tabellen“ war eine Hausregel ohne Quelle. Eine Ziffer am Satzanfang ist nicht falsch, sondern holprig — die Aufgabe dazu fragt jetzt nach der Empfehlung. Das harte Muster gegen „in 2026“ meldete auch „in 2000 Metern Höhe“ und ist auf „bitte prüfen“ herabgestuft. Nicht abgeschlossen: Maßeinheiten, Abkürzungen und Quellenangaben sind gelesen, aber nicht fertig belegt.</li>"+
-      "<li><b>Zusätzlich maschinell geprüft:</b> alle zehn Tabellen gegen die Standardparadigmen der Deklination und des Konjunktivs II, alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm.</li>"+
+      "<li><b>Zusätzlich maschinell geprüft:</b> fünf der zehn Tabellen gegen ein hinterlegtes Paradigma (bestimmter Artikel, Adjektiv nach bestimmtem und nach unbestimmtem Artikel, Relativpronomen, Konjunktiv II), alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm. Die übrigen fünf Tabellen laufen nur als korrekter Bestand gegen die harten Textcheck-Muster mit, nicht gegen ein Paradigma.</li>"+
       "<li><b>Widersprüche:</b> Eine laufende Prüfung meldet, wenn dasselbe Beispiel an einer Stelle als Fehler und an anderer als regionale Variante geführt wird. Wo Duden und amtliches Regelwerk mehrere Formen zulassen, steht das ausdrücklich da — auch dann, wenn eine Form empfohlen ist.</li>"+
     "</ul></div>";
   $("#ruleHost").innerHTML = (q||ruleFilter||ruleVar ? "" : hinweis) + (hits.length
@@ -7428,8 +7440,8 @@ const CHECKS = [
  k:"„wegen“ verlangt standardsprachlich den Genitiv: <b>wegen des Wetters</b>. Der Dativ ist umgangssprachlich.",r:"gram-genitiv"},
 {id:"x02",sev:"hart",re:/\btrotz\s+(dem|den|einem)\b/gi,t:"trotz + Genitiv",
  k:"„trotz“ verlangt den Genitiv: <b>trotz des Regens</b>.",r:"gram-genitiv"},
-{id:"x03",sev:"hart",re:/\bwährend\s+(dem|den|einem)\b/gi,t:"während + Genitiv",
- k:"„während“ verlangt den Genitiv: <b>während der Vorlesung</b>.",r:"gram-genitiv"},
+{id:"x03",sev:"pruef",re:/\bwährend\s+(dem|den|einem)\b/gi,t:"während + Genitiv",
+ k:"Als Präposition verlangt „während“ den Genitiv: <b>während der Vorlesung</b>. Prüf aber, ob hier die Konjunktion steht — die leitet einen Nebensatz ein, und dann gehört der Dativ in den Nebensatz: „Während dem Kollegen die Zeit fehlte, haben wir weitergemacht.“",r:"gram-genitiv"},
 {id:"x04",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:(?:größer|kleiner|besser|schlechter|schneller|langsamer|weniger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter)|(?<!nicht )(?<!nie )(?<!kaum )(?<!nichts )(?:mehr|länger))\s+wie\b(?!\s+(?:geplant|besprochen|vereinbart|abgesprochen|verabredet|angekündigt|gewohnt|gehabt|folgt|immer|üblich|bisher|zuvor|oben|unten|erwartet|beschrieben|gesagt|erwähnt|versprochen))/gi,
  t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“.",r:"gram-alswie"},
 {id:"x05",sev:"hart",re:/\bals\s+wie\b/gi,t:"„als wie“",
@@ -7460,7 +7472,7 @@ const CHECKS = [
 {id:"x22",sev:"pruef",re:/\bkostet\s+(mir|dir|ihm|uns|euch)\b/g,t:"kosten + Akkusativ?",
  k:"Bei Preis- und Zeitangaben steht standardsprachlich der Akkusativ: <b>Das kostet mich viel Zeit.</b> In der Bedeutung „jemanden um etwas bringen“ lässt der Duden auch den Dativ zu: „Das kostete ihm das Leben.“ Mit dem Akkusativ liegst du immer richtig.",r:"gram-akkverben"},
 {id:"x23",sev:"hart",re:/\b(dem|den|des|einem|einen|eines|diesem|diesen|jedem|jeden)\s+(Kollege|Junge|Kunde|Zeuge|Experte|Athlet|Praktikant|Student|Mensch|Pädagoge|Journalist|Kandidat|Präsident|Assistent|Patient|Klient|Polizist|Soldat|Fotograf|Philosoph|Architekt|Bauer|Prinz|Held|Löwe|Affe|Hase|Herr)\b(?![ne])/g,
- t:"n-Deklination",k:"Diese Substantive bekommen in allen Fällen außer dem Nominativ ein <b>-en</b>: „mit dem Kolleg<b>en</b>“, „für den Mensch<b>en</b>“.",r:"gram-ndekl"},
+ t:"n-Deklination",k:"Diese Substantive bekommen in allen Fällen außer dem Nominativ Singular ein <b>-en</b>: „mit dem Kolleg<b>en</b>“, „für den Mensch<b>en</b>“.",r:"gram-ndekl"},
 {id:"x24",sev:"pruef",re:/\b[Ii]n\s+(?:19|20)\d{2}\b(?!\s*(?:[A-ZÄÖÜ]|m\b|km\b|cm\b|mm\b|kg\b|g\b|l\b|ml\b|€))/g,t:"„in 2026“",
  k:"Als Zeitangabe ist das eine Übernahme aus dem Englischen: besser <b>2026</b> oder <b>im Jahr 2026</b>. Als Mengenangabe ist „in“ richtig — „in 2000 Metern Höhe“.",r:"stil-anglizismus"},
 {id:"x25",sev:"hart",re:/\b(?:Grüßen|Grüße|Gruß),[ \t]*(?:$|(?:[A-ZÄÖÜ][\wäöüß.-]*[ \t]*){1,3}$)/gm,t:"Komma nach der Grußformel",
@@ -7470,7 +7482,7 @@ const CHECKS = [
 {id:"x34",sev:"hart",re:/\bwider(hol|sah|sieht|sehen|kehr|gab|geben|gib)/gi,t:"wieder statt wider",
  k:"Bei „erneut“ steht <b>wieder</b> mit ie: wiederholen, wiedersehen, wiederkehren, wiedergeben. Ohne e nur bei „entgegen“: widersprechen, widerlegen.",r:"recht-wider"},
 {id:"x35",sev:"pruef",re:/\b(?:[Dd]ie|[Dd]en|[Vv]iele|[Aa]lle|[Ee]inige|[Mm]ehrere|[Bb]eide|[Zz]wei|[Dd]rei|[Vv]ier|[Ff]ünf|\d+)\s+[A-ZÄÖÜ][A-Za-zäöüß]*['’]s\b/g,t:"Plural mit Apostroph?",
- k:"Der Plural bekommt keinen Apostroph: <b>Fotos, Pizzas, DVDs</b>. Einer steht nur im Genitiv von Namen auf s-Laut (Andreas’ Buch) und bei Auslassungen (geht’s).",r:"recht-apostroph"},
+ k:"Der Plural bekommt keinen Apostroph: <b>Fotos, Pizzas, DVDs</b>. Im Genitiv von Namen auf s-Laut steht einer (Andreas’ Buch), ebenso bei Auslassungen (geht’s). Zulässig ist er außerdem in Namen wie „Andrea’s Blumenladen“ und vor -sch: „Newton’sche Gesetze“.",r:"recht-apostroph"},
 {id:"x27",sev:"hart",re:/\b(?:[Vv]orgestern|[Gg]estern|[Hh]eute|[Mm]orgen|[Üü]bermorgen)\s+(?:morgen|vormittag|mittag|nachmittag|abend|nacht)\b/g,t:"Tageszeit nach heute/gestern/morgen",
  k:"Tageszeiten sind hier Substantive und stehen groß: <b>heute Morgen, gestern Abend, morgen Nachmittag, heute Nacht</b>. Klein bleibt nur das Adverb „früh“: heute früh.",r:"gross-zeit"},
 {id:"x28",sev:"hart",re:/\btut\s+(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)\s+(?:sehr\s+|wirklich\s+|ehrlich\s+|aufrichtig\s+|furchtbar\s+|echt\s+)?Leid\b/g,t:"leid tun klein",
@@ -7499,18 +7511,18 @@ const CHECKS = [
  k:"<b>scheinbar</b> = nur dem Schein nach, in Wirklichkeit nicht. <b>anscheinend</b> = allem Anschein nach, vermutlich. Prüf, was du meinst.",r:"recht-verwechsel"},
 {id:"y05",sev:"pruef",re:/\b(der|die|das|den|dem)\s+(gleiche|gleichen|gleicher|gleiches)\b/g,t:"der gleiche oder derselbe?",
  k:"<b>derselbe</b> = ein und dasselbe Exemplar. <b>der gleiche</b> = von gleicher Art. Prüf, was gemeint ist.",r:"gram-derselbe"},
-{id:"y06",sev:"pruef",re:/\bwürde[nst]?\b[^.!?]{0,80}\bwürde[nst]?\b/g,t:"Doppeltes „würde“",
- k:"Wo die eigene Konjunktiv-II-Form existiert, ist sie kürzer und sicherer: <b>Wenn ich Zeit hätte, käme ich.</b>",r:"satz-konjunktiv"},
+{id:"y06",sev:"stil",re:/\bwürde[nst]?\b[^.!?]{0,80}\bwürde[nst]?\b/g,t:"Doppeltes „würde“",
+ k:"Kein Fehler, eine Stilfrage: Wo die eigene Konjunktiv-II-Form existiert, ist sie kürzer und wirkt weniger umständlich: <b>Wenn ich Zeit hätte, käme ich.</b>",r:"satz-konjunktiv"},
 {id:"y07",sev:"pruef",re:/\b(?:[Dd]es|[Ii]m|[Zz]um|[Aa]uf dem)\s+(weiteren|folgenden|allgemeinen|übrigen|wesentlichen|einzelnen|nachhinein|voraus|klaren|öfteren|laufenden)\b(?!\s+[A-ZÄÖÜ])/g,
  t:"Substantivierung großschreiben?",k:"Nach Präposition und Artikel wird substantiviert und großgeschrieben: <b>des Weiteren, im Folgenden, im Allgemeinen, im Voraus, im Nachhinein</b>. Folgt ein Substantiv, bleibt es klein: „im weiteren Verlauf“, „im folgenden Kapitel“.",r:"gross-subst"},
 {id:"y12",sev:"stil",re:/\b(?:[Vv]or|[Ss]eit|[Bb]innen)\s+(kurzem|langem|längerem)\b|\b(?:[Oo]hne|[Vv]on|[Bb]ei)\s+(weiteres|weitem)\b/g,
  t:"vor Kurzem oder vor kurzem?",k:"Ohne Artikel ist beides zulässig: <b>vor Kurzem</b> und <b>vor kurzem</b>, ebenso „seit Langem“, „ohne Weiteres“, „bei Weitem“. Der Duden empfiehlt die Großschreibung. Entscheide dich und bleib im Text dabei.",r:"gross-subst"},
-{id:"y08",sev:"pruef",re:/\b(etwas|nichts|alles|viel|wenig)\s+(?!andere|anderes|gleiche|meiste|mehr|übrige)[a-zäöüß]{4,}(es|e)\b/g,
- t:"Nach etwas/nichts/alles groß?",k:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das Adjektiv substantiviert: etwas <b>N</b>eues, nichts <b>B</b>esonderes, alles <b>G</b>ute, alles <b>W</b>eitere. Klein bleiben nur die Zahladjektive: etwas anderes, alles andere.",r:"gross-subst"},
+{id:"y08",sev:"pruef",re:/\b([Ee]twas|[Nn]ichts|[Aa]lles|[Vv]iel|[Ww]enig)\s+(?!andere|anderes|gleiche|meiste|mehr|übrige|ohne|eine|einer|jede|jedes|solche|solches)[a-zäöüß]{2,}(es|e)\b(?!\s+[A-ZÄÖÜ])/g,
+ t:"Nach etwas/nichts/alles groß?",k:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das Adjektiv substantiviert: etwas <b>N</b>eues, nichts <b>B</b>esonderes, alles <b>G</b>ute, alles <b>W</b>eitere. Klein bleiben die Zahladjektive: etwas anderes, alles andere. Und folgt ein Substantiv, ist das Adjektiv nur Attribut und bleibt ebenfalls klein: „viel frische Luft“, „wenig freie Plätze“.",r:"gross-subst"},
 {id:"y09",sev:"pruef",re:/\b(hoffe|denke|glaube|meine|sagte|sagt|sagen|finde|merke|wusste|bedeutet|zeigt|heißt|ist|war|bleibt|scheint|erklärt|betont|behauptet|vermute)\s+das\s+(ich|du|er|sie|es|wir|ihr|man|sich|der|die|das|ein|eine|einen|einem|dem|den|mein|sein|ihr)\b/g,
  t:"das oder dass?",k:"Ersatzprobe: Lässt sich „dieses/welches“ einsetzen? Wenn nein, ist es die Konjunktion <b>dass</b>.",r:"recht-dass"},
 {id:"y10",sev:"pruef",re:/,\s*wo\s+[a-zäöüß]+\s+(hat|ist|war|kann|will|soll|wird|macht|sagt)\b/g,
- t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relativ"},
+ t:"„wo“ als Relativpronomen",k:"Regional sehr verbreitet, standardsprachlich aber nicht: <b>der Mann, der das gesagt hat</b>.",r:"gram-relkasus"},
 
 /* ---------- STIL ---------- */
 {id:"s01",sev:"stil",re:/\b(eigentlich|irgendwie|quasi|sozusagen|letztendlich|schlussendlich|halt|durchaus|gewissermaßen|praktisch|im Grunde|an dieser Stelle|in diesem Kontext|im Rahmen dessen)\b/gi,
@@ -7520,9 +7532,9 @@ const CHECKS = [
 {id:"s03",sev:"stil",re:/\b(bereits\s+schon|schon\s+bereits|eventuell\s+vielleicht|vielleicht\s+eventuell|kleines\s+Detail|runder\s+Kreis|weißer\s+Schimmel|neu\s+renoviert|persönlich\s+anwesend|gemeinsames\s+Miteinander|zurzeit\s+momentan|alter\s+Greis|tote\s+Leiche)\b/gi,
  t:"Doppelung",k:"Zweimal dasselbe sagen wirkt unbeholfen. Eines der beiden Wörter reicht.",r:"stil-pleonasmus"},
 {id:"s04",sev:"stil",re:/\bEs\s+gibt\b|\bEs\s+ist\s+so,\s*dass\b|\bEs\s+sei\s+(erwähnt|angemerkt)\b/g,
- t:"Leerlauf am Satzanfang",k:"„Es gibt viele Studien, die zeigen …“ → <b>Viele Studien zeigen …</b> Der Satz sollte beim Thema beginnen.",r:"stil-esgibt"},
-{id:"s05",sev:"stil",re:/\bnicht\s+un[a-zäöüß]{3,}\b/gi,t:"Doppelte Verneinung",
- k:"„nicht unüberzeugend“ braucht einen zusätzlichen Denkschritt. Sag direkt, was du meinst.",r:"stil-verneinung"},
+ t:"Leerlauf am Satzanfang",k:"„Es gibt viele Studien, die zeigen …“ → <b>Viele Studien zeigen …</b> Gemeint ist die ankündigende Bauform „Es gibt X, die …“. Wo es wirklich ums Vorhandensein geht — „Es gibt keine verbindliche Regel“ —, bleibt „Es gibt“ stehen.",r:"stil-esgibt"},
+{id:"s05",sev:"stil",re:/\b[Nn]icht\s+un(?!ter)[a-zäöüß]{3,}\b/g,t:"Doppelte Verneinung",
+ k:"„nicht unüberzeugend“ braucht einen zusätzlichen Denkschritt. Sag direkt, was du meinst — es sei denn, du willst bewusst abstufen: dann ist die Litotes ein legitimes Stilmittel.",r:"stil-verneinung"},
 {id:"s06",sev:"stil",re:/\bSinn\s+(macht|machen|gemacht|machte)\b/gi,t:"„Sinn machen“",
  k:"Lehnübersetzung aus dem Englischen. In gehobenen Texten: <b>Sinn ergeben</b> oder <b>sinnvoll sein</b>.",r:"stil-anglizismus"},
 {id:"s07",sev:"stil",re:/\bman\s+(sollte|könnte|müsste|kann|muss|wird)\b/gi,t:"„man“ statt Zuständigkeit",
@@ -7537,7 +7549,7 @@ const CHECKS = [
 /* ---------- WIRKUNG UND TON ---------- */
 {id:"f01",sev:"form",re:/\bDanke\s+im\s+Vor(aus|raus)\b|\bVielen\s+Dank\s+im\s+Vor(aus|raus)\b/gi,t:"„Danke im Voraus“",
  k:"Setzt die Zusage voraus und macht das Nein teurer. Besser: „Über eine Rückmeldung würde ich mich freuen. Vielen Dank!“",r:"form-danken"},
-{id:"f02",sev:"form",re:/\bKein\s+Problem\b/gi,t:"„Kein Problem“",
+{id:"f02",sev:"form",re:/\bKein\s+Problem\b/g,t:"„Kein Problem“",
  k:"Als Antwort auf Dank verneint es, dass es Aufwand war — und entwertet den Dank. <b>„Sehr gern.“</b> nimmt ihn an.",r:"form-danken"},
 {id:"f03",sev:"form",re:/\bWir\s+müssen\s+reden\b/gi,t:"„Wir müssen reden“",
  k:"Löst bei fast jedem Alarm aus. Besser: Thema nennen und den Zeitpunkt zur Wahl stellen.",r:"form-konflikt"},
@@ -7555,7 +7567,7 @@ const CHECKS = [
  k:"Schreibt dem anderen die Kontrolle über deine Gefühle zu. Die Ich-Botschaft ist nicht bestreitbar: „Ich werde wütend, wenn …“",r:"form-kritik"},
 {id:"f10",sev:"form",re:/\bIch\s+hoffe,\s*es\s+geht\s+(Ihnen|dir)\s+gut\b/gi,t:"Vorrede vor dem Anliegen",
  k:"Beim Erstkontakt höflich gemeint, aber inhaltsleer — und verzögert das Anliegen. Nach dem ersten Satz sollte klar sein, worum es geht.",r:"form-mailaufbau"},
-{id:"f11",sev:"form",re:/\bIch\s+(hätte|habe)\s+(da\s+)?(mal\s+)?(nur\s+)?eine\s+(ganz\s+)?(kurze|kleine)\s+Frage\b/gi,
+{id:"f11",sev:"form",re:/\bIch\s+(hätte|habe)\s+(da\s+)?(mal\s+)?(nur\s+)?eine\s+(ganz\s+|sehr\s+|wirklich\s+)?(?:(?:kurze|kleine|schnelle)\s+){1,3}Frage\b/gi,
  t:"Verkleinerung",k:"Entwertet dein Anliegen im Voraus. Frag lieber nach dem Zeitpunkt: „Passt es Ihnen jetzt kurz?“",r:"form-hedging"},
 {id:"f12",sev:"form",re:/\bes\s+tut\s+mir\s+(sehr\s+|wirklich\s+|unglaublich\s+|furchtbar\s+)?leid,?\s*(falls|wenn)\b/gi,
  t:"Entschuldigung mit Ausweichmanöver",k:"„falls sich jemand gestört gefühlt hat“ verschiebt die Verantwortung zum Empfänger. Eine Entschuldigung braucht ein Subjekt und keinen Konjunktiv.",r:"form-fehler"},
@@ -7629,9 +7641,9 @@ const CHECKS_N = [
  t:"Doppeltes Perfekt",
  k:"„gemacht gehabt“ ist landschaftlich verbreitet. Im geschriebenen Standard genügt das Plusquamperfekt: <b>hatte ich schon gemacht</b>.",r:"satz-sprechen"},
 
-{id:"a11",sev:"stil",re:/\bwegen\s+(mir|dir|ihm|ihr|uns|euch)\b/gi,
+{id:"a11",sev:"pruef",re:/\bwegen\s+(mir|dir|ihm|ihr|uns|euch)\b/gi,
  t:"wegen mir → meinetwegen",
- k:"Standardsprachlich heißt es <b>meinetwegen, deinetwegen, seinetwegen</b>. „Wegen mir“ gilt als umgangssprachlich.",r:"gram-genitiv"}
+ k:"Standardsprachlich heißt es <b>meinetwegen, deinetwegen, seinetwegen</b>. „Wegen mir“ ist gesprochen verbreitet — geschrieben bleibt die Form auf -etwegen die sichere Wahl.",r:"gram-genitiv"}
 ];
 const CHECKS_ALL = CHECKS.concat(CHECKS_Z).concat(CHECKS_N);
 
@@ -7675,7 +7687,7 @@ function renderCheck(){
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
       "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
-      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> 78 Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie rund <b>drei von vier</b> eingebauten Fehlern. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
+      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa die Hälfte</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
       '<div class="spread" style="margin-bottom:10px"><div class="eyebrow" style="margin:0">Dein Text</div>'+
@@ -7973,10 +7985,10 @@ function cheatHTML(){
   'Relativsatz · Einschub beidseitig, auch nach dem Datum („am Montag, dem 3. Juni, um 9 Uhr“), Ausnahme: Erläuterung zwischen Adjektiv und Substantiv („eine kurze, das heißt fünfminütige Pause“) · vor <i>aber, sondern, doch, jedoch, denn</i> als Verbinder (als Adverb mitten im Satz keins: „Er kam jedoch zu spät“) · vor <i>das heißt, und zwar, zum Beispiel</i> als Nachtrag · '+
   'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat versucht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion (Komma, Semikolon oder Punkt — nur nichts geht nicht) · zwischen gleichrangigen Adjektiven, Und-Probe („ein langer, anstrengender Lauf“), nicht wenn das letzte Adjektiv zum Substantiv gehört („die neue rote Jacke“)</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen — außer, davor schließt ein Einschub oder Nebensatz · zwischen zwei Nebensätzen, die <i>und</i> verbindet · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
-  '<i>entweder … oder</i> · Vergleich ohne eigenes Verb („größer als ich“, „so gut wie du“), aber Komma vor <i>als/wie</i> + zu-Infinitiv („nichts anderes übrig, als aufzugeben“) · Infinitiv mit <i>brauchen, scheinen, haben, sein</i> („Du brauchst nicht zu kommen“) · nach der Grußformel</td></tr>'+
+  '<i>entweder … oder</i> zwischen gleichrangigen Satzteilen — verbinden die Paarformeln zwei Hauptsätze, ist das Komma freigestellt, vor ganzen Nebensätzen ist es Pflicht · Vergleich ohne eigenes Verb („größer als ich“, „so gut wie du“), aber Komma vor <i>als/wie</i> + zu-Infinitiv („nichts anderes übrig, als aufzugeben“) · Infinitiv als Teil eines mehrteiligen Prädikats — mit <i>sein, haben, brauchen, pflegen, scheinen</i> und übertragenem <i>drohen, versprechen</i>, auch bei erweiterter Gruppe („Du brauchst nicht zu kommen“, „Das Wetter droht schlecht zu werden“) · nach der Grußformel</td></tr>'+
   '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen (Pflicht, wenn davor ein Nebensatz, Einschub oder eine erweiterte Infinitivgruppe schließt) · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Partizipgruppe · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · eingeschobener Vergleich ohne Verb („wie letztes Jahr“) · vor <i>wie zum Beispiel</i> · Komma in „vorausgesetzt(,) dass“</td></tr>'+
   '</tbody></table>'+
-  '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · mit brauchen, scheinen, haben, sein → keins. Vor um, ohne, statt, anstatt, außer, als stand es schon immer. '+
+  '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · mehrteiliges Prädikat mit sein, haben, brauchen, pflegen, scheinen und übertragenem drohen, versprechen → keins, auch bei erweiterter Gruppe. Vor um, ohne, statt, anstatt, außer, als stand es schon immer. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+
 
   '<section class="ch-sec"><h2>2 · Präpositionen nach Fall</h2>'+
@@ -8002,7 +8014,7 @@ function cheatHTML(){
   '<div class="ch-2col"><div>'+tb("tb03")+'</div><div>'+tb("tb04")+'</div></div>'+
   '<div style="margin-top:8px">'+tb("tb05")+'</div>'+
   '<p class="ch-n"><b>Ein-Blick-Regel:</b> Das Kasussignal muss genau einmal vorkommen. '+
-  'Zeigt der Artikel den Fall schon, endet das Adjektiv auf -e oder -en. Fehlt der Artikel, trägt das Adjektiv die volle Endung.</p></section>'+
+  'Zeigt der Artikel den Fall schon, endet das Adjektiv auf -e oder -en. Fehlt der Artikel, trägt das Adjektiv die volle Endung — außer im Genitiv Singular maskulin und neutral, da steht -en (gut<b>en</b> Kaffees).</p></section>'+
 
   '<section class="ch-sec"><h2>5 · Satzbau in Kurzformeln</h2>'+
   '<table class="ch-t sm"><tbody>'+kurz+'</tbody></table></section>'+
@@ -8086,7 +8098,7 @@ function cheatHTML(){
 
   '<section class="ch-sec"><h2>12 · Zahlen, Datum, Abkürzungen</h2>'+
   '<table class="ch-t"><tbody>'+
-  '<tr><th>Ziffer/Wort</th><td>Konvention: eins bis zwölf ausschreiben, ab 13 Ziffern · immer Ziffern bei Maß, Geld, Zeit · Satzanfang ausschreiben</td></tr>'+
+  '<tr><th>Ziffer/Wort</th><td>Konvention: eins bis zwölf ausschreiben, ab 13 Ziffern · in aller Regel Ziffern bei Maß, Geld, Zeit (vor abgekürzter Einheit Pflicht: 5 kg, nicht „fünf kg“) · Satzanfang ausschreiben</td></tr>'+
   '<tr><th>Gliederung</th><td>1.250.000 oder 1 250 000 · Dezimalkomma: 1,5 · nicht gegliedert: Jahres- und Postleitzahlen</td></tr>'+
   '<tr><th>Leerzeichen</th><td>20 % · 5 kg · 12,50 € · 12 °C · § 5 · S. 12 · Nr. 7 — überall eines. Ohne: 90°, 20%ig · durchgekoppelt: 5-kg-Gewicht, 20-prozentig</td></tr>'+
   '<tr><th>Uhrzeit</th><td>Fließtext: um 8.30 Uhr · Tabelle: 08:30 · volle Stunde ohne Nullen: um 8 Uhr</td></tr>'+

@@ -58,6 +58,60 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Gegenprüfung der 120 offenen Funde (06.09.2026).** Die Liste aus dem Widerspruchslauf war
+ungeprüft — deshalb ein zweiter Lauf, der jede Meldung zu **widerlegen** versuchte und
+Prüfmuster mechanisch über `analyse()` nachstellte statt nach Gefühl zu urteilen.
+**63 der 120 fielen durch** — genau dafür war die Runde da. 54 hielten, 3 brauchen eine
+Quelle. Aus den haltbaren wurden 71 fertige Ersetzungen gebaut; jede habe ich selbst gegen
+die Datei geprüft (alle trafen genau einmal), vier Doppelmeldungen zusammengefasst,
+67 angewendet. Keine ändert die richtige Antwort einer Karte, also kein `NEU_GELERNT`.
+Alle Zahlen unverändert: 376 Übungen, 155 Wortkarten, 117 Regeln, 95 Prüfmuster, 86
+Markierungen, 696 Karten.
+
+Die Prüfmuster, jedes vorher und nachher nachgestellt:
+
+- **`x03`** meldete „Während dem Kollegen die Zeit fehlte, haben wir weitergemacht“ als
+  klaren Fehler — dort ist „während“ Konjunktion und „dem Kollegen“ das Dativobjekt des
+  Nebensatzes. Jetzt `pruef`, und der Hinweis nennt beide Lesarten.
+- **`y08`** meldete „viel frische Luft“ und „wenig freie Plätze“. Umgekehrt verlangte es
+  mindestens sechs Buchstaben und verfehlte damit **„etwas neues“**, das Musterbeispiel
+  seiner eigenen Regel. Beides behoben, dazu die Großformen am Satzanfang („Alles gute“).
+- **`s05`** (doppelte Verneinung) meldete „nicht **unter** die Dusche“ und „nicht
+  **unter**schiedlich“ — die Vorsilbe un- ist jetzt eingegrenzt.
+- **`f02`** traf jedes „kein Problem“ mitten im Satz; gemeint ist die Antwort auf einen Dank.
+- **`f11`** erkannte „eine ganz kurze Frage“, aber nicht „eine ganz kurze **kleine** Frage“ —
+  je stärker die Verkleinerung gestapelt war, desto weniger griff das Muster. Genau dieser
+  Satz steht in der App als abschreckendes Beispiel (`pr28`).
+- **`a11`** und **`y06`** standen auf Stufen, die der App widersprechen: „wegen mir“ ist wie
+  die Nachbarmuster eine Registerfrage, doppeltes „würde“ erklären `z15` und `sa12`
+  ausdrücklich für keinen Fehler.
+
+**Die App beschrieb sich selbst falsch.** Der Textcheck warb mit „78 Muster“ (es sind 95,
+die Zahl kommt jetzt aus `CHECKS_ALL.length` und kann nicht mehr veralten) und mit „erkennt
+rund drei von vier eingebauten Fehlern“. Nachgemessen an den eigenen Fehlersuchtexten sind
+es **47 von 86 markierten Stellen bei strenger Zählung, 47 bis 55 Prozent** — dort steht
+jetzt „etwa die Hälfte“.
+
+Inhaltlich außerdem: `komma-infinitiv` sagte „**immer** Komma“ und widerlegte das drei
+Absätze später selbst; der Merksatz nannte vier der sieben Verben, die den Ausnahmeabsatz
+bilden — im Spickzettel gleich zweimal. `kt08` ließ vor „ob“ das Komma weg, das vier andere
+Fehlersuchtexte anstreichen. `n-uhrzeit` und `kt04` schrieben eine Infinitivgruppe mit
+„statt“ ohne das Komma, das die App selbst zur Pflicht erklärt. Vier Stellen nannten
+„Es ist zu einer Nichtbewilligung gekommen“ ein Passiv — es ist Perfekt Aktiv, und der
+eigene Passivzähler der App gibt dafür 0. `gram-ndekl` nahm den ganzen Nominativ von der
+n-Deklination aus statt nur den Singular. Der „Stand der Prüfung“ behauptete, alle zehn
+Tabellen seien geprüft; es sind fünf.
+
+**Kontrollmessung nach allen Änderungen:** 1475 Proben aus dem gesamten sauberen Bestand —
+Regelbeispiele, Musterformulierungen der Schreibwerkstatt, Situationen, Schreibaufträge,
+Wortkarten und die richtigen Antworten aller Übungen — ergeben **keine einzige harte
+Meldung**. Die weicheren Stufen melden fast nur Stellen, an denen eine Regel die Falschform
+selbst zitiert (`stil-fuellwort` listet „eigentlich“, `stil-pleonasmus` „bereits schon“).
+
+`FUNDE-offen.md` führt jetzt die drei offenen Stellen und, als Gedächtnis für spätere Läufe,
+die 63 verworfenen Verdachtsfälle mit Begründung — damit niemand sie erneut als Fund meldet.
+
+
 **Widerspruchslauf über alle 117 Regeln (05.09.2026).** Ohne Suchbudget ist Faktenprüfung
 nicht möglich — also wurde nach dem gesucht, was ohne Quelle entscheidbar ist: Stellen, an
 denen die App sich selbst widerspricht. 26 Prüfer haben jede Regel gegen ihre Übungen,
