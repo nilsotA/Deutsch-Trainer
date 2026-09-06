@@ -1045,7 +1045,7 @@ const EX_B = [
 {id:"r09",c:"recht",q:"Welche Form ist richtig?",o:["Peters Trainingsplan","Peter's Trainingsplan"],a:0,
  e:"Im laufenden Text steht das Genitiv-s <b>ohne</b> Apostroph: Peters Trainingsplan. „Peter’s“ folgt dem englischen Muster. Vor einem angehängten Genitiv-s ist der Apostroph nur zulässig, wenn die Fügung selbst ein Name ist — etwa ein Laden- oder Firmenname: „Andrea’s Blumenladen“. Endet der Name auf einen s-Laut und steht kein Artikel davor, tritt der Apostroph an die Stelle des s: Nils’ Plan.",r:"recht-apostroph"},
 
-{id:"r10",c:"recht",q:"Wie bildet man den Genitiv von „Nils“?",o:["Nils’ Trainingsplan","Nils Trainingsplan"],a:0,
+{id:"r10",c:"recht",q:"Wie bildet man den Genitiv von „Nils“?",o:["Nils’ Trainingsplan","Nils’s Trainingsplan","Nils Trainingsplan"],a:0,
  e:"Endet ein Name auf <b>s, ss, ß, tz, z, x, ce</b> und steht kein Artikel davor, setzt man nur einen Apostroph, kein zusätzliches s: Andreas’ Buch, Max’ Rad, Nils’ Plan. Mit Artikel bleibt er ohne: der Plan des Nils.",r:"recht-apostroph"},
 
 {id:"r11",c:"recht",q:"Was stimmt?",o:["Sie war anscheinend krank.","Sie war scheinbar krank."],a:0,
@@ -5578,12 +5578,34 @@ function auslautHinweise(mein, alle){
   });
   return raus;
 }
+/* Apostroph beim Genitiv: „Nils’ Plan“, „Nils’s Plan“ und „Nils Plan“ klingen gleich —
+   das doppelte s spricht die Stimme nicht als eigenen Laut. Der Vergleich in hoerHinweis()
+   greift dort nicht, weil er gleichen Buchstabenbestand verlangt und „Nils’s“ ein s mehr
+   hat. Ohne diesen Hinweis bekämen zwei der drei Fassungen einen und die dritte nicht —
+   und dieses Muster wäre selbst die Antwort. */
+const APOS = /['’]/g;
+function apostrophHinweise(mein, alle){
+  const kern = t => String(t).toLowerCase().replace(APOS, "").replace(/ss\b/g, "s")
+    .replace(/[^\p{L}\p{N}]/gu, "");
+  const form = t => {
+    const m = String(t).match(/['’](s?)/);
+    return !m ? "ohne Apostroph" : (m[1] ? "mit Apostroph und s" : "mit Apostroph");
+  };
+  const meins = form(mein), raus = [];
+  alle.filter(a => a !== mein).forEach(a => {
+    if (kern(a) !== kern(mein) || form(a) === meins) return;
+    if (!raus.includes(meins)) raus.push(meins);
+  });
+  return raus;
+}
 function hoerHinweis(opt, alle){
   const roh   = t => strip(t).replace(/\s+/g," ").trim();
   const flach = t => nurZeichen(roh(t)).toLowerCase();
   const mein  = roh(opt);
   const gleich = alle.map(roh).filter(x => x !== mein && flach(x) === flach(mein));
-  const klang = klangHinweise(mein, alle.map(roh)).concat(auslautHinweise(mein, alle.map(roh)));
+  const klang = klangHinweise(mein, alle.map(roh))
+    .concat(auslautHinweise(mein, alle.map(roh)))
+    .concat(apostrophHinweise(mein, alle.map(roh)));
   if(!gleich.length) return klang.length ? " " + klang.join(", ") + "." : "";
   const hin = klang.slice();
   const zu = x => { if(x && !hin.includes(x)) hin.push(x); };
@@ -5597,7 +5619,8 @@ function hoerHinweis(opt, alle){
     if(ende(mein) !== ende(a) && ZEICHENNAME[ende(mein)]) merk("am Ende " + ZEICHENNAME[ende(mein)]);
     if(/\s[.,;:!?]/.test(mein) !== /\s[.,;:!?]/.test(a))
       merk(/\s[.,;:!?]/.test(mein) ? "mit Leerzeichen vor dem Satzzeichen" : "ohne Leerzeichen davor");
-    if(zahl(mein,"'") + zahl(mein,"’") !== zahl(a,"'") + zahl(a,"’"))
+    if(!hin.some(h => /Apostroph/.test(h)) &&
+       zahl(mein,"'") + zahl(mein,"’") !== zahl(a,"'") + zahl(a,"’"))
       merk(zahl(mein,"'") + zahl(mein,"’") ? "mit Apostroph" : "ohne Apostroph");
     if(mein.includes("-") !== a.includes("-"))
       merk(mein.includes("-") ? "mit Bindestrich" : "ohne Bindestrich");
@@ -5640,7 +5663,7 @@ function hoerHinweis(opt, alle){
         gefunden++;
       }
     }
-    if(!getroffen) zu(zeichenHinweis(mein));   // Notnagel: alle Zeichen nennen
+    if(!getroffen && !hin.length) zu(zeichenHinweis(mein));   // Notnagel: alle Zeichen nennen
   });
   return hin.length ? " " + hin.join(", ") + "." : "";
 }
