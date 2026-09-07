@@ -5911,6 +5911,27 @@ function sitzungFortsetzen(host){
   return true;
 }
 
+let scrollBeiFrage = null;
+/* Nach der Antwort steht die Erklärung — und unterwegs der Weiter-Knopf gleich mit — oft
+   unter der Falzkante. Die .walkbar ist zwar position:sticky;bottom:0, klebt aber nur
+   innerhalb ihres Elternblocks, und der beginnt erst hinter der Rückmeldung: ist die
+   Erklärung länger als der Rest des Schirms, kann die Leiste gar nicht ans Schirmende
+   gezogen werden. Gemessen auf 375x667 war der Weiter-Knopf nach der Antwort in 5 von 12
+   Fällen im Bild. Genau dann braucht Nils ihn — einhändig, beim Gehen.
+
+   Gescrollt wird nur, wenn nötig, und nur, wenn er seit dem Rendern der Frage nicht selbst
+   gescrollt hat; sonst würde ihn die App zurückholen. */
+function zeigeRueckmeldung(){
+  if(scrollBeiFrage === null || Math.abs(window.scrollY - scrollBeiFrage) > 8) return;
+  const fb = qEl(".fb"), knopf = qEl("#nextBtn");
+  if(!fb || !knopf) return;
+  const oben = fb.getBoundingClientRect().top;
+  const unten = knopf.getBoundingClientRect().bottom;
+  if(oben >= 0 && unten <= window.innerHeight) return;       // steht schon im Bild
+  const ziel = Math.max(0, window.scrollY + oben - 70);       // die Frage bleibt angeschnitten
+  try{ window.scrollTo({top:ziel, behavior:"smooth"}); }catch(e){ window.scrollTo(0, ziel); }
+  scrollBeiFrage = null;
+}
 function renderQ(){
   Q.beantwortet = false;
   const q = Q.list[Q.i];
@@ -5959,6 +5980,7 @@ function renderQ(){
       toast("Runde gemerkt — du kannst später weitermachen");
     };
   }
+  scrollBeiFrage = window.scrollY;
   if(Q.walk){
     const out = $("#walkOut");
     if(out) out.onclick = ()=>{ vorlesenStoppen(); bildschirmWachhalten(false);
@@ -6042,6 +6064,7 @@ function check(input){
                              ok ? ()=>{ if(Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
+  zeigeRueckmeldung();
   Q.beantwortet = true;
   sitzungSichern();
   qEl("#nextBtn").onclick = next;

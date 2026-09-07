@@ -328,7 +328,11 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d = w.document;
     d.querySelector("#wkNew").click();
     P.ok("Unterwegs-Modus an", d.body.classList.contains("walk"));
-    const ans = daten(w, "Q.list[0].ans");
+    /* Die Mischung der Runde ist nicht tagesfest, und Wortkarten tragen keine Regel —
+       also zur ersten Karte vorrücken, die eine hat, statt auf die erste zu bauen. */
+    w.eval("while(Q.i < Q.list.length - 1 && !Q.list[Q.i].rule) Q.i++; renderQ();");
+    P.ok("eine Karte mit Regel gefunden", !!daten(w, "Q.list[Q.i].rule || null"));
+    const ans = daten(w, "Q.list[Q.i].ans");
     [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0].click();   // falsch, damit die Regel dabeisteht
     const lnk = d.querySelector("#walkHost [data-rule]");
     P.ok("die Rückmeldung verweist auf die Regel", !!lnk);
@@ -365,6 +369,58 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
       d.querySelector("#dailyHost").textContent.slice(0, 60));
     P.ok("und sie ist gemerkt", !!daten(w, "S.session"));
     P.ok("mit dem Stand von vorher", daten(w, "(S.session && S.session.i) === 0"));
+  }
+
+  /* ---------- H · Rückmeldung im Bild ---------- */
+  P.titel("H · Rückmeldung im Bild");
+  {
+    /* Nach einer falschen Antwort standen Erklärung und Weiter-Knopf oft unter der
+       Falzkante. Die .walkbar ist zwar position:sticky;bottom:0, klebt aber nur innerhalb
+       ihres Elternblocks — und der beginnt erst hinter der Rückmeldung. Im Browser
+       gemessen (375x667, zwölf falsche Antworten): Weiter-Knopf im Bild vorher 4 von 12,
+       jetzt 12 von 12; Tagesaufgabe 0 von 12 auf 12 von 12.
+
+       jsdom rechnet kein Layout — alle Rechtecke sind null, zeigeRueckmeldung() hält sich
+       dort also für fertig. Geprüft wird deshalb die Entscheidung selbst, mit
+       untergeschobenen Rechtecken: scrollt sie, wenn die Rückmeldung unter dem Rand liegt,
+       und hält sie still, wenn Nils inzwischen selbst gescrollt hat. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const ans = daten(w, "Q.list[0].ans");
+    [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0].click();
+    w.eval(`
+      window.__gescrollt = [];
+      window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
+      Element.prototype.getBoundingClientRect = function(){
+        return {top:900, bottom:1000, left:0, right:0, width:0, height:0, x:0, y:900};
+      };
+    `);
+    P.ok("es gibt eine Stelle, die dafür sorgt", daten(w, "typeof zeigeRueckmeldung") === "function");
+    try { w.eval("zeigeRueckmeldung()"); } catch (e) { /* gibt es nicht — die Prüfung darunter meldet es */ }
+    P.ok("liegt die Rückmeldung unter dem Rand, wird gescrollt",
+      daten(w, "__gescrollt.length") === 1, daten(w, "__gescrollt"));
+    P.ok("und zwar so, dass die Frage angeschnitten bleibt",
+      daten(w, "(__gescrollt[0] === undefined ? null : __gescrollt[0])") === 830,
+      daten(w, "(__gescrollt[0] === undefined ? null : __gescrollt[0])"));
+
+    /* Zweiter Fall: Nils hat selbst gescrollt — dann holt ihn die App nicht zurück. */
+    const w2 = boot(leererStand({ auto: false }));
+    const d2 = w2.document;
+    d2.querySelector("#wkNew").click();
+    const ans2 = daten(w2, "Q.list[0].ans");
+    [...d2.querySelectorAll("#walkHost .opt")][ans2 === 0 ? 1 : 0].click();
+    w2.eval(`
+      window.__gescrollt = [];
+      window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
+      Element.prototype.getBoundingClientRect = function(){
+        return {top:900, bottom:1000, left:0, right:0, width:0, height:0, x:0, y:900};
+      };
+    `);
+    Object.defineProperty(w2, "scrollY", { value: 500, configurable: true });
+    try { w2.eval("zeigeRueckmeldung()"); } catch (e) { /* siehe oben */ }
+    P.ok("wer selbst gescrollt hat, wird nicht zurückgeholt",
+      daten(w2, "__gescrollt.length") === 0, daten(w2, "__gescrollt"));
   }
 
   P.abschluss();

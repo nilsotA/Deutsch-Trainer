@@ -58,6 +58,38 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Rückmeldung steht jetzt im Bild (07.09.2026).** Nach einer Antwort baut die App die
+Erklärung und darunter den Weiter-Knopf — und scrollte nicht mit. Die `.walkbar` ist zwar
+`position:sticky;bottom:0`, klebt aber nur innerhalb ihres Elternblocks, und der beginnt
+erst hinter der Rückmeldung: Ist die Erklärung länger als der Rest des Schirms, kann die
+Leiste gar nicht ans Schirmende gezogen werden. Genau in dem Moment, in dem Nils einhändig
+beim Gehen die Erklärung braucht, stand weder sie noch der Knopf im Bild.
+
+Im Browser gemessen, zwölf falsche Antworten je Lauf (falsch, weil die Erklärung dann am
+längsten ist):
+
+| | vorher | jetzt |
+|---|---|---|
+| unterwegs, 375×667 | Knopf 4/12 · Erklärung 7/12 | **12/12 · 12/12** |
+| unterwegs, 393×852 | 8/12 · 10/12 | 12/12 · 12/12 |
+| Tagesaufgabe, 375×667 | 0/12 · 6/12 | 12/12 · 12/12 |
+
+`zeigeRueckmeldung()` scrollt die Rückmeldung so weit hoch, dass 70 px darüber frei
+bleiben — die Frage bleibt angeschnitten sichtbar. Zwei Bedingungen halten es zurück: Steht
+alles schon im Bild, passiert nichts; und hat Nils seit dem Rendern der Frage selbst
+gescrollt (`scrollBeiFrage`), holt ihn die App nicht zurück.
+
+Geprüft in `tests/unterwegs.js`, Abschnitt **H · Rückmeldung im Bild**. jsdom rechnet kein
+Layout — dort sind alle Rechtecke null —, deshalb prüft der Lauf die *Entscheidung* mit
+untergeschobenen Rechtecken: scrollt sie, wenn die Rückmeldung unter dem Rand liegt, und
+hält sie still, wenn schon selbst gescrollt wurde. Das Verhalten selbst ist im Browser
+gemessen.
+
+Nebenbei aufgefallen: Die Zusammensetzung einer Unterwegs-Runde ist **nicht** tagesfest
+(`unterwegsRunde()` sät aus `Date.now()`), und Wortkarten tragen keine Regel. Ein Prüfschritt
+in Abschnitt G, der auf die erste Karte baute, war dadurch launisch — er rückt jetzt zur
+ersten Karte mit Regel vor. Wer dort neue Prüfungen schreibt, sollte das im Kopf haben.
+
 **Vier Sackgassen auf dem Handy (07.09.2026).** Alle vier sind in Chromium bei 393×852,
 375×667 und 667×375 gemessen, vorher wie nachher.
 
