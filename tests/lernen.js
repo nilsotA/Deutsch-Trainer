@@ -1,7 +1,7 @@
 /* Lernlogik: erster Start, Einstufung, Lernplan, Kartenrückweg,
    und ein Langzeitlauf über 180 Tage reinen Unterwegs-Übens. */
 
-const { boot, tag, leererStand, daten, schluessel, pruefer } = require("./setup");
+const { tippe, boot, tag, leererStand, daten, schluessel, pruefer } = require("./setup");
 const P = pruefer("A · Erster Start und Einstufung");
 
 /* ---------- A · Neuling ---------- */
@@ -28,10 +28,10 @@ const P = pruefer("A · Erster Start und Einstufung");
     if (q.t === "fill") {
       const inp = d.querySelector("#fillIn");
       inp.value = q.acc ? q.acc[0] : "x";
-      d.querySelector("#fillGo").click();
+      tippe(w, d.querySelector("#fillGo"));
     } else {
       const opts = [...d.querySelectorAll(".opt")];
-      opts[n % 3 === 0 ? (q.a === 0 ? 1 : 0) : q.a].click();
+      tippe(w, opts[n % 3 === 0 ? (q.a === 0 ? 1 : 0) : q.a]);
     }
     const weiter = d.querySelector("#nextBtn");
     if (!weiter) break;
@@ -86,10 +86,10 @@ P.titel("A2 · Unterbrochene Einstufung");
       const q = daten(fenster, "({t:Q.list[Q.i].type, a:Q.list[Q.i].ans, acc:Q.list[Q.i].accept||null})");
       if (q.t === "fill") {
         dok.querySelector("#fillIn").value = q.acc ? q.acc[0] : "x";
-        dok.querySelector("#fillGo").click();
+        tippe(fenster, dok.querySelector("#fillGo"));
       } else {
         const opts = [...dok.querySelectorAll(".opt")];
-        opts[n % 3 === 0 ? (q.a === 0 ? 1 : 0) : q.a].click();
+        tippe(fenster, opts[n % 3 === 0 ? (q.a === 0 ? 1 : 0) : q.a]);
       }
       const weiter = dok.querySelector("#nextBtn");
       if (!weiter) break;

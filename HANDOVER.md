@@ -58,6 +58,57 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vier kleinere, aber lästige Fehler (07.09.2026).**
+
+**1 · Ein Doppeltipp beantwortete die nächste Frage.** `renderQ()` ersetzt den Karteninhalt
+sofort. Ein zweiter Tipp an derselben Stelle — Nachfassen, unsicherer Daumen in Bewegung —
+landet auf dem, was dort jetzt liegt, und über eine Runde von 20 Karten liegt der
+Weiter-Knopf dreimal (393×852) genau über einer Antwortoption der Folgefrage. Die Karte
+stand danach ungesehen als Fehler im Lernstand, im Fehlerjournal und in der
+„Nur Fehler“-Runde. `check()` verwirft jetzt Antworten, die weniger als 350 ms nach dem
+Rendern kommen — kürzer als jede bewusste Antwort, länger als ein Prelltipp.
+
+Das trifft auch die Prüfläufe, die viel schneller tippen als ein Mensch: sie gehen jetzt
+über `tippe(w, knopf)` aus `tests/setup.js`, das die Sperre vor dem Klick zurückstellt. Wer
+eine neue Prüfung schreibt, die eine Antwort antippt, muss das auch tun (steht in
+`CLAUDE.md`).
+
+**2 · Enter bei einer Tippaufgabe blätterte sofort weiter.** Das Eingabefeld hat einen
+eigenen Enter-Horcher, und der Horcher am Dokument prüfte denselben Druck noch einmal, fand
+den eben entstandenen Weiter-Knopf und drückte ihn. Ein Tastendruck wertete also die
+Antwort und schaltete weiter — „Richtig wäre: …“ war nie zu sehen, und bei einer
+Tippaufgabe ist genau das der Ertrag. Betrifft 44 der 376 Übungen; unterwegs nichts, dort
+filtert `startQuiz()` sie heraus. Der Horcher am Feld verbraucht den Druck jetzt.
+
+**3 · Nach einem Anruf blieb der Bildschirm nicht mehr an.** Der Browser gibt die
+Bildschirmsperre von selbst frei, sobald das Dokument unsichtbar wird — Anruf,
+Benachrichtigung, Sperrtaste, App-Wechsel. Die App erfuhr davon nichts: `wakeSperre` blieb
+gesetzt, obwohl die Sperre weg war, und genau daran scheiterte jede Neuanforderung
+(`if(an && navigator.wakeLock && !wakeSperre)`). Der Bildschirm ging danach für den Rest der
+Sitzung aus, obwohl in der Kartenansicht steht: „Der Bildschirm bleibt während der Runde
+an.“ Jetzt vergisst ein `release`-Horcher den Sentinel, und ein `visibilitychange`-Horcher
+fordert bei der Rückkehr neu an, solange eine Unterwegs-Runde läuft.
+
+Der Ersatz in `tests/setup.js` lieferte bis eben ein nacktes Objekt ohne
+`addEventListener` — kein Prüflauf konnte das sehen. Er bildet das Browserverhalten jetzt
+nach (Sentinel mit `release`-Ereignis, `__wakeVerlieren()` für das Wegblenden). Das ist
+dieselbe Klasse Lücke wie beim Sprach-Ersatz vor zwei Tagen.
+
+**4 · Ein Prüfmuster fror die Oberfläche ein.** `a04` suchte lange Sätze mit
+`/[A-ZÄÖÜ][^.!?]{230,}[.!?]/`. Da im Deutschen fast jedes Substantiv groß beginnt, setzt so
+ein Muster alle paar Zeichen neu an, und ohne Obergrenze läuft jeder Versuch bis zum
+Textende: der Aufwand vervierfacht sich, wenn der Text doppelt so lang wird. Nicht die
+Länge ist das Problem, sondern **fehlende Satzpunkte** — ein zeilenweise notierter
+Trainingsplan, eine Mitschrift. In genau diesen Texten kann `a04` gar nichts finden.
+Gemessen über `analyse()` an 6000 Wörtern ohne Satzzeichen: **544 ms → 24 ms**. Die
+Obergrenze `{230,600}` ändert an echten Fundstellen nichts (Bandwurmsätze ein- bis
+fünffach: alt 1/2/3/5, neu 1/2/3/5).
+
+Neu in `tests/suite.js`: kein Prüfmuster darf eine nach oben offene Wiederholung über einer
+verneinten Zeichenklasse haben, plus eine großzügige Schranke von 250 ms für den ganzen
+Textcheck über 6000 Wörter ohne Satzzeichen. Beide fallen gegen die alte Fassung durch
+(442 ms). Neu in `tests/unterwegs.js`, Abschnitt **I** (12 Prüfungen, sieben fallen durch).
+
 **Die Rückmeldung steht jetzt im Bild (07.09.2026).** Nach einer Antwort baut die App die
 Erklärung und darunter den Weiter-Knopf — und scrollte nicht mit. Die `.walkbar` ist zwar
 `position:sticky;bottom:0`, klebt aber nur innerhalb ihres Elternblocks, und der beginnt

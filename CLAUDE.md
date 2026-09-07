@@ -184,6 +184,12 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
   prüft, dass der Hinweis das unterscheidende Zeichen beim Namen nennt.
 - Nach richtiger Antwort schaltet die App selbst weiter (`autoAn`/`autoAus`), beim Vorlesen
   erst nach dem Satzende. Abbrechen per Tipp, abschaltbar über ⏩.
+- **350 ms Prellsperre.** `check()` verwirft Antworten, die weniger als 350 ms nach dem
+  Rendern der Frage kommen: ein Nachfassen an derselben Stelle traf sonst eine Option der
+  Folgekarte, und die landete ungesehen als Fehler im Lernstand. Die Prüfläufe tippen
+  schneller als jeder Mensch und setzen die Sperre über `tippe(w, knopf)` aus `tests/setup.js`
+  vor jedem Klick zurück — **neue Prüfungen, die eine Antwort antippen, müssen das auch tun**,
+  sonst zählt der Klick nicht. Die Sperre selbst prüft `tests/unterwegs.js`, Abschnitt I.
 - Rundenende zeigt die Fehler nach Regel gebündelt, antippbar ins Regelwerk.
 - „Nur Fehler“-Runde über `schwachRunde()` aus `schwacheSchluessel()`.
 

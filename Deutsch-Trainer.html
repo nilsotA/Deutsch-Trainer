@@ -5590,7 +5590,16 @@ let wakeSperre = null;
 function bildschirmWachhalten(an){
   try{
     if(an && navigator.wakeLock && !wakeSperre){
-      navigator.wakeLock.request("screen").then(x=>{ wakeSperre = x; }).catch(()=>{});
+      /* Der Browser gibt die Bildschirmsperre von selbst frei, sobald das Dokument
+         unsichtbar wird — Anruf, Benachrichtigung, Sperrtaste, App-Wechsel. Ohne den
+         release-Horcher blieb wakeSperre gesetzt, obwohl die Sperre weg war, und genau
+         daran scheiterte jede Neuanforderung: die Bedingung oben verlangt !wakeSperre.
+         Der Bildschirm ging danach für den Rest der Sitzung aus, obwohl die Kartenansicht
+         „Der Bildschirm bleibt während der Runde an“ verspricht. */
+      navigator.wakeLock.request("screen").then(x=>{
+        wakeSperre = x;
+        try{ if(x && x.addEventListener) x.addEventListener("release", ()=>{ if(wakeSperre === x) wakeSperre = null; }); }catch(e){}
+      }).catch(()=>{});
     } else if(!an && wakeSperre){ wakeSperre.release().catch(()=>{}); wakeSperre = null; }
   }catch(e){}
 }
@@ -5934,6 +5943,7 @@ function zeigeRueckmeldung(){
 }
 function renderQ(){
   Q.beantwortet = false;
+  Q.frageSeit = Date.now();
   const q = Q.list[Q.i];
   const pct = Math.round(Q.i / Q.list.length * 100);
   let body = "";
@@ -6003,7 +6013,16 @@ function renderQ(){
   if(q.type === "fill"){
     const inp = qEl("#fillIn");
     inp.focus();
-    inp.addEventListener("keydown", e=>{ if(e.key==="Enter") check(inp.value); });
+    /* Der Tastendruck muss hier aufgebraucht werden. Sonst prüft ihn danach auch der
+       Horcher am Dokument, findet den eben entstandenen Weiter-Knopf und drückt ihn: ein
+       Enter wertete die Antwort und blätterte gleich weiter, „Richtig wäre: …“ war nie zu
+       sehen — bei einer Tippaufgabe genau der Ertrag. Nach dem Prüfen ist das Feld
+       deaktiviert, der nächste Enter läuft wieder durch. */
+    inp.addEventListener("keydown", e=>{
+      if(e.key!=="Enter") return;
+      e.preventDefault(); e.stopPropagation();
+      check(inp.value);
+    });
     qEl("#fillGo").onclick = ()=>check(inp.value);
   } else {
     qAll(".opt").forEach(b => b.onclick = ()=>check(parseInt(b.dataset.i,10)));
@@ -6011,6 +6030,13 @@ function renderQ(){
 }
 
 function check(input){
+  /* Prelltipp: renderQ() ersetzt den Karteninhalt sofort. Ein zweiter Tipp an derselben
+     Stelle — Nachfassen, unsicherer Daumen in Bewegung — landet auf dem, was dort jetzt
+     liegt, und über eine Runde von 20 Karten liegt der Weiter-Knopf dreimal (393x852)
+     genau über einer Antwortoption der Folgefrage. Die Karte stand danach ungesehen als
+     Fehler im Lernstand, im Fehlerjournal und in der „Nur Fehler“-Runde. 350 ms sind
+     kürzer als jede bewusste Antwort und länger als ein Prelltipp. */
+  if(Q.frageSeit && Date.now() - Q.frageSeit < 350) return;
   const q = Q.list[Q.i];
   let ok, chosen = -1;
   if(q.type === "mc"){
@@ -7868,7 +7894,7 @@ const CHECKS_N = [
 {id:"a03",sev:"stil",re:/\b(wurde|wurden)\s+(?:[^.!?]{0,40}?)\bvon\s+(?:dem|der|den|einem|einer|meinen?|unseren?)\b[^.!?]{0,40}?\b(?:(?:[a-zäöüß]{2,7}ge|ge)[a-zäöüß]{2,}(?:t|en)|(?:be|er|ver|ent|emp|zer|miss|über|unter)[a-zäöüß]{3,}(?:t|en)|[a-zäöüß]{3,}iert)\b/g,
  t:"Passiv mit genanntem Handelnden",
  k:"Wenn der Handelnde ohnehin dasteht, ist das Aktiv kürzer und klarer: „Der Fragebogen wurde von den Teilnehmenden ausgefüllt“ → „Die Teilnehmenden füllten den Fragebogen aus“.",r:"stil-passiv"},
-{id:"a04",sev:"stil",re:/[A-ZÄÖÜ][^.!?]{230,}[.!?]/g,
+{id:"a04",sev:"stil",re:/[A-ZÄÖÜ][^.!?]{230,600}[.!?]/g,   /* Obergrenze, sonst quadratisch: siehe Kommentar bei CHECKS */
  t:"Sehr langer Satz",
  k:"Über 30 Wörter in einem Satz. Prüf, ob sich die Satzklammer noch schließt und ob zwei Sätze nicht klarer wären.",r:"stil-schachtel"},
 {id:"a05",sev:"stil",re:/\b(der|des|dem)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+/g,
@@ -8456,6 +8482,12 @@ document.addEventListener("keydown", e=>{
 });
 renderAll();
 if(standDefekt) zeigeLesewarnung();
+
+/* Kommt die App aus dem Hintergrund zurück und läuft noch eine Unterwegs-Runde, muss die
+   Bildschirmsperre neu angefordert werden — der Browser hat sie beim Wegblenden freigegeben. */
+document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState === "visible" && Q && Q.walk && !Q.done) bildschirmWachhalten(true);
+});
 
 /* Eine unterbrochene Runde nicht verlieren */
 (function(){ if(sitzungOffen()){ go("karten"); } })();

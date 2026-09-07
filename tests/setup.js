@@ -37,7 +37,30 @@ function boot(stand, optionen = {}) {
       w.URL.createObjectURL = () => "blob:x";
       w.URL.revokeObjectURL = () => {};
       w.navigator.vibrate = () => true;
-      w.navigator.wakeLock = { request: () => Promise.resolve({ release: () => Promise.resolve() }) };
+      /* Wie im echten Browser: die Bildschirmsperre ist ein Sentinel mit release-Ereignis,
+         und der Browser gibt sie von selbst frei, sobald das Dokument unsichtbar wird.
+         Solange der Ersatz hier nur ein nacktes Objekt lieferte, konnte kein Prüflauf
+         sehen, dass die App die Sperre danach nie wieder anforderte. */
+      const sperren = [];
+      w.navigator.wakeLock = {
+        request() {
+          const s = {
+            type: "screen", released: false, __hoerer: [],
+            addEventListener(name, fn) { if (name === "release") this.__hoerer.push(fn); },
+            release() { this.__freigeben(); return Promise.resolve(); },
+            __freigeben() {
+              if (this.released) return;
+              this.released = true;
+              this.__hoerer.forEach(fn => { try { fn(); } catch (e) {} });
+            }
+          };
+          sperren.push(s);
+          return Promise.resolve(s);
+        }
+      };
+      w.__wakeSperren = sperren;
+      /* Das tut der Browser beim Wegblenden — hier von Hand auslösbar. */
+      w.__wakeVerlieren = () => sperren.forEach(s => s.__freigeben());
       w.SpeechSynthesisUtterance = function (text) { this.text = text; };
       /* Wie im echten Browser: cancel() bricht die laufende Äußerung ab und meldet
          das als Ende. Solange der Stub hier nichts tat, konnte der Prüflauf einen
@@ -71,6 +94,15 @@ function leererStand(extra = {}) {
     plan: null, lastExport: null, session: null, speak: false, auto: true,
     theme: "light", seenW: {}
   }, extra);
+}
+
+/* Antwort antippen. Die App sperrt Antworten 350 ms nach dem Rendern einer Frage — gegen
+   den Prelltipp, siehe check() in der App. Die Prüfläufe tippen viel schneller als jeder
+   Mensch und stellen die Sperre deshalb vor jedem Klick zurück; die Sperre selbst prüft
+   tests/unterwegs.js, Abschnitt I. */
+function tippe(w, el) {
+  try { w.eval("if (typeof Q !== 'undefined' && Q) Q.frageSeit = 0"); } catch (e) { /* keine Runde */ }
+  el.click();
 }
 
 /* Daten aus der laufenden App holen (JSON-fähige Teile) */
@@ -111,4 +143,4 @@ function pruefer(titel) {
   };
 }
 
-module.exports = { APP, KEY, HTML, boot, tag, leererStand, daten, schluessel, pruefer };
+module.exports = { tippe, APP, KEY, HTML, boot, tag, leererStand, daten, schluessel, pruefer };

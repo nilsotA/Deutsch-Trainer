@@ -310,6 +310,28 @@ KORREKTUR.forEach(t => {
 });
 P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauffindbar.join(" · "));
 
+/* Fehlerklasse „nach oben offene Wiederholung über einer verneinten Zeichenklasse“:
+   a04 suchte sehr lange Sätze mit /[A-ZÄÖÜ][^.!?]{230,}[.!?]/. Da im Deutschen fast jedes
+   Substantiv groß beginnt, setzt so ein Muster alle paar Zeichen neu an, und ohne
+   Obergrenze läuft jeder Versuch bis zum Textende — der Aufwand vervierfacht sich, wenn
+   der Text doppelt so lang wird. Gemessen an einem zeilenweise notierten Trainingsplan
+   ohne Satzpunkte: 6000 Wörter brauchten 544 ms, in denen a04 nicht eine Fundstelle
+   liefern kann (ohne Punkt trifft es nie). Mit Obergrenze sind es 24 ms. */
+const offeneWdh = muster.filter(c => /\[\^[^\]]*\]\{\d+,\}/.test(c.re));
+P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer verneinten Klasse",
+  !offeneWdh.length, offeneWdh.map(c => c.id + ": " + c.re).join(" · "));
+
+{
+  /* Und die Wirkung selbst, großzügig bemessen: die Schranke soll einen Rückfall in die
+     Größenordnung 500 ms fangen, nicht eine bestimmte Rechnerleistung festschreiben. */
+  const woerter = ["Training", "Einheit", "Gruppe", "Aufwärmen", "Sprint", "Pause",
+                   "Dehnen", "Sprungkraft", "Koordination", "Ausdauer"];
+  w.__probe = Array.from({ length: 6000 }, (_, i) => woerter[i % 10]).join(" ");
+  const ms = w.eval("(function(){const t=window.__probe;const a=Date.now();analyse(t);return Date.now()-a;})()");
+  P.info("Textcheck über 6000 Wörter ohne Satzzeichen: " + ms + " ms");
+  P.ok("Der Textcheck friert bei Text ohne Satzzeichen nicht ein", ms < 250, ms + " ms");
+}
+
 /* ---------- E · Ansichten ---------- */
 P.titel("E · Ansichten");
 const d = w.document;

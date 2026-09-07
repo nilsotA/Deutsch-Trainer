@@ -1,7 +1,7 @@
 /* Unterwegs-Modus — der Hauptanwendungsfall.
    Kartenmix in Grenzfällen, automatisches Weiterschalten, Rückblick, Fehlerrunde. */
 
-const { boot, tag, leererStand, daten, schluessel, pruefer } = require("./setup");
+const { tippe, boot, tag, leererStand, daten, schluessel, pruefer } = require("./setup");
 const P = pruefer("A · Zusammensetzung der Runde");
 
 const w0 = boot(null);
@@ -79,13 +79,13 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d = w.document;
     d.querySelector("#wkNew").click();
     const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
-    d.querySelectorAll(".opt")[vor.ans].click();
+    tippe(w, d.querySelectorAll(".opt")[vor.ans]);
     P.ok("Laufstreifen nach richtiger Antwort", d.body.classList.contains("autolauf"));
     await schlaf(2600);
     P.ok("schaltet von selbst weiter", daten(w, "Q.i") === vor.i + 1, daten(w, "Q.i"));
     const jetzt = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
     const falsch = [...d.querySelectorAll(".opt")].findIndex((b, i) => i !== jetzt.ans);
-    d.querySelectorAll(".opt")[falsch].click();
+    tippe(w, d.querySelectorAll(".opt")[falsch]);
     await schlaf(2600);
     P.ok("nach Fehler bleibt es stehen", daten(w, "Q.i") === jetzt.i);
   }
@@ -95,7 +95,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     d.querySelector("#wkNew").click();
     const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
     P.ok("Frage wird vorgelesen", (w.__gesagt || []).length > 0);
-    d.querySelectorAll(".opt")[vor.ans].click();
+    tippe(w, d.querySelectorAll(".opt")[vor.ans]);
     await schlaf(900);
     P.ok("beim Vorlesen erst nach dem Satzende weiter", daten(w, "Q.i") === vor.i + 1, daten(w, "Q.i"));
   }
@@ -111,7 +111,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d = w.document;
     d.querySelector("#wkNew").click();
     const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
-    d.querySelectorAll(".opt")[vor.ans].click();
+    tippe(w, d.querySelectorAll(".opt")[vor.ans]);
     d.querySelector("#nextBtn").click();          // weitertippen, statt zuzuhören
     await schlaf(60);                             // dem gemeldeten Satzende Zeit geben
     P.ok("Weitertippen armiert die Automatik nicht auf der neuen Frage",
@@ -128,7 +128,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d = w.document;
     d.querySelector("#wkNew").click();
     const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
-    d.querySelectorAll(".opt")[vor.ans].click();
+    tippe(w, d.querySelectorAll(".opt")[vor.ans]);
     await schlaf(2600);
     P.ok("abgeschaltet: bleibt stehen", daten(w, "Q.i") === vor.i);
     P.ok("Schalter vorhanden", !!d.querySelector("#walkAuto"));
@@ -148,7 +148,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
       const opts = [...d.querySelectorAll(".opt")];
       const falsch = opts.findIndex((b, i) => i !== st.ans);
       const wahl = (n % 3 === 0 && !st.nochmal && falsch >= 0) ? falsch : st.ans;
-      opts[wahl].click();
+      tippe(w, opts[wahl]);
       const weiter = d.querySelector("#nextBtn");
       if (!weiter) break;
       weiter.click();
@@ -171,7 +171,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     d.querySelector("#wkNew").click();
     let n = 0;
     while (daten(w, "!!(Q && !Q.done)") && n < 60) {
-      d.querySelectorAll(".opt")[daten(w, "Q.list[Q.i].ans")].click();
+      tippe(w, d.querySelectorAll(".opt")[daten(w, "Q.list[Q.i].ans")]);
       const weiter = d.querySelector("#nextBtn");
       if (!weiter) break;
       weiter.click();
@@ -220,7 +220,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     d.querySelector("#wkNew").click();
     const erste = daten(w, "({key:Q.list[0].key, ans:Q.list[0].ans, frage:Q.list[0].q})");
     const falsch = [...d.querySelectorAll(".opt")].findIndex((b, i) => i !== erste.ans);
-    d.querySelectorAll(".opt")[falsch].click();
+    tippe(w, d.querySelectorAll(".opt")[falsch]);
     const nachFehler = daten(w, "S.cards[" + JSON.stringify(erste.key) + "]");
     const tagNachFehler = daten(w, "S.days[today()]");
     P.ok("falsch beantwortet: Karte in Fach 1", nachFehler && nachFehler.b === 1, nachFehler);
@@ -241,7 +241,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
 
     /* Die eigentliche Folge: die Karte darf nicht durch die aufgedeckte Lösung aufsteigen. */
     const wahl2 = daten(w2, "Q.list[Q.i].ans");
-    d2.querySelectorAll(".opt")[wahl2].click();
+    tippe(w2, d2.querySelectorAll(".opt")[wahl2]);
     const spaeter = daten(w2, "S.cards[" + JSON.stringify(erste.key) + "]");
     P.ok("die falsch beantwortete Karte bleibt in Fach 1",
       spaeter && spaeter.b === 1, spaeter);
@@ -303,7 +303,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     d.querySelector("#walkHost").innerHTML =
       '<div id="fbHost"></div><button class="opt" data-i="0"><span>Rest</span></button>';
     const dran = daten(w, "Q.list[Q.i].key");
-    d.querySelectorAll("#dailyHost .opt")[daten(w, "Q.list[Q.i].ans")].click();
+    tippe(w, d.querySelectorAll("#dailyHost .opt")[daten(w, "Q.list[Q.i].ans")]);
     P.ok("die Rückmeldung landet im eigenen Wirt", !!d.querySelector("#dailyHost .fb"));
     P.ok("der fremde Wirt bleibt leer", d.querySelector("#walkHost #fbHost").innerHTML === "",
       d.querySelector("#walkHost #fbHost").innerHTML.slice(0, 60));
@@ -333,7 +333,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     w.eval("while(Q.i < Q.list.length - 1 && !Q.list[Q.i].rule) Q.i++; renderQ();");
     P.ok("eine Karte mit Regel gefunden", !!daten(w, "Q.list[Q.i].rule || null"));
     const ans = daten(w, "Q.list[Q.i].ans");
-    [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0].click();   // falsch, damit die Regel dabeisteht
+    tippe(w, [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0]);   // falsch, damit die Regel dabeisteht
     const lnk = d.querySelector("#walkHost [data-rule]");
     P.ok("die Rückmeldung verweist auf die Regel", !!lnk);
     lnk.onclick(new w.Event("click"));         // der Prüflauf klemmt echte Anker-Klicks ab
@@ -388,7 +388,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d = w.document;
     d.querySelector("#wkNew").click();
     const ans = daten(w, "Q.list[0].ans");
-    [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0].click();
+    tippe(w, [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0]);
     w.eval(`
       window.__gescrollt = [];
       window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
@@ -409,7 +409,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     const d2 = w2.document;
     d2.querySelector("#wkNew").click();
     const ans2 = daten(w2, "Q.list[0].ans");
-    [...d2.querySelectorAll("#walkHost .opt")][ans2 === 0 ? 1 : 0].click();
+    tippe(w2, [...d2.querySelectorAll("#walkHost .opt")][ans2 === 0 ? 1 : 0]);
     w2.eval(`
       window.__gescrollt = [];
       window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
@@ -421,6 +421,71 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     try { w2.eval("zeigeRueckmeldung()"); } catch (e) { /* siehe oben */ }
     P.ok("wer selbst gescrollt hat, wird nicht zurückgeholt",
       daten(w2, "__gescrollt.length") === 0, daten(w2, "__gescrollt"));
+  }
+
+  /* ---------- I · Prelltipp, Enter und Bildschirmsperre ---------- */
+  P.titel("I · Prelltipp, Enter und Bildschirmsperre");
+  {
+    /* Fehlerklasse „der zweite Tipp landet auf der neuen Karte“: renderQ() ersetzt den
+       Inhalt sofort. Ein Nachfassen an derselben Stelle — unsicherer Daumen in Bewegung —
+       trifft, was dort jetzt liegt, und über eine Runde von 20 Karten liegt der
+       Weiter-Knopf dreimal (393x852) genau über einer Antwortoption der Folgefrage. Die
+       Karte stand danach ungesehen als Fehler im Lernstand und in der „Nur Fehler“-Runde. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const erste = daten(w, "({key:Q.list[0].key, ans:Q.list[0].ans})");
+    d.querySelectorAll(".opt")[erste.ans].click();          // sofort, ohne tippe()
+    P.ok("ein Tipp binnen 350 ms zählt nicht",
+      daten(w, "S.cards[" + JSON.stringify(erste.key) + "] || null") === null,
+      daten(w, "S.cards[" + JSON.stringify(erste.key) + "] || null"));
+    P.ok("und die Karte steht noch unbeantwortet da",
+      d.querySelectorAll(".opt.right,.opt.wrong").length === 0);
+    await schlaf(400);
+    d.querySelectorAll(".opt")[erste.ans].click();
+    P.ok("danach zählt sie normal",
+      !!daten(w, "S.cards[" + JSON.stringify(erste.key) + "] || null"));
+  }
+  {
+    /* Fehlerklasse „ein Tastendruck, zwei Horcher“: Das Eingabefeld einer Tippaufgabe
+       hatte einen eigenen Enter-Horcher, und der Horcher am Dokument prüfte denselben
+       Druck noch einmal, fand den eben entstandenen Weiter-Knopf und drückte ihn. Ein
+       Enter wertete also die Antwort und blätterte gleich weiter — „Richtig wäre: …“ war
+       nie zu sehen, bei einer Tippaufgabe genau der Ertrag. Unterwegs betrifft es nichts,
+       dort filtert startQuiz() Tippaufgaben heraus. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    w.eval('startQuiz(ALL.filter(i=>i.t==="fill").slice(0,3).map(exQuestion), document.querySelector("#dailyHost"), {title:"Tippen"})');
+    P.ok("eine Tippaufgabe steht da", !!d.querySelector("#fillIn"));
+    w.eval("Q.frageSeit = 0");
+    const feld = d.querySelector("#fillIn");
+    feld.value = "irgendwas Falsches";
+    const taste = new w.KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true });
+    feld.dispatchEvent(taste);
+    P.ok("die Korrektur steht auf dem Schirm", !!d.querySelector("#dailyHost .fb"));
+    P.ok("und die App ist nicht weitergeblättert", daten(w, "Q.i") === 0, daten(w, "Q.i"));
+    const rueck = d.querySelector("#dailyHost .fb");
+    P.ok("„Richtig wäre“ ist zu lesen", !!rueck && /Richtig wäre/.test(rueck.textContent),
+      rueck && rueck.textContent.slice(0, 60));
+  }
+  {
+    /* Fehlerklasse „einmal angefordert, für immer verloren“: Der Browser gibt die
+       Bildschirmsperre frei, sobald das Dokument unsichtbar wird — Anruf, Sperrtaste,
+       App-Wechsel. Die App erfuhr davon nichts, wakeSperre blieb gesetzt, und genau daran
+       scheiterte jede Neuanforderung. Der Bildschirm ging danach für den Rest der Sitzung
+       aus, obwohl die Kartenansicht das Gegenteil verspricht. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    await schlaf(30);
+    P.ok("die Bildschirmsperre ist angefordert", w.__wakeSperren.length === 1, w.__wakeSperren.length);
+    P.ok("und die App hält sie", daten(w, "!!wakeSperre"));
+    w.__wakeVerlieren();                      // das tut der Browser beim Wegblenden
+    P.ok("nach dem Wegblenden merkt die App, dass sie weg ist", daten(w, "!!wakeSperre") === false);
+    d.dispatchEvent(new w.Event("visibilitychange"));
+    await schlaf(30);
+    P.ok("bei der Rückkehr fordert sie neu an", w.__wakeSperren.length === 2, w.__wakeSperren.length);
+    P.ok("und hält sie wieder", daten(w, "!!wakeSperre"));
   }
 
   P.abschluss();
