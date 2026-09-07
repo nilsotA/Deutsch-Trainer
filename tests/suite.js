@@ -340,4 +340,91 @@ if (zettelKnopf) {
   P.ok("Spickzettel deckt die Sprechkarte ab", !fehlt.length, fehlt.join(" · "));
 }
 
+/* ---------- F · Verpackung ---------- */
+/* Die gehostete Fassung ist auf dem Handy installierbar und offline nutzbar. Das hängt an
+   fünf kleinen Dateien und an sechs Zeilen im <head> — beides kann eine spätere Änderung
+   still zerstören, ohne dass irgendein Prüflauf rot wird. Genau das fängt dieser Abschnitt.
+   Die Einzeldatei muss dabei unberührt bleiben: unter file: darf sich kein Worker melden. */
+P.titel("F · Verpackung");
+const wurzel = path.join(__dirname, "..");
+const lies = n => fs.readFileSync(path.join(wurzel, n), "utf8");
+const daIst = n => fs.existsSync(path.join(wurzel, n));
+
+const kopf = lies("Deutsch-Trainer.html").split("</head>")[0];
+const kopfzeilen = [
+  ["viewport-fit=cover", /viewport-fit\s*=\s*cover/],
+  ["apple-mobile-web-app-capable", /name="apple-mobile-web-app-capable"\s+content="yes"/],
+  ["apple-touch-icon", /rel="apple-touch-icon"/],
+  ["Manifest verlinkt", /rel="manifest"/],
+  ["theme-color", /name="theme-color"/],
+];
+const fehlendeKopfzeilen = kopfzeilen.filter(([, re]) => !re.test(kopf)).map(([n]) => n);
+P.ok("Der <head> trägt, was das Handy braucht", !fehlendeKopfzeilen.length, fehlendeKopfzeilen.join(", "));
+
+/* Der Service Worker darf sich nur melden, wenn die App über einen Server läuft.
+   Als Datei ist ohnehin alles da, und eine Registrierung würde dort nur scheitern. */
+const registrierung = lies("Deutsch-Trainer.html").match(/serviceWorker[\s\S]{0,400}?register\([^)]*\)/);
+P.ok("Der Service Worker wird registriert", !!registrierung);
+P.ok("… aber nicht bei file:", !!registrierung &&
+  /location\.protocol\s*!==\s*"http:"[\s\S]{0,80}?return/.test(registrierung[0]),
+  "die Registrierung ist nicht auf http(s) begrenzt");
+
+P.ok("sw.js vorhanden", daIst("sw.js"));
+if (daIst("sw.js")) {
+  let sauber = true;
+  try { new Function(lies("sw.js")); } catch (e) { sauber = false; }
+  P.ok("sw.js ist ausführbar", sauber);
+}
+
+P.ok("manifest.webmanifest vorhanden", daIst("manifest.webmanifest"));
+if (daIst("manifest.webmanifest")) {
+  let m = null;
+  try { m = JSON.parse(lies("manifest.webmanifest")); } catch (e) { /* bleibt null */ }
+  P.ok("Manifest ist gültiges JSON", !!m);
+  if (m) {
+    const pflicht = ["name", "start_url", "display", "icons"].filter(k => !m[k]);
+    P.ok("Manifest nennt Name, Start, Anzeigeart und Symbole", !pflicht.length, pflicht.join(", "));
+    P.ok("Manifest öffnet im eigenen Fenster", m.display === "standalone", m.display);
+
+    /* Ein Symbol, das im Manifest steht, aber nicht im Repo liegt, fällt erst auf dem
+       Home-Bildschirm auf — dann steht dort ein leeres Kästchen. */
+    const groesse = datei => {
+      const b = fs.readFileSync(path.join(wurzel, datei));
+      if (b.slice(1, 4).toString() !== "PNG") return null;
+      return b.readUInt32BE(16) + "x" + b.readUInt32BE(20);
+    };
+    const symbolSchief = (m.icons || []).map(i => {
+      const n = String(i.src).replace(/^\//, "");
+      if (!daIst(n)) return n + " fehlt";
+      const g = groesse(n);
+      if (!g) return n + " ist kein PNG";
+      if (i.sizes && i.sizes !== g) return n + ": Manifest sagt " + i.sizes + ", Datei ist " + g;
+      return null;
+    }).filter(Boolean);
+    P.ok("Alle Symbole liegen da und haben die angegebene Größe (" + (m.icons || []).length + ")",
+      !symbolSchief.length, symbolSchief.join(" · "));
+
+    /* Was das Deployment braucht, darf nicht aus dem Deployment ausgeschlossen sein. */
+    if (daIst(".vercelignore")) {
+      const raus = lies(".vercelignore").split("\n").map(z => z.trim())
+        .filter(z => z && !z.startsWith("#"));
+      const noetig = ["Deutsch-Trainer.html", "sw.js", "manifest.webmanifest"]
+        .concat((m.icons || []).map(i => String(i.src).replace(/^\//, "")));
+      const versehentlich = noetig.filter(n => raus.some(r => r === n || n.startsWith(r.replace(/\/$/, "") + "/")));
+      P.ok("Die Ignorierliste schließt nichts Nötiges aus", !versehentlich.length,
+        [...new Set(versehentlich)].join(", "));
+    }
+  }
+}
+
+if (daIst("vercel.json")) {
+  let v = null;
+  try { v = JSON.parse(lies("vercel.json")); } catch (e) { /* bleibt null */ }
+  P.ok("vercel.json ist gültiges JSON", !!v);
+  /* Die App heißt nicht index.html — ohne diese Zuordnung antwortet / mit 404. */
+  P.ok("/ zeigt auf die App", !!v && (v.rewrites || [])
+    .some(r => r.source === "/" && /Deutsch-Trainer\.html$/.test(r.destination)),
+    "keine Zuordnung für / gefunden");
+}
+
 P.abschluss();

@@ -237,7 +237,7 @@ Für größere Umbauten ein Skript — aber:
 npm install        # einmalig, holt jsdom
 npm test           # alle Prüfläufe
 npm run syntax     # nur Syntaxprüfung des Skriptblocks
-node tests/suite.js       # Daten, Widersprüche, Ansichten, Textcheck
+node tests/suite.js       # Daten, Widersprüche, Ansichten, Textcheck, Verpackung
 node tests/unterwegs.js   # Kartenmix, Automatik, Rückblick, Fehlerrunde
 node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
