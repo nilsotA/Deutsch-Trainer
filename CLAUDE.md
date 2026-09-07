@@ -139,6 +139,11 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   **nicht** am Rundenende. Egal ob Tagesaufgabe oder unterwegs.
 - `SRS_RUNDE = 20` Karten pro Unterwegs-Runde.
 - `buildDaily()` drosselt neuen Stoff bei Rückstand (`neuProTag()`), sonst explodiert der Stapel.
+  Von den freien Plätzen für neuen Stoff geht **höchstens die Hälfte** an neue Wort- und
+  Fallkarten (`DAILY_WORDS`, `DAILY_FAELLE`); reicht der Rest nur für eine der beiden Sorten,
+  entscheidet der Tagesseed. Ohne diese Reservierung füllten die Übungen alle zwölf Plätze,
+  und weil eine Karte erst nach der ersten Antwort fällig werden kann, blieben 320 Karten
+  über „Heute“ dauerhaft unerreichbar. Geprüft in `tests/lernen.js`, Abschnitt H.
 - `unterwegsRunde()` füllt in drei Stufen — fällig → neu → am längsten nicht geübt —
   und zieht auf jeder Stufe über `quotenMix()` im Verhältnis **45 % Aufgaben / 25 % Wörter /
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.

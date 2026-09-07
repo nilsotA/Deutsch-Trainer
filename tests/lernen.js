@@ -305,4 +305,56 @@ P.titel("G · Zweites Fenster");
   P.ok("und zeigt keine Warnung", !w.document.querySelector("#otherWin"));
 }
 
+/* ---------- H · Tagesaufgabe über Wochen ---------- */
+P.titel("H · Tagesaufgabe über Wochen");
+{
+  /* Fehlerklasse „eine Kartensorte ist über einen Weg gar nicht erreichbar“ — dieselbe,
+     die schon einmal die Fallkarten aus dem Unterwegs-Mix hat fallen lassen. Hier traf es
+     „Heute“: buildDaily() füllte erst alle zwölf Plätze mit Übungen, der Wortschatzblock
+     kam danach nie an die Reihe, und einen Block für neue Fallkarten gab es gar nicht.
+     Weil eine Karte erst fällig werden kann, nachdem sie einmal dran war, blieben 320 der
+     696 Karten über diesen Weg dauerhaft unerreichbar: 30 Tage ergaben 360 Übungen, null
+     Wortkarten, null Fallkarten.
+
+     Der Lauf treibt die echte buildDaily() über 60 Tage. Weitergestellt wird nicht die
+     Uhr, sondern der Lernstand: alle gespeicherten Fälligkeiten wandern je Tag um einen
+     Tag zurück — für die App nicht zu unterscheiden. */
+  const w = boot(leererStand({ auto: false }));
+  const lauf = tage => daten(w, `(function(){
+    const sorten = {A:0, W:0, F:0}, gesehen = new Set();
+    let rnd = 12345; const zufall = () => (rnd = (rnd*1103515245+12345) & 0x7fffffff) / 0x7fffffff;
+    const minusEinTag = d => { const x = new Date(d + "T12:00:00"); x.setDate(x.getDate()-1); return x.toISOString().slice(0,10); };
+    for(let t = 0; t < ${tage}; t++){
+      const liste = buildDaily();
+      liste.forEach(q => {
+        gesehen.add(q.key);
+        sorten[q.key.startsWith("c:") ? "F" : q.key.startsWith("w:") ? "W" : "A"]++;
+        grade(q.key, zufall() < 0.8, q.cat, q.rule);
+      });
+      Object.keys(S.cards).forEach(k => { S.cards[k].d = minusEinTag(S.cards[k].d); });
+      S.days = {}; S.last = null;
+    }
+    return {sorten:sorten, gesehen:gesehen.size, gesamt:alleSchluessel().length, letzte:${tage}};
+  })()`);
+  const r = lauf(60);
+  P.info("60 Tage nur Tagesaufgabe: " + r.sorten.A + " Aufgaben · " + r.sorten.W +
+    " Wortkarten · " + r.sorten.F + " Fallkarten · " + r.gesehen + " von " + r.gesamt + " Karten gesehen");
+  P.ok("Wortkarten kommen über „Heute“ vor", r.sorten.W > 0, r.sorten.W);
+  P.ok("Fallkarten kommen über „Heute“ vor", r.sorten.F > 0, r.sorten.F);
+  /* Untergrenzen mit Luft: gemessen 150 und 235 bei 720 Antworten. Sie sollen einen
+     Rückfall auf null fangen, nicht die genaue Mischung festschreiben. */
+  P.ok("und zwar nicht nur vereinzelt", r.sorten.W >= 60 && r.sorten.F >= 60,
+    r.sorten.W + " / " + r.sorten.F);
+  /* Die Tagesaufgabe bleibt von Übungen getragen — sonst wäre die Aufteilung bloß von
+     einem Ende ins andere gekippt. Nicht als Mehrheit geprüft: die Quote unterwegs ist
+     45 % Aufgaben / 25 % Wörter / 30 % Fälle, und über 60 Tage landet „Heute“ von allein
+     bei 47 / 21 / 33. Übungen müssen also die größte Gruppe sein, nicht die absolute. */
+  const anteilA = r.sorten.A / (r.sorten.A + r.sorten.W + r.sorten.F);
+  P.ok("Übungen bleiben die größte Gruppe",
+    r.sorten.A > r.sorten.W && r.sorten.A > r.sorten.F && anteilA >= 0.4,
+    r.sorten.A + " / " + r.sorten.W + " / " + r.sorten.F + " — Anteil " + Math.round(anteilA*100) + " %");
+  P.ok("jeder Tag ist voll", r.sorten.A + r.sorten.W + r.sorten.F === 60 * 12,
+    r.sorten.A + r.sorten.W + r.sorten.F);
+}
+
 P.abschluss();

@@ -58,6 +58,38 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Tagesaufgabe führt jetzt auch Wort- und Fallkarten ein (07.09.2026).** `buildDaily()`
+füllte in Phase 2 erst alle zwölf Plätze mit Übungen; der Block „Neue Wortkarten, solange
+Platz ist“ stand danach und fand nie Platz, und einen Block für neue Fallkarten gab es gar
+nicht. Da eine Karte erst fällig werden kann, nachdem sie einmal dran war, konnten die
+beiden Sorten auch über Phase 1 nie hereinkommen. `DAILY_WORDS = 2` war damit wirkungslos,
+obwohl `SLOTS` so rechnete, als wären zwei Plätze reserviert.
+
+Nachgemessen an der echten `buildDaily()` über 60 simulierte Tage (weitergestellt wird der
+Lernstand, nicht die Uhr):
+
+| | vorher | jetzt |
+|---|---|---|
+| 30 Tage nur „Heute“ | 360 Aufgaben · 0 Wörter · 0 Fälle | 176 · 77 · 107 |
+| 60 Tage nur „Heute“ | 720 · 0 · 0 | 335 · 150 · 235 |
+
+320 der 696 Karten (155 Wörter + 165 Fälle) waren über diesen Weg also dauerhaft
+unerreichbar. Wer zusätzlich unterwegs übt, hat davon nichts gemerkt — dort greift
+`quotenMix()` sauber, und einmal beantwortete Karten tauchen dann auch in der Tagesaufgabe
+auf.
+
+Behoben: Von den freien Plätzen für neuen Stoff geht höchstens die Hälfte an neue Wort- und
+Fallkarten (`DAILY_WORDS`, neu `DAILY_FAELLE`, je 2). Reicht der Rest nur für eine der
+beiden Sorten, entscheidet der Tagesseed — über die Wochen kommen beide dran. Die
+Gesamtzahl von zwölf Karten bleibt; bestehende Lernstände bekommen keine anderen Karten,
+nur eine andere Mischung.
+
+Die Aufteilung stellt sich damit von allein auf 47 / 21 / 33 ein und liegt damit nah an der
+Quote unterwegs (45 / 25 / 30) — ohne dass die eine irgendwo aus der anderen abgeleitet
+wäre. Neu in `tests/lernen.js`, Abschnitt **H · Tagesaufgabe über Wochen**: der Lauf treibt
+die echte `buildDaily()` und prüft, dass beide Sorten vorkommen, nicht nur vereinzelt, und
+dass Übungen die größte Gruppe bleiben. Gegen die alte Fassung fallen drei Prüfungen durch.
+
 **Fortsetzen überspringt die schon beantwortete Frage (07.09.2026).** `sitzungSichern()`
 hielt nur `Q.i` fest, nicht ob die Frage an dieser Stelle bereits beantwortet und über
 `grade()` verbucht war. Wer nach der Rückmeldung auf „Beenden“ tippte, bekam beim

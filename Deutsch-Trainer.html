@@ -5193,7 +5193,7 @@ const NEU_GELERNT = {
 };
 const SRS_RUNDE = 20;                // höchstens so viele Karten je Wiederholungsrunde
 const TAGESZIEL = 12;                // so viele Karten am Tag zählen als erledigt
-const DAILY_EX = 10, DAILY_WORDS = 2;
+const DAILY_EX = 10, DAILY_WORDS = 2, DAILY_FAELLE = 2;
 
 /* ---------- Speicher ---------- */
 const KEY = "deutschtrainer.v1";
@@ -5479,14 +5479,35 @@ function buildDaily(){
     const c = order[idx++ % order.length];
     if(byCat[c].length) neuEx.push(byCat[c].shift());
   }
+  /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
+     Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
+     Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 696 Karten dauerhaft
+     unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
+     Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
+     Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
+     entscheidet der Tagesseed, welche — über die Wochen kommen beide dran. */
+  const neuW = shuffle(WORDS.filter(w=>!S.cards["w:"+w.w] && !used.has("w:"+w.w)), r);
+  const neuF = shuffle(drillPool().filter(e=>!S.cards["c:"+e.w] && !used.has("c:"+e.w)), r);
+  const zusammen = Math.floor(Math.max(0, SLOTS - qs.length) / 2);
+  let platzW, platzF;
+  if(r() < 0.5){
+    platzW = Math.min(DAILY_WORDS, neuW.length, zusammen);
+    platzF = Math.min(DAILY_FAELLE, neuF.length, zusammen - platzW);
+  } else {
+    platzF = Math.min(DAILY_FAELLE, neuF.length, zusammen);
+    platzW = Math.min(DAILY_WORDS, neuW.length, zusammen - platzF);
+  }
+  neuEx.forEach(i=>{
+    if(qs.length >= SLOTS - platzW - platzF || used.has(i.id)) return;
+    qs.push(exQuestion(i)); used.add(i.id);
+  });
+  neuW.slice(0, platzW).forEach(w=>{ qs.push(wordQuestion(w, r)); used.add("w:"+w.w); });
+  neuF.slice(0, platzF).forEach(e=>{ qs.push(caseQuestion(e)); used.add("c:"+e.w); });
+  /* Gab es weniger Wort- oder Fallkarten als reserviert, holen die Übungen den Rest. */
   neuEx.forEach(i=>{
     if(qs.length >= SLOTS || used.has(i.id)) return;
     qs.push(exQuestion(i)); used.add(i.id);
-  });
-  // Neue Wortkarten, solange Platz ist
-  shuffle(WORDS.filter(w=>!S.cards["w:"+w.w] && !used.has("w:"+w.w)), r).forEach(w=>{
-    if(qs.length >= SLOTS) return;
-    qs.push(wordQuestion(w, r)); used.add("w:"+w.w);
   });
   // Letzter Ausweg: bereits gesehene, aber noch nicht fällige Karten
   if(qs.length < SLOTS){
