@@ -58,6 +58,29 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Eine Runde greift nicht mehr in die andere (07.09.2026).** In der Heute-Ansicht liegen
+zwei Wirtsbereiche übereinander: `#walkHost` und `#dailyHost`. `startQuiz()` überschrieb
+nur den einen — die Karte im anderen blieb samt Antwortknöpfen stehen und bedienbar. `Q`
+ist aber global, und `check()` suchte mit `$$(".opt")` und `$("#fbHost")` im **ganzen
+Dokument**. Ein Tipp auf die stehengebliebene Karte bewertete damit die aktuelle Frage der
+anderen Runde: gemessen wurde so `c:interessieren` auf Fach 2 gesetzt — eine Fallkarte, die
+nie auf dem Schirm war. In der Gegenrichtung landete `s03` als Fehler im Lernstand. Weil
+`#walkHost` im Markup vor `#dailyHost` steht, traf `$("#fbHost")` dabei zuverlässig den
+falschen Wirt.
+
+Zwei Eingriffe:
+
+- `startQuiz()` leert den Wirt einer noch laufenden anderen Runde (`Q.host !== host`).
+- Alles, was zur laufenden Runde gehört, geht durch zwei neue Helfer `qEl()` / `qAll()`,
+  die im Wirt der Runde suchen statt im Dokument — dreizehn Fundstellen in `renderQ()`,
+  `check()`, `autoAn()` und der Tastaturbedienung. Damit greifen auch die doppelten IDs
+  (`#fbHost`, `#nextBtn`, `#fillIn`) nicht mehr ins Falsche.
+
+Neu in `tests/unterwegs.js`, Abschnitt **F · Zwei Runden gleichzeitig** (9 Prüfungen): Zwei
+Runden nacheinander in verschiedenen Wirten starten, dem verwaisten Wirt von Hand eine
+Karte unterschieben und prüfen, dass die Antwort weder dort landet noch die fremden Knöpfe
+einfärbt. Vier Prüfungen fallen gegen die alte Fassung durch.
+
 **Unterbrochene Einstufung behält ihr Ergebnis (07.09.2026).** `startTest()` übergab die
 Auswertung als Funktion (`opts.onDone`) an `startQuiz()`, und eine Funktion lässt sich nicht
 in den `localStorage` schreiben. Wer die Einstufung unterbrach — App geschlossen, oder iOS

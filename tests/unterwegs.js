@@ -272,5 +272,45 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("dieselbe Sitzung unbeantwortet ist offen", daten(w, "sitzungOffen() && sitzungOffen().i") === 1);
   }
 
+  /* ---------- F · Zwei Runden gleichzeitig ---------- */
+  P.titel("F · Zwei Runden gleichzeitig");
+  {
+    /* Fehlerklasse „globaler Zustand, dokumentweite Abfragen“: In der Heute-Ansicht liegen
+       zwei Wirtsbereiche übereinander (#walkHost und #dailyHost). startQuiz() überschrieb
+       nur den einen; die Karte im anderen blieb samt Antwortknöpfen stehen und bedienbar.
+       Q ist aber global, und check() suchte mit $$(".opt") und $("#fbHost") im ganzen
+       Dokument: Ein Tipp auf die stehengebliebene Karte bewertete die aktuelle Frage der
+       anderen Runde — gemessen wurde so eine Fallkarte auf Fach 2 gesetzt, die nie auf dem
+       Schirm war. Weil #walkHost im Markup vor #dailyHost steht, traf $("#fbHost") dabei
+       den falschen Wirt. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    P.ok("Unterwegs-Runde läuft in #walkHost", daten(w, "Q.host.id") === "walkHost");
+    w.eval('go("heute")');
+    d.querySelector("#startD").click();
+    P.ok("Tagesaufgabe läuft in #dailyHost", daten(w, "Q.host.id") === "dailyHost");
+    P.ok("nur eine Frage steht auf dem Schirm", d.querySelectorAll(".qtext").length === 1,
+      d.querySelectorAll(".qtext").length);
+    P.ok("die Karte der alten Runde ist weg", d.querySelector("#walkHost").innerHTML === "",
+      d.querySelector("#walkHost").innerHTML.slice(0, 60));
+
+    /* Selbst wenn im anderen Wirt etwas steht, darf check() es nicht anfassen. */
+    d.querySelector("#walkHost").innerHTML =
+      '<div id="fbHost"></div><button class="opt" data-i="0"><span>Rest</span></button>';
+    const dran = daten(w, "Q.list[Q.i].key");
+    d.querySelectorAll("#dailyHost .opt")[daten(w, "Q.list[Q.i].ans")].click();
+    P.ok("die Rückmeldung landet im eigenen Wirt", !!d.querySelector("#dailyHost .fb"));
+    P.ok("der fremde Wirt bleibt leer", d.querySelector("#walkHost #fbHost").innerHTML === "",
+      d.querySelector("#walkHost #fbHost").innerHTML.slice(0, 60));
+    P.ok("der fremde Knopf wird nicht eingefärbt",
+      d.querySelector("#walkHost .opt").className === "opt",
+      d.querySelector("#walkHost .opt").className);
+    P.ok("bewertet wurde die Karte der laufenden Runde",
+      !!daten(w, "S.cards[" + JSON.stringify(dran) + "] || null"));
+    P.ok("und sonst keine", Object.keys(daten(w, "S.cards")).length === 1,
+      Object.keys(daten(w, "S.cards")).join(", "));
+  }
+
   P.abschluss();
 })();

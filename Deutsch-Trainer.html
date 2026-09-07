@@ -5313,6 +5313,13 @@ regelAenderungen();
 /* ---------- Hilfsfunktionen ---------- */
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
+/* Alles, was zur laufenden Runde gehört, wird über diese beiden gesucht — im Wirt der
+   Runde, nicht im ganzen Dokument. In der Heute-Ansicht liegen zwei Wirtsbereiche
+   übereinander (#walkHost und #dailyHost); blieb in einem eine Karte samt Antwortknöpfen
+   stehen, bewertete ein Tipp dort die aktuelle Frage der anderen Runde — und färbte die
+   Knöpfe beider Karten ein, weil $$(".opt") dokumentweit sucht. */
+const qEl  = s => (Q && Q.host ? Q.host.querySelector(s) : $(s));
+const qAll = s => (Q && Q.host ? Array.from(Q.host.querySelectorAll(s)) : $$(s));
 function esc(t){ return String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function iso(d){ const x = new Date(d); x.setHours(12,0,0,0); return x.toISOString().slice(0,10); }
 function today(){ return iso(new Date()); }
@@ -5773,7 +5780,7 @@ function autoAn(ms){
   autoAus();
   if(!S.auto || !Q || !Q.walk) return;
   document.body.classList.add("autolauf");
-  const b = $("#nextBtn"); if(b) b.style.setProperty("--dauer", ms + "ms");
+  const b = qEl("#nextBtn"); if(b) b.style.setProperty("--dauer", ms + "ms");
   autoUhr = setTimeout(()=>{ autoUhr = null; document.body.classList.remove("autolauf"); next(); }, ms);
 }
 function vorlesenStoppen(){ try{ if(kannVorlesen()) speechSynthesis.cancel(); }catch(e){} }
@@ -5813,6 +5820,9 @@ function startQuiz(list, host, opts){
   opts = opts || {};
   if(opts.walk) list = list.filter(q=>q.type !== "fill");   // Tippen geht unterwegs nicht
   if(!list.length){ host.innerHTML = '<div class="card center"><p class="muted">Nichts zu tun — komm später wieder.</p></div>'; return; }
+  /* Startet eine Runde in einem anderen Wirt, muss die alte Karte weg — sie bliebe sonst
+     samt Antwortknöpfen bedienbar stehen. */
+  if(Q && !Q.done && Q.host && Q.host !== host) Q.host.innerHTML = "";
   Q = {list, i:0, correct:0, base:list.length, host, onDone:opts.onDone, title:opts.title||"Übung",
        daily:!!opts.daily, walk:!!opts.walk, art:opts.art||null, vorher:opts.vorher||null};
   document.body.classList.toggle("walk", !!opts.walk);
@@ -5888,12 +5898,12 @@ function renderQ(){
     if(S.speak) vorlesen(sprechFrage(q));
   }
   if(q.type === "fill"){
-    const inp = $("#fillIn");
+    const inp = qEl("#fillIn");
     inp.focus();
     inp.addEventListener("keydown", e=>{ if(e.key==="Enter") check(inp.value); });
-    $("#fillGo").onclick = ()=>check(inp.value);
+    qEl("#fillGo").onclick = ()=>check(inp.value);
   } else {
-    $$(".opt").forEach(b => b.onclick = ()=>check(parseInt(b.dataset.i,10)));
+    qAll(".opt").forEach(b => b.onclick = ()=>check(parseInt(b.dataset.i,10)));
   }
 }
 
@@ -5902,7 +5912,7 @@ function check(input){
   let ok, chosen = -1;
   if(q.type === "mc"){
     chosen = input; ok = (chosen === q.ans);
-    $$(".opt").forEach((b,i)=>{
+    qAll(".opt").forEach((b,i)=>{
       b.disabled = true;
       if(i === q.ans) b.classList.add("right");
       else if(i === chosen) b.classList.add("wrong");
@@ -5910,7 +5920,7 @@ function check(input){
     });
   } else {
     ok = q.accept.some(a => norm(a) === norm(input));
-    const inp = $("#fillIn"); inp.disabled = true; $("#fillGo").disabled = true;
+    const inp = qEl("#fillIn"); inp.disabled = true; qEl("#fillGo").disabled = true;
     inp.style.borderColor = ok ? "var(--acc)" : "var(--bad)";
   }
   if(!q._nochmal){
@@ -5927,7 +5937,7 @@ function check(input){
 
   const rl = q.rule ? ruleById(q.rule) : null;
   const solution = q.type === "fill" ? "<b>Richtig wäre:</b> " + esc(q.accept[0]) + "<br>" : "";
-  $("#fbHost").innerHTML =
+  qEl("#fbHost").innerHTML =
     '<div class="fb'+(ok?"":" no")+'">'+
       '<b class="hd">'+(ok?"Richtig":"Nicht ganz")+"</b>"+
       (ok ? "" : solution) + q.exp +
@@ -5938,7 +5948,7 @@ function check(input){
       '<span class="tiny muted kbd">Enter</span></div>';
   if(Q.walk){
     try{ if(navigator.vibrate) navigator.vibrate(ok ? 25 : [25,70,25]); }catch(e){}
-    const b = $("#nextBtn");
+    const b = qEl("#nextBtn");
     if(b){ const leiste = document.createElement("div"); leiste.className = "walkbar";
       b.parentElement.replaceWith(leiste); leiste.appendChild(b); }
     /* Der Rückruf gehört zu genau dieser Frage. Tippt Nils auf „Weiter“, statt die
@@ -5953,12 +5963,12 @@ function check(input){
   }
   Q.beantwortet = true;
   sitzungSichern();
-  $("#nextBtn").onclick = next;
+  qEl("#nextBtn").onclick = next;
   if(Q.walk && S.auto){
     const stopp = e => { if(!e.target.closest || !e.target.closest("#nextBtn")) autoAus(); };
     document.addEventListener("pointerdown", stopp, {once:true});
   }
-  const lnk = $("#fbHost [data-rule]");
+  const lnk = qEl("#fbHost [data-rule]");
   if(lnk) lnk.onclick = e => { e.preventDefault(); openRule(lnk.dataset.rule); };
   updHud();
 }
@@ -8315,13 +8325,13 @@ document.addEventListener("keydown", e=>{
   if(!typing && (e.key === "/" || ((e.metaKey||e.ctrlKey) && e.key === "k"))){
     e.preventDefault(); openSearch(); return;
   }
-  if(!Q || !$("#fbHost")) return;
+  if(!Q || !qEl("#fbHost")) return;
   const act = document.activeElement;
   if(act && act.tagName === "TEXTAREA") return;
-  if(e.key === "Enter" && $("#nextBtn")){ e.preventDefault(); next(); return; }
+  if(e.key === "Enter" && qEl("#nextBtn")){ e.preventDefault(); next(); return; }
   if(act && act.tagName === "INPUT") return;
   const n = "1234".indexOf(e.key);
-  if(n >= 0){ const b = $$(".opt")[n]; if(b && !b.disabled) b.click(); }
+  if(n >= 0){ const b = qAll(".opt")[n]; if(b && !b.disabled) b.click(); }
 });
 renderAll();
 
