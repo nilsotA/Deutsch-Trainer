@@ -446,6 +446,25 @@ if (daIst("sw.js")) {
   let sauber = true;
   try { new Function(lies("sw.js")); } catch (e) { sauber = false; }
   P.ok("sw.js ist ausführbar", sauber);
+
+  /* Zwei Eigenschaften, die sich nicht am Text ablesen lassen, ohne sie zu benennen —
+     beide sind teuer erkauft (gemessen: 28 s Start bei 25 kB/s, obwohl die ganze Seite
+     im Cache lag). Es sind Textprüfungen, also nur ein Riegel gegen Rückfall, kein Beweis:
+     das Verhalten selbst misst swtest/pruef.js im Browser.
+
+     1. Ein fetch() ist erfüllt, sobald die Kopfzeilen da sind. Wer nur darauf wartet,
+        misst nicht die 700 kB dahinter — die Frist schützt dann nur vor einem stummen
+        Server, nicht vor schwachem Empfang. Der Rumpf muss also gelesen werden.
+     2. Gewinnt die Frist, läuft das Nachladen im Hintergrund. Ohne waitUntil darf der
+        Browser den Worker vorher abräumen, und die neue Fassung landet nie im Cache. */
+  const swQuelle = lies("sw.js");
+  const abFetch = swQuelle.slice(swQuelle.indexOf('addEventListener("fetch"'));
+  P.ok("Der Worker wartet auf den ganzen Rumpf, nicht nur auf die Kopfzeilen",
+    /\.(?:blob|arrayBuffer|text)\(\)/.test(swQuelle),
+    "keine Stelle liest den Rumpf aus");
+  P.ok("Das Nachladen im Hintergrund überlebt den Worker",
+    /waitUntil\(/.test(abFetch),
+    "im fetch-Ereignis steht kein waitUntil");
 }
 
 P.ok("manifest.webmanifest vorhanden", daIst("manifest.webmanifest"));

@@ -58,6 +58,45 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Service Worker wartet jetzt auf den ganzen Rumpf (07.09.2026).** Beim
+Durchgehen der eigenen Verpackung ist eine Fehlannahme aufgefallen: Die Frist von 2,5 s
+im Worker (`seite()`) sollte den Start retten, wenn das Netz schwächelt — sie hat aber nur
+vor einem *stummen* Server geschützt. Ein `fetch()` ist schon erfüllt, sobald die
+**Kopfzeilen** da sind; die knapp 700 kB tröpfeln danach ohne jede Frist hinterher.
+
+Gemessen statt vermutet: ein Testserver, der die Seite in Häppchen mit 25 kB/s ausliefert
+(≈200 kbit/s, schwaches Mobilfunknetz), dazu ein Chromium, der vorher wartet, bis der
+Worker die Seite wirklich steuert und `/` **vollständig** im Cache liegt.
+
+| | alter Worker | jetzt |
+|---|---|---|
+| Start bei 25 kB/s, Kopie im Cache | **27 924 ms** | **2 561 ms** |
+
+Die erste Messung log übrigens: Sie lud nach drei Sekunden neu, da war der Worker noch gar
+nicht aktiv — beide Fassungen kamen auf 28 s. Erst das Warten auf `controller` und auf den
+vollständigen Cache-Eintrag hat den Unterschied sichtbar gemacht. (Dieselbe Klasse Fehler
+wie beim Sprach-Stub: ein Test, der grün oder rot ist, ohne das Gemeinte zu messen.)
+
+Behoben in `sw.js`: `netzSeite()` liest den Rumpf mit `.blob()` aus und baut daraus eine
+neue `Response`, bevor die Antwort als „da“ gilt — die Frist deckt damit die ganze
+Übertragung. Gewinnt die Frist, kommt die Fassung aus dem Cache und der Nachschub läuft
+weiter; damit der Browser den Worker dabei nicht abräumt, hängt das Netz-Versprechen im
+`fetch`-Ereignis an `e.waitUntil()`. Ganz zum Schluss steht ein `fetch(anfrage)` als letzte
+Rückfallebene, falls weder Netz noch Cache etwas hergeben — sonst käme ein leerer Wert bei
+`respondWith` an.
+
+Abgesichert auf zwei Ebenen:
+
+- `tests/suite.js`, Abschnitt F: zwei Textprüfungen (der Worker liest den Rumpf aus; im
+  `fetch`-Ereignis steht ein `waitUntil`). Beide fallen gegengeprüft beim alten Worker
+  durch. Es sind Textprüfungen und damit nur ein Riegel gegen Rückfall, kein Beweis —
+  das steht auch so im Kommentar.
+- Im Browser gemessen (Playwright, nicht im Repo, weil es einen laufenden Server braucht):
+  sechs Verhaltensweisen — Erststart, neue Fassung sofort nach dem Deploy, offline aus dem
+  Cache, Funkloch mit greifender Frist, Nachschub landet trotzdem im Cache, danach wieder
+  die neue Fassung. Der alte Worker fällt genau bei Nummer vier durch (27 942 ms statt
+  2 559 ms), die anderen fünf bestehen beide — der Unterschied liegt also wirklich dort.
+
 **Gegenprüfung der 120 offenen Funde (06.09.2026).** Die Liste aus dem Widerspruchslauf war
 ungeprüft — deshalb ein zweiter Lauf, der jede Meldung zu **widerlegen** versuchte und
 Prüfmuster mechanisch über `analyse()` nachstellte statt nach Gefühl zu urteilen.
