@@ -7597,6 +7597,9 @@ function renderPlan(){
 
 /* ---------- Fortschritt: Rahmen ---------- */
 function renderFortschritt(){
+  /* Läuft in diesem Bereich gerade eine Runde — die Einstufung rendert in #pSub —,
+     darf sie nicht weggezeichnet werden. Dieselbe Sperre hat go() für #dailyHost. */
+  if(Q && !Q.done && Q.host && Q.host.id === "pSub") return;
   const host = $("#statHost");
   host.innerHTML =
     '<div class="subnav">'+
@@ -8341,8 +8344,12 @@ function updHud(){
   $("#hudStreak").textContent = "🔥 " + S.streak;
   $("#hudXp").textContent = S.xp + " XP";
 }
+/* renderFortschritt() gehört hier hinein: „Sicherung laden“ und „Alles zurücksetzen“
+   sitzen selbst in dieser Ansicht, und ausgerechnet sie blieb als einzige stehen. Nach dem
+   Laden einer Sicherung stand die Kopfzeile auf „🔥 21“, während zwei Zeilen darunter
+   unverändert „0 sitzt sicher · 696 noch nicht dran“ zu lesen war. */
 function renderAll(){
-  renderHeute(); renderSchreiben(); renderRegelnNav(); updHud();
+  renderHeute(); renderSchreiben(); renderRegelnNav(); renderFortschritt(); updHud();
 }
 
 /* Start */

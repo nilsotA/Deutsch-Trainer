@@ -58,6 +58,22 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fortschritt zeigt nach Import und Zurücksetzen die richtigen Zahlen (07.09.2026).**
+„Sicherung laden“ und „Alles zurücksetzen“ sitzen beide in der Fortschritt-Ansicht und
+riefen am Ende `renderAll()` — darin fehlte ausgerechnet `renderFortschritt()`. Die Ansicht,
+auf der man steht, war damit die einzige, die stehen blieb. Nach dem Laden einer Sicherung
+stand oben „🔥 21 · 4300 XP“ und der Toast „Sicherung geladen“, zwei Zeilen darunter
+unverändert „0 sitzt sicher · 0 im Aufbau · 696 noch nicht dran“; beim Zurücksetzen
+dasselbe rückwärts. Erst ein Reiterwechsel hin und zurück zeigte die Wahrheit.
+
+`renderFortschritt()` ist jetzt Teil von `renderAll()`. Damit das nicht die laufende
+Einstufung wegzeichnet — die rendert in `#pSub` —, kehrt `renderFortschritt()` unverrichtet
+zurück, solange dort eine Runde läuft. Dieselbe Sperre hat `go()` seit jeher für
+`#dailyHost`; nebenbei überlebt die Einstufung damit auch einen Reiterwechsel.
+
+Neu in `tests/lernen.js`, Abschnitt **J** (9 Prüfungen): zurücksetzen und importieren, ohne
+den Reiter zu wechseln, dazu die Sperre. Vier fallen gegen die alte Fassung durch.
+
 **Beschädigter Lernstand wird nicht mehr stumm überschrieben (07.09.2026).** `load()` fing
 jeden Fehler ab und lieferte wortlos den leeren Standardzustand. Ist der gespeicherte Stand
 beschädigt — beim Schreiben abgeschnitten, Profil defekt —, startete die App also mit 0 XP

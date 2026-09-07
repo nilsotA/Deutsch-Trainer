@@ -472,4 +472,51 @@ P.titel("I · Beschädigter Lernstand");
   P.ok("und er wird geladen", daten(w2, "S.xp") === 30);
 }
 
+/* ---------- J · Ansicht nach Import und Zurücksetzen ---------- */
+P.titel("J · Ansicht nach Import und Zurücksetzen");
+{
+  /* Fehlerklasse „die Ansicht, auf der man steht, wird als einzige nicht neu gezeichnet“:
+     „Sicherung laden“ und „Alles zurücksetzen“ sitzen selbst im Fortschritt, riefen aber
+     renderAll() — und darin fehlte renderFortschritt(). Nach dem Laden einer Sicherung
+     stand oben „🔥 21 · 4300 XP“ und der Toast „Sicherung geladen“, zwei Zeilen darunter
+     unverändert „0 sitzt sicher · 696 noch nicht dran“. Beim Zurücksetzen dasselbe
+     rückwärts: der Speicher war leer, die Zeile zeigte weiter die alten Zahlen. */
+  const cards = {};
+  for (let i = 1; i <= 40; i++) cards["k" + String(i).padStart(2, "0")] = { b: 5, d: tag(20), s: 6, w: 0 };
+  const w = boot(leererStand({ xp: 400, streak: 9, cards }));
+  const d = w.document;
+  w.eval('go("fortschritt")');
+  const zeile = () => d.querySelector("#statHost").textContent.replace(/\s+/g, " ");
+  P.ok("vorher steht der gelernte Stand da", /39\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
+
+  d.querySelector("#rst").click();                       // confirm() ist im Prüflauf immer ja
+  P.ok("der Speicher ist zurückgesetzt", daten(w, "S.streak") === 0 && daten(w, "S.xp") === 0);
+  P.ok("die Kopfzeile auch", d.querySelector("#hudStreak").textContent.includes("0"));
+  P.ok("und dieselbe Ansicht zeigt es", /0\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
+
+  /* Der Import macht genau das, was der Import-Rückruf tut: S ersetzen, dann renderAll(). */
+  /* Andere Kartenzahl als vorher, damit die Prüfung auch dann bisse, wenn das
+     Zurücksetzen die Ansicht schon richtig gestellt hätte. */
+  const weniger = {};
+  Object.keys(cards).slice(0, 25).forEach(k => weniger[k] = cards[k]);
+  w.eval("S = Object.assign(load(), " + JSON.stringify(leererStand({ xp: 4300, streak: 21, cards: weniger })) +
+    "); save(); regelAenderungen(); renderAll();");   // genau die Schritte des Import-Rückrufs
+  P.ok("nach dem Laden einer Sicherung stimmt die Kopfzeile",
+    d.querySelector("#hudStreak").textContent.includes("21"));
+  P.ok("und die Ansicht darunter genauso", /2[45]\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
+}
+{
+  /* Gegenstück: die laufende Einstufung darf renderFortschritt() nicht wegzeichnen. */
+  const w = boot(leererStand({ auto: false }));
+  const d = w.document;
+  [...d.querySelectorAll("button")].find(b => /Einstufung/i.test(b.textContent)).click();
+  ([...d.querySelectorAll("#pSub button")].find(b => /Test|Loslegen|Starten|Beginnen/i.test(b.textContent))
+    || d.querySelector("#pSub button")).click();
+  P.ok("die Einstufung läuft in #pSub", daten(w, "(Q.host && Q.host.id) || null") === "pSub");
+  w.eval("renderFortschritt()");
+  P.ok("ein Neuzeichnen räumt sie nicht weg", !!d.querySelector("#pSub .qtext"));
+  w.eval('go("karten"); go("fortschritt")');
+  P.ok("ein Reiterwechsel auch nicht", !!d.querySelector("#pSub .qtext"));
+}
+
 P.abschluss();
