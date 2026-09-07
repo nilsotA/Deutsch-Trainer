@@ -17,6 +17,8 @@ Deutsch-Trainer.html      die komplette App (~590 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
+vercel.json               Zuordnung / → Deutsch-Trainer.html für das Vercel-Deployment
+.vercelignore             hält Prüfläufe und Projektnotizen aus dem Deployment
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
                           Formentabelle, unabhängig von der App aufgestellt
 package.json              npm-Skripte für die Prüfläufe
@@ -24,6 +26,12 @@ package.json              npm-Skripte für die Prüfläufe
 
 Die App läuft ohne Server: Datei im Browser öffnen. Kein Netzwerk, keine externen
 Skripte, keine Abhängigkeiten. Alles läuft offline, auch auf dem Handy.
+
+**Deployment.** Die Datei heißt nicht `index.html`, deshalb braucht ein Hoster eine
+Zuordnung für `/` — sonst kommt 404. Für Vercel steht sie in `vercel.json`. Wichtig für
+Nils: Der Lernstand liegt in `localStorage` und hängt an der Herkunft. Eine gehostete
+Fassung startet mit leerem Fortschritt; wer wechselt, exportiert vorher im Fortschritt
+seine Sicherung und importiert sie in der neuen Fassung.
 
 ## 2 · Aufbau der App
 

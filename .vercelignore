@@ -1,0 +1,8 @@
+# Deployt wird nur die App. Ohne diese Liste wären HANDOVER.md, FUNDE-offen.md
+# und die Prüfläufe unter ihrer URL öffentlich abrufbar.
+node_modules/
+tests/
+.claude/
+CLAUDE.md
+HANDOVER.md
+FUNDE-offen.md
