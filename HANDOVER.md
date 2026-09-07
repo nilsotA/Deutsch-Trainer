@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 95 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~660 KB, eine Datei, kein Build |
+| Dateigröße | ~704 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,35 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Der Haltbarkeitslauf ist abgearbeitet (07.09.2026).** Die 42 bestätigten Funde des
+Belastungslaufs sind durch: sechs schwere, der Rest mittel und niedrig. Jeder Eintrag
+darunter beschreibt, was schiefging, wie es gemessen wurde und was jetzt dagegen steht.
+
+Was dabei an Prüfungen entstanden ist — die bleiben, das ist der eigentliche Gewinn:
+
+| Lauf | neu |
+|---|---|
+| `tests/suite.js` | F2 · Suche und Textcheck · G · Bedienung ohne Maus · Riegel für Service Worker, CSS und galoppierende Prüfmuster |
+| `tests/unterwegs.js` | E · Fortsetzen · F · Zwei Runden gleichzeitig · G · Wege aus einer Runde heraus · H · Rückmeldung im Bild · I · Prelltipp, Enter und Bildschirmsperre · J · Rückmeldung ohne Farbe und ohne Maus |
+| `tests/lernen.js` | A2 · Unterbrochene Einstufung · G · Zweites Fenster · H · Tagesaufgabe über Wochen · I · Beschädigter Lernstand · J · Ansicht nach Import und Zurücksetzen · K · Sichern und Laden |
+| `tests/setup.js` | `tippe()` gegen die Prellsperre · Sprach- und Wachhalte-Ersatz, die sich wie der Browser verhalten · `boot(null, {roh})` für beschädigte Datensätze |
+
+Zum Schluss ein Rundgang im Browser bei 393×852 über alle sieben Reiter und eine volle
+Unterwegs-Runde: keine Seitenfehler, kein Seitwärts-Scrollen in irgendeiner Ansicht, Runde
+sauber zu Ende, Tagesziel und Serie gesetzt.
+
+Zwei Punkte bleiben bewusst offen:
+
+- Im **kurzen Querformat** klebt die Kopfzeile weiterhin nicht (`@media(max-height:480px)`).
+  Auf einem 375 px hohen Schirm kosten 46 px Kopfzeile zu viel; wer dort in einer langen
+  Liste steht, muss weiter nach oben wischen. Ein „nach oben“-Knopf wäre die kleinere
+  Lösung — wenn es Nils stört.
+- Die App kann nicht wissen, ob ein **Download** angekommen ist. Die Meldung sagt das jetzt
+  ehrlich; dass `lastExport` die Mahnung 30 Tage stumm schaltet, bleibt.
+
+Und in `FUNDE-offen.md` liegen weiterhin drei inhaltliche Punkte, die eine Sitzung mit
+Web-Recherche brauchen.
 
 **Zweimal dieselbe Arbeit (07.09.2026).** Zwei Stellen rechneten in einem Durchgang doppelt
 oder dreifach.
