@@ -19,6 +19,9 @@ HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
 vercel.json               Zuordnung / → Deutsch-Trainer.html für das Vercel-Deployment
 .vercelignore             hält Prüfläufe und Projektnotizen aus dem Deployment
+manifest.webmanifest      macht die gehostete Fassung auf dem Handy installierbar
+sw.js                     Service Worker: hält die App offline verfügbar
+icon-180/192/512.png      Symbol für den Home-Bildschirm
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
                           Formentabelle, unabhängig von der App aufgestellt
 package.json              npm-Skripte für die Prüfläufe
@@ -31,7 +34,15 @@ Skripte, keine Abhängigkeiten. Alles läuft offline, auch auf dem Handy.
 Zuordnung für `/` — sonst kommt 404. Für Vercel steht sie in `vercel.json`.
 **Vercel baut `main`**, nicht den Arbeitsbranch: Was nicht auf `main` liegt, ist auch nicht
 deployt. Und eine Deployment-URL mit Hash (`…-lpqaabbok-…`) zeigt für immer auf genau diesen
-Stand; nach einer Korrektur braucht es die Produktions-URL des Projekts, nicht die alte. Wichtig für
+Stand; nach einer Korrektur braucht es die Produktions-URL des Projekts, nicht die alte.
+
+**Als Web-App auf dem Handy.** Über den Server ist die App installierbar und offline nutzbar:
+`manifest.webmanifest` (Standalone-Fenster, Symbol), die `apple-mobile-web-app`-Kopfzeilen für
+iOS und `sw.js` als Service Worker. Der Worker liefert aus dem Cache aus und lädt im
+Hintergrund nach — eine neue Fassung ist also beim übernächsten Start da, nie auf Kosten des
+Startens. **Die Einzeldatei bleibt davon unberührt:** Unter `file:` registriert sich kein
+Worker, das Manifest läuft ins Leere, und die App funktioniert wie vorher. Wer die Datei
+weiterreicht, gibt weiterhin eine Datei weiter. Wichtig für
 Nils: Der Lernstand liegt in `localStorage` und hängt an der Herkunft. Eine gehostete
 Fassung startet mit leerem Fortschritt; wer wechselt, exportiert vorher im Fortschritt
 seine Sicherung und importiert sie in der neuen Fassung.

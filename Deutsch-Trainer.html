@@ -2,7 +2,16 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Deutsch">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f7f5f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171a" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Persönlicher Deutsch-Trainer: Rechtschreibung, Zeichensetzung, Kasus, Satzbau, Stil und Formulierung.">
 <title>Deutsch-Trainer</title>
@@ -45,7 +54,7 @@ input,textarea,select{font:inherit;color:inherit}
 .wrap{max-width:820px;margin:0 auto;padding:0 18px 80px}
 
 /* ---------- Kopf ---------- */
-.head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .head-in{max-width:820px;margin:0 auto;padding:14px 18px 0;display:flex;align-items:center;gap:14px}
 .brand{display:flex;align-items:baseline;gap:9px;margin-right:auto;min-width:0}
 .brand b{font-size:19px;font-weight:700;letter-spacing:-.02em}
@@ -8218,6 +8227,17 @@ renderAll();
   if(S.last && daysBetween(S.last, today()) > 1 && S.streak > 0){
     S.streak = 0; save(); updHud(); renderHeute();
   }
+})();
+
+/* Offline-Fähigkeit, wenn die App über einen Server läuft.
+   Als lokale Datei (file:) gibt es keinen Service Worker — dort ist ohnehin alles da.
+   Der Lernstand liegt in localStorage und wird davon nicht berührt. */
+(function(){
+  if(!("serviceWorker" in navigator)) return;
+  if(location.protocol !== "http:" && location.protocol !== "https:") return;
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
 })();
 </script>
 </body>
