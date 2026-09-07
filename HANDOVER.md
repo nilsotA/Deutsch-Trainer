@@ -58,6 +58,26 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zweimal dieselbe Arbeit (07.09.2026).** Zwei Stellen rechneten in einem Durchgang doppelt
+oder dreifach.
+
+`countDue()` geht über alle 696 Karten (gemessen 0,9 ms) und lief **dreimal** je Aufbau der
+Heute-Ansicht — zweimal im Text „Es stehen … Karten an“, einmal in `renderWalkCard()`. Jetzt
+einmal, weitergereicht. `renderHeute()` fällt damit von 14,7 auf 13,9 ms; der Löwenanteil
+ist `buildDaily()`, nicht dieser Fund.
+
+`openRule()` rief `drawRules()`, obwohl `go("regeln")` über `ensureRules()` schon gezeichnet
+hatte — 117 Regeln, zweimal, bei jedem ersten Regelsprung. Die Filter werden jetzt vor
+`go()` zurückgesetzt, und `drawRules()` läuft nur noch, wenn `ensureRules()` es nicht schon
+getan hat. Der erste Regelsprung fällt in jsdom von **375 auf 215 ms**. Geprüft wird die
+Anzahl der Aufrufe, nicht die Zeit — die hängt vom Rechner ab.
+
+Und eine Ehrlichkeitskorrektur, die schon im vorigen Schritt mitkam: „Sicherung
+heruntergeladen“ hieß es auch dann, wenn der Browser den Download abgebrochen hat. Die App
+kann das nicht wissen; die Meldung heißt jetzt „Sicherung erstellt — schau nach, ob die
+Datei angekommen ist“. Dass `lastExport` die Mahnung 30 Tage stumm schaltet, bleibt:
+zuverlässiger lässt es sich von der Seite aus nicht feststellen.
+
 **Sechs Fehler an Ansichten und Bedienung (07.09.2026).**
 
 **1 · Eine laufende Runde verschwand beim Reiterwechsel.** Die Sperre in `go()` hing fest

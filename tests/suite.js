@@ -646,6 +646,24 @@ P.titel("F2 · Suche und Textcheck");
     dd.activeElement === vorherFokussiert,
     dd.activeElement && (dd.activeElement.id || dd.activeElement.tagName));
 }
+{
+  /* Fehlerklasse „dieselbe teure Arbeit zweimal“: openRule() rief drawRules(), obwohl
+     go("regeln") über ensureRules() schon gezeichnet hatte — 117 Regeln, zweimal, beim
+     ersten Regelsprung. Der Zähler prüft die Anzahl der Aufrufe, nicht die Zeit; die hängt
+     vom Rechner ab. Gemessen sank der erste Sprung in jsdom von 375 auf 215 ms. */
+  const w3 = boot(null);
+  w3.eval("window.__n = 0; const echt = drawRules; drawRules = function(){ window.__n++; return echt.apply(this, arguments); };");
+  const ersteId = daten(w3, "RULES_ALL[3].id");
+  w3.eval("openRule(" + JSON.stringify(ersteId) + ")");
+  P.ok("der erste Regelsprung zeichnet die Liste einmal", daten(w3, "__n") === 1, daten(w3, "__n"));
+  P.ok("und die Regel steht offen da", !!w3.document.querySelector("#rule-" + ersteId + ".open"));
+  w3.eval("window.__n = 0;");
+  const zweiteId = daten(w3, "RULES_ALL[7].id");
+  w3.eval("openRule(" + JSON.stringify(zweiteId) + ")");
+  P.ok("der zweite auch", daten(w3, "__n") === 1, daten(w3, "__n"));
+  P.ok("und auch diese Regel steht offen da", !!w3.document.querySelector("#rule-" + zweiteId + ".open"));
+}
+
 /* ---------- G · Bedienung ohne Maus ---------- */
 P.titel("G · Bedienung ohne Maus");
 {

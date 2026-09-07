@@ -6351,8 +6351,12 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
+  /* countDue() geht über alle 696 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+     dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
+     nicht. */
+  const faellig = countDue();
   if(d && d.done){
-    const dueCount = countDue();
+    const dueCount = faellig;
     host.innerHTML =
       '<div class="card">'+
         '<div class="eyebrow">Tagesaufgabe</div>'+
@@ -6380,8 +6384,8 @@ function renderHeute(keepQuiz){
         (heuteA ? '<div class="bar" style="margin-top:10px"><i style="width:'+
           Math.round(Math.min(1,heuteA/TAGESZIEL)*100)+'%"></i></div>' : "")+
         '<p class="muted" style="margin-top:8px">'+
-        (countDue()>35
-          ? "Heute überwiegen Wiederholungen: Es stehen "+countDue()+" Karten an, deshalb kommt kaum neuer Stoff dazu. "
+        (faellig>35
+          ? "Heute überwiegen Wiederholungen: Es stehen "+faellig+" Karten an, deshalb kommt kaum neuer Stoff dazu. "
           : "Gemischt aus allen Bereichen — plus die Karten, die heute zur Wiederholung anstehen. ")+
         (S.streak ? "Deine Serie liegt bei <b>"+S.streak+(S.streak===1?" Tag":" Tagen")+"</b>." : "Heute beginnt deine Serie.")+
         " Für die Serie zählen "+TAGESZIEL+" Karten am Tag — egal, ob hier oder unterwegs.</p>"+
@@ -6391,13 +6395,13 @@ function renderHeute(keepQuiz){
     $("#startD").onclick = ()=> startQuiz(qs, host, {title:"Tagesaufgabe", daily:true});
   }
   bindPlanLine();
-  renderWalkCard();
+  renderWalkCard(faellig);
   renderChips();
   renderExtras();
 }
 
 /* Einstieg für unterwegs — ein Tipp von der Startseite aus */
-function renderWalkCard(){
+function renderWalkCard(faellig){
   const host = $("#walkHost");
   if(!host) return;
   /* Nur eine Unterwegs-Runde gehört auf diese Karte. Eine offene Einstufung stand hier
@@ -6405,7 +6409,7 @@ function renderWalkCard(){
      geschoben, in den sie nicht gehört; angeboten wird sie weiter unter „Karten“. */
   const roh = sitzungOffen();
   const offen = roh && roh.walk ? roh : null;
-  const n = countDue();
+  const n = faellig === undefined ? countDue() : faellig;
   const schwach = schwacheSchluessel().length;
   host.innerHTML =
     '<div class="card walkcard">'+
@@ -6722,10 +6726,16 @@ function bindAcc(sel){
   $$(sel+" .acc > button").forEach(b => b.onclick = ()=> b.parentElement.classList.toggle("open"));
 }
 function openRule(id){
-  RT.tab = "regeln"; go("regeln"); renderRegelnNav(); ensureRules();
-  $("#ruleSearch").value = ""; ruleFilter = ""; ruleVar = false;
+  /* Die Filter zurücksetzen, bevor irgendetwas zeichnet: go("regeln") ruft selbst
+     ensureRules(), und das zeichnet beim ersten Mal die ganze Liste. Danach zeichnete
+     openRule() sie ein zweites Mal — 117 Regeln, zweimal, beim ersten Regelsprung. */
+  RT.tab = "regeln";
+  ruleFilter = ""; ruleVar = false;
+  const frischGezeichnet = !rulesReady;
+  go("regeln"); renderRegelnNav(); ensureRules();
+  $("#ruleSearch").value = "";
   $$("#ruleChips .chip").forEach((x,i)=>x.classList.toggle("on", i===0));
-  drawRules();
+  if(!frischGezeichnet) drawRules();
   const el = $("#rule-"+id);
   if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); }
 }
