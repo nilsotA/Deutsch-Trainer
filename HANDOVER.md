@@ -58,6 +58,35 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Unterbrochene Einstufung behält ihr Ergebnis (07.09.2026).** `startTest()` übergab die
+Auswertung als Funktion (`opts.onDone`) an `startQuiz()`, und eine Funktion lässt sich nicht
+in den `localStorage` schreiben. Wer die Einstufung unterbrach — App geschlossen, oder iOS
+verwirft die Seite im Hintergrund —, bekam beim nächsten Start „Offene Runde · Du warst bei
+Frage 6 von 30 · Fortsetzen“, beantwortete brav die restlichen 25 und stand danach wieder
+vor „Wo stehst du gerade?“: `S.level`, `S.levelDate` und `S.plan` blieben null. Zwölf
+Minuten ins Leere. Dieselbe Lücke traf `Q.daily`: eine fortgesetzte Tagesaufgabe zeigte am
+Ende weder Serie noch XP-Zeile.
+
+Gesichert wird jetzt nicht die Funktion, sondern die **Absicht**: `art` („test“) und, weil
+die Auswertung den Stand von `S.cat` vor dem Test braucht, dieser Stand als `vorher`.
+`sitzungFortsetzen()` baut daraus die Auswertung neu — dafür steht sie jetzt als eigene
+Funktion `testAuswertung(before)` und nicht mehr als anonyme Closure in `startTest()`.
+`daily` wandert genauso mit.
+
+Zwei Dinge fielen dabei nebenbei auf und sind mit behoben: Die offene Einstufung erschien
+auf der Unterwegs-Karte als „Runde läuft noch“ und wurde beim Fortsetzen in den
+Unterwegs-Modus geschoben, in den sie nicht gehört — dort steht jetzt nur noch, was
+tatsächlich eine Unterwegs-Runde ist (`roh.walk`); angeboten wird sie weiter unter
+„Karten“. Und sie lief nach dem Fortsetzen im Karten-Reiter zu Ende, während ihre
+Auswertung den Plan im Fortschritt-Reiter aufbaute — `sitzungFortsetzen()` wechselt für
+`art === "test"` jetzt selbst dorthin.
+
+Ältere Sicherungen haben kein `art`-Feld; `x.art || null` fängt das ab, sie laden
+unverändert. Neu in `tests/lernen.js`, Abschnitt **A2 · Unterbrochene Einstufung**
+(14 Prüfungen): Einstufung anfangen, fünf Fragen beantworten, App neu starten, fortsetzen,
+zu Ende bringen — Ergebnis, Datum und Planangebot müssen da sein. Gegen die alte Fassung
+fallen neun davon durch.
+
 **Die Tagesaufgabe führt jetzt auch Wort- und Fallkarten ein (07.09.2026).** `buildDaily()`
 füllte in Phase 2 erst alle zwölf Plätze mit Übungen; der Block „Neue Wortkarten, solange
 Platz ist“ stand danach und fand nie Platz, und einen Block für neue Fallkarten gab es gar

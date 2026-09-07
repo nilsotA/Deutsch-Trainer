@@ -5780,8 +5780,14 @@ function vorlesenStoppen(){ try{ if(kannVorlesen()) speechSynthesis.cancel(); }c
 
 function sitzungSichern(){
   if(!Q || Q.done){ S.session = null; save(); return; }
+  /* Die Auswertung am Rundenende ist eine Funktion (opts.onDone) und lässt sich nicht in
+     den localStorage schreiben. Gesichert wird deshalb die Absicht: art und, für die
+     Einstufung, der Stand von S.cat vor dem Test — daraus baut sitzungFortsetzen() die
+     Auswertung neu. Ohne das war ein unterbrochener Einstufungstest nach 30 beantworteten
+     Fragen ergebnislos, und eine fortgesetzte Tagesaufgabe zeigte am Ende keine Serie. */
   S.session = {list:Q.list, i:Q.i, correct:Q.correct, base:Q.base, title:Q.title,
-               walk:!!Q.walk, fertig:!!Q.beantwortet, ts:Date.now()};
+               walk:!!Q.walk, daily:!!Q.daily, art:Q.art || null, vorher:Q.vorher || null,
+               fertig:!!Q.beantwortet, ts:Date.now()};
   save();
 }
 function sitzungOffen(){
@@ -5807,7 +5813,8 @@ function startQuiz(list, host, opts){
   opts = opts || {};
   if(opts.walk) list = list.filter(q=>q.type !== "fill");   // Tippen geht unterwegs nicht
   if(!list.length){ host.innerHTML = '<div class="card center"><p class="muted">Nichts zu tun — komm später wieder.</p></div>'; return; }
-  Q = {list, i:0, correct:0, base:list.length, host, onDone:opts.onDone, title:opts.title||"Übung", daily:!!opts.daily, walk:!!opts.walk};
+  Q = {list, i:0, correct:0, base:list.length, host, onDone:opts.onDone, title:opts.title||"Übung",
+       daily:!!opts.daily, walk:!!opts.walk, art:opts.art||null, vorher:opts.vorher||null};
   document.body.classList.toggle("walk", !!opts.walk);
   bildschirmWachhalten(!!opts.walk);
   sitzungSichern();
@@ -5816,7 +5823,13 @@ function startQuiz(list, host, opts){
 function sitzungFortsetzen(host){
   const x = sitzungOffen();
   if(!x) return false;
-  Q = {list:x.list, i:x.i, correct:x.correct||0, base:x.base||x.list.length, host, title:x.title||"Übung", walk:!!x.walk};
+  /* Die Einstufung gehört in den Fortschritt-Reiter — dort ist sie gestartet, dorthin
+     führt ihre Auswertung. Sonst liefe sie im Karten-Reiter zu Ende und der Plan
+     erschiene woanders. */
+  if(x.art === "test"){ PT.tab = "plan"; go("fortschritt"); host = $("#pSub") || host; }
+  Q = {list:x.list, i:x.i, correct:x.correct||0, base:x.base||x.list.length, host,
+       title:x.title||"Übung", walk:!!x.walk, daily:!!x.daily, art:x.art||null, vorher:x.vorher||null};
+  if(x.art === "test") Q.onDone = testAuswertung(x.vorher || {});
   document.body.classList.toggle("walk", !!x.walk);
   bildschirmWachhalten(!!x.walk);
   renderQ();
@@ -6193,7 +6206,11 @@ function renderHeute(keepQuiz){
 function renderWalkCard(){
   const host = $("#walkHost");
   if(!host) return;
-  const offen = sitzungOffen();
+  /* Nur eine Unterwegs-Runde gehört auf diese Karte. Eine offene Einstufung stand hier
+     sonst als „Runde läuft noch“ und wurde beim Fortsetzen in den Unterwegs-Modus
+     geschoben, in den sie nicht gehört; angeboten wird sie weiter unter „Karten“. */
+  const roh = sitzungOffen();
+  const offen = roh && roh.walk ? roh : null;
   const n = countDue();
   const schwach = schwacheSchluessel().length;
   host.innerHTML =
@@ -7407,10 +7424,10 @@ function testQuestions(){
   return out.map(exQuestion);
 }
 
-function startTest(host){
-  const before = JSON.parse(JSON.stringify(S.cat || {}));
-  const qs = testQuestions();
-  startQuiz(qs, host, {title:"Einstufung", onDone:()=>{
+/* Die Auswertung steht als eigene Funktion, damit sie das Fortsetzen einer
+   unterbrochenen Einstufung aus dem gesicherten Vorher-Stand neu bauen kann. */
+function testAuswertung(before){
+  return ()=>{
     const lvl = {};
     TESTCATS.forEach(c=>{
       const a = before[c] || {c:0,w:0}, b = S.cat[c] || {c:0,w:0};
@@ -7419,7 +7436,12 @@ function startTest(host){
     });
     S.level = lvl; S.levelDate = today(); save();
     PT.tab = "plan"; renderFortschritt();
-  }});
+  };
+}
+function startTest(host){
+  const before = JSON.parse(JSON.stringify(S.cat || {}));
+  const qs = testQuestions();
+  startQuiz(qs, host, {title:"Einstufung", art:"test", vorher:before, onDone:testAuswertung(before)});
   window.scrollTo({top:0,behavior:"smooth"});
 }
 

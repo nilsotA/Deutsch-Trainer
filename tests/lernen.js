@@ -65,6 +65,74 @@ const P = pruefer("A · Erster Start und Einstufung");
   P.ok("Unterwegs-Runde startet danach", d.body.classList.contains("walk") && daten(w, "Q.list.length") === 20);
 }
 
+/* ---------- A2 · Unterbrochene Einstufung ---------- */
+P.titel("A2 · Unterbrochene Einstufung");
+{
+  /* Fehlerklasse „die Sitzung merkt sich Daten, aber nicht die Absicht“: startTest()
+     übergab die Auswertung als Funktion (opts.onDone), und eine Funktion lässt sich nicht
+     in den localStorage schreiben. Wer die Einstufung unterbrach und später fortsetzte,
+     beantwortete alle 30 Fragen und stand danach wieder vor „Wo stehst du gerade?“ —
+     S.level, S.levelDate und S.plan blieben null. Dasselbe traf die Tagesaufgabe: nach dem
+     Fortsetzen fehlte am Ende die Serie, weil auch Q.daily nicht mitgesichert wurde. */
+  const w = boot(leererStand({ auto: false }));
+  const d = w.document;
+  [...d.querySelectorAll("button")].find(b => /Einstufung/i.test(b.textContent)).click();
+  ([...d.querySelectorAll("#pSub button")].find(b => /Test|Loslegen|Starten|Beginnen/i.test(b.textContent))
+    || d.querySelector("#pSub button")).click();
+
+  const antworte = (fenster, dok, wieViele) => {
+    let n = 0;
+    while (daten(fenster, "!!(Q && !Q.done)") && n < wieViele) {
+      const q = daten(fenster, "({t:Q.list[Q.i].type, a:Q.list[Q.i].ans, acc:Q.list[Q.i].accept||null})");
+      if (q.t === "fill") {
+        dok.querySelector("#fillIn").value = q.acc ? q.acc[0] : "x";
+        dok.querySelector("#fillGo").click();
+      } else {
+        const opts = [...dok.querySelectorAll(".opt")];
+        opts[n % 3 === 0 ? (q.a === 0 ? 1 : 0) : q.a].click();
+      }
+      const weiter = dok.querySelector("#nextBtn");
+      if (!weiter) break;
+      weiter.click();
+      n++;
+    }
+    return n;
+  };
+
+  const gesamt = daten(w, "Q.list.length");
+  P.ok("Einstufung läuft (" + gesamt + " Fragen)", gesamt >= 25, gesamt);
+  P.ok("die Sitzung ist als Einstufung gemerkt", daten(w, "(S.session && S.session.art) || null") === "test");
+  P.ok("und trägt den Stand von vorher mit", daten(w, "(S.session && S.session.vorher) || null") !== null);
+  P.ok("fünf beantwortet", antworte(w, d, 5) === 5);
+
+  /* App geschlossen und neu geöffnet — wie wenn iOS die Seite verwirft. */
+  const w2 = boot(daten(w, "S"));
+  const d2 = w2.document;
+  P.ok("die Unterwegs-Karte bietet die Einstufung nicht an",
+    !d2.querySelector("#wkOn"), d2.querySelector("#walkHost") && d2.querySelector("#walkHost").textContent.slice(0, 60));
+  const weiterKnopf = d2.querySelector("#goOn");
+  P.ok("unter „Karten“ steht die offene Runde", !!weiterKnopf);
+  weiterKnopf.click();
+  P.ok("die Auswertung ist wieder da", daten(w2, "typeof Q.onDone") === "function");
+  P.ok("und sie läuft im Fortschritt-Reiter weiter", daten(w2, "(Q.host && Q.host.id) || null") === "pSub",
+    daten(w2, "(Q.host && Q.host.id) || null"));
+
+  const rest = antworte(w2, d2, 60);
+  P.ok("die restlichen Fragen beantwortet (" + rest + ")", rest >= gesamt - 6, rest);
+  P.ok("das Ergebnis ist da", !!daten(w2, "S.level"), daten(w2, "S.level"));
+  P.ok("mit Datum", !!daten(w2, "S.levelDate"));
+  P.ok("und der Plan wird angeboten", !!d2.querySelector("#pMake"));
+}
+{
+  /* Die Tagesaufgabe muss nach dem Fortsetzen weiter als Tagesaufgabe gelten. */
+  const w = boot(leererStand({ auto: false }));
+  w.document.querySelector("#startD").click();
+  P.ok("Tagesaufgabe gemerkt", daten(w, "(S.session && S.session.daily) || null") === true);
+  const w2 = boot(daten(w, "S"));
+  w2.document.querySelector("#goOn").click();
+  P.ok("nach dem Fortsetzen weiterhin Tagesaufgabe", daten(w2, "Q.daily || null") === true);
+}
+
 /* ---------- B · Kartenrückweg: jede Sorte muss wiederkommen ---------- */
 P.titel("B · Rückweg aller Kartenarten");
 {
