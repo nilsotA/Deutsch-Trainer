@@ -36,12 +36,23 @@ function boot(stand, optionen = {}) {
       w.navigator.vibrate = () => true;
       w.navigator.wakeLock = { request: () => Promise.resolve({ release: () => Promise.resolve() }) };
       w.SpeechSynthesisUtterance = function (text) { this.text = text; };
+      /* Wie im echten Browser: cancel() bricht die laufende Äußerung ab und meldet
+         das als Ende. Solange der Stub hier nichts tat, konnte der Prüflauf einen
+         ganzen Fehlerweg nicht sehen — den abgebrochenen Rückruf, der die Automatik
+         auf der nächsten, unbeantworteten Frage armiert. */
+      let laufend = null;
       w.speechSynthesis = {
-        cancel() {},
+        cancel() {
+          const u = laufend; laufend = null;
+          if (u && u.onend) setTimeout(() => u.onend(), 0);
+        },
         speak(u) {
           (w.__gesagt = w.__gesagt || []).push(u.text);
+          laufend = u;
           // Vorlesen sofort beenden, damit Rückrufe wie das Auto-Weiter greifen
-          if (optionen.sprichSofortZuEnde && u.onend) setTimeout(() => u.onend(), 5);
+          if (optionen.sprichSofortZuEnde && u.onend) {
+            setTimeout(() => { if (laufend === u) { laufend = null; u.onend(); } }, 5);
+          }
         }
       };
     }

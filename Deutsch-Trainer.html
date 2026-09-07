@@ -5853,8 +5853,14 @@ function check(input){
     const b = $("#nextBtn");
     if(b){ const leiste = document.createElement("div"); leiste.className = "walkbar";
       b.parentElement.replaceWith(leiste); leiste.appendChild(b); }
+    /* Der Rückruf gehört zu genau dieser Frage. Tippt Nils auf „Weiter“, statt die
+       Erklärung abzuwarten, bricht next() das Vorlesen ab — und der Abbruch meldet
+       sich wie ein normales Satzende. Ohne diese Fessel armierte er die Automatik
+       auf der nächsten, noch unbeantworteten Frage, die 600 ms später ungefragt
+       übersprungen wurde. */
+    const beiFrage = Q.i;
     const spricht = vorlesen((ok?"Richtig. ":"Nicht ganz. ")+strip(q.exp),
-                             ok ? ()=>autoAn(600) : null);
+                             ok ? ()=>{ if(Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
   sitzungSichern();

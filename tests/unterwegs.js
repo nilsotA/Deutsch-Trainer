@@ -100,6 +100,30 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("beim Vorlesen erst nach dem Satzende weiter", daten(w, "Q.i") === vor.i + 1, daten(w, "Q.i"));
   }
   {
+    /* Fehlerklasse „abgebrochener Rückruf schaltet die nächste Frage weg“: Tippt Nils
+       auf „Weiter“, statt die vorgelesene Erklärung abzuwarten, bricht next() das
+       Vorlesen ab. Der Browser meldet den Abbruch wie ein normales Satzende — und der
+       Rückruf armierte die Automatik auf der nächsten, noch unbeantworteten Frage, die
+       600 ms später ungefragt übersprungen wurde. In einer Runde von zwanzig Karten
+       kam so nur jede zweite dran, und das Rundenende meldete „10 von 20 richtig“,
+       obwohl keine Antwort falsch war. */
+    const w = boot(leererStand({ auto: true, speak: true }));   // Vorlesen endet nicht von selbst
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
+    d.querySelectorAll(".opt")[vor.ans].click();
+    d.querySelector("#nextBtn").click();          // weitertippen, statt zuzuhören
+    await schlaf(60);                             // dem gemeldeten Satzende Zeit geben
+    P.ok("Weitertippen armiert die Automatik nicht auf der neuen Frage",
+      !d.body.classList.contains("autolauf"));
+    const jetzt = daten(w, "Q.i");
+    await schlaf(900);                            // länger als die 600 ms der Automatik
+    P.ok("die neue Frage wird nicht übersprungen", daten(w, "Q.i") === jetzt,
+      "aus Frage " + jetzt + " wurde " + daten(w, "Q.i"));
+    P.ok("und sie ist noch unbeantwortet",
+      d.querySelectorAll(".opt.right,.opt.wrong").length === 0);
+  }
+  {
     const w = boot(leererStand({ auto: false }));
     const d = w.document;
     d.querySelector("#wkNew").click();
