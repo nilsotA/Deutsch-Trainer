@@ -28,7 +28,10 @@ Die App läuft ohne Server: Datei im Browser öffnen. Kein Netzwerk, keine exter
 Skripte, keine Abhängigkeiten. Alles läuft offline, auch auf dem Handy.
 
 **Deployment.** Die Datei heißt nicht `index.html`, deshalb braucht ein Hoster eine
-Zuordnung für `/` — sonst kommt 404. Für Vercel steht sie in `vercel.json`. Wichtig für
+Zuordnung für `/` — sonst kommt 404. Für Vercel steht sie in `vercel.json`.
+**Vercel baut `main`**, nicht den Arbeitsbranch: Was nicht auf `main` liegt, ist auch nicht
+deployt. Und eine Deployment-URL mit Hash (`…-lpqaabbok-…`) zeigt für immer auf genau diesen
+Stand; nach einer Korrektur braucht es die Produktions-URL des Projekts, nicht die alte. Wichtig für
 Nils: Der Lernstand liegt in `localStorage` und hängt an der Herkunft. Eine gehostete
 Fassung startet mit leerem Fortschritt; wer wechselt, exportiert vorher im Fortschritt
 seine Sicherung und importiert sie in der neuen Fassung.
