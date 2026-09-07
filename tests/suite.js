@@ -364,6 +364,54 @@ if (zettelKnopf) {
   }
 }
 
+/* Fehlerklasse „Farbe reißt den Kontrast“: Weiß auf dem Akzentgrün des dunklen Themas
+   ergab 2,56:1 — nötig sind 4,5:1 für Fließtext. Betroffen war der Hauptknopf, also
+   „Weiter“, „Abschließen“, „Losgehen“, und ebenso die Fehlerfarbe mit 2,75:1. Beides
+   fällt beim Ansehen kaum auf und ist unterwegs bei Sonne genau das Problem. */
+const quelle = require("fs").readFileSync(require("path").join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
+const farben = (block) => {
+  const m = quelle.match(new RegExp(block.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\{([^}]*)\\}"));
+  const raus = {};
+  if (m) (m[1].match(/--[\w-]+:\s*#[0-9a-fA-F]{3,8}/g) || []).forEach(z => {
+    const [k, v] = z.split(":"); raus[k.trim()] = v.trim();
+  });
+  return raus;
+};
+const leucht = h => {
+  let c = h.replace("#", "");
+  if (c.length === 3) c = c.split("").map(x => x + x).join("");
+  const f = v => (v /= 255) <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  return 0.2126 * f(parseInt(c.substr(0, 2), 16)) + 0.7152 * f(parseInt(c.substr(2, 2), 16))
+       + 0.0722 * f(parseInt(c.substr(4, 2), 16));
+};
+const kontrast = (a, b) => {
+  const l1 = leucht(a), l2 = leucht(b), [h, n] = l1 > l2 ? [l1, l2] : [l2, l1];
+  return Math.round((h + 0.05) / (n + 0.05) * 100) / 100;
+};
+P.ok("Die Kontrastrechnung stimmt an bekannten Werten",
+  kontrast("#000000", "#ffffff") === 21 && kontrast("#ffffff", "#ffffff") === 1,
+  kontrast("#000000", "#ffffff") + " / " + kontrast("#ffffff", "#ffffff"));
+
+const themen = [["hell", farben(":root")], ["dunkel", farben('[data-theme="dark"]')]];
+const paare = [
+  ["Schrift auf dem Akzentknopf", "--acc-fg", "--acc"],
+  ["Schrift auf der Fehlerfläche", "--bad-fg", "--bad"],
+  ["Kleinschrift auf dem Grund", "--ink3", "--bg"],
+  ["Kleinschrift auf der Karte", "--ink3", "--card"],
+  ["Nebentext auf dem Grund", "--ink2", "--bg"],
+  ["Haupttext auf dem Grund", "--ink", "--bg"],
+];
+const zuBlass = [];
+themen.forEach(([name, f]) => {
+  P.ok("Farbwerte für das " + name + "e Thema gefunden", Object.keys(f).length > 5, Object.keys(f).length);
+  paare.forEach(([was, vg, hg]) => {
+    if (!f[vg] || !f[hg]) { zuBlass.push(name + ": " + vg + " oder " + hg + " fehlt"); return; }
+    const v = kontrast(f[vg], f[hg]);
+    if (v < 4.5) zuBlass.push(name + ", " + was + ": " + v + ":1");
+  });
+});
+P.ok("Kein Text unter 4,5:1 (" + themen.length * paare.length + " Paare)", !zuBlass.length, zuBlass.join(" · "));
+
 /* ---------- F · Verpackung ---------- */
 /* Die gehostete Fassung ist auf dem Handy installierbar und offline nutzbar. Das hängt an
    fünf kleinen Dateien und an sechs Zeilen im <head> — beides kann eine spätere Änderung
