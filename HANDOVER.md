@@ -58,6 +58,32 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fortsetzen überspringt die schon beantwortete Frage (07.09.2026).** `sitzungSichern()`
+hielt nur `Q.i` fest, nicht ob die Frage an dieser Stelle bereits beantwortet und über
+`grade()` verbucht war. Wer nach der Rückmeldung auf „Beenden“ tippte, bekam beim
+Fortsetzen **dieselbe Frage noch einmal — samt der Lösung, die eben in der Rückmeldung
+stand**. `grade()` unterscheidet nicht zwischen „auf Anhieb richtig“ und „richtig, nachdem
+die Lösung dastand“: eine gerade falsch beantwortete Karte stieg dadurch auf Fach 2 und kam
+erst in drei Tagen wieder statt am nächsten Tag. Denselben Zustand erzeugt iOS von allein,
+wenn es die Seite im Hintergrund verwirft und neu lädt — dafür braucht es nicht einmal den
+Beenden-Knopf.
+
+Behoben mit einer Marke am laufenden Quiz: `renderQ()` setzt `Q.beantwortet = false`,
+`check()` setzt sie auf `true`, `sitzungSichern()` schreibt sie als `fertig` mit. Die Marke
+sitzt bewusst an `Q` und nicht als Parameter der Sicherung — der Beenden-Knopf sichert
+selbst noch einmal und hätte sie sonst wieder gelöscht. `sitzungOffen()` zählt beim Lesen
+`fertig` dazu und gilt als geschlossen, wenn dahinter nichts mehr kommt.
+
+Neu in `tests/unterwegs.js`, Abschnitt **E · Fortsetzen** (13 Prüfungen): der ganze Weg
+falsch antworten → beenden → in einem zweiten Fenster fortsetzen, dazu die Gegenprobe
+(unbeantwortet beendet → dieselbe Frage kommt zu Recht wieder) und der Randfall hinter der
+letzten Frage. Gegen die alte Fassung fallen vier davon durch, eine bricht ab.
+
+Eine Einschränkung, die die Meldung überzeichnet hatte: Der Tageszähler kam vorher wie
+nachher auf dieselbe Zahl. Doppelt gezählt wurde die *Karte*, nicht die Antwort — zwölf
+Antworten deckten also elf verschiedene Karten ab. Der teure Teil war die Beförderung ins
+nächste Fach, nicht die Zählung.
+
 **Der Service Worker wartet jetzt auf den ganzen Rumpf (07.09.2026).** Beim
 Durchgehen der eigenen Verpackung ist eine Fehlannahme aufgefallen: Die Frist von 2,5 s
 im Worker (`seite()`) sollte den Start retten, wenn das Netz schwächelt — sie hat aber nur

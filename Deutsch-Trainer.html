@@ -5759,14 +5759,22 @@ function vorlesenStoppen(){ try{ if(kannVorlesen()) speechSynthesis.cancel(); }c
 
 function sitzungSichern(){
   if(!Q || Q.done){ S.session = null; save(); return; }
-  S.session = {list:Q.list, i:Q.i, correct:Q.correct, base:Q.base, title:Q.title, walk:!!Q.walk, ts:Date.now()};
+  S.session = {list:Q.list, i:Q.i, correct:Q.correct, base:Q.base, title:Q.title,
+               walk:!!Q.walk, fertig:!!Q.beantwortet, ts:Date.now()};
   save();
 }
 function sitzungOffen(){
   const x = S.session;
-  if(!x || !Array.isArray(x.list) || x.i >= x.list.length) return null;
+  if(!x || !Array.isArray(x.list)) return null;
   if(Date.now() - (x.ts||0) > 36*3600*1000) return null;
-  return x;
+  /* War die Frage beim Beenden schon beantwortet, ist sie auch schon verbucht.
+     Ohne dieses Weiterzählen käme sie beim Fortsetzen samt aufgedeckter Lösung
+     noch einmal — und stiege dadurch ein Fach auf, obwohl sie danebenging.
+     Denselben Zustand erzeugt iOS von allein, wenn es die Seite im Hintergrund
+     verwirft und neu lädt. */
+  const i = x.i + (x.fertig ? 1 : 0);
+  if(i >= x.list.length) return null;
+  return Object.assign({}, x, {i:i});
 }
 
 /* ============================================================
@@ -5795,6 +5803,7 @@ function sitzungFortsetzen(host){
 }
 
 function renderQ(){
+  Q.beantwortet = false;
   const q = Q.list[Q.i];
   const pct = Math.round(Q.i / Q.list.length * 100);
   let body = "";
@@ -5908,6 +5917,7 @@ function check(input){
                              ok ? ()=>{ if(Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
+  Q.beantwortet = true;
   sitzungSichern();
   $("#nextBtn").onclick = next;
   if(Q.walk && S.auto){

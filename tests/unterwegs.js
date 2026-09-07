@@ -205,5 +205,72 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("ohne Fehler kein Knopf", !rein.document.querySelector("#wkWeak"));
   }
 
+  /* ---------- E · Fortsetzen ---------- */
+  P.titel("E · Fortsetzen");
+  {
+    /* Fehlerklasse „beantwortete Frage kommt beim Fortsetzen noch einmal“: sitzungSichern()
+       hielt nur Q.i fest, nicht ob die Frage an dieser Stelle schon beantwortet und über
+       grade() verbucht war. Wer nach der Rückmeldung auf „Beenden“ tippte, bekam beim
+       Fortsetzen dieselbe Frage — samt der Lösung, die eben in der Rückmeldung stand. Eine
+       gerade falsch beantwortete Karte stieg dadurch auf Fach 2 und kam erst in drei Tagen
+       wieder statt am nächsten Tag; das Tagesziel zählte sie doppelt. Denselben Zustand
+       erzeugt iOS von allein, wenn es die Seite im Hintergrund verwirft. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const erste = daten(w, "({key:Q.list[0].key, ans:Q.list[0].ans, frage:Q.list[0].q})");
+    const falsch = [...d.querySelectorAll(".opt")].findIndex((b, i) => i !== erste.ans);
+    d.querySelectorAll(".opt")[falsch].click();
+    const nachFehler = daten(w, "S.cards[" + JSON.stringify(erste.key) + "]");
+    const tagNachFehler = daten(w, "S.days[today()]");
+    P.ok("falsch beantwortet: Karte in Fach 1", nachFehler && nachFehler.b === 1, nachFehler);
+
+    d.querySelector("#walkOut").click();                    // „Beenden“ mitten in der Rückmeldung
+    const gemerkt = daten(w, "S.session");
+    P.ok("die Runde ist gemerkt", !!gemerkt && Array.isArray(gemerkt.list), gemerkt);
+    P.ok("und weiß, dass die Frage schon verbucht ist", !!gemerkt && gemerkt.fertig === true, gemerkt && gemerkt.fertig);
+
+    const stand2 = daten(w, "S");
+    const w2 = boot(stand2);
+    const d2 = w2.document;
+    P.ok("die Startseite bietet das Fortsetzen an", !!d2.querySelector("#wkOn"));
+    d2.querySelector("#wkOn").click();
+    P.ok("es geht hinter der beantworteten Frage weiter", daten(w2, "Q.i") === 1, daten(w2, "Q.i"));
+    P.ok("nicht dieselbe Frage noch einmal",
+      daten(w2, "Q.list[Q.i].q") !== erste.frage, daten(w2, "Q.list[Q.i].q"));
+
+    /* Die eigentliche Folge: die Karte darf nicht durch die aufgedeckte Lösung aufsteigen. */
+    const wahl2 = daten(w2, "Q.list[Q.i].ans");
+    d2.querySelectorAll(".opt")[wahl2].click();
+    const spaeter = daten(w2, "S.cards[" + JSON.stringify(erste.key) + "]");
+    P.ok("die falsch beantwortete Karte bleibt in Fach 1",
+      spaeter && spaeter.b === 1, spaeter);
+    const tagSpaeter = daten(w2, "S.days[today()]");
+    P.ok("und zählt für das Tagesziel nur einmal",
+      (tagSpaeter.a || 0) === (tagNachFehler.a || 0) + 1,
+      "vorher " + (tagNachFehler.a || 0) + ", nachher " + (tagSpaeter.a || 0));
+  }
+  {
+    /* Gegenprobe: wer beendet, ohne geantwortet zu haben, bekommt seine Frage zurück. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const frage = daten(w, "Q.list[Q.i].q");
+    d.querySelector("#walkOut").click();
+    P.ok("unbeantwortet beendet: nicht als verbucht gemerkt", daten(w, "S.session.fertig") === false);
+    const w2 = boot(daten(w, "S"));
+    w2.document.querySelector("#wkOn").click();
+    P.ok("dieselbe Frage kommt wieder", daten(w2, "Q.i") === 0 && daten(w2, "Q.list[Q.i].q") === frage);
+  }
+  {
+    /* War die verbuchte Frage die letzte, gibt es nichts mehr fortzusetzen — sonst
+       stünde der Zeiger hinter dem Ende der Liste. */
+    const w = boot(leererStand({ auto: false }));
+    w.eval("S.session = {list:[{key:'k01'},{key:'k02'}], i:1, correct:0, base:2, title:'x', walk:true, fertig:true, ts:Date.now()}");
+    P.ok("hinter der letzten Frage ist die Runde vorbei", daten(w, "sitzungOffen()") === null);
+    w.eval("S.session.fertig = false");
+    P.ok("dieselbe Sitzung unbeantwortet ist offen", daten(w, "sitzungOffen() && sitzungOffen().i") === 1);
+  }
+
   P.abschluss();
 })();
