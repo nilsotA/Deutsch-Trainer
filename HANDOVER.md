@@ -58,6 +58,48 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vier Sackgassen auf dem Handy (07.09.2026).** Alle vier sind in Chromium bei 393×852,
+375×667 und 667×375 gemessen, vorher wie nachher.
+
+**1 · Aus einer Runde führte kein Weg heraus.** Nur der Unterwegs-Kopf hatte einen
+Beenden-Knopf. Wer auf Heute ein Thema antippte oder die Tagesaufgabe startete, kam nur
+durch Neuladen wieder heraus — alle Reiter durchklicken half nicht, weil `go()` die
+Heute-Ansicht gesperrt hält, solange dort eine Runde läuft. Als Startbildschirm-App
+(`display:standalone`) gibt es keine Adressleiste und keinen Neuladen-Knopf; dort blieb nur,
+die App zu beenden. Der gewöhnliche Rundenkopf hat jetzt denselben Knopf, und `startQuiz()`
+merkt sich in `Q.zurueck`, aus welcher Ansicht die Runde kam.
+
+**2 · Der Regel-Link im Unterwegs-Modus war eine Sackgasse.** `body.walk` blendet die
+Reiterleiste aus; `go()` fasste `body.walk` nicht an. Ein Tipp auf „→ Regel nachlesen“
+führte also in die Regelansicht ohne Reiterleiste — kein Weg zurück, dieselbe Klemme wie
+oben. `go()` verlässt den Unterwegs-Modus jetzt selbst und legt die Runde ab; sie steht
+danach als „Fortsetzen“ bereit.
+
+**3 · Die Reiterleiste scrollte weg und kam nicht wieder.** `.head` ist `position:sticky`,
+aber der Handy-Block setzte sie auf `relative` — laut Kommentar als Bezugsrahmen für den
+Wischhinweis (`::after`). Sticky ist selbst ein Bezugsrahmen, der Verlauf hätte also
+ebenso funktioniert. Auf jedem Handy verschwanden damit Kopfzeile, Reiter, Suche und der
+Hell/Dunkel-Schalter beim Scrollen. Die Ansicht Sätze ist bei 393 px **18 408 px** hoch —
+einundzwanzig Bildschirme zurück nach oben. Gemessen: Reiterleiste nach 3000 px Scrollen
+vorher außer Sicht, jetzt bei `top 55`. Im Unterwegs-Modus und im kurzen Querformat bleibt
+sie weiterhin bewusst stehen.
+
+**4 · Der Spickzettel wurde hochkant abgeschnitten.** Rasterzellen haben von Haus aus
+`min-width:auto` und wachsen auf die Mindestbreite ihres Inhalts. Die Tabellen sind breiter
+als der Schirm, die Zelle stand 65–83 px über den Rand — und weil `body{overflow-x:hidden}`
+gilt, wurde der Überstand abgeschnitten statt scrollbar. In der dritten Tabelle fehlte die
+halbe Plural-Spalte. `.ch-2col > *{min-width:0}` lässt die Scrollfläche von `table.dt`
+wieder greifen, wie im Kommentar dort ohnehin vorgesehen. Gemessen: Seitenbreite 458 auf
+393 px Schirm vorher, 393 nachher; 459/375 → 375; quer 752/667 → 667. Fürs Querformat
+brauchte es dieselben Regeln noch einmal, weil die 600-px-Abfrage dort nicht greift — das
+war die einzige Stelle der App mit echtem Seitwärts-Scrollen.
+
+Geprüft: `tests/unterwegs.js`, Abschnitt **G · Wege aus einer Runde heraus** (14 Prüfungen,
+sechs fallen gegen die alte Fassung durch). Für die beiden CSS-Punkte steht in
+`tests/suite.js` nur ein Riegel gegen Rückfall — jsdom rechnet weder Medienabfragen noch
+Layout, das Verhalten selbst ist im Browser gemessen; beide Riegel fallen gegen die alte
+Fassung durch.
+
 **Fortschritt zeigt nach Import und Zurücksetzen die richtigen Zahlen (07.09.2026).**
 „Sicherung laden“ und „Alles zurücksetzen“ sitzen beide in der Fortschritt-Ansicht und
 riefen am Ende `renderAll()` — darin fehlte ausgerechnet `renderFortschritt()`. Die Ansicht,

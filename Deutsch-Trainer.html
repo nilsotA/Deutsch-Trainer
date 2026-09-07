@@ -88,6 +88,9 @@ input,textarea,select{font:inherit;color:inherit}
 .center{text-align:center}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .spread{display:flex;justify-content:space-between;align-items:center;gap:12px}
+/* Ausstieg im gewöhnlichen Rundenkopf: schmal und einzeilig, damit er die Zeile mit
+   Titel und Kategorie-Marke nicht dominiert. */
+#quizOut{flex:0 0 auto;white-space:nowrap;padding:7px 11px;font-size:13px;line-height:1.2}
 hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 
 .btn{padding:11px 20px;border-radius:11px;background:var(--acc);color:var(--acc-fg);font-weight:620;font-size:15px;
@@ -475,8 +478,13 @@ table.ch-t.sm td{padding-right:14px}
   .pill{padding:5px 9px;font-size:12.5px}
   .hud{gap:5px}
 
-  /* Wischhinweis an der Reiterleiste */
-  .head{position:relative}
+  /* Wischhinweis an der Reiterleiste. Die Kopfzeile bleibt dabei sticky: position:relative
+     war hier nur als Bezugsrahmen für den ::after-Verlauf gedacht, und das ist sticky
+     ebenso. Ohne sticky verschwanden auf jedem Handy Reiterleiste, Suche und der
+     Hell/Dunkel-Schalter beim Scrollen und kamen nicht wieder — die Ansicht Sätze ist bei
+     393 px rund 18 000 px hoch, das sind einundzwanzig Bildschirme zurück nach oben.
+     Im Unterwegs-Modus (Zeile „body.walk .head“) und im kurzen Querformat bleibt sie
+     weiterhin bewusst stehen. */
   .head::after{content:"";position:absolute;right:0;bottom:1px;width:26px;height:42px;
     background:linear-gradient(90deg,transparent,var(--bg));pointer-events:none}
 
@@ -502,6 +510,12 @@ table.ch-t.sm td{padding-right:14px}
   table.ch-t td{display:block;padding-top:2px;padding-bottom:9px}
   .satz{overflow-x:auto;font-size:14.5px;line-height:2}
   .ch-2col{grid-template-columns:1fr;gap:12px}
+  /* Rasterzellen haben von Haus aus min-width:auto und wachsen auf die Mindestbreite
+     ihres Inhalts. Die Spickzettel-Tabellen sind breiter als der Schirm; die Zelle stand
+     damit 96 px über den Rand, und weil body{overflow-x:hidden} gilt, wurde der Überstand
+     abgeschnitten statt scrollbar — in der dritten Tabelle fehlte die halbe Plural-Spalte.
+     Mit min-width:0 greift die Scrollfläche von table.dt wieder, wie oben vorgesehen. */
+  .ch-2col > *{min-width:0}
 
   /* Lange Wörter dürfen nicht überstehen */
   .crow-e,.fnd-q,.jlast,.sres-t,.kerr-h,.model,.quote,.acc .body{overflow-wrap:anywhere}
@@ -554,6 +568,15 @@ table.ch-t.sm td{padding-right:14px}
 /* Querformat auf dem Handy: Kopfzeile nicht kleben lassen */
 @media(max-height:480px) and (orientation:landscape){
   .head{position:static}
+  /* Die 600-px-Regeln greifen hier nicht — quer ist der Schirm breiter —, die Tabellen des
+     Spickzettels sind aber genauso breit wie hochkant. Ohne diese vier Zeilen bekam die
+     Seite als einzige Stelle der App echtes Seitwärts-Scrollen (752 px Inhalt auf 667 px
+     Schirm). */
+  .ch-2col{grid-template-columns:1fr;gap:12px}
+  .ch-2col > *{min-width:0}
+  table.dt{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--line2);border-radius:9px;padding:2px 4px}
+  table.dt th,table.dt td{white-space:nowrap}
 }
 
 </style>
@@ -5860,8 +5883,11 @@ function startQuiz(list, host, opts){
   /* Startet eine Runde in einem anderen Wirt, muss die alte Karte weg — sie bliebe sonst
      samt Antwortknöpfen bedienbar stehen. */
   if(Q && !Q.done && Q.host && Q.host !== host) Q.host.innerHTML = "";
+  /* Wohin der Beenden-Knopf zurückführt: in die Ansicht, aus der die Runde gestartet ist. */
+  const sichtbar = document.querySelector(".view.on");
   Q = {list, i:0, correct:0, base:list.length, host, onDone:opts.onDone, title:opts.title||"Übung",
-       daily:!!opts.daily, walk:!!opts.walk, art:opts.art||null, vorher:opts.vorher||null};
+       daily:!!opts.daily, walk:!!opts.walk, art:opts.art||null, vorher:opts.vorher||null,
+       zurueck: sichtbar ? sichtbar.id.replace(/^v-/, "") : "heute"};
   document.body.classList.toggle("walk", !!opts.walk);
   bildschirmWachhalten(!!opts.walk);
   sitzungSichern();
@@ -5874,8 +5900,10 @@ function sitzungFortsetzen(host){
      führt ihre Auswertung. Sonst liefe sie im Karten-Reiter zu Ende und der Plan
      erschiene woanders. */
   if(x.art === "test"){ PT.tab = "plan"; go("fortschritt"); host = $("#pSub") || host; }
+  const sichtbar = document.querySelector(".view.on");
   Q = {list:x.list, i:x.i, correct:x.correct||0, base:x.base||x.list.length, host,
-       title:x.title||"Übung", walk:!!x.walk, daily:!!x.daily, art:x.art||null, vorher:x.vorher||null};
+       title:x.title||"Übung", walk:!!x.walk, daily:!!x.daily, art:x.art||null, vorher:x.vorher||null,
+       zurueck: sichtbar ? sichtbar.id.replace(/^v-/, "") : "heute"};
   if(x.art === "test") Q.onDone = testAuswertung(x.vorher || {});
   document.body.classList.toggle("walk", !!x.walk);
   bildschirmWachhalten(!!x.walk);
@@ -5905,6 +5933,7 @@ function renderQ(){
         '<span style="margin-left:auto">'+tag(q.cat)+"</span>"+
       "</div>"
     : '<div class="spread" style="margin-bottom:12px">'+
+        '<button class="btn ghost sm" id="quizOut">‹ Beenden</button>'+
         '<span class="tiny muted">'+Q.title+" · Frage "+(Q.i+1)+" von "+Q.list.length+"</span>"+ tag(q.cat)+
       "</div>";
   Q.host.innerHTML =
@@ -5915,6 +5944,21 @@ function renderQ(){
       body+
       '<div id="fbHost"></div>'+
     "</div>";
+  if(!Q.walk){
+    /* Ohne diesen Knopf gab es aus einer Runde außerhalb des Unterwegs-Modus nur ein
+       Neuladen heraus — und als Startbildschirm-App gibt es dafür keinen Knopf. Die
+       Tagesaufgabe kam auch beim Reiterwechsel nicht wieder, weil go() sie gesperrt hält,
+       solange eine Runde in ihrem Wirt läuft. */
+    const raus = qEl("#quizOut");
+    if(raus) raus.onclick = ()=>{
+      autoAus(); vorlesenStoppen();
+      const ziel = Q.zurueck || "heute";
+      sitzungSichern();
+      Q = null;
+      go(ziel);
+      toast("Runde gemerkt — du kannst später weitermachen");
+    };
+  }
   if(Q.walk){
     const out = $("#walkOut");
     if(out) out.onclick = ()=>{ vorlesenStoppen(); bildschirmWachhalten(false);
@@ -8328,6 +8372,16 @@ function renderRegelnNav(){
    RAHMEN
    ============================================================ */
 function go(v){
+  /* Ein Ansichtswechsel verlässt den Unterwegs-Modus. Sonst führte der Regel-Link aus der
+     Rückmeldung („→ Regel nachlesen“) in eine Ansicht, in der body.walk die Reiterleiste
+     ausgeblendet hält: kein Weg zurück zu Heute, Karten oder in die Runde, einziger
+     Ausweg ein Neuladen — in der installierten Web-App ohne Adressleiste. Die Runde
+     selbst ist über sitzungSichern() abgelegt und lässt sich fortsetzen. */
+  if(document.body.classList.contains("walk")){
+    autoAus(); vorlesenStoppen(); bildschirmWachhalten(false);
+    document.body.classList.remove("walk");
+    if(Q && !Q.done){ sitzungSichern(); Q = null; }
+  }
   $$(".tab").forEach(t=>t.classList.toggle("on", t.dataset.v===v));
   $$(".view").forEach(s=>s.classList.toggle("on", s.id==="v-"+v));
   const busy = Q && !Q.done && Q.host === $("#dailyHost");

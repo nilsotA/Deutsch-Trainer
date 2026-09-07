@@ -292,8 +292,12 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("Tagesaufgabe läuft in #dailyHost", daten(w, "Q.host.id") === "dailyHost");
     P.ok("nur eine Frage steht auf dem Schirm", d.querySelectorAll(".qtext").length === 1,
       d.querySelectorAll(".qtext").length);
-    P.ok("die Karte der alten Runde ist weg", d.querySelector("#walkHost").innerHTML === "",
-      d.querySelector("#walkHost").innerHTML.slice(0, 60));
+    /* Im Wirt der alten Runde darf keine Frage mit Antwortknöpfen stehen bleiben. Was
+       dort steht, ist die gewöhnliche Unterwegs-Kachel — der Wechsel auf Heute beendet
+       die Unterwegs-Runde und zeichnet sie neu. */
+    P.ok("die Karte der alten Runde ist weg",
+      !d.querySelector("#walkHost .qtext") && !d.querySelector("#walkHost .opt"),
+      d.querySelector("#walkHost").innerHTML.slice(0, 80));
 
     /* Selbst wenn im anderen Wirt etwas steht, darf check() es nicht anfassen. */
     d.querySelector("#walkHost").innerHTML =
@@ -310,6 +314,57 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
       !!daten(w, "S.cards[" + JSON.stringify(dran) + "] || null"));
     P.ok("und sonst keine", Object.keys(daten(w, "S.cards")).length === 1,
       Object.keys(daten(w, "S.cards")).join(", "));
+  }
+
+  /* ---------- G · Wege aus einer Runde heraus ---------- */
+  P.titel("G · Wege aus einer Runde heraus");
+  {
+    /* Fehlerklasse „Sackgasse“: body.walk blendet die Reiterleiste aus. Der Link
+       „→ Regel nachlesen“ aus der Rückmeldung rief go("regeln"), und go() fasste
+       body.walk nicht an — die Regelansicht stand ohne Reiterleiste da, die laufende Runde
+       lag in einer ausgeblendeten Ansicht, und der einzige Ausweg war ein Neuladen. In der
+       vom Startbildschirm gestarteten Web-App gibt es dafür keinen Knopf. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    P.ok("Unterwegs-Modus an", d.body.classList.contains("walk"));
+    const ans = daten(w, "Q.list[0].ans");
+    [...d.querySelectorAll("#walkHost .opt")][ans === 0 ? 1 : 0].click();   // falsch, damit die Regel dabeisteht
+    const lnk = d.querySelector("#walkHost [data-rule]");
+    P.ok("die Rückmeldung verweist auf die Regel", !!lnk);
+    lnk.onclick(new w.Event("click"));         // der Prüflauf klemmt echte Anker-Klicks ab
+    P.ok("die Regelansicht ist offen",
+      [...d.querySelectorAll(".view.on")].map(x => x.id).join() === "v-regeln",
+      [...d.querySelectorAll(".view.on")].map(x => x.id).join());
+    P.ok("der Unterwegs-Modus ist beendet", !d.body.classList.contains("walk"));
+    /* Am gerechneten Stil geprüft, nicht am Vorhandensein der Knoten: body.walk blendet
+       die Leiste per CSS aus, die Elemente stehen die ganze Zeit im Dokument. */
+    P.ok("die Reiterleiste ist wieder sichtbar",
+      w.getComputedStyle(d.querySelector(".tabs")).display !== "none",
+      w.getComputedStyle(d.querySelector(".tabs")).display);
+    P.ok("die Runde ist gemerkt", !!daten(w, "S.session"));
+    w.eval('go("heute")');
+    P.ok("und lässt sich fortsetzen", !!d.querySelector("#wkOn"));
+  }
+  {
+    /* Fehlerklasse „Runde ohne Ausstieg“: Nur der Unterwegs-Kopf hatte einen
+       Beenden-Knopf. Wer auf Heute ein Thema antippte oder die Tagesaufgabe startete, kam
+       nur durch Neuladen wieder heraus — alle sieben Reiter durchklicken half nicht, weil
+       go() die Heute-Ansicht gesperrt hält, solange dort eine Runde läuft. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    w.eval('go("heute")');
+    d.querySelector("#startD").click();
+    P.ok("die Tagesaufgabe läuft", daten(w, "!!(Q && !Q.done)"));
+    const raus = d.querySelector("#quizOut");
+    P.ok("der Rundenkopf hat einen Ausstieg", !!raus);
+    P.ok("und er weiß, wohin zurück", daten(w, "(Q && Q.zurueck) || null") === "heute", daten(w, "(Q && Q.zurueck) || null"));
+    if (raus) raus.click();
+    P.ok("die Runde ist beendet", daten(w, "Q") === null);
+    P.ok("die Tagesaufgabe steht wieder da", !!d.querySelector("#startD"),
+      d.querySelector("#dailyHost").textContent.slice(0, 60));
+    P.ok("und sie ist gemerkt", !!daten(w, "S.session"));
+    P.ok("mit dem Stand von vorher", daten(w, "(S.session && S.session.i) === 0"));
   }
 
   P.abschluss();

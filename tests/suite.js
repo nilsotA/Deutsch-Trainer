@@ -467,6 +467,40 @@ if (daIst("sw.js")) {
     "im fetch-Ereignis steht kein waitUntil");
 }
 
+/* Zwei Layout-Eigenschaften, die sich nur im Browser messen lassen (jsdom rechnet keine
+   Medienabfragen und kein Layout). Hier steht deshalb nur der Riegel gegen den Rückfall —
+   gemessen wurde beides in Chromium bei 393x852, 375x667 und 667x375:
+   Seitenbreite 458 auf 393 px Schirm vorher, 393 nachher; Reiterleiste nach 3000 px
+   Scrollen vorher außer Sicht, nachher bei top 55. */
+const handyBlock = (() => {
+  /* Es gibt mehrere @media(max-width:600px)-Blöcke; gesucht ist der große am Ende der
+     Formatvorlage. Geschnitten wird über die Klammern, nicht über Zeilenumbrüche. */
+  const quelle = lies("Deutsch-Trainer.html");
+  let bester = "";
+  let ab = 0;
+  for (;;) {
+    const start = quelle.indexOf("@media(max-width:600px){", ab);
+    if (start < 0) break;
+    let i = quelle.indexOf("{", start), tiefe = 0, ende = -1;
+    for (; i < quelle.length; i++) {
+      if (quelle[i] === "{") tiefe++;
+      else if (quelle[i] === "}" && --tiefe === 0) { ende = i; break; }
+    }
+    if (ende < 0) break;
+    const block = quelle.slice(start, ende);
+    if (block.length > bester.length) bester = block;
+    ab = ende;
+  }
+  return bester;
+})();
+P.ok("Der Handy-Block ist auffindbar", handyBlock.length > 200, handyBlock.length);
+P.ok("Die Kopfzeile bleibt auf dem Handy kleben",
+  !/\.head\{[^}]*position:(relative|static)/.test(handyBlock),
+  "der Handy-Block hebt position:sticky wieder auf");
+P.ok("Die Spickzettel-Spalten dürfen schmaler werden als ihr Inhalt",
+  /\.ch-2col\s*>\s*\*\{[^}]*min-width:0/.test(handyBlock),
+  "ohne min-width:0 stehen die Tabellen über den Rand");
+
 P.ok("manifest.webmanifest vorhanden", daIst("manifest.webmanifest"));
 if (daIst("manifest.webmanifest")) {
   let m = null;
