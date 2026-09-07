@@ -327,12 +327,19 @@ body.autolauf .walkbar #nextBtn::after{content:"";position:absolute;inset:0;back
 @keyframes autolauf{to{transform:scaleX(1)}}
 @media (prefers-reduced-motion: reduce){ body.autolauf .walkbar #nextBtn::after{animation:none} }
 .walktop{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-@media (max-width:400px){
-  .walktop{gap:7px}
-  .walktop .btn{padding:10px 12px}
-  .walktop .tag{display:none}
-}
+/* Die Grundregel muss vor die Medienabfrage: beide Selektoren sind gleich spezifisch, und
+   die spätere gewann — die schmalere Polsterung auf kleinen Geräten war dadurch tot. */
 .walktop .btn{padding:10px 16px;font-size:15px}
+@media (max-width:480px){
+  .walktop{gap:7px}
+  .walktop .btn{padding:10px 11px;font-size:14.5px}
+  /* Die beiden Zeichenknöpfe brauchen keine Textpolsterung — sie waren 76 px breit und
+     schoben den Fortschrittszähler über den Rand. */
+  .walktop #walkSpeak,.walktop #walkAuto{flex:0 0 48px;width:48px;padding:10px 0;text-align:center}
+  /* Wenn es trotzdem nicht reicht (320 px), rutscht der Zähler in eine zweite Zeile,
+     statt unsichtbar zu werden. */
+  .walktop{flex-wrap:wrap}
+}
 .walkzahl{font-size:15px;font-weight:650;color:var(--ink3);white-space:nowrap}
 .walkcard{border-left:3px solid var(--acc)}
 body.walk .walkbar .btn{font-size:19px;padding:20px 24px}
@@ -462,6 +469,16 @@ table.ch-t.sm td{padding-right:14px}
   .sub{padding:12px 12px}
   .crit li{padding:13px 0 13px 32px}
   .jrow-a .btn.sm{padding:9px 14px}
+  /* Die Kategorie-Marke im Unterwegs-Kopf ist auf keinem Handy unterzubringen: gemessen
+     brauchte die Zeile mit ihr 468 px auf einem 414-px-Schirm, ohne sie 341 px. Sie wurde
+     bisher nur unter 400 px ausgeblendet, saß auf größeren Handys also mit — und schob den
+     Fortschrittszähler über den Rand. Unterwegs ist sie entbehrlich; die Regel steht nach
+     der Antwort ohnehin in der Rückmeldung. */
+  .walktop .tag{display:none}
+  /* Eingabefelder mindestens 16 px, sonst zoomt iOS beim Antippen. Das hängt am Gerät,
+     nicht an der Fensterbreite: quer gehalten ist ein iPhone breiter als 600 px, die
+     Felder fielen dort auf 15 px zurück und iOS zoomte beim Antippen hinein. */
+  input,textarea,select,.search,.fillbox input,#tcArea,.srch input{font-size:16px!important}
 }
 
 /* ============================================================
@@ -493,8 +510,6 @@ table.ch-t.sm td{padding-right:14px}
   .opt{padding:14px 14px;font-size:16px}
   .opt .k{width:24px;height:24px}
 
-  /* Eingabefelder mindestens 16 px, sonst zoomt iOS beim Antippen */
-  input,textarea,select,.search,.fillbox input,#tcArea,.srch input{font-size:16px!important}
   .search{padding:13px 14px}
 
   /* Unternavigation wischbar */
@@ -8088,7 +8103,11 @@ function renderCheck(){
     $("#tcw").textContent = n + (n===1?" Wort":" Wörter"); };
   cnt();
   ta.addEventListener("input", ()=>{ cnt(); TC.text = ta.value; });
-  $("#tcGo").onclick = ()=>{ TC.text = ta.value; TC.res = analyse(ta.value); TC.filter=""; drawCheck(); };
+  /* Der geprüfte Text gehört zum Ergebnis. Die Fundstellen sind Zeichenpositionen; wer
+     nach dem Prüfen im Feld weiterschreibt, verschiebt sie — die Markierungen saßen dann
+     auf den falschen Wörtern, weil drawCheck() aus dem inzwischen geänderten TC.text
+     schnitt. */
+  $("#tcGo").onclick = ()=>{ TC.text = ta.value; TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; drawCheck(); };
   $("#tcClear").onclick = ()=>{ ta.value=""; TC.text=""; TC.res=null; cnt(); $("#tcRes").innerHTML=""; };
   $("#tcDemo").onclick = ()=>{
     ta.value = "Sehr geehrte Frau Weber, Vielen Dank für Ihre Nachricht. Ich wollte fragen ob ich die Arbeit "+
@@ -8097,13 +8116,14 @@ function renderCheck(){
       "Ich habe mit dem Kollege gesprochen und er meinte, das die Auswertung Ende August vorliegt. "+
       "Das würde bedeuten, dass ich schneller wie geplant arbeiten würde müssen. "+
       "Danke im Voraus für Ihre Mühe. Mit freundlichen Grüssen, Nils";
-    TC.text = ta.value; cnt(); TC.res = analyse(ta.value); TC.filter=""; drawCheck();
+    TC.text = ta.value; cnt(); TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; drawCheck();
   };
   if(TC.res) drawCheck();
 }
 
 function drawCheck(){
   const {finds, m} = TC.res;
+  const geprueft = TC.res.text !== undefined ? TC.res.text : TC.text;
   const byS = {hart:[],pruef:[],stil:[],form:[]};
   finds.forEach(f=>byS[f.c.sev].push(f));
   const shown = TC.filter ? finds.filter(f=>f.c.sev===TC.filter) : finds;
@@ -8113,11 +8133,11 @@ function drawCheck(){
   let out = "", pos = 0;
   marks.forEach((f,i)=>{
     if(f.s < pos) return;
-    out += esc(TC.text.slice(pos, f.s));
-    out += '<mark class="mk mk-'+f.c.sev+'" data-f="'+i+'">'+esc(TC.text.slice(f.s, f.e))+"</mark>";
+    out += esc(geprueft.slice(pos, f.s));
+    out += '<mark class="mk mk-'+f.c.sev+'" data-f="'+i+'">'+esc(geprueft.slice(f.s, f.e))+"</mark>";
     pos = f.e;
   });
-  out += esc(TC.text.slice(pos));
+  out += esc(geprueft.slice(pos));
 
   // Journalabgleich
   const log = S.log || [];
@@ -8172,7 +8192,7 @@ function drawCheck(){
           '<button class="chip'+(TC.filter===s?" on":"")+'" data-s="'+s+'">'+SEVN[s]+" ("+byS[s].length+")</button>").join("")+
       "</div>"+
     "</div>"+
-    (TC.text.trim() ? '<div class="card"><div class="eyebrow">Dein Text mit Markierungen</div>'+
+    (geprueft.trim() ? '<div class="card"><div class="eyebrow">Dein Text mit Markierungen</div>'+
       '<div class="tctext">'+out.replace(/\n/g,"<br>")+"</div></div>" : "")+
     (finds.length ? ["hart","pruef","stil","form"].filter(s=>!TC.filter||TC.filter===s).map(card).join("")
       : '<div class="card center" style="padding:34px"><div style="font-size:34px;line-height:1">◆</div>'+
@@ -8196,8 +8216,13 @@ function buildIndex(){
   RULES_ALL.forEach(r=>ix.push({k:"Regel", t:r.t, s:strip(r.b), c:r.c,
     go:()=>openRule(r.id)}));
   CASEREF.forEach(e=>ix.push({k:"Fall", t:e.w, sub:e.k, s:e.k+" "+e.ex+" "+(e.n||""), c:"gram",
+    /* Der Sprung filtert die Liste, scrollt aber nicht hin: die Fälle-Liste beginnt weit
+       unten, der Treffer landete rund 1000 px unter dem Bildschirmrand, und es sah aus, als
+       hätte der Tipp nichts bewirkt. Der Umweg über setTimeout wartet auf den Entpreller
+       im Filterfeld — vorher steht die gefilterte Liste noch gar nicht. */
     go:()=>{ ST.tab="faelle"; ST.typ=""; ST.kas=""; ST.nurFallen=false; go("saetze");
-      const si=$("#crSearch"); if(si){ si.value=e.w; si.dispatchEvent(new Event("input")); } }}));
+      const si=$("#crSearch"); if(si){ si.value=e.w; si.dispatchEvent(new Event("input")); }
+      setTimeout(()=>{ const l=$("#crHost"); if(l) l.scrollIntoView({behavior:"smooth",block:"start"}); }, 220); }}));
   SATZ.forEach(x=>ix.push({k:"Satzbau", t:x.t, sub:x.short, s:strip(x.b), c:"satz",
     go:()=>{ ST.tab="bau"; go("saetze");
       const el=$("#sa-"+x.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); } }}));
@@ -8208,7 +8233,8 @@ function buildIndex(){
     go:()=>{ FT.tab="bausteine"; FT.grp=""; FT.ctx=""; go("formulieren");
       openPhraseAcc(p.id); }}));
   WORDS.forEach(w=>ix.push({k:"Wort", t:w.w, sub:w.p, s:w.d+" "+w.ex+" "+(w.s||""), c:"wort",
-    go:()=>{ go("karten"); const si=$("#wSearch"); if(si){ si.value=w.w; si.dispatchEvent(new Event("input")); } }}));
+    go:()=>{ go("karten"); const si=$("#wSearch"); if(si){ si.value=w.w; si.dispatchEvent(new Event("input")); }
+      setTimeout(()=>{ const l=$("#wList"); if(l) l.scrollIntoView({behavior:"smooth",block:"start"}); }, 220); }}));
   ALL.forEach(i=>ix.push({k:"Übung", t:strip(i.q).slice(0,80), s:strip(i.e), c:i.c,
     go:()=>{ go("heute"); startQuiz([exQuestion(i)], $("#dailyHost"), {title:CATS[i.c].n}); }}));
   KORREKTUR.forEach(t=>ix.push({k:"Korrekturtext", t:t.t, sub:t.ctx, s:t.txt, c:"komma",
@@ -8248,12 +8274,27 @@ function openSearch(){
       if(e.key === "Enter"){ const f = $("#srchOut .sres"); if(f) f.click(); }
     });
   }
+  /* Ohne Fessel wandert ein Shift+Tab aus dem Suchfenster in die Seite dahinter — der
+     Fokus steht dann unsichtbar auf einem Knopf, den Enter auslöst, und plötzlich läuft
+     eine Runde. `inert` nimmt die Seite dahinter aus der Fokusreihenfolge; Browser ohne
+     inert ignorieren die Zuweisung, dort bleibt es beim alten Verhalten. */
+  vorherFokus = document.activeElement;
+  const seite = document.querySelector(".wrap");
+  if(seite) seite.inert = true;
   box.classList.add("on");
   $("#srchIn").value = "";
   drawSearch();
   setTimeout(()=>$("#srchIn").focus(), 30);
 }
-function closeSearch(){ const b = $("#srchWrap"); if(b) b.classList.remove("on"); }
+let vorherFokus = null;
+function closeSearch(){
+  const b = $("#srchWrap"); if(b) b.classList.remove("on");
+  const seite = document.querySelector(".wrap");
+  if(seite) seite.inert = false;
+  /* Zurück, wo der Fokus herkam — sonst beginnt die Tastaturbedienung wieder ganz oben. */
+  try{ if(vorherFokus && vorherFokus.focus && document.contains(vorherFokus)) vorherFokus.focus(); }catch(e){}
+  vorherFokus = null;
+}
 
 function drawSearch(){
   const q = norm($("#srchIn").value);
@@ -8544,14 +8585,18 @@ function go(v){
   }
   $$(".tab").forEach(t=>t.classList.toggle("on", t.dataset.v===v));
   $$(".view").forEach(s=>s.classList.toggle("on", s.id==="v-"+v));
-  const busy = Q && !Q.done && Q.host === $("#dailyHost");
+  /* Läuft in der Ansicht, auf die gewechselt wird, gerade eine Runde, darf sie nicht
+     weggezeichnet werden. Die Sperre hing bisher fest an #dailyHost — eine Runde in
+     Karten, Sätzen oder Fortschritt (auch die 30-Fragen-Einstufung) verschwand beim
+     Reiterwechsel ohne Hinweis. */
+  const busy = !!(Q && !Q.done && Q.host && Q.host.closest && Q.host.closest(".view") === $("#v-"+v));
   if(v==="heute" && !busy) renderHeute();
   if(v==="regeln") ensureRules();
-  if(v==="karten") renderCards();
-  if(v==="formulieren") renderForm();
-  if(v==="saetze") renderSatz();
-  if(v==="schreiben" && !$("#wArea") && !$("#ktText")) renderSchreiben();
-  if(v==="fortschritt") renderFortschritt();
+  if(v==="karten" && !busy) renderCards();
+  if(v==="formulieren" && !busy) renderForm();
+  if(v==="saetze" && !busy) renderSatz();
+  if(v==="schreiben" && !busy && !$("#wArea") && !$("#ktText")) renderSchreiben();
+  if(v==="fortschritt" && !busy) renderFortschritt();
   window.scrollTo({top:0,behavior:"instant"});
 }
 function updHud(){

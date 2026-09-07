@@ -634,5 +634,20 @@ P.titel("K · Sichern und Laden");
     P.ok("und im Arbeitsspeicher auch", daten(w, "S.xp") === 77, daten(w, "S.xp"));
   }
 
+  {
+    /* Fehlerklasse „gefiltert, aber nicht hingescrollt“: Der Sprung aus der Suche auf ein
+       Wort oder einen Fall füllte nur das Filterfeld. Die Listen beginnen weit unten — der
+       Treffer landete rund 1000 px unter dem Bildschirmrand, und es sah aus, als hätte der
+       Tipp nichts bewirkt. */
+    const w = boot(leererStand({}));
+    w.eval("window.__hin = []; HTMLElement.prototype.scrollIntoView = function(){ window.__hin.push(this.id || this.className); };");
+    w.eval("if(!INDEX) INDEX = buildIndex(); INDEX.find(e => e.k === 'Wort').go();");
+    await new Promise(r => setTimeout(r, 400));
+    P.ok("der Wort-Sprung scrollt auf die Liste", daten(w, "__hin").includes("wList"), daten(w, "__hin"));
+    w.eval("window.__hin = []; INDEX.find(e => e.k === 'Fall').go();");
+    await new Promise(r => setTimeout(r, 400));
+    P.ok("der Fall-Sprung auch", daten(w, "__hin").includes("crHost"), daten(w, "__hin"));
+  }
+
   P.abschluss();
 })();

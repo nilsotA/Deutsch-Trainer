@@ -58,6 +58,47 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Sechs Fehler an Ansichten und Bedienung (07.09.2026).**
+
+**1 · Eine laufende Runde verschwand beim Reiterwechsel.** Die Sperre in `go()` hing fest
+an `#dailyHost`. Eine Runde in Karten, Sätzen oder Fortschritt — auch die 30 Fragen der
+Einstufung — wurde beim Wechsel weggezeichnet, ohne Hinweis. Die Sperre fragt jetzt, ob der
+Wirt der laufenden Runde in der Ansicht liegt, auf die gewechselt wird
+(`Q.host.closest(".view")`).
+
+**2 · Der Textcheck markierte nach dem Bearbeiten die falschen Stellen.** Die Fundstellen
+sind Zeichenpositionen im **geprüften** Text; `drawCheck()` schnitt sie aber aus `TC.text`,
+und das ist der **aktuelle** Feldinhalt. Wer nach dem Prüfen weiterschrieb, sah die
+Markierungen auf verschobenen Wörtern (in der Gegenprobe wurde aus „Vorraus“ ein „etzt et“).
+Der geprüfte Text hängt jetzt am Ergebnis (`TC.res.text`).
+
+**3 · Das Suchfenster hielt den Fokus nicht.** Ein Shift+Tab landete unsichtbar auf der
+Seite dahinter, und Enter startete dort eine Runde. Die Seite ist jetzt `inert`, solange die
+Suche offen ist, und der Fokus kehrt beim Schließen dorthin zurück, wo er herkam.
+
+**4 · Ein Wort- oder Fall-Treffer aus der Suche landete unter dem Bildschirmrand.** Der
+Sprung füllte nur das Filterfeld; die Listen beginnen weit unten, der Treffer lag rund
+1000 px darunter, und es sah aus, als hätte der Tipp nichts bewirkt. Jetzt wird nach dem
+Entpreller auf die Liste gescrollt — so, wie `openRule()` es längst tut.
+
+**5 · Die Eingabefelder fielen im Querformat unter 16 px.** Die Regel („sonst zoomt iOS beim
+Antippen“) stand in der Breiten-Abfrage; quer gehalten ist ein iPhone breiter als 600 px.
+Sie hängt jetzt an `@media(hover:none)`, also am Gerät.
+
+**6 · Der Unterwegs-Kopf passte auf keinem Handy.** Gemessen an sechs Breiten: Die
+Kategorie-Marke wurde nur unter 400 px ausgeblendet, auf einem 414-px-Schirm brauchte die
+Zeile mit ihr **468 px** — der Fortschrittszähler stand über dem Rand. Aber auch ohne sie
+passte es nicht: die beiden Zeichenknöpfe waren 76 px breit, und `.walktop .btn` stand im
+Stylesheet **nach** der Medienabfrage, hob deren schmalere Polsterung also wieder auf.
+Jetzt: Grundregel vor die Abfrage, Zeichenknöpfe 48 px breit, Marke auf allen Touchgeräten
+aus, und wenn es auf 320 px trotzdem nicht reicht, rutscht der Zähler in eine zweite Zeile
+statt unsichtbar zu werden. Ergebnis bei 320/375/393/414/430 px: alles im Bild.
+
+Geprüft: `tests/suite.js`, neuer Abschnitt **F2 · Suche und Textcheck** (7 Prüfungen, vier
+fallen gegen die alte Fassung durch) und zwei Riegel für die beiden CSS-Punkte (beide fallen
+durch); `tests/unterwegs.js`, Abschnitt G (Reiterwechsel, eine fällt durch);
+`tests/lernen.js`, Abschnitt K (die beiden Sprünge, mit aufgezeichnetem `scrollIntoView`).
+
 **Sichern, Laden und die Reihenfolge des Stoffs (07.09.2026).** Sechs Funde rund um
 Lernstand und Auswahl.
 

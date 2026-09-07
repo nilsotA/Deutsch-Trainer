@@ -371,6 +371,24 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("mit dem Stand von vorher", daten(w, "(S.session && S.session.i) === 0"));
   }
 
+  {
+    /* Fehlerklasse „die Sperre hängt an einem einzelnen Wirt“: go() schützte nur die
+       Runde in #dailyHost. Eine Runde in Karten, Sätzen oder Fortschritt — auch die
+       30 Fragen der Einstufung — verschwand beim Reiterwechsel ohne Hinweis, und mit ihr
+       jede Antwort, die noch nicht verbucht war. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    w.eval('go("karten")');
+    d.querySelector("#startSrs").click();
+    P.ok("die Runde läuft in der Kartenansicht", daten(w, "(Q && Q.host && Q.host.id) || null") === "cardHost");
+    const stand = daten(w, "Q.i");
+    w.eval('go("regeln")');
+    w.eval('go("karten")');
+    P.ok("nach dem Reiterwechsel läuft sie noch", daten(w, "!!(Q && !Q.done)"));
+    P.ok("und steht wieder auf dem Schirm", !!d.querySelector("#v-karten .qtext"));
+    P.ok("an derselben Stelle", daten(w, "(Q && Q.i)") === stand, daten(w, "(Q && Q.i)"));
+  }
+
   /* ---------- H · Rückmeldung im Bild ---------- */
   P.titel("H · Rückmeldung im Bild");
   {

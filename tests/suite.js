@@ -523,6 +523,33 @@ P.ok("Die Spickzettel-Spalten dürfen schmaler werden als ihr Inhalt",
   /\.ch-2col\s*>\s*\*\{[^}]*min-width:0/.test(handyBlock),
   "ohne min-width:0 stehen die Tabellen über den Rand");
 
+{
+  /* Zwei weitere Regeln, die an der falschen Bedingung hingen — beide im Browser gemessen.
+     (1) Die 16 px für Eingabefelder verhindern, dass iOS beim Antippen hineinzoomt. Sie
+     standen in der Breiten-Abfrage: quer gehalten ist ein iPhone breiter als 600 px, die
+     Felder fielen dort auf 15 px zurück, und iOS zoomte. Das hängt am Gerät, nicht an der
+     Fensterbreite.
+     (2) Die Kategorie-Marke im Unterwegs-Kopf wurde nur unter 400 px ausgeblendet. Auf
+     einem 414-px-Schirm brauchte die Zeile mit ihr 468 px und schob den Fortschrittszähler
+     über den Rand. */
+  const quelle = lies("Deutsch-Trainer.html");
+  const start = quelle.indexOf("@media(hover:none){");
+  let tiefe = 0, ende = -1;
+  for (let i = quelle.indexOf("{", start); i < quelle.length && start >= 0; i++) {
+    if (quelle[i] === "{") tiefe++;
+    else if (quelle[i] === "}" && --tiefe === 0) { ende = i; break; }
+  }
+  const touchBlock = start >= 0 && ende > 0 ? quelle.slice(start, ende) : "";
+  P.ok("Der Touch-Block ist auffindbar", touchBlock.length > 100, touchBlock.length);
+  P.ok("Die 16 px für Eingabefelder hängen am Gerät, nicht an der Fensterbreite",
+    /input[^{}]*\{[^}]*font-size:16px/.test(touchBlock) &&
+    !/input[^{}]*\{[^}]*font-size:16px/.test(handyBlock),
+    "steht im Handy-Block statt im Touch-Block");
+  P.ok("Die Kategorie-Marke ist im Unterwegs-Kopf auf jedem Handy aus",
+    /\.walktop\s+\.tag\{[^}]*display:none/.test(touchBlock),
+    "sie wird nur unter einer bestimmten Breite ausgeblendet");
+}
+
 P.ok("manifest.webmanifest vorhanden", daIst("manifest.webmanifest"));
 if (daIst("manifest.webmanifest")) {
   let m = null;
@@ -574,6 +601,51 @@ if (daIst("vercel.json")) {
     "keine Zuordnung für / gefunden");
 }
 
+/* ---------- F2 · Suche, Textcheck, Sprünge ---------- */
+P.titel("F2 · Suche und Textcheck");
+{
+  const dd = w.document;
+
+  /* Fehlerklasse „das Ergebnis überlebt seine Grundlage“: Die Fundstellen des Textchecks
+     sind Zeichenpositionen im geprüften Text. Wer nach dem Prüfen im Feld weiterschrieb,
+     verschob sie — drawCheck() schnitt die Markierungen aus dem inzwischen geänderten
+     Text, und sie saßen auf den falschen Wörtern. Der geprüfte Text gehört jetzt zum
+     Ergebnis. */
+  w.eval('go("schreiben")');
+  [...dd.querySelectorAll("#v-schreiben .sub")].find(b => /Textcheck/.test(b.textContent)).click();
+  const feld = dd.querySelector("#tcArea");
+  P.ok("das Textcheck-Feld ist da", !!feld);
+  feld.value = "Wir haben im Vorraus geplant und sind zufrieden mit dem Ergebniss.";
+  dd.querySelector("#tcGo").click();
+  P.ok("es gibt Fundstellen", (dd.querySelectorAll("#tcRes mark") || []).length > 0,
+    dd.querySelectorAll("#tcRes mark").length);
+  const markiert = [...dd.querySelectorAll("#tcRes mark")].map(m => m.textContent);
+  feld.value = "Vorne steht jetzt etwas ganz anderes. " + feld.value;
+  feld.dispatchEvent(new w.Event("input"));
+  w.eval("drawCheck()");
+  const danach = [...dd.querySelectorAll("#tcRes mark")].map(m => m.textContent);
+  P.ok("die Markierungen sitzen weiter auf denselben Wörtern",
+    JSON.stringify(markiert) === JSON.stringify(danach),
+    markiert.join("|") + "  →  " + danach.join("|"));
+
+  /* Fehlerklasse „Überlagerung ohne Fessel“: Ein Shift+Tab im Suchfenster landete
+     unsichtbar auf der Seite dahinter — und Enter startete dort eine Runde. */
+  const vorherFokussiert = dd.querySelector("#searchBtn");
+  vorherFokussiert.focus();
+  w.eval("openSearch()");
+  P.ok("die Seite hinter der Suche ist aus der Fokusreihenfolge",
+    dd.querySelector(".wrap").inert === true, dd.querySelector(".wrap").inert);
+  /* Der Fokus muss erst wirklich weg sein, sonst prüft die Zeile darunter nichts —
+     openSearch() setzt ihn selbst erst nach 30 ms. */
+  dd.querySelector("#srchIn").focus();
+  P.ok("der Fokus liegt im Suchfeld", dd.activeElement && dd.activeElement.id === "srchIn",
+    dd.activeElement && dd.activeElement.id);
+  w.eval("closeSearch()");
+  P.ok("nach dem Schließen ist sie wieder bedienbar", dd.querySelector(".wrap").inert === false);
+  P.ok("und der Fokus steht wieder, wo er herkam",
+    dd.activeElement === vorherFokussiert,
+    dd.activeElement && (dd.activeElement.id || dd.activeElement.tagName));
+}
 /* ---------- G · Bedienung ohne Maus ---------- */
 P.titel("G · Bedienung ohne Maus");
 {
