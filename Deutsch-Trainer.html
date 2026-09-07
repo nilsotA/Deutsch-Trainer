@@ -5337,13 +5337,19 @@ function zeigeSpeicherwarnung(){
 }
 function exportieren(){
   try{
+    /* Das Datum muss vor dem Verpacken gesetzt sein, sonst trägt die Datei das Datum der
+       vorigen Sicherung — und der Import-Dialog fragt später nach der falschen. */
+    S.lastExport = today();
     const blob = new Blob([JSON.stringify(S)], {type:"application/json"});
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "deutsch-trainer-"+today()+".json";
-    a.click(); URL.revokeObjectURL(a.href);
-    S.lastExport = today(); save();
-    toast("Sicherung heruntergeladen");
+    a.click();
+    /* Der Widerruf darf nicht sofort kommen: manche Browser holen den Inhalt erst nach
+       dem Klick, und dann käme eine leere Datei an. */
+    setTimeout(()=>{ try{ URL.revokeObjectURL(a.href); }catch(e){} }, 60000);
+    save();
+    toast("Sicherung erstellt — schau nach, ob die Datei angekommen ist");
   }catch(e){ toast("Sicherung fehlgeschlagen"); }
 }
 let S = load();
@@ -5516,18 +5522,19 @@ function buildDaily(){
   // 1. Fällige zuerst — Wortkarten anteilig, damit der Wortschatz nicht liegen bleibt
   const wAnteil = Math.min(dueW.length, Math.max(1, Math.round(DAILY_WORDS)));
   dueW.slice(0, wAnteil).forEach(w=>{ qs.push(wordQuestion(w, r)); used.add("w:"+w.w); });
-  dueD.forEach(e=>{
-    if(qs.length >= SLOTS - neuMax) return;
-    qs.push(caseQuestion(e)); used.add("c:"+e.w);
-  });
-  dueEx.forEach(i=>{
-    if(qs.length >= SLOTS - neuMax) return;
-    qs.push(exQuestion(i)); used.add(i.id);
-  });
-  // Wenn der Rückstand die Plätze nicht füllt, weitere fällige Wortkarten nachziehen
-  dueW.slice(wAnteil).forEach(w=>{
-    if(qs.length >= SLOTS - neuMax || used.has("w:"+w.w)) return;
-    qs.push(wordQuestion(w, r)); used.add("w:"+w.w);
+  /* Alles Fällige in einer Liste, gemeinsam nach Fälligkeit sortiert. Vorher kamen erst
+     alle Fallkarten dran, dann die Übungen: nach einer Pause, wenn der Rückstand größer
+     ist als die zwölf Plätze, bestand die Tagesaufgabe tagelang aus nichts als Fallkarten,
+     während die ältesten Übungen weiter liegen blieben. Die Wortschatzquote oben bleibt
+     davon unberührt. */
+  const faellig = []
+    .concat(dueD.map(e=>({d:cardOf("c:"+e.w).d, k:"c:"+e.w, mach:()=>caseQuestion(e)})))
+    .concat(dueEx.map(i=>({d:cardOf(i.id).d, k:i.id, mach:()=>exQuestion(i)})))
+    .concat(dueW.slice(wAnteil).map(x=>({d:cardOf("w:"+x.w).d, k:"w:"+x.w, mach:()=>wordQuestion(x, r)})))
+    .sort((a,b)=>a.d.localeCompare(b.d));
+  faellig.forEach(e=>{
+    if(qs.length >= SLOTS - neuMax || used.has(e.k)) return;
+    qs.push(e.mach()); used.add(e.k);
   });
 
   // 2. Neues auffüllen — Schwerpunkt der Planwoche zuerst
@@ -6243,10 +6250,15 @@ function unterwegsRunde(host){
 
 /* Karten, die schon einmal danebengingen — die häufigsten Fehler zuerst */
 function schwacheSchluessel(){
+  /* Erst das Fach, dann die Zahl der Fehler. Andersherum stand vorn, was irgendwann
+     einmal oft danebenging — auch wenn es längst in Fach 5 sitzt und seit Wochen
+     stimmt —, während eine Karte, die gestern zurück auf Fach 1 gefallen ist, hinten
+     anstand. „Nur Fehler“ soll zeigen, was gerade danebengeht, nicht was einmal schwer
+     war. */
   return Object.keys(S.cards)
     .filter(k => (S.cards[k].w || 0) > 0)
-    .sort((a,b) => (S.cards[b].w||0) - (S.cards[a].w||0)
-                || (S.cards[a].b||0) - (S.cards[b].b||0));
+    .sort((a,b) => (S.cards[a].b||0) - (S.cards[b].b||0)
+                || (S.cards[b].w||0) - (S.cards[a].w||0));
 }
 function schwacheKarten(r){
   const out = [];
@@ -6834,8 +6846,31 @@ function renderStats(sel){
       if(!confirm("Sicherung vom "+(neu.lastExport||neu.levelDate||"unbekannten Datum")+" laden?\n"+
                   anz+" Lernkarten, Serie "+(neu.streak||0)+".\n\nDein aktueller Stand wird überschrieben."))
         return;
+      /* Der bisherige Stand kommt zur Seite, bevor irgendetwas überschrieben wird —
+         sonst gäbe es bei einer halb passenden Datei keinen Weg zurück. */
+      let vorher = null;
+      try{ vorher = localStorage.getItem(KEY); }catch(e){}
       S = Object.assign(load(), neu);
-      save(); regelAenderungen(); toast("Sicherung geladen"); renderAll();
+      /* Der Merker für Regeländerungen muss aus der Datei kommen, nicht vom Gerät. Sonst
+         gilt für eine ältere Sicherung, was dieses Gerät längst abgearbeitet hat: die
+         betroffenen Karten blieben in ihrem alten Fach, und Nils bekäme die geänderte
+         Antwort erst in Wochen zu sehen. */
+      S.neu = neu.neu || {};
+      /* Auch die Anzeigeart steckt im Stand — ohne diese Zeile bliebe es hell, obwohl
+         „dunkel“ gesichert war. */
+      document.documentElement.setAttribute("data-theme", S.theme || "light");
+      try{
+        save(); regelAenderungen(); renderAll();
+        toast("Sicherung geladen");
+      }catch(err){
+        if(vorher !== null){
+          try{ localStorage.setItem(KEY, vorher); }catch(e){}
+          S = load();
+          document.documentElement.setAttribute("data-theme", S.theme || "light");
+          try{ renderAll(); }catch(e){}
+        }
+        toast("Die Datei ließ sich nicht laden — dein alter Stand ist zurück");
+      }
     };
     rd.readAsText(f);
   };

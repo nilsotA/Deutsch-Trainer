@@ -58,6 +58,52 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Sichern, Laden und die Reihenfolge des Stoffs (07.09.2026).** Sechs Funde rund um
+Lernstand und Auswahl.
+
+**1 · Die Sicherungsdatei trug das Datum der vorigen Sicherung.** `S.lastExport = today()`
+stand *hinter* dem `JSON.stringify(S)`. Der Import-Dialog fragt später „Sicherung vom …
+laden?“ und nannte damit ein Datum, an dem diese Datei noch gar nicht existierte. Eine
+Zeile nach oben.
+
+**2 · Der Widerruf der Datei-URL kam sofort.** `URL.revokeObjectURL` lief unmittelbar nach
+`a.click()`; manche Browser holen den Inhalt erst danach, und dann käme eine leere Datei
+an. Der Widerruf wartet jetzt eine Minute. Die Meldung heißt außerdem nicht mehr „Sicherung
+heruntergeladen“ (das weiß die App nicht), sondern „Sicherung erstellt — schau nach, ob die
+Datei angekommen ist“.
+
+**3 · Nach dem Import blieb die Anzeige hell,** obwohl „dunkel“ gesichert war. Die
+Anzeigeart steckt im Stand, wurde aber nur beim Start angewendet.
+
+**4 · Eine ältere Sicherung übersprang die Regeländerungen.** `S.neu` hält fest, welche
+geänderten Karten schon zurückgesetzt sind. Beim Import blieb der Merker **dieses Geräts**
+stehen, weil `Object.assign` ihn aus einer alten Datei nicht überschreibt —
+`regelAenderungen()` hielt die Änderungen für erledigt, und die betroffenen Karten blieben
+in ihrem alten Fach. Nils hätte die geänderte Antwort erst in Wochen gesehen, obwohl er die
+alte gelernt hat. Der Merker kommt jetzt aus der Datei (`S.neu = neu.neu || {}`); die
+eigene Schutzregel von `regelAenderungen()` — wer nach dem Änderungsdatum geantwortet hat,
+bleibt stehen — greift weiter.
+
+**5 · Der Import überschrieb, bevor klar war, ob es gutgeht.** Der bisherige Rohtext kommt
+jetzt vor dem Überschreiben zur Seite; scheitert der Aufbau der Ansicht, wird er
+zurückgeschrieben und die App meldet „Die Datei ließ sich nicht laden — dein alter Stand
+ist zurück“.
+
+**6 · Zwei Reihenfolgen standen falsch herum.**
+`schwacheSchluessel()` sortierte nach der Gesamtzahl der Fehler und erst dann nach dem
+Fach. „Nur Fehler“ zeigte damit, was irgendwann einmal oft danebenging — auch wenn es
+längst in Fach 5 sitzt —, während eine gestern auf Fach 1 gefallene Karte hinten anstand.
+Jetzt entscheidet das Fach zuerst.
+Und `buildDaily()` nahm in Phase 1 erst alle fälligen **Fallkarten**, dann die Übungen. Nach
+einer Pause, wenn der Rückstand größer ist als die zwölf Plätze, bestand die Tagesaufgabe
+tagelang aus nichts als Fallkarten (gemessen: 0 Übungen / 2 Wörter / 10 Fälle), während die
+seit vierzehn Tagen fälligen Übungen liegen blieben. Jetzt entscheidet die Fälligkeit, nicht
+die Sorte (dieselbe Lage: 10 / 2 / 0). Die garantierte Wortschatzquote bleibt davor.
+
+Geprüft in `tests/lernen.js`: Abschnitt **K · Sichern und Laden** (9 Prüfungen — der Import
+wird über ein echtes `File` und den `change`-Horcher gefahren, nicht nachgebaut) und zwei
+neue Blöcke in Abschnitt H. Neun Prüfungen fallen gegen die alte Fassung durch.
+
 **Die App ist ohne Maus und ohne Farbe benutzbar (07.09.2026).** Vier Funde, die
 zusammengehören.
 

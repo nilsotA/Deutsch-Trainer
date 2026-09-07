@@ -424,6 +424,47 @@ P.titel("H · Tagesaufgabe über Wochen");
   P.ok("jeder Tag ist voll", r.sorten.A + r.sorten.W + r.sorten.F === 60 * 12,
     r.sorten.A + r.sorten.W + r.sorten.F);
 }
+{
+  /* Fehlerklasse „eine Sorte hat Vorfahrt vor der Fälligkeit“: buildDaily() nahm in
+     Phase 1 erst alle fälligen Fallkarten und dann erst die Übungen. Nach einer Pause,
+     wenn der Rückstand größer ist als die zwölf Plätze, bestand die Tagesaufgabe damit
+     tagelang aus nichts als Fallkarten, während die ältesten Übungen liegen blieben.
+     Jetzt entscheidet die Fälligkeit, nicht die Sorte. */
+  const K = schluessel(boot(null));
+  const bau = (exTage, fallTage) => {
+    const cards = {};
+    K.aufgaben.slice(0, 60).forEach((k, i) => cards[k] = { b: 2, d: tag(exTage + i % 5), s: 2, w: 0 });
+    K.faelle.slice(0, 60).forEach((k, i) => cards[k] = { b: 2, d: tag(fallTage + i % 5), s: 2, w: 0 });
+    K.woerter.slice(0, 20).forEach(k => cards[k] = { b: 2, d: tag(-8), s: 2, w: 0 });
+    const w = boot(leererStand({ cards }));
+    const z = { A: 0, W: 0, F: 0 };
+    daten(w, "buildDaily().map(x=>x.key)")
+      .forEach(k => z[k.startsWith("c:") ? "F" : k.startsWith("w:") ? "W" : "A"]++);
+    return z;
+  };
+  const exAelter = bau(-14, -10);
+  P.ok("liegen die Übungen länger, kommen sie zuerst", exAelter.A > exAelter.F,
+    JSON.stringify(exAelter));
+  const fallAelter = bau(-10, -14);
+  P.ok("liegen die Fallkarten länger, kommen sie zuerst", fallAelter.F > fallAelter.A,
+    JSON.stringify(fallAelter));
+}
+{
+  /* „Nur Fehler“ soll zeigen, was gerade danebengeht — nicht, was irgendwann einmal oft
+     danebenging und längst in Fach 5 sitzt. */
+  const K = schluessel(boot(null));
+  const cards = {};
+  K.aufgaben.slice(0, 5).forEach(k => cards[k] = { b: 5, d: tag(30), s: 12, w: 9 });   // Altlast
+  K.aufgaben.slice(5, 10).forEach(k => cards[k] = { b: 1, d: tag(0), s: 3, w: 1 });    // gerade gefallen
+  const w = boot(leererStand({ cards }));
+  const reihe = daten(w, "schwacheSchluessel()");
+  P.ok("die frisch gefallenen Karten stehen vorn",
+    reihe.slice(0, 5).every(k => K.aufgaben.slice(5, 10).includes(k)),
+    reihe.slice(0, 5).join(", "));
+  P.ok("die gefestigten Altlasten stehen hinten",
+    reihe.slice(5).every(k => K.aufgaben.slice(0, 5).includes(k)),
+    reihe.slice(5).join(", "));
+}
 
 /* ---------- I · Beschädigter Lernstand ---------- */
 P.titel("I · Beschädigter Lernstand");
@@ -519,4 +560,79 @@ P.titel("J · Ansicht nach Import und Zurücksetzen");
   P.ok("ein Reiterwechsel auch nicht", !!d.querySelector("#pSub .qtext"));
 }
 
-P.abschluss();
+/* ---------- K · Sichern und Laden ---------- */
+P.titel("K · Sichern und Laden");
+(async () => {
+  {
+    /* Die Datei trug das Datum der *vorigen* Sicherung: S.lastExport wurde erst nach dem
+       Verpacken gesetzt. Der Import-Dialog fragt später „Sicherung vom … laden?“ und nannte
+       damit ein Datum, an dem diese Datei noch gar nicht existierte. */
+    const w = boot(leererStand({ xp: 40, lastExport: "2026-01-01" }));
+    w.eval(`
+      window.__inhalt = null;
+      const Echt = window.Blob;
+      window.Blob = function (teile, opt) { window.__inhalt = String(teile[0]); return new Echt(teile, opt); };
+    `);
+    w.eval("exportieren()");
+    const inhalt = JSON.parse(daten(w, "__inhalt"));
+    P.ok("die Sicherung trägt das heutige Datum", inhalt.lastExport === daten(w, "today()"),
+      inhalt.lastExport + " statt " + daten(w, "today()"));
+    P.ok("und im Speicher steht dasselbe", daten(w, "S.lastExport") === daten(w, "today()"));
+  }
+
+  const laden = async (w, stand) => {
+    const d = w.document;
+    w.eval('go("fortschritt")');
+    const feld = d.querySelector("#impFile");
+    const datei = new w.File([JSON.stringify(stand)], "sicherung.json", { type: "application/json" });
+    Object.defineProperty(feld, "files", { value: [datei], configurable: true });
+    feld.dispatchEvent(new w.Event("change"));
+    await new Promise(r => setTimeout(r, 120));
+  };
+
+  {
+    /* Die Anzeigeart steckt im Stand — sie blieb nach dem Import trotzdem hell. */
+    const w = boot(leererStand({ xp: 5, theme: "light" }));
+    await laden(w, leererStand({ xp: 4300, streak: 21, theme: "dark" }));
+    P.ok("die Sicherung ist geladen", daten(w, "S.xp") === 4300, daten(w, "S.xp"));
+    P.ok("und die Anzeige ist dunkel",
+      w.document.documentElement.getAttribute("data-theme") === "dark",
+      w.document.documentElement.getAttribute("data-theme"));
+  }
+
+  {
+    /* Fehlerklasse „der Merker vom Gerät gilt für eine fremde Datei“: S.neu hält fest,
+       welche Regeländerungen schon abgearbeitet sind. Beim Import blieb der Merker dieses
+       Geräts stehen, weil die alte Sicherung gar keinen mitbringt — regelAenderungen()
+       hielt die Änderungen damit für erledigt, und die betroffenen Karten blieben in ihrem
+       alten Fach. Nils hätte die neue Antwort erst in Wochen gesehen. */
+    const geaendert = Object.keys(daten(boot(null), "NEU_GELERNT"));
+    P.ok("es gibt geänderte Karten", geaendert.length > 0, geaendert.length);
+    const id = geaendert[0];
+    const datum = daten(boot(null), "NEU_GELERNT")[id];
+    /* Ein Gerät, das die Änderung längst abgearbeitet hat … */
+    const cards = {}; cards[id] = { b: 4, d: tag(9), s: 5, w: 0 };
+    const merker = {}; merker[id] = datum;
+    const w = boot(leererStand({ cards, neu: merker }));
+    /* … lädt eine Sicherung von vorher: dieselbe Karte, aber ohne Merker. */
+    const altCards = {}; altCards[id] = { b: 4, d: tag(9), s: 5, w: 0 };
+    await laden(w, leererStand({ xp: 100, cards: altCards }));
+    const karte = daten(w, "S.cards[" + JSON.stringify(id) + "] || null");
+    P.ok("die geänderte Karte fällt zurück auf Fach 1", karte && karte.b === 1, karte);
+    P.ok("und ist sofort fällig", karte && karte.d === daten(w, "today()"), karte && karte.d);
+  }
+
+  {
+    /* Eine Datei, die die Prüfung besteht, aber beim Aufbau der Ansicht scheitert, darf den
+       vorhandenen Stand nicht mitreißen. */
+    const w = boot(leererStand({ xp: 77, streak: 4 }));
+    w.eval("window.__echtRenderAll = renderAll; renderAll = function(){ throw new Error('Absicht'); };");
+    await laden(w, leererStand({ xp: 4300, streak: 21 }));
+    P.ok("der alte Stand steht wieder im Speicher",
+      JSON.parse(w.localStorage.getItem("deutschtrainer.v1") || "{}").xp === 77,
+      JSON.parse(w.localStorage.getItem("deutschtrainer.v1") || "{}").xp);
+    P.ok("und im Arbeitsspeicher auch", daten(w, "S.xp") === 77, daten(w, "S.xp"));
+  }
+
+  P.abschluss();
+})();
