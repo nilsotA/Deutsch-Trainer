@@ -488,5 +488,72 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("und hält sie wieder", daten(w, "!!wakeSperre"));
   }
 
+  /* ---------- J · Rückmeldung ohne Farbe und ohne Maus ---------- */
+  P.titel("J · Rückmeldung ohne Farbe und ohne Maus");
+  {
+    /* Zwei Fehlerklassen auf einmal.
+
+       „Nur der Farbton unterscheidet“: Rand und Fläche von richtig und falsch liegen bei
+       1,03:1 bzw. 1,02:1 Helligkeitsverhältnis — in Graustufen identisch. Dieselbe
+       Entsättigung erzeugt ein Handydisplay in der Sonne, also genau Nils' Standardfall.
+
+       „Die Runde läuft stumm“: Es gab in der ganzen Datei keine einzige Live-Region, und
+       der Fokus fiel bei jedem Schritt auf <body> — check() deaktiviert die angetippte
+       Fläche, renderQ() ersetzt danach den ganzen Kartenblock. Vorlese-Software sagte
+       weder die Rückmeldung noch die nächste Frage an. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const richtig = daten(w, "Q.list[Q.i].ans");
+    const falsch = richtig === 0 ? 1 : 0;
+    tippe(w, d.querySelectorAll("#walkHost .opt")[falsch]);
+
+    const marke = i => d.querySelectorAll("#walkHost .opt")[i].querySelector(".k").textContent;
+    P.ok("die richtige Fläche trägt einen Haken", marke(richtig) === "✓", marke(richtig));
+    P.ok("die falsch gewählte ein Kreuz", marke(falsch) === "✗", marke(falsch));
+    P.ok("und beides sind Zeichen, keine Buchstaben — der Buchstabe stand vorher auf beiden",
+      !/[A-Za-z]/.test(marke(richtig) + marke(falsch)), marke(richtig) + marke(falsch));
+
+    const fbh = d.querySelector("#walkHost #fbHost");
+    P.ok("die Rückmeldung ist eine Live-Region", fbh && fbh.getAttribute("role") === "status",
+      fbh && fbh.getAttribute("role"));
+    P.ok("und wird angesagt, wenn die App nicht selbst redet",
+      fbh && fbh.getAttribute("aria-live") === "polite", fbh && fbh.getAttribute("aria-live"));
+    P.ok("der Fokus steht auf dem Weiter-Knopf",
+      d.activeElement && d.activeElement.id === "nextBtn",
+      d.activeElement && (d.activeElement.id || d.activeElement.tagName));
+  }
+  {
+    /* Läuft die App-eigene Sprachausgabe, muss die Live-Region still bleiben — sonst
+       redeten zwei Stimmen gleichzeitig. */
+    const w = boot(leererStand({ auto: false, speak: true }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    tippe(w, d.querySelectorAll("#walkHost .opt")[daten(w, "Q.list[Q.i].ans")]);
+    const fbh = d.querySelector("#walkHost #fbHost");
+    P.ok("beim Vorlesen bleibt die Live-Region still",
+      fbh && fbh.getAttribute("aria-live") === "off", fbh && fbh.getAttribute("aria-live"));
+  }
+  {
+    /* Die beiden Unterwegs-Schalter sagen jetzt, wie sie heißen und ob sie an sind. */
+    const w = boot(leererStand({ auto: false, speak: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const au = d.querySelector("#walkAuto");
+    P.ok("der Automatik-Schalter hat einen Namen",
+      !!au && (au.getAttribute("aria-label") || "").length > 5, au && au.getAttribute("aria-label"));
+    P.ok("und sagt, dass er aus ist", au.getAttribute("aria-pressed") === "false");
+    au.click();
+    P.ok("nach dem Umschalten sagt er, dass er an ist", au.getAttribute("aria-pressed") === "true");
+    const sp = d.querySelector("#walkSpeak");
+    if (sp) {
+      P.ok("der Vorlese-Schalter hat einen Namen", (sp.getAttribute("aria-label") || "").length > 5,
+        sp.getAttribute("aria-label"));
+      P.ok("und sagt, dass er aus ist", sp.getAttribute("aria-pressed") === "false");
+      sp.click();
+      P.ok("nach dem Umschalten sagt er, dass er an ist", sp.getAttribute("aria-pressed") === "true");
+    }
+  }
+
   P.abschluss();
 })();

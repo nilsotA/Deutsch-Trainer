@@ -589,8 +589,8 @@ table.ch-t.sm td{padding-right:14px}
     <div class="hud">
       <span class="pill flame" id="hudStreak" title="Serie">🔥 0</span>
       <span class="pill xp" id="hudXp" title="Punkte">0 XP</span>
-      <button class="iconbtn" id="searchBtn" title="Suchen (Taste /)">⌕</button>
-      <button class="iconbtn" id="themeBtn" title="Hell / Dunkel">◐</button>
+      <button class="iconbtn" id="searchBtn" title="Suchen (Taste /)" aria-label="Suchen (Taste /)">⌕</button>
+      <button class="iconbtn" id="themeBtn" title="Hell / Dunkel" aria-label="Hell oder dunkel">◐</button>
     </div>
   </div>
   <nav class="tabs" id="tabs">
@@ -5958,8 +5958,13 @@ function renderQ(){
   const kopf = Q.walk
     ? '<div class="walktop">'+
         '<button class="btn ghost" id="walkOut">‹ Beenden</button>'+
-        (kannVorlesen() ? '<button class="btn ghost'+(S.speak?" speakon":"")+'" id="walkSpeak" title="Vorlesen">🔊</button>' : "")+
-        '<button class="btn ghost'+(S.auto?" speakon":"")+'" id="walkAuto" title="Nach richtiger Antwort automatisch weiter">⏩</button>'+
+        /* aria-label, weil die Namensberechnung sonst den Zeichennamen vorliest
+           („Lautsprecher mit Schallwellen“); aria-pressed, weil der Zustand sonst nur in
+           der Füllfarbe steht. Beides wird beim Umschalten mitgezogen. */
+        (kannVorlesen() ? '<button class="btn ghost'+(S.speak?" speakon":"")+'" id="walkSpeak" title="Vorlesen"'+
+          ' aria-label="Fragen vorlesen" aria-pressed="'+(S.speak?"true":"false")+'">🔊</button>' : "")+
+        '<button class="btn ghost'+(S.auto?" speakon":"")+'" id="walkAuto" title="Nach richtiger Antwort automatisch weiter"'+
+          ' aria-label="Nach richtiger Antwort automatisch weiter" aria-pressed="'+(S.auto?"true":"false")+'">⏩</button>'+
         '<span class="walkzahl">'+(Q.i+1)+" / "+Q.list.length+"</span>"+
         '<span style="margin-left:auto">'+tag(q.cat)+"</span>"+
       "</div>"
@@ -5973,7 +5978,7 @@ function renderQ(){
       (q._nochmal ? '<p class="tiny muted" style="margin:6px 0 0">Noch einmal — die hattest du eben nicht.</p>' : "")+
       '<div class="qtext">'+q.q+"</div>"+
       body+
-      '<div id="fbHost"></div>'+
+      '<div id="fbHost"></div>'+   /* wird in check() zur Live-Region, siehe dort */
     "</div>";
   if(!Q.walk){
     /* Ohne diesen Knopf gab es aus einer Runde außerhalb des Unterwegs-Modus nur ein
@@ -6001,11 +6006,13 @@ function renderQ(){
     const au = $("#walkAuto");
     if(au) au.onclick = ()=>{ S.auto = !S.auto; save();
       au.classList.toggle("speakon", S.auto);
+      au.setAttribute("aria-pressed", S.auto ? "true" : "false");
       if(!S.auto) autoAus();
       toast(S.auto ? "Weiter geht es von selbst" : "Weiter nur noch auf Tipp"); };
     const sp = $("#walkSpeak");
     if(sp) sp.onclick = ()=>{ S.speak = !S.speak; save();
       sp.classList.toggle("speakon", S.speak);
+      sp.setAttribute("aria-pressed", S.speak ? "true" : "false");
       if(S.speak) vorlesen(sprechFrage(q));
       else vorlesenStoppen(); };
     if(S.speak) vorlesen(sprechFrage(q));
@@ -6041,10 +6048,17 @@ function check(input){
   let ok, chosen = -1;
   if(q.type === "mc"){
     chosen = input; ok = (chosen === q.ans);
+    /* Rand und Fläche von „richtig“ und „falsch“ unterscheiden sich nur im Farbton:
+       gemessen 1,03:1 Helligkeitsverhältnis am Rand, 1,02:1 an der Fläche. In Graustufen
+       sind die beiden Kästen also identisch — und dieselbe Entsättigung erzeugt ein
+       Handydisplay in der Sonne, Nils' Standardsituation. Deshalb tritt in der Marke ein
+       Haken bzw. ein Kreuz an die Stelle des Buchstabens; vorgelesen wird da nichts mehr,
+       die Frage ist beantwortet. */
     qAll(".opt").forEach((b,i)=>{
       b.disabled = true;
-      if(i === q.ans) b.classList.add("right");
-      else if(i === chosen) b.classList.add("wrong");
+      const marke = b.querySelector(".k");
+      if(i === q.ans){ b.classList.add("right"); if(marke) marke.textContent = "✓"; }
+      else if(i === chosen){ b.classList.add("wrong"); if(marke) marke.textContent = "✗"; }
       else b.classList.add("dim");
     });
   } else {
@@ -6090,7 +6104,20 @@ function check(input){
                              ok ? ()=>{ if(Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
+  /* Ohne Live-Region sagt Vorlese-Software die Rückmeldung nie an: der Fokus fällt beim
+     Deaktivieren der Antwortfläche auf <body>, und renderQ() ersetzt danach den ganzen
+     Kartenblock. Läuft die App-eigene Sprachausgabe, bleibt die Region still — sonst
+     redeten zwei Stimmen gleichzeitig. */
+  const fbh = qEl("#fbHost");
+  if(fbh){
+    fbh.setAttribute("role", "status");
+    fbh.setAttribute("aria-live", S.speak ? "off" : "polite");
+  }
   zeigeRueckmeldung();
+  /* Der Fokus gehört jetzt auf den Weiter-Knopf — er entsteht ohnehin an dieser Stelle,
+     und „Weiter“ ist eine sinnvolle Ansage. preventScroll, damit unterwegs nicht die
+     Frage aus dem Bild rutscht. */
+  try{ const nb = qEl("#nextBtn"); if(nb) nb.focus({preventScroll:true}); }catch(e){}
   Q.beantwortet = true;
   sitzungSichern();
   qEl("#nextBtn").onclick = next;
@@ -6557,7 +6584,9 @@ function openPrompt(id){
       '<div class="eyebrow">Selbstcheck</div>'+
       '<p class="tiny muted" style="margin:6px 0 10px">Erst schreiben, dann abhaken. Was du nicht abhaken kannst, ist dein nächster Übungspunkt.</p>'+
       '<ul class="crit" id="critList">'+ p.crit.map((c,i)=>
-        '<li data-i="'+i+'"'+(saved.crit&&saved.crit[i]?' class="tick"':"")+">"+esc(c)+"</li>").join("")+"</ul>"+
+        '<li data-i="'+i+'" role="checkbox" tabindex="0" aria-checked="'+
+          (saved.crit&&saved.crit[i]?"true":"false")+'"'+
+          (saved.crit&&saved.crit[i]?' class="tick"':"")+">"+esc(c)+"</li>").join("")+"</ul>"+
     "</div>"+
     '<div class="card hidden" id="modelCard">'+
       '<div class="eyebrow">Musterlösung</div>'+
@@ -6596,11 +6625,16 @@ function openPrompt(id){
     if(S.writing[id]) S.writing[id].text = "";
     save(); toast("Entwurf gelöscht");
   };
-  $$("#critList li").forEach(li => li.onclick = ()=>{
-    li.classList.toggle("tick");
-    S.writing[id] = S.writing[id] || {text:ta.value};
-    S.writing[id].crit = $$("#critList li").map(x=>x.classList.contains("tick"));
-    save();
+  $$("#critList li").forEach(li => {
+    const haken = ()=>{
+      li.classList.toggle("tick");
+      li.setAttribute("aria-checked", li.classList.contains("tick") ? "true" : "false");
+      S.writing[id] = S.writing[id] || {text:ta.value};
+      S.writing[id].crit = $$("#critList li").map(x=>x.classList.contains("tick"));
+      save();
+    };
+    li.onclick = haken;
+    li.onkeydown = e => { if(e.key === " " || e.key === "Enter"){ e.preventDefault(); haken(); } };
   });
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -7346,7 +7380,13 @@ function drawKorr(){
       else if(map[i]) cls += " miss";
       else if(marked.has(i)) cls += " fp";
     } else if(marked.has(i)) cls += " sel";
-    return '<span class="'+cls+'" data-i="'+i+'">'+esc(tk)+"</span>";
+    /* Ein span ohne tabindex steht in keiner Fokusreihenfolge: die ganze Übung — 12 Texte,
+       86 markierte Stellen — war ohne Maus oder Finger nicht bedienbar. Dass es anders
+       gemeint war, stand längst im Stylesheet (.tok:focus-visible), einer Regel, die nie
+       greifen konnte. 84 Wörter je Text als Tabstopps wären allerdings eine Zumutung,
+       deshalb wandert der Tabstopp: einer hinein, danach die Pfeiltasten. */
+    return '<span class="'+cls+'" data-i="'+i+'" role="checkbox" aria-checked="'+
+      (marked.has(i) ? "true" : "false")+'" tabindex="'+(i === 0 && !done ? "0" : "-1")+'">'+esc(tk)+"</span>";
   }).join(" ");
 
   $("#wSub").innerHTML =
@@ -7390,13 +7430,39 @@ function drawKorr(){
         "</div>"+
       "</div>" : "");
 
+  const textfeld = $("#ktText");
+  if(textfeld && !done){
+    textfeld.setAttribute("role", "group");
+    textfeld.setAttribute("aria-label",
+      "Text mit " + toks.length + " Wörtern — mit den Pfeiltasten von Wort zu Wort, mit der Leertaste markieren");
+  }
   $("#backK").onclick = ()=>{ KO = null; renderKorrList(); };
   if(!done){
-    $$("#ktText .tok").forEach(sp => sp.onclick = ()=>{
+    const woerter = $$("#ktText .tok");
+    const umschalten = sp => {
       const i = +sp.dataset.i;
       marked.has(i) ? marked.delete(i) : marked.add(i);
       sp.classList.toggle("sel");
+      sp.setAttribute("aria-checked", marked.has(i) ? "true" : "false");
       $("#ktCount").textContent = marked.size + " von " + total + " markiert";
+    };
+    /* Wandernder Tabstopp: immer genau ein Wort ist mit Tab erreichbar, innerhalb des
+       Textes geht es mit den Pfeiltasten weiter. Leertaste und Enter markieren. */
+    const hin = n => {
+      const ziel = Math.max(0, Math.min(woerter.length - 1, n));
+      woerter.forEach(x => x.setAttribute("tabindex", "-1"));
+      woerter[ziel].setAttribute("tabindex", "0");
+      woerter[ziel].focus();
+    };
+    woerter.forEach((sp, i) => {
+      sp.onclick = ()=> umschalten(sp);
+      sp.onkeydown = e => {
+        if(e.key === " " || e.key === "Enter"){ e.preventDefault(); umschalten(sp); return; }
+        const schritt = {ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1}[e.key];
+        if(schritt){ e.preventDefault(); hin(i + schritt); return; }
+        if(e.key === "Home"){ e.preventDefault(); hin(0); }
+        if(e.key === "End"){ e.preventDefault(); hin(woerter.length - 1); }
+      };
     });
     $("#ktGo").onclick = ()=>{
       KO.done = true;
@@ -8218,7 +8284,17 @@ function renderExtras(){
         "</div>"+
       "</div>"+
     "</div>";
-  $$("#extraHost .tbox-h").forEach(h => h.onclick = ()=> h.parentElement.classList.toggle("open"));
+  $$("#extraHost .tbox-h").forEach(h => {
+    const auf = ()=>{
+      h.parentElement.classList.toggle("open");
+      h.setAttribute("aria-expanded", h.parentElement.classList.contains("open") ? "true" : "false");
+    };
+    h.setAttribute("role", "button");
+    h.setAttribute("tabindex", "0");
+    h.setAttribute("aria-expanded", h.parentElement.classList.contains("open") ? "true" : "false");
+    h.onclick = auf;
+    h.onkeydown = e => { if(e.key === " " || e.key === "Enter"){ e.preventDefault(); auf(); } };
+  });
   $("#tb1go").onclick = e=>{ e.stopPropagation(); ST.tab="bau"; go("saetze");
     const el=$("#sa-"+s.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); } };
   $("#tb1dr").onclick = e=>{ e.stopPropagation(); ST.tab="drill"; go("saetze");

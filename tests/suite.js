@@ -574,4 +574,75 @@ if (daIst("vercel.json")) {
     "keine Zuordnung für / gefunden");
 }
 
+/* ---------- G · Bedienung ohne Maus ---------- */
+P.titel("G · Bedienung ohne Maus");
+{
+  /* Fehlerklasse „klickbar, aber nicht fokussierbar“: Ein span oder li ohne tabindex steht
+     in keiner Fokusreihenfolge und lässt sich mit keiner Taste auslösen. Betroffen waren
+     die 84 Wörter je Fehlersuchtext (12 Texte, 86 markierte Stellen — die ganze Übung war
+     ohne Zeigegerät zu), die fünf Selbstcheck-Haken im Schreibimpuls und die zwei
+     Tagesbausteine auf Heute. Dass es anders gemeint war, stand längst im Stylesheet:
+     `.tok:focus-visible` konnte nie greifen. */
+  const dd = w.document;
+
+  /* Die vier Zeichenknöpfe heißen für Vorlese-Software sonst „⌕“, „◐“, „🔊“, „⏩“ — die
+     Namensberechnung nimmt zuerst den Inhalt, das title kommt nie dran. */
+  ["#searchBtn", "#themeBtn"].forEach(sel => {
+    const b = dd.querySelector(sel);
+    const name = b && b.getAttribute("aria-label");
+    P.ok("Knopf " + sel + " hat einen sprechbaren Namen",
+      !!name && name.length > 3 && !/^[^A-Za-zÄÖÜäöü]+$/.test(name), name);
+  });
+
+  w.eval('go("schreiben")');
+  [...dd.querySelectorAll("#v-schreiben .sub")].find(b => /Fehlersuche/.test(b.textContent)).click();
+  dd.querySelector("#wSub button").click();
+  const woerter = [...dd.querySelectorAll("#ktText .tok")];
+  P.ok("Der Fehlersuchtext ist in Wörter zerlegt", woerter.length > 40, woerter.length);
+  P.ok("genau ein Wort ist mit Tab erreichbar",
+    woerter.filter(x => x.getAttribute("tabindex") === "0").length === 1,
+    woerter.filter(x => x.getAttribute("tabindex") === "0").length);
+  P.ok("und jedes sagt, was es ist", woerter.every(x => x.getAttribute("role") === "checkbox"));
+  P.ok("und ob es markiert ist", woerter.every(x => x.getAttribute("aria-checked") === "false"));
+
+  const taste = k => new w.KeyboardEvent("keydown", { key: k, bubbles: true, cancelable: true });
+  woerter[0].dispatchEvent(taste("ArrowRight"));
+  P.ok("die Pfeiltaste rückt den Tabstopp weiter",
+    woerter[1].getAttribute("tabindex") === "0" && woerter[0].getAttribute("tabindex") === "-1",
+    woerter.map(x => x.getAttribute("tabindex")).slice(0, 3).join(","));
+  woerter[1].dispatchEvent(taste(" "));
+  P.ok("die Leertaste markiert", woerter[1].classList.contains("sel"));
+  P.ok("und sagt es an", woerter[1].getAttribute("aria-checked") === "true");
+  P.ok("der Zähler zählt mit", /1 von/.test(dd.querySelector("#ktCount").textContent),
+    dd.querySelector("#ktCount").textContent);
+  woerter[1].dispatchEvent(taste("Enter"));
+  P.ok("Enter nimmt die Markierung zurück",
+    !woerter[1].classList.contains("sel") && woerter[1].getAttribute("aria-checked") === "false");
+
+  /* Selbstcheck-Haken im Schreibimpuls */
+  [...dd.querySelectorAll("#v-schreiben .sub")].find(b => /Schreibimpuls/.test(b.textContent)).click();
+  const schreiben = [...dd.querySelectorAll("#wSub button")].find(b => /Schreiben/.test(b.textContent));
+  if (schreiben) schreiben.click();
+  const haken = [...dd.querySelectorAll("#critList li")];
+  P.ok("Die Selbstcheck-Haken sind da", haken.length > 0, haken.length);
+  P.ok("und alle mit Tab erreichbar", haken.every(x => x.getAttribute("tabindex") === "0"));
+  if (haken.length) {
+    haken[0].dispatchEvent(taste(" "));
+    P.ok("die Leertaste hakt ab",
+      haken[0].classList.contains("tick") && haken[0].getAttribute("aria-checked") === "true");
+  }
+
+  /* Tagesbausteine auf Heute */
+  w.eval('go("heute")');
+  const kasten = [...dd.querySelectorAll("#extraHost .tbox-h")];
+  P.ok("Die Tagesbausteine sind da", kasten.length > 0, kasten.length);
+  P.ok("und mit Tab erreichbar", kasten.every(x => x.getAttribute("tabindex") === "0"));
+  if (kasten.length) {
+    kasten[0].dispatchEvent(taste("Enter"));
+    P.ok("Enter klappt sie auf",
+      kasten[0].parentElement.classList.contains("open") &&
+      kasten[0].getAttribute("aria-expanded") === "true");
+  }
+}
+
 P.abschluss();

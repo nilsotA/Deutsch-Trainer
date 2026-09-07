@@ -58,6 +58,50 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die App ist ohne Maus und ohne Farbe benutzbar (07.09.2026).** Vier Funde, die
+zusammengehören.
+
+**1 · Richtig und falsch unterschieden sich nur im Farbton.** Gemessen an einer echten
+Runde: Rand `rgb(47,107,82)` gegen `rgb(168,54,47)` — Helligkeitsverhältnis **1,03:1**;
+Fläche 1,02:1; Randstärke und Deckkraft bei beiden gleich. In Graustufen sind die zwei
+Kästen also identisch, und dieselbe Entsättigung erzeugt ein Handydisplay in der Sonne —
+Nils' Standardsituation. In der Marke steht jetzt nach der Antwort ein **✓** bzw. ein **✗**
+statt des Buchstabens. Vorgelesen wird an der Stelle nichts mehr, die Frage ist beantwortet.
+
+**2 · Die Fehlersuche war ohne Zeigegerät gar nicht bedienbar.** Jedes Wort ist ein `span`
+ohne `tabindex` — 84 je Text, keines in der Fokusreihenfolge, keines mit einer Taste
+auslösbar. Damit war die ganze Übung (12 Texte, 86 markierte Stellen) für jeden ohne Maus
+oder Finger zu; „Auswerten“ ließ sich drücken und meldete zwangsläufig null Treffer. Dass
+es anders gemeint war, stand längst im Stylesheet: `.tok:focus-visible` konnte nie greifen.
+
+84 Tabstopps je Text wären allerdings eine Zumutung. Deshalb **wandert der Tabstopp**:
+einer führt in den Text, danach geht es mit den Pfeiltasten von Wort zu Wort, Leertaste und
+Enter markieren, `Home`/`End` springen. Jedes Wort trägt `role="checkbox"` und ein
+`aria-checked`, das mitgezogen wird. Dasselbe Muster, einfacher gelöst, bei den fünf
+Selbstcheck-Haken im Schreibimpuls und den zwei Tagesbausteinen auf Heute.
+
+**3 · Vier Knöpfe hießen für Vorlese-Software „⌕“, „◐“, „🔊“ und „⏩“.** Alle vier trugen
+ein `title` mit genau dem richtigen Text — es kommt nur nie dran: die Namensberechnung
+nimmt zuerst den Inhalt des Knopfes, und der ist nicht leer. Vorgelesen wurde also der
+Zeichenname. Zwei davon sind die Unterwegs-Schalter, deren Funktion man ohne Beschriftung
+nicht raten kann, und beide sind Ein/Aus-Schalter, deren Zustand nur in der Füllfarbe
+stand. Jetzt: `aria-label` an allen vieren, `aria-pressed` an den beiden Schaltern, beim
+Umschalten mitgezogen.
+
+**4 · Eine Runde lief für Vorlese-Software stumm.** In der ganzen Datei gab es keine
+einzige Live-Region, und der Fokus fiel bei jedem Schritt auf `<body>`: `check()`
+deaktiviert die angetippte Fläche (ein deaktivierter Knopf verliert den Fokus), `renderQ()`
+ersetzt danach den ganzen Kartenblock. Weder die Rückmeldung noch die nächste Frage wurde
+je angesagt, und der Lesepunkt saß jedes Mal wieder am Seitenanfang. `#fbHost` ist jetzt
+`role="status"`, und der Fokus wandert nach der Antwort auf den Weiter-Knopf
+(`preventScroll`, sonst rutscht unterwegs die Frage aus dem Bild). Läuft die App-eigene
+Sprachausgabe, schaltet die Region auf `aria-live="off"` — sonst redeten zwei Stimmen
+gleichzeitig.
+
+Geprüft: `tests/suite.js`, Abschnitt **G · Bedienung ohne Maus** (17 Prüfungen, 14 fallen
+gegen die alte Fassung durch), und `tests/unterwegs.js`, Abschnitt **J · Rückmeldung ohne
+Farbe und ohne Maus** (13 Prüfungen, 12 fallen durch).
+
 **Vier kleinere, aber lästige Fehler (07.09.2026).**
 
 **1 · Ein Doppeltipp beantwortete die nächste Frage.** `renderQ()` ersetzt den Karteninhalt
