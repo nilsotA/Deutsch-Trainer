@@ -5206,7 +5206,44 @@ function load(){
     const raw = localStorage.getItem(KEY);
     zuletztGesehen = raw;
     return raw ? Object.assign(def, JSON.parse(raw)) : def;
-  }catch(e){ return mem || (mem = def); }
+  }catch(e){
+    /* Beim Schreibfehler warnt die App, beim Lesefehler warnte sie bisher nicht: Ist der
+       gespeicherte Stand beschädigt (abgeschnitten geschrieben, Profil defekt), startete
+       sie stumm bei null — und die erste Antwort schrieb den Rest endgültig weg. Ein auf
+       80 % gekürzter Stand enthielt in der Nachstellung noch fast alle Karten und wäre von
+       Hand zu retten gewesen. Deshalb: die Rohfassung einmal beiseitelegen und es sagen.
+       Nur wenn überhaupt etwas dastand — ein leerer Speicher ist kein Defekt. */
+    let roh = null;
+    try{ roh = localStorage.getItem(KEY); }catch(e2){ /* dann eben nicht */ }
+    if(roh){
+      try{ localStorage.setItem(KEY + ".defekt", roh); }catch(e2){ /* Speicher voll */ }
+      standDefekt = true;
+    }
+    zuletztGesehen = null;   // nichts überschreiben, ohne es gesehen zu haben
+    return mem || (mem = def);
+  }
+}
+let standDefekt = false;
+/* Der beschädigte Stand liegt unter KEY + ".defekt". Die Leiste sagt, dass es ihn gibt;
+   weggeräumt wird er erst, wenn Nils selbst zustimmt — sonst wäre die Kopie weg, bevor
+   jemand sie ansehen konnte. */
+function zeigeLesewarnung(){
+  if($("#readWarn")) return;
+  const b = document.createElement("div");
+  b.id = "readWarn";
+  b.className = "savewarn";
+  b.innerHTML = "<b>Der gespeicherte Fortschritt ließ sich nicht lesen.</b> "+
+    "Die App startet deshalb bei null. Eine Kopie des beschädigten Standes ist gesichert — "+
+    "wenn dir etwas fehlt, sag Bescheid, bevor du weiterübst. "+
+    '<button class="btn sm" id="readDrop">Verstanden, verwerfen</button>';
+  const w = document.querySelector(".wrap");
+  if(w) w.insertBefore(b, w.firstChild);
+  const e = $("#readDrop");
+  if(e) e.onclick = ()=>{
+    try{ localStorage.removeItem(KEY + ".defekt"); }catch(e2){}
+    standDefekt = false;
+    b.remove();
+  };
 }
 let speicherDefekt = false;
 /* Was dieses Fenster zuletzt im Speicher gesehen hat. Weicht der Speicher davon ab,
@@ -8334,6 +8371,7 @@ document.addEventListener("keydown", e=>{
   if(n >= 0){ const b = qAll(".opt")[n]; if(b && !b.disabled) b.click(); }
 });
 renderAll();
+if(standDefekt) zeigeLesewarnung();
 
 /* Eine unterbrochene Runde nicht verlieren */
 (function(){ if(sitzungOffen()){ go("karten"); } })();

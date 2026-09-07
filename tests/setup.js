@@ -25,7 +25,10 @@ function boot(stand, optionen = {}) {
     pretendToBeVisual: true,
     url: "http://localhost/",
     beforeParse(w) {
-      if (stand) w.localStorage.setItem(KEY, JSON.stringify(stand));
+      /* optionen.roh legt den Lernstand als Rohtext ab — für beschädigte Datensätze,
+         die sich als Objekt gar nicht ausdrücken lassen. */
+      if (optionen.roh !== undefined) w.localStorage.setItem(KEY, optionen.roh);
+      else if (stand) w.localStorage.setItem(KEY, JSON.stringify(stand));
       w.scrollTo = () => {};
       w.print = () => {};
       w.confirm = () => true;

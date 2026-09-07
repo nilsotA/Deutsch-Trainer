@@ -425,4 +425,51 @@ P.titel("H · Tagesaufgabe über Wochen");
     r.sorten.A + r.sorten.W + r.sorten.F);
 }
 
+/* ---------- I · Beschädigter Lernstand ---------- */
+P.titel("I · Beschädigter Lernstand");
+{
+  /* Fehlerklasse „stiller Verlust“: load() fing jeden Fehler ab und lieferte wortlos den
+     leeren Standardzustand. Bei einem beschädigten Datensatz — abgeschnitten geschrieben,
+     Profil defekt — startete die App also mit 0 XP und Serie 0, ohne Warnung, und die
+     erste Antwort schrieb den Rest endgültig weg. Beim Schreibfehler warnt die App seit
+     jeher, beim Lesefehler gar nicht. In der Nachstellung enthielt der auf 80 % gekürzte
+     Stand noch fast alle Karten und wäre von Hand zu retten gewesen. */
+  const cards = {};
+  for (let i = 1; i <= 20; i++) cards["k" + String(i).padStart(2, "0")] = { b: 4, d: tag(9), s: 5, w: 0 };
+  const heil = JSON.stringify(leererStand({ xp: 480, streak: 23, best: 23, cards }));
+  const kaputt = heil.slice(0, Math.floor(heil.length * 0.8));
+
+  const w = boot(null, { roh: kaputt });
+  const d = w.document;
+  P.ok("die App startet trotzdem", daten(w, "typeof S") === "object");
+  P.ok("und zwar bei null", daten(w, "S.xp") === 0 && daten(w, "S.streak") === 0);
+  const leiste = d.querySelector("#readWarn");
+  P.ok("eine Warnleiste steht da", !!leiste);
+  P.ok("sie sagt, was los ist", !!leiste && /nicht lesen/i.test(leiste.textContent),
+    leiste && leiste.textContent.slice(0, 80));
+  P.ok("der beschädigte Stand ist beiseitegelegt",
+    w.localStorage.getItem("deutschtrainer.v1.defekt") === kaputt);
+
+  /* Weiterüben darf die Kopie nicht wegräumen — nur der Knopf darf das. */
+  w.eval('grade("k01", true)');
+  P.ok("die Kopie überlebt die erste Antwort",
+    w.localStorage.getItem("deutschtrainer.v1.defekt") === kaputt);
+  P.ok("der neue Stand wird normal gespeichert",
+    JSON.parse(w.localStorage.getItem("deutschtrainer.v1") || "{}").xp > 0);
+  const verwerfen = d.querySelector("#readDrop");
+  if (verwerfen) verwerfen.click();
+  P.ok("nach dem Verwerfen ist die Kopie weg",
+    w.localStorage.getItem("deutschtrainer.v1.defekt") === null);
+  P.ok("und die Leiste auch", !d.querySelector("#readWarn"));
+}
+{
+  /* Gegenprobe: ein leerer Speicher ist kein Defekt. */
+  const w = boot(null);
+  P.ok("erster Start ohne Warnleiste", !w.document.querySelector("#readWarn"));
+  P.ok("und ohne Kopie", w.localStorage.getItem("deutschtrainer.v1.defekt") === null);
+  const w2 = boot(leererStand({ xp: 30 }));
+  P.ok("heiler Stand ohne Warnleiste", !w2.document.querySelector("#readWarn"));
+  P.ok("und er wird geladen", daten(w2, "S.xp") === 30);
+}
+
 P.abschluss();

@@ -58,6 +58,28 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Beschädigter Lernstand wird nicht mehr stumm überschrieben (07.09.2026).** `load()` fing
+jeden Fehler ab und lieferte wortlos den leeren Standardzustand. Ist der gespeicherte Stand
+beschädigt — beim Schreiben abgeschnitten, Profil defekt —, startete die App also mit 0 XP
+und Serie 0, ohne Warnleiste und ohne Toast, und die erste Antwort schrieb den Rest
+endgültig weg. Beim **Schreib**fehler warnt die App seit jeher vorbildlich, beim
+**Lese**fehler gar nicht. In der Nachstellung enthielt der auf 80 % gekürzte Datensatz noch
+fast alle zwanzig Karten und die Serie 23 — von Hand rettbar, nach einer einzigen Antwort
+weg.
+
+Jetzt legt der `catch`-Zweig die Rohfassung einmalig unter `deutschtrainer.v1.defekt`
+beiseite und zeigt eine eigene Leiste („Der gespeicherte Fortschritt ließ sich nicht
+lesen“). Weggeräumt wird die Kopie erst auf Knopfdruck — sonst wäre sie weg, bevor jemand
+sie ansehen konnte. Das Beiseitelegen steht selbst in `try/catch`: ein voller Speicher darf
+den Start nicht kosten. Ein **leerer** Speicher ist kein Defekt und löst nichts aus.
+Datenformat und Speicherschlüssel bleiben unverändert.
+
+Neu in `tests/lernen.js`, Abschnitt **I · Beschädigter Lernstand** (13 Prüfungen), samt
+Gegenprobe für den ersten Start und einen heilen Stand. `tests/setup.js` kann dafür jetzt
+einen Rohtext statt eines Objekts in den Speicher legen (`boot(null, {roh})`) — als Objekt
+lässt sich ein kaputter Datensatz nicht ausdrücken. Vier Prüfungen fallen gegen die alte
+Fassung durch.
+
 **Eine Runde greift nicht mehr in die andere (07.09.2026).** In der Heute-Ansicht liegen
 zwei Wirtsbereiche übereinander: `#walkHost` und `#dailyHost`. `startQuiz()` überschrieb
 nur den einen — die Karte im anderen blieb samt Antwortknöpfen stehen und bedienbar. `Q`
