@@ -262,4 +262,47 @@ P.titel("F · Regeländerung");
   P.ok("Nach dem Import einer alten Sicherung zurückgesetzt", daten(w4, "S.cards[" + JSON.stringify(id) + "].b") === 1);
 }
 
+/* ---------- G · Zweites Fenster ---------- */
+/* Fehlerklasse „veraltetes Fenster überschreibt den neuen Stand“: save() schrieb immer
+   den ganzen Zustand, den das Fenster beim Start geladen hatte. Ein vergessenes Fenster
+   löschte mit einer einzigen Antwort den ganzen Lerntag des anderen — lautlos.
+   Hier nachgestellt über denselben Speicher, den zwei Fenster teilen. */
+P.titel("G · Zweites Fenster");
+{
+  const spA = boot(leererStand({}));
+  const spB = boot(leererStand({}));
+  /* Beide Fenster auf denselben Speicher legen, wie zwei Tabs im selben Browser */
+  const gemeinsam = {};
+  const geteilt = {
+    setItem(k, v) { gemeinsam[k] = String(v); },
+    getItem(k) { return k in gemeinsam ? gemeinsam[k] : null; },
+    removeItem(k) { delete gemeinsam[k]; },
+    clear() { Object.keys(gemeinsam).forEach(k => delete gemeinsam[k]); },
+  };
+  [spA, spB].forEach(w => Object.defineProperty(w, "localStorage", { configurable: true, value: geteilt }));
+  /* B lernt zwölf Karten */
+  spB.eval('for(let i=0;i<12;i++) grade("k"+String(i+1).padStart(2,"0"), true);');
+  const nachB = JSON.parse(gemeinsam["deutschtrainer.v1"] || "{}");
+  P.ok("B hat zwölf Karten gespeichert", Object.keys(nachB.cards || {}).length === 12,
+    Object.keys(nachB.cards || {}).length);
+
+  /* A kennt den Stand von vorher und beantwortet eine Karte */
+  spA.eval('grade("z01", true);');
+  const nachA = JSON.parse(gemeinsam["deutschtrainer.v1"] || "{}");
+  P.ok("A überschreibt den Lerntag nicht", Object.keys(nachA.cards || {}).length === 12,
+    "im Speicher stehen " + Object.keys(nachA.cards || {}).length + " Karten");
+  P.ok("A sagt es dem Nutzer", !!spA.document.querySelector("#otherWin"));
+  P.ok("und speichert danach nichts mehr",
+    (() => { try { return spA.eval("fremdStand") === true; } catch (e) { return false; } })());
+}
+{
+  /* Der Normalfall darf davon unberührt bleiben. */
+  const w = boot(leererStand({}));
+  w.eval('for(let i=0;i<8;i++) grade("k"+String(i+1).padStart(2,"0"), true);');
+  const roh = JSON.parse(w.localStorage.getItem("deutschtrainer.v1") || "{}");
+  P.ok("Ein einzelnes Fenster speichert wie bisher", Object.keys(roh.cards || {}).length === 8,
+    Object.keys(roh.cards || {}).length);
+  P.ok("und zeigt keine Warnung", !w.document.querySelector("#otherWin"));
+}
+
 P.abschluss();

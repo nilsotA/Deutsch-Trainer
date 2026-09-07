@@ -5199,13 +5199,29 @@ function load(){
                session:null,speak:false,auto:true,theme:"light",seenW:{}};
   try{
     const raw = localStorage.getItem(KEY);
+    zuletztGesehen = raw;
     return raw ? Object.assign(def, JSON.parse(raw)) : def;
   }catch(e){ return mem || (mem = def); }
 }
 let speicherDefekt = false;
+/* Was dieses Fenster zuletzt im Speicher gesehen hat. Weicht der Speicher davon ab,
+   hat ein anderes Fenster geschrieben — dann darf dieses hier nichts überschreiben.
+   Ohne diese Sperre löschte eine einzige Antwort in einem vergessenen Fenster den
+   ganzen Lerntag des anderen, lautlos. */
+let zuletztGesehen = null;
+let fremdStand = false;
 function save(){
+  if(fremdStand) return;
   try{
-    localStorage.setItem(KEY, JSON.stringify(S));
+    const jetzt = localStorage.getItem(KEY);
+    if(jetzt !== null && zuletztGesehen !== null && jetzt !== zuletztGesehen){
+      fremdStand = true;
+      zeigeFremdstandwarnung();
+      return;
+    }
+    const roh = JSON.stringify(S);
+    localStorage.setItem(KEY, roh);
+    zuletztGesehen = roh;
     if(speicherDefekt){ speicherDefekt = false; const b=$("#saveWarn"); if(b) b.remove(); }
   }catch(e){
     mem = S;
@@ -5216,6 +5232,30 @@ function save(){
     }
   }
 }
+/* Eigene Leiste, nicht die Speicherwarnung: deren Knopf „Jetzt sichern“ würde hier
+   genau den veralteten Stand als Datei ausgeben. */
+function zeigeFremdstandwarnung(){
+  if($("#otherWin")) return;
+  const b = document.createElement("div");
+  b.id = "otherWin";
+  b.className = "savewarn";
+  b.innerHTML = "<b>In einem anderen Fenster wurde weitergelernt.</b> "+
+    "Dieses Fenster zeigt einen älteren Stand und speichert deshalb nichts mehr — sonst "+
+    "würde es den neueren überschreiben. Lade neu, dann ist alles da. "+
+    '<button class="btn sm" id="winReload">Neu laden</button>';
+  const w = document.querySelector(".wrap");
+  if(w) w.insertBefore(b, w.firstChild);
+  const e = $("#winReload");
+  if(e) e.onclick = ()=> location.reload();
+}
+/* Schreibt ein anderes Fenster, erfährt dieses es sofort — nicht erst beim nächsten
+   eigenen Speichern. */
+window.addEventListener("storage", e => {
+  if(e.key !== KEY || fremdStand) return;
+  if(e.newValue === zuletztGesehen) return;
+  fremdStand = true;
+  zeigeFremdstandwarnung();
+});
 function zeigeSpeicherwarnung(){
   if($("#saveWarn")) return;
   const b = document.createElement("div");
