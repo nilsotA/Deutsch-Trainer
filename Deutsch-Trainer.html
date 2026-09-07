@@ -370,7 +370,11 @@ mark.mk-form{background:var(--blue-soft);box-shadow:inset 0 -2px 0 var(--blue);c
 .srch-bd{position:absolute;inset:0;background:rgba(20,23,26,.4);backdrop-filter:blur(2px)}
 .srch{position:relative;max-width:600px;margin:8vh auto 0;background:var(--card);border:1px solid var(--line);
   border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
-.srch input{width:100%;padding:18px 20px;border:0;background:none;font-size:16.5px;outline:none}
+.srch input{width:100%;padding:18px 62px 18px 20px;border:0;background:none;font-size:16.5px;outline:none}
+.srch-x{position:absolute;top:6px;right:6px;width:44px;height:44px;display:flex;align-items:center;
+  justify-content:center;border:0;background:none;color:var(--ink2);font-size:19px;line-height:1;
+  cursor:pointer;border-radius:11px}
+.srch-x:hover{background:var(--line2);color:var(--ink)}
 .srch-out{max-height:56vh;overflow:auto;border-top:1px solid var(--line2)}
 .sres{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:11px 20px;
   border-bottom:1px solid var(--line2);font-size:14.5px}
@@ -512,7 +516,8 @@ table.ch-t.sm td{padding-right:14px}
 
   /* Suchfenster als Vollbild */
   .srch{margin:0;border-radius:0;height:100dvh;max-width:none;display:flex;flex-direction:column}
-  .srch input{padding:16px 16px calc(16px + env(safe-area-inset-top))}
+  .srch input{padding:calc(16px + env(safe-area-inset-top)) 62px 16px 16px}
+  .srch-x{top:calc(6px + env(safe-area-inset-top))}
   .srch-out{flex:1;max-height:none}
   .sres{padding:14px 16px}
   .sres-k{width:70px;font-size:10px}
@@ -7933,11 +7938,13 @@ function openSearch(){
       '<div class="srch-bd" id="srchBd"></div>'+
       '<div class="srch">'+
         '<input id="srchIn" placeholder="Alles durchsuchen — Regeln, Fälle, Bausteine, Wörter, Übungen …" autocomplete="off">'+
+        '<button class="srch-x" id="srchX" type="button" aria-label="Suche schließen" title="Suche schließen">✕</button>'+
         '<div id="srchOut" class="srch-out"></div>'+
         '<div class="srch-ft kbd">Enter öffnet den ersten Treffer · Esc schließt</div>'+
       "</div>";
     document.body.appendChild(box);
     $("#srchBd").onclick = closeSearch;
+    $("#srchX").onclick = closeSearch;
     $("#srchIn").addEventListener("input", deb(drawSearch, 90));
     $("#srchIn").addEventListener("keydown", e=>{
       if(e.key === "Escape") closeSearch();

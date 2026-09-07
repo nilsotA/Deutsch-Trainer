@@ -340,6 +340,30 @@ if (zettelKnopf) {
   P.ok("Spickzettel deckt die Sprechkarte ab", !fehlt.length, fehlt.join(" · "));
 }
 
+/* Fehlerklasse „Fenster ohne Ausweg“: Auf Schirmen unter 600 px deckt das Suchfenster
+   die ganze Fläche. Der Hintergrund, dessen Tipp es schließt, liegt darunter und ist
+   nicht mehr erreichbar; der Hinweis auf Esc trägt die Klasse kbd und ist auf
+   Berührungsgeräten ausgeblendet. Auf dem iPhone gab es damit keinen Weg heraus —
+   als Startbildschirm-App auch keine Adressleiste zum Neuladen. */
+{
+  const knopf = d.querySelector("#searchBtn");
+  P.ok("Suche erreichbar", !!knopf);
+  if (knopf) {
+    knopf.click();
+    const fenster = d.querySelector("#srchWrap");
+    P.ok("Suchfenster öffnet", !!fenster && fenster.classList.contains("on"));
+    const zu = fenster && fenster.querySelector("button[aria-label], button[title]");
+    P.ok("Das Suchfenster hat einen eigenen Schließen-Knopf", !!zu,
+      "ohne ihn führt auf dem Handy kein Weg heraus");
+    if (zu) {
+      P.ok("… mit einem Namen für Vorlese-Software",
+        !!(zu.getAttribute("aria-label") || "").trim());
+      zu.click();
+      P.ok("… und er schließt wirklich", !fenster.classList.contains("on"));
+    }
+  }
+}
+
 /* ---------- F · Verpackung ---------- */
 /* Die gehostete Fassung ist auf dem Handy installierbar und offline nutzbar. Das hängt an
    fünf kleinen Dateien und an sechs Zeilen im <head> — beides kann eine spätere Änderung
