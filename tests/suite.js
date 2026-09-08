@@ -310,6 +310,51 @@ KORREKTUR.forEach(t => {
 });
 P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauffindbar.join(" · "));
 
+{
+  /* Wie viel von dem, was die App selbst als Fehler markiert, findet ihr eigener Textcheck?
+     Die zwölf Fehlersuchtexte tragen 86 markierte Stellen mit Korrektur — eine Probe, die
+     man nicht schönrechnen kann. Gemessen: 45 von 86 (52 %), nach dem Ausbau der
+     Kommamuster 52 von 86 (60 %). Die Schranke ist eine Untergrenze gegen Rückfall, kein
+     Ziel: Der Textcheck soll auf Verdachtsstellen zeigen, nicht alles finden. */
+  const quote = daten(w, `(function(){
+    let stellen = 0, gefunden = 0;
+    KORREKTUR.forEach(t => {
+      const worte = analyse(t.txt).finds.map(f => t.txt.slice(f.s, f.e));
+      t.errs.forEach(e => {
+        stellen++;
+        if (worte.some(x => x.includes(e.w) || e.w.includes(x))) gefunden++;
+      });
+    });
+    return {stellen, gefunden};
+  })()`);
+  P.info("Der Textcheck findet " + quote.gefunden + " von " + quote.stellen + " markierten Fehlern (" +
+    Math.round(quote.gefunden / quote.stellen * 100) + " %)");
+  P.ok("Der Textcheck findet mindestens die Hälfte der markierten Fehler",
+    quote.gefunden >= 50, quote.gefunden + " von " + quote.stellen);
+
+  /* Und die Gegenrichtung, härter als die Vorlage oben: Die korrigierten Fassungen
+     derselben Texte sind zusammenhängende, richtige Prosa. Die drei Kommamuster dürfen
+     dort nicht melden — sie sind die einzigen, die auf fehlende Zeichen zielen, und
+     ausgerechnet solche Muster feuern leicht auf richtigen Text. */
+  const falschalarm = daten(w, `(function(){
+    const out = [];
+    KORREKTUR.forEach(t => {
+      const toks = t.txt.split(/\\s+/);
+      t.errs.forEach(e => {
+        if (!e.ok || /^\\(|^…/.test(e.ok)) return;
+        let n = e.nth || 1, c = 0;
+        for (let i = 0; i < toks.length; i++) { if (toks[i] === e.w && ++c === n) { toks[i] = e.ok; break; } }
+      });
+      const s = toks.join(" ");
+      analyse(s).finds.forEach(f => {
+        if (["y01", "y13", "y14"].includes(f.c.id)) out.push(f.c.id + " in " + (t.id || "?") + ": " + s.slice(f.s, f.e));
+      });
+    });
+    return out;
+  })()`);
+  P.ok("Die Kommamuster melden nichts im korrigierten Text", !falschalarm.length, falschalarm.join(" · "));
+}
+
 /* Fehlerklasse „nach oben offene Wiederholung über einer verneinten Zeichenklasse“:
    a04 suchte sehr lange Sätze mit /[A-ZÄÖÜ][^.!?]{230,}[.!?]/. Da im Deutschen fast jedes
    Substantiv groß beginnt, setzt so ein Muster alle paar Zeichen neu an, und ohne

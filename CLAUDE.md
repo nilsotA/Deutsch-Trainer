@@ -65,7 +65,7 @@ also nicht umbenennen.
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 86 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 95 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 97 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.

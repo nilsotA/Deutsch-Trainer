@@ -58,6 +58,58 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Textcheck findet jetzt 60 statt 52 Prozent (08.09.2026).** Erst gemessen, dann
+gebaut: Die zwölf Fehlersuchtexte tragen 86 markierte Fehler mit Korrektur — eine Probe, die
+sich nicht schönrechnen lässt. Der Textcheck fand davon **45 (52 %)**. Nach Fehlerklassen
+sortiert war die Lücke eindeutig: **16 der 41 verpassten Stellen waren fehlende Kommas**,
+und zwar in drei Formen.
+
+Für die Arbeit daran habe ich eine Messbank gebaut (`scratchpad/komma/bank.js`, nicht im
+Repo): auf der einen Seite die Fehlertexte, auf der anderen **2343 Stellen, die die App
+selbst als richtig zeigt** — Regelbeispiele, Regelprosa, Übungserklärungen, richtige
+Antworten, Musterformulierungen und die korrigierten Fehlersuchtexte. Ein Muster wird an
+beidem gemessen, nicht nur an dem, was es finden soll.
+
+**`y01` umgebaut.** „ob“ fehlte in der Konjunktionsliste — ausgerechnet „Ich wollte fragen
+ob …“, der Satz, den Nils schreibt. Dazu darf das Wort davor jetzt großgeschrieben sein
+(„Frage ob“), und hinter der Konjunktion muss ein Wort folgen. Letzteres klingt nach
+Kleinkram, ist aber der Grund, warum das Muster die App-eigenen Erwähnungen nicht mehr
+meldet: „der dass-Satz“, „die Konjunktion dass.“, „so dass; im Text“.
+
+| | Treffer in den Fehlertexten | Fehlalarme im richtigen Bestand |
+|---|---|---|
+| y01 vorher | 1 | 7 |
+| y01 jetzt | 5 | 1 |
+
+Der eine verbliebene Fehlalarm ist der Satz „Das Regelwerk stellt sodass und so dass frei“
+aus der App selbst — eine Erwähnung, keine Verwendung. In Nils' Texten kommt so etwas nicht
+vor, und das Muster steht auf `pruef`, nicht auf `hart`.
+
+**`y13` neu — vorangestellter Nebensatz ohne Komma.** „Wenn ihr Fragen habt meldet euch.“
+Der Satz beginnt mit der Konjunktion und läuft ohne ein einziges Trennzeichen bis zum Punkt;
+dann fehlt es sicher. Gedankenstrich und Doppelpunkt zählen als Trenner, die Kurzformeln
+(„wenn möglich“) sind ausgenommen. 4 Treffer, **kein** Fehlalarm.
+
+**`y14` neu — Datum.** „am Dienstag den 12. Mai statt“. 1 Treffer, kein Fehlalarm.
+
+**Verworfen: „während“ als Konjunktion.** Das Muster fand die eine echte Stelle und keinen
+Fehlalarm im Bestand — aber an 14 744 Wörtern Projektprosa (`HANDOVER.md`, `CLAUDE.md`,
+`FUNDE-offen.md`) fiel es über „Der Bildschirm bleibt während der Runde an“. „während“ als
+Präposition hat dieselbe Gestalt wie „während“ als Konjunktion; ohne Satzgliedanalyse ist
+das nicht zu trennen. Also nicht eingebaut. Dieselbe Prosa hat y01, y13 und y14 ohne eine
+einzige Meldung passiert — das ist die eigentliche Freigabe, weil es Text ist, den die App
+nicht selbst geschrieben hat.
+
+Ergebnis: **52 von 86 (60 %)**. Neu in `tests/suite.js`: die Quote selbst mit einer
+Untergrenze von 50 (gegen Rückfall, nicht als Ziel — der Textcheck soll auf Verdachtsstellen
+zeigen, nicht alles finden) und eine Sperre, dass die drei Kommamuster im korrigierten Text
+nichts melden. Die Untergrenze fällt gegen die alte Fassung durch; die Sperre ist ein
+Riegel nach vorn, sie hielt auch vorher schon.
+
+Was bleibt: 34 nicht gefundene Stellen, überwiegend Klassen, die ein Muster nicht sicher
+entscheiden kann — Relativsätze ohne Komma („Studien die sich …“), uneingeleitete
+Nebensätze („Ich hoffe du verstehst mich“), Nominalstil, Formulierungshinweise.
+
 **Sauberkeitsdurchgang (07.09.2026).** Nach dem Haltbarkeitslauf einmal von außen
 draufgeschaut — Repo, Code, Bild.
 

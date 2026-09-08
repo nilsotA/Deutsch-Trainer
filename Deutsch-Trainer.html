@@ -7912,8 +7912,25 @@ const CHECKS = [
  k:"Nach langem Vokal oder Diphthong steht <b>ß</b>: Grüße, weiß, heiß, draußen, Straße, groß, außer, Fußball. In der Schweiz und in Liechtenstein gilt durchgängig ss; in Großbuchstaben steht ohnehin SS (STRASSE).",r:"recht-sz"},
 
 /* ---------- BITTE PRÜFEN ---------- */
-{id:"y01",sev:"pruef",re:/\b(?!(?:ohne|statt|anstatt|außer|und|oder|so|sondern|aber|denn|damit|dazu|davon|dadurch|als|nur|auch|selbst|gerade|nicht|besonders|insbesondere|allem|kaum|einfach|erst|noch|kurz|gleich|lange|sofort|je|immer|vorausgesetzt|angenommen|ausgenommen|geschweige)\b)[a-zäöüß]+\s+(weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem)\b/gi,
- t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ vor dem ersten Wort der Fügung, außer du betonst das erste Wort als Teil des Hauptsatzes („Ich komme nur, wenn du kommst“). Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
+/* „ob“ gehört dazu — es fehlte, und „Ich wollte fragen ob …“ ist genau der Satz, den
+   Nils schreibt. Das erste Wort darf jetzt auch großgeschrieben sein („Frage ob“); dafür
+   muss hinter der Konjunktion ein Wort folgen, sonst meldete das Muster die App-eigenen
+   Erwähnungen mit („der dass-Satz“, „die Konjunktion dass.“, „so dass; im Text“).
+   Gemessen an 2343 Stellen, die die App selbst als richtig zeigt: vorher 7 Fehlalarme
+   und 1 Treffer in den Fehlersuchtexten, jetzt 1 Fehlalarm und 5 Treffer. */
+{id:"y01",sev:"pruef",re:/\b(?!(?:[Oo]hne|[Ss]tatt|[Aa]nstatt|[Aa]ußer|[Uu]nd|[Oo]der|[Ss]o|[Ss]ondern|[Aa]ber|[Dd]enn|[Dd]amit|[Dd]azu|[Dd]avon|[Dd]adurch|[Aa]ls|[Nn]ur|[Aa]uch|[Ss]elbst|[Gg]erade|[Nn]icht|[Bb]esonders|[Ii]nsbesondere|[Aa]llem|[Kk]aum|[Ee]infach|[Ee]rst|[Nn]och|[Kk]urz|[Gg]leich|[Ll]ange|[Ss]ofort|[Jj]e|[Ii]mmer|[Vv]orausgesetzt|[Aa]ngenommen|[Aa]usgenommen|[Gg]eschweige|[Ee]gal|[Gg]leichgültig|[Gg]leichviel|[Uu]nabhängig|[Dd]arüber|[Dd]arauf|[Dd]anach|[Dd]ahingehend|[Uu]ngeachtet|[Nn]achdem|[Gg]anz|[Nn]ach|[Vv]or|[Dd]ort|[Kk]onjunktion|[Ww]ort|[Ww]örtchen)\b)[A-ZÄÖÜa-zäöüß]{2,}\s+(?:weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem|ob)(?=\s+[A-Za-zÄÖÜäöüß])/g,
+ t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — auch vor <b>ob</b>: „Ich wollte fragen<b>,</b> ob …“. Bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ steht es vor dem ersten Wort der Fügung, außer du betonst das erste Wort als Teil des Hauptsatzes („Ich komme nur, wenn du kommst“). Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
+/* Steht der Nebensatz vorn, fehlt das Komma leicht vor dem Hauptsatz: „Wenn ihr Fragen
+   habt meldet euch.“ Der Satz beginnt mit der Konjunktion und läuft ohne jedes Trennzeichen
+   bis zum Punkt — dann fehlt es sicher. Gedankenstrich und Doppelpunkt zählen als Trenner,
+   die Kurzformeln („wenn möglich“) sind ausgenommen. Kein Fehlalarm in 2343 richtigen
+   Stellen der App und in 14 744 Wörtern Projektprosa. */
+{id:"y13",sev:"pruef",re:/(?:^|[.!?]\s+|\n\s*)(?:Wenn|Falls|Sobald|Obwohl|Solange|Sofern)\s+(?!(?:möglich|nötig|notwendig|ja|nein|überhaupt|gewünscht|erforderlich|nicht anders)\b)[^,.!?;:—–]{12,140}[.!?]/g,
+ t:"Komma nach dem vorangestellten Nebensatz?",k:"Steht der Nebensatz vorn, wird er vom Hauptsatz durch ein Komma getrennt: „Wenn ihr Fragen habt<b>,</b> meldet euch.“ In diesem Satz steht zwischen Anfang und Punkt kein einziges Trennzeichen. Ausgenommen sind Kurzformeln wie „wenn möglich“, dort ist es freigestellt.",r:"komma-nebensatz"},
+/* „am Dienstag den 12. Mai statt“ — die mehrteilige Datumsangabe braucht das Komma nach
+   dem Wochentag, seit 2024 auch das schließende. */
+{id:"y14",sev:"pruef",re:/\b(?:Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonnabend|Sonntag)\s+(?:den|dem)\s+\d{1,2}\./g,
+ t:"Komma in der Datumsangabe",k:"Bei einer mehrteiligen Datumsangabe steht ein Komma nach dem Wochentag: „am Dienstag<b>,</b> dem 12. Mai<b>,</b> …“. Das schließende Komma ist seit dem Regelwerk 2024 Pflicht, wenn der Satz weiterläuft.",r:"komma-brief"},
 {id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?)\szu\s+[a-zäöüß]+(en|eln|ern)\b/g,
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
 {id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
