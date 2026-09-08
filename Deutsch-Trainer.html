@@ -303,6 +303,11 @@ table.dt td.hl{background:var(--gold-soft);color:var(--gold);font-weight:650;bor
 /* ---------- Unterwegs-Modus ---------- */
 body.walk .head{position:static}
 body.walk .tabs{display:none}
+/* Unterwegs zählt nur die Karte. Ohne das stand unter der laufenden Runde weiter die
+   Tagesaufgabe samt „Loslegen“ — Ablenkung beim Gehen und ein Knopf, der die Runde
+   ersetzt hätte. Die Marke setzt startQuiz(); außerhalb des Unterwegs-Modus greift die
+   Regel nicht, ein Rest der Marke schadet also nichts. */
+body.walk .view.on > *:not(.nurRunde){display:none}
 body.walk .wrap{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
 body.walk .card{padding:20px 16px;border-radius:14px}
 body.walk .qtext{font-size:26px;line-height:1.45;font-weight:550;margin:16px 0 22px}
@@ -1353,7 +1358,7 @@ const WORDS = [
 {w:"rudimentär",p:"Adj.",d:"nur ansatzweise vorhanden, unvollständig entwickelt",ex:"Seine Kenntnisse sind bislang rudimentär.",s:"ansatzweise, bruchstückhaft"},
 {w:"plausibel",p:"Adj.",d:"einleuchtend, glaubhaft — aber nicht bewiesen",ex:"Die Erklärung klingt plausibel, ist jedoch nicht belegt.",s:"einleuchtend, nachvollziehbar",t:"Nicht mit „valide“ verwechseln: valide heißt geprüft und gültig."},
 {w:"triftig",p:"Adj.",d:"stichhaltig, überzeugend begründet",ex:"Er nannte einen triftigen Grund für die Absage.",s:"stichhaltig, zwingend"},
-{w:"tendenziös",p:"Adj.",d:"parteiisch gefärbt, mit versteckter Absicht",ex:"Die Darstellung ist tendenziös und blendet Gegenargumente aus.",s:"parteiisch, einseitig",t:"Nicht mit „tendenziell“ (= der Tendenz nach) verwechseln!"},
+{w:"tendenziös",p:"Adj.",d:"parteiisch gefärbt, mit versteckter Absicht",ex:"Die Darstellung ist tendenziös und blendet Gegenargumente aus.",s:"parteiisch, einseitig",t:"Nicht mit „tendenziell“ (= der Tendenz nach) verwechseln."},
 {w:"marginal",p:"Adj.",d:"am Rand liegend, unbedeutend",ex:"Der Effekt ist statistisch marginal.",s:"geringfügig, nebensächlich"},
 {w:"substanziell",p:"Adj.",d:"wesentlich, den Kern betreffend",ex:"Ein substanzieller Einwand, kein bloßer Formfehler.",s:"wesentlich, gehaltvoll"},
 {w:"eklatant",p:"Adj.",d:"in auffallender, unübersehbarer Weise",ex:"Ein eklatanter Widerspruch zwischen Anspruch und Praxis.",s:"krass, offenkundig"},
@@ -3711,7 +3716,7 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 </ul>
 <p><b>Mit „haben“</b> stehen alle anderen — vor allem alle Verben mit Akkusativobjekt und alle reflexiven Verben.</p>
 <div class="ex">Ich <b>bin</b> nach Köln gefahren. (Ortswechsel)<br>
-Ich <b>habe</b> das Auto gefahren. (Akkusativobjekt!)<br>
+Ich <b>habe</b> das Auto gefahren. (Akkusativobjekt)<br>
 Ich <b>habe</b> mich beeilt. (reflexiv)</div>
 <p><b>Regional unterschiedlich — beides gilt:</b> <code>stehen, sitzen, liegen</code>. Im Norden „ich <b>habe</b> gestanden“, im Süden und in Österreich „ich <b>bin</b> gestanden“. Beides ist korrekt.</p>`},
 
@@ -5914,6 +5919,8 @@ function startQuiz(list, host, opts){
   /* Startet eine Runde in einem anderen Wirt, muss die alte Karte weg — sie bliebe sonst
      samt Antwortknöpfen bedienbar stehen. */
   if(Q && !Q.done && Q.host && Q.host !== host) Q.host.innerHTML = "";
+  $$(".nurRunde").forEach(e=>e.classList.remove("nurRunde"));
+  if(opts.walk) host.classList.add("nurRunde");
   /* Wohin der Beenden-Knopf zurückführt: in die Ansicht, aus der die Runde gestartet ist. */
   const sichtbar = document.querySelector(".view.on");
   Q = {list, i:0, correct:0, base:list.length, host, onDone:opts.onDone, title:opts.title||"Übung",
@@ -5932,6 +5939,8 @@ function sitzungFortsetzen(host){
      erschiene woanders. */
   if(x.art === "test"){ PT.tab = "plan"; go("fortschritt"); host = $("#pSub") || host; }
   const sichtbar = document.querySelector(".view.on");
+  $$(".nurRunde").forEach(e=>e.classList.remove("nurRunde"));
+  if(x.walk) host.classList.add("nurRunde");
   Q = {list:x.list, i:x.i, correct:x.correct||0, base:x.base||x.list.length, host,
        title:x.title||"Übung", walk:!!x.walk, daily:!!x.daily, art:x.art||null, vorher:x.vorher||null,
        zurueck: sichtbar ? sichtbar.id.replace(/^v-/, "") : "heute"};
@@ -6002,21 +6011,6 @@ function renderQ(){
       body+
       '<div id="fbHost"></div>'+   /* wird in check() zur Live-Region, siehe dort */
     "</div>";
-  if(!Q.walk){
-    /* Ohne diesen Knopf gab es aus einer Runde außerhalb des Unterwegs-Modus nur ein
-       Neuladen heraus — und als Startbildschirm-App gibt es dafür keinen Knopf. Die
-       Tagesaufgabe kam auch beim Reiterwechsel nicht wieder, weil go() sie gesperrt hält,
-       solange eine Runde in ihrem Wirt läuft. */
-    const raus = qEl("#quizOut");
-    if(raus) raus.onclick = ()=>{
-      autoAus(); vorlesenStoppen();
-      const ziel = Q.zurueck || "heute";
-      sitzungSichern();
-      Q = null;
-      go(ziel);
-      toast("Runde gemerkt — du kannst später weitermachen");
-    };
-  }
   scrollBeiFrage = window.scrollY;
   if(Q.walk){
     const out = $("#walkOut");
@@ -6038,6 +6032,20 @@ function renderQ(){
       if(S.speak) vorlesen(sprechFrage(q));
       else vorlesenStoppen(); };
     if(S.speak) vorlesen(sprechFrage(q));
+  } else {
+    /* Ohne diesen Knopf gab es aus einer Runde außerhalb des Unterwegs-Modus nur ein
+       Neuladen heraus — und als Startbildschirm-App gibt es dafür keinen Knopf. Die
+       Tagesaufgabe kam auch beim Reiterwechsel nicht wieder, weil go() sie gesperrt hält,
+       solange eine Runde in ihrem Wirt läuft. */
+    const raus = qEl("#quizOut");
+    if(raus) raus.onclick = ()=>{
+      autoAus(); vorlesenStoppen();
+      const ziel = Q.zurueck || "heute";
+      sitzungSichern();
+      Q = null;
+      go(ziel);
+      toast("Runde gemerkt — du kannst später weitermachen");
+    };
   }
   if(q.type === "fill"){
     const inp = qEl("#fillIn");
@@ -8261,6 +8269,8 @@ function buildIndex(){
 }
 
 /* ---------- Suchfenster ---------- */
+/* Wohin der Fokus zurückgeht, wenn die Suche schließt. */
+let vorherFokus = null;
 function openSearch(){
   if(!INDEX) INDEX = buildIndex();
   let box = $("#srchWrap");
@@ -8296,7 +8306,6 @@ function openSearch(){
   drawSearch();
   setTimeout(()=>$("#srchIn").focus(), 30);
 }
-let vorherFokus = null;
 function closeSearch(){
   const b = $("#srchWrap"); if(b) b.classList.remove("on");
   const seite = document.querySelector(".wrap");

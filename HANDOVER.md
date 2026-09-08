@@ -58,6 +58,30 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Sauberkeitsdurchgang (07.09.2026).** Nach dem Haltbarkeitslauf einmal von außen
+draufgeschaut — Repo, Code, Bild.
+
+**Repo:** 22 Dateien, nichts Verirrtes, `node_modules/` ignoriert, `.vercelignore` deckt
+Prüfläufe und Projektnotizen ab. Kein `console.log`, kein `debugger`, kein TODO in der App.
+
+**Code:** Der Rundenkopf hatte nach den Umbauten zwei getrennte `if(Q.walk)`-Blöcke mit
+einer Zuweisung dazwischen — jetzt ein `if/else`. `vorherFokus` stand unter der Funktion,
+die es liest, und ist hochgezogen.
+
+**Eine echte Unsauberkeit war noch drin:** Unter der laufenden Unterwegs-Runde stand
+weiterhin die ganze Heute-Ansicht — Tagesaufgabe, Tagesbausteine, Freies Üben, samt einem
+„Loslegen“, das die Runde ersetzt hätte. Unterwegs zählt nur die Karte:
+`body.walk .view.on > *:not(.nurRunde){display:none}`, die Marke setzt `startQuiz()`.
+
+**Ton:** Zwei Ausrufezeichen in der eigenen Stimme der App entfernt (`satz-perfekt`
+„(Akkusativobjekt!)“ und die Wortkarte `tendenziös`). Die übrigen sieben stehen in zitierten
+Beispielsätzen — „Frag ihn, ob er kommt!“ in der Regel *über* das Ausrufezeichen — und
+bleiben.
+
+**Bild:** Sichtprüfung über alle sieben Reiter, hell und dunkel, 393×852 und 1280×900:
+kein Seitwärts-Scrollen, kein Element über dem Rand, keine Tippfläche unter 30 px, keine
+Seitenfehler.
+
 **Der Haltbarkeitslauf ist abgearbeitet (07.09.2026).** Die 42 bestätigten Funde des
 Belastungslaufs sind durch: sechs schwere, der Rest mittel und niedrig. Jeder Eintrag
 darunter beschreibt, was schiefging, wie es gemessen wurde und was jetzt dagegen steht.
