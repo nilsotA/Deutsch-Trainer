@@ -127,6 +127,10 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
 ### Lernlogik
 
 - Leitner, `BOXES = [1,3,7,16,35]` Tage. Auf Anhieb richtig → Fach 2 statt 1.
+  **Höchstens ein Aufstieg am Tag**: `grade()` merkt sich in `c.l` das Datum der letzten
+  Antwort und befördert nicht noch einmal, wenn dort schon heute steht. Ein Fehler zählt
+  dagegen immer. Ohne diese Sperre stieg eine Karte an einem Nachmittag von Fach 1 auf
+  Fach 3, weil Tagesaufgabe, Unterwegs-Runde und Fehlerrunde sich überschneiden.
 - **Ändert sich die richtige Antwort einer Karte**, kommt ihre ID mit dem Datum in
   `NEU_GELERNT`. `regelAenderungen()` setzt sie beim Laden und nach dem Import einmal auf
   Fach 1 und macht sie sofort fällig, wenn die letzte Antwort (Fälligkeit minus
@@ -163,11 +167,17 @@ Fach 1 zurücksetzt — wer dort steht, hat also mindestens drei richtige Antwor
 Genau das steht auch in der App, und `tests/lernen.js` rechnet es über `grade()` nach,
 statt es zu glauben.
 
-**Was sie nicht sagt:** nichts über den *Abstand* zwischen den Antworten. Der Lernstand
-hält je Karte nur `{b, d, s, w}` fest; das Datum der vorletzten Antwort fehlt. Über
-`unterwegsRunde()` kann eine noch nicht fällige Karte am selben Tag erneut drankommen und
-ein Fach aufsteigen. Wer die Zahl strenger machen will, braucht ein zusätzliches Feld im
-Kartenzustand — und muss dann Export und Import mitziehen.
+Seit dem 08.09.2026 hält der Kartenzustand mit `l` auch das **Datum der letzten Antwort**,
+und `grade()` befördert höchstens einmal am Tag. Fach 4 heißt damit: drei richtige Antworten
+an drei verschiedenen Tagen. Vorher war die Zahl aufgebläht — in einem Lauf über 40 Tage mit
+Tagesaufgabe, Unterwegs-Runde und Fehlerrunde standen 350 statt 288 Karten auf „sitzt
+sicher“. Geprüft in `tests/lernen.js`, Abschnitt D: keine Karte darf an einem Tag um mehr
+als ein Fach steigen.
+
+**Was die Zahl weiterhin nicht sagt:** nichts darüber, ob die Abstände dem Plan entsprachen.
+Eine Karte kann an drei aufeinanderfolgenden Tagen drankommen und trotzdem auf Fach 4
+stehen. Ältere Sicherungen haben kein `l`; dort schätzt `letzteAntwort()` es weiter aus
+Fälligkeit minus Fachintervall.
 
 ### Unterwegs-Modus (der Hauptanwendungsfall)
 

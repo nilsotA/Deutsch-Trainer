@@ -58,6 +58,39 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**„Sitzt sicher“ meint jetzt drei verschiedene Tage (08.09.2026).** `CLAUDE.md` benannte
+diese Schwäche selbst: Der Lernstand hielt je Karte nur `{b, d, s, w}`, das Datum der letzten
+Antwort fehlte, und über `unterwegsRunde()` konnte eine noch nicht fällige Karte am selben
+Tag erneut drankommen und ein Fach aufsteigen.
+
+Erst gemessen, ob das überhaupt vorkommt. Bei drei reinen Unterwegs-Runden am Tag: **nie** —
+die Runde meidet Doppelungen. Im realistischen Ablauf dagegen, Tagesaufgabe plus
+Unterwegs-Runde plus Fehlerrunde, an **jedem einzelnen** von 40 simulierten Tagen, 266-mal
+insgesamt. Und die Wirkung ist keine Kleinigkeit:
+
+| nach 40 Tagen | vorher | jetzt |
+|---|---|---|
+| „sitzt sicher“ | 350 | **288** |
+| grösster Aufstieg an einem Tag | Fach 1 → Fach 3 | Fach n → Fach n+1 |
+
+Die Zahl war also rund 22 % zu hoch, und zwar systematisch nach oben — genau die Richtung,
+in der sie nicht irren darf.
+
+`grade()` merkt sich jetzt in `c.l` das Datum der letzten Antwort und befördert nicht noch
+einmal, wenn dort schon heute steht. Ein **Fehler** zählt dagegen weiter jederzeit: Er ist
+Information, keine Aufblähung. Die Antworten selbst werden alle gezählt (`c.s`), nur der
+Aufstieg ist gedeckelt. `letzteAntwort()` nutzt `l` jetzt direkt statt es aus Fälligkeit
+minus Fachintervall zu schätzen — das macht auch `regelAenderungen()` genauer. Ältere
+Sicherungen ohne `l` laden unverändert und schätzen weiter.
+
+Der Satz im Fortschritt sagt es jetzt so: „mindestens 3 richtige Antworten nacheinander, an
+3 verschiedenen Tagen — mehr als einmal am Tag steigt eine Karte nicht auf.“
+
+`tests/lernen.js`, Abschnitt D, prüft beides: den Einzelfall (viermal am selben Tag richtig
+bringt ein Fach, nicht vier; ein Fehler am selben Tag setzt trotzdem zurück) und den ganzen
+Ablauf über 40 Tage — keine Karte darf an einem Tag um mehr als ein Fach steigen. Gegen die
+alte Fassung fällt das durch, mit „Fach 1 → Fach 3 an Tag 2“.
+
 **Der Textcheck findet jetzt 60 statt 52 Prozent (08.09.2026).** Erst gemessen, dann
 gebaut: Die zwölf Fehlersuchtexte tragen 86 markierte Fehler mit Korrektur — eine Probe, die
 sich nicht schönrechnen lässt. Der Textcheck fand davon **45 (52 %)**. Nach Fehlerklassen

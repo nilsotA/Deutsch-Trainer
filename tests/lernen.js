@@ -226,19 +226,38 @@ P.titel("D · Was sitzt");
   P.ok("Leerer Stand: alles steht noch aus", leer.neu === gesamt, leer.neu + "/" + gesamt);
   P.info("Bestand: " + gesamt + " Karten");
 
-  /* Die Aussage im Fortschritt lautet: Fach 4 heißt drei richtige Antworten nacheinander.
-     Genau das wird hier über grade() nachgerechnet, nicht angenommen. */
-  const nachDrei = daten(w, '(function(){const k=' + JSON.stringify(K[0]) +
-    ';for(let i=0;i<3;i++) grade(k,true);return S.cards[k].b;})()');
-  P.ok("Drei richtige Antworten führen auf Fach 4", nachDrei === 4, "Fach " + nachDrei);
+  /* Die Aussage im Fortschritt lautet: Fach 4 heißt drei richtige Antworten an drei
+     verschiedenen Tagen. Genau das wird hier über grade() nachgerechnet, nicht angenommen.
+     „An einem anderen Tag geantwortet“ heißt im Lernstand: das Feld l steht auf gestern. */
+  const anTagen = (k, n) => daten(w, '(function(){const k=' + JSON.stringify(k) +
+    ';for(let i=0;i<' + n + ';i++){ grade(k,true); if(S.cards[k]) S.cards[k].l = "2020-01-0"+(i+1); }' +
+    'return S.cards[k].b;})()');
+  const nachDrei = anTagen(K[0], 3);
+  P.ok("Drei richtige Antworten an drei Tagen führen auf Fach 4", nachDrei === 4, "Fach " + nachDrei);
   P.ok("Nach drei richtigen Antworten sitzt genau eine Karte",
     daten(w, "retention().sicher") === 1, daten(w, "retention().sicher"));
 
+  /* Und die Gegenprobe, die den Wert der Zahl ausmacht: dreimal am selben Tag richtig
+     bringt die Karte genau ein Fach weiter, nicht drei. */
+  const amStueck = daten(w, '(function(){const k=' + JSON.stringify(K[2]) +
+    ';for(let i=0;i<4;i++) grade(k,true);return {b:S.cards[k].b, s:S.cards[k].s};})()');
+  P.ok("Viermal am selben Tag richtig bringt trotzdem nur ein Fach",
+    amStueck.b === 2, "Fach " + amStueck.b);
+  P.ok("gezählt werden die Antworten trotzdem alle", amStueck.s === 4, amStueck.s);
+  P.ok("und die Karte sitzt dadurch nicht", daten(w, "retention().sicher") === 1,
+    daten(w, "retention().sicher"));
+
   const nachZwei = daten(w, '(function(){const k=' + JSON.stringify(K[1]) +
-    ';for(let i=0;i<2;i++) grade(k,true);return {b:S.cards[k].b,r:retention()};})()');
+    ';for(let i=0;i<2;i++){ grade(k,true); if(S.cards[k]) S.cards[k].l = "2020-02-0"+(i+1); }' +
+    'return {b:S.cards[k].b,r:retention()};})()');
   P.ok("Zwei richtige Antworten reichen nicht", nachZwei.b === 3 && nachZwei.r.sicher === 1,
     "Fach " + nachZwei.b + ", sicher " + nachZwei.r.sicher);
-  P.ok("Die halb gelernte Karte zählt als im Aufbau", nachZwei.r.aufbau === 1, nachZwei.r.aufbau);
+  P.ok("Die halb gelernte Karte zählt als im Aufbau", nachZwei.r.aufbau === 2, nachZwei.r.aufbau);
+
+  /* Ein Fehler zaehlt dagegen auch am selben Tag — er ist Information, keine Aufblaehung. */
+  const fehlerSelberTag = daten(w, '(function(){const k=' + JSON.stringify(K[3]) +
+    ';grade(k,true); grade(k,false); return S.cards[k].b;})()');
+  P.ok("Ein Fehler am selben Tag setzt trotzdem zurück", fehlerSelberTag === 1, "Fach " + fehlerSelberTag);
 
   /* Eine falsche Antwort setzt auf Fach 1 zurück — dann darf die Zahl nicht stehen bleiben */
   const nachFehler = daten(w, '(function(){grade(' + JSON.stringify(K[0]) + ',false);return retention();})()');
@@ -246,6 +265,50 @@ P.titel("D · Was sitzt");
 
   const summe = daten(w, "(function(){const r=retention();return r.sicher+r.aufbau+r.neu===r.gesamt;})()");
   P.ok("Die drei Zahlen ergeben den Bestand", summe);
+
+  {
+    /* Die Zusage der Zahl als Ganzes, an einem realistischen Tagesablauf geprüft:
+       Tagesaufgabe, dann eine Unterwegs-Runde, dann die Fehlerrunde. Dabei kommt dieselbe
+       Karte oft mehrfach an einem Tag dran — in 40 simulierten Tagen an jedem einzelnen.
+       Kein Fach darf höher steigen, als die Karte verschiedene Tage gesehen hat.
+       (Gemessen: 284 solcher Doppelungen führten vorher zu je einem zusätzlichen Aufstieg;
+       „sitzt sicher“ stand nach 40 Tagen bei 349 statt bei 287.) */
+    const w2 = boot(leererStand({ auto: false }));
+    const lauf = daten(w2, `(function(){
+      const minus = d => { const x = new Date(d + "T12:00:00"); x.setDate(x.getDate()-1); return x.toISOString().slice(0,10); };
+      let rnd = 99; const zufall = () => (rnd = (rnd*1103515245+12345) & 0x7fffffff) / 0x7fffffff;
+      let doppelt = 0; const sprung = [];
+      for (let t = 0; t < 40; t++) {
+        const heute = new Set();
+        /* Der Fachstand zu Tagesbeginn — daran misst sich, ob ein Tag mehr als einen
+           Aufstieg gebracht hat. Der Deckel bei Fach 5 verdeckt die Aufblaehung sonst. */
+        const vorher = {}; Object.keys(S.cards).forEach(k => vorher[k] = S.cards[k].b || 0);
+        const spiele = liste => liste.forEach(q => {
+          if (heute.has(q.key)) doppelt++;
+          heute.add(q.key);
+          grade(q.key, zufall() < 0.85, q.cat, q.rule);
+        });
+        spiele(buildDaily());
+        unterwegsRunde(document.querySelector("#walkHost")); if (Q) { spiele(Q.list); Q = null; }
+        if (schwacheSchluessel().length >= 6) { schwachRunde(document.querySelector("#walkHost")); if (Q) { spiele(Q.list); Q = null; } }
+        Object.keys(S.cards).forEach(k => {
+          /* Eine neue Karte startet bei Fach 1; „auf Anhieb richtig“ bringt sie auf 2 —
+             das ist ein Aufstieg, kein Sprung. */
+          const stand = vorher[k] === undefined ? 1 : vorher[k];
+          const auf = (S.cards[k].b || 0) - stand;
+          if (auf > 1 && sprung.length < 6) sprung.push("Tag " + (t+1) + " · " + k + ": " + (vorher[k] === undefined ? "neu" : "Fach " + vorher[k]) + " → Fach " + S.cards[k].b);
+          S.cards[k].d = minus(S.cards[k].d); if (S.cards[k].l) S.cards[k].l = minus(S.cards[k].l);
+        });
+        S.days = {}; S.last = null;
+      }
+      return { doppelt, sprung, sicher: retention().sicher, karten: Object.keys(S.cards).length };
+    })()`);
+    P.info("40 Tage mit Tagesaufgabe, Unterwegs-Runde und Fehlerrunde: " + lauf.doppelt +
+      " Karten kamen an einem Tag mehrfach dran · " + lauf.sicher + " von " + lauf.karten + " sitzen sicher");
+    P.ok("keine Karte steigt an einem Tag um mehr als ein Fach",
+      !lauf.sprung.length, lauf.sprung.join(" · "));
+    P.ok("die Doppelungen gibt es wirklich — sonst prüft der Lauf nichts", lauf.doppelt > 50, lauf.doppelt);
+  }
 
   /* Ein Schlüssel, den es nicht mehr gibt, darf die Zahl nicht aufblähen */
   const fremd = daten(w, '(function(){S.cards["k-gibtsnicht"]={b:5,d:"2030-01-01",s:9,w:0};' +
@@ -258,8 +321,12 @@ P.titel("E · Anzeige");
 {
   const w = boot(leererStand());
   const K = daten(w, "alleSchluessel()");
+  /* Drei richtige Antworten an drei verschiedenen Tagen — das Feld l wird dafür jeweils
+     auf einen früheren Tag gesetzt, so wie es nach einer echten Nacht aussähe. */
   daten(w, '(function(){' + K.slice(0, 5).map(k =>
-    'for(let i=0;i<3;i++) grade(' + JSON.stringify(k) + ',true);').join("") + 'return 1;})()');
+    'for(let i=0;i<3;i++){ grade(' + JSON.stringify(k) + ',true); ' +
+    'if(S.cards[' + JSON.stringify(k) + ']) S.cards[' + JSON.stringify(k) + '].l="2020-03-0"+(i+1); }').join("") +
+    'return 1;})()');
   const r = daten(w, "retention()");
   P.ok("Fünf Karten sitzen", r.sicher === 5, r.sicher);
 

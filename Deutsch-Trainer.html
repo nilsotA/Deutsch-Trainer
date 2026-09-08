@@ -5374,9 +5374,11 @@ function exportieren(){
 }
 let S = load();
 
-/* Der Lernstand hält das Datum der letzten Antwort nicht — es ergibt sich aus
-   Fälligkeit minus Fachintervall. */
+/* Das Datum der letzten Antwort steht seit dem 08.09.2026 als `l` im Kartenzustand.
+   Ältere Sicherungen haben es nicht — dort ergibt es sich näherungsweise aus Fälligkeit
+   minus Fachintervall. */
 function letzteAntwort(c){
+  if(c && c.l) return c.l;
   return c && c.d && c.b ? addDays(c.d, -BOXES[Math.min(c.b, BOXES.length)-1]) : null;
 }
 function regelAenderungen(){
@@ -5459,11 +5461,18 @@ function retention(){
 }
 function grade(id,ok,cat,rule){
   const c = cardOf(id);
-  // Auf Anhieb richtig? Dann überspringt die Karte das erste Fach.
-  if(ok){ c.b = Math.min((c.s ? c.b+1 : 2), BOXES.length); }
+  const heute = today();
+  /* Höchstens ein Aufstieg am Tag. „unterwegsRunde“ zieht in ihrer dritten Stufe auch
+     Karten, die noch nicht fällig sind — üben ist gut, aber zweimal am selben Tag richtig
+     zu antworten ist kein Beleg dafür, dass etwas über Tage hält. Ohne diese Sperre konnte
+     eine Karte an einem Nachmittag von Fach 1 auf Fach 4 klettern, und „sitzt sicher“ hätte
+     das mitgezählt. Ein Fehler zählt dagegen immer: er ist Information, keine Aufblähung. */
+  const schonHeute = c.l === heute;
+  if(ok){ if(!schonHeute) c.b = Math.min((c.s ? c.b+1 : 2), BOXES.length); }
   else  { c.b = 1; c.w = (c.w||0)+1; if(typeof logError==="function") logError(id, cat, rule); }
   c.s = (c.s||0)+1;
-  c.d = addDays(today(), BOXES[c.b-1]);
+  c.l = heute;
+  c.d = addDays(heute, BOXES[c.b-1]);
   S.cards[id] = c;
   if(cat){ const k = S.cat[cat] || {c:0,w:0}; ok ? k.c++ : k.w++; S.cat[cat]=k; }
   S.xp += ok ? 10 : 3;
@@ -6801,9 +6810,11 @@ function renderStats(sel){
         '<i style="width:'+anteil(ret.neu)+';background:var(--line2)"></i>'+
       "</div>"+
       '<p class="tiny muted" style="margin-top:9px">Sicher heißt Fach '+SICHER_AB+' oder '+BOXES.length+
-        ": mindestens "+(SICHER_AB-1)+" richtige Antworten nacheinander, nächste Wiederholung in "+
-        BOXES[SICHER_AB-1]+" oder "+BOXES[BOXES.length-1]+" Tagen. Eine falsche Antwort setzt eine Karte "+
-        "auf Fach 1 zurück — die Zahl fällt also wieder, wenn etwas nicht mehr sitzt.</p>"+
+        ": mindestens "+(SICHER_AB-1)+" richtige Antworten nacheinander, an "+(SICHER_AB-1)+
+        " verschiedenen Tagen — mehr als einmal am Tag steigt eine Karte nicht auf. "+
+        "Nächste Wiederholung in "+BOXES[SICHER_AB-1]+" oder "+BOXES[BOXES.length-1]+" Tagen. "+
+        "Eine falsche Antwort setzt eine Karte auf Fach 1 zurück — die Zahl fällt also wieder, "+
+        "wenn etwas nicht mehr sitzt.</p>"+
     "</div>"+
     '<div class="card">'+
       '<div class="eyebrow">Überblick</div>'+
