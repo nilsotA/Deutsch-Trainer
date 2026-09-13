@@ -302,6 +302,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Test misst das Falsche | Ein Test suchte „Speicher“ und fand das Wort woanders auf der Seite — grün, obwohl kaputt. Immer am konkreten Element prüfen, nicht an `body.textContent`. |
 | Patch landet nicht | Siehe Abschnitt 4. |
 | `\b` in Python | Siehe Abschnitt 4. |
+| Agent schreibt selbst | Ein Prüfagent, der nur melden sollte, hat seinen Vorschlag direkt in `Deutsch-Trainer.html` eingetragen — mit einer Zahl, die niemand nachgeprüft hatte. Nach einem Agentenlauf **nie `git add -A` ohne `git diff` zu lesen**; jede App-Änderung muss eine sein, die du selbst geschrieben hast. |
 | `\b` in JavaScript | Kennt nur `[A-Za-z0-9_]`. Vor „überlegen“ liegt zwischen ü und b eine Wortgrenze — ein Prüfmuster traf erst ab dem b, der Textcheck unterstrich „berlegen ob“. `analyse()` dehnt Treffer jetzt auf ganze Wörter; für die Musterlogik selbst `(?<![A-Za-zÄÖÜäöüß])` statt `\b` schreiben. |
 
 ## 7 · Wenn Nils etwas ergänzt haben will

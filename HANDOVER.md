@@ -58,6 +58,54 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fallkarten-Ablenker und die Einordnung regionaler Varianten (13.09.2026, dritte Runde).**
+
+Ausgangspunkt war eine Messung: `tests/fallform.js` konnte **50 der 173 Ablenker gar nicht
+beurteilen**, weil die richtige Option ein Substantiv trägt („des Vortrags“) oder die Form
+mehrdeutig ist („den“). Ausgerechnet bei den Genitivpräpositionen wurde also nicht geprüft.
+
+Zwei Antworten darauf, eine maschinelle und eine inhaltliche.
+
+**Maschinell:** Der Prüflauf vergleicht jetzt auch über den **Wortstamm** — gleiche
+Wortzahl, je ein Träger, Rest derselbe Stamm. Damit sind **150 statt 123** Fassungen
+entscheidbar. Kein neuer Fund darunter; „zwischen#1“ bleibt zu Recht mehrdeutig.
+
+**Inhaltlich:** Ein Durchgang mit neun Prüfern über die 50 offenen Ablenker, jeder Fund von
+zwei Gegnern angegriffen. **Neun Funde**, alle behoben, jeder vorher von mir selbst mit zwei
+verschieden formulierten Suchen nachgeprüft:
+
+- **Drei Ablenker waren nicht sicher falsch.** „unter“ fragte „Ich *schiebe* die Kiste unter
+  ___ Tisch“ — „schieben“ lässt auch eine Ortslesart zu, und die acht Geschwisterkarten
+  benutzen alle ein Zielverb aus dem eigenen Verbtest. „hängen — wo“ fragte „an ___ Haken“,
+  und „an den Haken“ ist ein gültiger Dativ Plural. „mittels einem Test“ führt der Duden als
+  seltene Nebenform.
+- **Sechs Karten ordneten eine Variante nicht ein** oder taten es uneinheitlich. Die
+  Fallkarte „trotz“ sagte „In Österreich“, die Übung d17 „landschaftlich und in der
+  Schweiz“ — zwei Landkarten für dieselbe Form. „während“ und „statt“ sagten gar nichts,
+  „wegen“ dagegen an fünf Stellen dasselbe. Dazu „zwecks“ und „seitens“ (Amtsdeutsch),
+  „gedenken“ und „zu (Richtung)“ („nach Aldi“).
+
+Nachgezogen wurden dabei auch die Übungen d17, d18 und m03 und die Regel `gram-genitiv` —
+alle vier Ebenen sagen jetzt dasselbe. Festgehalten in `tests/inhalt.js`, Abschnitt G: zu
+jeder Variante steht, welche Stellen sie einordnen und welche Wörter dort stehen müssen.
+
+**Eine Warnung fürs Verfahren.** Ein Agent des Laufs hat seinen Vorschlag *selbst in die
+Datei geschrieben*, obwohl der Auftrag „melden“ lautete — samt einer Zahl („447
+Korpusbelege“), die niemand nachgeprüft hatte. Gelandet ist davon nichts, weil ich vor dem
+Commit den Diff gelesen habe; in keinem eingecheckten Stand steht Agententext. Seitdem in
+CLAUDE.md unter „Fallen“: nach einem Agentenlauf nie `git add -A`, ohne den Diff zu lesen.
+
+Ein Gegenprüfer lag inhaltlich falsch, und das ist es wert, hier zu stehen: Er hielt den
+`mittels`-Fund für erfunden, weil das „selten“ im Duden-Eintrag am Genitiv hänge. Eine
+dritte Suche zeigte, dass der Eintrag **zwei** „selten“-Sätze enthält und beide recht
+haben. Gegenprüfung ersetzt das eigene Nachschlagen nicht.
+
+**Außerdem in dieser Runde:** `q12` (Uhrzeit) ist geklärt — der Duden lässt Punkt und
+Doppelpunkt zu, die App hatte die Zuordnung falsch herum; Regel, Übung und Spickzettel
+nachgezogen, `NEU_GELERNT` gesetzt. Und der dritte Prüfkorpus in `tests/suite.js` war
+in Wahrheit leer: Er verwarf jeden Fehlersuchtext, sobald eine Markierung mehrteilig
+ersetzt — was auf alle zwölf zutrifft. Jetzt satzweise gerettet, 55 Sätze.
+
 **Ablenkerlauf über alle 379 Übungen — abgeschlossen (13.09.2026).** 17 Prüfer, eine
 Frage: Ist jede als falsch markierte Option auch *sicher* falsch? 14 Funde, je zwei
 Gegenprüfer, 45 Agenten, kein Fehler. **1 hält, 2 geteilt, 11 fallen.** Die drei, die nicht
