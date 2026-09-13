@@ -64,9 +64,11 @@ Gegenprüfer, 45 Agenten, kein Fehler. **1 hält, 2 geteilt, 11 fallen.** Die dr
 durchfielen, hatte ich unabhängig schon behoben — die Gegenprüfer haben zwei davon prompt
 mit „steht so nicht mehr in der Datei“ widerlegt, was für die Gegenprüfung spricht: Sie
 liest den Bestand, nicht den Vorschlag. Der eine echt geteilte Fund (`q12`, Uhrzeit mit
-Punkt oder Doppelpunkt) steht als offener Punkt in `FUNDE-offen.md`, weil das
-Suchkontingent aufgebraucht war, bevor ich ihn selbst nachprüfen konnte. Eine Änderung auf
-Verdacht wäre schlimmer als die offene Frage.
+Punkt oder Doppelpunkt) ist inzwischen geklärt und behoben: Zwei eigene Suchen bestätigen
+den Quellen-Gegenprüfer — der Duden lässt Punkt und Doppelpunkt nebeneinander zu,
+festgelegt ist nur DIN 5008, und zwar auf den Doppelpunkt. Die alte Zuordnung stand also
+falsch herum. Regel, Übung, Spickzettel nachgezogen; die Übung hat jetzt die Bauform der
+anderen Variantenaufgaben und steht wegen der geänderten Antwort in `NEU_GELERNT`.
 
 **Textcheck und Aufgabenlogik nachgeschärft (13.09.2026, zweite Runde).** Fünf Änderungen,
 jede mit eigener Prüfung.

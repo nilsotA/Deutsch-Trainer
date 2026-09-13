@@ -30,30 +30,23 @@ mit „steht so nicht mehr in der Datei" widerlegt:
   Behoben durch „Dativ Singular".
 - **`k29`** (gefallen, weil behoben) — zwei richtige Antworten, siehe Commit 360c150.
 
-### Offen: `q12` — Uhrzeit mit Punkt oder Doppelpunkt
+### Erledigt: `q12` — Uhrzeit mit Punkt oder Doppelpunkt
 
-Der einzige Fund mit **echt geteiltem Urteil**, und er bleibt offen, weil das Suchkontingent
-der Sitzung aufgebraucht war (200 von 200), bevor ich ihn selbst nachprüfen konnte.
+Der einzige Fund mit echt geteiltem Urteil, und der Quellen-Gegenprüfer hatte recht. Zwei
+verschieden formulierte Suchen sagen dasselbe: **Der Duden lässt beide Trennzeichen zu.**
+Wörtlich aus den Suchergebnissen zum Duden-Sprachratgeber „Schreibung von Uhrzeitangaben":
+„Der Doppelpunkt kann aber auch durch einen Punkt ersetzt werden: 8.03 Uhr, und Sie können
+die Minutenangaben auch hochstellen." Und: „Die DIN 5008 schreibt für Zeitangaben den
+Doppelpunkt vor … Der Duden erlaubt auch den Punkt und sogar die Hochstellung."
 
-`q12` fragt „Welche Uhrzeitschreibung folgt dem Duden?" und wertet „um 8:30 Uhr" als falsch.
-Der Quellen-Gegenprüfer hält den Fund: Der Duden-Sprachratgeber führe den Doppelpunkt als
-Grundform und nenne den Punkt als Ersatzform — restriktiv sei nur DIN 5008, und zwar in die
-andere Richtung. Der Bestands-Gegenprüfer widerlegt ihn: Die Übung ordnet die Option selbst
-ein („Beide Schreibungen sind korrekt — die Frage ist nur, welcher Konvention du folgst"),
-Regel `n-uhrzeit` und Spickzettel sagen dasselbe, die Frage sei damit eine Zuordnungsfrage.
+Damit war die alte Zuordnung falsch herum: Der Punkt gehört nicht dem Duden und der
+Doppelpunkt nicht der DIN. Festgelegt ist nur DIN 5008, und zwar auf den Doppelpunkt.
 
-**Was zu prüfen ist:** Führt der Duden-Sprachratgeber „Schreibung von Uhrzeitangaben" den
-Doppelpunkt als Grundform oder den Punkt? Zwei verschieden formulierte Suchen, wie üblich.
-
-- Trägt der Punkt, bleibt alles, wie es ist.
-- Trägt der Doppelpunkt, darf die Frage die Schreibung nicht mehr „dem Duden" zuschreiben.
-  Die sparsamste Fassung ohne Änderung der richtigen Antwort wäre eine Zuordnungsfrage nach
-  dem Muster von `g33`: „Beides ist zulässig — der Punkt im Fließtext, der Doppelpunkt nach
-  DIN 5008" als richtige Antwort, daneben zwei Ausschlussbehauptungen. Das ändert allerdings
-  die richtige Antwort und braucht deshalb einen Eintrag in `NEU_GELERNT`.
-
-Bis dahin steht `q12` unverändert: Die App widerspricht sich an dieser Stelle nicht, und
-eine Änderung auf Verdacht wäre schlimmer als die offene Frage.
+Korrigiert wurden alle vier Ebenen — Regel `n-uhrzeit`, Übung `q12`, Spickzettel, und die
+Übung ist auf die Bauform der anderen Variantenaufgaben umgestellt („Beides ist zulässig"
+gegen zwei Ausschlussbehauptungen). Weil sich damit die richtige Antwort ändert, steht
+`q12` in `NEU_GELERNT` mit dem 13.09.2026: Wer die Karte vorher gelernt hat, bekommt sie
+einmal auf Fach 1 zurück und sofort wieder vorgelegt.
 
 Direkter Seitenabruf ist in dieser Umgebung gesperrt (duden.de, dwds.de, grammis,
 rechtschreibrat.com — alle). Es geht nur die Suche. Wo ein Wortlaut zitiert wird, stammt er

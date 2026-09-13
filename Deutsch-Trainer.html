@@ -4900,10 +4900,10 @@ Enden Zitat und Rahmensatz beide mit Frage- oder Ausrufezeichen, stehen beide: <
 <p><b>Einheitenzeichen bekommen keinen Punkt</b> und keine Pluralendung: 5 kg (nicht kg.), 3 m, 10 l.</p>`},
 
 {id:"n-uhrzeit",c:"zahlen",t:"Uhrzeit",b:`
-<p>Auch hier stehen zwei Konventionen nebeneinander:</p>
-<div class="ex"><b>Duden / Fließtext:</b> um 8.30 Uhr · um 14.15 Uhr<br>
-<b>DIN 5008:</b> 08:30 · 14:15</div>
-<p>Beides ist korrekt. Im Fließtext liest sich der Punkt natürlicher, in Listen, Formularen und überall dort, wo nach DIN geschrieben wird, der Doppelpunkt.</p>
+<p>Auch hier stehen zwei Konventionen nebeneinander — aber nicht so, wie man es oft liest:</p>
+<div class="ex"><b>Duden:</b> um 8.30 Uhr · um 8:30 Uhr — beide Trennzeichen sind zulässig<br>
+<b>DIN 5008:</b> 08:30 · 14:15 — nur der Doppelpunkt, immer zweistellig</div>
+<p>Der Punkt gehört nicht dem Duden und der Doppelpunkt nicht der DIN: Der Duden führt den Doppelpunkt und lässt den Punkt daneben zu (dazu die hochgestellte Minutenangabe). Festgelegt ist nur <b>DIN 5008</b> — sie verlangt den Doppelpunkt mit zwei Ziffern und gilt für Geschäftsbriefe, Formulare und Tabellen. Im Fließtext hast du also die Wahl; entscheide dich einmal und bleib dabei.</p>
 <p><b>Volle Stunden</b> brauchen im Fließtext keine Nullen: <b>um 8 Uhr</b>. Mit Nullen schreibst du sie, wo Zahlen untereinanderstehen und die Spalten stimmen sollen: 08.00 oder 08:00. Beides ist korrekt, die kurze Form ist im Fließtext die knappere.</p>
 <p><b>Zeitspannen:</b></p>
 <div class="ex"><span class="ok">von 9 bis 11 Uhr</span> · <span class="ok">9–11 Uhr</span> · <span class="nope">von 9–11 Uhr</span></div>
@@ -5125,9 +5125,11 @@ const EX_E = [
 {id:"q11",c:"zahlen",q:"Bekommen Einheitenzeichen einen Punkt?",o:["Nein: 5 kg, 3 m, 10 l","Ja: 5 kg., 3 m."],a:0,
  e:"Einheitenzeichen stehen ohne Punkt und ohne Pluralendung.",r:"n-einheiten"},
 
-{id:"q12",c:"zahlen",q:"Welche Uhrzeitschreibung folgt dem Duden?",o:[
- "um 8.30 Uhr","um 8:30 Uhr","um 8-30 Uhr"],a:0,
- e:"Der Duden schreibt die Uhrzeit mit <b>Punkt</b>, DIN 5008 mit <b>Doppelpunkt</b> (08:30). Beide Schreibungen sind korrekt — die Frage ist nur, welcher Konvention du folgst. Der Bindestrich kommt in keiner von beiden vor.",r:"n-uhrzeit"},
+{id:"q12",c:"zahlen",q:"Die Uhrzeit mit Punkt oder mit Doppelpunkt — was gilt?",o:[
+ "Beides ist zulässig — der Duden lässt beide Trennzeichen zu",
+ "Nur der Punkt ist zulässig",
+ "Nur der Doppelpunkt ist zulässig"],a:0,
+ e:"Der Duden führt den Doppelpunkt und lässt den Punkt daneben zu: <b>8:30 Uhr</b> wie <b>8.30 Uhr</b>, dazu die hochgestellte Minutenangabe. Festgelegt ist nur <b>DIN 5008</b> — sie verlangt den Doppelpunkt mit zwei Ziffern (08:30) und gilt für Geschäftsbriefe, Formulare und Tabellen. Ein Bindestrich kommt in keiner von beiden vor.",r:"n-uhrzeit"},
 
 {id:"q13",c:"zahlen",q:"Welche Form für eine volle Stunde ist im Fließtext die knappere?",o:["um 8 Uhr","um 8.00 Uhr"],a:0,
  e:"Im Fließtext genügt die Stunde. Die Nullen schreibst du, wo Zahlen untereinanderstehen und die Spalten stimmen sollen: 08.00 oder 08:00. Beide Formen sind korrekt.",r:"n-uhrzeit"},
@@ -5257,7 +5259,8 @@ const NEU_GELERNT = {
   k20: "2026-09-04",  // Komma bei erweiterten Infinitivgruppen: seit dem Regelwerk 2024 Pflicht, vorher frei
   p25: "2026-09-04",  // Semikolon-Übung: der Ablenker „Komma“ war ebenfalls richtig, jetzt „Komma oder Semikolon“
   p21: "2026-09-04",  // Schrägstrich bei Wortgruppen: Leerzeichen sind DIN-Konvention, nicht Regel; jetzt „Beides geht“
-  g05: "2026-09-05"   // morgen früh: „morgen Früh“ ist ebenfalls zulässig, richtige Antwort jetzt „Beides ist zulässig“
+  g05: "2026-09-05",  // morgen früh: „morgen Früh“ ist ebenfalls zulässig, richtige Antwort jetzt „Beides ist zulässig“
+  q12: "2026-09-13"   // Uhrzeit: der Duden lässt Punkt und Doppelpunkt zu, der Ablenker „8:30“ war ebenfalls richtig
 };
 const SRS_RUNDE = 20;                // höchstens so viele Karten je Wiederholungsrunde
 const TAGESZIEL = 12;                // so viele Karten am Tag zählen als erledigt
@@ -8631,7 +8634,7 @@ function cheatHTML(){
   '<tr><th>Ziffer/Wort</th><td>Konvention: eins bis zwölf ausschreiben, ab 13 Ziffern · in aller Regel Ziffern bei Maß, Geld, Zeit (vor abgekürzter Einheit Pflicht: 5 kg, nicht „fünf kg“) · Satzanfang ausschreiben</td></tr>'+
   '<tr><th>Gliederung</th><td>1.250.000 oder 1 250 000 · Dezimalkomma: 1,5 · nicht gegliedert: Jahres- und Postleitzahlen</td></tr>'+
   '<tr><th>Leerzeichen</th><td>20 % · 5 kg · 12,50 € · 12 °C · § 5 · S. 12 · Nr. 7 — überall eines. Ohne: 90°, 20%ig · durchgekoppelt: 5-kg-Gewicht, 20-prozentig</td></tr>'+
-  '<tr><th>Uhrzeit</th><td>Fließtext: um 8.30 Uhr · Tabelle: 08:30 · volle Stunde ohne Nullen: um 8 Uhr</td></tr>'+
+  '<tr><th>Uhrzeit</th><td>Punkt und Doppelpunkt sind beide zulässig: um 8.30 Uhr · um 8:30 Uhr · nur DIN 5008 legt fest: 08:30, zweistellig · volle Stunde ohne Nullen: um 8 Uhr</td></tr>'+
   '<tr><th>Datum</th><td>am 5. Mai 2026 · 05.05.2026 · „am Montag, dem/den 5. Mai,“ — beides zulässig · <b>nicht</b> „in 1995“</td></tr>'+
   '<tr><th>Abkürzung mit Punkt</th><td>z. B. · d. h. · u. a. · ca. · vgl. · ggf. · S. · Abb. — mehrteilig <b>mit Leerzeichen</b></td></tr>'+
   '<tr><th>ohne Punkt</th><td>EU · Pkw · GmbH · kg · m · km/h · °C</td></tr>'+
