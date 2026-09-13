@@ -321,6 +321,14 @@ const EINORDNUNG = [
     stellen: [["Fallkarte", "statt / anstatt"]] },
   { was: "wegen", muss: [/umgangssprachlich/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "n05"], ["Übung", "v03"], ["Übung", "m01"]] },
+  /* gedenken → Duden-Zweifelsfälle: „standardsprachlich noch nicht anerkannt“, aber in
+     Zeitungen verbreitet. zu (Richtung) → „nach Aldi“ ist Ruhrgebiet, nördliches
+     Rheinland, Ostfriesland; Duden 2005: auf Norddeutschland beschränkt, nicht
+     standardsprachlich. Beides am 13.09.2026 mit je zwei Suchen belegt. */
+  { was: "gedenken", muss: [/nicht anerkannt|nicht standardsprachlich/, /Zeitungen|Presse/],
+    stellen: [["Fallkarte", "gedenken"]] },
+  { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /nicht standardsprachlich|norddeutsch/],
+    stellen: [["Fallkarte", "zu (Richtung)"]] },
 ];
 const textVon = (art, id) => {
   if (art === "Fallkarte") { const c = CASEREF.find(x => x.w === id); return c ? String(c.n || "") : null; }
