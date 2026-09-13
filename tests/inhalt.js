@@ -190,4 +190,38 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 P.ok("Ziffer und ausgeschriebene Zahl klingen nicht gleich", !zifferStumm.length,
   zifferStumm.join(" · "));
 
+/* ---------- E · Sammelantworten ---------- */
+P.titel("E · Sammelantworten");
+/* Fehlerklasse „zwei richtige Antworten“: Lautet die richtige Antwort „Beides ist
+   zulässig“, dann erklärt die Aufgabe beide vorgeführten Formen für korrekt. Steht eine
+   davon als blanker Ablenker daneben, ist dieser Ablenker nicht falsch — wer ihn antippt,
+   hat nichts Falsches gewählt und bekommt trotzdem „falsch“ angezeigt (CLAUDE.md,
+   Abschnitt 3, Grundsatz 2). Der Bestand löst das sonst einheitlich: Die Ablenker
+   behaupten Ausschließlichkeit („Nur klein: recht haben“) und sind damit sicher falsch,
+   weil eben nicht nur die eine Form gilt. */
+const SAMMEL = /^\s*(beides|beide|alle\s+(drei|beide)|sowohl)\b/i;
+const AUSSCHLUSS = /\b(nur|ausschließlich|einzig|ausschliesslich)\b|\b(ist|sind|wäre)\s+falsch\b|nicht\s+(zulässig|erlaubt|korrekt|richtig)|darf\s+nicht\b/i;
+const sammelPruefen = liste => {
+  const schief = [];
+  liste.filter(i => i.t !== "fill" && Array.isArray(i.o) && SAMMEL.test(String(i.o[i.a] || "")))
+    .forEach(i => i.o.forEach((o, k) => {
+      if (k === i.a || AUSSCHLUSS.test(String(o))) return;
+      schief.push(i.id + ": „" + o + "“ neben „" + i.o[i.a] + "“");
+    }));
+  return schief;
+};
+const sammelSchief = sammelPruefen(ALL);
+const sammelZahl = ALL.filter(i => Array.isArray(i.o) && SAMMEL.test(String(i.o[i.a] || ""))).length;
+P.ok("Sammelantworten gefunden (" + sammelZahl + ")", sammelZahl >= 10, sammelZahl);
+P.ok("Kein Ablenker neben einer Sammelantwort ist selbst richtig", !sammelSchief.length,
+  sammelSchief.join(" · "));
+/* Positivprobe: Genau die Bauform, die hier verboten ist — sonst misst der Abschnitt
+   nichts, falls sich SAMMEL oder AUSSCHLUSS an der Wirklichkeit vorbeientwickeln. */
+P.ok("Die Sammelantwort-Prüfung schlägt beim blanken Ablenker an",
+  sammelPruefen([{ id: "probe", a: 0, o: ["Beides ist zulässig", "Er ist imstande zu helfen."] }]).length === 1,
+  "Positivprobe blieb stumm");
+P.ok("und lässt die Ausschlussbehauptung stehen",
+  sammelPruefen([{ id: "probe", a: 0, o: ["Beides ist zulässig", "Nur: imstande"] }]).length === 0,
+  "Positivprobe meldet zu viel");
+
 P.abschluss();
