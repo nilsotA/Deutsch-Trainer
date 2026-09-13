@@ -7934,7 +7934,7 @@ const CHECKS = [
    Erwähnungen mit („der dass-Satz“, „die Konjunktion dass.“, „so dass; im Text“).
    Gemessen an 2343 Stellen, die die App selbst als richtig zeigt: vorher 7 Fehlalarme
    und 1 Treffer in den Fehlersuchtexten, jetzt 1 Fehlalarm und 5 Treffer. */
-{id:"y01",sev:"pruef",re:/\b(?!(?:[Oo]hne|[Ss]tatt|[Aa]nstatt|[Aa]ußer|[Uu]nd|[Oo]der|[Ss]o|[Ss]ondern|[Aa]ber|[Dd]enn|[Dd]amit|[Dd]azu|[Dd]avon|[Dd]adurch|[Aa]ls|[Nn]ur|[Aa]uch|[Ss]elbst|[Gg]erade|[Nn]icht|[Bb]esonders|[Ii]nsbesondere|[Aa]llem|[Kk]aum|[Ee]infach|[Ee]rst|[Nn]och|[Kk]urz|[Gg]leich|[Ll]ange|[Ss]ofort|[Jj]e|[Ii]mmer|[Vv]orausgesetzt|[Aa]ngenommen|[Aa]usgenommen|[Gg]eschweige|[Ee]gal|[Gg]leichgültig|[Gg]leichviel|[Uu]nabhängig|[Dd]arüber|[Dd]arauf|[Dd]anach|[Dd]ahingehend|[Uu]ngeachtet|[Nn]achdem|[Gg]anz|[Nn]ach|[Vv]or|[Dd]ort|[Kk]onjunktion|[Ww]ort|[Ww]örtchen)\b)[A-ZÄÖÜa-zäöüß]{2,}\s+(?:weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem|ob)(?=\s+[A-Za-zÄÖÜäöüß])/g,
+{id:"y01",sev:"pruef",re:/(?<![A-Za-zÄÖÜäöüß])(?!(?:[Oo]hne|[Ss]tatt|[Aa]nstatt|[Aa]ußer|[Uu]nd|[Oo]der|[Ss]o|[Ss]ondern|[Aa]ber|[Dd]enn|[Dd]amit|[Dd]azu|[Dd]avon|[Dd]adurch|[Aa]ls|[Nn]ur|[Aa]uch|[Ss]elbst|[Gg]erade|[Nn]icht|[Bb]esonders|[Ii]nsbesondere|[Aa]llem|[Kk]aum|[Ee]infach|[Ee]rst|[Nn]och|[Kk]urz|[Gg]leich|[Ll]ange|[Ss]ofort|[Jj]e|[Ii]mmer|[Vv]orausgesetzt|[Aa]ngenommen|[Aa]usgenommen|[Gg]eschweige|[Ee]gal|[Gg]leichgültig|[Gg]leichviel|[Uu]nabhängig|[Dd]arüber|[Dd]arauf|[Dd]anach|[Dd]ahingehend|[Uu]ngeachtet|[Nn]achdem|[Gg]anz|[Nn]ach|[Vv]or|[Dd]ort|[Kk]onjunktion|[Ww]ort|[Ww]örtchen)(?![A-Za-zÄÖÜäöüß]))[A-ZÄÖÜa-zäöüß]{2,}\s+(?:weil|dass|obwohl|sodass|falls|sobald|nachdem|bevor|solange|wobei|indem|ob)(?=\s+[A-Za-zÄÖÜäöüß])/g,
  t:"Komma vor dem Nebensatz?",k:"Vor einer unterordnenden Konjunktion steht meist ein Komma — auch vor <b>ob</b>: „Ich wollte fragen<b>,</b> ob …“. Bei Fügungen wie „nur weil“, „auch wenn“, „kurz bevor“, „so dass“ steht es vor dem ersten Wort der Fügung, außer du betonst das erste Wort als Teil des Hauptsatzes („Ich komme nur, wenn du kommst“). Hier scheint keines zu stehen. Prüf die Stelle.",r:"komma-nebensatz"},
 /* Steht der Nebensatz vorn, fehlt das Komma leicht vor dem Hauptsatz: „Wenn ihr Fragen
    habt meldet euch.“ Der Satz beginnt mit der Konjunktion und läuft ohne jedes Trennzeichen
@@ -8099,10 +8099,22 @@ const FUELL = ["eigentlich","irgendwie","quasi","sozusagen","letztendlich","schl
 
 function analyse(txt){
   const finds = [];
+  /* Die Markierung muss auf ganzen Wörtern sitzen. JavaScripts \b kennt keine Umlaute:
+     In „überlegen“ liegt zwischen ü und b eine Wortgrenze, also traf das Kommamuster erst
+     ab dem b und der Textcheck unterstrich „berlegen ob“. Statt jedes Muster einzeln
+     nachzuziehen, wird der Treffer hier auf die Wortgrenzen gedehnt — das kann nur mehr
+     markieren, nie etwas Neues melden. Geprüft in tests/suite.js. */
+  const WORTZ = /[\p{L}\p{N}]/u;
+  const dehne = (a, b) => {
+    while(a > 0 && WORTZ.test(txt[a-1]) && WORTZ.test(txt[a])) a--;
+    while(b < txt.length && WORTZ.test(txt[b]) && WORTZ.test(txt[b-1])) b++;
+    return [a, b];
+  };
   CHECKS_ALL.forEach(c=>{
     for(const m of txt.matchAll(c.re)){
       if(m.index === undefined) continue;
-      finds.push({c, s:m.index, e:m.index+m[0].length, txt:m[0]});
+      const [s, e] = dehne(m.index, m.index + m[0].length);
+      finds.push({c, s, e, txt:txt.slice(s, e)});
     }
   });
   finds.sort((a,b)=>a.s-b.s);

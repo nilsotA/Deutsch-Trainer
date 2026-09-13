@@ -347,6 +347,48 @@ KORREKTUR.forEach(t => {
 });
 P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauffindbar.join(" · "));
 
+/* Fehlerklasse „Markierung mitten im Wort“: JavaScripts \b kennt keine Umlaute. Vor
+   „überlegen“ liegt zwischen ü und b eine Wortgrenze, also begann der Treffer des
+   Kommamusters erst beim b — der Textcheck unterstrich „berlegen ob“. analyse() dehnt
+   Treffer seitdem auf ganze Wörter. Geprüft wird am echten Bestand, nicht an
+   Kunstsätzen: 2200 Texte voller Umlaute sind die schärfere Probe. */
+{
+  const wortProben = [];
+  ALL.forEach(i => {
+    wortProben.push(strip(i.q));
+    (i.o || []).forEach(o => wortProben.push(strip(o)));
+    if (i.e) wortProben.push(strip(i.e));
+  });
+  RA.forEach(r => wortProben.push(strip(r.b)));
+  KORREKTUR.forEach(t => wortProben.push(String(t.txt)));
+  WORDS.forEach(x => { if (x.ex) wortProben.push(strip(x.ex)); });
+  /* und drei Sätze, die genau die Stelle treffen, an der es schiefging */
+  const gift = ["Man sollte mal überlegen ob wir das aufteilen.",
+    "Wir müssen überprüfen dass alles stimmt.",
+    "Die Übung hört auf sobald der Pfiff kommt."];
+  const WZ = /[\p{L}\p{N}]/u;
+  const mitten = [];
+  let gepruefteTreffer = 0;
+  wortProben.concat(gift).forEach(t => {
+    if (!t || t.length < 4) return;
+    const finds = daten(w, 'analyse(' + JSON.stringify(t) + ').finds.map(f=>({id:f.c.id,s:f.s,e:f.e}))');
+    finds.forEach(f => {
+      gepruefteTreffer++;
+      const links = f.s > 0 && WZ.test(t[f.s - 1]) && WZ.test(t[f.s]);
+      const rechts = f.e < t.length && WZ.test(t[f.e]) && WZ.test(t[f.e - 1]);
+      if (links || rechts) mitten.push(f.id + ": „" + t.slice(Math.max(0, f.s - 6), f.e + 6) +
+        "“ markiert „" + t.slice(f.s, f.e) + "“");
+    });
+  });
+  P.ok("Die Wortgrenzenprüfung sieht überhaupt Treffer (" + gepruefteTreffer + ")",
+    gepruefteTreffer >= 200, gepruefteTreffer);
+  P.ok("Der drei Giftsätze wegen greift ein Kommamuster", daten(w,
+    'analyse("Man sollte mal überlegen ob wir das aufteilen.").finds.some(f=>f.c.id==="y01")') === true,
+    "Positivprobe blieb stumm");
+  P.ok("Keine Markierung beginnt oder endet mitten im Wort", !mitten.length,
+    mitten.slice(0, 5).join(" · ") + (mitten.length > 5 ? " …(" + mitten.length + ")" : ""));
+}
+
 {
   /* Wie viel von dem, was die App selbst als Fehler markiert, findet ihr eigener Textcheck?
      Die zwölf Fehlersuchtexte tragen 86 markierte Stellen mit Korrektur — eine Probe, die
