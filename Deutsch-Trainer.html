@@ -1273,7 +1273,7 @@ const EX_B = [
 {id:"s06",c:"stil",q:"Welcher Satz liest sich besser?",o:[
  "Die Teilnehmenden füllten den Fragebogen aus.",
  "Der Fragebogen wurde von den Teilnehmenden ausgefüllt."],a:0,
- e:"Das <b>Aktiv</b> nennt den Handelnden und ist kürzer. Passiv ist nur sinnvoll, wenn der Handelnde unwichtig oder unbekannt ist.",r:"stil-passiv"},
+ e:"Für sich genommen liest sich das <b>Aktiv</b> besser: Es nennt den Handelnden und ist kürzer. Passiv ist deshalb kein Fehler — es ist am Platz, wenn der Handelnde unwichtig, unbekannt oder allgemein ist, und auch dann, wenn das Betroffene das Thema des Absatzes ist und vorn stehen soll.",r:"stil-passiv"},
 
 {id:"s07",c:"stil",q:"Was ist das Problem an „Es gibt viele Studien, die zeigen, dass …“?",o:[
  "„Es gibt“ ist eine Leerformel",
@@ -3109,7 +3109,7 @@ const RULES_FORM = [
 <div class="ex"><span class="ok">Sehr geehrte Frau Weber,</span> · <span class="nope">Sehr geehrte Frau Prof. Dr. Weber,</span> (Titelkette)<br>
 <span class="ok">Hallo Frau Weber,</span> · <span class="nope">Hallo Frau Prof. Weber,</span> (Register-Bruch)</div>
 <p>Bei mehreren Personen: <code>Sehr geehrte Frau Weber, sehr geehrter Herr Lang,</code> — je eigene Zeile, ranghöchste oder direkt angesprochene Person zuerst.</p>
-<p>Nach dem Anredekomma geht es <b>klein</b> weiter.</p>`},
+<p>Nach dem Anredekomma geht es <b>klein</b> weiter. Groß bleiben Nomen, Namen und Sie/Ihre; beim Duzen darfst du auch du/dein großschreiben.</p>`},
 
 {id:"form-grussformel",c:"form",t:"Grußformeln und ihre Wirkung",b:`
 <ul>
@@ -3712,9 +3712,10 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 <ul>
 <li>Verben der <b>Ortsveränderung</b>: gehen, fahren, laufen, fliegen, kommen, reisen, springen</li>
 <li>Verben der <b>Zustandsveränderung</b>: aufwachen, einschlafen, wachsen, sterben, aufstehen, werden</li>
+<li><b>Ereignisse ohne Ortswechsel</b>: geschehen, passieren, gelingen, misslingen, begegnen, folgen — „Das <b>ist</b> gestern passiert.“ · „Der Wurf <b>ist</b> mir gelungen.“ · „Ich <b>bin</b> ihm in der Halle begegnet.“</li>
 <li>Die Sonderfälle <b>sein</b> und <b>bleiben</b>: „Ich bin da gewesen.“ · „Er ist geblieben.“</li>
 </ul>
-<p><b>Mit „haben“</b> stehen alle anderen — vor allem alle Verben mit Akkusativobjekt und alle reflexiven Verben.</p>
+<p><b>Mit „haben“</b> stehen die übrigen Verben — vor allem alle Verben mit Akkusativobjekt und alle reflexiven Verben.</p>
 <div class="ex">Ich <b>bin</b> nach Köln gefahren. (Ortswechsel)<br>
 Ich <b>habe</b> das Auto gefahren. (Akkusativobjekt)<br>
 Ich <b>habe</b> mich beeilt. (reflexiv)</div>
@@ -7891,10 +7892,14 @@ const CHECKS = [
  k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce) steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Regelwerk und Duden erlauben den Apostroph, wenn er in einem Namen wie einem Ladennamen die Grundform verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“). Bei Auslassungen wie „geht’s“, „gibt’s“, „wenn’s“ ist der Apostroph freigestellt — mit und ohne ist richtig.",r:"recht-apostroph"},
 {id:"x20",sev:"pruef",re:/\b(?:[Rr]uf|[Rr]ufe|[Rr]ufst|[Rr]uft|[Rr]ief|[Rr]iefst|[Rr]ieft|[Rr]iefen)(?:\s+(?:du|er|sie|es|wir|Sie))?\s+(?:dir|mir|ihm|ihnen|Ihnen)\b(?=[^.!?]*\ban\b)|\b(?:dir|mir|ihm|ihnen|Ihnen)\s+angerufen\b/g,
  t:"anrufen + Akkusativ",k:"Überregional verlangt „anrufen“ den Akkusativ: <b>Ich rufe dich an.</b> Der Dativ ist südwestdeutsch und schweizerisch verbreitet — außerhalb fällt er auf, falsch ist er nicht. Bei <i>zurufen</i> und <i>nachrufen</i> steht der Dativ überall richtig. „uns“ und „euch“ sind in beiden Fällen gleich — dort sieht man es der Form nicht an.",r:"gram-akkverben"},
-{id:"x21",sev:"hart",re:/\binteressiert\s+(mir|dir|ihm|uns|euch)\b/g,t:"interessieren + Akkusativ",
- k:"„interessieren“ verlangt den Akkusativ: <b>Das interessiert mich.</b>",r:"gram-akkverben"},
-{id:"x22",sev:"pruef",re:/\bkostet\s+(mir|dir|ihm|uns|euch)\b/g,t:"kosten + Akkusativ?",
- k:"Bei Preis- und Zeitangaben steht standardsprachlich der Akkusativ: <b>Das kostet mich viel Zeit.</b> In der Bedeutung „jemanden um etwas bringen“ lässt der Duden auch den Dativ zu: „Das kostete ihm das Leben.“ Mit dem Akkusativ liegst du immer richtig.",r:"gram-akkverben"},
+/* „uns“ und „euch“ dürfen hier nicht stehen: Sie lauten im Dativ und im Akkusativ gleich,
+   „Das interessiert uns sehr“ ist also einwandfrei — wurde aber als „Klarer Fehler“
+   gemeldet, mit einem Hinweis, der den Akkusativ verlangt, der schon dasteht. x20 nimmt
+   die beiden Formen aus demselben Grund längst heraus. */
+{id:"x21",sev:"hart",re:/\binteressiert\s+(mir|dir|ihm|ihnen|Ihnen)\b/g,t:"interessieren + Akkusativ",
+ k:"„interessieren“ verlangt den Akkusativ: <b>Das interessiert mich.</b> „uns“ und „euch“ lauten im Dativ und im Akkusativ gleich — dort sieht man es der Form nicht an.",r:"gram-akkverben"},
+{id:"x22",sev:"pruef",re:/\bkostet\s+(mir|dir|ihm)\b/g,t:"kosten + Akkusativ?",
+ k:"Bei Preis- und Zeitangaben steht standardsprachlich der Akkusativ: <b>Das kostet mich viel Zeit.</b> In der Bedeutung „jemanden um etwas bringen“ lässt der Duden auch den Dativ zu: „Das kostete ihm das Leben.“ Mit dem Akkusativ liegst du immer richtig. „uns“ und „euch“ lauten in beiden Fällen gleich und werden deshalb nicht gemeldet.",r:"gram-akkverben"},
 {id:"x23",sev:"hart",re:/\b(dem|den|des|einem|einen|eines|diesem|diesen|jedem|jeden)\s+(Kollege|Junge|Kunde|Zeuge|Experte|Athlet|Praktikant|Student|Mensch|Pädagoge|Journalist|Kandidat|Präsident|Assistent|Patient|Klient|Polizist|Soldat|Fotograf|Philosoph|Architekt|Bauer|Prinz|Held|Löwe|Affe|Hase|Herr)\b(?![ne])/g,
  t:"n-Deklination",k:"Diese Substantive bekommen in allen Fällen außer dem Nominativ Singular ein <b>-en</b>: „mit dem Kolleg<b>en</b>“, „für den Mensch<b>en</b>“.",r:"gram-ndekl"},
 {id:"x24",sev:"pruef",re:/\b[Ii]n\s+(?:19|20)\d{2}\b(?!\s*(?:[A-ZÄÖÜ]|m\b|km\b|cm\b|mm\b|kg\b|g\b|l\b|ml\b|€))/g,t:"„in 2026“",

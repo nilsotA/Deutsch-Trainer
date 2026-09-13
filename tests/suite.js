@@ -132,7 +132,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
 
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
-const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev}))");
+const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev,r:c.r||null}))");
 const kaputt = muster.filter(c => /[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(c.re));
 P.ok("Prüfmuster ohne Steuerzeichen (" + muster.length + ")", !kaputt.length, kaputt.map(c => c.id).join(","));
 
@@ -362,6 +362,30 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
    der Text doppelt so lang wird. Gemessen an einem zeilenweise notierten Trainingsplan
    ohne Satzpunkte: 6000 Wörter brauchten 544 ms, in denen a04 nicht eine Fundstelle
    liefern kann (ohne Punkt trifft es nie). Mit Obergrenze sind es 24 ms. */
+{
+  /* Fehlerklasse „ein Fallmuster meldet eine Form, die den geforderten Fall selbst tragen
+     kann“: x21 verlangte den Akkusativ und meldete dabei „uns“ und „euch“ — Formen, die im
+     Dativ und im Akkusativ gleich lauten. „Das interessiert uns sehr“ stand damit als
+     „Klarer Fehler“ da, und der eingeblendete Hinweis forderte genau die Form, die schon
+     dastand. Die App wusste es an anderer Stelle selbst: x20 nimmt die beiden Formen aus
+     demselben Grund ausdrücklich heraus.
+
+     Geprüft wird gegen tests/formen.js — dieselbe unabhängig aufgestellte Formentabelle,
+     mit der auch die Fallkarten geprüft werden. Wer ein Muster baut, das den Akkusativ
+     verlangt, darf darin keine Form aufzählen, die selbst Akkusativ sein kann. */
+  const { FORM } = require("./formen");
+  const akkMuster = muster.filter(c => c.r === "gram-akkverben");
+  const durchlaessig = [];
+  akkMuster.forEach(c => {
+    (String(c.re).match(/[a-zäöüßA-ZÄÖÜ]+/g) || []).forEach(wort => {
+      const faelle = FORM[wort.toLowerCase()];
+      if (faelle && faelle.includes("A")) durchlaessig.push(c.id + ": „" + wort + "“");
+    });
+  });
+  P.ok("Kein Akkusativmuster zählt eine Form auf, die selbst Akkusativ sein kann (" +
+    akkMuster.length + " Muster)", !durchlaessig.length, [...new Set(durchlaessig)].join(" · "));
+}
+
 const offeneWdh = muster.filter(c => /\[\^[^\]]*\]\{\d+,\}/.test(c.re));
 P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer verneinten Klasse",
   !offeneWdh.length, offeneWdh.map(c => c.id + ": " + c.re).join(" · "));
