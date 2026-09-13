@@ -393,8 +393,12 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   /* Wie viel von dem, was die App selbst als Fehler markiert, findet ihr eigener Textcheck?
      Die zwölf Fehlersuchtexte tragen 86 markierte Stellen mit Korrektur — eine Probe, die
      man nicht schönrechnen kann. Gemessen: 45 von 86 (52 %), nach dem Ausbau der
-     Kommamuster 52 von 86 (60 %). Die Schranke ist eine Untergrenze gegen Rückfall, kein
-     Ziel: Der Textcheck soll auf Verdachtsstellen zeigen, nicht alles finden. */
+     Kommamuster 52, nachdem analyse() die Treffer auf ganze Wörter dehnt 54, mit den
+     Mustern zu „Mal“, „im Großen und Ganzen“ und dem erweiterten „leid“ 58 von 86 (67 %).
+     Die Schranke ist eine Untergrenze gegen Rückfall, kein Ziel: Der Textcheck soll auf
+     Verdachtsstellen zeigen, nicht alles finden. Wer ein Muster zu Recht enger fasst,
+     darf sie unterschreiten — dann hier den neuen Stand eintragen, nicht die Zahl
+     schönrechnen. */
   const quote = daten(w, `(function(){
     let stellen = 0, gefunden = 0;
     KORREKTUR.forEach(t => {
@@ -408,8 +412,8 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   })()`);
   P.info("Der Textcheck findet " + quote.gefunden + " von " + quote.stellen + " markierten Fehlern (" +
     Math.round(quote.gefunden / quote.stellen * 100) + " %)");
-  P.ok("Der Textcheck findet mindestens die Hälfte der markierten Fehler",
-    quote.gefunden >= 50, quote.gefunden + " von " + quote.stellen);
+  P.ok("Der Textcheck findet mindestens 54 der markierten Fehler",
+    quote.gefunden >= 54, quote.gefunden + " von " + quote.stellen);
 
   /* Und die Gegenrichtung, härter als die Vorlage oben: Die korrigierten Fassungen
      derselben Texte sind zusammenhängende, richtige Prosa. Die drei Kommamuster dürfen

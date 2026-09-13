@@ -975,6 +975,16 @@ const EX_A = [
 {id:"g30",c:"gross",q:"Korrekt ist …",o:["Er hat es des Öfteren erwähnt.","Er hat es des öfteren erwähnt."],a:0,
  e:"Substantiviertes Adjektiv im Genitiv → groß: <b>des Öfteren</b>.",r:"gross-subst"},
 
+{id:"g31",c:"gross",q:"„Beim nächsten ___ machen wir es anders.“",o:["Mal","mal"],a:0,
+ e:"Artikel und Adjektiv davor („beim nächsten“) — da steht das Substantiv <b>das Mal</b>, also groß. Dieselbe Probe trägt „das erste Mal“, „jedes Mal“, „dieses Mal“.",r:"gross-mal"},
+{id:"g32",c:"gross",q:"„Sag ___, hast du Freitag Zeit?“",o:["mal","Mal"],a:0,
+ e:"Hier ist <b>mal</b> die Kurzform von „einmal“ und macht die Frage weicher — kein Substantiv, also klein. Kein Artikel und kein Adjektiv davor.",r:"gross-mal"},
+{id:"g33",c:"gross",q:"Was gilt für „Ich habe dir das schon hundertmal gesagt“?",o:[
+ "Beides ist zulässig — getrennt und groß, wenn beide Teile betont sind",
+ "Nur zusammen und klein: hundertmal",
+ "Nur getrennt und groß: hundert Mal"],a:0,
+ e:"Zahlwort und „mal“ sind zu einem Adverb verschmolzen: <b>hundertmal</b>. Betonst du beide Teile, ist <b>hundert Mal</b> ebenso richtig. Gleiches gilt für „ein paarmal“ und „ein paar Mal“.",r:"gross-mal"},
+
 /* Infinitivgruppen nach dem Regelwerk von 2024 */
 {id:"j01",c:"komma",q:"Welche Variante ist richtig?",o:[
  "Sie hat vor, im Sommer nach Köln zu ziehen.",
@@ -1675,6 +1685,20 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <div class="ex">Sie spricht gut Deutsch. → sie beherrscht die Sprache (was?)<br>Die Trainerin hat deutsch gesprochen. → in deutscher Sprache, nicht englisch (wie?)</div>
 <p>Faustregel: Frage „Was?“ → groß. Frage „Wie?“ → klein. Mit <i>können</i> und nach <i>auf</i> oder <i>in</i> in der Regel groß: <code>Er kann gut Deutsch · auf Deutsch · in Deutsch abgefasst</code>. Folgt ein Substantiv oder Partizip, steht dort das Adjektiv und bleibt klein: <code>auf deutsch besetztem Gebiet</code></p>
 <p><b>Groß im Eigennamen:</b> <code>Deutsche Sporthochschule Köln, Deutscher Fußball-Bund, Deutsche Bahn</code> — hier gehört das Adjektiv zum Namen. Sonst klein: <code>die deutsche Nationalmannschaft</code></p>`},
+
+{id:"gross-mal",c:"gross",t:"Mal oder mal?",b:`
+<p><b>Groß</b>, wenn das Substantiv <code>das Mal</code> gemeint ist — die Zähleinheit für Ereignisse. Erkennbar an Artikel, Zahlwort oder Adjektiv davor:</p>
+<div class="ex">das erste Mal · zum ersten Mal · beim nächsten Mal · jedes Mal · dieses Mal · das eine Mal · ein einziges Mal · manches Mal · ein ums andere Mal</div>
+<p><b>Klein</b>, wenn <code>mal</code> die Kurzform von „einmal“ ist — das Wörtchen, das einen Satz weicher macht:</p>
+<div class="ex">Komm mal her. · Sag mal, hast du Freitag Zeit? · Das lässt sich nun mal nicht ändern.</div>
+<p>Klein auch beim Rechnen, wo „mal“ für das Zeichen × steht:</p>
+<div class="ex">Zwei mal drei ist sechs.</div>
+<p><b>Zusammen und klein</b>, wenn Zahlwort und „mal“ zu einem Adverb verschmolzen sind:</p>
+<div class="ex">einmal · zweimal · dreimal · hundertmal · keinmal · manchmal · diesmal · vielmals</div>
+<p class="tiny muted">Sind dabei beide Teile besonders betont, ist auch getrennt und groß zulässig: „Ich habe dir schon <b>hundert Mal</b> gesagt …“. Ebenso <code>ein paarmal</code> und <code>ein paar Mal</code>.</p>
+<p class="tiny muted"><b>jedesmal</b> war die Schreibung vor 1996; heute führen Duden und Regelwerk nur <b>jedes Mal</b>. Zusammen bleibt nur die Ableitung <code>jedesmalig</code>.</p>
+<p class="tiny muted"><b>erst mal</b> (= zunächst) und <b>erstmals</b> (= zum ersten Mal) sind zwei verschiedene Wörter. Für „zunächst“ sind <code>erst mal</code> und <code>erstmal</code> beide zulässig, der Duden empfiehlt die getrennte Form. <code>erst einmal</code> steht immer getrennt.</p>
+<p class="tiny muted">Quelle: Duden, Sprachratgeber „Groß- oder Kleinschreibung von <i>mal</i>“.</p>`},
 
 /* ---------- GETRENNT / ZUSAMMEN ---------- */
 {id:"getrennt-praep",c:"getrennt",t:"Präposition + Substantiv",b:`
@@ -7914,8 +7938,14 @@ const CHECKS = [
  k:"Der Plural bekommt keinen Apostroph: <b>Fotos, Pizzas, DVDs</b>. Im Genitiv von Namen auf s-Laut steht einer (Andreas’ Buch); bei Auslassungen ist er freigestellt (geht’s oder gehts). Zulässig ist er außerdem in Namen wie „Andrea’s Blumenladen“ und vor -sch: „Newton’sche Gesetze“.",r:"recht-apostroph"},
 {id:"x27",sev:"hart",re:/\b(?:[Vv]orgestern|[Gg]estern|[Hh]eute|[Mm]orgen|[Üü]bermorgen)\s+(?:morgen|vormittag|mittag|nachmittag|abend|nacht)\b/g,t:"Tageszeit nach heute/gestern/morgen",
  k:"Tageszeiten sind hier Substantive und stehen groß: <b>heute Morgen, gestern Abend, morgen Nachmittag, heute Nacht</b>. Klein bleibt nur das Adverb „früh“: heute früh.",r:"gross-zeit"},
-{id:"x28",sev:"hart",re:/\btut\s+(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)\s+(?:sehr\s+|wirklich\s+|ehrlich\s+|aufrichtig\s+|furchtbar\s+|echt\s+)?Leid\b/g,t:"leid tun klein",
+{id:"x28",sev:"hart",re:/\btut\s+(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)\s+(?:(?:sehr|wirklich|ehrlich|aufrichtig|furchtbar|echt|unglaublich|schrecklich|zutiefst|so|besonders)\s+){0,3}Leid\b/g,t:"leid tun klein",
  k:"Seit 2006 klein: <b>Es tut mir leid.</b> Die Schreibung „Leid tun“ galt nur von 1996 bis 2006.",r:"gross-wendung"},
+{id:"x36",sev:"hart",re:/(?<![A-Za-zÄÖÜäöüß])[Ii]m\s+(?:großen\s+und\s+[Gg]anzen|Großen\s+und\s+ganzen)(?![A-Za-zÄÖÜäöüß])/g,t:"im Großen und Ganzen",
+ k:"Beide Wörter sind substantiviert und stehen groß: <b>im Großen und Ganzen</b>. Klein war die Schreibung vor 1996.",r:"gross-subst"},
+{id:"x37",sev:"hart",re:/(?<![A-Za-zÄÖÜäöüß])(?:[Bb]eim|[Zz]um|[Vv]om|[Dd]as|[Dd]ieses|[Jj]edes|[Mm]anches|[Ee]in)\s+(?:nächste[ns]?|letzte[ns]?|erste[ns]?|zweite[ns]?|dritte[ns]?|vorige[ns]?|andere[ns]?|selbe[ns]?|gleiche[ns]?|einzige[ns]?)\s+mal(?![A-Za-zÄÖÜäöüß])/g,t:"Mal großschreiben",
+ k:"Mit Artikel und Adjektiv davor steht das Substantiv <b>das Mal</b>: beim nächsten <b>Mal</b>, das erste <b>Mal</b>. Klein bleibt nur das Wörtchen „mal“ als Kurzform von „einmal“ („Komm mal her“).",r:"gross-mal"},
+{id:"x38",sev:"hart",re:/(?<![A-Za-zÄÖÜäöüß])(?:[Jj]edes|[Dd]ieses)\s*mal(?![A-Za-zÄÖÜäöüß])/g,t:"jedes Mal getrennt und groß",
+ k:"Seit 1996 nur <b>jedes Mal</b> und <b>dieses Mal</b> — getrennt, mit großem M. Zusammen bleibt das Adverb <b>diesmal</b> und die Ableitung <b>jedesmalig</b>.",r:"gross-mal"},
 {id:"x29",sev:"hart",re:/\bin\s+bezug\s+auf\b/g,t:"in Bezug auf",
  k:"„Bezug“ ist ein Substantiv und bleibt groß: <b>in Bezug auf</b>. „in bezug auf“ war die Schreibung vor 1996.",r:"gross-wendung"},
 {id:"x30",sev:"hart",re:/\b(?:[Ww]ieviel|zuviel|irgend\s+(?:etwas|jemand|wann|wo))\b/g,t:"Seit der Reform getrennt oder zusammen",
@@ -8145,7 +8175,7 @@ function renderCheck(){
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
       "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
-      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa die Hälfte</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
+      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa zwei Drittel</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
       '<div class="spread" style="margin-bottom:10px"><div class="eyebrow" style="margin:0">Dein Text</div>'+
@@ -8524,6 +8554,9 @@ function cheatHTML(){
   'Tageszeiten: heute Morgen, gestern Abend · feste Wendungen: außer Acht lassen, in Kauf nehmen, in Bezug auf, nach Hause · Sprachen als Substantiv: auf Deutsch, Deutsch können</td></tr>'+
   '<tr><th>Klein</th><td>zum einen … zum anderen · ein bisschen · die meisten · am besten · etwas anderes, alles andere · Es tut mir leid · Mir ist angst · montags, abends</td></tr>'+
   '<tr><th>Beides</th><td>recht/Recht haben · vor Kurzem/kurzem · seit Langem/langem · ohne Weiteres/weiteres · morgen früh/Früh (Duden: früh) · zu Hause/zuhause · zurate/zu Rate ziehen · sie spricht deutsch/Deutsch (wie? / was?)</td></tr>'+
+  '<tr><th>Mal / mal</th><td><b>groß</b> als Substantiv, erkennbar an Artikel oder Adjektiv davor: das erste Mal, beim nächsten Mal, jedes Mal, dieses Mal · '+
+  '<b>klein</b> als Kurzform von „einmal“: komm mal her, sag mal — und beim Rechnen: zwei mal drei · '+
+  '<b>zusammen</b> im verschmolzenen Adverb: einmal, dreimal, hundertmal, manchmal, diesmal (betont auch getrennt: hundert Mal)</td></tr>'+
   '</tbody></table></section>'+
 
   '<section class="ch-sec"><h2>7 · Die Klassiker</h2>'+

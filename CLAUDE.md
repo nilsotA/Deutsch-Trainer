@@ -58,14 +58,14 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 376 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 379 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
-| `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 117 Regeln | `{id, c, t, b}` — `b` ist HTML |
+| `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 118 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 86 Fehler | `{txt, errs:[{w, nth?, ok, k, r, c}]}` |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 97 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 100 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
@@ -153,7 +153,7 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (696 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (699 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
