@@ -285,4 +285,17 @@ const stumpf = SCHARF.filter(([id, re]) => {
 }).map(([id]) => id);
 P.ok("Die geschärften Fragen sind geschärft geblieben", !stumpf.length, stumpf.join(","));
 
+/* Die Rückmeldung zeigt bei einer Tippaufgabe „Richtig wäre: “ + accept[0]. Wer die Liste
+   erweitert, darf die Musterantwort nicht ans Ende schieben — Nils läse sonst plötzlich
+   „Richtig wäre: dieser“, wo er „einer“ gelernt hat. */
+const ERST = { m20: "einer", n01: "dem", n02: "den", n03: "den", n04: "der", n06: "der",
+  n07: "den", n11: "dich", n12: "mir", n14: "mich", n15: "dem", n23: "mir", n25: "mir" };
+const verrutscht = Object.keys(ERST).filter(id => {
+  const i = ALL.find(x => x.id === id);
+  return !i || !Array.isArray(i.a) || norm(i.a[0]) !== norm(ERST[id]);
+});
+P.ok("Die Musterantwort steht bei jeder erweiterten Tippaufgabe vorn", !verrutscht.length,
+  verrutscht.join(","));
+
+
 P.abschluss();

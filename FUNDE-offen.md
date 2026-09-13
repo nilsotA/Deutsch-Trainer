@@ -14,6 +14,47 @@ Ergebnis: **13 halten, 36 fallen.** Alle dreizehn sind eingebaut; jede Quellenau
 ich vor dem Einbau mit zwei eigenen, verschieden formulierten Suchen nachgeprüft, weil
 vielen Gegenprüfern das Suchkontingent ausgegangen war.
 
+**Vierter Lauf (13.09., nachmittags): die Ablenker.** 17 Prüfer über alle 379 Übungen mit
+der einen teuren Frage — ist jede als falsch markierte Option auch *sicher* falsch? **14
+Funde**, wieder je zwei Gegner. Ergebnis: **1 hält, 2 geteilt, 11 fallen** (45 Agenten,
+kein Fehler).
+
+Die drei, die nicht durchgefallen sind, waren beim Eintreffen der Urteile schon behoben —
+ich hatte sie unabhängig geprüft und geändert, und die Gegenprüfer haben zwei davon prompt
+mit „steht so nicht mehr in der Datei" widerlegt:
+
+- **`m20`** (hält, beide) — die Tippaufgabe „Innerhalb ___ Woche" nahm nur „einer",
+  obwohl „der Woche" derselbe Genitiv ist. Behoben, samt neun weiteren Tippaufgaben
+  derselben Bauart.
+- **`n15`** (geteilt) — „(maskulin, Dativ)" erfüllt auch der Dativ Plural „den Kollegen".
+  Behoben durch „Dativ Singular".
+- **`k29`** (gefallen, weil behoben) — zwei richtige Antworten, siehe Commit 360c150.
+
+### Offen: `q12` — Uhrzeit mit Punkt oder Doppelpunkt
+
+Der einzige Fund mit **echt geteiltem Urteil**, und er bleibt offen, weil das Suchkontingent
+der Sitzung aufgebraucht war (200 von 200), bevor ich ihn selbst nachprüfen konnte.
+
+`q12` fragt „Welche Uhrzeitschreibung folgt dem Duden?" und wertet „um 8:30 Uhr" als falsch.
+Der Quellen-Gegenprüfer hält den Fund: Der Duden-Sprachratgeber führe den Doppelpunkt als
+Grundform und nenne den Punkt als Ersatzform — restriktiv sei nur DIN 5008, und zwar in die
+andere Richtung. Der Bestands-Gegenprüfer widerlegt ihn: Die Übung ordnet die Option selbst
+ein („Beide Schreibungen sind korrekt — die Frage ist nur, welcher Konvention du folgst"),
+Regel `n-uhrzeit` und Spickzettel sagen dasselbe, die Frage sei damit eine Zuordnungsfrage.
+
+**Was zu prüfen ist:** Führt der Duden-Sprachratgeber „Schreibung von Uhrzeitangaben" den
+Doppelpunkt als Grundform oder den Punkt? Zwei verschieden formulierte Suchen, wie üblich.
+
+- Trägt der Punkt, bleibt alles, wie es ist.
+- Trägt der Doppelpunkt, darf die Frage die Schreibung nicht mehr „dem Duden" zuschreiben.
+  Die sparsamste Fassung ohne Änderung der richtigen Antwort wäre eine Zuordnungsfrage nach
+  dem Muster von `g33`: „Beides ist zulässig — der Punkt im Fließtext, der Doppelpunkt nach
+  DIN 5008" als richtige Antwort, daneben zwei Ausschlussbehauptungen. Das ändert allerdings
+  die richtige Antwort und braucht deshalb einen Eintrag in `NEU_GELERNT`.
+
+Bis dahin steht `q12` unverändert: Die App widerspricht sich an dieser Stelle nicht, und
+eine Änderung auf Verdacht wäre schlimmer als die offene Frage.
+
 Direkter Seitenabruf ist in dieser Umgebung gesperrt (duden.de, dwds.de, grammis,
 rechtschreibrat.com — alle). Es geht nur die Suche. Wo ein Wortlaut zitiert wird, stammt er
 aus Suchergebnissen, nicht von der Originalseite. Das steht so auch in den Prüfregeln, und

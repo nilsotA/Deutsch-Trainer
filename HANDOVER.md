@@ -58,6 +58,16 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ablenkerlauf über alle 379 Übungen — abgeschlossen (13.09.2026).** 17 Prüfer, eine
+Frage: Ist jede als falsch markierte Option auch *sicher* falsch? 14 Funde, je zwei
+Gegenprüfer, 45 Agenten, kein Fehler. **1 hält, 2 geteilt, 11 fallen.** Die drei, die nicht
+durchfielen, hatte ich unabhängig schon behoben — die Gegenprüfer haben zwei davon prompt
+mit „steht so nicht mehr in der Datei“ widerlegt, was für die Gegenprüfung spricht: Sie
+liest den Bestand, nicht den Vorschlag. Der eine echt geteilte Fund (`q12`, Uhrzeit mit
+Punkt oder Doppelpunkt) steht als offener Punkt in `FUNDE-offen.md`, weil das
+Suchkontingent aufgebraucht war, bevor ich ihn selbst nachprüfen konnte. Eine Änderung auf
+Verdacht wäre schlimmer als die offene Frage.
+
 **Textcheck und Aufgabenlogik nachgeschärft (13.09.2026, zweite Runde).** Fünf Änderungen,
 jede mit eigener Prüfung.
 
