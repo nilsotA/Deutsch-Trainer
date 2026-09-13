@@ -119,7 +119,12 @@ entscheidbar ist. Drei Fallen bleiben deine:
   ihn als ungeprüft. Enthält keine Lesart den Fall, gilt er als sicher falsch.
 
 Die Tabelle kennt Artikel, Pronomen in Objektform, Verschmelzungen (im, ans) und die
-artikellosen Adjektivformen der Karten in starker Beugung. Persönliche Pronomen, die auch
+artikellosen Adjektivformen der Karten in starker Beugung. Trägt die Option ein Substantiv
+(„des Vortrags“ gegen „dem Vortrag“), greift der **Stammvergleich**: gleiche Wortzahl, je
+ein Träger, und die übrigen Wörter mit demselben Stamm — dann ist der Fall des Ablenkers
+bestimmbar. Das entscheidet 150 der 173 Fassungen; ohne ihn waren es 123, weil 31 Karten
+ein Substantiv in der richtigen Option tragen. Der Vergleich sagt nur, welchen **Fall** der
+Ablenker hat — nicht, ob dieser Fall irgendwo als Variante gilt. Persönliche Pronomen, die auch
 Subjekt sein können (er, sie, es, wir, ihr), stehen in der zweiten Tabelle `PRONOMEN`, die
 nur `fallform.js` verwendet — dort steht das Wort selbst in der Lücke. `inhalt.js` prüft
 Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.

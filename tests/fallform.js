@@ -79,23 +79,55 @@ P.ok("Die richtige Form passt zum Fall der Karte (" + gedeckt + " geprüft)",
    Mehrdeutige Formen — „den“ ist Akkusativ Singular und Dativ Plural — bleiben ungeprüft,
    wenn der verlangte Fall unter ihren Lesarten ist. Enthält keine Lesart den Fall („sie“
    für einen Dativ), ist der Ablenker sicher falsch und zählt als entschieden. */
-const wortzahl = t => String(t).toLowerCase().replace(/[^a-zäöüß ]/g, " ").split(/\s+/).filter(Boolean).length;
-const reineForm = t => wortzahl(t) > 0 && traeger(t).length === wortzahl(t);
+const worte = t => String(t).toLowerCase().replace(/[^a-zäöüß ]/g, " ").split(/\s+/).filter(Boolean);
+const reineForm = t => worte(t).length > 0 && traeger(t).length === worte(t).length;
+/* Zweiter Weg, wenn die Optionen ein Substantiv tragen: „des Vortrags“ gegen „dem Vortrag“
+   sind keine reinen Fallformen, aber dieselbe Wortgruppe in verschiedenen Fällen — zu
+   erkennen daran, dass beide Seiten gleich viele Wörter haben, je genau einen Träger, und
+   die übrigen Wörter denselben Stamm. Der Stammvergleich schneidet die Beugungsendungen
+   ab und lässt gelten, wenn eine Form Anfang der anderen ist. Das entscheidet 28 weitere
+   Ablenker, vor allem bei den Genitivpräpositionen und Genitivverben; ohne ihn blieben
+   31 Karten ungeprüft, weil ihre richtige Option ein Substantiv enthält.
+   Der Vergleich sagt nur, welchen FALL der Ablenker hat — nicht, ob dieser Fall
+   irgendwo als Variante gilt. Das bleibt Handarbeit. */
+const stamm = x => x.replace(/(es|en|er|em|n|e|s)$/, "");
+const gleicherStamm = (a, b) => {
+  const [k, l] = [stamm(a), stamm(b)];
+  return k === l || k.startsWith(l) || l.startsWith(k);
+};
+const gleicheGruppe = (richtig, o) => {
+  const rw = worte(richtig), ow = worte(o);
+  if (rw.length !== ow.length) return null;
+  const rt = rw.filter(y => FORMEN[y]), ot = ow.filter(y => FORMEN[y]);
+  if (rt.length !== 1 || ot.length !== 1) return null;
+  const rRest = rw.filter(y => !FORMEN[y]), oRest = ow.filter(y => !FORMEN[y]);
+  if (rRest.length !== oRest.length) return null;
+  if (!rRest.every((y, k) => gleicherStamm(y, oRest[k]))) return null;
+  return ot[0];
+};
 let entschieden = 0;
 const zweitRichtig = [];
 ALLE.forEach(x => {
   const soll = sollFall(x);
-  if (!soll || !reineForm(x.richtig)) return;
+  if (!soll) return;
   x.falsch.forEach(o => {
-    const tr = traeger(o);
-    if (!reineForm(o) || tr.length !== 1) return;
-    const lesarten = FORMEN[tr[0]];
+    let traegerWort = null;
+    if (reineForm(x.richtig) && reineForm(o) && traeger(o).length === 1) traegerWort = traeger(o)[0];
+    else traegerWort = gleicheGruppe(x.richtig, o);
+    if (!traegerWort) return;
+    const lesarten = FORMEN[traegerWort];
     if (lesarten.includes(soll) && lesarten.length !== 1) return;
     entschieden++;
     if (lesarten.length === 1 && lesarten[0] === soll)
       zweitRichtig.push(x.e.w + "#" + (x.i + 1) + ": „" + o + "“ ist auch " + NAME[soll]);
   });
 });
+/* Positivprobe: Der Stammvergleich muss den gebauten Fall auch wirklich erkennen. */
+P.ok("Der Stammvergleich erkennt dieselbe Wortgruppe in zwei Fällen",
+  gleicheGruppe("des Vortrags", "dem Vortrag") === "dem" &&
+  gleicheGruppe("der Verletzung", "die Verletzung") === "die" &&
+  gleicheGruppe("zum Bäcker", "nach dem Bäcker") === null,
+  "Positivprobe blieb stumm");
 P.ok("Kein Ablenker steht eindeutig im verlangten Fall (" + entschieden + " entscheidbar)",
   !zweitRichtig.length, zweitRichtig.join(" · "));
 
