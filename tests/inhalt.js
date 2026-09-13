@@ -224,4 +224,65 @@ P.ok("und lässt die Ausschlussbehauptung stehen",
   sammelPruefen([{ id: "probe", a: 0, o: ["Beides ist zulässig", "Nur: imstande"] }]).length === 0,
   "Positivprobe meldet zu viel");
 
+/* ---------- F · Tippaufgaben ---------- */
+P.titel("F · Tippaufgaben");
+/* Fehlerklasse „richtige Eingabe wird als Fehler gewertet“: Eine Tippaufgabe prüft den
+   Kasus, akzeptierte aber nur eine einzige Form. „Innerhalb ___ Woche“ nahm nur „einer“ —
+   „der Woche“ und „dieser Woche“ sind derselbe Genitiv. Wer richtig denkt und die andere
+   Form tippt, bekommt einen Fehler in den Lernstand geschrieben und lernt daraus etwas
+   Falsches. Umgekehrt darf die Liste nicht so weit werden, dass der falsche Kasus
+   durchgeht — deshalb steht zu jeder Aufgabe beides: was durchgehen muss und was nicht.
+   Die Tabelle ist die festgehaltene Durchsicht aller 44 Tippaufgaben vom 13.09.2026. */
+const TIPP = [
+  { id: "m20", muss: ["einer", "der", "dieser"], nicht: ["die", "eine", "den"] },
+  { id: "n01", muss: ["dem", "meinem", "einem"], nicht: ["das", "den", "der"] },
+  { id: "n02", muss: ["den", "einen", "meinen"], nicht: ["dem", "der", "des"] },
+  { id: "n03", muss: ["den", "einen", "meinen"], nicht: ["dem", "der"] },
+  { id: "n04", muss: ["der", "einer", "meiner"], nicht: ["die", "eine", "den"] },
+  { id: "n06", muss: ["der", "einer"], nicht: ["die", "eine"] },
+  { id: "n07", muss: ["den", "einen", "unseren"], nicht: ["dem", "des"] },
+  { id: "n11", muss: ["dich", "ihn", "sie", "euch"], nicht: ["dir", "ihm", "ihnen"] },
+  { id: "n12", muss: ["mir", "ihm", "ihr", "uns"], nicht: ["mich", "ihn", "dich"] },
+  { id: "n14", muss: ["mich", "dich", "ihn", "uns"], nicht: ["mir", "dir", "ihm"] },
+  { id: "n15", muss: ["dem"], nicht: ["den", "der", "des"] },
+  { id: "n23", muss: ["mir"], nicht: ["mich", "dir"] },
+  { id: "n25", muss: ["mir"], nicht: ["mich", "dir"] },
+  { id: "r21", muss: ["darf"], nicht: ["dürfen", "darfst"] },
+  { id: "n20", muss: ["unter"], nicht: ["auf", "über"] },
+];
+const norm = t => String(t).toLowerCase().trim()
+  .replace(/[„“”"'‚‘’]/g, "").replace(/[.,;:!?]+$/, "").replace(/\s+/g, " ");
+const nimmt = (auf, wort) => auf.some(a => norm(a) === norm(wort));
+const zuEng = [], zuWeit = [], fehlt = [];
+TIPP.forEach(t => {
+  const i = ALL.find(x => x.id === t.id);
+  if (!i || i.t !== "fill") { fehlt.push(t.id); return; }
+  t.muss.forEach(x => { if (!nimmt(i.a, x)) zuEng.push(t.id + ": „" + x + "“ wird abgelehnt"); });
+  t.nicht.forEach(x => { if (nimmt(i.a, x)) zuWeit.push(t.id + ": „" + x + "“ geht durch"); });
+});
+P.ok("Alle geprüften Tippaufgaben gibt es noch (" + TIPP.length + ")", !fehlt.length, fehlt.join(","));
+P.ok("Keine richtige Eingabe wird abgelehnt", !zuEng.length, zuEng.join(" · "));
+P.ok("Kein falscher Kasus geht durch", !zuWeit.length, zuWeit.join(" · "));
+/* Positivproben: Beide Richtungen müssen anschlagen können. */
+P.ok("Die Tippprüfung erkennt eine zu enge Liste",
+  !nimmt(["einer"], "der") && nimmt(["einer", "der"], "der"), "Positivprobe blieb stumm");
+P.ok("und eine zu weite", nimmt(["den", "dem"], "dem"), "Positivprobe blieb stumm");
+
+/* Die Frage einer Tippaufgabe darf keine zweite Lesart offenlassen, die eine andere Form
+   verlangt: n15 sagte nur „(maskulin, Dativ)“, was auch der Dativ Plural „den Kollegen“
+   erfüllt; n23 und n25 fragten nach einem Pronomen, ohne „Reflexiv“ zu nennen. Die
+   geschärften Fassungen werden hier festgehalten, damit sie nicht zurückfallen. */
+const SCHARF = [
+  ["n15", /Dativ Singular/],
+  ["n20", /bei einem Umstand/],
+  ["n23", /Reflexivpronomen/],
+  ["n25", /Reflexivpronomen/],
+  ["r21", /von „dürfen“/],
+];
+const stumpf = SCHARF.filter(([id, re]) => {
+  const i = ALL.find(x => x.id === id);
+  return !i || !re.test(String(i.q));
+}).map(([id]) => id);
+P.ok("Die geschärften Fragen sind geschärft geblieben", !stumpf.length, stumpf.join(","));
+
 P.abschluss();

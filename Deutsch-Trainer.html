@@ -1145,7 +1145,7 @@ const EX_B = [
 {id:"r20",c:"recht",q:"Was ist richtig?",o:["Konsens","Konsenz"],a:0,
  e:"<b>Konsens</b> mit s — von lat. consensus. Ebenso: Differenz, Kompetenz, aber Konsens.",r:"recht-klassiker"},
 
-{id:"r21",c:"recht",q:"Vervollständige: „Es geht um das Wohl der Kinder, das ___ nicht gefährdet werden.“",t:"fill",a:["darf"],
+{id:"r21",c:"recht",q:"Vervollständige mit der passenden Form von „dürfen“: „Es geht um das Wohl der Kinder, das ___ nicht gefährdet werden.“",t:"fill",a:["darf"],
  e:"Bezugswort ist „das Wohl“ (Singular) → „darf“. Kongruenzfehler entstehen oft, wenn ein Plural („der Kinder“) dazwischensteht.",r:"gram-kongruenz"},
 
 {id:"r22",c:"recht",q:"Korrekt ist …",o:["Interesse","Intresse"],a:0,
@@ -1232,7 +1232,7 @@ const EX_B = [
  "Nur „haben“ ist korrekt"],a:1,
  e:"Formal richtet sich das Verb nach „eine Reihe“ (Singular), der Plural gilt aber als „Kongruenz nach dem Sinn“ und ist ebenfalls korrekt.",r:"gram-kongruenz"},
 
-{id:"m20",c:"gram",q:"Welcher Kasus? „Innerhalb ___ Woche muss die Abgabe erfolgen.“",t:"fill",a:["einer"],
+{id:"m20",c:"gram",q:"Welcher Kasus? „Innerhalb ___ Woche muss die Abgabe erfolgen.“",t:"fill",a:["einer","der","dieser","jeder"],
  e:"„innerhalb“ + Genitiv: <b>innerhalb einer Woche</b>. Bei Zeitangaben ist auch „innerhalb von einer Woche“ üblich.",r:"gram-genitiv"},
 
 {id:"m21",c:"gram",q:"Welche Fassung passt bei einer Altersgrenze?",o:[
@@ -4060,16 +4060,16 @@ const TABLES = [
 const EX_D = [
 
 /* ---------- KASUS: PRÄPOSITIONEN ---------- */
-{id:"n01",c:"gram",q:"Ergänze: „Ich fahre mit ___ Rad zur Uni.“",t:"fill",a:["dem"],
+{id:"n01",c:"gram",q:"Ergänze: „Ich fahre mit ___ Rad zur Uni.“",t:"fill",a:["dem","meinem","einem","diesem"],
  e:"<b>mit</b> steht immer mit Dativ. Die Dativ-Präpositionen als Reihe: <b>aus, außer, bei, gegenüber, mit, nach, seit, von, zu</b> — plus ab, entgegen, gemäß.",r:"gram-praepdat"},
 
-{id:"n02",c:"gram",q:"Ergänze: „Das Geschenk ist für ___ Trainer.“ (maskulin)",t:"fill",a:["den"],
+{id:"n02",c:"gram",q:"Ergänze: „Das Geschenk ist für ___ Trainer.“ (maskulin)",t:"fill",a:["den","einen","meinen","unseren","diesen"],
  e:"<b>für</b> verlangt den Akkusativ. Die Akkusativ-Präpositionen: <b>durch, für, gegen, ohne, um, bis, entlang, wider</b>.",r:"gram-praepakk"},
 
-{id:"n03",c:"gram",q:"Wohin oder wo? „Ich stelle die Tasche auf ___ Tisch.“",t:"fill",a:["den"],
+{id:"n03",c:"gram",q:"Wohin oder wo? „Ich stelle die Tasche auf ___ Tisch.“",t:"fill",a:["den","einen","meinen","diesen"],
  e:"<b>stellen</b> = etwas irgendwohin → Frage „wohin?“ → <b>Akkusativ</b>. Bei „Die Tasche steht auf dem Tisch“ wäre es Dativ.",r:"gram-wechsel"},
 
-{id:"n04",c:"gram",q:"Wohin oder wo? „Die Tasche liegt unter ___ Bank.“ (feminin)",t:"fill",a:["der"],
+{id:"n04",c:"gram",q:"Wohin oder wo? „Die Tasche liegt unter ___ Bank.“ (feminin)",t:"fill",a:["der","einer","meiner","dieser"],
  e:"<b>liegen</b> = irgendwo sein → Frage „wo?“ → <b>Dativ</b>. Der Verbtest ist zuverlässiger als das Bauchgefühl: legen/stellen/setzen/hängen → Akkusativ, liegen/stehen/sitzen/hängen → Dativ.",r:"gram-wechsel"},
 
 {id:"n05",c:"gram",q:"Welche Variante ist standardsprachlich?",o:[
@@ -4077,10 +4077,10 @@ const EX_D = [
  "Wegen dem Wetter fällt das Training aus."],a:0,
  e:"<b>wegen</b> + Genitiv. Der Dativ ist umgangssprachlich sehr verbreitet und im Gespräch unauffällig — in geschriebenen Texten und formellen Situationen aber vermeiden.",r:"gram-genitiv"},
 
-{id:"n06",c:"gram",q:"Ergänze: „Ich laufe in ___ Halle hin und her.“",t:"fill",a:["der"],
+{id:"n06",c:"gram",q:"Ergänze: „Ich laufe in ___ Halle hin und her.“",t:"fill",a:["der","einer","dieser"],
  e:"Trickfrage: Bewegung ja — aber <b>ohne Zielwechsel</b>. Man bleibt in der Halle → „wo?“ → <b>Dativ</b>. „Ich laufe in die Halle“ hieße: von draußen hinein.",r:"gram-wechsel"},
 
-{id:"n07",c:"gram",q:"Ergänze: „Wir sprechen über ___ neuen Trainingsplan.“",t:"fill",a:["den"],
+{id:"n07",c:"gram",q:"Ergänze: „Wir sprechen über ___ neuen Trainingsplan.“",t:"fill",a:["den","einen","unseren","diesen"],
  e:"Bei <b>Themen</b> steht „über“ immer mit Akkusativ — unabhängig von jeder Bewegung. Ebenso: „nachdenken über“, „diskutieren über“, „sich ärgern über“.",r:"gram-wechsel"},
 
 {id:"n08",c:"gram",q:"Ergänze: „Das war vor ___ Jahr.“",t:"fill",a:["einem"],
@@ -4093,20 +4093,20 @@ const EX_D = [
  e:"Länder <b>mit Artikel</b> bekommen „in“ + Akkusativ: in die Schweiz, in die Türkei, in die USA, in den Iran. Ohne Artikel steht „nach“: nach Italien, nach Spanien.",r:"gram-richtung"},
 
 /* ---------- KASUS: VERBEN ---------- */
-{id:"n11",c:"gram",q:"Ergänze: „Ich rufe ___ morgen an.“",t:"fill",a:["dich"],
+{id:"n11",c:"gram",q:"Ergänze: „Ich rufe ___ morgen an.“",t:"fill",a:["dich","ihn","sie","euch"],
  e:"<b>anrufen</b> verlangt überregional den Akkusativ. „Ich rufe dir an“ ist im Südwesten und in der Schweiz verbreitet, außerhalb fällt es auf. Merke: Man ruft jemanden an, wie man jemanden fragt.",r:"gram-akkverben"},
 
-{id:"n12",c:"gram",q:"Ergänze: „Kannst du ___ kurz helfen?“",t:"fill",a:["mir"],
+{id:"n12",c:"gram",q:"Ergänze: „Kannst du ___ kurz helfen?“",t:"fill",a:["mir","ihm","ihr","uns","ihnen"],
  e:"<b>helfen</b> steht mit Dativ — im Gegensatz zu <b>unterstützen</b> (Akkusativ): „Kannst du mich unterstützen?“",r:"gram-kasus"},
 
 {id:"n13",c:"gram",q:"Welche Form ist richtig?",o:[
  "Ich habe ihm geantwortet.","Ich habe ihn geantwortet."],a:0,
  e:"<b>antworten</b> + Dativ. Aber <b>beantworten</b> + Akkusativ: „Ich habe die Frage beantwortet.“ Dasselbe Paar: raten (Dat) / beraten (Akk).",r:"gram-kasus"},
 
-{id:"n14",c:"gram",q:"Ergänze: „Das interessiert ___ sehr.“",t:"fill",a:["mich"],
+{id:"n14",c:"gram",q:"Ergänze: „Das interessiert ___ sehr.“",t:"fill",a:["mich","dich","ihn","sie","uns","euch"],
  e:"<b>interessieren</b> verlangt den Akkusativ. „Das interessiert mir“ hört man, ist aber nicht standardsprachlich. Gleiche Gruppe: stören, treffen, anrufen.",r:"gram-akkverben"},
 
-{id:"n15",c:"gram",q:"Ergänze: „Ich gebe ___ Kollegen die Unterlagen.“ (maskulin, Dativ)",t:"fill",a:["dem"],
+{id:"n15",c:"gram",q:"Ergänze: „Ich gebe ___ Kollegen die Unterlagen.“ (maskulin, Dativ Singular)",t:"fill",a:["dem"],
  e:"Zwei Dinge stecken drin: <b>geben</b> = Person im Dativ, Sache im Akkusativ. Und „Kollege“ folgt der <b>n-Deklination</b> — deshalb „dem Kollegen“ mit -n.",r:"gram-ndekl"},
 
 {id:"n16",c:"gram",q:"Was ist richtig?",o:[
@@ -4123,7 +4123,7 @@ const EX_D = [
 {id:"n19",c:"gram",q:"Ergänze: „Ich freue mich ___ das Wochenende.“",t:"fill",a:["auf"],
  e:"<b>sich freuen auf</b> = Zukunft. <b>sich freuen über</b> = etwas, das schon da ist: „Ich freue mich über dein Geschenk.“ Beide mit Akkusativ.",r:"gram-praep"},
 
-{id:"n20",c:"gram",q:"Welche Präposition passt? „Er leidet ___ starkem Druck.“",t:"fill",a:["unter"],
+{id:"n20",c:"gram",q:"Welche Präposition steht bei einem Umstand? „Er leidet ___ starkem Druck.“",t:"fill",a:["unter"],
  e:"Als Faustregel steht <b>unter</b> bei Umständen und <b>an</b> bei Krankheiten — beide mit Dativ. Die Grenze ist durchlässig: Für seelisches Leiden führt das DWDS beide Präpositionen („an unglücklicher Liebe leiden“). „Unter Druck leiden“ ist die feste Wendung.",r:"gram-praep"},
 
 {id:"n21",c:"gram",q:"Was bedeutet was?",o:[
@@ -4136,7 +4136,7 @@ const EX_D = [
  e:"<b>bestehen aus</b> = Bestandteile. <b>bestehen in</b> = worin etwas besteht („Die Aufgabe besteht in der Auswertung“). <b>bestehen auf</b> = beharren.",r:"gram-praep"},
 
 /* ---------- REFLEXIVPRONOMEN ---------- */
-{id:"n23",c:"gram",q:"Ergänze: „Ich wasche ___ die Hände.“",t:"fill",a:["mir"],
+{id:"n23",c:"gram",q:"Ergänze das Reflexivpronomen: „Ich wasche ___ die Hände.“",t:"fill",a:["mir"],
  e:"Kommt ein Akkusativobjekt dazu („die Hände“), wird das Reflexivpronomen zum <b>Dativ</b>. Ohne Objekt: „Ich wasche mich.“",r:"gram-reflexiv"},
 
 {id:"n24",c:"gram",q:"Was bedeutet „Ich stelle mir das vor“?",o:[
@@ -4144,7 +4144,7 @@ const EX_D = [
  "Ich nenne meinen Namen"],a:0,
  e:"Der Kasus entscheidet die Bedeutung: „Ich stelle <b>mich</b> vor“ = Name nennen. „Ich stelle <b>mir</b> das vor“ = im Kopf ausmalen.",r:"gram-reflexiv"},
 
-{id:"n25",c:"gram",q:"Ergänze: „Ich kann ___ die Nummer nicht merken.“",t:"fill",a:["mir"],
+{id:"n25",c:"gram",q:"Ergänze das Reflexivpronomen: „Ich kann ___ die Nummer nicht merken.“",t:"fill",a:["mir"],
  e:"<b>sich etwas merken</b> steht immer im Dativ — es ist ja ein Akkusativobjekt dabei. Gleiche Gruppe: sich etwas überlegen, ansehen, leisten, einbilden.",r:"gram-reflexiv"},
 
 /* ---------- ADJEKTIVENDUNGEN ---------- */
