@@ -998,4 +998,67 @@ P.titel("G · Bedienung ohne Maus");
   }
 }
 
+/* ---------- H · Kontraste ---------- */
+P.titel("H · Kontraste");
+/* Fehlerklasse „Farbe im hellen Theme zu blass“: Acht Regeln setzten --gold als Textfarbe
+   auf --gold-soft — die Serien-Kachel, der ◆-Varianten-Aufkleber, die Stilmarke im
+   Textcheck, das gewählte Wort im Satzbaukasten. Gemessen 3,43:1, verlangt sind 4,5:1 bei
+   Fließtext. Drei weitere lagen mit --ink3 auf --line2 bei 4,27:1. Im dunklen Theme war
+   alles in Ordnung, deshalb fiel es beim Ansehen nicht auf: Nils läuft mit dem Handy in
+   der Sonne, und da ist das helle Theme der schwierige Fall.
+   Gerechnet wird auf den Farbwerten, nicht am gerenderten Bild — das findet auch, was
+   gerade nicht auf dem Schirm steht. */
+{
+  const css = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8")
+    .split("<style>")[1].split("</style>")[0];
+  const dunkelStart = css.indexOf('[data-theme="dark"]{');
+  const hellStart = css.indexOf(":root{");
+  /* Der erste Anlauf schnitt am Text „:root[data-theme=…]“ — den es nicht gibt. Beide
+     Themes waren dadurch dunkel, und die Prüfung meldete null Fehler. Deshalb hier hart
+     abbrechen, statt stumm das Falsche zu messen. */
+  P.ok("Beide Themenblöcke im CSS gefunden", hellStart >= 0 && dunkelStart > hellStart,
+    "hell@" + hellStart + " dunkel@" + dunkelStart);
+  const lies = block => {
+    const o = {};
+    [...block.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})/g)].forEach(m => o[m[1]] = m[2]);
+    return o;
+  };
+  const hellTok = lies(css.slice(hellStart, dunkelStart));
+  const dunkelTok = Object.assign({}, hellTok,
+    lies(css.slice(dunkelStart, css.indexOf("}", css.indexOf("--shadow", dunkelStart)) + 1)));
+  P.ok("Das dunkle Theme setzt eigene Farben (" + Object.keys(lies(css.slice(dunkelStart,
+    css.indexOf("}", css.indexOf("--shadow", dunkelStart)) + 1))).length + " Tokens)",
+    hellTok.bg !== dunkelTok.bg && hellTok.ink !== dunkelTok.ink, "Themes sind identisch");
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const lum = c => { const v = c.map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+    return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+  const kontrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const paare = [];
+  [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].forEach(m => {
+    const sel = m[1].trim().replace(/\s+/g, " "), body = m[2];
+    const fg = (body.match(/(?:^|;)\s*color:\s*var\(--([a-z0-9-]+)\)/) || [])[1];
+    const bg = (body.match(/background(?:-color)?:\s*var\(--([a-z0-9-]+)\)/) || [])[1];
+    const px = Number((body.match(/font-size:\s*([\d.]+)px/) || [])[1]) || 13;
+    const fw = Number((body.match(/font-weight:\s*(\d+)/) || [])[1]) || 400;
+    if (fg && bg) paare.push({ sel, fg, bg, px, gross: px >= 24 || (px >= 18.66 && fw >= 700) });
+  });
+  P.ok("Genug Farbpaare im CSS gefunden (" + paare.length + ")", paare.length >= 40, paare.length);
+  const blass = [];
+  [["hell", hellTok], ["dunkel", dunkelTok]].forEach(([name, tok]) => {
+    paare.forEach(p2 => {
+      if (!tok[p2.fg] || !tok[p2.bg]) return;
+      const c = kontrast(hex(tok[p2.fg]), hex(tok[p2.bg]));
+      const soll = p2.gross ? 3 : 4.5;
+      if (c < soll) blass.push(name + " " + (Math.round(c * 100) / 100) + ":1 (" + soll + " nötig)  " +
+        p2.sel.slice(0, 40) + "  --" + p2.fg + " auf --" + p2.bg);
+    });
+  });
+  P.ok("Jede Farbkombination erreicht den Kontrast nach WCAG AA", !blass.length,
+    blass.slice(0, 6).join(" · ") + (blass.length > 6 ? " …(" + blass.length + ")" : ""));
+  /* Positivprobe: Die Rechnung muss ein bekannt zu blasses Paar auch als zu blass erkennen. */
+  P.ok("Die Kontrastrechnung erkennt ein zu blasses Paar",
+    kontrast(hex("#a97b1e"), hex("#fbf3e2")) < 4.5 && kontrast(hex("#8d6518"), hex("#fbf3e2")) >= 4.5,
+    "Positivprobe blieb stumm");
+}
+
 P.abschluss();
