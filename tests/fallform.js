@@ -187,6 +187,32 @@ const einseitig = MIT.filter(e => fassungen(e).length > 1).filter(e => {
 });
 P.ok("Beide Fassungen kommen dran", !einseitig.length, einseitig.map(e => e.w).join(", "));
 
+/* Fehlerklasse „Verb entscheidet nicht“: Die Karte „unter“ fragte „Ich schiebe die Kiste
+   unter ___ Tisch.“ und wertete den Dativ als falsch. „schieben“ ist aber ein
+   Bewegungsverb, das auch eine Ortsangabe zulässt — „Ich schiebe die Kiste unter dem
+   Tisch hin und her“ ist ein richtiger Satz. Der Ablenker war also nicht sicher falsch.
+   Die App lehrt selbst den Ausweg: legen, stellen, setzen, hängen zeigen das Ziel;
+   liegen, stehen, sitzen, hängen den Ort (Regel gram-wechsel, Verbtest). Die acht
+   Geschwisterkarten hielten sich daran, nur „unter“ nicht. */
+const ZIELVERB = /(?<![A-Za-zÄÖÜäöüß])(?:leg|stell|setz|häng|steck|werf)[eits]{0,3}(?:en|st)?(?![A-Za-zÄÖÜäöüß])/i;
+const ORTSVERB = /(?<![A-Za-zÄÖÜäöüß])(?:lieg|steh|sitz|häng|wohn|bleib)[eit]{0,3}(?:en|st)?(?![A-Za-zÄÖÜäöüß])|(?<![A-Za-zÄÖÜäöüß])(?:ist|sind|bin)(?![A-Za-zÄÖÜäöüß])/i;
+const verbSchief = [];
+ALLE.filter(x => x.e.t === "wechsel" && x.von === 2).forEach(x => {
+  const willAkk = x.i === 0;
+  const passt = willAkk ? ZIELVERB.test(x.satz) : ORTSVERB.test(x.satz);
+  if (!passt) verbSchief.push(x.e.w + "#" + (x.i + 1) + " [" + (willAkk ? "wohin" : "wo") +
+    "]: „" + x.satz + "“ trägt kein Verb aus dem Verbtest");
+});
+P.ok("Jede Wechselfassung trägt ein Verb aus dem eigenen Verbtest", !verbSchief.length,
+  verbSchief.join(" · "));
+/* Positivprobe: der alte Satz mit „schiebe“ darf nicht als Zielverb durchgehen, der neue
+   mit „stelle“ schon — sonst prüft der Abschnitt nichts. */
+P.ok("Die Verbprüfung erkennt ein Verb, das beides zulässt",
+  !ZIELVERB.test("Ich schiebe die Kiste unter ___ Tisch.") &&
+  ZIELVERB.test("Ich stelle die Kiste unter ___ Tisch.") &&
+  ORTSVERB.test("Die Kiste steht unter ___ Tisch."),
+  "Positivprobe blieb stumm");
+
 /* ---------- D · Abdeckung ---------- */
 P.titel("D · Abdeckung");
 /* Bewusst in der Etikettform: Zweifelsfälle, bei denen kein Ablenker sicher falsch wäre.
