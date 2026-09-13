@@ -1059,6 +1059,30 @@ P.titel("H · Kontraste");
   P.ok("Die Kontrastrechnung erkennt ein zu blasses Paar",
     kontrast(hex("#a97b1e"), hex("#fbf3e2")) < 4.5 && kontrast(hex("#8d6518"), hex("#fbf3e2")) >= 4.5,
     "Positivprobe blieb stumm");
+
+  /* Tippflächen. Gemessen im echten Browser bei 320, 393 und 430 px mit Touch-Emulation:
+     keine Fläche unter 44 px, außer den Kopfknöpfen bei ≤360 px — dort stehen sie auf 38,
+     und das ist Absicht: Mit 44 passt „Deutsch-Trainer“ nicht mehr neben Serie, XP und die
+     zwei Knöpfe, der Titel läuft unter die Serien-Kachel. 38 liegt weit über dem
+     Mindestmaß von 24 px (WCAG 2.5.8).
+     Wichtig beim Nachmessen: Ohne Touch-Emulation greift @media(hover:none) nicht, und
+     dann meldet die Messung 91 zu kleine Flächen, die es auf dem Handy nicht gibt.
+     Hier wird nur die Regel geprüft, dafür ohne Browser. */
+  const groesse = (block, sel) => {
+    const m = block.match(new RegExp("\\" + sel + "\\{[^}]*?(?:width|height):\\s*(\\d+)px"));
+    return m ? Number(m[1]) : null;
+  };
+  const touchBlock = css.slice(css.indexOf("@media(hover:none)"), css.indexOf("@media(hover:none)") + 900);
+  const engStart = css.indexOf("@media(max-width:360px)");
+  const engBlock = engStart > 0 ? css.slice(engStart, engStart + 700) : "";
+  const touchIcon = groesse(touchBlock, ".iconbtn"), engIcon = groesse(engBlock, ".iconbtn");
+  P.ok("Der Touchblock setzt die Kopfknöpfe auf mindestens 44 px (" + touchIcon + ")",
+    touchIcon !== null && touchIcon >= 44, touchIcon);
+  P.ok("Auch auf schmalen Schirmen bleiben sie über dem Mindestmaß von 24 px (" + engIcon + ")",
+    engIcon !== null && engIcon >= 24, engIcon);
+  /* Positivprobe: Die Suche darf nicht irgendeine Zahl finden. */
+  P.ok("Die Größenprüfung liest wirklich die iconbtn-Regel",
+    groesse(touchBlock, ".gibtsnicht") === null && touchIcon !== engIcon, touchIcon + "/" + engIcon);
 }
 
 P.abschluss();

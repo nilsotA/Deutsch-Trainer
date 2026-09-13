@@ -1466,6 +1466,20 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 
 ## Werkzeug, das nützlich war
 
+**Messen im Browser: Touch-Emulation nicht vergessen.** Zwei Messungen dieser Runde
+hätten ohne sie das Falsche gesagt. Die Tippflächen: Ohne `hasTouch:true, isMobile:true`
+greift `@media(hover:none)` nicht, und die Messung meldet 91 Flächen unter 44 px, die es
+auf dem Handy nicht gibt — mit Emulation sind es null. Und die Kontraste: Der erste
+Extraktor schnitt den hellen Themenblock bei `:root[data-theme="dark"]` ab, im CSS steht
+aber `[data-theme="dark"]` ohne `:root`; dadurch waren beide Themes dunkel und die Prüfung
+meldete null Fehler bei elf Fundstellen.
+
+**Und: das Bild ansehen, nicht nur die Zahl.** Bei 320 px sagte die Rechnung „Titel passt“
+(clientWidth = scrollWidth), der Screenshot zeigte „Deutsch-Traine“. Der Grund lag eine
+Ebene höher: Das `b` ragte über sein `.brand`-Elternelement und lief unter die
+Serien-Kachel. Genau dieser Vergleich hat auch entschieden, dass die Kopfknöpfe bei ≤360 px
+auf 38 px bleiben — mit 44 passt der Name nicht mehr daneben.
+
 **Rauchprobe im echten Browser.** Chromium liegt in dieser Umgebung unter
 `/opt/pw-browsers`, Playwright unter `/opt/node22/lib/node_modules/playwright` — beides
 außerhalb des Projekts, die Datei bleibt also abhängigkeitsfrei. Ein kurzes Skript im
