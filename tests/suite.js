@@ -106,6 +106,23 @@ KORREKTUR.forEach(t => {
 P.ok("Korrekturmarkierungen auffindbar (" + KORREKTUR.reduce((a, t) => a + t.errs.length, 0) + ")",
   fehlmark === 0 && dopmark === 0, fehlmark + " nicht gefunden / " + dopmark + " doppelt");
 
+/* Jede Markierung ist antippbar und führt in die Regel. Zeigt ihr Verweis ins Leere,
+   landet Nils nirgends — und eine Markierung, deren Kategorie nicht zur verwiesenen Regel
+   passt, sortiert sich im Fehlerjournal unter der falschen Überschrift ein. */
+const KAT = new Set(["komma", "gross", "getrennt", "recht", "gram", "stil", "form", "satz", "zeichen", "zahlen"]);
+const regelKat = {};
+daten(w, "RULES_ALL.map(r=>({id:r.id,c:r.c}))").forEach(r => regelKat[r.id] = r.c);
+const markSchief = [];
+KORREKTUR.forEach(t => t.errs.forEach(e => {
+  if (!e.r || !rids.has(e.r)) markSchief.push(t.id + ": „" + e.w + "“ verweist auf " + e.r);
+  else if (e.c && regelKat[e.r] !== e.c)
+    markSchief.push(t.id + ": „" + e.w + "“ ist " + e.c + ", die Regel " + e.r + " aber " + regelKat[e.r]);
+  if (String(e.ok) === String(e.w)) markSchief.push(t.id + ": „" + e.w + "“ wird durch sich selbst ersetzt");
+  if (!e.c || !KAT.has(e.c)) markSchief.push(t.id + ": „" + e.w + "“ hat die Kategorie " + e.c);
+}));
+P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
+  markSchief.slice(0, 5).join(" · "));
+
 /* ---------- B · Formulierung der Aufgaben ---------- */
 P.titel("B · Formulierung");
 const POS = /\b(Fassung [ABC]\b|Option [ABC]\b|die (erste|zweite|dritte) (Fassung|Variante|Version|Option|Antwort))/i;
