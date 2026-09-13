@@ -1406,6 +1406,17 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 
 ## Werkzeug, das nützlich war
 
+**Rauchprobe im echten Browser.** Chromium liegt in dieser Umgebung unter
+`/opt/pw-browsers`, Playwright unter `/opt/node22/lib/node_modules/playwright` — beides
+außerhalb des Projekts, die Datei bleibt also abhängigkeitsfrei. Ein kurzes Skript im
+Kritzelordner lädt `file://…/Deutsch-Trainer.html` bei 393×852, klickt jeden der sieben
+Reiter an, tippt einen Text in den Textcheck, startet eine Unterwegs-Runde und meldet
+Konsolenfehler sowie waagerechtes Scrollen. Die Prüfläufe laufen unter jsdom und sehen
+zwei Dinge nicht: ob moderne Regex-Teile (`\p{L}`, Lookbehind) im Browser wirklich
+greifen und ob die Seite bei Handybreite überläuft. Nach dem Umbau von `analyse()` war
+genau das die Bestätigung, die gefehlt hat.
+
+
 - `nils-schreibstil` — Skill mit Nils' Schreibstil, abgeleitet aus seinem
   BFP-Portfolio. Nützlich, wenn Texte nach ihm klingen sollen.
 - Web-Recherche für jede normative Aussage. Duden und DWDS liefern klare
