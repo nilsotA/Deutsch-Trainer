@@ -248,12 +248,26 @@ const probeAn = daten(w, 'analyse("Das ist ein Standart im Verein.").finds.filte
 P.ok("Die Beispielprüfung schlägt bei einem echten Fehler an", probeAn > 0, "Positivprobe blieb stumm");
 P.ok("Genug Beispiele in den Regeln gefunden (" + proben.length + ")", proben.length >= 450, proben.length);
 const regelAlarm = [];
+const regelFrage = [];
 proben.forEach(pr => {
-  const f = daten(w, 'analyse(' + JSON.stringify(pr.t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
-  if (f.length) regelAlarm.push(f.join("/") + " in " + pr.id + ": „" + pr.t.slice(0, 50) + "“");
+  const f = daten(w, 'analyse(' + JSON.stringify(pr.t) + ').finds.map(f=>({id:f.c.id,sev:f.c.sev,r:f.c.r||null}))');
+  const hart = f.filter(x => x.sev === "hart").map(x => x.id);
+  if (hart.length) regelAlarm.push(hart.join("/") + " in " + pr.id + ": „" + pr.t.slice(0, 50) + "“");
+  /* Ein Muster der Stufe „prüfen“ darf auf dem Beispiel der Regel stehen, zu der es
+     selbst gehört: y05 fragt „derselbe oder der gleiche?“ und trifft damit das Beispiel
+     von gram-derselbe — genau das ist der Zweck. Trifft es ein Beispiel einer anderen
+     Regel, meldet der Textcheck einen Zweifel an Text, den die App als richtig zeigt. */
+  f.filter(x => x.sev === "pruef" && x.r !== pr.id).forEach(x =>
+    regelFrage.push(x.id + " in " + pr.id + ": „" + pr.t.slice(0, 50) + "“"));
 });
 P.ok("Keine harte Meldung auf den Beispielen der Regeln", !regelAlarm.length,
   regelAlarm.slice(0, 5).join(" · ") + (regelAlarm.length > 5 ? " …(" + regelAlarm.length + ")" : ""));
+P.ok("Kein fremder Prüfhinweis auf den Beispielen der Regeln", !regelFrage.length,
+  regelFrage.slice(0, 5).join(" · ") + (regelFrage.length > 5 ? " …(" + regelFrage.length + ")" : ""));
+/* Positivprobe: Der Weg muss auch auf Stufe „prüfen“ etwas finden können, sonst ist die
+   Prüfung eine leere Zusicherung. Dasselbe Beispiel, einer fremden Regel zugeschrieben. */
+const frageProbe = daten(w, 'analyse("Wir tragen die gleichen Schuhe heute.").finds.filter(f=>f.c.sev==="pruef"&&f.c.r!=="komma-aufzaehlung").length');
+P.ok("Die Prüfhinweis-Prüfung schlägt bei fremder Regel an", frageProbe > 0, "Positivprobe blieb stumm");
 
 /* Dritter korrekter Bestand: die Musterformulierungen der Schreibwerkstatt (PHRASES,
    PAIRS.good) und die Fehlersuchtexte in ihrer korrigierten Fassung. Nils soll die
@@ -264,14 +278,21 @@ P.ok("Keine harte Meldung auf den Beispielen der Regeln", !regelAlarm.length,
 const PHRASES = daten(w, "PHRASES");
 const PAIRS = daten(w, "PAIRS");
 const vorlagen = [];
+/* Teilmenge „Vorbildtexte“: Text, den Nils abschreiben oder nachbauen soll. Er wird
+   unten zusätzlich auf der Stufe „prüfen“ geprüft — siehe Begründung dort. */
+const vorbild = [];
+const beide = x => { vorlagen.push(x); vorbild.push(x); };
 PHRASES.forEach(ph => Object.keys(ph.lv || {}).forEach(stufe =>
-  (ph.lv[stufe] || []).forEach(t => vorlagen.push({ id: "ph:" + ph.id, t: strip(t) }))));
-PAIRS.forEach(pr => vorlagen.push({ id: "pr:" + pr.id, t: strip(pr.good) }));
+  (ph.lv[stufe] || []).forEach(t => beide({ id: "ph:" + ph.id, t: strip(t) }))));
+PAIRS.forEach(pr => beide({ id: "pr:" + pr.id, t: strip(pr.good) }));
 /* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
    Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
    korrektes Deutsch vorgesetzt bekommt. */
-daten(w, "SCENES").forEach(sc => { if (sc.s) vorlagen.push({ id: "sc:" + sc.id, t: strip(sc.s) }); });
-daten(w, "PROMPTS").forEach(pr => { if (pr.p) vorlagen.push({ id: "w:" + pr.id, t: strip(pr.p) }); });
+daten(w, "SCENES").forEach(sc => { if (sc.s) beide({ id: "sc:" + sc.id, t: strip(sc.s) }); });
+daten(w, "PROMPTS").forEach(pr => { if (pr.p) beide({ id: "w:" + pr.id, t: strip(pr.p) }); });
+/* Die Erläuterung einer Wortkarte beschreibt das Wort, statt es zu verwenden: „scheinbar
+   = nur dem Schein nach“. Ein Muster der Stufe „prüfen“ trifft dort zu Recht — sie bleibt
+   deshalb bei der harten Prüfung und zählt nicht zu den Vorbildtexten. */
 WORDS.forEach(x => { if (x.d) vorlagen.push({ id: "w:" + x.w + " (Erläuterung)", t: strip(x.d) }); });
 let korrOffen = 0;
 KORREKTUR.forEach(t => {
@@ -282,17 +303,33 @@ KORREKTUR.forEach(t => {
     let c = 0;
     for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { toks[i] = e.ok; break; }
   });
-  vorlagen.push({ id: t.id + " korrigiert", t: toks.join(" ") });
+  beide({ id: t.id + " korrigiert", t: toks.join(" ") });
 });
 P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 430, vorlagen.length);
+const vorbildSet = new Set(vorbild);
 const vorlagenAlarm = [];
+const vorbildFrage = [];
 vorlagen.forEach(m => {
   if (m.t.length < 8) return;
-  const f = daten(w, 'analyse(' + JSON.stringify(m.t) + ').finds.filter(f=>f.c.sev==="hart").map(f=>f.c.id)');
-  if (f.length) vorlagenAlarm.push(f.join("/") + " in " + m.id + ": „" + m.t.slice(0, 50) + "“");
+  const f = daten(w, 'analyse(' + JSON.stringify(m.t) + ').finds.map(f=>({id:f.c.id,sev:f.c.sev}))');
+  const hart = f.filter(x => x.sev === "hart").map(x => x.id);
+  if (hart.length) vorlagenAlarm.push(hart.join("/") + " in " + m.id + ": „" + m.t.slice(0, 50) + "“");
+  if (!vorbildSet.has(m)) return;
+  const frag = f.filter(x => x.sev === "pruef").map(x => x.id);
+  if (frag.length) vorbildFrage.push(frag.join("/") + " in " + m.id + ": „" + m.t.slice(0, 50) + "“");
 });
 P.ok("Keine harte Meldung auf den Musterformulierungen", !vorlagenAlarm.length,
   vorlagenAlarm.slice(0, 5).join(" · ") + (vorlagenAlarm.length > 5 ? " …(" + vorlagenAlarm.length + ")" : ""));
+/* Fehlerklasse „Prüfhinweis auf dem eigenen Vorbildtext“: Ein Muster der Stufe „prüfen“
+   behauptet keinen Fehler, es stellt eine Frage („Komma nötig?“, „scheinbar oder
+   anscheinend?“). Auf einem Baustein, den Nils wörtlich übernehmen soll, ist die Frage
+   trotzdem falsch — er schreibt ab, was die App vorgibt, und bekommt dafür einen Zweifel
+   angezeigt. Die Vorbildtexte sind damit zugleich das Netz gegen zu weit gefasste neue
+   Kommamuster: y01, y13 und y14 laufen hier über gut 300 korrekte Sätze. */
+P.ok("Kein Prüfhinweis auf den Vorbildtexten (" + vorbild.length + ")", !vorbildFrage.length,
+  vorbildFrage.slice(0, 5).join(" · ") + (vorbildFrage.length > 5 ? " …(" + vorbildFrage.length + ")" : ""));
+const vorbildProbe = daten(w, 'analyse("Er war scheinbar schon vor uns da.").finds.filter(f=>f.c.sev==="pruef").length');
+P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0, "Positivprobe blieb stumm");
 if (korrOffen) P.info(korrOffen + " Fehlersuchtexte ersetzen mehrteilig — dort ist die korrigierte Fassung nicht rekonstruierbar");
 
 /* Jede Markierung muss im Text auffindbar sein: korrErrIdx() sucht das Wort als ganzes
