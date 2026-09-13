@@ -43,6 +43,31 @@ const dokuSchief = dokuZahlen.filter(([, dok, app]) => dok !== app)
   .map(([was, d, a]) => was + ": CLAUDE.md " + d + ", App " + a);
 P.ok("Die Zahlen in CLAUDE.md stimmen mit der App überein", !dokuSchief.length, dokuSchief.join(" · "));
 
+/* Dieselbe Falle ein zweites Mal: HANDOVER.md führt eine Tabelle „Stand der App“ mit
+   denselben Zahlen. Sie stand bei 376 Übungen, 117 Regeln und 95 Prüfmustern, während
+   CLAUDE.md längst nachgezogen war — geprüft wurde eben nur die eine Datei. Auch die
+   Dateigröße wird mitgeprüft: Sie hinkte um 130 KB hinterher, und wer nach ihr plant,
+   schätzt die Ladezeit auf dem Handy falsch ein. */
+const hand = fs.readFileSync(path.join(__dirname, "..", "HANDOVER.md"), "utf8");
+const hzahl = re => { const m = hand.match(re); return m ? Number(m[1]) : null; };
+const appKB = Math.round(fs.statSync(path.join(__dirname, "..", "Deutsch-Trainer.html")).size / 1024);
+const handZahlen = [
+  ["Übungen", hzahl(/\|\s*Übungen\s*\|\s*(\d+)\s*\|/), daten(w, "ALL.length")],
+  ["Regeln", hzahl(/\|\s*Regeln\s*\|\s*(\d+)\s*\|/), daten(w, "RULES_ALL.length")],
+  ["Wortkarten", hzahl(/\|\s*Wortkarten\s*\|\s*(\d+)\s*\|/), daten(w, "WORDS.length")],
+  ["Fallkarten", hzahl(/\|\s*Fallkarten\s*\|\s*(\d+)/), daten(w, "CASEREF.length")],
+  ["Satzbaukarten", hzahl(/\|\s*Satzbaukarten\s*\|\s*(\d+)\s*\|/), daten(w, "SATZ.length")],
+  ["Prüfmuster", hzahl(/\|\s*Prüfmuster im Textcheck\s*\|\s*(\d+)\s*\|/), daten(w, "CHECKS_ALL.length")],
+  ["Fehlersuchtexte", hzahl(/\|\s*Fehlersuchtexte\s*\|\s*(\d+) mit/), daten(w, "KORREKTUR.length")],
+  ["Fehlermarkierungen", hzahl(/Fehlersuchtexte \| \d+ mit (\d+) markierten/), daten(w, "KORREKTUR.reduce((a,t)=>a+t.errs.length,0)")],
+];
+const handSchief = handZahlen.filter(([, dok, app]) => dok !== app)
+  .map(([was, d, a]) => was + ": HANDOVER.md " + d + ", App " + a);
+P.ok("Die Zahlen in HANDOVER.md stimmen mit der App überein", !handSchief.length, handSchief.join(" · "));
+const handKB = hzahl(/\|\s*Dateigröße\s*\|\s*~(\d+) KB/);
+P.ok("Die Dateigröße in HANDOVER.md stimmt auf 20 KB genau (" + appKB + " KB)",
+  handKB !== null && Math.abs(handKB - appKB) <= 20, "HANDOVER.md ~" + handKB + " KB, tatsächlich " + appKB + " KB");
+
 /* Fehlerklasse „doppelte Prüfmuster-Kennung“: Zwei Muster mit derselben id sind in der
    Ansicht nicht auseinanderzuhalten, und wer nach der id filtert, sieht das falsche. */
 const CHECKS = daten(w, "CHECKS_ALL.map(c => ({id: c.id, sev: c.sev}))");

@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 376 |
-| Regeln | 117 |
+| Übungen | 379 |
+| Regeln | 118 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 95 |
+| Prüfmuster im Textcheck | 100 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~704 KB, eine Datei, kein Build |
+| Dateigröße | ~717 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,54 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Textcheck und Aufgabenlogik nachgeschärft (13.09.2026, zweite Runde).** Fünf Änderungen,
+jede mit eigener Prüfung.
+
+- **Zwei Aufgaben hatten zwei richtige Antworten.** `k29` zeigte beide Fassungen von „Von der
+  Hitze erschöpft(,) brach sie das Training ab.“ und fragte „Welche Variante ist richtig?“ —
+  beide sind richtig, das Komma bei vorangestellten Partizipgruppen ist auch nach dem
+  Regelwerk 2024 freigestellt. `m19` stellte „hat“ und „haben“ nach „eine Reihe von“
+  gegenüber und fragte „Was ist korrekt?“ — beides ist korrekt. Beide fragen jetzt nach dem
+  strittigen Punkt und bieten Ausschlussbehauptungen an („Nur mit Komma ist richtig“), so wie
+  die anderen dreizehn Aufgaben dieser Bauart es schon taten. `tests/inhalt.js`, Abschnitt E,
+  hält das fest: Neben einer Sammelantwort muss jeder Ablenker Ausschließlichkeit behaupten,
+  statt eine Form vorzuführen.
+
+- **JavaScripts `\b` kennt keine Umlaute.** In „überlegen“ liegt zwischen ü und b eine
+  Wortgrenze — das Kommamuster `y01` traf erst ab dem b, und der Textcheck unterstrich
+  „berlegen ob“. `analyse()` dehnt Treffer jetzt über `\p{L}` auf ganze Wörter; das wirkt für
+  alle Muster auf einmal und kann nur mehr markieren, nie etwas Neues melden. `y01` selbst
+  bekam zusätzlich `(?<![A-Za-zÄÖÜäöüß])`, damit die Ausschlussliste nicht auf einen
+  Wortrest angewandt wird. Geprüft an 2200 echten Texten der App.
+
+- **„Mal oder mal?“ fehlte ganz** — keine Regel, keine Übung, kein Muster, obwohl „beim
+  nächsten mal“ ein Klassiker ist. Neu: Regel `gross-mal`, die Übungen `g31` bis `g33`, eine
+  Spickzettel-Zeile und die Muster `x36` (im großen und ganzen), `x37` (Artikel + Adjektiv +
+  klein geschriebenes mal), `x38` (jedes mal, jedesmal, dieses mal). `x28` greift jetzt auch
+  bei mehreren Verstärkern — „tut mir wirklich unglaublich Leid“ lief vorher durch.
+
+- **`y09` (das/dass) kannte „meine“, aber nicht „meinte“** und „zeigt“, aber nicht „zeigen“.
+  Jetzt beide Bauformen, dazu „Dabei wurde deutlich, das die …“. Die Folgerliste verlor dafür
+  die Dativformen: „Ich sage das dem Trainer“ ist richtig und hatte einen Fehlalarm ausgelöst.
+
+- **Die Vorbildtexte der Schreibwerkstatt sind jetzt Prüfkorpus.** Die 319 Bausteine,
+  Gegenüberstellungen, Situationen, Schreibaufträge und korrigierten Fehlersuchtexte dürfen
+  kein Muster der Stufe „prüfen“ auslösen — ein Baustein, den Nils abschreiben soll, darf
+  ihm keinen Zweifel anzeigen. Das ist zugleich das Netz gegen zu weit gefasste Kommamuster.
+  Auf den 529 Beispielen der Regeln darf ein Prüfhinweis nur dort stehen, wo er zur Regel
+  selbst gehört.
+
+**Trefferquote des Textchecks** auf den zwölf Fehlersuchtexten: 52 → 64 von 86 (74 %). Die
+Untergrenze in `tests/suite.js` steht auf 60.
+
+**Eine Einschränkung für die nächste Runde:** Das Suchkontingent dieser Sitzung ist
+aufgebraucht (200 von 200). Alles oben ist vor dem Aufbrauchen belegt worden, jeweils mit
+zwei verschieden formulierten Suchen. Ein Fund blieb deshalb liegen: ein Prüfmuster für
+„dem selben“ statt „demselben“. Die Falle dabei ist, dass „am selben Tag“, „im selben
+Moment“, „zur selben Zeit“ mit verschmolzener Präposition korrekt sind — das gehört belegt,
+bevor ein hartes Muster entsteht. Die Regel `gram-derselbe` sagt bisher nur etwas zur
+Bedeutung, nichts zur Schreibung.
 
 **Inhaltliche Prüfung mit Quellen — abgeschlossen (13.09.2026).** Der Nachlauf hat die 55
 Gegenprüfungen nachgeholt, die ins Wochenlimit gelaufen waren: **146 Agenten, kein Fehler.**
