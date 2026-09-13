@@ -342,4 +342,23 @@ P.ok("Die Einordnungsprüfung erkennt eine unvollständige Landkarte",
   EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length === 2,
   "Positivprobe blieb stumm");
 
+/* Zweite Achse derselben Fehlerklasse: das Register. Die Übung g13 sagt zu „bezüglich“,
+   es klinge nach Amtsdeutsch — die Fallkarten „zwecks“ und „seitens“ sagten dazu nichts,
+   obwohl beide tiefer im Amtsdeutsch stehen: Duden führt „zwecks“ als Amtssprache und
+   „seitens“ als Papierdeutsch, das DWDS „zwecks“ als Behördensprache neben „behufs“.
+   Nils soll die Wörter erkennen, nicht übernehmen — er schreibt Hausarbeiten und
+   Elternmails, keine Bescheide. Belegt am 13.09.2026 mit je zwei Suchen. */
+const REGISTER = [
+  { was: "zwecks", art: "Fallkarte", id: "zwecks", muss: /Amtssprache|Amtsdeutsch|Behördensprache/ },
+  { was: "seitens", art: "Fallkarte", id: "seitens", muss: /Papierdeutsch|Amtssprache|Amtsdeutsch/ },
+  { was: "bezüglich", art: "Übung", id: "g13", muss: /Amtsdeutsch|Amtssprache/ },
+];
+const registerSchief = REGISTER.filter(r => {
+  const t = textVon(r.art, r.id);
+  return t === null || !r.muss.test(t);
+}).map(r => r.was);
+P.ok("Amtsdeutsch ist als Amtsdeutsch gekennzeichnet", !registerSchief.length, registerSchief.join(", "));
+P.ok("Die Registerprüfung erkennt eine fehlende Kennzeichnung",
+  !REGISTER[0].muss.test("zwecks besserer Planung — Genitiv."), "Positivprobe blieb stumm");
+
 P.abschluss();
