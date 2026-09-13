@@ -1105,8 +1105,8 @@ const EX_B = [
 {id:"r10",c:"recht",q:"Wie bildet man den Genitiv von „Nils“?",o:["Nils’ Trainingsplan","Nils’s Trainingsplan","Nils Trainingsplan"],a:0,
  e:"Endet ein Name auf <b>s, ss, ß, tz, z, x, ce</b> und steht kein Artikel davor, setzt man nur einen Apostroph, kein zusätzliches s: Andreas’ Buch, Max’ Rad, Nils’ Plan. Mit Artikel bleibt er ohne: der Plan des Nils.",r:"recht-apostroph"},
 
-{id:"r11",c:"recht",q:"Was stimmt?",o:["Sie war anscheinend krank.","Sie war scheinbar krank."],a:0,
- e:"<b>anscheinend</b> = allem Anschein nach, vermutlich. <b>scheinbar</b> = nur dem Schein nach, in Wirklichkeit nicht: „Die Sonne bewegt sich scheinbar.“",r:"recht-verwechsel"},
+{id:"r11",c:"recht",q:"Sie hat blass ausgesehen und beim Training gefehlt. Was stimmt?",o:["Sie war anscheinend krank.","Sie war scheinbar krank."],a:0,
+ e:"<b>anscheinend</b> = allem Anschein nach, vermutlich — genau das sagen die Anzeichen hier. <b>scheinbar</b> = nur dem Schein nach, in Wirklichkeit nicht: „Die Sonne bewegt sich scheinbar.“ „Sie war scheinbar krank“ hieße also: Sie hat es nur vorgetäuscht.",r:"recht-verwechsel"},
 
 {id:"r12",c:"recht",q:"Welche Schreibung ist korrekt?",o:["Tipp","Tip"],a:0,
  e:"Seit 1996 mit doppeltem p: <b>Tipp</b>, ebenso <b>Stopp</b>, <b>Ass</b>.",r:"recht-klassiker"},
@@ -1183,8 +1183,8 @@ const EX_B = [
 {id:"m09",c:"gram",q:"Wie lautet der Plural von „Praktikum“?",o:["Praktika","Praktikums","Praktiken"],a:0,
  e:"Lateinische Neutra auf -um bilden den Plural auf -a: Praktikum → <b>Praktika</b>, Zentrum → Zentren (Ausnahme), Museum → Museen.",r:"gram-plural"},
 
-{id:"m10",c:"gram",q:"Plural von „Thema“?",o:["Themen","Themas","Themata"],a:0,
- e:"<b>Themen</b>. („Themata“ ist eine sehr alte Nebenform und heute ungebräuchlich.)",r:"gram-plural"},
+{id:"m10",c:"gram",q:"Welcher Plural von „Thema“ ist heute der gebräuchliche?",o:["Themen","Themas","Themata"],a:0,
+ e:"<b>Themen</b> ist die normale Form. „Themata“ führt der Duden weiterhin als Plural, markiert als bildungssprachlich veraltend — selten, aber nicht falsch. „Themas“ ist der Genitiv Singular („des Themas“), kein Plural.",r:"gram-plural"},
 
 {id:"m11",c:"gram",q:"Welches Relativpronomen ist richtig? „Der Trainer, ___ Methoden umstritten sind, …“",t:"fill",a:["dessen"],
  e:"Maskulinum Singular Genitiv → <b>dessen</b>. Femininum und Plural → <b>deren</b>.",r:"gram-relativ"},
@@ -1642,7 +1642,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <p>Adjektive, Partizipien und andere Wortarten werden großgeschrieben, sobald sie <b>wie ein Substantiv</b> gebraucht werden. Signalwörter:</p>
 <ul>
 <li><b>Artikel oder Präposition + Artikel:</b> <code>das Beste, im Allgemeinen, des Weiteren, im Folgenden, im Übrigen, im Wesentlichen, im Voraus, im Nachhinein, auf dem Laufenden, im Klaren</code></li>
-<li><b>alles, etwas, nichts, viel, wenig:</b> <code>alles Gute, etwas Neues, nichts Besonderes, viel Interessantes</code> — Ausnahme sind die Zahladjektive: <code>etwas anderes, alles andere, nichts anderes, das meiste</code> bleiben klein</li>
+<li><b>alles, etwas, nichts, viel, wenig:</b> <code>alles Gute, etwas Neues, nichts Besonderes, viel Interessantes</code> — Ausnahme sind die Zahladjektive: <code>etwas anderes, alles andere, nichts anderes, das meiste</code> bleiben in der Regel klein (groß ist zulässig, wenn du das Substantivische betonst — siehe unten)</li>
 <li><b>Genitivformel:</b> <code>des Öfteren, des Weiteren</code></li>
 </ul>
 <p><b>Klein trotz Signalwort:</b> <code>am besten, am schnellsten</code> (am + Superlativ, Frage „wie?“ — bei „woran?“ groß: es fehlt am Nötigsten) · <code>ein bisschen, ein paar</code> · <code>zum einen … zum anderen</code>, <code>die einen, die anderen</code>, <code>die meisten</code> (Zahladjektive; vor einem Substantiv immer klein, allein stehend ist „die Meisten“ zulässig, der Duden empfiehlt klein).</p>
@@ -1748,7 +1748,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <p><b>Apostroph</b>, wenn der Name auf <code>s, ss, ß, tz, z, x, ce</code> endet — aber nicht mit Artikel oder Possessiv davor (der Plan des Nils, das Rad unseres Max):</p>
 <div class="ex">Andreas’ Buch · Max’ Fahrrad · Nils’ Plan · Fritz’ Idee</div>
 <p><b>Nie</b> beim Plural: <span class="nope">Pizza's, Foto's, DVD's</span> → <span class="ok">Pizzas, Fotos, DVDs</span></p>
-<p><b>Bei Auslassungen:</b> Vor einem angehängten <code>’s</code> gehört der Apostroph hin, sonst liest es sich schwer: <code>geht’s, gibt’s, wenn’s</code>. Freigestellt ist er bei <code>hab’ ich, so ’ne Sache, ’nen Moment</code>. <b>Keiner</b> steht bei den üblichen Verschmelzungen (<code>ans, ins, fürs, zum, beim</code>), beim Befehl (<code>Komm, Lass das</code>) und beim Adverb-s (<code>montags, abends</code>).</p>
+<p><b>Bei Auslassungen:</b> Vor einem angehängten <code>’s</code> ist der Apostroph <b>freigestellt</b>: <code>geht’s</code> und <code>gehts</code>, <code>gibt’s</code> und <code>gibts</code> sind beide richtig. Nötig ist er nur dort, wo die verkürzte Form sonst schwer zu lesen wäre — bei den geläufigen Verbindungen mit „es“ ist das nicht der Fall, und der Duden führt dort beide Schreibungen („Wenns weiter nichts ist“ neben „Wenn’s …“). Mit Apostroph ist die Auslassung deutlicher markiert. Freigestellt ebenso: <code>hab’ ich, so ’ne Sache, ’nen Moment</code>. <b>Keiner</b> steht bei den üblichen Verschmelzungen (<code>ans, ins, fürs, zum, beim</code>), beim Befehl (<code>Komm, Lass das</code>) und beim Adverb-s (<code>montags, abends</code>).</p>
 <p class="tiny muted">Beim Sprechen hört man den Apostroph nicht: „Max’ Fahrrad“ klingt wie „Max Fahrrad“. Mündlich und in lockeren Texten ist die Umschreibung mit „von“ die sichere Form: das Fahrrad von Max.</p>
 <p><b>Zulässig</b> auch, wenn die Fügung selbst ein Name ist — Laden, Lokal, Marke: <code>Andrea’s Blumenladen</code> — und vor -sch: <code>Newton’sche Gesetze</code> (ebenso richtig: newtonsche). Mehr unter „Schrägstrich, Apostroph, Sonderzeichen“.</p>`},
 
@@ -3782,7 +3782,7 @@ liegen, stehen, sitzen, hängen (irgendwo sein) → <b>Dativ</b></div>
 <p><b>Achtung — Bewegung ohne Zielwechsel bleibt Dativ:</b></p>
 <div class="ex">Ich laufe <b>in der</b> Halle. (drinnen hin und her)<br>
 Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
-<p><b>Feste Ausnahmen:</b> Bei Themen immer Akkusativ („über <b>den</b> Trainer sprechen“), bei Zeitangaben immer Dativ („vor <b>einem</b> Jahr“).</p>`},
+<p><b>Feste Ausnahmen:</b> Bei Themen immer Akkusativ („über <b>den</b> Trainer sprechen“), bei Zeitangaben meist Dativ („vor <b>einem</b> Jahr“, „in <b>der</b> nächsten Woche“). Nicht durchgehend: Umspannt die Präposition einen Zeitraum, steht der Akkusativ — „über <b>das</b> Wochenende“, „auf <b>zwei Jahre</b> befristet“.</p>`},
 
 {id:"sa17",t:"Genitiv im Alltag — wo er wirklich hingehört",short:"Besitz, Genitivpräpositionen, feste Verben",b:`
 <p>Der Genitiv verschwindet in der gesprochenen Sprache — an drei Stellen lohnt er sich trotzdem, weil sein Fehlen auffällt:</p>
@@ -3911,7 +3911,7 @@ Ich weiß nicht, <b>wann</b> das Training anfängt.<br>
 <span style="opacity:.85">Im Sinne von „ziehen“ schwach: „Er hat den Sack geschleift.“</span></div>
 <div class="ex"><b>bewegen</b> → bewog, hat bewogen (= veranlassen)<br>
 <span style="opacity:.85">Im Sinne von „die Lage ändern“ schwach: „Ich habe den Schrank bewegt.“</span></div>
-<p><b>Das Muster dahinter:</b> Wo dasselbe Verb zwei Formen hat, ist die <b>starke</b> Form fast immer die ohne Objekt („etwas geschieht“) und die <b>schwache</b> die mit Objekt („jemand tut etwas mit etwas“).</p>
+<p><b>Das Muster dahinter:</b> Bei <b>erschrecken</b> und <b>hängen</b> entscheidet das Objekt — ohne Objekt die starke Form („er erschrak“, „das Bild hing“), mit Objekt die schwache („der Knall erschreckte mich“, „ich hängte das Bild auf“). Bei <b>schleifen</b> und <b>bewegen</b> entscheidet dagegen die Bedeutung, nicht das Objekt: Dort steht auch die starke Form mit Objekt („das Messer geschliffen“, „das bewog ihn zum Aufgeben“).</p>
 <p class="tiny muted">Geprüft: DWDS-Eintrag zu „winken“ (Formgeschichte), Duden zur Perfektbildung.</p>`}
 
 ];
@@ -4832,7 +4832,7 @@ Enden Zitat und Rahmensatz beide mit Frage- oder Ausrufezeichen, stehen beide: <
 <p>Bei längeren Wortgruppen sind Leerzeichen auf beiden Seiten üblich und lesbarer — so sieht es die DIN 5008 vor: <span class="ex">Deutsche Sporthochschule Köln / Institut für Trainingswissenschaft</span>. Das amtliche Regelwerk schreibt dazu nichts vor und setzt selbst „das Semikolon/der Strichpunkt“; sicher falsch ist nur ein Leerzeichen auf einer Seite.</p>
 <p><b>Apostroph</b> — drei Fälle und eine Variante:</p>
 <ul>
-<li>Auslassung: <code>hab’s, geht’s, so ’ne Sache</code> — aber kein Apostroph bei den üblichen Verschmelzungen <code>ans, ins, fürs, zum, beim</code></li>
+<li>Auslassung: <code>hab’s, geht’s, so ’ne Sache</code> — dort ist der Apostroph freigestellt (auch <code>gehts</code>), aber kein Apostroph bei den üblichen Verschmelzungen <code>ans, ins, fürs, zum, beim</code></li>
 <li>Namen, die auf einen s-Laut enden (<code>s, ss, ß, tz, z, x, ce</code>): <code>Andreas’ Buch, Max’ Rad, Alice’ Idee</code> — nur ohne Artikel oder Possessiv davor (sonst: das Rad des Max, der Plan unseres Nils)</li>
 <li>Wenn die Fügung selbst ein Name ist — Laden, Lokal, Marke —, darf ein Apostroph die Grundform zeigen: <code>Andrea’s Blumenladen</code> (sonst läse man Andreas). Im laufenden Text bleibt es dabei: Peters Auto, Andreas Rad.</li>
 <li>Vor <code>-sch</code>, wenn der Name erkennbar bleiben soll: <code>die Newton’schen Gesetze</code> — ebenso richtig: <code>die newtonschen Gesetze</code></li>
@@ -7888,7 +7888,7 @@ const CHECKS = [
  t:"seit oder seid?",k:"Zeitangabe? Dann <b>seit</b> (Zei<b>t</b> → sei<b>t</b>): „seit dem letzten Spiel“. Form von „sein“? Dann bleibt <b>seid</b>: „Ihr seid dem Gegner überlegen“, „Seid Montag pünktlich da“.",r:"recht-seit"},
 {id:"x18",sev:"pruef",re:/\bseit\s+ihr\b/gi,t:"seit ihr oder seid ihr?",k:"Frage oder Aussage mit „sein“? Dann die Verbform: <b>Seid ihr</b> bereit? Im Zeitsatz bleibt <b>seit</b> richtig: „seit ihr zusammen trainiert“, „seit ihr Knie wieder hält“.",r:"recht-seit"},
 {id:"x19",sev:"pruef",re:/\b(?!(?:Geht|Gibt|Hab|Hat|Ist|Wird|War|Wenn|Wie|Wo|Was|Macht|Kommt|Tut|Lass|Nimm|Sag|Zeig|Pack|Halt|Klappt|Läuft|Passt|Reicht|Sonst|Dann|Jetzt)['’]s\b)[A-ZÄÖÜ][a-zäöüß]+['’]s\s+[A-ZÄÖÜ]/g,t:"Apostroph im Genitiv?",
- k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce) steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Regelwerk und Duden erlauben den Apostroph, wenn er in einem Namen wie einem Ladennamen die Grundform verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“). Bei Auslassungen wie „geht’s“, „gibt’s“, „wenn’s“ ist der Apostroph ohnehin richtig.",r:"recht-apostroph"},
+ k:"Das Genitiv-s steht im Deutschen normalerweise <b>ohne</b> Apostroph: „Peters Auto“. Bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce) steht einer — und dann ohne s: „Andreas’ Buch“. <b>Zulässige Ausnahme:</b> Regelwerk und Duden erlauben den Apostroph, wenn er in einem Namen wie einem Ladennamen die Grundform verdeutlicht — „Andrea’s Blumenladen“ (sonst läse man „Andreas“). Bei Auslassungen wie „geht’s“, „gibt’s“, „wenn’s“ ist der Apostroph freigestellt — mit und ohne ist richtig.",r:"recht-apostroph"},
 {id:"x20",sev:"pruef",re:/\b(?:[Rr]uf|[Rr]ufe|[Rr]ufst|[Rr]uft|[Rr]ief|[Rr]iefst|[Rr]ieft|[Rr]iefen)(?:\s+(?:du|er|sie|es|wir|Sie))?\s+(?:dir|mir|ihm|ihnen|Ihnen)\b(?=[^.!?]*\ban\b)|\b(?:dir|mir|ihm|ihnen|Ihnen)\s+angerufen\b/g,
  t:"anrufen + Akkusativ",k:"Überregional verlangt „anrufen“ den Akkusativ: <b>Ich rufe dich an.</b> Der Dativ ist südwestdeutsch und schweizerisch verbreitet — außerhalb fällt er auf, falsch ist er nicht. Bei <i>zurufen</i> und <i>nachrufen</i> steht der Dativ überall richtig. „uns“ und „euch“ sind in beiden Fällen gleich — dort sieht man es der Form nicht an.",r:"gram-akkverben"},
 {id:"x21",sev:"hart",re:/\binteressiert\s+(mir|dir|ihm|uns|euch)\b/g,t:"interessieren + Akkusativ",
@@ -7906,7 +7906,7 @@ const CHECKS = [
 {id:"x34",sev:"hart",re:/\bwider(hol|sah|sieht|sehen|kehr|gab|geben|gib)/gi,t:"wieder statt wider",
  k:"Bei „erneut“ steht <b>wieder</b> mit ie: wiederholen, wiedersehen, wiederkehren, wiedergeben. Ohne e nur bei „entgegen“: widersprechen, widerlegen.",r:"recht-wider"},
 {id:"x35",sev:"pruef",re:/\b(?:[Dd]ie|[Dd]en|[Vv]iele|[Aa]lle|[Ee]inige|[Mm]ehrere|[Bb]eide|[Zz]wei|[Dd]rei|[Vv]ier|[Ff]ünf|\d+)\s+[A-ZÄÖÜ][A-Za-zäöüß]*['’]s\b/g,t:"Plural mit Apostroph?",
- k:"Der Plural bekommt keinen Apostroph: <b>Fotos, Pizzas, DVDs</b>. Im Genitiv von Namen auf s-Laut steht einer (Andreas’ Buch), ebenso bei Auslassungen (geht’s). Zulässig ist er außerdem in Namen wie „Andrea’s Blumenladen“ und vor -sch: „Newton’sche Gesetze“.",r:"recht-apostroph"},
+ k:"Der Plural bekommt keinen Apostroph: <b>Fotos, Pizzas, DVDs</b>. Im Genitiv von Namen auf s-Laut steht einer (Andreas’ Buch); bei Auslassungen ist er freigestellt (geht’s oder gehts). Zulässig ist er außerdem in Namen wie „Andrea’s Blumenladen“ und vor -sch: „Newton’sche Gesetze“.",r:"recht-apostroph"},
 {id:"x27",sev:"hart",re:/\b(?:[Vv]orgestern|[Gg]estern|[Hh]eute|[Mm]orgen|[Üü]bermorgen)\s+(?:morgen|vormittag|mittag|nachmittag|abend|nacht)\b/g,t:"Tageszeit nach heute/gestern/morgen",
  k:"Tageszeiten sind hier Substantive und stehen groß: <b>heute Morgen, gestern Abend, morgen Nachmittag, heute Nacht</b>. Klein bleibt nur das Adverb „früh“: heute früh.",r:"gross-zeit"},
 {id:"x28",sev:"hart",re:/\btut\s+(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)\s+(?:sehr\s+|wirklich\s+|ehrlich\s+|aufrichtig\s+|furchtbar\s+|echt\s+)?Leid\b/g,t:"leid tun klein",
@@ -8479,7 +8479,7 @@ function cheatHTML(){
   '<tr><th>Wechsel</th><td>'+esc(wechsel)+' — <b>wohin?</b> Akkusativ · <b>wo?</b> Dativ</td></tr>'+
   '</tbody></table>'+
   '<p class="ch-n"><b>Verbtest bei Wechselpräpositionen:</b> legen, stellen, setzen, hängen → Akkusativ · '+
-  'liegen, stehen, sitzen, hängen → Dativ. <b>Themen</b> immer Akkusativ, <b>Zeitangaben</b> immer Dativ.</p></section>'+
+  'liegen, stehen, sitzen, hängen → Dativ. <b>Themen</b> immer Akkusativ, <b>Zeitangaben</b> meist Dativ — für einen Zeitraum aber Akkusativ: über das Wochenende.</p></section>'+
 
   '<section class="ch-sec"><h2>3 · Verben — Dativ oder Akkusativ</h2>'+
   '<div class="ch-2col">'+
@@ -8515,7 +8515,7 @@ function cheatHTML(){
   '<tr><th>seit / seid</th><td>Zei<b>t</b> → sei<b>t</b>. „ihr seid“ ist die Verbform.</td></tr>'+
   '<tr><th>wider / wieder</th><td><b>wider</b> = gegen (widersprechen, widerlegen, widerspiegeln) · <b>wieder</b> = erneut.</td></tr>'+
   '<tr><th>ss / ß</th><td>Kurzer Vokal → ss (Fluss, muss, dass) · langer Vokal oder Diphthong → ß (Maß, Straße, außer, heiß).</td></tr>'+
-  '<tr><th>Apostroph</th><td>Genitiv-s ohne Apostroph: Peters Auto. Apostroph bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce): Andreas’ Buch, Alice’ Idee — und bei Auslassungen: geht’s. Nie im Plural: Fotos, DVDs. Zulässig in Ladennamen (Andrea’s Blumenladen) und vor -sch (Newton’sche Gesetze).</td></tr>'+
+  '<tr><th>Apostroph</th><td>Genitiv-s ohne Apostroph: Peters Auto. Apostroph bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce): Andreas’ Buch, Alice’ Idee — und bei Auslassungen freigestellt: geht’s oder gehts. Nie im Plural: Fotos, DVDs. Zulässig in Ladennamen (Andrea’s Blumenladen) und vor -sch (Newton’sche Gesetze).</td></tr>'+
   '<tr><th>als / wie</th><td>ungleich → <b>als</b> („größer als“) · gleich → <b>wie</b> („so groß wie“).</td></tr>'+
   '<tr><th>scheinbar / anscheinend</th><td><b>scheinbar</b> = in Wirklichkeit nicht · <b>anscheinend</b> = wahrscheinlich.</td></tr>'+
   '</tbody></table></section>'+

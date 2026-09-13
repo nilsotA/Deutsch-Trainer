@@ -677,12 +677,17 @@ P.titel("K · Sichern und Laden");
     P.ok("es gibt geänderte Karten", geaendert.length > 0, geaendert.length);
     const id = geaendert[0];
     const datum = daten(boot(null), "NEU_GELERNT")[id];
-    /* Ein Gerät, das die Änderung längst abgearbeitet hat … */
-    const cards = {}; cards[id] = { b: 4, d: tag(9), s: 5, w: 0 };
+    /* Die letzte Antwort muss vor dem Änderungsdatum liegen — sonst hat Nils die neue
+       Antwort schon gesehen und regelAenderungen() lässt die Karte zu Recht stehen. Das
+       Feld l sagt das ausdrücklich; vorher hing es an der Schätzung aus Fälligkeit minus
+       Fachintervall und damit am heutigen Datum, und die Prüfung wurde mit der Zeit falsch. */
+    const vorDerAenderung = "2020-01-01";
+    const karteVon = () => ({ b: 4, d: tag(9), s: 5, w: 0, l: vorDerAenderung });
+    const cards = {}; cards[id] = karteVon();
     const merker = {}; merker[id] = datum;
     const w = boot(leererStand({ cards, neu: merker }));
     /* … lädt eine Sicherung von vorher: dieselbe Karte, aber ohne Merker. */
-    const altCards = {}; altCards[id] = { b: 4, d: tag(9), s: 5, w: 0 };
+    const altCards = {}; altCards[id] = karteVon();
     await laden(w, leererStand({ xp: 100, cards: altCards }));
     const karte = daten(w, "S.cards[" + JSON.stringify(id) + "] || null");
     P.ok("die geänderte Karte fällt zurück auf Fach 1", karte && karte.b === 1, karte);

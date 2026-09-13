@@ -58,6 +58,71 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Inhaltliche Prüfung mit Quellen — erster Teil (13.09.2026).** Die Websuche ist wieder
+verfügbar, und damit die Arbeit möglich, auf die `FUNDE-offen.md` gewartet hat. 51 Prüfer
+sind über Regeln, Übungen, Fall- und Wortkarten, Prüfmuster und Spickzettel gegangen, jeder
+mit eigener Recherche; **49 Funde** kamen zurück, jeder danach von zwei Gegnern angegriffen
+(einer die Beleglage, einer den Bestand).
+
+Eine Einschränkung vorweg, die in den Gegenprüfungen selbst steht: Bei den meisten war das
+Suchkontingent der Sitzung schon aufgebraucht, sie konnten die Quellenlage also nicht
+unabhängig nachschlagen und haben stattdessen den Bestand angegriffen. **Die fünf Funde
+unten habe ich deshalb selbst nachrecherchiert**, bevor ich etwas geändert habe — mit je
+zwei verschieden formulierten Suchen.
+
+**1 · `recht-apostroph` machte aus einer freigestellten Schreibung eine Pflicht.** Da stand:
+„Vor einem angehängten ’s gehört der Apostroph hin, sonst liest es sich schwer.“ Der Duden
+führt bei enklitischem „es“ **beide** Schreibungen und hält den Apostroph dort meist für
+entbehrlich — sein Sprachratgeber zeigt „Wenns (also: Wenn’s) weiter nichts ist“ und „Mir
+gehts gut“. Die Begründung der App sagte also das Gegenteil dessen, was die Quelle zu genau
+diesen Formen feststellt. Jetzt freigestellt, mit der Bedingung statt eines Urteils. Vier
+weitere Stellen mitgezogen (`z-schraeg`, Spickzettel, die Hinweise von `x19` und `x35`),
+damit die App überall dasselbe sagt. Die Regel trägt dadurch automatisch die Markierung
+**◆ Varianten**.
+
+**2 · `m10` wertete eine gültige Wörterbuchform als falsch.** „Themata“ stand als
+Falschantwort, die eigene Erklärung nannte es „Nebenform … ungebräuchlich“ — eine Nebenform
+ist aber keine Fehlform. Der Duden führt sie weiterhin als Plural, markiert als
+*bildungssprachlich veraltend*. Grundsatz 2 verletzt. Die Frage heißt jetzt „Welcher Plural
+ist heute der gebräuchliche?“, die richtige Antwort bleibt „Themen“. **Damit ist der dritte
+der drei offenen Punkte aus `FUNDE-offen.md` entschieden.**
+
+**3 · `r11` stellte eine Frage ohne Zusammenhang.** „Was stimmt? — Sie war anscheinend krank
+/ Sie war scheinbar krank.“ Ohne Kontext ist der Ablenker ein korrekter Satz, und zwar in
+genau der Bedeutung, die die App selbst lehrt. Die Frage nennt jetzt die Situation („Sie hat
+blass ausgesehen und beim Training gefehlt“), und die Erklärung sagt ausdrücklich, was der
+Ablenker bedeuten *würde*, statt ihn als Unwort hinzustellen.
+
+**4 · „Bei Zeitangaben immer Dativ“ stimmt für die Wechselpräpositionen nicht.** „über das
+Wochenende“, „auf zwei Jahre befristet“ — beides Akkusativ, formal eindeutig, ohne jede
+Quelle entscheidbar. Der Satz war aus zwei Fallkartennotizen zusammengesetzt, die einzeln
+richtig sind („über“ bei Themen, „vor“ bei Zeitangaben), als Regel über alle neun aber
+falsch. Regel und Spickzettel angeglichen; die Fallkarten selbst bleiben, sie sind korrekt.
+
+**5 · `gram-verbformen` gab ein Muster aus, das seine eigenen Beispiele widerlegen.** „Die
+starke Form ist fast immer die ohne Objekt“ — bei `schleifen` und `bewegen` entscheidet aber
+die Bedeutung, nicht das Objekt, und beide starken Formen stehen mit Objekt („das Messer
+geschliffen“, „das bewog ihn“). Wer das Muster anwendet, bildet genau die Fehler, die die
+Regel verhindern soll. Jetzt nach Verbpaaren getrennt.
+
+**Dazu eine Abschwächung ohne Fund:** Der Aufzählungspunkt in `gross-subst` sagte „das meiste
+bleiben klein“. Die Gegenprüfung hat den Fund zu Recht kassiert — zwei Zeilen später steht
+die Einschränkung bereits, generalisiert über „Zahladjektive“. Die *offene Frage* aus
+`FUNDE-offen.md` ist damit aber beantwortet: Groß ist zulässig, wenn das Substantivische
+betont wird (§ 58 E4; Duden führt „das meiste oder Meiste ist bekannt“). Also ein Wort
+eingefügt statt umgeschrieben — der Punkt sagt jetzt „in der Regel klein“ und verweist nach
+unten. **Zweiter der drei offenen Punkte entschieden.**
+
+Nebenbei repariert: Die Import-Prüfung in `tests/lernen.js`, Abschnitt K, hing am heutigen
+Datum. Sie baute die Karte mit `d: tag(9)` und verließ sich darauf, dass die geschätzte
+letzte Antwort vor dem Änderungsdatum liegt — fünf Tage später stimmte das nicht mehr, und
+der Lauf wurde rot, ohne dass sich an der App etwas geändert hätte. Jetzt steht das Datum
+der letzten Antwort ausdrücklich im neuen Feld `l`.
+
+Die restlichen 44 Funde: 17 sind an der Gegenprüfung gescheitert, 27 hatten kein
+vollständiges Urteil, weil die Gegenprüfer ins Wochenlimit gelaufen sind. Der Lauf ist dafür
+wieder angestoßen — ungeprüft ist nicht widerlegt.
+
 **„Sitzt sicher“ meint jetzt drei verschiedene Tage (08.09.2026).** `CLAUDE.md` benannte
 diese Schwäche selbst: Der Lernstand hielt je Karte nur `{b, d, s, w}`, das Datum der letzten
 Antwort fehlte, und über `unterwegsRunde()` konnte eine noch nicht fällige Karte am selben
