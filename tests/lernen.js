@@ -41,6 +41,37 @@ const P = pruefer("A · Erster Start und Einstufung");
   P.ok("Test läuft durch (" + n + " Fragen)", n >= 25);
   P.ok("Niveau gespeichert", !!daten(w, "S.level"));
 
+  /* Die Einstufung trägt den ganzen Lernplan: makePlan() sortiert die Bereiche nach dem
+     Ergebnis und macht den schwächsten zum ersten Wochenschwerpunkt. Ein Bereich, der gar
+     nicht abgefragt wurde, bekäme in testAuswertung() den Wert 0 („t ? … : 0“) und stünde
+     damit als schwächster vorn — ohne dass Nils dazu je eine Frage gesehen hätte.
+     testQuestions() nimmt drei Fragen je Bereich aus dem Vorrat; schrumpft ein Vorrat unter
+     drei, liefert die Schleife stillschweigend weniger. Deshalb hier festgehalten. */
+  const einstufung = daten(w, "testQuestions().map(x=>x.cat)");
+  const jeBereich = {};
+  einstufung.forEach(c => jeBereich[c] = (jeBereich[c] || 0) + 1);
+  const testcats = daten(w, "TESTCATS");
+  P.ok("Die Einstufung fragt jeden Bereich ab", testcats.every(c => jeBereich[c]),
+    testcats.filter(c => !jeBereich[c]).join(", "));
+  P.ok("und jeden gleich oft (3)", testcats.every(c => jeBereich[c] === 3),
+    JSON.stringify(jeBereich));
+  P.ok("zusammen so viele Fragen, wie die App ankündigt",
+    einstufung.length === testcats.length * 3, einstufung.length);
+  {
+    /* Positivprobe, damit die drei Prüfungen oben nicht stumm grün werden: Schrumpft der
+       Vorrat eines Bereichs unter drei, muss es auffallen. Der Vorrat wird dafür in einem
+       eigenen Fenster zusammengestrichen, das danach weggeworfen wird. */
+    const w2 = boot(leererStand());
+    const knapp = daten(w2, `(function(){
+      const raus = ALL.filter(i => i.c === "zahlen").slice(2);
+      raus.forEach(i => ALL.splice(ALL.indexOf(i), 1));
+      const z = {};
+      testQuestions().forEach(q => z[q.cat] = (z[q.cat] || 0) + 1);
+      return z;
+    })()`);
+    P.ok("ein geschrumpfter Vorrat fällt auf", knapp.zahlen !== 3, JSON.stringify(knapp));
+  }
+
   const machen = d.querySelector("#pMake");
   P.ok("Plan wird angeboten", !!machen);
   if (machen) {
