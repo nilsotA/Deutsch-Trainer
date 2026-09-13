@@ -319,16 +319,37 @@ daten(w, "PROMPTS").forEach(pr => { if (pr.p) beide({ id: "w:" + pr.id, t: strip
    = nur dem Schein nach“. Ein Muster der Stufe „prüfen“ trifft dort zu Recht — sie bleibt
    deshalb bei der harten Prüfung und zählt nicht zu den Vorbildtexten. */
 WORDS.forEach(x => { if (x.d) vorlagen.push({ id: "w:" + x.w + " (Erläuterung)", t: strip(x.d) }); });
-let korrOffen = 0;
+/* Fehlerklasse „Prüfkorpus ist in Wahrheit leer“: Vorher wurde ein Fehlersuchtext ganz
+   verworfen, sobald EINE seiner Markierungen mehrteilig ersetzt („dem“ → „des Zeitplans“)
+   oder gar eine Anweisung statt einer Form ist („(Beobachtung statt Etikett)“). Das trifft
+   auf alle zwölf zu — der dritte korrekte Bestand trug also null Texte bei, während
+   CLAUDE.md ihn aufzählte. Jetzt wird satzweise gerettet: einteilige Korrekturen einsetzen,
+   dann nur die Sätze behalten, in denen keine unersetzte Markierung mehr steht. Das sind
+   55 Sätze mit gut 600 Wörtern zusammenhängender, richtiger Prosa. */
+let korrOffen = 0, korrSaetze = 0;
 KORREKTUR.forEach(t => {
-  if (t.errs.some(e => /\s/.test(String(e.ok)))) { korrOffen++; return; }
   const toks = String(t.txt).split(/\s+/);
+  const offen = new Set();
   t.errs.forEach(e => {
     const nth = e.nth || 1;
-    let c = 0;
-    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { toks[i] = e.ok; break; }
+    let c = 0, idx = -1;
+    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { idx = i; break; }
+    if (idx < 0) return;
+    if (/\s/.test(String(e.ok))) offen.add(idx);
+    else toks[idx] = e.ok;
   });
-  beide({ id: t.id + " korrigiert", t: toks.join(" ") });
+  korrOffen += offen.size;
+  let start = 0;
+  toks.forEach((tk, i) => {
+    if (!/[.!?]["\u201c\u00bb]?$/.test(tk) && i !== toks.length - 1) return;
+    const satz = toks.slice(start, i + 1).join(" ");
+    const belastet = [...offen].some(o => o >= start && o <= i);
+    if (!belastet && satz.split(" ").length >= 4) {
+      beide({ id: t.id + " korrigiert", t: satz });
+      korrSaetze++;
+    }
+    start = i + 1;
+  });
 });
 P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 430, vorlagen.length);
 const vorbildSet = new Set(vorbild);
@@ -355,7 +376,8 @@ P.ok("Kein Prüfhinweis auf den Vorbildtexten (" + vorbild.length + ")", !vorbil
   vorbildFrage.slice(0, 5).join(" · ") + (vorbildFrage.length > 5 ? " …(" + vorbildFrage.length + ")" : ""));
 const vorbildProbe = daten(w, 'analyse("Er war scheinbar schon vor uns da.").finds.filter(f=>f.c.sev==="pruef").length');
 P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0, "Positivprobe blieb stumm");
-if (korrOffen) P.info(korrOffen + " Fehlersuchtexte ersetzen mehrteilig — dort ist die korrigierte Fassung nicht rekonstruierbar");
+P.ok("Genug korrigierte Sätze aus den Fehlersuchtexten (" + korrSaetze + ")", korrSaetze >= 45, korrSaetze);
+if (korrOffen) P.info(korrOffen + " Markierungen ersetzen mehrteilig oder nennen nur eine Anweisung — die Sätze um sie herum bleiben außen vor");
 
 /* Jede Markierung muss im Text auffindbar sein: korrErrIdx() sucht das Wort als ganzes
    Token. Findet es nichts, ist der Fehler unanklickbar, zählt aber in der Gesamtzahl —
