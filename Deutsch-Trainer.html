@@ -1168,7 +1168,7 @@ const EX_B = [
  e:"<b>während</b> verlangt den Genitiv. Merksatz für die häufigsten: <b>w</b>egen, <b>w</b>ährend, <b>t</b>rotz, <b>s</b>tatt, <b>i</b>nnerhalb, <b>a</b>ußerhalb.",r:"gram-genitiv"},
 
 {id:"m03",c:"gram",q:"Welche Form ist richtig?",o:["trotz des schlechten Wetters","trotz dem schlechten Wetter"],a:0,
- e:"<b>trotz</b> + Genitiv. (Beim Plural ohne erkennbaren Genitiv weicht man auf den Dativ aus: „trotz Beweisen“.)",r:"gram-genitiv"},
+ e:"<b>trotz</b> + Genitiv. (Beim Plural ohne erkennbaren Genitiv weicht man auf den Dativ aus: „trotz Beweisen“.) In der Schweiz, in Österreich und teilweise in Süddeutschland ist der Dativ auch mit Artikel verbreitet.",r:"gram-genitiv"},
 
 {id:"m04",c:"gram",q:"Wie gibst du das neutral wieder? „Er sagte: ‚Ich bin müde.‘“",o:[
  "Er sagte, er sei müde.","Er sagte, er ist müde.","Er sagte, er wäre müde."],a:0,
@@ -1823,6 +1823,7 @@ Ich hoffe, dass du kommst. → „welches du kommst“ ergibt keinen Sinn → <b
 <li>Artikelloses Substantiv im Singular: „wegen Umbau geschlossen“</li>
 <li>Plural ohne erkennbare Genitivform: „trotz Beweisen“</li>
 </ul>
+<p><b>Die Schweiz und Österreich schreiben es anders.</b> Bei <b>trotz</b>, <b>während</b> und <b>statt</b> ist der Dativ dort verbreitet — nicht nur gesprochen, sondern auch in Zeitungstexten; die Variantengrammatik des IDS führt ihn als regionale Standardvariante. Bei <b>trotz</b> gilt das teilweise auch für Süddeutschland, bei <b>während</b> vor allem für die Schweiz und Westösterreich. Bei <b>wegen</b> dagegen gilt der Dativ überall als umgangssprachlich. Für Nils — Schule und Uni in Deutschland — ist der Genitiv in allen vier Fällen die sichere Wahl; als Fehler abstempeln sollte man den Dativ bei den ersten drei aber nicht.</p>
 <p><b>Bei Pronomen</b> steht standardsprachlich die Form auf -etwegen: <b>meinetwegen, deinetwegen, seinetwegen</b>. „Wegen mir“ ist gesprochen verbreitet, geschrieben bleibt „meinetwegen“ die sichere Wahl.</p>
 <p><b>Verben mit Genitiv:</b> gedenken, bedürfen, sich bedienen, sich rühmen, sich enthalten, harren.</p>`},
 
@@ -3454,10 +3455,10 @@ const CASEREF = [
 {w:"zwischen",t:"wechsel",k:"Akk / Dat",ex:"Wohin? zwischen die Stühle · Wo? zwischen den Stühlen",s:[["Ich stelle die Tasche zwischen ___.", "die Stühle", "den Stühlen"], ["Die Tasche steht zwischen ___.", "den Stühlen", "die Stühle"]]},
 
 /* ---------- PRÄPOSITIONEN MIT GENITIV ---------- */
-{w:"während",t:"praep",k:"Genitiv",ex:"während der Vorlesung, während des Spiels",s:["Während ___ habe ich mitgeschrieben.","des Vortrags","dem Vortrag"]},
+{w:"während",t:"praep",k:"Genitiv",ex:"während der Vorlesung, während des Spiels",n:"„während dem Vortrag“ ist umgangssprachlich verbreitet; in der Schweiz und in Westösterreich steht der Dativ auch in Zeitungstexten. Im Plural ohne erkennbare Genitivform ist er überall richtig: „während fünf Jahren“.",s:["Während ___ habe ich mitgeschrieben.","des Vortrags","dem Vortrag"]},
 {w:"wegen",t:"praep",k:"Genitiv",ex:"wegen des schlechten Wetters",n:"„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet, gilt aber nicht als standardsprachlich. Ohne Artikel steht der Dativ: „wegen Umbau geschlossen“. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.",fall:true,s:["Wegen ___ haben wir abgesagt.","des schlechten Wetters","dem schlechten Wetter"]},
-{w:"trotz",t:"praep",k:"Genitiv",ex:"trotz des Regens",n:"Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus: „trotz Beweisen“. In Österreich ist „trotz dem“ verbreitet.",s:["Trotz ___ haben wir gewonnen.","des Rückstands","dem Rückstand"]},
-{w:"statt / anstatt",t:"praep",k:"Genitiv",ex:"statt des Trainings, anstatt eines Vortrags",s:["Statt ___ gab es eine Besprechung.","des Trainings","dem Training"]},
+{w:"trotz",t:"praep",k:"Genitiv",ex:"trotz des Regens",n:"Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus: „trotz Beweisen“. In der Schweiz, in Österreich und teilweise in Süddeutschland ist auch „trotz dem Rückstand“ verbreitet — der Dativ ist die ältere Fügung, erhalten in „trotz allem“.",s:["Trotz ___ haben wir gewonnen.","des Rückstands","dem Rückstand"]},
+{w:"statt / anstatt",t:"praep",k:"Genitiv",ex:"statt des Trainings, anstatt eines Vortrags",n:"„statt dem Training“ ist umgangssprachlich verbreitet, in der Schweiz und in Österreich auch geschrieben. Ohne erkennbare Genitivform steht der Dativ überall: „statt Worten will ich Taten sehen“.",s:["Statt ___ gab es eine Besprechung.","des Trainings","dem Training"]},
 {w:"innerhalb",t:"praep",k:"Genitiv",ex:"innerhalb einer Woche, innerhalb des Gebäudes",n:"Bei Zeitangaben ist „innerhalb von einer Woche“ ebenfalls üblich.",s:["Die Anmeldung läuft innerhalb ___.","einer Woche","eine Woche"]},
 {w:"außerhalb",t:"praep",k:"Genitiv",ex:"außerhalb der Öffnungszeiten",s:["Die Halle ist außerhalb ___ geschlossen.","der Öffnungszeiten","die Öffnungszeiten"]},
 {w:"oberhalb / unterhalb",t:"praep",k:"Genitiv",ex:"oberhalb des Knies, unterhalb der Grenze",s:["Der Schmerz sitzt oberhalb ___.","des Knies","dem Knie"]},
@@ -4413,10 +4414,10 @@ const EX_D = [
  e:"„fragen“ verlangt den Akkusativ, und „Kollege“ folgt der n-Deklination: <b>den Kollegen</b>. Im Nominativ heißt es „der Kollege“.",r:"gram-ndekl"},
 
 {id:"d17",c:"gram",q:"Trotz ___ Regens haben wir draußen trainiert.",o:["des","dem"],a:0,
- e:"<b>trotz</b> steht standardsprachlich mit dem Genitiv: trotz <b>des</b> Regens. Der Dativ ist landschaftlich und in der Schweiz üblich.",r:"gram-genitiv"},
+ e:"<b>trotz</b> steht standardsprachlich mit dem Genitiv: trotz <b>des</b> Regens. In der Schweiz, in Österreich und teilweise in Süddeutschland ist der Dativ verbreitet, auch geschrieben — für Schule und Uni in Deutschland bleibt der Genitiv die sichere Wahl.",r:"gram-genitiv"},
 
 {id:"d18",c:"gram",q:"Während ___ Sitzung habe ich mitgeschrieben.",o:["der","die"],a:0,
- e:"<b>während</b> steht mit dem Genitiv. „Sitzung“ ist feminin, der Genitiv lautet <b>der</b> Sitzung.",r:"gram-genitiv"},
+ e:"<b>während</b> steht mit dem Genitiv. „Sitzung“ ist feminin, der Genitiv lautet <b>der</b> Sitzung — im Femininum sieht man den Unterschied ohnehin nicht, Dativ und Genitiv lauten gleich. Sichtbar wird er erst im Maskulinum: „während <b>des</b> Vortrags“ gegen das umgangssprachliche „während <b>dem</b> Vortrag“.",r:"gram-genitiv"},
 
 {id:"d19",c:"gram",q:"Das sehe ich ___ heute Abend in Ruhe an.",o:["mir","mich"],a:0,
  e:"<b>sich etwas ansehen</b> — wenn ein Objekt dabei ist („das“), steht das Reflexivpronomen im Dativ: <b>mir</b>.",r:"gram-reflexiv"},

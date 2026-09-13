@@ -298,4 +298,48 @@ P.ok("Die Musterantwort steht bei jeder erweiterten Tippaufgabe vorn", !verrutsc
   verrutscht.join(","));
 
 
+/* ---------- G · Einordnung regionaler Varianten ---------- */
+P.titel("G · Regionale Varianten");
+/* Fehlerklasse „dieselbe Form, zwei verschiedene Landkarten“: Die Fallkarte „trotz“ sagte
+   „In Österreich ist ‚trotz dem‘ verbreitet“, die Übung d17 zur exakt selben Sache „Der
+   Dativ ist landschaftlich und in der Schweiz üblich“. Nils hat beide Karten im selben
+   Stapel und bekommt für denselben Ablenker zwei verschiedene geografische Auskünfte.
+   CLAUDE.md, Grundsatz 4: regional statt falsch — und überall gleich einordnen.
+   Die Tabelle hält fest, was an welcher Stelle stehen muss. Sie ist der festgehaltene
+   Quellenstand vom 13.09.2026, je mit zwei verschieden formulierten Suchen belegt:
+   trotz → Schweiz, Österreich, teilweise Süddeutschland (IDS-Variantengrammatik)
+   während → Schweiz und Westösterreich, in Zeitungstexten (IDS); sonst umgangssprachlich
+   statt → Österreich und Schweiz (IDS); Dativ auch ohne erkennbare Genitivform
+   wegen → überall umgangssprachlich, keine regionale Standardvariante
+   Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
+const EINORDNUNG = [
+  { was: "trotz", muss: [/Schweiz/, /Österreich/, /[Ss]üddeutschland|Süden Deutschlands/],
+    stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"]] },
+  { was: "während", muss: [/umgangssprachlich/],
+    stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
+  { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
+    stellen: [["Fallkarte", "statt / anstatt"]] },
+  { was: "wegen", muss: [/umgangssprachlich/],
+    stellen: [["Fallkarte", "wegen"], ["Übung", "n05"], ["Übung", "v03"], ["Übung", "m01"]] },
+];
+const textVon = (art, id) => {
+  if (art === "Fallkarte") { const c = CASEREF.find(x => x.w === id); return c ? String(c.n || "") : null; }
+  const i = ALL.find(x => x.id === id); return i ? String(i.e || "") : null;
+};
+const schiefG = [], fehltG = [];
+EINORDNUNG.forEach(e => e.stellen.forEach(([art, id]) => {
+  const t = textVon(art, id);
+  if (t === null) { fehltG.push(art + " " + id); return; }
+  const fehlend = e.muss.filter(re => !re.test(t));
+  if (fehlend.length) schiefG.push(e.was + " · " + art + " " + id + ": fehlt " + fehlend.map(String).join(", "));
+}));
+P.ok("Alle eingeordneten Stellen gibt es noch", !fehltG.length, fehltG.join(", "));
+P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schiefG.join(" · "));
+/* Positivprobe: Die Prüfung muss anschlagen, wenn eine Landkarte unvollständig ist —
+   sonst misst sie nichts. Die alte Fassung der Fallkarte trotz nannte nur Österreich. */
+const alteFassung = "Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus. In Österreich ist „trotz dem“ verbreitet.";
+P.ok("Die Einordnungsprüfung erkennt eine unvollständige Landkarte",
+  EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length === 2,
+  "Positivprobe blieb stumm");
+
 P.abschluss();
