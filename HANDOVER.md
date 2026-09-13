@@ -58,6 +58,86 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Inhaltliche Prüfung mit Quellen — abgeschlossen (13.09.2026).** Der Nachlauf hat die 55
+Gegenprüfungen nachgeholt, die ins Wochenlimit gelaufen waren: **146 Agenten, kein Fehler.**
+Endstand der 49 Funde: **13 halten, 36 fallen, 0 ungeprüft.**
+
+Die fünf, die ich vorgestern eingebaut hatte, stehen jetzt unter „widerlegt“ — mit der
+Begründung „steht so nicht mehr in der App“, teils samt Commit-Hash. Das ist der richtige
+Ausgang und ein gutes Zeichen für die Gegenprüfung: Sie liest den Bestand, nicht den
+Vorschlag.
+
+Vor jedem Einbau habe ich die Quellenaussage selbst mit zwei verschieden formulierten
+Suchen nachgeprüft — vielen Gegenprüfern war das Suchkontingent ausgegangen, sie konnten nur
+den Bestand angreifen und haben das auch offen dazugeschrieben.
+
+**Die dreizehn, nach Gewicht:**
+
+*Falsche Aussagen:*
+- **`x21` meldete „uns“ und „euch“ als klaren Fehler.** Beide lauten im Dativ und im
+  Akkusativ gleich — „Das interessiert uns sehr“ ist einwandfrei und wurde mit einem
+  Hinweis angezeigt, der den Akkusativ verlangt, der schon dasteht. `x22` dasselbe eine
+  Stufe milder. `x20` nimmt die beiden Formen aus demselben Grund längst heraus.
+- **`satz-perfekt` ließ eine ganze sein-Gruppe aus.** Drei Gruppen, und „mit haben stehen
+  alle anderen“ — damit fehlten *geschehen, passieren, gelingen, misslingen, begegnen,
+  folgen*. Wer der Regel folgt, landet bei „das hat passiert“. Die Fallkarte `begegnen`
+  sagte längst „Perfekt mit sein“.
+- **`d05` behauptete einen Dativ, den es nicht gibt.** „Mit Dativ nur in der Wendung ‚Das
+  trifft sich gut‘“ — dort ist „sich“ Akkusativ, wie in „wir treffen uns“.
+- **Die Fallkarte `dank` belegte ihre eigene Aussage nicht.** „Im Plural meist Genitiv:
+  ‚dank guter Vorbereitung‘“ — das ist Singular, und im Femininum sind Dativ und Genitiv
+  ohnehin formgleich. Jetzt „dank neuer Regeln“ mit dem Dativ danebengestellt; die Aussage
+  selbst bestätigt grammis.
+
+*Zu absolute Aussagen:*
+- **`s06`**: „Passiv ist **nur** sinnvoll, wenn der Handelnde unwichtig oder unbekannt ist“
+  — schneidet die zweite Aufgabe des Passivs ab, das Betroffene zum Thema zu machen. Der
+  Beispielsatz der Übung nennt den Handelnden ja selbst.
+- **`form-anrede`**: „Nach dem Anredekomma geht es klein weiter“, ohne Einschränkung. Groß
+  bleiben Nomen, Namen und Sie/Ihre — die App weiß das in `komma-brief`, `k14` und `f05`,
+  nur hier fehlte es. Wortlaut von dort übernommen.
+- **`komma-nebensatz` + `k27`**: „erst bei längeren Einleitungen steht es **fest**“ — der
+  Duden schreibt „sollte man ein Komma setzen“. Beide Stellen angeglichen.
+- **`form-grussformel`**: „Mit freundlichen Grüßen … **nie falsch**“ — bei einem
+  Kondolenzschreiben eben doch.
+- **`n16`**: „**Alles** außer dem Nominativ Singular endet auf -en“ — für das im selben Satz
+  genannte *Herr* ergibt das „dem Herren“ statt „dem Herrn“. Dazu „-at“ ohne den Zusatz
+  *Personen*bezeichnungen, was den Salat und das Referat mitnimmt.
+
+*Fehlende Varianten:*
+- **`getrennt-verb`**: Bei *gut gehen, sitzen bleiben, stehen lassen, liegen lassen* führt
+  der Duden die getrennte Form als Stichwort, die App nannte die Zusammenschreibung zuerst —
+  und weil im selben Satz „der Duden empfiehlt hier die Zusammenschreibung“ für
+  *kennenlernen* steht, liest sich die Reihenfolge als Empfehlung. Umgedreht.
+- **`recht-bindestrich`**: „80er-Jahre“ ist die Duden-Empfehlung, „80er Jahre“ aber ebenfalls
+  zulässig.
+- **Fallkarte `liegen — wo`** nannte nur „hat gelegen“, während die Schwesterkarten *stehen*
+  und *sitzen* die süddeutsche Variante führen und die Regel `satz-perfekt` alle drei
+  ausdrücklich als „beides gilt“ aufzählt.
+
+**Statt Einzelfix eine Prüfung** (CLAUDE.md §5): Kein Muster mit `r:"gram-akkverben"` darf
+eine Form aufzählen, die laut `tests/formen.js` selbst Akkusativ sein kann. Geprüft wird
+gegen dieselbe unabhängig aufgestellte Formentabelle, mit der auch die Fallkarten geprüft
+werden; gegen die alte Fassung fällt sie mit „x21: uns · x21: euch · x22: uns · x22: euch“
+durch.
+
+**Zwei Dinge, die der Lauf nebenbei über das Projekt gezeigt hat:**
+
+Der Prüflauf hat mich bei m21 erwischt: Ich hatte „die zweite Fassung“ geschrieben — ein
+Positionsverweis, und Antworten werden gemischt. Genau dafür steht die Prüfung da.
+
+Und `VARIANTE` (der Detektor für die Markierung ◆ Varianten) sucht nach **Wortfolgen**. Aus
+„(Duden empfiehlt zusammen)“ wurde bei mir „hier empfiehlt der Duden …“ — und die Markierung
+war weg, ohne dass etwas rot wurde. Wer einen Variantensatz umformuliert, prüft danach
+`hatVarianten()`.
+
+**Alle drei offenen Punkte aus `FUNDE-offen.md` sind entschieden** (`gross-subst`, `m10`,
+`m21`). Die Datei ist neu geschrieben: Stand, die dreizehn eingebauten Funde und die 36
+verworfenen mit Begründung, damit ein späterer Lauf sie nicht noch einmal meldet.
+
+Abschluss: Rundgang im Browser bei 393×852 über alle sieben Reiter und eine volle
+Unterwegs-Runde — keine Seitenfehler, kein Seitwärts-Scrollen, Runde sauber zu Ende.
+
 **Inhaltliche Prüfung mit Quellen — erster Teil (13.09.2026).** Die Websuche ist wieder
 verfügbar, und damit die Arbeit möglich, auf die `FUNDE-offen.md` gewartet hat. 51 Prüfer
 sind über Regeln, Übungen, Fall- und Wortkarten, Prüfmuster und Spickzettel gegangen, jeder
