@@ -277,11 +277,19 @@ Regeln, Fallkarten, Prüfmuster oder Fehlersuchtexte hinzufügt, ändert die Tab
 Abschnitt 2 mit — sonst schlägt der Lauf fehl. (Die Zahl der Übungen stand hier lange
 falsch: 331 statt 371.)
 
-**Zwei Prüfungen sichern die häufigsten Inhaltsfehler ab.** `tests/suite.js` lässt drei
+**Zwei Prüfungen sichern die häufigsten Inhaltsfehler ab.** `tests/suite.js` lässt vier
 korrekte Bestände gegen die harten Textcheck-Muster laufen: die richtigen Antworten der
-Übungen, die Beispiele der Regeln (`class="ok"`, `class="ex"`) und die Musterformulierungen
-der Schreibwerkstatt samt der korrigierten Fehlersuchtexte — ein hartes Muster darf nicht
-melden, was die App selbst als richtig zeigt. `tests/inhalt.js`
+Übungen, die Beispiele der Regeln (`class="ok"`, `class="ex"`), die Musterformulierungen
+der Schreibwerkstatt samt der satzweise rekonstruierten Fehlersuchtexte und den
+**Spickzettel** — ein hartes Muster darf nicht melden, was die App selbst als richtig
+zeigt. Die Vorbildtexte der Schreibwerkstatt und der Spickzettel dürfen zusätzlich kein
+Muster der Stufe „prüfen“ auslösen: Wer einen Baustein abschreibt, soll keinen Zweifel
+angezeigt bekommen.
+
+**Der Pfeil bedeutet nicht überall dasselbe.** Im Regeltext heißt `→` „falsch → richtig“,
+im Spickzettel „X ergibt Y“ („Kurzer Vokal → ss“). Wer den Spickzettel mit der
+Gegenbeispiel-Formel der Regeln filtert, überspringt zehn Zellen stillschweigend — genau
+daran blieb die erste Gegenprobe stumm. `tests/inhalt.js`
 prüft zusätzlich, dass sich zwei Optionen nicht nur in Ziffer gegen ausgeschriebene Zahl
 unterscheiden; unterwegs klingt das gleich. Beide tragen eine Positivprobe, damit sie nicht
 stumm grün werden.

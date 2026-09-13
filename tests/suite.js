@@ -252,10 +252,12 @@ const RB = daten(w, "RULES_ALL.map(r=>({id:r.id,b:r.b}))")
   .concat(daten(w, "TABLES.map(x=>({id:x.id,b:x.b}))"));
 const ohneNope = h => String(h).replace(/<(span|div) class="nope">[\s\S]*?<\/\1>/g, " ");
 /* Gegenbeispiel-Marker: der Pfeil, und „nicht/statt/falsch“ nur dort, wo sie als
-   Kontrastformel stehen — in Klammern, in Anführungszeichen oder mit Doppelpunkt.
+   Kontrastformel stehen — in Klammern, in Anführungszeichen, mit Doppelpunkt oder direkt
+   vor der zitierten Falschform („… · nicht „in 1995““, die Schreibweise des Spickzettels).
    Ein schlichtes „nicht“ im Satz („Du brauchst nicht zu kommen“) ist eine normale
-   Verneinung; wer danach ausschließt, verliert 49 korrekte Beispiele stillschweigend. */
-const GEGEN = /→|[(„]\s*(?:nicht|statt|falsch)\b|\b(?:nicht|statt|falsch):/i;
+   Verneinung; wer danach ausschließt, verliert 49 korrekte Beispiele stillschweigend.
+   Die vierte Form kostet nachgemessen null Regelbeispiele. */
+const GEGEN = /→|[(„]\s*(?:nicht|statt|falsch)\b|\b(?:nicht|statt|falsch):|\b(?:nicht|statt|falsch)\s+„/i;
 const proben = [];
 RB.forEach(r => {
   const re = /<(span|div) class="(ok|ex)">([\s\S]*?)<\/\1>/g;
@@ -376,6 +378,50 @@ P.ok("Kein Prüfhinweis auf den Vorbildtexten (" + vorbild.length + ")", !vorbil
   vorbildFrage.slice(0, 5).join(" · ") + (vorbildFrage.length > 5 ? " …(" + vorbildFrage.length + ")" : ""));
 const vorbildProbe = daten(w, 'analyse("Er war scheinbar schon vor uns da.").finds.filter(f=>f.c.sev==="pruef").length');
 P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0, "Positivprobe blieb stumm");
+
+/* Vierter korrekter Bestand: der Spickzettel. CLAUDE.md nennt ihn selbst als Risiko — er
+   „wiederholt Teile des Bestands teils handgeschrieben“ —, und bis hierher fasste ihn kein
+   Prüflauf an: 2300 Wörter, die Nils ausdruckt und danebenlegt. Geprüft werden die Zellen
+   und Absätze der Abschnitte, die eine Norm aufstellen. Ausgenommen sind „Die Klassiker“
+   und „Was beim Sprechen wirklich auffällt“: Dort stehen die Falschformen absichtlich, und
+   zwar ohne Kontrastformel („doppeltes Perfekt („gemacht gehabt“)“). Ausgenommen ist
+   außerdem jedes Stück mit Pfeil oder Kontrastwort, wie bei den Regelbeispielen. */
+{
+  /* Der Pfeil zählt hier NICHT als Gegenbeispiel-Marke. Im Regeltext heißt „→“ „falsch →
+     richtig“, im Spickzettel dagegen „X ergibt Y“: „Kurzer Vokal → ss“, „wohin? →
+     Akkusativ“, „legen, stellen, setzen, hängen → Akkusativ“. Alle zehn Pfeilstellen sind
+     Zuordnungen. Mit GEGEN wären zehn Zellen stillschweigend übersprungen worden, darunter
+     die ss/ß-Zelle — die Gegenprobe blieb genau deshalb erst stumm. */
+  const GEGEN_SPICK = /[(„]\s*(?:nicht|statt|falsch)\b|\b(?:nicht|statt|falsch):|\b(?:nicht|statt|falsch)\s+„/i;
+  const spick = String(daten(w, "cheatHTML()"));
+  const spickSek = [...spick.matchAll(/<section[^>]*>([\s\S]*?)<\/section>/g)].map(m => m[1]);
+  const spickStuecke = [];
+  spickSek.forEach(sek => {
+    const titel = strip((sek.match(/<h2>([\s\S]*?)<\/h2>/) || [, ""])[1]);
+    if (/Klassiker|beim Sprechen/i.test(titel)) return;
+    [...sek.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>|<(?:p|li)[^>]*>([\s\S]*?)<\/(?:p|li)>/g)].forEach(m => {
+      const t = strip(m[1] || m[2] || "");
+      if (t.length >= 10 && !GEGEN_SPICK.test(t)) spickStuecke.push({ titel, t });
+    });
+  });
+  P.ok("Genug Spickzettel-Stücke gefunden (" + spickStuecke.length + ")", spickStuecke.length >= 120,
+    spickStuecke.length);
+  /* Und sie müssen aus dem ganzen Blatt kommen, nicht aus einer Ecke: Fiele die Zerlegung
+     auf einen Abschnitt zurück, bliebe die Zahl oben hoch und die Prüfung trotzdem blind. */
+  const spickAbschnitte = new Set(spickStuecke.map(x => x.titel)).size;
+  P.ok("Die Stücke kommen aus dem ganzen Spickzettel (" + spickAbschnitte + " Abschnitte)",
+    spickAbschnitte >= 8, spickAbschnitte);
+  const spickAlarm = [];
+  spickStuecke.forEach(x => {
+    const f = daten(w, 'analyse(' + JSON.stringify(x.t) + ').finds.filter(f=>f.c.sev==="hart"||f.c.sev==="pruef").map(f=>f.c.sev+" "+f.c.id)');
+    if (f.length) spickAlarm.push(f.join("/") + " in „" + x.titel + "“: „" + x.t.slice(0, 60) + "“");
+  });
+  P.ok("Keine Meldung auf dem Spickzettel", !spickAlarm.length,
+    spickAlarm.slice(0, 5).join(" · ") + (spickAlarm.length > 5 ? " …(" + spickAlarm.length + ")" : ""));
+  /* Positivprobe: Der Weg Spickzettel → analyse() muss überhaupt etwas finden können. */
+  const spickProbe = daten(w, 'analyse("Im großen und ganzen war das Standart.").finds.filter(f=>f.c.sev==="hart").length');
+  P.ok("Die Spickzettelprüfung schlägt bei einem echten Fehler an", spickProbe >= 2, spickProbe);
+}
 P.ok("Genug korrigierte Sätze aus den Fehlersuchtexten (" + korrSaetze + ")", korrSaetze >= 45, korrSaetze);
 if (korrOffen) P.info(korrOffen + " Markierungen ersetzen mehrteilig oder nennen nur eine Anweisung — die Sätze um sie herum bleiben außen vor");
 
