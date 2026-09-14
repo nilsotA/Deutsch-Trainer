@@ -58,6 +58,49 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der lange Horizont — und was die Simulation vorher gar nicht gemessen hat (14.09.2026).**
+
+Abschnitt H von `tests/lernen.js` stellte den Lernstand Tag für Tag zurück, aber nur die
+**Fälligkeit** (`d`), nicht das **Datum der letzten Antwort** (`l`). Genau daran hängt die
+Sperre „höchstens ein Aufstieg am Tag“ in `grade()`. Ohne zurückgestelltes `l` greift sie
+für immer: keine Karte verlässt Fach 2, fast alles bleibt dauerhaft fällig, und neuer Stoff
+kommt nie an die Reihe. Der Lauf hat also 60 Tage lang eine Welt gemessen, die es nicht
+gibt — 76 gesehene Karten statt 159, alles in den Fächern 1 und 2.
+
+Behoben, und mit einer Prüfung abgesichert, die den Rückfall fängt: Die Karten müssen sich
+nach 60 Tagen über **mindestens vier Fächer** verteilen (gemessen 1:14 2:22 3:30 4:39 5:54).
+
+Derselbe Fehler steckte in meinem Messskript für die Jahresabdeckung und hat dort 77 statt
+269 Karten gemeldet — er ist leicht zu machen und unauffällig, weil nichts abstürzt.
+
+**Neu: Abschnitt L · Der lange Horizont.** Abschnitt C läuft zwar über 180 Tage und meldet
+„alle Karten kommen dran“, aber mit einer **eigenen, vereinfachten Nachbildung** der
+Auswahl. Die kennt weder die Drosselung neuen Stoffs bei Rückstand noch `quotenMix()` noch
+die Tagessperre — sie kann gar nichts anderes melden als volle Abdeckung. Abschnitt L
+treibt stattdessen `buildDaily()` und `unterwegsRunde()` der App selbst. Gemessen:
+
+| Weg | Tag 30 | Tag 90 | Tag 120 | Tag 180 |
+|---|---|---|---|---|
+| nur „Heute“ | 117 | 193 | 227 | — |
+| „Heute“ + eine Runde | ~236 | ~423 | ~480 | ~555 |
+| „Heute“ + zwei Runden | ~378 | ~668 | **699** | — |
+
+Von 699 Karten. Die Kurve flacht ab, bleibt aber nicht stehen — mit einer Runde am Tag
+kommen zwischen Tag 150 und 180 noch rund 40 Karten neu dazu. Und sie sagt etwas
+Praktisches: **Eine Runde am Tag holt den Bestand nicht durch, zwei schon** — in vier
+Monaten. Das ist keine Schwäche der Auswahl, sondern der Vorrang der Wiederholung; es steht
+jetzt als Zahl da, damit es niemand für einen Fehler hält.
+
+Die Zahlen schwanken von Lauf zu Lauf um ein paar Karten, weil `unterwegsRunde()` mit
+`rng(Date.now())` mischt. Die Schranken lassen entsprechend Luft.
+
+**Eine Vermutung, die die Messung kassiert hat.** Ich hatte in den Kommentar geschrieben,
+Stufe 3 von `unterwegsRunde()` („das am längsten nicht Geübte“) sei es, die die letzten
+Karten hereinholt. Abgeklemmt gemessen stimmt das nicht: **Stufe 2 und Stufe 3 vertreten
+einander.** Jede der beiden schafft die volle Abdeckung auch allein; erst wenn beide fehlen,
+bleibt es bei 487 von 699. Die Redundanz war mir vorher nicht bewusst — und der Satz stand
+schon fast im Repo.
+
 **Fallkarten-Ablenker und die Einordnung regionaler Varianten (13.09.2026, dritte Runde).**
 
 Ausgangspunkt war eine Messung: `tests/fallform.js` konnte **50 der 173 Ablenker gar nicht

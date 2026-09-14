@@ -497,14 +497,23 @@ P.titel("H · Tagesaufgabe über Wochen");
         sorten[q.key.startsWith("c:") ? "F" : q.key.startsWith("w:") ? "W" : "A"]++;
         grade(q.key, zufall() < 0.8, q.cat, q.rule);
       });
-      Object.keys(S.cards).forEach(k => { S.cards[k].d = minusEinTag(S.cards[k].d); });
+      Object.keys(S.cards).forEach(k => {
+        S.cards[k].d = minusEinTag(S.cards[k].d);
+        if (S.cards[k].l) S.cards[k].l = minusEinTag(S.cards[k].l);
+      });
       S.days = {}; S.last = null;
     }
-    return {sorten:sorten, gesehen:gesehen.size, gesamt:alleSchluessel().length, letzte:${tage}};
+    const faecher = {}; Object.values(S.cards).forEach(c => faecher[c.b] = (faecher[c.b]||0) + 1);
+    return {sorten:sorten, gesehen:gesehen.size, gesamt:alleSchluessel().length, faecher:faecher, letzte:${tage}};
   })()`);
   const r = lauf(60);
   P.info("60 Tage nur Tagesaufgabe: " + r.sorten.A + " Aufgaben · " + r.sorten.W +
     " Wortkarten · " + r.sorten.F + " Fallkarten · " + r.gesehen + " von " + r.gesamt + " Karten gesehen");
+  /* Der Beleg, dass die Simulation die Lernlogik wirklich durchläuft: Ohne das
+     Weiterstellen von `l` blieben alle Karten in Fach 1 und 2 stecken. */
+  P.ok("die Karten verteilen sich über die Fächer (" +
+    Object.keys(r.faecher).sort().map(b => b + ":" + r.faecher[b]).join(" ") + ")",
+    Object.keys(r.faecher).length >= 4, JSON.stringify(r.faecher));
   P.ok("Wortkarten kommen über „Heute“ vor", r.sorten.W > 0, r.sorten.W);
   P.ok("Fallkarten kommen über „Heute“ vor", r.sorten.F > 0, r.sorten.F);
   /* Untergrenzen mit Luft: gemessen 150 und 235 bei 720 Antworten. Sie sollen einen
@@ -751,6 +760,79 @@ P.titel("K · Sichern und Laden");
     await new Promise(r => setTimeout(r, 400));
     P.ok("der Fall-Sprung auch", daten(w, "__hin").includes("crHost"), daten(w, "__hin"));
   }
+
+/* ---------- L · Der lange Horizont ---------- */
+P.titel("L · Der lange Horizont");
+{
+  /* Fehlerklasse „die Prüfung glaubt einem Abbild statt der App“. Abschnitt C läuft über
+     180 Tage und meldet „alle Karten kommen dran“ — aber mit einer eigenen, vereinfachten
+     Nachbildung der Auswahl. Die kennt weder die Drosselung neuen Stoffs bei Rückstand
+     noch quotenMix() noch die Sperre „höchstens ein Aufstieg am Tag“ und kann deshalb
+     gar nichts anderes melden als volle Abdeckung.
+
+     Hier läuft stattdessen die echte Auswahl: buildDaily() und unterwegsRunde() der App,
+     bewertet über grade(). Das Ergebnis sieht anders aus, und genau deshalb steht es hier.
+
+     Weitergestellt wird wieder nicht die Uhr, sondern der Lernstand — Fälligkeit und
+     Datum der letzten Antwort wandern je Tag um einen Tag zurück. Beides zusammen: Ohne
+     das zurückgestellte `l` greift die Tagessperre in grade() für immer, keine Karte
+     verlässt Fach 2, und der Lauf misst eine Welt, die es nicht gibt. (Gegenprobe: ohne
+     `l` bleibt die Abdeckung ab Tag 1 bei 93 Karten stehen.) */
+  const lauf = (tage, runden, marken) => {
+    const w = boot(leererStand({ auto: false }));
+    return daten(w, `(function(){
+      const minus = d => { const x = new Date(d + "T12:00:00"); x.setDate(x.getDate()-1); return x.toISOString().slice(0,10); };
+      let rnd = 4711; const zufall = () => (rnd = (rnd*1103515245+12345) & 0x7fffffff) / 0x7fffffff;
+      const gesehen = new Set(), stand = {};
+      const host = document.querySelector("#walkHost");
+      const spiele = liste => liste.forEach(q => { gesehen.add(q.key); grade(q.key, zufall() < 0.8, q.cat, q.rule); });
+      for(let t = 0; t < ${tage}; t++){
+        spiele(buildDaily());
+        for(let i = 0; i < ${runden}; i++){ unterwegsRunde(host); if(Q){ spiele(Q.list); Q = null; } }
+        Object.keys(S.cards).forEach(k => {
+          S.cards[k].d = minus(S.cards[k].d); if(S.cards[k].l) S.cards[k].l = minus(S.cards[k].l);
+        });
+        S.days = {}; S.last = null;
+        if(${JSON.stringify(marken)}.indexOf(t+1) >= 0) stand[t+1] = gesehen.size;
+      }
+      return { stand: stand, gesehen: gesehen.size, gesamt: alleSchluessel().length };
+    })()`);
+  };
+
+  /* Ein Tag, wie Nils ihn wirklich hat: die Tagesaufgabe und eine Runde unterwegs. */
+  const eins = lauf(180, 1, [30, 90, 150, 180]);
+  P.info("180 Tage mit Tagesaufgabe und einer Runde: " +
+    [30, 90, 150, 180].map(t => "Tag " + t + ": " + eins.stand[t]).join(" · ") +
+    " von " + eins.gesamt + " Karten");
+  /* Gemessen 234 / 426 / 522 / 558, in einem zweiten Lauf 239 / 431 / 514 / 564 — die
+     Reihenfolge unterwegs hängt an rng(Date.now()). Die Schranken lassen deshalb Luft;
+     sie sollen einen Einbruch fangen, keine Zahl festschreiben. */
+  P.ok("nach drei Monaten ist mehr als die Hälfte des Bestands dran gewesen",
+    eins.stand[90] > eins.gesamt / 2, eins.stand[90] + "/" + eins.gesamt);
+  P.ok("und die Abdeckung wächst weiter, statt stehen zu bleiben",
+    eins.stand[180] - eins.stand[150] >= 20, eins.stand[150] + " → " + eins.stand[180]);
+  /* Die ehrliche Kehrseite: Wiederholung hat Vorrang vor neuem Stoff, also ist der Bestand
+     nach einem halben Jahr mit einer Runde am Tag noch nicht durch. Das ist gewollt und
+     steht hier als Zahl, damit es niemand versehentlich für einen Fehler hält. */
+  P.ok("ein Rest bleibt dabei offen — eine Runde am Tag reicht nicht für alles",
+    eins.stand[180] < eins.gesamt, eins.stand[180] + "/" + eins.gesamt);
+
+  /* Was die Unterwegs-Runde wirklich beiträgt, misst nur der Vergleich mit ihrem Ausbleiben.
+     „Heute“ allein bringt in vier Monaten 227 Karten zusammen — zwölf Karten am Tag, davon
+     der größte Teil Wiederholung. Mit zwei Runden ist derselbe Zeitraum der ganze Bestand.
+     (Zwei Stellen in unterwegsRunde() holen neuen Stoff: Stufe 2 gezielt, Stufe 3 über das
+     am längsten nicht Geübte. Abgeklemmt gemessen: jede der beiden schafft die volle
+     Abdeckung auch allein, erst ohne beide bleibt es bei 487 von 699.) */
+  const ohne = lauf(120, 0, [120]);
+  const zwei = lauf(120, 2, [30, 60, 90, 120]);
+  P.info("120 Tage nur „Heute“: " + ohne.gesehen + " Karten · mit zwei Runden: " +
+    [30, 60, 90, 120].map(t => "Tag " + t + ": " + zwei.stand[t]).join(" · ") +
+    " von " + zwei.gesamt);
+  P.ok("die Tagesaufgabe allein lässt den größeren Teil des Bestands liegen",
+    ohne.gesehen < ohne.gesamt / 2, ohne.gesehen + "/" + ohne.gesamt);
+  P.ok("mit zwei Runden am Tag ist der ganze Bestand binnen vier Monaten durch",
+    zwei.gesehen === zwei.gesamt, zwei.gesehen + "/" + zwei.gesamt);
+}
 
   P.abschluss();
 })();
