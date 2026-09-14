@@ -339,6 +339,10 @@ const EINORDNUNG = [
      aber Peter Eisenberg hält dagegen, dass „machen“ mit abstraktem Objekt im Deutschen
      alt ist („das macht Freude“). Am 14.09.2026 mit zwei Suchen belegt. Seitdem steht
      an allen vier Stellen dasselbe: der Duden-Befund und der Vorbehalt. */
+  /* „wo“ als Relativpronomen: Regel und Übung nannten die Landkarte, das Prüfmuster sagte
+     nur „regional“. Seit dem 14.09.2026 steht die Einordnung auch dort. */
+  { was: "wo als Relativpronomen", muss: [/Süddeutschland/, /Westens/, /nicht/],
+    stellen: [["Übung", "n35"], ["Prüfmuster", "y10"], ["Regel", "gram-relkasus"]] },
   { was: "Sinn machen", muss: [/umgangssprachlich/, /umstritten/],
     stellen: [["Übung", "s08"], ["Prüfmuster", "s06"], ["Fehlersuche", "macht"],
               ["Regel", "stil-anglizismus"]] },

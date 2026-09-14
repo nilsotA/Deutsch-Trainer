@@ -58,6 +58,46 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ein Muster, das genau das Gegenteil seiner Aufgabe tat (14.09.2026, dritte Runde).**
+
+**y10** sollte „wo“ als Relativpronomen finden — „der Mann, wo das gesagt hat“, die
+Falschoption der eigenen Übung n35. Sein Regex verlangte `, wo` + ein Wort + finites Verb,
+also **Verbzweitstellung**. Ein Relativsatz hat aber Verbletztstellung. Die einzigen Sätze,
+auf die das passt, sind die mit einem echten lokalen „wo“ — und die sind richtig. Gemessen:
+
+| Satz | vorher | jetzt |
+|---|---|---|
+| Die Halle, wo er ist, liegt am Rand. | **gemeldet** | still |
+| Das ist der Ort, wo er war. | **gemeldet** | still |
+| der Mann, wo das gesagt hat | still | **gemeldet** |
+| Die Frau, wo im Verein arbeitet, heißt Meier. | still | **gemeldet** |
+
+Der Prüflauf schlug vor, weiter an der Verbstellung zu drehen. Das geht nicht: Ob „wo“
+richtig ist, hängt nicht am Satzbau, sondern am **Bezugswort**. Nach einem Ort ist es
+richtig, nach einer Person regional. Der Anker liegt jetzt dort — Artikel oder Possessiv
+plus ein Personenwort aus einer geschlossenen Liste (Mann, Frau, Trainer, Kollege, Leute …),
+dann Komma, dann „wo“. Elf Verbotssätze bleiben still, darunter jedes lokale „wo“ und jeder
+indirekte Fragesatz. Die Einordnung steht jetzt auch im Prüfmuster, nicht nur in Regel und
+Übung: „In Süddeutschland und Teilen des Westens“.
+
+**Drei weitere Muster am Satzanfang und in der Wortform:**
+
+- **x37** („Mal“) verlangte einen Begleiter vor der Ordnungszahl. „Nächstes mal bringe ich
+  die Pfeife mit“ fiel damit durch — und x38 sprang nicht ein, weil ihm „nächstes“ fehlt.
+  Ohne Begleiter kommen jetzt nur nächste, letzte und vorige dazu: Bei gleiche und selbe
+  hätte „Das Gleiche mal zwei“ einen Fehlalarm gegeben, denn beim Rechnen ist „mal“ klein.
+- **x38** kannte „jedes mal“ und „dieses mal“, aber nicht „manches mal“ — obwohl die Regel
+  „manches Mal“ ausdrücklich als richtige Form führt. Die Wendung fiel zwischen beide Muster.
+- **x35** (Apostroph im Plural) griff nur nach bestimmtem Artikel oder Zahlwort. „Meine
+  Foto’s“, „Unsere CD’s“, „Ein paar Foto’s“ liefen durch. Die Begleiter-Pflicht bleibt — sie
+  ist es, die „Andrea’s Blumenladen“ und „Newton’sche Gesetze“ draußen hält.
+
+**Und eine Zahl, die die App über sich selbst sagte und die nicht stimmte.** a04 versprach
+„Über 30 Wörter in einem Satz“ und maß in Wirklichkeit **Zeichen**, 230 davon. Gemessen
+kippt es bei 43 kurzen Wörtern und schon bei 18 langen Komposita — die Wortzahl war keine
+Beschreibung, sondern eine Verwechslung. Die Erklärung nennt jetzt beide Enden, und
+`tests/suite.js` rechnet sie nach.
+
 **Vier Muster, die im Hauptsatz stumm waren — und eine Aussage, die so nicht stimmt (14.09.2026, zweite Runde).**
 
 Dieselbe Fehlerklasse wie oben, aber eine andere Ursache: Vier Muster kannten ihren Zielfall

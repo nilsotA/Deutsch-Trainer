@@ -630,6 +630,26 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
      stand auf „etwa zwei Drittel“, während die Messung schon bei 74 Prozent lag — die
      Zahl war also nicht falsch, aber zu bescheiden, und sie wandert mit jedem geschärften
      Muster weiter weg. Hier wird sie an der Messung festgemacht. */
+  {
+    /* Dieselbe Klasse noch einmal: a04 versprach in seiner Erklärung „Über 30 Wörter in
+       einem Satz“ und maß in Wirklichkeit Zeichen — 230 davon. Gemessen kippt es bei
+       43 kurzen Wörtern und schon bei 18 langen Komposita; die Wortzahl war also keine
+       Beschreibung, sondern eine Verwechslung. Die Erklärung nennt jetzt beide Enden,
+       und hier stehen sie nachgerechnet. */
+    const baue = (woerter, n) =>
+      Array.from({ length: n }, (_, i) => woerter[i % woerter.length]).join(" ") + ".";
+    const KURZ = ["Der","Trainer","hat","uns","heute","noch","einmal","die","Halle","gezeigt",
+                  "und","dann","die","Bälle","geholt"];
+    const LANG = ["Die","Trainerin","erklärte","ausführlich","sämtliche","Koordinationsübungen",
+                  "einschließlich","Aufwärmprogramm","Dehnungseinheiten","Rückmeldungen",
+                  "Wiederholungszahlen","Belastungssteuerung"];
+    const trifft = txt => daten(w, "analyse(" + JSON.stringify(txt) + ").finds.some(f=>f.c.id===\"a04\")");
+    P.ok("a04 lässt 40 kurze Wörter noch durch", !trifft(baue(KURZ, 40)));
+    P.ok("und meldet 45 kurze Wörter", trifft(baue(KURZ, 45)));
+    P.ok("bei langen Komposita meldet es schon 20 Wörter", trifft(baue(LANG, 20)));
+    P.ok("und lässt 12 davon durch", !trifft(baue(LANG, 12)));
+  }
+
   const BRUCH = { "die Hälfte": 0.5, "zwei Drittel": 2/3, "drei Viertel": 0.75,
                   "vier Fünftel": 0.8, "neun Zehntel": 0.9 };
   /* Am gerenderten Element gemessen, nicht am Quelltext — und der vorige Inhalt von
@@ -815,6 +835,41 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       still: ["Im Zitat steht [...].", "Er zitierte (...).", "Und dann ...?",
               "Ich wollte noch trainieren ..., aber die Halle war zu.",
               "Die Methode funktioniert […]."] },
+    /* y10 tat vorher genau das Gegenteil seiner Aufgabe: Es verlangte Verbzweitstellung
+       im wo-Satz, die ein Relativsatz gar nicht hat, und traf deshalb nur den korrekten
+       lokalen Gebrauch — „Die Halle, wo er ist“ und „Das ist der Ort, wo er war“ wurden
+       gemeldet, die eigene Falschoption aus n35 nicht. Der Anker liegt jetzt auf dem
+       Bezugswort: Nach einer Person ist „wo“ regional, nach einem Ort ist es richtig. */
+    { id: "y10",
+      ziel: ["der Mann, wo das gesagt hat", "Die Frau, wo im Verein arbeitet, heißt Meier.",
+             "Der Trainer, wo uns betreut, ist neu.",
+             "Die Leute, wo das erzählt haben, waren dabei.",
+             "Mein Kollege, wo im Büro sitzt, weiß es."],
+      still: ["Die Halle, wo er ist, liegt am Rand.", "Das ist der Ort, wo er war.",
+              "Die Halle, wo wir trainieren, ist neu.", "Der Punkt, wo es kippt, ist der dritte.",
+              "Der Mann, der das gesagt hat, ist weg.", "Ich weiß nicht, wo der Ball ist.",
+              "Das Zimmer, wo das Material steht, ist abgeschlossen."] },
+    { id: "x35",
+      ziel: ["Meine Foto's vom Turnier sind fertig.", "Unsere CD's liegen im Schrank.",
+             "Sechs Auto's standen vor der Halle.", "Ein paar Foto's fehlen noch.",
+             "Keine Foto's mehr."],
+      still: ["Meine Fotos vom Turnier sind fertig.", "Andrea’s Blumenladen hat zu.",
+              "Newton’sche Gesetze gelten hier.", "Andreas’ Buch liegt da.", "Geht’s dir gut?"] },
+    /* Bei „mal“ ist die Verbotsseite das Rechnen: „Das Gleiche mal zwei“ und „Zwei mal
+       drei“ schreiben „mal“ zu Recht klein. Deshalb kommen ohne Begleiter nur nächste,
+       letzte und vorige dazu — gleiche und selbe bleiben an den Begleiter gebunden. */
+    { id: "x37",
+      ziel: ["Nächstes mal bringe ich die Pfeife mit.", "Letztes mal war es besser.",
+             "Voriges mal hat es geregnet.", "Beim nächsten mal klappt es.", "Bis nächstes mal."],
+      still: ["Nächstes Mal bringe ich die Pfeife mit.", "Das Gleiche mal zwei ergibt das Doppelte.",
+              "Zwei mal drei ist sechs.", "Komm mal her.", "Beim nächsten Mal klappt es."] },
+    { id: "x38",
+      ziel: ["Jedes mal, wenn ich ins Training komme, fehlt ein Ball.",
+             "Hat es dieses mal geklappt?", "Ich habe jedesmal nachgefragt.",
+             "Manches mal fehlt mir die Ruhe."],
+      still: ["Jedes Mal, wenn ich ins Training komme, fehlt ein Ball.",
+              "Manches Mal fehlt mir die Ruhe.", "Das ist die jedesmalige Prüfung.",
+              "Diesmal klappt es."] },
     { id: "x32",
       ziel: ["Auf gut deutsch: das reicht nicht.", "Auf deutsch heißt das Abseits.",
              "In deutsch war ich nie gut.", "Ich schreibe die Mail in deutsch."],
