@@ -1466,6 +1466,23 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 
 ## Werkzeug, das nützlich war
 
+**Der Spickzettel auf Papier.** Gemessen mit Druckemulation im Browser (`emulateMedia({media:
+"print"})`, Spickzettel über den Knopf im Regelwerk öffnen):
+
+- Aus dem dunklen Theme kam er **weiß auf weiß** — behoben, der Druckblock zieht die
+  Farbtokens jetzt auf helle Werte. `tests/suite.js` rechnet den Druck seitdem als eigene
+  Konfiguration mit, samt der Regel „jede Schriftfarbe muss gegen reines Weiß reichen“.
+- **Kein Element läuft über die Seitenbreite**, bei 10 mm wie bei 20 mm Rand.
+- **Jeder Abschnitt passt auf eine Seite**, `break-inside:avoid` kann also greifen. Aber die
+  Luft ist knapp: Der höchste Abschnitt ist „5 · Satzbau in Kurzformeln“ mit 835 px gegen
+  972 px nutzbare Höhe bei 20 mm Rand — **137 px übrig, also etwa vier Tabellenzeilen**. Der
+  Abschnitt rendert eine Zeile je Satzbaukarte; wer `SATZ` über etwa 28 Karten hinaus
+  erweitert, bekommt dort einen gesplitteten Abschnitt im Ausdruck.
+- Eine Prüfung dafür gibt es bewusst nicht: Die Höhe hängt am Layout, und jeder Ersatzwert
+  (Zeichenzahl, Zeilenzahl) misst etwas anderes als das, worauf es ankommt. Abschnitt 1 hat
+  mehr Zeichen als Abschnitt 5 und ist trotzdem kürzer. Wer `SATZ` erweitert, misst mit dem
+  Skript im Kritzelordner nach.
+
 **Messen im Browser: Touch-Emulation nicht vergessen.** Zwei Messungen dieser Runde
 hätten ohne sie das Falsche gesagt. Die Tippflächen: Ohne `hasTouch:true, isMobile:true`
 greift `@media(hover:none)` nicht, und die Messung meldet 91 Flächen unter 44 px, die es
