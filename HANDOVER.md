@@ -58,6 +58,54 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vier Muster, die im Hauptsatz stumm waren — und eine Aussage, die so nicht stimmt (14.09.2026, zweite Runde).**
+
+Dieselbe Fehlerklasse wie oben, aber eine andere Ursache: Vier Muster kannten ihren Zielfall
+nur in **verbletzter Stellung** — Nebensatz, Infinitiv, Partizip. Im Hauptsatz rückt das
+finite Verb an Position 2, vor das Nomen, und dort waren sie still. Sie verpassten damit die
+Gegenbeispiele der App selbst:
+
+- **s06** („Sinn machen“) fing „Die Argumentation macht Sinn“ aus dem Fehlersuchtext kt10
+  nicht und auch nicht die falsche Option der Übung s08.
+- **s02** (Streckverben) fing „Das Verfahren kam zur Anwendung“ nicht — die falsche Option
+  der Übung s02, also das Gegenbeispiel zu genau der Regel, auf die es verweist.
+- **y02** und **y11** (Komma bei Infinitivgruppen) hatten Zeichenklassen ohne
+  Großbuchstaben. Deutsche Substantive sind groß, also blockte fast jeder echte Satz:
+  „Er hat versucht den Ball zu treffen“, „Sie hat beschlossen das Training zu verschieben“,
+  „Sie plant im Sommer umzuziehen“ — alle drei liefen durch. Dazu verlangte y02 ein
+  eigenständiges „zu“, traf also nie ein trennbares Verb („durchzugehen“).
+
+Der Textcheck findet damit **65 statt 64** der 86 markierten Fehler.
+
+**Ein Vorschlag hat die Prüfung nicht überstanden, und das ist der Punkt.** Der Prüflauf
+schlug für y02 vor, auch Großbuchstaben vor „um“ zuzulassen — dann fängt es „Er trainiert
+jeden Morgen um seine Ausdauer zu verbessern“, die eigene Übung k01. Der Vorschlag kam mit
+einer Risikoanalyse, die sauber aussah. Sie hatte nur das präpositionale „um“ nicht geprüft.
+Gemessen an zehn Sätzen: **zehn Fehlalarme**, darunter „Wir haben den Termin um zehn Minuten
+zu verschieben“, „Der Streit um die Halle zu schlichten war schwer“, „Er ist um die Ecke zu
+finden“. Ein Substantiv vor „um“ ist beim finalen und beim präpositionalen „um“ gleich
+häufig; das Muster kann beides an der Oberfläche nicht trennen. Also **nicht eingebaut** —
+k01 bleibt ungefangen, und das steht hier, damit es niemand für ein Versehen hält.
+
+**Eine Aussage, die die App an drei Stellen glatt behauptet hat.** „Sinn machen“ stand als
+„Lehnübersetzung aus dem Englischen“ da — in der Übung s08, im Fehlersuchtext kt10 und im
+Prüfmuster s06. Zwei verschieden formulierte Suchen zeigen: Der Duden führt „etwas macht
+[k]einen Sinn“ als umgangssprachlich und setzt „nach englisch something makes sense“ dazu —
+aber Peter Eisenberg hält dagegen, dass „machen“ mit abstraktem Objekt im Deutschen alt ist
+(„das macht Freude“), und hält die Herleitung für unbelegt. Jetzt steht an allen vier
+Stellen dasselbe: der Duden-Befund und der Vorbehalt. Die Empfehlung ändert sich nicht.
+
+`tests/inhalt.js`, Abschnitt G kann das jetzt prüfen: Die Tabelle der eingeordneten
+Varianten reichte bisher nur an Fallkarten und Übungen heran. `textVon()` erreicht jetzt
+auch Prüfmuster, Regeln und die Markierungen der Fehlersuchtexte — also alle vier Ebenen,
+die CLAUDE.md verlangt.
+
+**Und der Textcheck sagt jetzt die Wahrheit über sich selbst.** Er behauptete, „etwa zwei
+Drittel“ der eingebauten Fehler zu finden, während die Messung schon bei 74 Prozent lag.
+Die Zahl war nicht falsch, nur zu bescheiden — und sie wandert mit jedem geschärften Muster
+weiter weg. Jetzt steht dort „etwa drei Viertel“, und `tests/suite.js` rechnet nach: Der
+genannte Bruch muss der Messung am nächsten liegen.
+
 **Elf Prüfmuster, die ihren eigenen Zielfall verpasst haben (14.09.2026).**
 
 Ausgangspunkt war eine Messung: 17 der 100 Textcheck-Muster greifen auf **keiner einzigen**

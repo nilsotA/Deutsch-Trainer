@@ -10,6 +10,9 @@ const CASEREF = daten(w, "CASEREF");
 const ALL = daten(w, "ALL");
 const TABLES = daten(w, "TABLES");
 const WORDS = daten(w, "WORDS");
+const RULES_ALL = daten(w, "RULES_ALL.map(r=>({id:r.id,b:r.b}))");
+const CHECKS_ALL = daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||\"\"}))");
+const KORREKTUR = daten(w, "KORREKTUR");
 
 /* Formentabelle: siehe tests/formen.js — von inhalt.js und fallform.js geteilt */
 const { FORM, NAME } = require("./formen");
@@ -329,9 +332,27 @@ const EINORDNUNG = [
     stellen: [["Fallkarte", "gedenken"]] },
   { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /nicht standardsprachlich|norddeutsch/],
     stellen: [["Fallkarte", "zu (Richtung)"]] },
+  /* „Sinn machen“ ist keine regionale, sondern eine strittige Einordnung — dieselbe
+     Fehlerklasse auf einer anderen Achse. Die App sagte an drei Stellen glatt
+     „Lehnübersetzung aus dem Englischen“. Der Duden führt „etwas macht [k]einen Sinn“
+     zwar als umgangssprachlich und setzt „nach englisch something makes sense“ dazu,
+     aber Peter Eisenberg hält dagegen, dass „machen“ mit abstraktem Objekt im Deutschen
+     alt ist („das macht Freude“). Am 14.09.2026 mit zwei Suchen belegt. Seitdem steht
+     an allen vier Stellen dasselbe: der Duden-Befund und der Vorbehalt. */
+  { was: "Sinn machen", muss: [/umgangssprachlich/, /umstritten/],
+    stellen: [["Übung", "s08"], ["Prüfmuster", "s06"], ["Fehlersuche", "macht"],
+              ["Regel", "stil-anglizismus"]] },
 ];
 const textVon = (art, id) => {
   if (art === "Fallkarte") { const c = CASEREF.find(x => x.w === id); return c ? String(c.n || "") : null; }
+  if (art === "Prüfmuster") { const c = CHECKS_ALL.find(x => x.id === id); return c ? String(c.k || "") : null; }
+  if (art === "Regel") { const r = RULES_ALL.find(x => x.id === id); return r ? String(r.b || "") : null; }
+  if (art === "Fehlersuche") {
+    /* Ein Fehlersuchtext trägt mehrere Markierungen; gesucht ist die mit diesem Wort. */
+    const treffer = [];
+    KORREKTUR.forEach(k => (k.errs || []).forEach(e => { if (e.w === id) treffer.push(String(e.k || "")); }));
+    return treffer.length ? treffer.join(" ") : null;
+  }
   const i = ALL.find(x => x.id === id); return i ? String(i.e || "") : null;
 };
 const schiefG = [], fehltG = [];

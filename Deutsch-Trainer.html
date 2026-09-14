@@ -1309,7 +1309,7 @@ const EX_B = [
 
 {id:"s08",c:"stil",q:"Welche Formulierung ist stilistisch sauberer?",o:[
  "Diese Regel ergibt Sinn.","Diese Regel macht Sinn."],a:0,
- e:"„Sinn machen“ ist eine Lehnübersetzung aus dem Englischen. In gehobenen Texten: <b>Sinn ergeben</b> oder <b>sinnvoll sein</b>. (Umgangssprachlich ist „Sinn machen“ längst üblich.)",r:"stil-anglizismus"},
+ e:"Der Duden führt „etwas macht [k]einen Sinn“ als umgangssprachlich und setzt dazu „nach englisch something makes sense“. Ob es wirklich von dort kommt, ist umstritten: „machen“ mit abstraktem Objekt gibt es im Deutschen schon lange („das macht Freude“). Umgangssprachlich ist die Wendung längst üblich; in gehobenen Texten ist <b>Sinn ergeben</b> oder <b>sinnvoll sein</b> die sichere Wahl.",r:"stil-anglizismus"},
 
 {id:"s09",c:"stil",q:"Was ist an diesem Satz schwierig? „Die vom Trainer, der seit drei Jahren, seit er die Lizenz hat, arbeitet, geplante Einheit fiel aus.“",o:[
  "Schachtelsatz","Zu wenig Kommas","Falscher Kasus"],a:0,
@@ -2007,6 +2007,7 @@ kontrollieren (= beherrschen) → steuern, beherrschen<br>
 adressieren (ein Problem) → angehen, behandeln<br>
 checken → überprüfen<br>
 Learnings → Erkenntnisse</div>
+<p>„Sinn machen“ ist der umstrittene Fall in dieser Liste. Der Duden führt es als umgangssprachlich und setzt dazu „nach englisch something makes sense“; Peter Eisenberg hält dagegen, dass „machen“ mit abstraktem Objekt im Deutschen alt ist („das macht Freude“). Für die Empfehlung ändert das nichts — in Hausarbeiten bleibt „Sinn ergeben“ die sichere Wahl.</p>
 <p>Das ist kein Purismus: Wo ein Anglizismus kürzer und etabliert ist (Feedback, Training, Team), spricht nichts dagegen.</p>`},
 
 {id:"stil-wissenschaft",c:"stil",t:"Wissenschaftlicher Stil",b:`
@@ -4706,7 +4707,7 @@ txt:"In seinem Aufsatz untersucht Kurz das Verhältnis von Bewegungslernen und P
 errs:[
  {w:"fragt",nth:1,ok:"fragt,",k:"Vor dem indirekten Fragesatz mit „ob“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"scheinbar",ok:"anscheinend",k:"„scheinbar“ heißt: in Wirklichkeit nicht. Gemeint ist „anscheinend“ (= allem Anschein nach).",r:"recht-verwechsel",c:"recht"},
- {w:"macht",nth:1,ok:"ergibt Sinn / ist schlüssig",k:"„Sinn machen“ ist eine Lehnübersetzung. In wissenschaftlichen Texten: „Sinn ergeben“ oder „schlüssig sein“.",r:"stil-anglizismus",c:"stil"},
+ {w:"macht",nth:1,ok:"ergibt Sinn / ist schlüssig",k:"„Sinn machen“ führt der Duden als umgangssprachlich, mit dem Hinweis „nach englisch something makes sense“; ob es von dort kommt, ist umstritten. In wissenschaftlichen Texten: „Sinn ergeben“ oder „schlüssig sein“.",r:"stil-anglizismus",c:"stil"},
  {w:"unproblematisch.",ok:"diskussionswürdig.",k:"Als Litotes ist „nicht ganz unproblematisch“ zulässig — hier stapeln sich aber drei Abschwächungen in einer Fügung: nicht, ganz und un-. Eine genügt.",r:"stil-hedging",c:"stil"},
  {w:"gibt",nth:1,ok:"Studien zeigen, dass …",k:"„Es gibt Studien, die zeigen“ schiebt einen Leerlauf vor den eigentlichen Satz.",r:"stil-esgibt",c:"stil"},
  {w:"das",nth:2,ok:"dass",k:"Konjunktion → „dass“. (Das erste „das“ im Text ist ein Artikel: „das Verhältnis“ — das ist richtig so.)",r:"recht-dass",c:"recht"},
@@ -7998,9 +7999,9 @@ const CHECKS = [
    dem Wochentag, seit 2024 auch das schließende. */
 {id:"y14",sev:"pruef",re:/\b(?:Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonnabend|Sonntag)\s+(?:den|dem)\s+\d{1,2}\./g,
  t:"Komma in der Datumsangabe",k:"Bei einer mehrteiligen Datumsangabe steht ein Komma nach dem Wochentag: „am Dienstag<b>,</b> dem 12. Mai<b>,</b> …“. Das schließende Komma ist seit dem Regelwerk 2024 Pflicht, wenn der Satz weiterläuft.",r:"komma-brief"},
-{id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?)\szu\s+[a-zäöüß]+(en|eln|ern)\b/g,
+{id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?\s)?(?:zu\s+(?:[a-zäöüß]+(?:en|eln|ern)|sein|tun)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])/g,
  t:"Komma vor „um … zu“?",k:"Vor Infinitivgruppen mit <b>um, ohne, statt, anstatt, außer, als</b> steht immer ein Komma.",r:"komma-infinitiv"},
-{id:"y11",sev:"pruef",re:/\b(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt)\s+(?:(?!zu\s)[a-zäöüß0-9\-]+\s+){1,7}zu\s+[a-zäöüß]+(?:en|eln|ern)\b/g,
+{id:"y11",sev:"pruef",re:/(?<![\wäöüßÄÖÜ])(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt|vorhat|vorhatte|vorhaben)\s+(?:(?!zu\s)[A-Za-zÄÖÜäöüß0-9\-]+\s+){1,7}(?:zu\s+[a-zäöüß]+(?:en|eln|ern)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])/g,
  t:"Komma vor der Infinitivgruppe?",k:"Seit 2024 wird eine <b>erweiterte</b> Infinitivgruppe immer mit Komma abgetrennt: „Er hat versucht<b>,</b> pünktlich zu sein.“ Hier scheint keines zu stehen. Prüf die Stelle — nach brauchen, scheinen, haben und sein steht dagegen keins.",r:"komma-infinitiv"},
 {id:"y03",sev:"pruef",re:/\bweil\s+(ich|du|er|sie|es|wir|ihr|man)\s+(bin|bist|ist|sind|seid|hab|habe|hast|hat|haben|habt|kann|kannst|will|willst|muss|musst|wird|werde|war|warst|waren|hatte|hattest|möchte|soll)\b(?![^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen|sehen|hören|helfen)\s*[,.!?;]|[^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen)\s*$)/g,
  t:"„weil“ mit Hauptsatzstellung",k:"Nach „weil“ wandert das gebeugte Verb ans Satzende: <b>…, weil ich keine Zeit habe.</b> Gesprochen ist die Hauptsatzstellung verbreitet, schriftlich fällt sie auf.",r:"satz-nebensatz"},
@@ -8024,7 +8025,7 @@ const CHECKS = [
 /* ---------- STIL ---------- */
 {id:"s01",sev:"stil",re:/\b(eigentlich|irgendwie|quasi|sozusagen|letztendlich|schlussendlich|halt|durchaus|gewissermaßen|praktisch|im Grunde|an dieser Stelle|in diesem Kontext|im Rahmen dessen)\b/gi,
  t:"Füllwort",k:"Streich es testweise. Bleibt der Satz gleich, war es überflüssig.",r:"stil-fuellwort"},
-{id:"s02",sev:"stil",re:/\b(zur\s+Anwendung\s+(kommt|kommen|kam)|in\s+Erwägung\s+(ziehen|gezogen)|zur\s+Durchführung\s+(bringen|gebracht)|Anwendung\s+(findet|finden)|eine\s+Prüfung\s+(vornehmen|vorgenommen)|zum\s+Einsatz\s+(kommt|kommen)|Verwendung\s+(findet|finden))\b/gi,
+{id:"s02",sev:"stil",re:/\b(zur\s+(?:Anwendung|Durchführung)\s+(?:kommt|kommen|kam|kamen|bringt|bringen|brachte|gebracht)|(?:kommt|kommen|kam|kamen|bringt|bringen|brachte)(?:\s+[^\s.!?,;:]+){0,3}\s+zur\s+(?:Anwendung|Durchführung)|in\s+Erwägung\s+(?:zieht|ziehen|zog|gezogen)|(?:zieht|ziehen|zog)(?:\s+[^\s.!?,;:]+){0,3}\s+in\s+Erwägung|zum\s+Einsatz\s+(?:kommt|kommen|kam|kamen)|(?:kommt|kommen|kam|kamen)(?:\s+[^\s.!?,;:]+){0,3}\s+zum\s+Einsatz|(?:Anwendung|Verwendung)\s+(?:findet|finden)|(?:findet|finden)(?:\s+[^\s.!?,;:]+){0,3}\s+(?:Anwendung|Verwendung)|eine\s+Prüfung\s+(?:vornehmen|vorgenommen))\b/gi,
  t:"Streckverb",k:"Das einfache Verb ist fast immer stärker: anwenden, erwägen, durchführen, prüfen, einsetzen, verwenden.",r:"stil-nominal"},
 {id:"s03",sev:"stil",re:/\b(bereits\s+schon|schon\s+bereits|eventuell\s+vielleicht|vielleicht\s+eventuell|kleines\s+Detail|runder\s+Kreis|weißer\s+Schimmel|neu\s+renoviert|persönlich\s+anwesend|gemeinsames\s+Miteinander|zurzeit\s+momentan|alter\s+Greis|tote\s+Leiche)\b/gi,
  t:"Doppelung",k:"Zweimal dasselbe sagen wirkt unbeholfen. Eines der beiden Wörter reicht.",r:"stil-pleonasmus"},
@@ -8032,8 +8033,8 @@ const CHECKS = [
  t:"Leerlauf am Satzanfang",k:"„Es gibt viele Studien, die zeigen …“ → <b>Viele Studien zeigen …</b> Gemeint ist die ankündigende Bauform „Es gibt X, die …“. Wo es wirklich ums Vorhandensein geht — „Es gibt keine verbindliche Regel“ —, bleibt „Es gibt“ stehen.",r:"stil-esgibt"},
 {id:"s05",sev:"stil",re:/\b[Nn]icht\s+un(?!ter)[a-zäöüß]{3,}\b/g,t:"Doppelte Verneinung",
  k:"„nicht unüberzeugend“ braucht einen zusätzlichen Denkschritt. Sag direkt, was du meinst — es sei denn, du willst bewusst abstufen: dann ist die Litotes ein legitimes Stilmittel.",r:"stil-verneinung"},
-{id:"s06",sev:"stil",re:/\bSinn\s+(macht|machen|gemacht|machte)\b/gi,t:"„Sinn machen“",
- k:"Lehnübersetzung aus dem Englischen. In gehobenen Texten: <b>Sinn ergeben</b> oder <b>sinnvoll sein</b>.",r:"stil-anglizismus"},
+{id:"s06",sev:"stil",re:/\b(Sinn\s+(?:macht|machen|machte|machten|gemacht)|(?:macht|machen|machte|machten|gemacht)(?:\s+(?:das|es|dies|doch|auch|wirklich|überhaupt|irgendwie|schon|nicht|so|nur|eben))?(?:\s+(?:kein|keinen|kaum|wenig|weniger|mehr|viel|durchaus|absolut|total|echt))?\s+Sinn)\b/gi,t:"„Sinn machen“",
+ k:"Der Duden führt das als umgangssprachlich und verweist auf englisch „something makes sense“ — ob es wirklich von dort kommt, ist umstritten. In gehobenen Texten: <b>Sinn ergeben</b> oder <b>sinnvoll sein</b>.",r:"stil-anglizismus"},
 {id:"s07",sev:"stil",re:/\bman\s+(sollte|könnte|müsste|kann|muss|wird)\b/gi,t:"„man“ statt Zuständigkeit",
  k:"Wo „man“ steht, ist niemand zuständig. Ersetz es durch <b>ich</b> oder <b>wir</b>, und der Satz wird verbindlich.",r:"form-verbindlich"},
 {id:"s08",sev:"stil",re:/\b(deutlich|erheblich|relativ|ziemlich|einige|mehrere|häufig|oft)\s+[a-zäöüß]+/gi,
@@ -8196,7 +8197,7 @@ function renderCheck(){
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
       "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
-      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa zwei Drittel</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
+      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa drei Viertel</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
       '<div class="spread" style="margin-bottom:10px"><div class="eyebrow" style="margin:0">Dein Text</div>'+

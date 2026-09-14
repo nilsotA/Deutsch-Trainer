@@ -625,6 +625,35 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   P.ok("Der Textcheck findet mindestens 60 der markierten Fehler",
     quote.gefunden >= 60, quote.gefunden + " von " + quote.stellen);
 
+  /* Fehlerklasse „die App nennt einen Anteil, den niemand nachrechnet“. Der Textcheck
+     sagt über sich selbst, wie viel er von den eingebauten Fehlern findet. Diese Zusage
+     stand auf „etwa zwei Drittel“, während die Messung schon bei 74 Prozent lag — die
+     Zahl war also nicht falsch, aber zu bescheiden, und sie wandert mit jedem geschärften
+     Muster weiter weg. Hier wird sie an der Messung festgemacht. */
+  const BRUCH = { "die Hälfte": 0.5, "zwei Drittel": 2/3, "drei Viertel": 0.75,
+                  "vier Fünftel": 0.8, "neun Zehntel": 0.9 };
+  /* Am gerenderten Element gemessen, nicht am Quelltext — und der vorige Inhalt von
+     #wSub wird danach zurückgelegt, damit die Ansichtsprüfungen unten dasselbe vorfinden. */
+  const zusage = String(daten(w, `(function(){
+    const host = document.querySelector("#wSub");
+    const vorher = host.innerHTML;
+    renderCheck();
+    const t = host.textContent;
+    host.innerHTML = vorher;
+    return t;
+  })()`));
+  const genannt = Object.keys(BRUCH).find(x => zusage.includes(x));
+  P.ok("Der Textcheck sagt selbst, welchen Anteil er findet", !!genannt,
+    zusage.slice(0, 120));
+  if (genannt) {
+    const ist = quote.gefunden / quote.stellen;
+    const naechster = Object.keys(BRUCH).sort((x, y) =>
+      Math.abs(BRUCH[x] - ist) - Math.abs(BRUCH[y] - ist))[0];
+    P.ok("und dieser Anteil stimmt mit der Messung überein („" + genannt + "“, gemessen " +
+      Math.round(ist * 100) + " %)", genannt === naechster,
+      "genannt „" + genannt + "“, am nächsten läge „" + naechster + "“");
+  }
+
   /* Und die Gegenrichtung, härter als die Vorlage oben: Die korrigierten Fassungen
      derselben Texte sind zusammenhängende, richtige Prosa. Die drei Kommamuster dürfen
      dort nicht melden — sie sind die einzigen, die auf fehlende Zeichen zielen, und
@@ -736,6 +765,40 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       ziel: ["Ich erwiedere den Gruß.", "Er erwiederte nichts.", "Sie erwiedern nur knapp.",
              "Die Erwiederung kam prompt."],
       still: ["Ich erwidere den Gruß.", "Er erwiderte nichts.", "Er hat wieder etwas gesagt."] },
+    /* Die Kommamuster für Infinitivgruppen: Beide kannten ihren Zielfall nur, wenn
+       zwischen Auslöser und „zu“ kein Substantiv stand — deutsche Substantive sind groß,
+       also blockte fast jeder echte Satz. Auf der Verbotsseite steht hier das mehrteilige
+       Prädikat (sein, haben, brauchen, pflegen, scheinen, drohen, versprechen), bei dem
+       nach § 73 E4 gerade kein Komma steht. */
+    { id: "y02",
+      ziel: ["Sie geht früher um pünktlich zu sein.", "Wir treffen uns um den Plan durchzugehen.",
+             "Er spart um sich ein Rad zu kaufen.", "Sie kommt vorbei um das Trikot abzuholen."],
+      still: ["Sie geht früher, um pünktlich zu sein.", "Um fit zu bleiben, geht er joggen.",
+              "Er bittet um Erlaubnis.", "Wir kümmern uns um den Aufbau, um Zeit zu sparen."] },
+    { id: "y11",
+      ziel: ["Er hat versucht den Ball zu treffen.", "Sie hat beschlossen das Training zu verschieben.",
+             "Er hat angefangen für die Klausur zu lernen.", "Sie plant im Sommer umzuziehen.",
+             "Er hat vergessen Milch zu kaufen.", "Sie hat gelernt mit dem Rad zu fahren."],
+      still: ["Er hat versucht, den Ball zu treffen.", "Er hofft zu gewinnen.",
+              "Du brauchst nicht zu kommen.", "Sie scheint das Spiel zu gewinnen.",
+              "Er hat noch zu arbeiten.", "Das Wetter droht schlecht zu werden.",
+              "Er hat es versucht. Den Ball zu treffen ist schwer.",
+              "Unser Vorhaben die Halle zu sanieren war teuer."] },
+    /* Zwei Stilmuster, die nur die verbletzte Stellung kannten — im Hauptsatz rückt das
+       finite Verb vor das Nomen, und genau dort waren beide stumm. Sie verpassten damit
+       die eigenen Gegenbeispiele der App: „macht Sinn“ aus dem Fehlersuchtext kt10 und
+       der Übung s08, „kam zur Anwendung“ aus der Übung s02. */
+    { id: "s06",
+      ziel: ["Das macht Sinn.", "Macht das Sinn?", "Die Aufteilung macht keinen Sinn.",
+             "Zwei Einheiten machen mehr Sinn als eine.", "Das hat wenig Sinn gemacht."],
+      still: ["Das ergibt Sinn.", "Der Sinn des Lebens ist unklar.", "Das ist sinnvoll.",
+              "Er macht das mit viel Sinn für Details."] },
+    { id: "s02",
+      ziel: ["Das Verfahren kam zur Anwendung.", "Die Regel kommt hier zur Anwendung.",
+             "Der Ersatzball kam zum Einsatz.", "Wir ziehen das in Erwägung.",
+             "Die Regel findet hier Anwendung."],
+      still: ["Wir wendeten das Verfahren an.", "Wir setzen den Ersatzball ein.",
+              "Wir erwägen das.", "Er kam zur Halle.", "Die Anwendung ist einfach."] },
     { id: "y05",
       ziel: ["Der gleiche Fehler ist mir wieder passiert.", "Das gleiche Problem wie gestern.",
              "Wir tragen die gleichen Schuhe."],
