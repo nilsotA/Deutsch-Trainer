@@ -58,6 +58,36 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vier Muster, die nur eine Zeitform kannten — und was die Ausgangsmessung wirklich wert war (14.09.2026, vierte Runde).**
+
+Die Runden davor sind Funden eines Prüflaufs nachgegangen. Diese hier kommt aus eigenem
+Nachmessen: Von den Mustern, die auf keiner Falschform der App greifen, hatte der Lauf
+sechs gar nicht angesehen. Vier davon hatten eine Lücke:
+
+- **x22** („kosten + Akkusativ“) kannte nur das Präsens. „Das kostete mir das Letzte“ und
+  „Die Karten kosten mir zu viel“ liefen durch. Dazu fehlte „ihnen“ — eindeutig Dativ und
+  damit meldbar, anders als das mehrdeutige „uns“ und „euch“. „ihr“ bleibt bewusst draußen:
+  „Das kostet ihr Geld“ ist ein Possessivpronomen, kein Dativobjekt.
+- **f12** verlangte ein „es“ vor „tut mir leid“ — und verpasste damit den häufigsten Fall
+  überhaupt, den Satzanfang ohne „es“: „Tut mir leid, falls ich störe.“ Jetzt greift es am
+  Satzanfang, nach „es“ und nach „das“. Absichtlich nicht überall: Ohne diese Schranke
+  meldet es „Ein großes tut mir leid, wenn das nicht klappt“.
+- **a07** (Selbstabwertung) kannte zwei Adverbien. „Ich bin einfach zu dumm für das Thema“
+  und „Ich bin wohl zu blöd dafür“ liefen durch. Die Adverbienliste ist jetzt länger, bleibt
+  aber geschlossen — ein freies Füllwort hätte „Ich bin für dumm verkauft worden“ mitgefangen.
+- **x03** („während + Genitiv“) kannte dem, den und einem, aber nicht diesem, jedem oder ein
+  Possessivpronomen. „Während meinem Praktikum“ lief durch.
+
+**Was die Ausgangszahl wert war.** Angefangen hat alles mit der Messung „17 von 100 Mustern
+greifen auf keiner Falschform der App“. Nach allen vier Runden steht sie bei **18 von 100** —
+sie hat sich also nicht verbessert, und das ist richtig so. Ein Muster steht auf dieser Liste
+auch dann, wenn es tadellos arbeitet und die App diesen Fehler nur nirgends als Beispiel
+zeigt: „Wiederspruch“ und „widergegeben“ kommen im Bestand schlicht nicht vor. Die Zahl war
+eine **Spur, kein Urteil**. Was sie ersetzt hat, ist die Zielsatztabelle in `tests/suite.js`:
+**163 Sätze**, für jedes reparierte Muster die Stellungen, die es fangen muss, und die
+Nachbarformen, die still bleiben müssen. Drei Muster haben die Liste verlassen, weil sie jetzt
+wirklich fangen, was die App zeigt — y10, s06 und s02.
+
 **Ein Muster, das genau das Gegenteil seiner Aufgabe tat (14.09.2026, dritte Runde).**
 
 **y10** sollte „wo“ als Relativpronomen finden — „der Mann, wo das gesagt hat“, die

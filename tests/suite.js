@@ -840,6 +840,31 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
        lokalen Gebrauch — „Die Halle, wo er ist“ und „Das ist der Ort, wo er war“ wurden
        gemeldet, die eigene Falschoption aus n35 nicht. Der Anker liegt jetzt auf dem
        Bezugswort: Nach einer Person ist „wo“ regional, nach einem Ort ist es richtig. */
+    /* Vier Muster, die nur eine Zeitform oder nur einen Begleiter kannten. Gefunden beim
+       eigenen Nachmessen, nicht durch den Prüflauf: x22 kannte nur das Präsens, f12
+       verlangte ein „es“ vor „tut mir leid“ und verpasste damit den häufigsten Fall am
+       Satzanfang, a07 kannte zwei Adverbien, x03 drei Begleiter. */
+    { id: "x03",
+      ziel: ["Während dem Spiel hat es geregnet.", "Während diesem Training war es laut.",
+             "Während meinem Praktikum habe ich viel gelernt."],
+      still: ["Während der Vorlesung war es still.", "Während ich lief, regnete es.",
+              "Während des Spiels hat es geregnet.", "Währenddessen lief das Warm-up."] },
+    { id: "x22",
+      ziel: ["Das kostet mir viel Zeit.", "Das kostete mir das Letzte.",
+             "Die Karten kosten mir zu viel."],
+      still: ["Das kostet mich viel Zeit.", "Das kostet uns viel Zeit.",
+              "Das kostet euch nichts.", "Das kostet ihr Geld."] },
+    { id: "f12",
+      ziel: ["Es tut mir leid, falls das untergegangen ist.", "Tut mir leid, falls ich störe.",
+             "Hallo Herr Meier. Tut mir leid, falls das untergeht."],
+      still: ["Es tut mir leid. Ich habe den Termin vergessen.",
+              "Tut mir leid für die späte Antwort.",
+              "Ein großes tut mir leid, wenn das nicht klappt."] },
+    { id: "a07",
+      ziel: ["Ich bin wahrscheinlich zu blöd dafür.", "Ich bin einfach zu dumm für das Thema.",
+             "Ich bin wohl zu blöd dafür.", "Ich bin schwer von Begriff."],
+      still: ["Ich bin nicht zu dumm dafür.", "Ich bin für dumm verkauft worden.",
+              "Ich bin mit der Aufgabe nicht weitergekommen."] },
     { id: "y10",
       ziel: ["der Mann, wo das gesagt hat", "Die Frau, wo im Verein arbeitet, heißt Meier.",
              "Der Trainer, wo uns betreut, ist neu.",
