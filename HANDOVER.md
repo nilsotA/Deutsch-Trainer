@@ -1466,6 +1466,28 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 
 ## Werkzeug, das nützlich war
 
+**Der Service Worker, zum ersten Mal von Ende zu Ende nachgemessen.** Mit einem kleinen
+Server im Kritzelordner, der auf Zuruf langsam wird oder schweigt (`srv.js`), und
+`swtest3.js`. Ergebnis: Er tut genau das, was in CLAUDE.md steht.
+
+| | |
+|---|---|
+| Erster Start mit Netz | Worker registriert, `/` im Cache (721 506 Zeichen) |
+| Netz tot | App startet in **54 ms**, alle 379 Übungen da |
+| Netz sehr langsam (Rumpf über 8 s) | Seite steht nach **2550 ms** — die Frist von 2500 ms greift auf die Millisekunde, der Cache gewinnt |
+| Korrektur im Netz | beim nächsten Start da |
+
+Der dritte Fall ist der, für den der Umbau gemacht wurde: Ein `fetch()` gilt schon als
+erfüllt, wenn die Kopfzeilen da sind — deshalb liest `netzSeite()` den Rumpf aus, bevor die
+Antwort als „da“ zählt. Ohne das gewann das Netz die Frist und die App startete trotz
+vollständiger Kopie erst nach einer halben Minute. Die 2550 ms belegen, dass es hält.
+
+**Wichtig beim Nachbauen:** Den Server von Node aus schalten, nicht aus der Seite heraus.
+Der Worker cacht jede erfolgreiche gleiche-Herkunft-Anfrage und sucht mit
+`ignoreSearch:true` — ein Steuerendpunkt in der Seite wird deshalb beim ersten Aufruf
+gecacht und danach nie wieder ans Netz gereicht. Mein erster Anlauf meldete daraus
+„Korrektur fehlt“, obwohl sie ankommt.
+
 **Der Spickzettel auf Papier.** Gemessen mit Druckemulation im Browser (`emulateMedia({media:
 "print"})`, Spickzettel über den Knopf im Regelwerk öffnen):
 
