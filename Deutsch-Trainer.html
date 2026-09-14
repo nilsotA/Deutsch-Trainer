@@ -436,6 +436,23 @@ table.ch-t.sm td{padding-right:14px}
 .cheat table.dt{font-size:11.5px}
 .cheat table.dt th,.cheat table.dt td{padding:4px 6px}
 @media print{
+  /* Papier ist immer hell. Ohne diesen Block druckte der Spickzettel im dunklen Theme
+     weiße Schrift auf weißem Papier: Der Druckblock setzte nur den Hintergrund und .cheat
+     auf Schwarz, die Farbtokens der Unterelemente blieben dunkel. Gemessen waren 146 von
+     328 Textelementen unter 4,5:1, das schlechteste bei 1,19:1 — also unsichtbar.
+     Die Werte sind die des hellen Themes, nur die Flächen auf reines Weiß gezogen. */
+  :root,[data-theme="dark"],[data-theme="light"]{
+    --bg:#ffffff; --bg2:#ffffff; --card:#ffffff; --ink:#1c1f1d; --ink2:#5a615c;
+    --ink3:#60665f; --line:#d8d3c9; --line2:#eae6de;
+    --acc:#2f6b52; --acc-soft:#e6f0ea; --acc-ink:#1f4a39; --acc-fg:#ffffff;
+    --warn:#b4501e; --warn-soft:#fbeee7;
+    --bad:#a8362f; --bad-soft:#fbeceb; --bad-fg:#ffffff;
+    --gold:#8d6518; --gold-soft:#fbf3e2;
+    --blue:#2f5578; --blue-soft:#e8eef5;
+    --pur:#5b4a80; --pur-soft:#ece8f3;
+    --teal:#1f6b6b; --teal-soft:#e2f0ef;
+    --shadow:none;
+  }
   body.cheat-on{background:#fff}
   body.cheat-on .head,body.cheat-on .toast,body.cheat-on .noprint,
   body.cheat-on #rNav,body.cheat-on #rRules,body.cheat-on #srchWrap{display:none!important}

@@ -1018,9 +1018,14 @@ P.titel("H · Kontraste");
      abbrechen, statt stumm das Falsche zu messen. */
   P.ok("Beide Themenblöcke im CSS gefunden", hellStart >= 0 && dunkelStart > hellStart,
     "hell@" + hellStart + " dunkel@" + dunkelStart);
+  /* Dreistellige Hex-Werte gehören dazu — „#fff“ ist dasselbe wie „#ffffff“. Ohne diese
+     Zeile fehlten fünf Tokens des Druckblocks, und die Prüfung meldete den Druck aus dem
+     dunklen Theme als unlesbar, obwohl der Browser ihn sauber zeichnete. */
+  const langHex = h => h.length === 4 ? "#" + h[1] + h[1] + h[2] + h[2] + h[3] + h[3] : h;
   const lies = block => {
     const o = {};
-    [...block.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})/g)].forEach(m => o[m[1]] = m[2]);
+    [...block.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?)\b/g)]
+      .forEach(m => o[m[1]] = langHex(m[2]));
     return o;
   };
   const hellTok = lies(css.slice(hellStart, dunkelStart));
@@ -1043,8 +1048,30 @@ P.titel("H · Kontraste");
     if (fg && bg) paare.push({ sel, fg, bg, px, gross: px >= 24 || (px >= 18.66 && fw >= 700) });
   });
   P.ok("Genug Farbpaare im CSS gefunden (" + paare.length + ")", paare.length >= 40, paare.length);
+  /* Dritte Konfiguration: der Druck. Papier ist immer hell, und der Druckblock zieht die
+     Farbtokens deshalb auf helle Werte. Ohne diesen Block druckte der Spickzettel im
+     dunklen Theme weiße Schrift auf weißem Papier — 146 von 328 Textelementen unter
+     4,5:1, das schlechteste bei 1,19:1. Zwei Themes zu prüfen hätte das nie gefunden:
+     Der Fehler entsteht erst aus dunklem Theme PLUS Druckregeln. */
+  const klammerEnde = (text, start) => {
+    let i = text.indexOf("{", start), tief = 0;
+    for (; i < text.length; i++) {
+      if (text[i] === "{") tief++;
+      else if (text[i] === "}" && --tief === 0) return i;
+    }
+    return text.length;
+  };
+  const druckStart = css.indexOf("@media print{");
+  P.ok("Der Druckblock ist auffindbar", druckStart > 0, druckStart);
+  const druckBlock = css.slice(druckStart, klammerEnde(css, druckStart) + 1);
+  const druckTok = lies(druckBlock);
+  P.ok("Der Druckblock setzt eigene Farbtokens (" + Object.keys(druckTok).length + ")",
+    Object.keys(druckTok).length >= 10 && druckTok.ink, Object.keys(druckTok).join(","));
+  const druckAusHell = Object.assign({}, hellTok, druckTok);
+  const druckAusDunkel = Object.assign({}, dunkelTok, druckTok);
   const blass = [];
-  [["hell", hellTok], ["dunkel", dunkelTok]].forEach(([name, tok]) => {
+  [["hell", hellTok], ["dunkel", dunkelTok],
+   ["Druck aus hell", druckAusHell], ["Druck aus dunkel", druckAusDunkel]].forEach(([name, tok]) => {
     paare.forEach(p2 => {
       if (!tok[p2.fg] || !tok[p2.bg]) return;
       const c = kontrast(hex(tok[p2.fg]), hex(tok[p2.bg]));
@@ -1053,8 +1080,24 @@ P.titel("H · Kontraste");
         p2.sel.slice(0, 40) + "  --" + p2.fg + " auf --" + p2.bg);
     });
   });
-  P.ok("Jede Farbkombination erreicht den Kontrast nach WCAG AA", !blass.length,
+  P.ok("Jede Farbkombination erreicht den Kontrast — hell, dunkel und im Druck", !blass.length,
     blass.slice(0, 6).join(" · ") + (blass.length > 6 ? " …(" + blass.length + ")" : ""));
+  /* Und die physische Wahrheit dazu: Papier ist weiß, egal was --bg sagt. Der Drucker
+     zeichnet keine Flächen, wenn „Hintergrundgrafiken“ aus sind — das ist die Voreinstellung.
+     Jede Schriftfarbe des Druckstands muss deshalb gegen reines Weiß reichen, aus beiden
+     Themes heraus. Genau hier lag der Fehler: Aus dem dunklen Theme stand --ink auf #e9ecea,
+     also 1,08:1 auf Papier. Die Paarprüfung oben sah das nicht, weil sie --ink gegen --bg
+     hielt und --bg im dunklen Theme mitdunkelt. */
+  const AUFWEISS = ["ink", "ink2", "ink3", "acc", "acc-ink", "warn", "bad", "gold", "blue", "pur", "teal"];
+  const aufPapier = [];
+  [["aus hell", druckAusHell], ["aus dunkel", druckAusDunkel]].forEach(([name, tok]) => {
+    AUFWEISS.forEach(t => {
+      if (!tok[t]) return;
+      const c = kontrast(hex(tok[t]), [255, 255, 255]);
+      if (c < 4.5) aufPapier.push(name + " --" + t + " " + (Math.round(c * 100) / 100) + ":1 auf weißem Papier");
+    });
+  });
+  P.ok("Jede Schriftfarbe reicht auf weißem Papier", !aufPapier.length, aufPapier.join(" · "));
   /* Positivprobe: Die Rechnung muss ein bekannt zu blasses Paar auch als zu blass erkennen. */
   P.ok("Die Kontrastrechnung erkennt ein zu blasses Paar",
     kontrast(hex("#a97b1e"), hex("#fbf3e2")) < 4.5 && kontrast(hex("#8d6518"), hex("#fbf3e2")) >= 4.5,
