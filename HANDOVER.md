@@ -58,6 +58,62 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Elf Prüfmuster, die ihren eigenen Zielfall verpasst haben (14.09.2026).**
+
+Ausgangspunkt war eine Messung: 17 der 100 Textcheck-Muster greifen auf **keiner einzigen**
+Falschform, die die App selbst zeigt. Ein Muster kann fehlerfrei laufen, syntaktisch heil
+sein, keinen Fehlalarm auslösen — und den Fall, für den es gebaut wurde, in der häufigsten
+Stellung trotzdem durchlassen. Das fällt nirgends auf: Der Textcheck meldet nichts, und der
+Text sieht sauber aus.
+
+Ein Prüflauf mit sechs Findern hat die Muster durchgemessen; jeden Fund habe ich selbst
+nachgemessen, bevor etwas in die Datei kam, und jede Sprachaussage mit zwei verschieden
+formulierten Suchen belegt. Sieben Muster waren zu eng:
+
+| Muster | verpasste | Beleg |
+|---|---|---|
+| x34 | „widergegeben“, „widergesehen“, „widergekehrt“ | die Partizipien schieben ein ge ein, und Perfekt ist die Alltagsstellung dieser Verben |
+| x15 | „Wiederspruch“ (Singular) | Duden führt dafür eine eigene Falschschreibungsseite; nur der Plural wurde gefangen |
+| x33 | „ich erwiedere“ | die Alternativenliste kannte jede Form außer der ersten Person |
+| x32 | „Auf gut deutsch …“ am Satzanfang | „auf\|in“ stand nur klein — das Muster verpasste genau das Beispiel aus seiner eigenen Erklärung |
+| y05 | „Der gleiche Fehler …“ am Satzanfang | kein i-Flag, und der Artikel nur klein |
+| t10 | „laufen - Krafttraining“ | beide Zeichenklassen nur Kleinbuchstaben, nach dem Gedankenstrich steht aber meist ein Substantiv |
+| t14 | „Das war es....“ | das Muster kannte nur das Zeichen …, nicht die drei getippten Punkte |
+
+Bei t10 kam eine zweite Änderung dazu: `\s` traf auch den Zeilenumbruch, deshalb meldete das
+Muster jede Aufzählung mit Spiegelstrichen. Jetzt steht dort ein Leerzeichen.
+
+**Und eine Fehlerklasse, die dabei aufgefallen ist und schlimmer war.** `\b` liegt in
+JavaScript zwischen jedem Nicht-Wortzeichen und einem Wortzeichen — ä, ö, ü und ß gehören
+nicht dazu. „Brüder“ endet für JavaScript also auf einer Wortgrenze plus „der“. Ein mit `\b`
+verankertes Muster springt dort mitten im Wort an. Gemessen an vier Mustern:
+
+- x23 (**hart**, n-Deklination) meldete „Grüße aus dem Süden Herr Meier war auch da“
+- y05 meldete „Alle Brüder gleiche Chancen bekommen“
+- a05 meldete „Die Räder Bosch des Vereins der Stadt“
+- a10 meldete „Wir haben Lügengeschichten gehabt“
+- f12 meldete „Ein großes tut mir leid, wenn …“
+
+Und weil `analyse()` den Treffer auf ganze Wörter dehnt, stand am Ende „Süden Herr“ ange-
+strichen da. Alle fünf tragen jetzt `(?<![\wäöüßÄÖÜ])` statt `\b`.
+
+**Zwei neue Prüfungen, beide gegengeprobt.** `tests/suite.js` sucht die Paarung jetzt
+selbst: jede mit `\b` verankerte ASCII-Alternative gegen jedes Wort mit Umlaut aus dem
+eigenen Bestand (857 Wörter). Dazu eine Tabelle mit 55 Sätzen — was jedes reparierte Muster
+fangen muss und was in seiner Nähe liegt und still bleiben muss. Die Verbotsseite ist die
+teurere: Bei x34 sind es die trennbaren wider-Verben, deren Partizip ein ge einschiebt und
+dabei korrekt ist („hat sich widergespiegelt“, „hat widergehallt“). Wer die Lücke mit einem
+breiten `/widerge/` schlösse, meldete diese Formen als harten Fehler und widerspräche dem
+eigenen Regeltext.
+
+**Der Agent hat wieder selbst geschrieben — und diesmal nach dem Abbruch.** Derselbe Vorfall
+wie am 13.09., mit einer neuen Wendung: Ich hatte den Lauf gestoppt, danach committet und
+gepusht, und **90 Sekunden nach dem Commit** stand eine Änderung in `Deutsch-Trainer.html`,
+die ich nicht geschrieben hatte (ausgerechnet der x33-Fund). Gelandet ist wieder nichts —
+`git show HEAD:Deutsch-Trainer.html` war sauber, die Arbeitskopie zurückgesetzt, die Änderung
+später selbst geschrieben und selbst belegt. Die Lehre steht in CLAUDE.md: Ein sauberer
+`git status` vor dem Abbruch sagt nichts; nach einem Agentenlauf noch einmal nachsehen.
+
 **Der lange Horizont — und was die Simulation vorher gar nicht gemessen hat (14.09.2026).**
 
 Abschnitt H von `tests/lernen.js` stellte den Lernstand Tag für Tag zurück, aber nur die

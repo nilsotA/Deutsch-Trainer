@@ -264,6 +264,71 @@ const stumpf = [];
 muster.forEach(c => toteGrenzen(c).forEach(x => stumpf.push(c.id + ": \\b " + x)));
 P.ok("Kein \\b vor oder hinter Umlaut und ß (tote Alternative)", !stumpf.length, stumpf.join(" · "));
 
+{
+  /* Die Gegenrichtung derselben \b-Falle, und die teurere: Nicht die Alternative wird
+     stumm, sondern sie springt mitten in einem Wort an. \b liegt in JavaScript zwischen
+     jedem Nicht-Wortzeichen und einem Wortzeichen — ä, ö, ü und ß gehören nicht dazu.
+     „Brüder“ endet deshalb für JavaScript auf einer eigenen Wortgrenze plus „der“.
+     y05 (/\b(der|die|das|den|dem)\s+(gleiche|…)/) meldete darum „Alle Brüder gleiche
+     Chancen“ als Zweifelsfall, x23 meldete „Grüße aus dem Süden Herr Meier war auch da“
+     als harten Fehler in der n-Deklination. analyse() dehnt den Treffer anschließend auf
+     ganze Wörter — angestrichen wird also „Süden Herr“, und die Meldung liest sich, als
+     hätte Nils etwas falsch gemacht.
+
+     Gesucht wird die Paarung selbst: eine mit \b verankerte Alternative aus reinen
+     ASCII-Buchstaben, und ein Wort aus dem eigenen Bestand der App, das genau darauf
+     endet und davor einen Umlaut oder ein ß trägt. Gefunden hat das x23, f12, a05 und
+     a10; alle vier tragen jetzt (?<![\wäöüßÄÖÜ]) statt \b. Der Bestand der App ist als
+     Wortliste bewusst schmal — er fängt, was Nils hier liest, nicht jedes deutsche Wort. */
+  const woerter = new Set();
+  daten(w, `(function(){
+    const strip = h => String(h).replace(/<[^>]+>/g," ").replace(/&[a-z]+;/g," ").replace(/\s+/g," ").trim();
+    const t = [];
+    ALL.forEach(i => { (i.o||[]).forEach(o=>t.push(strip(o))); if(i.q) t.push(strip(i.q)); if(i.e) t.push(strip(i.e)); });
+    RULES_ALL.concat(SATZ).concat(TABLES).forEach(r => t.push(strip(r.b)));
+    WORDS.forEach(x => { t.push(x.ex); t.push(x.d); t.push(x.w); });
+    CASEREF.forEach(e => t.push(e.ex));
+    KORREKTUR.forEach(k => t.push(k.txt));
+    t.push(strip(cheatHTML()));
+    return t.filter(Boolean).map(String);
+  })()`).forEach(t => (String(t).match(/[A-Za-zÄÖÜäöüß]{3,}/g) || []).forEach(x => woerter.add(x)));
+  const UML = /[ÄÖÜäöüß]/;
+  const mitUmlaut = [...woerter].filter(x => UML.test(x));
+
+  const steckenBleibt = c => {
+    const src = c.re.slice(1, c.re.lastIndexOf("/"));
+    if (!src.startsWith("\\b")) return [];
+    const egal = /i/.test(c.re.slice(c.re.lastIndexOf("/") + 1));
+    let anfaenge = altsNachGrenze(src, 2);
+    if (!anfaenge) { const m = src.slice(2).match(/^[A-Za-z]+/); anfaenge = m ? [m[0]] : []; }
+    const raus = [];
+    anfaenge.forEach(a => {
+      /* Nur vollständige Alternativen aus ASCII-Buchstaben. Wer „ständig“ auf „st“ kürzt,
+         prüft einen Wortanfang, den das Muster gar nicht kennt. */
+      if (!/^[A-Za-z]{2,}$/.test(a)) return;
+      mitUmlaut.forEach(wo => {
+        if (wo.length <= a.length) return;
+        const ende = wo.slice(-a.length);
+        if (egal ? ende.toLowerCase() !== a.toLowerCase() : ende !== a) return;
+        if (!UML.test(wo[wo.length - a.length - 1])) return;
+        raus.push(c.id + ": „" + a + "“ steckt am Ende von „" + wo + "“");
+      });
+    });
+    return raus;
+  };
+  /* Positiv- und Gegenprobe an dem Muster, das die Klasse ans Licht gebracht hat. */
+  P.ok("Der Wortmitte-Erkenner findet die alte Fassung von y05",
+    steckenBleibt({ id: "y05", re: String(/\b(der|die|das|den|dem)\s+(gleiche|gleichen)\b/g) }).length > 0,
+    "Positivprobe blieb stumm");
+  P.ok("… und meldet die reparierte Fassung nicht mehr",
+    steckenBleibt({ id: "y05", re: String(/(?<![\wäöüßÄÖÜ])(der|die|das|den|dem)\s+(gleiche|gleichen)\b/g) }).length === 0,
+    "Gegenprobe schlug an");
+  const mitten = [];
+  muster.forEach(c => steckenBleibt(c).forEach(x => mitten.push(x)));
+  P.ok("Kein \\b lässt ein Muster mitten in einem Wort anspringen (" + mitUmlaut.length +
+    " Wörter mit Umlaut geprüft)", !mitten.length, [...new Set(mitten)].join(" · "));
+}
+
 /* Der eigene korrekte Bestand darf keine harten Meldungen auslösen.
    Fehlerklasse „zitierte Falschform“: Manche richtigen Antworten benennen eine falsche
    Form, statt selbst eine korrekte zu sein („Ich rufe dir an“ statt „dich“). Steht im
@@ -627,6 +692,89 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
   const ms = w.eval("(function(){const t=window.__probe;const a=Date.now();analyse(t);return Date.now()-a;})()");
   P.info("Textcheck über 6000 Wörter ohne Satzzeichen: " + ms + " ms");
   P.ok("Der Textcheck friert bei Text ohne Satzzeichen nicht ein", ms < 250, ms + " ms");
+}
+
+{
+  /* Fehlerklasse „das Muster kennt seinen Zielfall nur in einer Wortform“. Ein Prüfmuster
+     kann fehlerfrei laufen, syntaktisch heil sein, keinen Fehlalarm auslösen — und den
+     Fall, für den es gebaut wurde, trotzdem in der häufigsten Stellung verpassen. Solche
+     Muster fallen nirgends auf: Der Textcheck meldet nichts, und Nils hält seinen Text
+     für sauber.
+
+     Gefunden wurde die Klasse bei einem Durchgang über die Muster, die auf keiner einzigen
+     Falschform der App greifen. Vier Beispiele, alle nachgemessen:
+     x34 kannte nur wider + Stamm, nie das ge-Infix der Partizipien — „widergegeben“,
+     „widergesehen“, „widergekehrt“ liefen durch, obwohl das Perfekt die Alltagsstellung
+     dieser Verben ist. x15 kannte „Wiedersprüche“, aber nicht den Singular
+     „Wiederspruch“, für den der Duden eigens eine Falschschreibungsseite führt. x33
+     kannte jede Form von „erwiedern“ außer der ersten Person („ich erwiedere“). Und x32
+     schrieb „auf|in“ nur klein, hatte also am Satzanfang gar keine Wirkung — es verpasste
+     genau das Beispiel, das in seiner eigenen Erklärung steht („auf gut Deutsch“).
+
+     Die Tabelle hält beide Richtungen fest: Was das Muster fangen muss, und was in seiner
+     Nähe liegt und still bleiben muss. Die Verbotsseite ist die teurere — bei x34 sind es
+     die trennbaren wider-Verben, deren Partizip ein ge einschiebt und dabei korrekt ist
+     („hat sich widergespiegelt“, „hat widergehallt“). Wer die Lücke mit einem breiten
+     /widerge/ schlösse, meldete diese Formen als harten Fehler und widerspräche damit dem
+     eigenen Regeltext. */
+  const ZIELE = [
+    { id: "x34",
+      ziel: ["Er hat das widergegeben.", "Wir haben uns lange nicht widergesehen.",
+             "Der Schmerz ist widergekehrt.", "Ich widergebe den Inhalt nur.",
+             "Ich muss das leider widerholen."],
+      still: ["Das Ergebnis hat sich darin widergespiegelt.", "Der Ruf hat im Saal widergehallt.",
+              "Das Echo ist widergeklungen.", "Das Licht hat widergestrahlt.",
+              "Er hat das wiedergegeben.", "Sie hat ihm widersprochen.",
+              "Ihm ist Unrecht widerfahren.", "Der Widerstand war groß."] },
+    { id: "x15",
+      ziel: ["Das ist ein klarer Wiederspruch.", "Er hat mir wiedersprochen.",
+             "Ich kann dem nicht wiederstehen.", "Den Bescheid kann man wiederrufen."],
+      still: ["Das ist ein klarer Widerspruch.", "Ich kann dem nicht widerstehen.",
+              "Den Bescheid kann man widerrufen.", "Ich muss die Übung wiederholen.",
+              "Wir haben den Zustand wiederhergestellt."] },
+    { id: "x33",
+      ziel: ["Ich erwiedere den Gruß.", "Er erwiederte nichts.", "Sie erwiedern nur knapp.",
+             "Die Erwiederung kam prompt."],
+      still: ["Ich erwidere den Gruß.", "Er erwiderte nichts.", "Er hat wieder etwas gesagt."] },
+    { id: "y05",
+      ziel: ["Der gleiche Fehler ist mir wieder passiert.", "Das gleiche Problem wie gestern.",
+             "Wir tragen die gleichen Schuhe."],
+      still: ["Alle Brüder gleiche Chancen bekommen.", "Die Räder gleicher Bauart liefen rund.",
+              "Das Gleiche gilt für dich."] },
+    { id: "t10",
+      ziel: ["Er wollte laufen - Krafttraining kam später.",
+             "Das Ergebnis war klar - Nils hatte gewonnen.",
+             "Der Plan - so gut er war - scheiterte."],
+      still: ["Meine Aufgaben:\n- aufwärmen\n- auslaufen", "Das Warm-up dauert zehn Minuten.",
+              "Er wollte laufen – Krafttraining kam später."] },
+    { id: "t14",
+      ziel: ["Das war es....", "Und dann war Schluss…."],
+      still: ["Im Zitat steht [...].", "Er zitierte (...).", "Und dann ...?",
+              "Ich wollte noch trainieren ..., aber die Halle war zu.",
+              "Die Methode funktioniert […]."] },
+    { id: "x32",
+      ziel: ["Auf gut deutsch: das reicht nicht.", "Auf deutsch heißt das Abseits.",
+             "In deutsch war ich nie gut.", "Ich schreibe die Mail in deutsch."],
+      still: ["Auf Deutsch heißt das Abseits.", "Auf gut Deutsch: das reicht nicht.",
+              "Wir spielen auf deutsch-französischem Boden."] },
+  ];
+  const verpasst = [], falschAn = [];
+  ZIELE.forEach(z => {
+    const treffer = s => daten(w, "analyse(" + JSON.stringify(s) + ").finds.some(f=>f.c.id===" +
+      JSON.stringify(z.id) + ")");
+    z.ziel.forEach(s => { if (!treffer(s)) verpasst.push(z.id + ": „" + s + "“"); });
+    z.still.forEach(s => { if (treffer(s)) falschAn.push(z.id + ": „" + s + "“"); });
+  });
+  const zahl = ZIELE.reduce((n, z) => n + z.ziel.length + z.still.length, 0);
+  P.ok("Jedes geprüfte Muster fängt seinen Zielfall in allen aufgeführten Stellungen (" +
+    zahl + " Sätze)", !verpasst.length, verpasst.join(" · "));
+  P.ok("und lässt die richtigen Nachbarformen in Ruhe", !falschAn.length, falschAn.join(" · "));
+  /* Positivprobe: Der Weg Satz → analyse() → Muster-Treffer muss überhaupt anschlagen.
+     Ohne sie wäre eine leere oder falsch geschriebene Tabelle stumm grün. */
+  P.ok("Die Zielsatzprüfung schlägt bei einem Muster an, das nicht greifen darf",
+    daten(w, 'analyse("Das Ergebnis hat sich darin widergespiegelt.").finds.some(f=>f.c.id==="x15")') === false &&
+    daten(w, 'analyse("Das Ergebnis hat sich darin wiederspiegelt.").finds.some(f=>f.c.id==="x15")') === true,
+    "Positivprobe blieb stumm");
 }
 
 /* ---------- E · Ansichten ---------- */
