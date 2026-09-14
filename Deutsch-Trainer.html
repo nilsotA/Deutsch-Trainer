@@ -5631,7 +5631,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 696 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 699 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -6414,7 +6414,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 696 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 699 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();
@@ -6791,7 +6791,7 @@ function bindAcc(sel){
 function openRule(id){
   /* Die Filter zurücksetzen, bevor irgendetwas zeichnet: go("regeln") ruft selbst
      ensureRules(), und das zeichnet beim ersten Mal die ganze Liste. Danach zeichnete
-     openRule() sie ein zweites Mal — 117 Regeln, zweimal, beim ersten Regelsprung. */
+     openRule() sie ein zweites Mal — 118 Regeln, zweimal, beim ersten Regelsprung. */
   RT.tab = "regeln";
   ruleFilter = ""; ruleVar = false;
   const frischGezeichnet = !rulesReady;

@@ -43,6 +43,40 @@ const dokuSchief = dokuZahlen.filter(([, dok, app]) => dok !== app)
   .map(([was, d, a]) => was + ": CLAUDE.md " + d + ", App " + a);
 P.ok("Die Zahlen in CLAUDE.md stimmen mit der App überein", !dokuSchief.length, dokuSchief.join(" · "));
 
+/* Dieselbe Falle ein drittes Mal, diesmal in der App selbst: Ihre Kommentare begründen
+   Entscheidungen mit Bestandszahlen — „320 der 699 Karten waren über Heute unerreichbar“,
+   „118 Regeln, zweimal gezeichnet“. Wächst der Bestand, stimmen sie nicht mehr, und wer
+   beim nächsten Umbau danach plant, rechnet falsch. Drei standen veraltet da (696, 696,
+   117), bevor diese Prüfung entstand.
+   Geführte Liste statt Mustersuche: Ein erster Anlauf suchte jede Zahl vor einem
+   Bestandswort und meldete „30 Tage Tagesaufgabe ergaben 360 Übungen“ — ein
+   Rechenergebnis, keine Bestandsangabe. Die beiden lassen sich maschinell nicht
+   trennen, und eine Regel, die das Falsche misst, ist schlimmer als eine enge. */
+{
+  const skript = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8")
+    .split("<script>")[1].split("</" + "script>")[0];
+  const KOMMENTARZAHLEN = [
+    { text: "320 der N Karten", wert: () => daten(w, "alleSchluessel().length") },
+    { text: "über alle N Karten", wert: () => daten(w, "alleSchluessel().length") },
+    { text: "N Regeln, zweimal", wert: () => daten(w, "RULES_ALL.length") },
+  ];
+  const veraltet = [], fehlt = [];
+  KOMMENTARZAHLEN.forEach(k => {
+    const soll = k.wert();
+    const gesucht = k.text.replace("N", String(soll));
+    if (skript.includes(gesucht)) return;
+    /* Steht dort eine andere Zahl, oder ist die Stelle ganz weg? Erst escapen, dann das
+       N einsetzen — andersherum escapt man die eigene Klammer und die Gruppe ist hin. */
+    const escapt = k.text.replace(/[.*+?^${}()|[\]\\]/g, x => "\\" + x);
+    const m = skript.match(new RegExp(escapt.replace("N", "(\\d+)")));
+    if (m) veraltet.push("„" + m[0] + "“ — es sind " + soll);
+    else fehlt.push("„" + k.text + "“ nicht mehr im Skript");
+  });
+  P.ok("Die Bestandszahlen in den Kommentaren der App stimmen", !veraltet.length, veraltet.join(" · "));
+  P.ok("Die geprüften Kommentarstellen gibt es noch (" + KOMMENTARZAHLEN.length + ")", !fehlt.length,
+    fehlt.join(" · "));
+}
+
 /* Dieselbe Falle ein zweites Mal: HANDOVER.md führt eine Tabelle „Stand der App“ mit
    denselben Zahlen. Sie stand bei 376 Übungen, 117 Regeln und 95 Prüfmustern, während
    CLAUDE.md längst nachgezogen war — geprüft wurde eben nur die eine Datei. Auch die
