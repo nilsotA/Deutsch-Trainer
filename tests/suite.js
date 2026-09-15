@@ -334,6 +334,62 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Gegenprobe schlug an");
 }
 
+/* Grundsatz 5 für die andere Wortfamilie: „immer“, „nie“, „ausschließlich“. Die
+   Rangbehauptungsprüfung darüber fängt Superlative; diese hier fängt die Absolutwörter in
+   den Grammatik- und Satzregeln — dort, wo eine verschwiegene Ausnahme Nils eine falsche
+   Form beibringt. Am 15.09.2026 sagte sa07 „Vor diesen Elementen steht ‚nicht‘ immer“,
+   obwohl das vorangestellte Element es hinten stehen lässt („Nach Köln fahre ich nicht“);
+   sa04 nannte den nachgestellten Nebensatz „immer leichter zu bauen“ und sa19 versprach,
+   wer mit einem Hauptsatz beginne, könne ihn „immer beenden“.
+
+   Abgeschwächte Formen („fast immer“), feste Fügungen („immer wenn“, „wann immer“,
+   „immer noch“) und die Satzkarten, die denselben Text tragen, zählen nicht als Fund —
+   letztere aber doch, weil sie eigene Stellen sind: Wer nur die Regel ändert und die
+   Karte vergisst, soll auffallen. Wie bei den Rangformeln eine gepflegte Liste statt
+   eines Verbots: Jede Stelle, die ein Absolutwort tragen darf, steht hier mit Grund. */
+{
+  const ABSOLUT = /(?<![\wäöüßÄÖÜ])(immer|nie|niemals|ausschließlich|stets|ohne Ausnahme|in jedem Fall)(?![\wäöüßÄÖÜ])/gi;
+  const WEICH = /(fast|nicht|meist|so gut wie|beinahe|nahezu|wann)\s+$/i;
+  const FEST = /^(immer\s+wenn|immer\s+noch)/i;
+  const ABS_ERLAUBT = {
+    "Regel gram-kasus":  "„über beim Thema immer Akkusativ“ und „vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
+    "Regel gram-wechsel": "dieselbe Aussage über Themen mit „über“",
+    "Satzkarte sa16":     "Satzkarte zu gram-wechsel, trägt denselben Satz",
+    "Regel satz-klammer": "„Nie trennbar: be-, ge-, er-, ver-, zer-, ent-, emp-, miss-“ — diese Vorsilben trennen sich nicht ab; der Sonderfall miss- steht im Satz danach",
+    "Satzkarte sa08":     "Satzkarte zu satz-klammer, trägt denselben Satz",
+  };
+  const nurText = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const absStellen = new Set();
+  const absSammle = (art, id, b) => {
+    const t = nurText(b);
+    [...t.matchAll(ABSOLUT)].forEach(m => {
+      if (WEICH.test(t.slice(Math.max(0, m.index - 20), m.index))) return;
+      if (FEST.test(t.slice(m.index, m.index + 30))) return;
+      absStellen.add(art + " " + id);
+    });
+  };
+  RA.filter(r => r.c === "gram" || r.c === "satz").forEach(r => absSammle("Regel", r.id, r.b));
+  SATZ.forEach(x => absSammle("Satzkarte", x.id, x.b));
+  const absNeu = [...absStellen].filter(x => !(x in ABS_ERLAUBT));
+  P.ok("Kein ungelistetes Absolutwort in Grammatik- und Satzregeln (" + absStellen.size +
+    " Stellen, " + Object.keys(ABS_ERLAUBT).length + " begründet erlaubt)", !absNeu.length, absNeu.join(" · "));
+  /* Positivprobe an der alten Fassung von sa07, Gegenproben an Abschwächung und fester Fügung. */
+  const probeAbs = (b) => { const v = new Set();
+    const t = nurText(b);
+    [...t.matchAll(ABSOLUT)].forEach(m => {
+      if (WEICH.test(t.slice(Math.max(0, m.index - 20), m.index))) return;
+      if (FEST.test(t.slice(m.index, m.index + 30))) return;
+      v.add(1); });
+    return v.size; };
+  P.ok("Der Absolut-Erkenner schlägt bei der alten Fassung an",
+    probeAbs("<p><b>Vor diesen Elementen steht „nicht“ immer:</b></p>") === 1, "Positivprobe blieb stumm");
+  P.ok("… und schweigt bei „fast immer“ und „immer wenn“",
+    probeAbs("<p>Die Vorsilbe be- macht fast immer ein Akkusativverb. Immer wenn ich Zeit habe, gehe ich schwimmen.</p>") === 0,
+    "Gegenprobe schlug an");
+  const absTot = Object.keys(ABS_ERLAUBT).filter(x => !absStellen.has(x));
+  P.ok("Keine tote Ausnahme in der Absolutliste", !absTot.length, absTot.join(", "));
+}
+
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
 const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev,r:c.r||null}))");

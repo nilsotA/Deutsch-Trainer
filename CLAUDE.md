@@ -226,9 +226,10 @@ Diese sind über Monate erarbeitet und teuer bezahlt — bitte einhalten:
    Warnsignale. Meist gibt es eine Ausnahme. Dieselbe Falle stellt der **Superlativ**:
    „der häufigste Fehler“, „die wichtigste Regel überhaupt“ behaupten eine Häufigkeits-
    ordnung, für die es keine Quelle gibt — und der Rat wird nicht schlechter, wenn
-   stattdessen der Mechanismus dasteht. `tests/suite.js` führt dazu eine gepflegte Liste:
-   Jede Stelle, die eine Rangformel tragen darf, steht dort mit Grund; eine neue macht den
-   Lauf rot.
+   stattdessen der Mechanismus dasteht. `tests/suite.js` führt dazu zwei gepflegte Listen —
+   eine für Rangformeln über den ganzen Bestand, eine für die Absolutwörter in den
+   Grammatik- und Satzregeln. Jede Stelle, die eine tragen darf, steht dort mit Grund; eine
+   neue macht den Lauf rot.
 6. **Gesprochen ≠ geschrieben.** Wo sich beides unterscheidet, beides benennen.
 7. Quellen: Duden, DWDS, Rat für deutsche Rechtschreibung, DIN 5008 (für Zahlen/Datum).
    **Maßgeblich ist das Amtliche Regelwerk in der Fassung von 2024** (in Kraft seit

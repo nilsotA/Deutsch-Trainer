@@ -58,6 +58,33 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**„immer“ und „nie“ in den Grammatik- und Satzregeln (15.09.2026, dreizehnte Runde).**
+
+Grundsatz 5 nennt „immer“, „nie“, „ausschließlich“ als Warnsignale; geprüft war bisher nur
+der Superlativ. Die 22 Grammatik- und 13 Satzregeln samt ihrer 24 Satzkarten sind jetzt
+daraufhin durchgesehen. Abgeschwächte Formen („fast immer“) und feste Fügungen („immer
+wenn“, „wann immer“) zählen nicht. Übrig blieben fünf Behauptungen, drei davon halten:
+
+- **sa07** sagte „Vor diesen Elementen steht ‚nicht‘ immer“ — stimmt nur, solange Ortsangabe,
+  Adjektiv oder Präpositionalobjekt im Mittelfeld stehen. Vorangestellt bleibt „nicht“
+  hinten: „Nach Köln fahre ich nicht.“ Die Karte nennt jetzt die Bedingung.
+- **sa04** nannte den nachgestellten Nebensatz „immer leichter zu bauen“, **sa19**
+  versprach, wer mit einem Hauptsatz beginne, könne ihn „immer beenden“. Beides jetzt
+  abgeschwächt.
+- Nicht geändert, weil belegt: „bei Themen immer Akkusativ“ und „vor bei der Zeit immer
+  Dativ“ (gram-kasus, gram-wechsel, sa16) sowie „Nie trennbar: be-, ge-, er-, ver-, zer-,
+  ent-, emp-, miss-“ (satz-klammer, sa08). Die fünf Stellen stehen mit Grund in der
+  Ausnahmenliste von `tests/suite.js`, Abschnitt B — wie bei den Rangformeln.
+
+**Dazu miss- richtiggestellt.** sa08 stellte den betonten Fall als den Normalfall dar. Der
+Duden-Sprachratgeber „Konjugation von Verben mit der Vorsilbe miss-“ und die Gesellschaft
+für deutsche Sprache sagen dasselbe: Meist ist die Vorsilbe unbetont und verhält sich wie
+„ver-“ — <b>missachtet, zu missachten</b>. Nur wenn sie den Ton trägt (missverstehen,
+missleiten), rutscht das „zu“ hinein: <b>misszuverstehen</b>. Getrennt wird das Verb in
+keinem Fall. Zwei verschieden formulierte Suchen, beide Quellen unabhängig.
+
+Der Absatz „Stand der Prüfung“ im Regelwerk trägt die drei Runden dieses Tages jetzt mit.
+
 **Stil ist keine Regel — nachgesehen statt angenommen (15.09.2026, zwölfte Runde).**
 
 Punkt 1 der Ideenliste fragte für die 17 `stil-` und 26 `form-`Regeln: Sind Empfehlungen
