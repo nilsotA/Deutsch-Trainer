@@ -206,6 +206,57 @@ const streit = Object.keys(H).filter(z => WCH[z] &&
   [...new Set(H[z])].join() !== [...new Set(WCH[z])].join());
 P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, streit.join(" · "));
 
+{
+  /* Fehlerklasse „Rangbehauptung ohne Beleg“. Grundsatz 5 warnt vor „immer“, „nie“ und
+     „ausschließlich“ — dieselbe Falle stellt der Superlativ: „der häufigste Fehler“, „die
+     wichtigste Regel überhaupt“, „die größten Konfliktverstärker der deutschen Sprache“.
+     Das sind Häufigkeitsordnungen, für die es keine Quelle gibt, und der Rat wird nicht
+     schlechter, wenn stattdessen der Mechanismus dasteht. Gefunden wurden sieben solche
+     Stellen — in komma-nebensatz, gram-ndekl, form-kritik samt Übung f26, satz-konjunktiv
+     mit der Satzkarte sa12, satz-reden mit sa19, n-abkuerzung und z-auslassung.
+
+     Nicht jede Fundstelle ist ein Fehler: In gross-subst sind „das Beste“ und „die
+     meisten“ die Beispielwörter der Regel selbst, und die form-Regeln sind Ratgebertexte,
+     in denen „die beste Investition“ ein Rat ist und kein Befund. Deshalb eine gepflegte
+     Liste statt eines Verbots: Jede Stelle, die eine Rangformel tragen darf, steht hier
+     mit Grund. Eine neue, nicht gelistete Stelle macht den Lauf rot — der Superlativ wird
+     damit zur bewussten Entscheidung.
+
+     Geprüft wird die Stelle, nicht die Zahl der Formeln in ihr: Wer in einer gelisteten
+     Regel eine zweite Rangformel ergänzt, fällt nicht auf. Das ist der Preis dafür, dass
+     eine Umformulierung des Beispiels den Lauf nicht grundlos rot macht. */
+  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+häufigsten(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/gi;
+  const ERLAUBT = {
+    "Regel gross-subst":    "„das Beste“ und „die meisten“ sind dort die Beispielwörter der Regel",
+    "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
+    "Regel form-anrede":    "Ratgebertext: „Die wichtigste Regel: spiegeln“ ist ein Rat, kein Befund",
+    "Regel form-eltern":    "Ratgebertext: „Die beste Investition“ ist ein Rat, kein Befund",
+    "Regel n-abkuerzung":   "„raten die meisten Leitfäden“ — Aussage über Leitfäden, mit „raten“ abgeschwächt",
+    "Übung g07":            "„die meisten wissen das“ ist der Beispielsatz der Aufgabe",
+    "Übung m02":            "„die häufigsten“ meint die häufigsten Präpositionen, kein Fehlerranking",
+    "Übung q25":            "Frage nach dem, was Leitfäden raten",
+  };
+  const rangStellen = new Set();
+  const sammle = (art, id, t) => { if (t && RANG.test(String(t).replace(/<[^>]+>/g, " "))) rangStellen.add(art + " " + id); };
+  RA.forEach(r => sammle("Regel", r.id, r.b));
+  SATZ.forEach(x => sammle("Satzkarte", x.id, x.b));
+  ALL.forEach(i => { sammle("Übung", i.id, i.e); sammle("Übung", i.id, i.q); });
+  daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||''}))").forEach(c => sammle("Prüfmuster", c.id, c.k));
+  CASEREF.forEach(e => sammle("Fallkarte", e.w, e.n));
+  const neu = [...rangStellen].filter(x => !(x in ERLAUBT));
+  P.ok("Keine ungelistete Rangbehauptung (" + rangStellen.size + " Stellen, " +
+    Object.keys(ERLAUBT).length + " begründet erlaubt)", !neu.length, neu.join(" · "));
+  /* Positivprobe: Der Erkenner muss anschlagen, sonst ist die Liste eine leere Zusage. */
+  const probe = new Set();
+  const sammle2 = (art, id, t) => { if (t && RANG.test(String(t))) probe.add(art + " " + id); };
+  sammle2("Regel", "probe-rang", "<p>Das ist der häufigste Fehler in Alltagstexten.</p>");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 1, "Positivprobe blieb stumm");
+  const leer = new Set();
+  const sammle3 = (art, id, t) => { if (t && RANG.test(String(t))) leer.add(art + " " + id); };
+  sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
+  P.ok("… und schweigt bei einem Satz ohne Rangformel", leer.size === 0, "Gegenprobe schlug an");
+}
+
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
 const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev,r:c.r||null}))");

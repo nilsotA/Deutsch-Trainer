@@ -17,7 +17,6 @@ und ich habe sie noch nicht selbst nachgeprüft:
 |---|---|---|
 | `gram-zeiten` | Variante fehlt | „Präteritum für die Beschreibung des Vorgehens“ — die Ratgeber führten Präteritum **und** Perfekt nebeneinander („Wir haben 40 Sportstudierende befragt“). |
 | `gram-zeiten` | Widerspruch | Regel und Übung m18 verlangen nach „nachdem“ das Plusquamperfekt; die Wortkarte „nachdem“ zeigt als Muster ein Präteritum („nachdem er ankam“). |
-| `n-abkuerzung` | zu absolut | „Mehrteilige Abkürzungen bekommen ein Leerzeichen — das ist der häufigste Fehler“ — die Rangaussage ist unbelegt (dieselbe Klasse wie die schon behobene in `gram-kongruenz`). |
 | `n-quellen` | Variante fehlt | „Bei Gliederungspunkten steht der Punkt nur bei Ordnungszahlen“ — zu prüfen, ob daneben andere Zählweisen zulässig sind. |
 
 Dazu ein Fund, den beide Gegner gehalten haben und den ich bewusst **nicht** eingebaut habe,

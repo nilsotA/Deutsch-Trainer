@@ -223,7 +223,12 @@ Diese sind über Monate erarbeitet und teuer bezahlt — bitte einhalten:
    einordnen, nicht abstempeln. Und **überall gleich** einordnen — Regel, Übung, Textcheck,
    Spickzettel.
 5. **Keine absoluten Aussagen ohne Prüfung.** „immer“, „nie“, „ausschließlich“ sind
-   Warnsignale. Meist gibt es eine Ausnahme.
+   Warnsignale. Meist gibt es eine Ausnahme. Dieselbe Falle stellt der **Superlativ**:
+   „der häufigste Fehler“, „die wichtigste Regel überhaupt“ behaupten eine Häufigkeits-
+   ordnung, für die es keine Quelle gibt — und der Rat wird nicht schlechter, wenn
+   stattdessen der Mechanismus dasteht. `tests/suite.js` führt dazu eine gepflegte Liste:
+   Jede Stelle, die eine Rangformel tragen darf, steht dort mit Grund; eine neue macht den
+   Lauf rot.
 6. **Gesprochen ≠ geschrieben.** Wo sich beides unterscheidet, beides benennen.
 7. Quellen: Duden, DWDS, Rat für deutsche Rechtschreibung, DIN 5008 (für Zahlen/Datum).
    **Maßgeblich ist das Amtliche Regelwerk in der Fassung von 2024** (in Kraft seit

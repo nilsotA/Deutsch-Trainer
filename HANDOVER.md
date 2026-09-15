@@ -58,6 +58,44 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Superlativ ist dieselbe Falle wie „immer“ (15.09.2026, siebte Runde).**
+
+`main` steht jetzt auf dem aktuellen Stand — dreizehn Commits, Vercel baut sie.
+
+Aus dem Regellauf blieb eine Meldung offen, die nach demselben Muster gebaut war wie eine
+schon behobene: `n-abkuerzung` behauptete „das ist der häufigste Fehler“, `gram-kongruenz`
+hatte „der häufigste Verständlichkeitsfehler in Hausarbeiten“ gesagt. Zwei Fundstellen sind
+kein Einzelfall, also erst die Klasse benennen und den ganzen Bestand absuchen.
+
+**Fünfzehn Stellen tragen eine Rang- oder Häufigkeitsformel. Sieben davon waren
+Behauptungen ohne Beleg:**
+
+| Stelle | stand da | steht jetzt |
+|---|---|---|
+| `komma-nebensatz` | „Die wichtigste Kommaregel überhaupt“ | „Die Grundregel“ |
+| `gram-ndekl` | „einer der häufigsten Fehler in Alltagstexten“ | „liest man oft: Das fehlende -n fällt beim Schreiben kaum auf, weil die Form im Nominativ ja stimmt“ |
+| `form-kritik` + Übung f26 | „die größten Konfliktverstärker der deutschen Sprache“ | „verschärfen fast jeden Konflikt“ |
+| `satz-konjunktiv` + `sa12` | „die wichtigste Höflichkeitsform überhaupt“ | „macht eine Bitte höflich, ohne dass du ein einziges Höflichkeitswort brauchst“ |
+| `satz-reden` + `sa19` | „Der häufigste Fehler beim freien Sprechen“ | „Ein typischer Stolperer“ |
+| `n-abkuerzung` | „das ist der häufigste Fehler“ | „es wird oft weggelassen“ |
+| `z-auslassung` | „Die meisten Programme wandeln um“ | „Viele Programme“ |
+
+Jedes Mal dasselbe Rezept: die Rangbehauptung durch den **Mechanismus** ersetzen. Der Rat
+wird dadurch nicht schwächer, sondern konkreter — „das fehlende -n fällt beim Schreiben
+kaum auf, weil die Form im Nominativ ja stimmt“ sagt Nils mehr als eine Häufigkeitsordnung.
+
+**Die übrigen acht bleiben, mit Grund.** In `gross-subst` sind „das Beste“ und „die
+meisten“ die Beispielwörter der Regel selbst; die `form`-Regeln sind Ratgebertexte, in
+denen „die beste Investition“ ein Rat ist und kein Befund; „die meisten Verben sind
+schwach“ ist eine Aussage über die Formenbildung. `tests/suite.js` führt sie als **gepflegte
+Liste mit Begründung** — eine neue, nicht gelistete Rangformel macht den Lauf rot. Damit
+wird der Superlativ zur bewussten Entscheidung statt zur Gewohnheit. Gegenprobe geführt: die
+zurückgedrehte Fassung von `satz-reden` meldet zwei Stellen.
+
+Geprüft wird die Stelle, nicht die Zahl der Formeln in ihr — wer in einer gelisteten Regel
+eine zweite ergänzt, fällt nicht auf. Das ist der Preis dafür, dass eine Umformulierung des
+Beispiels den Lauf nicht grundlos rot macht; es steht so auch im Kommentar.
+
 **Die vier Funde, die der Gegenprobe standgehalten haben (15.09.2026, sechste Runde).**
 
 Die adversarische Stufe des Regellaufs ist nachgeholt: 30 Funde, je zwei Gegner, **4 halten,
