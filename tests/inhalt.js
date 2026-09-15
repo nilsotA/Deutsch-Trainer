@@ -339,6 +339,19 @@ const EINORDNUNG = [
      aber Peter Eisenberg hält dagegen, dass „machen“ mit abstraktem Objekt im Deutschen
      alt ist („das macht Freude“). Am 14.09.2026 mit zwei Suchen belegt. Seitdem steht
      an allen vier Stellen dasselbe: der Duden-Befund und der Vorbehalt. */
+  /* Perfekt mit „sein“ bei den Ruheverben. Die Landkarte stand an sieben Stellen und an
+     zwei verschiedenen: Die Regel und z14 nannten Süddeutschland und Österreich, x11
+     nannte zusätzlich die Schweiz, die vier Fallkarten wieder nicht. grammis (IDS) führt
+     Süddeutschland, Österreich und die Schweiz — und als vierte Form „hängen“, die in
+     der App gar nicht dabeistand. Am 15.09.2026 mit drei Suchen belegt. */
+  { was: "Perfekt mit sein — die Landkarte",
+    muss: [/schweizerisch|Schweiz/, /österreichisch|Österreich/, /süddeutsch|Süddeutschland|Süden/],
+    stellen: [["Regel", "satz-perfekt"], ["Übung", "z14"], ["Übung", "x11"],
+              ["Fallkarte", "stehen — wo"], ["Fallkarte", "sitzen — wo"],
+              ["Fallkarte", "liegen — wo"], ["Fallkarte", "hängen (hing) — wo"]] },
+  { was: "Perfekt mit sein — die Verbliste",
+    muss: [/hängen/],
+    stellen: [["Regel", "satz-perfekt"], ["Übung", "z14"], ["Übung", "x11"]] },
   /* „wo“ als Relativpronomen: Regel und Übung nannten die Landkarte, das Prüfmuster sagte
      nur „regional“. Seit dem 14.09.2026 steht die Einordnung auch dort. */
   { was: "wo als Relativpronomen", muss: [/Süddeutschland/, /Westens/, /nicht/],

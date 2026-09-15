@@ -3625,13 +3625,13 @@ const CASEREF = [
 
 /* ---------- WECHSELVERBEN: DAS VERB ENTSCHEIDET ÜBER DEN FALL ---------- */
 {w:"legen — wohin",t:"verb",k:"Akkusativ",ex:"Ich lege das Handy auf den Tisch.",n:"Schwach: legte, hat gelegt. Immer mit Akkusativobjekt — und die Ortsangabe steht ebenfalls im Akkusativ.",fall:true,s:["Ich lege das Handy auf ___ Tisch.","den","dem"]},
-{w:"liegen — wo",t:"verb",k:"Dativ",ex:"Das Handy liegt auf dem Tisch.",n:"Stark: lag, hat gelegen (süddeutsch und österreichisch auch: ist gelegen). Kein Objekt — die Ortsangabe steht im Dativ.",fall:true,s:["Das Handy liegt auf ___ Tisch.","dem","den"]},
+{w:"liegen — wo",t:"verb",k:"Dativ",ex:"Das Handy liegt auf dem Tisch.",n:"Stark: lag, hat gelegen (süddeutsch, österreichisch und schweizerisch auch: ist gelegen). Kein Objekt — die Ortsangabe steht im Dativ.",fall:true,s:["Das Handy liegt auf ___ Tisch.","dem","den"]},
 {w:"stellen — wohin",t:"verb",k:"Akkusativ",ex:"Ich stelle die Flasche in den Kühlschrank.",n:"Schwach: stellte, hat gestellt. Etwas irgendwohin bringen.",fall:true,s:["Ich stelle die Flasche in ___ Kühlschrank.","den","dem"]},
-{w:"stehen — wo",t:"verb",k:"Dativ",ex:"Die Flasche steht im Kühlschrank.",n:"Stark: stand, hat gestanden (süddeutsch und österreichisch auch: ist gestanden).",fall:true,s:["Die Flasche steht in ___ Kühlschrank.","dem","den"]},
+{w:"stehen — wo",t:"verb",k:"Dativ",ex:"Die Flasche steht im Kühlschrank.",n:"Stark: stand, hat gestanden (süddeutsch, österreichisch und schweizerisch auch: ist gestanden).",fall:true,s:["Die Flasche steht in ___ Kühlschrank.","dem","den"]},
 {w:"setzen — wohin",t:"verb",k:"Akkusativ",ex:"Ich setze mich auf die Bank.",n:"Schwach: setzte, hat gesetzt. Auch reflexiv: sich setzen (Akkusativ).",fall:true,s:["Ich setze mich auf ___ Bank.","die","der"]},
-{w:"sitzen — wo",t:"verb",k:"Dativ",ex:"Ich sitze auf der Bank.",n:"Stark: saß, hat gesessen (süddeutsch und österreichisch auch: ist gesessen).",fall:true,s:["Ich sitze auf ___ Bank.","der","die"]},
+{w:"sitzen — wo",t:"verb",k:"Dativ",ex:"Ich sitze auf der Bank.",n:"Stark: saß, hat gesessen (süddeutsch, österreichisch und schweizerisch auch: ist gesessen).",fall:true,s:["Ich sitze auf ___ Bank.","der","die"]},
 {w:"hängen (hängte) — wohin",t:"verb",k:"Akkusativ",ex:"Ich hänge die Jacke an den Haken.",n:"Das schwache „hängen“: hängte, hat gehängt. Mit Akkusativobjekt.",fall:true,s:["Ich hänge die Jacke an ___ Haken.","den","dem"]},
-{w:"hängen (hing) — wo",t:"verb",k:"Dativ",ex:"Die Jacke hängt an dem Stuhl.",n:"Das starke „hängen“: hing, hat gehangen. Ohne Objekt.",fall:true,s:["Die Jacke hängt an ___ Stuhl.","dem","den"]},
+{w:"hängen (hing) — wo",t:"verb",k:"Dativ",ex:"Die Jacke hängt an dem Stuhl.",n:"Das starke „hängen“: hing, hat gehangen (süddeutsch, österreichisch und schweizerisch auch: ist gehangen). Ohne Objekt.",fall:true,s:["Die Jacke hängt an ___ Stuhl.","dem","den"]},
 {w:"stecken — wo",t:"verb",k:"Dativ",ex:"Der Schlüssel steckt im Schloss.",n:"Als „wohin“-Verb dagegen Akkusativ: „Ich stecke den Schlüssel ins Schloss.“",fall:true,s:["Der Schlüssel steckt in ___ Schloss.","dem","das"]}
 ];
 
@@ -3762,7 +3762,7 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 <div class="ex">Ich <b>bin</b> nach Köln gefahren. (Ortswechsel)<br>
 Ich <b>habe</b> das Auto gefahren. (Akkusativobjekt)<br>
 Ich <b>habe</b> mich beeilt. (reflexiv)</div>
-<p><b>Regional unterschiedlich — beides gilt:</b> <code>stehen, sitzen, liegen</code>. Im Norden „ich <b>habe</b> gestanden“, im Süden und in Österreich „ich <b>bin</b> gestanden“. Beides ist korrekt.</p>`},
+<p><b>Regional unterschiedlich — beides gilt:</b> <code>stehen, sitzen, liegen, hängen</code>. Im Norden und in der Mitte „ich <b>habe</b> gestanden“, im Süden, in Österreich und in der Schweiz „ich <b>bin</b> gestanden“. Beides ist korrekt. Quelle: grammis (Leibniz-Institut für Deutsche Sprache), „Regionale Varianten beim Perfekt mit sein oder haben“.</p>`},
 
 {id:"sa12",t:"Konjunktiv II — die Formen, die man wirklich braucht",short:"hätte, wäre, könnte, würde",b:`
 <p>Für den Alltag reichen ein Dutzend Formen. Sie sind kürzer als die „würde“-Umschreibung und wirken weniger umständlich:</p>
@@ -4262,7 +4262,7 @@ const EX_D = [
  "Regional korrekt",
  "Immer falsch",
  "Immer richtig"],a:0,
- e:"Bei <b>stehen, sitzen, liegen</b> gilt beides. Süddeutschland und Österreich nehmen „sein“, der Norden „haben“. Kein Fehler, nur Region.",r:"satz-perfekt"},
+ e:"Bei <b>stehen, sitzen, liegen, hängen</b> gilt beides. Süddeutschland, Österreich und die Schweiz nehmen „sein“, der Norden und die Mitte „haben“. Kein Fehler, nur Region.",r:"satz-perfekt"},
 
 {id:"z15",c:"satz",q:"Welche Fassung ist besser?",o:[
  "Wenn ich Zeit hätte, käme ich.",
@@ -4363,10 +4363,10 @@ const EX_D = [
  e:"<b>stellen</b> ist ein Wohin-Verb: „Ich stelle die Flasche in <b>den</b> Kühlschrank.“ Das Gegenstück „stehen“ (wo?) verlangt den Dativ.",r:"gram-wechsel"},
 
 {id:"x11",c:"gram",q:"Welche Aussage stimmt zu „Ich bin gestanden“?",o:[
- "Süddeutsch und österreichisch korrekt, im Norden sagt man „ich habe gestanden“",
+ "Süddeutsch, österreichisch und schweizerisch korrekt, im Norden sagt man „ich habe gestanden“",
  "Immer falsch — richtig ist nur „ich habe gestanden“",
  "Immer richtig, „ich habe gestanden“ ist umgangssprachlich"],a:0,
- e:"Bei <b>stehen, sitzen, liegen</b> bildet der Süden samt Österreich und Schweiz das Perfekt mit <b>sein</b>, der Norden mit <b>haben</b>. Beides gilt — es ist eine regionale Variante, kein Fehler.",r:"satz-perfekt"},
+ e:"Bei <b>stehen, sitzen, liegen, hängen</b> bildet der Süden samt Österreich und Schweiz das Perfekt mit <b>sein</b>, der Norden und die Mitte mit <b>haben</b>. Beides gilt — es ist eine regionale Variante, kein Fehler.",r:"satz-perfekt"},
 
 {id:"x12",c:"gram",q:"Welche Form passt in „Der Sender hat den ganzen Tag ___“?",o:[
  "gesendet","gesandt"],a:0,
