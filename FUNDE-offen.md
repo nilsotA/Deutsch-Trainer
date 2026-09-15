@@ -1,3 +1,32 @@
+# Offene Funde und verworfene Verdachtsfälle (Stand 15.09.2026)
+
+## Offen aus dem Regellauf vom 15.09.2026
+
+Ein Prüflauf über die 40 Regeln ohne Quellenbezug hat 21 Funde gemeldet. Zwölf davon habe
+ich selbst nachgemessen, mit je zwei verschieden formulierten Suchen belegt und eingebaut
+(siehe HANDOVER, „Zuletzt geändert“). **Diese acht stehen noch offen** — gemeldet, aber von
+mir noch nicht nachgeprüft. Sie sind hier notiert, damit sie nicht verloren gehen; keiner
+davon ist eingebaut.
+
+| Regel | Art | Was gemeldet wurde |
+|---|---|---|
+| `gram-genitiv` | zu absolut | Die Regel setzt „wegen“ von trotz/während/statt ab: „Bei wegen dagegen gilt der Dativ **überall** als umgangssprachlich.“ Dieselbe Quelle, auf die sich die Regel zwei Sätze vorher stützt (Variantengrammatik des IDS), soll auch für „wegen“ eine regionale Variante in Zeitungstexten verzeichnen — Liechtenstein, Österreich Mitte/West, Schweiz, Südwestdeutschland. Zu prüfen. |
+| `gram-genalltag` | zu absolut | Unter „Wo der Genitiv nicht hingehört“ steht „Lenas Rad, nicht das Rad Lenas“. Der nachgestellte Genitiv bei Eigennamen sei nicht falsch, sondern gehobener („die Werke Goethes“). |
+| `gram-zeiten` | Variante fehlt | „Präteritum für die Beschreibung des Vorgehens“ — die Ratgeber führten dafür Präteritum **und** Perfekt nebeneinander („Wir haben 40 Sportstudierende befragt“). |
+| `gram-zeiten` | Widerspruch | Regel und Übung m18 verlangen nach „nachdem“ das Plusquamperfekt; die Wortkarte „nachdem“ zeigt als Muster ein Präteritum („nachdem er ankam“). |
+| `satz-modal` | Variante fehlt | „Ich habe ihn kommen sehen“ — die Regel nennt „gesehen“ alltagssprachlich. Bei den Wahrnehmungsverben sehen und hören führe der Duden das Partizip als seltenere, aber korrekte Form (anders als bei den Modalverben, wo der Ersatzinfinitiv Pflicht ist). |
+| `satz-perfekt` | zu absolut | „Sobald ein Akkusativobjekt dabeisteht, gilt haben“ — im Sport hält das nicht: Der Duden führe „einen Rekord / neue Bestzeit laufen“ mit beiden Hilfsverben („Er ist neue Bestzeit gelaufen“). |
+| `satz-perfekt` | zu absolut | „Reflexive Verben bilden das Perfekt **immer** mit haben — ohne Ausnahme“ (Übung z13). Beim reziproken „uns“ entscheide das Verb: „Wir sind uns in der Halle begegnet“. |
+| `gross-sprachen` | Variante fehlt | „Groß im Eigennamen … sonst klein“ lässt den Titelfall aus: „Deutsche Meisterschaften“, „der amtierende Deutsche Meister“ groß, „sie wurde deutsche Meisterin“ klein. |
+
+**Zum Verfahren.** Die adversarische Gegenprobe des Laufs ist beim ersten Anlauf gar nicht
+gestartet — ein Fehler im Workflow-Skript (`parallel()` bekam Promises statt Funktionen),
+der erst nach 43 Minuten gemeldet wurde. Sie läuft nach. Dass davon nichts Ungeprüftes in
+die App kam, lag allein daran, dass jeder Fund ohnehin erst nach eigener Messung und zwei
+eigenen Suchen eingebaut wird.
+
+---
+
 # Offene Funde und verworfene Verdachtsfälle (Stand 13.09.2026)
 
 ## Wie diese Liste entstanden ist
