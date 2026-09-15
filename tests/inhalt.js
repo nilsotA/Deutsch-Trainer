@@ -500,4 +500,57 @@ const praepFehlt = [[/entlang des Flusses/, "entlang vorangestellt mit Genitiv"]
 P.ok("Die Sonderfälle der Präpositionslisten stehen im Spickzettel dabei",
   praepAbschnitt && !praepFehlt.length, praepFehlt.join(", "));
 
+P.titel("L · Kein Ablenker, den die App selbst erlaubt");
+/* Grundsatz 2 ist der teuerste des Projekts: Kein Ablenker darf richtig sein. Eine Sorte
+   davon lässt sich maschinell suchen — die, bei der die App sich selbst widerspricht.
+   Unterscheiden sich richtige Antwort und Ablenker in genau einem Wort, und nennt
+   irgendeine Regel beide Wörter in einem Satz, der sie als Varianten führt („beides
+   zulässig“, „ebenso richtig“, „sind beide richtig“), dann sagt das Regelwerk selbst,
+   dass der Ablenker nicht falsch ist. Genau so war „im Stande“ in die Aufgaben gekommen.
+   Zwei Sorten Fehlalarm fallen raus: Grammatikbezeichnungen — die Aufgabe fragt dann nach
+   dem Namen des Falls, nicht nach einer Form — und Kontrastsätze wie „Standard (nicht
+   Standart)“, in denen beide Wörter stehen, aber gerade nicht als Varianten. */
+const VARSATZ = /beides|ebenso richtig|auch richtig|auch zulässig|ebenfalls zulässig|freigestellt|beide (?:sind |formen|richtig)|zwei Schreibungen|wahlweise|sind beide/i;
+const TERM = /^(Genitiv|Dativ|Akkusativ|Nominativ|Pflicht|freigestellt|groß|klein|zusammen|getrennt)$/i;
+const nurText = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+const varSaetze = [];
+RULES_ALL.forEach(r => nurText(r.b).split(/(?<=[.:;])\s+/)
+  .forEach(z => { if (VARSATZ.test(z)) varSaetze.push({ id: r.id, z }); }));
+const wortDrin = (t, x) =>
+  new RegExp("(?<![\\wäöüßÄÖÜ])" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![\\wäöüßÄÖÜ])").test(t);
+/* Liefert die Fundstellen für ein Optionenpaar — als eigene Funktion, damit die
+   Positivprobe unten denselben Weg geht wie die Prüfung. */
+const variantenTreffer = (richtig, ablenker) => {
+  const sauber = x => x.replace(/[„“”"()]/g, "").trim().split(/\s+/);
+  const a = sauber(richtig), b = sauber(ablenker);
+  if (a.length !== b.length) return [];
+  const diff = a.map((x, n) => [x, b[n]]).filter(([x, y]) => x !== y);
+  if (diff.length !== 1) return [];
+  const ka = diff[0][0].replace(/[.,;:!?]+$/, ""), kb = diff[0][1].replace(/[.,;:!?]+$/, "");
+  if (ka === kb || ka.length < 4 || kb.length < 4) return [];
+  if (TERM.test(ka) || TERM.test(kb)) return [];
+  const kontrast = new RegExp("\\(nicht\\s+(?:" + ka + "|" + kb + ")|statt\\s+(?:" + ka + "|" + kb + ")");
+  return varSaetze.filter(v => !kontrast.test(v.z) && wortDrin(v.z, ka) && wortDrin(v.z, kb))
+    .map(v => ka + " / " + kb + " — " + v.id);
+};
+const varSchief = [];
+ALL.forEach(i => {
+  if (!i.o || i.t === "fill" || i.o.length < 2) return;
+  i.o.forEach((opt, k) => {
+    if (k === i.a) return;
+    variantenTreffer(i.o[i.a], opt).forEach(t => varSchief.push(i.id + ": " + t));
+  });
+});
+P.ok("Kein Ablenker steht anderswo als zulässige Variante", !varSchief.length, varSchief.join(" · "));
+P.info(varSaetze.length + " Variantensätze in den Regeln, dagegen geprüft");
+/* Positivprobe: „ab nächstem Montag“ und „ab nächsten Montag“ führt gram-praepdat
+   ausdrücklich als beide richtig. Als Aufgabenpaar müsste die Prüfung das melden. */
+P.ok("Die Variantenprüfung erkennt einen erlaubten Ablenker",
+  variantenTreffer("Wir starten ab nächstem Montag.", "Wir starten ab nächsten Montag.").length > 0,
+  "Positivprobe blieb stumm");
+/* Gegenprobe: ein echtes Falschpaar darf sie nicht melden. */
+P.ok("und meldet ein echtes Falschpaar nicht",
+  !variantenTreffer("Das ist Standard.", "Das ist Standart.").length,
+  "Gegenprobe schlug an");
+
 P.abschluss();
