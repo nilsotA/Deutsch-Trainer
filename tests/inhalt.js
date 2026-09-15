@@ -323,8 +323,15 @@ const EINORDNUNG = [
     stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
   { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
     stellen: [["Fallkarte", "statt / anstatt"]] },
+  /* „wegen“ stand in der Regel als der Fall, bei dem der Dativ „überall“ umgangssprachlich
+     sei — abgesetzt von trotz/während/statt, für die dieselbe Quelle zwei Sätze vorher
+     zitiert wird. Die Variantengrammatik hat aber auch für „wegen“ eine Seite: geschrieben
+     vor allem Liechtenstein, daneben Schweiz, Mittel- und Westösterreich, Südwestdeutschland,
+     Luxemburg — bei überall deutlich überwiegendem Genitiv. Am 15.09.2026 mit zwei Suchen
+     belegt. Das Prüfmuster x01 steht seitdem auf „pruef“ statt „hart“, wie x02. */
   { was: "wegen", muss: [/umgangssprachlich/],
-    stellen: [["Fallkarte", "wegen"], ["Übung", "n05"], ["Übung", "v03"], ["Übung", "m01"]] },
+    stellen: [["Fallkarte", "wegen"], ["Übung", "n05"], ["Übung", "v03"], ["Übung", "m01"],
+              ["Prüfmuster", "x01"]] },
   /* gedenken → Duden-Zweifelsfälle: „standardsprachlich noch nicht anerkannt“, aber in
      Zeitungen verbreitet. zu (Richtung) → „nach Aldi“ ist Ruhrgebiet, nördliches
      Rheinland, Ostfriesland; Duden 2005: auf Norddeutschland beschränkt, nicht

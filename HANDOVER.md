@@ -58,6 +58,42 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die vier Funde, die der Gegenprobe standgehalten haben (15.09.2026, sechste Runde).**
+
+Die adversarische Stufe des Regellaufs ist nachgeholt: 30 Funde, je zwei Gegner, **4 halten,
+6 geteilt, 20 gefallen** — wobei die zwanzig fast ausnahmslos deshalb fielen, weil ich sie
+während des Laufs schon behoben hatte. Die vier haltbaren habe ich nachgemessen und
+eingebaut:
+
+**`gram-genitiv` maß mit zwei Maßen.** Die Regel beruft sich für trotz, während und statt
+auf die Variantengrammatik des IDS — und setzte „wegen“ dann ab: „Bei wegen dagegen gilt der
+Dativ **überall** als umgangssprachlich.“ Dieselbe Quelle hat für „wegen“ eine eigene Seite:
+geschrieben vor allem Liechtenstein, daneben Schweiz, Mittel- und Westösterreich,
+Südwestdeutschland, Luxemburg — bei überall deutlich überwiegendem Genitiv. Wer für
+„während“ die Variantengrammatik entscheiden lässt und für „wegen“ nicht, misst mit zwei
+Maßen. Die Regel nennt jetzt beides: das Wörterbuchurteil (umgangssprachlich und
+landschaftlich) **und** den Korpusbefund. Der Schlusssatz sagte „als Fehler abstempeln sollte
+man den Dativ bei den ersten drei aber nicht“ — mit der Änderung zählt „die ersten drei“
+nicht mehr, also steht dort jetzt „bei keinem der vier“. Und **x01 steht auf `pruef` statt
+`hart`**, wie x02: Was die App selbst durchgehend „umgangssprachlich“ nennt, kann sie nicht
+zugleich als „Klaren Fehler“ melden.
+
+**`satz-perfekt` schloss ausgerechnet den Sportfall aus.** „Sobald ein Akkusativobjekt
+dabeisteht, gilt haben“ — der Duden führt „einen Rekord, neue Bestzeit laufen“ ausdrücklich
+mit **beiden** Hilfsverben: „Ich bin / habe einen neuen Rekord gelaufen.“ Für einen
+Sportstudenten ist das nicht der Randfall, sondern der Alltag. Regel und Übung z12 sagen es
+jetzt beide.
+
+**`satz-modal` warf Pflicht und Schwankung in einen Topf.** „Das gilt genauso für sehen,
+hören, lassen“ — genauso gilt es nur für lassen. Bei den Wahrnehmungsverben sehen, hören,
+fühlen und helfen ist der Ersatzinfinitiv nach der Duden-Grammatik **nicht Pflicht**,
+sondern die häufigere von zwei zulässigen Formen; „Ich habe ihn kommen gesehen“ ist korrekt,
+nicht bloß alltagssprachlich. Pflicht ist er nur bei den Modalverben und bei „brauchen“.
+
+Der vierte haltbare Fund (`gram-genalltag`, nachgestellter Genitiv bei Eigennamen) steht mit
+Begründung in `FUNDE-offen.md` — niedriges Gewicht, und die Beleglage braucht mehr Sorgfalt,
+als diese Runde noch hergab. Dort stehen auch die vier geteilten Funde.
+
 **Drei Regeln, die sich im eigenen Text widersprochen haben (15.09.2026, fünfte Runde).**
 
 **`recht-wider` führte „widerspiegeln“ als Musterbeispiel und als Ausnahme.** Zeile 1: „wider

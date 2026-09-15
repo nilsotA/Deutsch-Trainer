@@ -1,29 +1,39 @@
 # Offene Funde und verworfene Verdachtsfälle (Stand 15.09.2026)
 
-## Offen aus dem Regellauf vom 15.09.2026
+## Aus dem Regellauf vom 15.09.2026 — erledigt bis auf vier
 
-Ein Prüflauf über die 40 Regeln ohne Quellenbezug hat 21 Funde gemeldet. Zwölf davon habe
-ich selbst nachgemessen, mit je zwei verschieden formulierten Suchen belegt und eingebaut
-(siehe HANDOVER, „Zuletzt geändert“). **Diese acht stehen noch offen** — gemeldet, aber von
-mir noch nicht nachgeprüft. Sie sind hier notiert, damit sie nicht verloren gehen; keiner
-davon ist eingebaut.
+Ein Prüflauf über die 40 Regeln ohne Quellenbezug hat **30 Funde** gemeldet, jeder danach
+von zwei Gegnern angegriffen (Beleglage und Bestand). Ergebnis nach der Gegenprobe:
+**4 halten, 6 geteilt, 20 gefallen** — wobei die zwanzig fast ausnahmslos deshalb fielen,
+weil ich sie **während** des Laufs schon behoben hatte und die Gegner korrekt „steht so
+nicht mehr im Bestand“ meldeten. Das ist kein Urteil über die Sache.
+
+Alle vier haltbaren Funde sind inzwischen nachgemessen und eingebaut (siehe HANDOVER).
+
+**Offen bleiben diese vier aus der Gruppe „geteilt“** — je ein Gegner hat sie nicht gehalten,
+und ich habe sie noch nicht selbst nachgeprüft:
 
 | Regel | Art | Was gemeldet wurde |
 |---|---|---|
-| `gram-genitiv` | zu absolut | Die Regel setzt „wegen“ von trotz/während/statt ab: „Bei wegen dagegen gilt der Dativ **überall** als umgangssprachlich.“ Dieselbe Quelle, auf die sich die Regel zwei Sätze vorher stützt (Variantengrammatik des IDS), soll auch für „wegen“ eine regionale Variante in Zeitungstexten verzeichnen — Liechtenstein, Österreich Mitte/West, Schweiz, Südwestdeutschland. Zu prüfen. |
-| `gram-genalltag` | zu absolut | Unter „Wo der Genitiv nicht hingehört“ steht „Lenas Rad, nicht das Rad Lenas“. Der nachgestellte Genitiv bei Eigennamen sei nicht falsch, sondern gehobener („die Werke Goethes“). |
-| `gram-zeiten` | Variante fehlt | „Präteritum für die Beschreibung des Vorgehens“ — die Ratgeber führten dafür Präteritum **und** Perfekt nebeneinander („Wir haben 40 Sportstudierende befragt“). |
+| `gram-zeiten` | Variante fehlt | „Präteritum für die Beschreibung des Vorgehens“ — die Ratgeber führten Präteritum **und** Perfekt nebeneinander („Wir haben 40 Sportstudierende befragt“). |
 | `gram-zeiten` | Widerspruch | Regel und Übung m18 verlangen nach „nachdem“ das Plusquamperfekt; die Wortkarte „nachdem“ zeigt als Muster ein Präteritum („nachdem er ankam“). |
-| `satz-modal` | Variante fehlt | „Ich habe ihn kommen sehen“ — die Regel nennt „gesehen“ alltagssprachlich. Bei den Wahrnehmungsverben sehen und hören führe der Duden das Partizip als seltenere, aber korrekte Form (anders als bei den Modalverben, wo der Ersatzinfinitiv Pflicht ist). |
-| `satz-perfekt` | zu absolut | „Sobald ein Akkusativobjekt dabeisteht, gilt haben“ — im Sport hält das nicht: Der Duden führe „einen Rekord / neue Bestzeit laufen“ mit beiden Hilfsverben („Er ist neue Bestzeit gelaufen“). |
-| `satz-perfekt` | zu absolut | „Reflexive Verben bilden das Perfekt **immer** mit haben — ohne Ausnahme“ (Übung z13). Beim reziproken „uns“ entscheide das Verb: „Wir sind uns in der Halle begegnet“. |
-| `gross-sprachen` | Variante fehlt | „Groß im Eigennamen … sonst klein“ lässt den Titelfall aus: „Deutsche Meisterschaften“, „der amtierende Deutsche Meister“ groß, „sie wurde deutsche Meisterin“ klein. |
+| `n-abkuerzung` | zu absolut | „Mehrteilige Abkürzungen bekommen ein Leerzeichen — das ist der häufigste Fehler“ — die Rangaussage ist unbelegt (dieselbe Klasse wie die schon behobene in `gram-kongruenz`). |
+| `n-quellen` | Variante fehlt | „Bei Gliederungspunkten steht der Punkt nur bei Ordnungszahlen“ — zu prüfen, ob daneben andere Zählweisen zulässig sind. |
 
-**Zum Verfahren.** Die adversarische Gegenprobe des Laufs ist beim ersten Anlauf gar nicht
-gestartet — ein Fehler im Workflow-Skript (`parallel()` bekam Promises statt Funktionen),
-der erst nach 43 Minuten gemeldet wurde. Sie läuft nach. Dass davon nichts Ungeprüftes in
-die App kam, lag allein daran, dass jeder Fund ohnehin erst nach eigener Messung und zwei
-eigenen Suchen eingebaut wird.
+Dazu ein Fund, den beide Gegner gehalten haben und den ich bewusst **nicht** eingebaut habe,
+weil sein Gewicht niedrig ist und die Beleglage Sorgfalt braucht:
+
+| `gram-genalltag` | zu absolut | Unter „Wo der Genitiv nicht hingehört“ steht „Lenas Rad, nicht das Rad Lenas“. Der nachgestellte Genitiv bei Eigennamen sei nicht falsch, sondern gehobener („die Werke Goethes“). |
+
+**Zwei Funde sind wirklich gefallen**, nicht bloß durch Zeitablauf: `gross-sprachen`
+(„Deutsche Meisterschaften“ als Titel) und `n-gliederung` (Punkt und Leerzeichen). Beide
+Gegner haben sie inhaltlich widerlegt; sie brauchen nichts weiter.
+
+**Zum Verfahren.** Die Gegenprobe ist beim ersten Anlauf gar nicht gestartet — ein Fehler im
+Workflow-Skript (`parallel()` bekam Promises statt Funktionen), gemeldet erst nach 43
+Minuten. Nachgeholt mit den zwischengespeicherten Berichten. Dass in der Zwischenzeit nichts
+Ungeprüftes in die App kam, lag allein daran, dass jeder Fund ohnehin erst nach eigener
+Messung und zwei eigenen, verschieden formulierten Suchen eingebaut wird.
 
 ---
 
