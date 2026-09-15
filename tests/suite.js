@@ -609,13 +609,26 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
      Verdachtsstellen zeigen, nicht alles finden. Wer ein Muster zu Recht enger fasst,
      darf sie unterschreiten — dann hier den neuen Stand eintragen, nicht die Zahl
      schönrechnen. */
+  /* Fehlerklasse „der Test misst neben der Stelle“. Gezaehlt wurde vorher, ob IRGENDEIN
+     Treffer im Text das markierte Wort enthaelt — egal wo er sitzt. Bei kurzen Wörtern wie
+     „das“, „den“ oder „wie“ ist das schnell irgendwo im Text erfuellt, und ein Treffer auf
+     das eine „das“ zaehlte fuer das andere mit. Jetzt muss der Treffer die markierte Stelle
+     wirklich ueberlappen. Die Stelle wird so bestimmt, wie die App selbst es tut
+     (korrErrIdx): Text an Leerraum zerlegen, das n-te gleiche Token nehmen. */
   const quote = daten(w, `(function(){
     let stellen = 0, gefunden = 0;
     KORREKTUR.forEach(t => {
-      const worte = analyse(t.txt).finds.map(f => t.txt.slice(f.s, f.e));
+      const finds = analyse(t.txt).finds;
+      const toks = t.txt.split(/\\s+/);
+      const pos = []; let p = 0;
+      toks.forEach(tk => { const i = t.txt.indexOf(tk, p); pos.push(i); p = i + tk.length; });
       t.errs.forEach(e => {
         stellen++;
-        if (worte.some(x => x.includes(e.w) || e.w.includes(x))) gefunden++;
+        const nth = e.nth || 1; let c = 0, idx = -1;
+        for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { idx = i; break; }
+        if (idx < 0) return;
+        const a = pos[idx], b = a + toks[idx].length;
+        if (finds.some(f => f.s < b && f.e > a)) gefunden++;
       });
     });
     return {stellen, gefunden};
@@ -844,6 +857,33 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
        eigenen Nachmessen, nicht durch den Prüflauf: x22 kannte nur das Präsens, f12
        verlangte ein „es“ vor „tut mir leid“ und verpasste damit den häufigsten Fall am
        Satzanfang, a07 kannte zwei Adverbien, x03 drei Begleiter. */
+    /* Zwei Muster aus dem Nachmessen an den eigenen Fehlersuchtexten. x04 verlangte, dass
+       der Komparativ unmittelbar vor „wie“ steht - im Satz liegt aber meist ein Verb
+       dazwischen („schneller verbessert wie“, „weniger Anweisungen bekam wie“). Der Abstand
+       ist jetzt erlaubt, aber nur, wenn direkt vor „wie“ ein kleingeschriebenes Wort steht:
+       Sonst faengt das Muster den attributiven Gebrauch mit („ein kleiner Fehler wie
+       dieser“ - kleiner ist dort kein Komparativ). x39 ist neu und hat kein Vorbild im
+       Bestand: „der selbe“ getrennt fuehrt der Duden als Falschschreibung. Die Verbotsseite
+       ist hier die verschmolzene Praeposition - „am selben Tag“ ist richtig, weil der
+       Artikel im „am“ schon steckt. */
+    { id: "x04",
+      ziel: ["Die Gruppe von Marek hat sich deutlich schneller verbessert wie die anderen beiden.",
+             "Auffällig war das die Gruppe weniger Anweisungen bekam wie die vordere.",
+             "Er ist größer wie ich.", "Das dauerte länger wie gedacht.",
+             "Größer wie ich ist hier keiner."],
+      still: ["Er ist größer als ich.", "Mach es besser so wie gestern.",
+              "Wir laufen genauso schnell wie ihr.", "Es lief besser als geplant.",
+              "Das war ein kleiner Fehler wie dieser.", "Ein schneller Läufer wie er fehlt uns.",
+              "Ein schlechter Tag wie jeder andere.", "Das ist nicht mehr wie früher.",
+              "Ich habe mehr Zeit gebraucht, wie du weißt."] },
+    { id: "x39",
+      ziel: ["Wir kommen aus dem selben Verein.", "Er hat nochmal das Selbe erklärt.",
+             "Das ist der selbe Fehler wie gestern.", "Sie tragen die selben Schuhe.",
+             "Ein und das selbe."],
+      still: ["Wir kommen aus demselben Verein.", "Er hat nochmal dasselbe erklärt.",
+              "Am selben Tag war Training.", "Im selben Atemzug sagte er das.",
+              "Zur selben Zeit lief das Spiel.", "Ich habe das selber gemacht.",
+              "Vom selben Trainer betreut.", "Beim selben Verein angestellt."] },
     { id: "x03",
       ziel: ["Während dem Spiel hat es geregnet.", "Während diesem Training war es laut.",
              "Während meinem Praktikum habe ich viel gelernt."],

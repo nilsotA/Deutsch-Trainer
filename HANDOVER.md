@@ -31,12 +31,12 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 379 |
+| Übungen | 381 |
 | Regeln | 118 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 100 |
+| Prüfmuster im Textcheck | 101 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
 | Dateigröße | ~717 KB, eine Datei, kein Build |
 
@@ -57,6 +57,47 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Die Trefferquote maß neben der Stelle — und zwei Muster, die daraus folgten (15.09.2026).**
+
+Die Zahl „der Textcheck findet X von 86 markierten Fehlern“ wurde **positionsblind**
+gezählt: Als gefunden galt ein markierter Fehler, sobald **irgendein** Treffer im selben
+Text das markierte Wort enthielt. Bei kurzen Wörtern wie „das“, „den“ oder „wie“ ist das
+schnell irgendwo erfüllt, und ein Treffer auf das eine „das“ zählte für das andere mit.
+Jetzt muss der Treffer die markierte Stelle wirklich überlappen — bestimmt so, wie die App
+sie selbst bestimmt (`korrErrIdx`: Text an Leerraum zerlegen, das n-te gleiche Token).
+
+Interessanterweise war die alte Zählung nicht durchweg großzügiger: Sie verlangte, dass der
+**Treffertext** das markierte Wort enthält, und das scheitert an Wortgrenzen auch dann, wenn
+der Treffer genau richtig sitzt. 65 locker gegen 66 streng — zwei verschieden falsche Zahlen.
+
+Mit der sauberen Messung ließ sich die Liste der wirklich ungefundenen Fehler lesen. 20 von
+86, und zwei davon kamen doppelt vor — beide mit einer Ursache, die sich beheben ließ:
+
+**x04 („größer wie“) verlangte, dass der Komparativ unmittelbar vor „wie“ steht.** Im
+wirklichen Satz liegt fast immer ein Verb dazwischen: „hat sich schneller verbessert wie die
+anderen“, „weniger Anweisungen bekam wie die vordere“ — beides aus den eigenen
+Fehlersuchtexten. Der Abstand ist jetzt erlaubt, mit einer Bedingung: Direkt vor „wie“ muss
+ein **kleingeschriebenes** Wort stehen. Ohne diese Bedingung fängt das Muster den
+attributiven Gebrauch mit, und der ist richtig: „ein kleiner Fehler wie dieser“, „ein
+schneller Läufer wie er“ — dort ist „kleiner“ kein Komparativ, sondern eine Adjektivendung.
+Nebenbei fiel dabei das `i`-Flag: Mit ihm war `[a-zäöüß]` auch für Großbuchstaben erfüllt,
+die Bedingung also wirkungslos. Das Muster schreibt die Fälle jetzt aus.
+
+**x39 ist neu: „der selbe“ getrennt geschrieben.** Der Duden führt das als
+Falschschreibung, und die App hatte dafür kein Muster — „aus dem selben Verein“ und „nochmal
+das Selbe“ liefen beide durch. Die Verbotsseite ist hier die verschmolzene Präposition: „am
+selben Tag“, „im selben Atemzug“, „zur selben Zeit“ sind **richtig**, weil der Artikel im
+„am“ schon steckt. Das Muster kennt deshalb nur die ausgeschriebenen Artikel. Ebenfalls
+draußen: „selber“ im Sinne von „selbst“.
+
+Damit findet der Textcheck **70 von 86** statt 66 — und die Selbstauskunft der App steht
+jetzt auf „etwa vier Fünftel“ statt „drei Viertel“, nachgerechnet wie gehabt.
+
+Die Regel `gram-derselbe` kannte bisher nur die Bedeutung (derselbe gegen der gleiche), nicht
+die Schreibung. Sie trägt sie jetzt samt Ausnahme und Quelle, dazu zwei neue Übungen: **m26**
+(zusammen) und **m27** (die Ausnahme als Variantenaufgabe — „am selben Tag“ und „an
+demselben Tag“ sind beide richtig). Alle vier Ebenen sagen dasselbe.
 
 **Vier Muster, die nur eine Zeitform kannten — und was die Ausgangsmessung wirklich wert war (14.09.2026, vierte Runde).**
 

@@ -1272,6 +1272,15 @@ const EX_B = [
  "Ich half ihm.","Ich half ihn."],a:0,
  e:"„helfen“ regiert den <b>Dativ</b>. Ebenso: danken, gratulieren, folgen, gehören, begegnen, zuhören, widersprechen.",r:"gram-kasus"},
 
+{id:"m26",c:"gram",q:"Welche Schreibung ist richtig?",o:[
+ "Wir kommen aus demselben Verein.","Wir kommen aus dem selben Verein."],a:0,
+ e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, dasselbe, denselben. Der Duden führt „der selbe“ als Falschschreibung.",r:"gram-derselbe"},
+
+{id:"m27",c:"gram",q:"„selben“ nach einer verschmolzenen Präposition — was gilt?",o:[
+ "Beides ist zulässig — „am selben Tag“ und „an demselben Tag“",
+ "Nur: am selben Tag","Nur: an demselben Tag"],a:0,
+ e:"In <b>am</b> steckt der Artikel schon drin („an dem“), deshalb steht „selben“ dort für sich. Schreibst du die Präposition aus, rückt es wieder zusammen: <b>an demselben Tag</b>. Genauso: im selben Atemzug / in demselben Atemzug.",r:"gram-derselbe"},
+
 /* ---------- STIL ---------- */
 {id:"s01",c:"stil",q:"Welche Fassung ist klarer?",o:[
  "Wir untersuchten die Belastung der Sportlerinnen.",
@@ -1881,7 +1890,13 @@ das Schema → die Schemata / Schemas / Schemen · der Atlas → die Atlanten
 <b>der gleiche</b> = qualitative Gleichheit, gleiche Art.</p>
 <div class="ex">Wir tragen <b>die gleichen</b> Schuhe. (zwei Paar desselben Modells)<br>
 Wir tragen <b>dieselben</b> Schuhe. (ein Paar, das wir uns teilen)</div>
-<p>Im Alltag verschwimmt die Unterscheidung, in präzisen Texten lohnt sie sich.</p>`},
+<p>Im Alltag verschwimmt die Unterscheidung, in präzisen Texten lohnt sie sich.</p>
+<p><b>Geschrieben wird „derselbe“ zusammen</b> — auch gebeugt: <code>desselben, demselben, denselben, dieselbe, dasselbe</code>. Der Duden führt „der selbe“ als Falschschreibung.</p>
+<div class="ex">Wir kommen aus <b>demselben</b> Verein. · Er hat nochmal <b>dasselbe</b> erklärt. · Ein und <b>dasselbe</b>.</div>
+<p><b>Getrennt nur nach einer verschmolzenen Präposition:</b> In <code>am, im, zum, zur, beim, vom</code> steckt der Artikel schon drin, und „selben“ steht für sich.</p>
+<div class="ex">am selben Tag · im selben Atemzug · zur selben Zeit</div>
+<p>Nicht zu verwechseln mit <b>selber</b> (= selbst): „Ich habe das selber gemacht.“</p>
+<p>Quellen: Duden, Rechtschreibung „derselbe“ und Falschschreibung „der selbe“.</p>`},
 
 {id:"gram-praep",c:"gram",t:"Verben mit fester Präposition",b:`
 <p>Diese Verbindungen sind nicht ableitbar — man muss sie lernen:</p>
@@ -5632,7 +5647,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 699 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 701 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -6415,7 +6430,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 699 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 701 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();
@@ -7913,7 +7928,7 @@ const CHECKS = [
  k:"„trotz“ verlangt den Genitiv: <b>trotz des Regens</b>.",r:"gram-genitiv"},
 {id:"x03",sev:"pruef",re:/\bwährend\s+(dem|den|einem|diesem|diesen|jedem|meinem|deinem|seinem|ihrem|unserem|eurem)\b/gi,t:"während + Genitiv",
  k:"Als Präposition verlangt „während“ den Genitiv: <b>während der Vorlesung</b>. Prüf aber, ob hier die Konjunktion steht — die leitet einen Nebensatz ein, und dann gehört der Dativ in den Nebensatz: „Während dem Kollegen die Zeit fehlte, haben wir weitergemacht.“",r:"gram-genitiv"},
-{id:"x04",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:(?:größer|kleiner|besser|schlechter|schneller|langsamer|weniger|kürzer|älter|jünger|höher|tiefer|stärker|schwächer|öfter)|(?<!nicht )(?<!nie )(?<!kaum )(?<!nichts )(?:mehr|länger))\s+wie\b(?!\s+(?:geplant|besprochen|vereinbart|abgesprochen|verabredet|angekündigt|gewohnt|gehabt|folgt|immer|üblich|bisher|zuvor|oben|unten|erwartet|beschrieben|gesagt|erwähnt|versprochen))/gi,
+{id:"x04",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:(?:[Gg]rößer|[Kk]leiner|[Bb]esser|[Ss]chlechter|[Ss]chneller|[Ll]angsamer|[Ww]eniger|[Kk]ürzer|[Ää]lter|[Jj]ünger|[Hh]öher|[Tt]iefer|[Ss]tärker|[Ss]chwächer|[Öö]fter)|(?<![Nn]icht )(?<![Nn]ie )(?<![Kk]aum )(?<![Nn]ichts )(?:[Mm]ehr|[Ll]änger))\s+(?:(?:[^\s.,;:!?]+\s+){0,2}[a-zäöüß][^\s.,;:!?]*\s+)?(?<![Ss]o )(?<![Gg]enauso )(?<![Ee]benso )(?<![Gg]eradeso )wie\b(?!\s+(?:geplant|besprochen|vereinbart|abgesprochen|verabredet|angekündigt|gewohnt|gehabt|folgt|immer|üblich|bisher|zuvor|oben|unten|erwartet|beschrieben|gesagt|erwähnt|versprochen|du|ihr|Sie|man))/g,
  t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“.",r:"gram-alswie"},
 {id:"x05",sev:"hart",re:/\bals\s+wie\b/gi,t:"„als wie“",
  k:"Nicht standardsprachlich. Es heißt entweder <b>als</b> (ungleich) oder <b>wie</b> (gleich).",r:"gram-alswie"},
@@ -7966,6 +7981,8 @@ const CHECKS = [
  k:"Beide Wörter sind substantiviert und stehen groß: <b>im Großen und Ganzen</b>. Klein war die Schreibung vor 1996.",r:"gross-subst"},
 {id:"x37",sev:"hart",re:/(?<![A-Za-zÄÖÜäöüß])(?:(?:[Bb]eim|[Zz]um|[Vv]om|[Dd]as|[Dd]ieses|[Jj]edes|[Mm]anches|[Ee]in)\s+(?:nächste[ns]?|letzte[ns]?|erste[ns]?|zweite[ns]?|dritte[ns]?|vorige[ns]?|andere[ns]?|selbe[ns]?|gleiche[ns]?|einzige[ns]?)|[Nn]ächste[ns]?|[Ll]etzte[ns]?|[Vv]orige[ns]?)\s+mal(?![A-Za-zÄÖÜäöüß])/g,t:"Mal großschreiben",
  k:"Mit Artikel und Adjektiv davor steht das Substantiv <b>das Mal</b>: beim nächsten <b>Mal</b>, das erste <b>Mal</b>. Klein bleibt nur das Wörtchen „mal“ als Kurzform von „einmal“ („Komm mal her“).",r:"gross-mal"},
+{id:"x39",sev:"hart",re:/(?<![\wäöüßÄÖÜ])([Dd]er|[Dd]ie|[Dd]as|[Dd]em|[Dd]en|[Dd]es)\s+[Ss]elben?(?![\wäöüßÄÖÜ])/g,t:"derselbe zusammen",
+ k:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: <b>demselben</b>, <b>dasselbe</b>, <b>denselben</b>. Getrennt steht „selben“ nur nach einer verschmolzenen Präposition, weil der Artikel dort schon drinsteckt: <b>am selben Tag</b>, <b>im selben Atemzug</b>, <b>zur selben Zeit</b>.",r:"gram-derselbe"},
 {id:"x38",sev:"hart",re:/(?<![A-Za-zÄÖÜäöüß])(?:[Jj]edes|[Dd]ieses|[Mm]anches)\s*mal(?![A-Za-zÄÖÜäöüß])/g,t:"jedes Mal getrennt und groß",
  k:"Seit 1996 nur <b>jedes Mal</b>, <b>dieses Mal</b>, <b>manches Mal</b> — getrennt, mit großem M. Zusammen bleibt das Adverb <b>diesmal</b> und die Ableitung <b>jedesmalig</b>.",r:"gross-mal"},
 {id:"x29",sev:"hart",re:/\bin\s+bezug\s+auf\b/g,t:"in Bezug auf",
@@ -8197,7 +8214,7 @@ function renderCheck(){
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
       "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
-      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa drei Viertel</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
+      '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa vier Fünftel</b> der eingebauten Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
       '<div class="spread" style="margin-bottom:10px"><div class="eyebrow" style="margin:0">Dein Text</div>'+
