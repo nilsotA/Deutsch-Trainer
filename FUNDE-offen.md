@@ -1,38 +1,30 @@
 # Offene Funde und verworfene Verdachtsfälle (Stand 15.09.2026)
 
-## Aus dem Regellauf vom 15.09.2026 — erledigt bis auf vier
+## Aus dem Regellauf vom 15.09.2026 — abgearbeitet
 
 Ein Prüflauf über die 40 Regeln ohne Quellenbezug hat **30 Funde** gemeldet, jeder danach
-von zwei Gegnern angegriffen (Beleglage und Bestand). Ergebnis nach der Gegenprobe:
-**4 halten, 6 geteilt, 20 gefallen** — wobei die zwanzig fast ausnahmslos deshalb fielen,
-weil ich sie **während** des Laufs schon behoben hatte und die Gegner korrekt „steht so
-nicht mehr im Bestand“ meldeten. Das ist kein Urteil über die Sache.
+von zwei Gegnern angegriffen (Beleglage und Bestand). Ergebnis: **4 halten, 6 geteilt,
+20 gefallen** — wobei die zwanzig fast ausnahmslos deshalb fielen, weil ich sie **während**
+des Laufs schon behoben hatte und die Gegner korrekt „steht so nicht mehr im Bestand“
+meldeten. Das ist kein Urteil über die Sache.
 
-Alle vier haltbaren Funde sind inzwischen nachgemessen und eingebaut (siehe HANDOVER).
+**Alles ist inzwischen abgearbeitet.** Die vier haltbaren und die sechs geteilten sind
+nachgemessen, mit je zwei verschieden formulierten Suchen belegt und eingebaut (siehe
+HANDOVER, Runden fünf bis acht). Zwei Funde sind inhaltlich widerlegt worden und brauchen
+nichts weiter: `gross-sprachen` („Deutsche Meisterschaften“ als Titel) und `n-gliederung`
+(Punkt und Leerzeichen).
 
-**Offen bleiben diese vier aus der Gruppe „geteilt“** — je ein Gegner hat sie nicht gehalten,
-und ich habe sie noch nicht selbst nachgeprüft:
-
-| Regel | Art | Was gemeldet wurde |
-|---|---|---|
-| `gram-zeiten` | Variante fehlt | „Präteritum für die Beschreibung des Vorgehens“ — die Ratgeber führten Präteritum **und** Perfekt nebeneinander („Wir haben 40 Sportstudierende befragt“). |
-| `gram-zeiten` | Widerspruch | Regel und Übung m18 verlangen nach „nachdem“ das Plusquamperfekt; die Wortkarte „nachdem“ zeigt als Muster ein Präteritum („nachdem er ankam“). |
-| `n-quellen` | Variante fehlt | „Bei Gliederungspunkten steht der Punkt nur bei Ordnungszahlen“ — zu prüfen, ob daneben andere Zählweisen zulässig sind. |
-
-Dazu ein Fund, den beide Gegner gehalten haben und den ich bewusst **nicht** eingebaut habe,
-weil sein Gewicht niedrig ist und die Beleglage Sorgfalt braucht:
-
-| `gram-genalltag` | zu absolut | Unter „Wo der Genitiv nicht hingehört“ steht „Lenas Rad, nicht das Rad Lenas“. Der nachgestellte Genitiv bei Eigennamen sei nicht falsch, sondern gehobener („die Werke Goethes“). |
-
-**Zwei Funde sind wirklich gefallen**, nicht bloß durch Zeitablauf: `gross-sprachen`
-(„Deutsche Meisterschaften“ als Titel) und `n-gliederung` (Punkt und Leerzeichen). Beide
-Gegner haben sie inhaltlich widerlegt; sie brauchen nichts weiter.
+Ein Nebenertrag: Die Meldung zu `n-quellen` war vage („andere Zählweisen?“), führte beim
+Nachsehen aber auf eine echte Lücke — die Regel sagte nichts zu **DIN 1421**, nach der in
+einer Gliederungsnummer der Punkt nur *zwischen* die Stufen gehört („2.1 Methode“, nicht
+„2.1. Methode“). Das steht jetzt drin, samt der Einschränkung, dass viele Institutsleitfäden
+es anders halten.
 
 **Zum Verfahren.** Die Gegenprobe ist beim ersten Anlauf gar nicht gestartet — ein Fehler im
 Workflow-Skript (`parallel()` bekam Promises statt Funktionen), gemeldet erst nach 43
 Minuten. Nachgeholt mit den zwischengespeicherten Berichten. Dass in der Zwischenzeit nichts
 Ungeprüftes in die App kam, lag allein daran, dass jeder Fund ohnehin erst nach eigener
-Messung und zwei eigenen, verschieden formulierten Suchen eingebaut wird.
+Messung und zwei eigenen Suchen eingebaut wird.
 
 ---
 

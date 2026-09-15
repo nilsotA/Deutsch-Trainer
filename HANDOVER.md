@@ -58,6 +58,40 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die letzten vier offenen Meldungen, abgearbeitet (15.09.2026, achte Runde).**
+
+`FUNDE-offen.md` ist für den Regellauf leer — alles nachgemessen, jede Sprachaussage mit
+zwei verschieden formulierten Suchen belegt.
+
+**`gram-zeiten` nannte nur eine von zwei üblichen Zeitformen.** „Das Präteritum für die
+Beschreibung des eigenen Vorgehens“ — die Schreibratgeber führen für den Methodenteil
+**Präteritum und Perfekt** nebeneinander. „Wir befragten 40 Sportstudierende“ und „Wir haben
+40 Sportstudierende befragt“ sind beide üblich; worauf es ankommt, ist die Einheitlichkeit
+innerhalb des Abschnitts. Genau das steht jetzt da — und ist für eine Hausarbeit der
+nützlichere Hinweis als die Wahl selbst.
+
+**Die Wortkarte „nachdem“ zeigte eine Zeitform, die dieselbe App zwei Regeln weiter
+ablehnt.** Ihre Erklärung gab als Muster der standardsprachlichen Verwendung „nachdem er
+ankam“ — ein Präteritum, während Regel und Übung m18 nach „nachdem“ das Plusquamperfekt
+verlangen. Das Beispiel der Karte selbst („Nachdem er sich aufgewärmt hatte“) hatte es
+richtig. Jetzt steht in beiden Feldern dieselbe Zeit.
+
+**`gram-genalltag` verbot eine Form, die nur stilistisch schwächer ist.** Unter der
+Überschrift „Wo der Genitiv nicht hingehört“ stand „Lenas Rad, nicht das Rad Lenas“. Der
+nachgestellte Genitiv bei artikellosen Eigennamen ist aber nicht falsch — „das Werk
+Beethovens“, „die Werke Goethes“ sind gehobene Schriftsprache. Beide Suchen sagen dasselbe:
+möglich, aber stilistisch schwächer als die Voranstellung. Nach Grundsatz 3 gehört das damit
+nicht in eine Verbotsliste. Der Punkt steht jetzt als das, was er ist — eine Frage der
+Stellung, nicht des Falls.
+
+**Und eine Lücke, auf die eine vage Meldung geführt hat.** Zu `n-quellen` hieß es nur
+„andere Zählweisen?“. Beim Nachsehen fiel auf, dass die Regel zu **DIN 1421** nichts sagt:
+In einer Gliederungsnummer gehört der Punkt nur *zwischen* die Stufen, nie ans Ende — „1
+Einleitung“, „2.1 Methode“, „2.1.1 Stichprobe“. Für eine Hausarbeit ist das der Fall, der
+täglich vorkommt. Steht jetzt drin, mit der ehrlichen Einschränkung: Viele
+Institutsleitfäden schreiben trotzdem „1. Einleitung“, verbindlich ist die Vorgabe des
+Instituts, und wichtig ist das Durchhalten einer Form.
+
 **Der Superlativ ist dieselbe Falle wie „immer“ (15.09.2026, siebte Runde).**
 
 `main` steht jetzt auf dem aktuellen Stand — dreizehn Commits, Vercel baut sie.
