@@ -317,7 +317,8 @@ P.titel("G · Regionale Varianten");
    Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
 const EINORDNUNG = [
   { was: "trotz", muss: [/Schweiz/, /Österreich/, /[Ss]üddeutschland|Süden Deutschlands/],
-    stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"]] },
+    stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"],
+              ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
   { was: "während", muss: [/umgangssprachlich/],
     stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
   { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
@@ -331,7 +332,7 @@ const EINORDNUNG = [
   { was: "gedenken", muss: [/nicht anerkannt|nicht standardsprachlich/, /Zeitungen|Presse/],
     stellen: [["Fallkarte", "gedenken"]] },
   { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /nicht standardsprachlich|norddeutsch/],
-    stellen: [["Fallkarte", "zu (Richtung)"]] },
+    stellen: [["Fallkarte", "zu (Richtung)"], ["Übung", "n09"], ["Regel", "gram-richtung"]] },
   /* „Sinn machen“ ist keine regionale, sondern eine strittige Einordnung — dieselbe
      Fehlerklasse auf einer anderen Achse. Die App sagte an drei Stellen glatt
      „Lehnübersetzung aus dem Englischen“. Der Duden führt „etwas macht [k]einen Sinn“
@@ -365,9 +366,15 @@ const textVon = (art, id) => {
   if (art === "Prüfmuster") { const c = CHECKS_ALL.find(x => x.id === id); return c ? String(c.k || "") : null; }
   if (art === "Regel") { const r = RULES_ALL.find(x => x.id === id); return r ? String(r.b || "") : null; }
   if (art === "Fehlersuche") {
-    /* Ein Fehlersuchtext trägt mehrere Markierungen; gesucht ist die mit diesem Wort. */
+    /* Ein Fehlersuchtext trägt mehrere Markierungen. „kt07:dem“ meint die Markierung „dem“
+       in kt07; ohne Doppelpunkt gilt die Suche über alle Texte. Ohne diese Schärfung müsste
+       jede gleichnamige Markierung dieselbe Einordnung tragen — „dem“ gibt es mehrfach. */
+    const [wo, was] = id.includes(":") ? id.split(":") : [null, id];
     const treffer = [];
-    KORREKTUR.forEach(k => (k.errs || []).forEach(e => { if (e.w === id) treffer.push(String(e.k || "")); }));
+    KORREKTUR.forEach(k => {
+      if (wo && k.id !== wo) return;
+      (k.errs || []).forEach(e => { if (e.w === was) treffer.push(String(e.k || "")); });
+    });
     return treffer.length ? treffer.join(" ") : null;
   }
   const i = ALL.find(x => x.id === id); return i ? String(i.e || "") : null;

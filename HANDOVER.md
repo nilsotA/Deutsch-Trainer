@@ -58,6 +58,45 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Drei Regeln, die etwas Richtiges zu schmal gesagt haben (15.09.2026, zweite Runde).**
+
+Ein Prüflauf über die 40 Regeln, die bisher keinen Quellenbezug tragen, läuft noch. Diese
+drei habe ich selbst nachgemessen und mit je zwei verschieden formulierten Suchen belegt:
+
+**`gram-konjunktiv` nannte nur den seltenen Grund für „würde“.** Da stand: „würde ist dann
+berechtigt, wenn die eigene Form altertümlich klingt (hülfe, stürbe)“ — und sonst nichts.
+Der Hauptgrund fehlte: Bei **allen schwachen Verben** fällt der Konjunktiv II mit dem
+Indikativ Präteritum zusammen. „wenn er härter trainierte“ kann das Irreale meinen oder
+schlicht die Vergangenheit; „trainieren würde“ macht es eindeutig. Dasselbe gilt bei starken
+Verben auf i und ie in der wir- und sie-Form („wir riefen“, „sie gingen“). Der Duden-
+Sprachratgeber führt genau diese beiden Fälle, den Zusammenfall zuerst. Weil die meisten
+Verben schwach sind, ist der weggelassene Fall der häufigere. Regel und Übung m06 sagen es
+jetzt beide.
+
+**`gram-reflexiv` hatte „sich setzen“ in der falschen Liste.** Es stand unter „Nur
+Akkusativ“ — aber „Ich setze **mir** ein Ziel“ ist Dativ, und das ist genau das Muster, das
+dieselbe Regel drei Absätze weiter oben erklärt („Akkusativobjekt da → Reflexiv wird
+Dativ“). Verschoben zu „Ich wasche mich / Ich wasche mir die Hände“, wo es hingehört.
+
+**`gram-richtung` stempelte Nils' eigene Gegend ab.** Die Übung n09 führt „Ich gehe nach dem
+Arzt“ als schlicht falsche Option, und weder Regel noch Erklärung sagten dazu etwas. Die
+Fallkarte „zu (Richtung)“ ordnet dieselbe Form seit dem 13.09. sauber ein: im Ruhrgebiet, im
+nördlichen Rheinland und in Ostfriesland die verbreitete Form, vom Duden als norddeutsch und
+nicht standardsprachlich geführt. Köln liegt im nördlichen Rheinland. Regel und Übung sagen
+das jetzt auch — die Antwort bleibt dieselbe, die Einordnung kommt dazu.
+
+**Und ein Prüfmuster, das der eigenen Regel widersprach.** `gram-genitiv` sagt wörtlich: „als
+Fehler abstempeln sollte man den Dativ bei den ersten drei aber nicht“ — gemeint sind trotz,
+während und statt, für die die Variantengrammatik des IDS den Dativ als regionale
+Standardvariante führt. Das Muster **x02** („trotz dem“) stand trotzdem auf `hart`, also
+„Klarer Fehler“, mit einem kommentarlosen „trotz verlangt den Genitiv“ — während das
+Schwestermuster x03 („während dem“) längst auf `pruef` steht und die Einordnung mitführt.
+Dasselbe im Fehlersuchtext kt07. Beide tragen jetzt dieselbe Einordnung wie Regel, Fallkarte
+und Übungen; x02 steht auf `pruef`.
+
+`tests/inhalt.js` bewacht das jetzt mit: Die Tabelle der eingeordneten Varianten erreicht
+Fehlersuchtexte nun genau („kt07:dem“ statt nur „dem“ — das Wort gibt es mehrfach).
+
 **Die Trefferquote maß neben der Stelle — und zwei Muster, die daraus folgten (15.09.2026).**
 
 Die Zahl „der Textcheck findet X von 86 markierten Fehlern“ wurde **positionsblind**
