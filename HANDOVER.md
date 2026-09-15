@@ -58,6 +58,26 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zwei Präpositionen, bei denen die App Nils' eigene Form zur Ausnahme erklärt hat (15.09.2026, vierte Runde).**
+
+**`ab` steht nicht immer mit dem Dativ.** Die Regel führte es kommentarlos unter den
+Dativpräpositionen, die Fallkarte ebenso. Ohne Artikel schwankt der Fall aber, und
+ausgerechnet der Akkusativ ist **in Deutschland** die verbreitete Form: „ab nächstem
+Montag“ (Dativ, vom Duden empfohlen) und „ab nächsten Montag“ (Akkusativ) sind beide
+richtig. Nur mit Artikel steht der Dativ fest — „ab dem ersten Mai“, und genau so fragt die
+Fallkarte auch, der Ablenker bleibt also sicher falsch. Beide Stellen tragen die
+Einschränkung jetzt, mit der Quelle: Variantengrammatik des IDS.
+
+**„auf die Post“ ist nicht die Regel, sondern der Süden.** `gram-richtung` verteilte die
+vier Richtungsangaben und gab Ämter und Einrichtungen an „auf“ — „auf die Post“, „auf die
+Bank“. Der IDS führt dafür einen eigenen Artikel: „auf die Post“ ist im Süden und in
+Österreich verbreitet, „zur Post“ in der Mitte und im Norden, **beides Standard**. Für Köln
+ist „zur Post“ die normale Form; die Regel hätte Nils seine eigene Form abgewöhnt. Regel und
+Fallkarte sagen es jetzt beide.
+
+Beide Einordnungen stehen in der Variantentabelle von `tests/inhalt.js` und werden dort
+gegen ein Auseinanderlaufen gehalten.
+
 **Sechs Regeln, die eine Ausnahme verschwiegen — und eine Erklärung, die seitenverkehrt war (15.09.2026, dritte Runde).**
 
 Weiter aus dem Prüflauf über die unbelegten Regeln, jeder Fund von mir nachgemessen und

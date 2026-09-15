@@ -360,6 +360,16 @@ const EINORDNUNG = [
   /* „anrufen“ mit Dativ: an sieben Stellen eingeordnet, nur in der Regel gram-akkverben
      stand bis zum 15.09.2026 ein nacktes „(nicht: dir)“ in der Klasse .nope — also optisch
      als klarer Fehler, während überall sonst die Landkarte steht. */
+  /* „ab“ ohne Artikel: Duden empfiehlt den Dativ, in Deutschland ist der Akkusativ
+     verbreitet; mit Artikel steht der Dativ fest. Am 15.09.2026 mit zwei Suchen belegt,
+     beide beim IDS-Artikel „ab + Dativ/Akkusativ bei Datums- und Zeitangaben“. */
+  /* „auf die Post“ gegen „zur Post“: beides Standard, die Verteilung regional. Der IDS
+     führt dafür einen eigenen Artikel („Auf die / zur Post“). Am 15.09.2026 mit zwei
+     Suchen belegt. Die Regel gab bis dahin nur „auf“ an — für Köln die seltenere Form. */
+  { was: "auf die / zur Post", muss: [/[Ss]üden/, /Norden/, /Standard/],
+    stellen: [["Regel", "gram-richtung"], ["Fallkarte", "auf (Richtung)"]] },
+  { was: "ab ohne Artikel", muss: [/[Oo]hne Artikel/, /Akkusativ/, /Dativ/],
+    stellen: [["Regel", "gram-praepdat"], ["Fallkarte", "ab"]] },
   { was: "anrufen mit Dativ", muss: [/[Ss]üdwest/, /[Ss]chweiz/],
     stellen: [["Regel", "gram-akkverben"], ["Übung", "n11"], ["Übung", "d03"], ["Übung", "d28"],
               ["Fallkarte", "anrufen"], ["Prüfmuster", "x20"]] },

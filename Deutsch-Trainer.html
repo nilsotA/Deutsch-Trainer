@@ -3472,7 +3472,7 @@ const CASEREF = [
 {w:"seit",t:"praep",k:"Dativ",ex:"seit einem Jahr, seit dem Umzug",n:"Nicht „seid“ — das ist die Verbform („ihr seid“).",s:["Ich trainiere seit ___ Jahr im Verein.","einem","ein"]},
 {w:"von",t:"praep",k:"Dativ",ex:"von meinem Bruder, vom Bahnhof",s:["Ich habe den Plan von ___ Bruder.","meinem","meinen"]},
 {w:"zu",t:"praep",k:"Dativ",ex:"zu dir, zum Arzt, zur Schule",s:["Nach dem Training fahre ich zu ___ Eltern.","meinen","meine"]},
-{w:"ab",t:"praep",k:"Dativ",ex:"ab dem ersten Mai, ab morgen",s:["Ab ___ ersten Mai gilt der neue Plan.","dem","den"]},
+{w:"ab",t:"praep",k:"Dativ",ex:"ab dem ersten Mai, ab morgen",n:"Mit Artikel steht der Dativ fest. Ohne Artikel schwankt der Fall: „ab nächstem Montag“ (Dativ, vom Duden empfohlen) und „ab nächsten Montag“ (Akkusativ, in Deutschland verbreitet) sind beide richtig.",s:["Ab ___ ersten Mai gilt der neue Plan.","dem","den"]},
 {w:"entgegen",t:"praep",k:"Dativ",ex:"entgegen der Absprache, allen Erwartungen entgegen",s:["Entgegen ___ Absprache kam er später.","der","die"]},
 {w:"gemäß",t:"praep",k:"Dativ",ex:"gemäß der Vorschrift, der Vorschrift gemäß",s:["Gemäß ___ Vorschrift wird die Halle abgeschlossen.","der","die"]},
 {w:"zufolge",t:"praep",k:"Dativ",ex:"dem Bericht zufolge",n:"Nachgestellt mit Dativ. Vorangestellt mit Genitiv: „zufolge des Berichts“ (seltener).",fall:true,s:["___ Bericht zufolge fällt das Spiel aus.","Dem","Den"]},
@@ -3642,7 +3642,7 @@ const CASEREF = [
 {w:"nach (Richtung)",t:"praep",k:"Dativ",ex:"nach Köln, nach Hause, nach Italien",n:"Bei Städten und den meisten Ländern ohne Artikel. Mit Artikel geht „in“: in die Schweiz, in die Türkei, in die USA.",fall:true,s:["Wir fahren im Sommer ___ Italien.","nach","zu"]},
 {w:"zu (Richtung)",t:"praep",k:"Dativ",ex:"zum Bahnhof, zur Schule, zu Aldi",n:"Bei Personen und Einrichtungen. „Ich gehe zum Arzt“, nicht „nach dem Arzt“. Im Ruhrgebiet, im nördlichen Rheinland und in Ostfriesland ist „nach dem Bäcker“, „nach Aldi“ die verbreitete Form; der Duden führt sie als norddeutsch und nicht standardsprachlich.",s:["Ich gehe kurz ___ Bäcker.","zum","nach dem"]},
 {w:"in (Richtung)",t:"wechsel",k:"Akkusativ",ex:"in die Halle, in den Wald, in die Schweiz",n:"Wenn man hineingeht. „Ich gehe in die Schule“ (ins Gebäude) vs. „Ich gehe zur Schule“ (Richtung / als Schüler).",s:["Wir fahren im Sommer in ___ Schweiz.", "die", "der"]},
-{w:"auf (Richtung)",t:"wechsel",k:"Akkusativ",ex:"auf die Post, auf den Markt, aufs Land",n:"Bei Ämtern, Plätzen und offenen Flächen.",s:["Ich gehe kurz auf ___ Markt.", "den", "dem"]},
+{w:"auf (Richtung)",t:"wechsel",k:"Akkusativ",ex:"auf die Post, auf den Markt, aufs Land",n:"Bei Ämtern, Plätzen und offenen Flächen. Bei Einrichtungen wie Post und Bank steht daneben „zu“, und die Verteilung ist regional: „auf die Post“ ist im Süden und in Österreich verbreitet, „zur Post“ in der Mitte und im Norden. Beides gilt als Standard.",s:["Ich gehe kurz auf ___ Markt.", "den", "dem"]},
 {w:"bei (Ort)",t:"praep",k:"Dativ",ex:"bei meiner Schwester, beim Arzt",n:"Antwort auf „wo?“, nicht auf „wohin?“ — dafür steht „zu“.",s:["Heute Abend bin ich ___ meiner Schwester.","bei","zu"]},
 
 /* ---------- WECHSELVERBEN: DAS VERB ENTSCHEIDET ÜBER DEN FALL ---------- */
@@ -4554,6 +4554,7 @@ dazu: ab · entgegen · gemäß · zufolge · samt · nebst · nahe · mitsamt</
 <p><b>Merkspruch:</b> „aus außer bei gegenüber mit nach seit von zu“ — als Reihe auswendig gelernt, spart es beim Sprechen jede Überlegung.</p>
 <div class="ex">aus <b>dem</b> Haus · bei <b>meiner</b> Schwester · mit <b>dem</b> Rad · nach <b>dem</b> Training · seit <b>einem</b> Jahr · von <b>meinem</b> Bruder · zu <b>dir</b></div>
 <p><b>Schwankende Fälle:</b> <code>dank</code>, <code>laut</code> und <code>binnen</code> gehen mit Dativ <i>und</i> Genitiv — beides ist korrekt.</p>
+<p>Bei <code>ab</code> schwankt der Fall, aber nur <b>ohne Artikel</b>: „ab nächstem Montag“ (Dativ, vom Duden empfohlen) und „ab nächsten Montag“ (Akkusativ, in Deutschland verbreitet) sind beide richtig. Steht ein Artikel dabei, bleibt es beim Dativ: „ab dem ersten Mai“. Quelle: Variantengrammatik des IDS, „ab + Dativ/Akkusativ bei Datums- und Zeitangaben“.</p>
 <p><b>Verschmelzungen</b>, die im Sprechen selbstverständlich sind: bei dem → <b>beim</b>, von dem → <b>vom</b>, zu dem → <b>zum</b>, zu der → <b>zur</b>.</p>`},
 
 {id:"gram-akkverben",c:"gram",t:"Verben, die oft fälschlich mit Dativ stehen",b:`
@@ -4586,6 +4587,7 @@ dazu: ab · entgegen · gemäß · zufolge · samt · nebst · nahe · mitsamt</
 <span class="ex">in die Halle · in den Wald · in die Schweiz · in die Türkei · in die USA</span></li>
 <li><b>auf</b> + Akkusativ — Ämter, Plätze, offene Flächen<br>
 <span class="ex">auf die Post · auf den Markt · aufs Land · auf die Bank</span></li>
+<li class="tiny muted">Bei Einrichtungen wie Post und Bank steht daneben „zu“, und die Verteilung ist regional: „auf die Post“ ist im Süden und in Österreich verbreitet, „zur Post“ in der Mitte und im Norden. Beides gilt als Standard — für Köln ist „zur Post“ die normale Form.</li>
 </ul>
 <p><b>Feiner Unterschied:</b> „Ich gehe <b>in die</b> Schule“ = ins Gebäude hinein. „Ich gehe <b>zur</b> Schule“ = in Richtung Schule oder: Ich bin Schüler.</p>
 <p><b>Für „wo?“ statt „wohin?“</b> gilt: <code>bei</code> bei Personen („beim Arzt“), <code>in</code> + Dativ bei Räumen („in der Halle“), <code>auf</code> + Dativ bei Flächen („auf dem Markt“).</p>
