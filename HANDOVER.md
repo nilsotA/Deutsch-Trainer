@@ -58,6 +58,33 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Wenn die Stufe etwas anderes sagt als die Regel dahinter (15.09.2026, zehnte Runde).**
+
+Grundsatz 3 sagt: Stil ist keine Regel, und was Stil ist, darf nicht als „falsch“
+herauskommen. Die App hat dafür vier Stufen — **hart** („Klarer Fehler“), **pruef** („Bitte
+prüfen“), **stil**, **form** („Wirkung und Ton“) — und jede Regel hat eine Kategorie. Laufen
+beide auseinander, sagt der Textcheck etwas anderes als das Regelwerk dahinter. Vier Paare
+liefen auseinander:
+
+- **a06** („faul“, „unmotiviert“, „unzuverlässig“) und **a07** („ich bin zu blöd“) standen
+  auf **Bitte prüfen**. Beides ist tadelloses Deutsch; beanstandet wird die Wirkung auf den
+  Leser. Sie stehen jetzt auf **Wirkung und Ton** — der Stufe, die dafür gemacht ist.
+- **x24** („in 2026“) stand ebenfalls auf **Bitte prüfen**, obwohl es eine Übernahme aus
+  dem Englischen ist und kein Fehler. Jetzt **Stil**.
+- **x06** und **x07** (`einzigste`, `optimalste`) standen auf **hart** und zeigten auf eine
+  Regel, die die Steigerung von Absolutadjektiven bloß „schief“ nannte. Hier hat die Regel
+  nachgezogen, nicht das Muster: Der Duden führt „einzigste“ eigens unter den **häufigen
+  Fehlern**, mit eigener Seite. Die Regel sagt das jetzt — und nennt zugleich die beiden
+  Stellen, an denen die Steigerung vorkommt, ohne falsch zu sein: die Umgangssprache und der
+  literarische Gebrauch (Goethe 1775: „Einzigstes, einzigstes Mädchen“).
+
+`tests/suite.js` gleicht das jetzt bei jedem Lauf ab. Fünf Paare bleiben erlaubt und stehen
+mit Begründung in der Liste — etwa das doppelte „würde“, das CLAUDE.md ausdrücklich als
+Stilfrage führt, und „vor Kurzem/vor kurzem“, wo beide Schreibungen zulässig sind und der
+Hinweis nur Einheitlichkeit anmahnt. Dazu zwei Gegenrichtungen: Der Abgleich muss ein
+falsches Paar erkennen, und jede gelistete Ausnahme muss es noch geben — sonst verwaltet die
+Liste Karteileichen.
+
 **Ein Widerspruch, den es nicht gab — und was daraus zu lernen war (15.09.2026, neunte Runde).**
 
 Beim Durchsehen der Kommaregeln stieß ich in `komma-adjektive` scheinbar auf einen groben

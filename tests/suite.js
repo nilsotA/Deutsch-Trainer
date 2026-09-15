@@ -831,6 +831,58 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
     akkMuster.length + " Muster)", !durchlaessig.length, [...new Set(durchlaessig)].join(" · "));
 }
 
+{
+  /* Fehlerklasse „die Stufe passt nicht zur Regel“. Grundsatz 3 sagt: Stil ist keine Regel,
+     und was Stil ist, darf nicht als „falsch“ herauskommen. Die App hat dafür vier Stufen —
+     hart („Klarer Fehler“), pruef („Bitte prüfen“), stil, form („Wirkung und Ton“) — und
+     jede Regel hat eine Kategorie. Laufen beide auseinander, sagt der Textcheck etwas
+     anderes als das Regelwerk dahinter.
+
+     Gefunden wurden vier solche Paare: a06 („faul“, „unmotiviert“) und a07
+     („ich bin zu blöd“) standen auf „Bitte prüfen“, obwohl beides tadelloses Deutsch ist
+     und nur die Wirkung betrifft — jetzt „form“. x24 („in 2026“) stand ebenso auf
+     „prüfen“, obwohl es eine Übernahme ist und kein Fehler — jetzt „stil“. Umgekehrt
+     standen x06 und x07 auf „hart“ und zeigten auf eine Regel, die die Steigerung von
+     Absolutadjektiven „schief“ nannte; der Duden führt „einzigste“ unter den häufigen
+     Fehlern, also hat die Regel nachgezogen, nicht das Muster.
+
+     Die Ausnahmen stehen mit Grund in der Liste — eine neue macht den Lauf rot. */
+  const kat = {};
+  RA.forEach(r => kat[r.id] = r.c);
+  const PASST = {
+    hart:  ["recht", "komma", "gross", "getrennt", "gram", "satz", "zeichen", "zahlen"],
+    pruef: ["recht", "komma", "gross", "getrennt", "gram", "satz", "zeichen", "zahlen"],
+    stil:  ["stil", "form"],
+    form:  ["stil", "form"],
+  };
+  const AUSNAHMEN = {
+    "x06": "hart auf stil-absolut: „einzigste“ führt der Duden unter den häufigen Fehlern, nicht als Stilfrage",
+    "x07": "hart auf stil-absolut: dieselbe Begründung für optimalste, maximalste, idealste",
+    "y06": "stil auf satz-konjunktiv: das doppelte „würde“ nennt CLAUDE.md ausdrücklich als Stilfrage",
+    "y12": "stil auf gross-subst: „vor Kurzem/vor kurzem“ sind beide zulässig — der Hinweis mahnt nur Einheitlichkeit an",
+    "s07": "stil auf form-verbindlich: „man“ statt Zuständigkeit ist eine Formulierungsfrage",
+  };
+  const schief = [];
+  muster.forEach(c => {
+    const k = kat[c.r];
+    if (!k || !PASST[c.sev]) return;
+    if (PASST[c.sev].includes(k)) return;
+    if (c.id in AUSNAHMEN) return;
+    schief.push(c.id + " [" + c.sev + "] → " + c.r + " (" + k + ")");
+  });
+  P.ok("Die Stufe jedes Musters passt zur Kategorie seiner Regel (" +
+    Object.keys(AUSNAHMEN).length + " begründete Ausnahmen)", !schief.length, schief.join(" · "));
+  /* Positivprobe: Der Abgleich muss ein falsches Paar erkennen. */
+  const probe = [{ id: "probe", sev: "hart", r: "stil-fuellwort" }].filter(c => {
+    const k = kat[c.r];
+    return k && PASST[c.sev] && !PASST[c.sev].includes(k);
+  });
+  P.ok("Der Stufenabgleich erkennt ein unpassendes Paar", probe.length === 1, "Positivprobe blieb stumm");
+  /* Und jede Ausnahme muss es noch geben — sonst verwaltet die Liste Karteileichen. */
+  const tot = Object.keys(AUSNAHMEN).filter(id => !muster.some(c => c.id === id));
+  P.ok("Jede gelistete Ausnahme gibt es noch", !tot.length, tot.join(", "));
+}
+
 const offeneWdh = muster.filter(c => /\[\^[^\]]*\]\{\d+,\}/.test(c.re));
 P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer verneinten Klasse",
   !offeneWdh.length, offeneWdh.map(c => c.id + ": " + c.re).join(" · "));

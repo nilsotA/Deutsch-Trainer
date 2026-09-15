@@ -2015,9 +2015,10 @@ sagen → erläutern, einwenden, betonen, einräumen, feststellen</div>
 <p>Ab drei Genitiven hintereinander verliert der Satz seine Struktur. Lösungen: Kompositum bilden, in einen Nebensatz auflösen oder verbalisieren.</p>`},
 
 {id:"stil-absolut",c:"stil",t:"Absolutadjektive nicht steigern",b:`
-<p>Manche Adjektive bezeichnen bereits einen Endzustand — gesteigert wirken sie schief:</p>
+<p>Manche Adjektive bezeichnen bereits einen Endzustand. Gesteigert sind sie standardsprachlich <b>falsch</b> — der Duden führt „einzigste“ eigens unter den häufigen Fehlern:</p>
 <div class="ex">optimal · maximal · minimal · ideal · einzig · total · tot · schwanger</div>
 <p class="tiny muted">Nicht jedes Adjektiv, das einen Endzustand nennt, sperrt sich gegen die Steigerung: „voll“, „leer“ und „rund“ werden in festen Wendungen durchaus gesteigert. Die Liste oben ist die enge, sichere Auswahl.</p>
+<p class="tiny muted">In der Umgangssprache hört man die Steigerung oft, und in literarischen Texten kommt sie als bewusstes Mittel vor — Goethe schrieb 1775 „Einzigstes, einzigstes Mädchen“. In Schule, Uni und Beruf bleibt sie ein Fehler. Quelle: Duden, Falschschreibung „einzigste“ und Sprachratgeber „einzige oder einzigste?“.</p>
 <div class="ex"><span class="nope">die optimalste Lösung</span> → <span class="ok">die optimale Lösung</span><br>
 <span class="nope">die einzigste Möglichkeit</span> → <span class="ok">die einzige Möglichkeit</span></div>`},
 
@@ -7981,7 +7982,7 @@ const CHECKS = [
  k:"Bei Preis- und Zeitangaben steht standardsprachlich der Akkusativ: <b>Das kostet mich viel Zeit.</b> In der Bedeutung „jemanden um etwas bringen“ lässt der Duden auch den Dativ zu: „Das kostete ihm das Leben.“ Mit dem Akkusativ liegst du immer richtig. „uns“ und „euch“ lauten in beiden Fällen gleich und werden deshalb nicht gemeldet.",r:"gram-akkverben"},
 {id:"x23",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(dem|den|des|einem|einen|eines|diesem|diesen|jedem|jeden)\s+(Kollege|Junge|Kunde|Zeuge|Experte|Athlet|Praktikant|Student|Mensch|Pädagoge|Journalist|Kandidat|Präsident|Assistent|Patient|Klient|Polizist|Soldat|Fotograf|Philosoph|Architekt|Bauer|Prinz|Held|Löwe|Affe|Hase|Herr)\b(?![ne])/g,
  t:"n-Deklination",k:"Diese Substantive bekommen in allen Fällen außer dem Nominativ Singular ein <b>-en</b>: „mit dem Kolleg<b>en</b>“, „für den Mensch<b>en</b>“.",r:"gram-ndekl"},
-{id:"x24",sev:"pruef",re:/\b[Ii]n\s+(?:19|20)\d{2}\b(?!\s*(?:[A-ZÄÖÜ]|m\b|km\b|cm\b|mm\b|kg\b|g\b|l\b|ml\b|€))/g,t:"„in 2026“",
+{id:"x24",sev:"stil",re:/\b[Ii]n\s+(?:19|20)\d{2}\b(?!\s*(?:[A-ZÄÖÜ]|m\b|km\b|cm\b|mm\b|kg\b|g\b|l\b|ml\b|€))/g,t:"„in 2026“",
  k:"Als Zeitangabe ist das eine Übernahme aus dem Englischen: besser <b>2026</b> oder <b>im Jahr 2026</b>. Als Mengenangabe ist „in“ richtig — „in 2000 Metern Höhe“.",r:"stil-anglizismus"},
 {id:"x25",sev:"hart",re:/\b(?:Grüßen|Grüße|Gruß),[ \t]*(?:$|(?:[A-ZÄÖÜ][\wäöüß.-]*[ \t]*){1,3}$)/gm,t:"Komma nach der Grußformel",
  k:"Nach „Mit freundlichen Grüßen“ steht <b>kein</b> Satzzeichen.",r:"komma-brief"},
@@ -8154,10 +8155,10 @@ const CHECKS_N = [
 {id:"a05",sev:"stil",re:/(?<![\wäöüßÄÖÜ])(der|des|dem)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+\s+(der|des)\s+[A-ZÄÖÜ][a-zäöüß]+/g,
  t:"Genitivkette",
  k:"Drei Genitive hintereinander lesen sich zäh. Bilde ein Kompositum oder verbalisiere: „die Ergebnisse der Teilnehmerbefragung auswerten“.",r:"stil-genitivkette"},
-{id:"a06",sev:"pruef",re:/\b(faul|unmotiviert|unzuverlässig|schlampig|desinteressiert)\b/gi,
+{id:"a06",sev:"form",re:/\b(faul|unmotiviert|unzuverlässig|schlampig|desinteressiert)\b/gi,
  t:"Etikett statt Beobachtung",
  k:"Solche Wörter bewerten die Person, statt Verhalten zu beschreiben. In Rückmeldungen und Gesprächen erzeugen sie Abwehr: „dreimal ohne Sportsachen erschienen“ statt „faul“.",r:"form-kritik"},
-{id:"a07",sev:"pruef",re:/\bich bin (?:(?:wahrscheinlich|vielleicht|wohl|einfach|echt|total|wirklich|halt|eben|leider|offenbar|anscheinend)\s+)?(?:zu\s+)?(blöd|dumm|doof|schwer von Begriff)\b/gi,
+{id:"a07",sev:"form",re:/\bich bin (?:(?:wahrscheinlich|vielleicht|wohl|einfach|echt|total|wirklich|halt|eben|leider|offenbar|anscheinend)\s+)?(?:zu\s+)?(blöd|dumm|doof|schwer von Begriff)\b/gi,
  t:"Selbstabwertung",
  k:"Die Entwertung vorweg färbt auf die Antwort ab. Eine präzise Frage zeigt, dass du bis zu einem bestimmten Punkt gekommen bist.",r:"form-nachfragen"},
 
