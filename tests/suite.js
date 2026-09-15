@@ -296,6 +296,44 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   P.ok("… und schweigt bei einem Satz ohne Rangformel", leer.size === 0, "Gegenprobe schlug an");
 }
 
+/* Grundsatz 3: Stil ist keine Regel. Die Stilregeln stehen im Regelwerk neben den
+   Kommaregeln und sehen genauso aus — wer dort „falsch“ liest, hält eine Empfehlung für
+   einen Fehler. Am 15.09.2026 sagte stil-kollokation „Wer sie falsch kombiniert, klingt
+   sofort schief“, stil-hedging führte seine Empfehlung als „Regel:“ ein, und
+   stil-genitivkette behauptete, ab drei Genitiven verliere der Satz seine Struktur.
+
+   Geprüft wird satzweise: Ein Satz einer stil-Regel darf ein Fehlerwort nur tragen, wenn
+   er es verneint („Ein Fehler ist die Kette nicht“) — oder wenn die Regel eine Quelle
+   nennt und die Aussage damit belegt ist wie in stil-absolut. Für form-Regeln gilt das
+   nicht: Das sind Ratgebertexte über Gespräche und Mails, kein Urteil über Sprache. */
+{
+  const FEHLERWORT = /(?<![\wäöüßÄÖÜ])(falsch|fehlerhaft|Fehler|unzulässig|verboten)(?![\wäöüßÄÖÜ])/i;
+  const VERNEINT = /(?<![\wäöüßÄÖÜ])(kein|keine|keines|keiner|nicht)(?![\wäöüßÄÖÜ])/i;
+  const QUELLE = /Duden|DWDS|Regelwerk|Rat für deutsche Rechtschreibung|IDS|Variantengrammatik|grammis|DIN /i;
+  const nurText = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const stilUrteil = (b) => {
+    const t = nurText(b);
+    if (QUELLE.test(t)) return [];
+    return t.split(/(?<=[.:;])\s+/).filter(z => FEHLERWORT.test(z) && !VERNEINT.test(z));
+  };
+  const stilSchief = [];
+  RA.filter(r => r.c === "stil").forEach(r =>
+    stilUrteil(r.b).forEach(z => stilSchief.push(r.id + ": „" + z.trim().slice(0, 90) + "“")));
+  P.ok("Keine Stilregel nennt eine Empfehlung einen Fehler (" +
+    RA.filter(r => r.c === "stil").length + " Stilregeln)", !stilSchief.length, stilSchief.join(" · "));
+  /* Positivprobe: die alte Fassung von stil-kollokation. */
+  P.ok("Der Stil-Erkenner schlägt bei der alten Fassung an",
+    stilUrteil("<p>Wörter haben Lieblingspartner. Wer sie falsch kombiniert, klingt sofort schief.</p>").length === 1,
+    "Positivprobe blieb stumm");
+  /* Zwei Gegenproben: die Verneinung und der Beleg müssen den Satz durchlassen. */
+  P.ok("… und lässt eine Verneinung durch",
+    !stilUrteil("<p>Ein Fehler ist die Kette nicht — sie kostet Lesbarkeit.</p>").length,
+    "Gegenprobe schlug an");
+  P.ok("… und einen belegten Befund",
+    !stilUrteil("<p>Gesteigert sind sie standardsprachlich falsch. Quelle: Duden.</p>").length,
+    "Gegenprobe schlug an");
+}
+
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
 const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev,r:c.r||null}))");

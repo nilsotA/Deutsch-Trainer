@@ -58,6 +58,30 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Stil ist keine Regel — nachgesehen statt angenommen (15.09.2026, zwölfte Runde).**
+
+Punkt 1 der Ideenliste fragte für die 17 `stil-` und 26 `form-`Regeln: Sind Empfehlungen
+als Empfehlungen gekennzeichnet? Alle 43 sind jetzt daraufhin gelesen. Die `form-`Regeln
+sind Ratgebertexte über Gespräche und Mails — sie urteilen nicht über Sprache, dort ist
+nichts zu ändern. Bei den Stilregeln waren es vier Stellen:
+
+- **stil-kollokation** sagte „Wer sie falsch kombiniert, klingt sofort schief“. Eine
+  ungewohnte Kollokation ist meist kein Grammatikfehler; sie klingt schief. Genau das
+  steht jetzt da.
+- **stil-hedging** führte seine Empfehlung als „**Regel:** eine Absicherung pro Aussage“
+  ein — jetzt „Faustregel“.
+- **stil-genitivkette** behauptete, ab drei Genitiven verliere der Satz seine Struktur.
+  Eine Schwelle ohne Quelle, und als Befund formuliert. Jetzt steht der Mechanismus da:
+  ab dem dritten wird die Zuordnung mühsam, ein Fehler ist die Kette nicht.
+- **stil-fuellwort** nennt jetzt ausdrücklich, was Grundsatz 3 mit diesen Wörtern als
+  Beispiel meint: ein Fehler ist keines davon, es geht um Wirkung.
+
+Die Prüfung dazu steht in `tests/suite.js`, Abschnitt B, neben der Rangbehauptungsprüfung.
+Sie liest die Stilregeln satzweise: Ein Fehlerwort darf nur stehen, wenn der Satz es
+verneint — oder wenn die Regel eine Quelle nennt, wie `stil-absolut` den Duden. Gegen den
+Stand vor dieser Runde schlägt sie an, zwei Gegenproben halten sie davon ab, Verneinungen
+und belegte Befunde zu melden.
+
 **Der Spickzettel, Zelle für Zelle (15.09.2026, elfte Runde).**
 
 CLAUDE.md, Abschnitt 7, Schritt 4 sagt: „Spickzettel prüfen: Er wiederholt Teile des
@@ -2017,9 +2041,10 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
    Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.
    Offen sind die 23 Grammatikregeln (`gram-*`), die 14 Satzbauregeln (`satz-*`), die
-   17 Stilregeln (`stil-*`) und die 26 Formulierungsregeln (`form-*`) — bei den letzten
-   beiden Gruppen geht es weniger um Belege als um die Frage, ob Empfehlungen als
-   Empfehlungen gekennzeichnet sind (Grundsatz 3). Vorgehen wie gehabt.
+   17 Stilregeln (`stil-*`) und die 26 Formulierungsregeln (`form-*`). Die Grundsatz-3-Frage
+   für diese beiden Gruppen — sind Empfehlungen als Empfehlungen gekennzeichnet? — ist am
+   15.09.2026 beantwortet und in `tests/suite.js` festgehalten; offen sind dort nur noch
+   die Belege. Vorgehen wie gehabt.
 
 2. **Aus der alten Liste: restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
    Doppelpunkt und Bis-Strich sind erledigt (siehe „Zuletzt geändert“). Offen:
