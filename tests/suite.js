@@ -207,6 +207,45 @@ const streit = Object.keys(H).filter(z => WCH[z] &&
 P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, streit.join(" · "));
 
 {
+  /* Fehlerklasse „die Markierung geht beim Strippen verloren“. In den Regelkörpern trägt
+     die Bedeutung nicht der Text, sondern die Klasse: <span class="nope">,</span> zeigt ein
+     Komma, das gerade NICHT stehen soll, class="ok" die richtige Form. Wer solchen Text
+     durch strip() schickt, macht aus der Falschform eine Empfehlung — „die neue, rote
+     Trainingsjacke“ liest sich dann wie ein Vorbild, obwohl die Regel genau das Komma
+     durchstreicht. (Mir selbst beim Durchsehen passiert, mit einem Lesewerkzeug, das die
+     Klassen wegwarf.)
+
+     In der App geht das heute gut: Regelkörper werden als HTML gerendert, die Klassen
+     bleiben; der Suchindex strippt zwar, zeigt den gestrippten Text aber nie an — er dient
+     nur dem Treffer. Vorgelesen wird dagegen gestrippt (sprechFrage, und die Erklärung nach
+     der Antwort). Deshalb hier die Bedingung, die das hält: Kein Feld, das gesprochen oder
+     ohne Markup gezeigt wird, darf eine solche Klasse tragen. */
+  const MARKE = /class="(nope|ok)"/;
+  const gestrippt = [];
+  ALL.forEach(i => {
+    if (MARKE.test(String(i.q || ""))) gestrippt.push("Frage " + i.id);
+    (i.o || []).forEach(o => { if (MARKE.test(String(o))) gestrippt.push("Option " + i.id); });
+    if (MARKE.test(String(i.e || ""))) gestrippt.push("Erklärung " + i.id);
+  });
+  WORDS.forEach(x => {
+    if (MARKE.test(String(x.d || "") + String(x.t || "") + String(x.ex || "")))
+      gestrippt.push("Wortkarte " + x.w);
+  });
+  CASEREF.forEach(e => {
+    if (MARKE.test(String(e.n || "") + String(e.ex || ""))) gestrippt.push("Fallkarte " + e.w);
+  });
+  P.ok("Keine Richtig-/Falsch-Markierung in vorgelesenem Material",
+    !gestrippt.length, [...new Set(gestrippt)].join(" · "));
+  /* Positivprobe: Der Erkenner muss anschlagen — sonst ist die Zusage leer. */
+  P.ok("Der Markierungs-Erkenner schlägt an",
+    MARKE.test('die neue<span class="nope">,</span> rote Trainingsjacke'), "Positivprobe blieb stumm");
+  /* Und die Regelkörper tragen die Markierungen wirklich — sonst prüft die Bedingung oben
+     etwas, das es gar nicht gibt. */
+  const mitMarke = RA.filter(r => MARKE.test(String(r.b))).length;
+  P.ok("Die Regelkörper tragen die Markierungen (" + mitMarke + " Regeln)", mitMarke >= 40, mitMarke);
+}
+
+{
   /* Fehlerklasse „Rangbehauptung ohne Beleg“. Grundsatz 5 warnt vor „immer“, „nie“ und
      „ausschließlich“ — dieselbe Falle stellt der Superlativ: „der häufigste Fehler“, „die
      wichtigste Regel überhaupt“, „die größten Konfliktverstärker der deutschen Sprache“.

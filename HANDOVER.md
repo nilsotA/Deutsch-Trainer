@@ -58,6 +58,45 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ein Widerspruch, den es nicht gab — und was daraus zu lernen war (15.09.2026, neunte Runde).**
+
+Beim Durchsehen der Kommaregeln stieß ich in `komma-adjektive` scheinbar auf einen groben
+Fehler: Als Beispiel für **nicht** gleichrangige Adjektive stand dort „die neue, rote
+Trainingsjacke“ — mit Komma, obwohl der Text daneben erklärt, dass genau dort keins
+hingehört. Der Fehler lag bei mir: Im Quelltext steht `die neue<span class="nope">,</span>
+rote Trainingsjacke`. Das Komma wird in Fehlerrot gezeigt und ist durchgestrichen gemeint.
+Mein Lesewerkzeug warf die Klassen weg und machte aus der Warnung ein Vorbild.
+
+Das ist eine Fehlerklasse, keine Ungeschicklichkeit: **In den Regelkörpern trägt die
+Bedeutung nicht der Text, sondern die Klasse.** Also nachgesehen, ob die App selbst irgendwo
+in dieselbe Falle läuft:
+
+| Stelle | strippt? | zeigt den gestrippten Text? |
+|---|---|---|
+| Regelkörper im Regelwerk | nein, HTML bleibt | — |
+| Suchindex (`buildIndex`) | ja | **nein** — der gestrippte Text dient nur dem Treffer, angezeigt werden Art, Titel und Untertitel |
+| Vorlesen (`sprechFrage`, Erklärung nach der Antwort) | ja | gesprochen |
+
+Der dritte Weg wäre der gefährliche, und dort ist es sauber: Kein Feld, das gesprochen wird
+— Frage, Optionen, Erklärung, Wort- und Fallkarten — trägt eine solche Klasse. Das ist
+jetzt festgehalten, mit Positivprobe und einer Gegenrichtung („die Regelkörper tragen die
+Markierungen wirklich“, 73 Regeln), damit die Bedingung nicht stumm grün wird.
+
+**Zwei Gegenproben waren zuerst ungültig, und das gehört dazu.** Die erste baute
+`class='nope'` mit einfachen Anführungszeichen ein — das Muster sucht doppelte, also blieb
+der Lauf grün, ohne etwas zu prüfen. Die zweite nahm doppelte, unescapet: Die schließen das
+JS-String, der Skriptblock war kaputt, und `node tests/suite.js` gab **gar nichts** aus. Eine
+Gegenprobe, die schweigt, ist kein Beweis — erst die dritte (`class=\"nope\"` escaped) machte
+den Lauf rot und damit die Prüfung gültig. Nebenbei zeigt das eine zweite Schutzschicht:
+Eine solche Markierung lässt sich in ein doppelt gequotetes Feld gar nicht unbemerkt
+einbauen, `npm run syntax` fängt es.
+
+**Und ein negatives Ergebnis, das eine Runde wert war:** Die App zitiert genau **eine**
+Stelle des amtlichen Regelwerks (§ 73 in `komma-infinitiv`), und die stimmt für die Fassung
+von 2024. Die übrigen Paragrafenzeichen im Bestand sind Beispiele für das Zeichen selbst
+(„§ 5 mit Leerzeichen“), keine Verweise. Es gibt also keine veralteten Paragrafennummern,
+die man nachziehen müsste.
+
 **Die letzten vier offenen Meldungen, abgearbeitet (15.09.2026, achte Runde).**
 
 `FUNDE-offen.md` ist für den Regellauf leer — alles nachgemessen, jede Sprachaussage mit
