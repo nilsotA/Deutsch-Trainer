@@ -58,6 +58,39 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Drei Regeln, die sich im eigenen Text widersprochen haben (15.09.2026, fünfte Runde).**
+
+**`recht-wider` führte „widerspiegeln“ als Musterbeispiel und als Ausnahme.** Zeile 1: „wider
+= gegen: widersprechen, widerlegen, **widerspiegeln**, widerstehen …“. Drei Zeilen tiefer:
+„Tückisch: **widerspiegeln**, Widerhall, Widerschein — hier heißt „wider“ nicht „gegen“,
+sondern „zurück“ … Merk dir die drei als Ausnahmen.“ Ein Wort kann nicht beides sein. Die
+Übung r17 wiederholte denselben Fehler. „widerspiegeln“ steht jetzt nur noch dort, wo es
+hingehört — bei den Ausnahmen.
+
+**`komma-aufzaehlung` machte im ersten Satz aus der Ausnahme eine Pauschale.** „Gleichrangige
+Teile werden durch Komma getrennt — außer, es steht schon eine Konjunktion dazwischen.“ Zwei
+Zeilen später steht in derselben Regel die richtige Unterscheidung: vor **und, oder, sowie**
+kein Komma, vor **aber, sondern, doch, denn** sehr wohl — und das sind auch Konjunktionen.
+Der Einleitungssatz sagt das jetzt und verweist auf beide Listen. Für Nils ist das keine
+Kleinigkeit: Komma ist das erklärte Ziel der App.
+
+**`gross-sprachen` nannte ein Merkmal, das nichts entscheidet.** „Folgt ein Substantiv oder
+Partizip, steht dort das Adjektiv und bleibt klein: auf deutsch besetztem Gebiet.“ Zwei
+Wörter vorher steht in derselben Regel das Gegenbeispiel: „in **Deutsch** abgefasst“ — groß,
+und „abgefasst“ ist ein Partizip. Entscheidend ist nicht, was folgt, sondern worauf sich die
+Präposition bezieht: Steht die Sprache selbst hinter auf oder in, ist sie ein Substantiv und
+steht groß; bestimmt das Wort ein folgendes Adjektiv oder Partizip näher, ist es ein Adverb
+und bleibt klein („das Dokument ist deutsch verfasst“). Das Prüfmuster x32 trug dasselbe
+falsche Merkmal und ist mitgezogen.
+
+**Zum Prüflauf selbst — ein Fehler im Skript, den es festzuhalten lohnt.** Die
+Gegenprobe-Stufe hat nie gelaufen: Ich hatte `parallel([agent(...), agent(...)])`
+geschrieben, also fertige Promises übergeben statt Funktionen. Der Lauf meldete das erst am
+Ende, nach 43 Minuten — acht Berichte mit 21 Funden, null Urteile. Dass davon nichts
+ungeprüft in die App kam, lag nur daran, dass ich ohnehin **jeden Fund selbst nachmesse und
+jede Sprachaussage mit zwei verschieden formulierten Suchen belege**, bevor ich etwas
+ändere. Die Stufe läuft jetzt nach; die Berichte kommen aus dem Zwischenspeicher.
+
 **Zwei Präpositionen, bei denen die App Nils' eigene Form zur Ausnahme erklärt hat (15.09.2026, vierte Runde).**
 
 **`ab` steht nicht immer mit dem Dativ.** Die Regel führte es kommentarlos unter den
