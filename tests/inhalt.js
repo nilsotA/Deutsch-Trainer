@@ -357,6 +357,12 @@ const EINORDNUNG = [
      nur „regional“. Seit dem 14.09.2026 steht die Einordnung auch dort. */
   { was: "wo als Relativpronomen", muss: [/Süddeutschland/, /Westens/, /nicht/],
     stellen: [["Übung", "n35"], ["Prüfmuster", "y10"], ["Regel", "gram-relkasus"]] },
+  /* „anrufen“ mit Dativ: an sieben Stellen eingeordnet, nur in der Regel gram-akkverben
+     stand bis zum 15.09.2026 ein nacktes „(nicht: dir)“ in der Klasse .nope — also optisch
+     als klarer Fehler, während überall sonst die Landkarte steht. */
+  { was: "anrufen mit Dativ", muss: [/[Ss]üdwest/, /[Ss]chweiz/],
+    stellen: [["Regel", "gram-akkverben"], ["Übung", "n11"], ["Übung", "d03"], ["Übung", "d28"],
+              ["Fallkarte", "anrufen"], ["Prüfmuster", "x20"]] },
   { was: "Sinn machen", muss: [/umgangssprachlich/, /umstritten/],
     stellen: [["Übung", "s08"], ["Prüfmuster", "s06"], ["Fehlersuche", "macht"],
               ["Regel", "stil-anglizismus"]] },

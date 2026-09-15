@@ -58,6 +58,48 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Sechs Regeln, die eine Ausnahme verschwiegen — und eine Erklärung, die seitenverkehrt war (15.09.2026, dritte Runde).**
+
+Weiter aus dem Prüflauf über die unbelegten Regeln, jeder Fund von mir nachgemessen und
+jede Sprachaussage mit zwei verschieden formulierten Suchen belegt.
+
+**Die Erklärung von z07 beschrieb die Umstellung verkehrt herum.** Die Aufgabe stellt „Ich
+gebe dem Trainer den Ball“ gegen „Ich gebe den Ball dem Trainer“, und die Erklärung sagte:
+die andere Reihenfolge „rückt den Ball nach hinten“. Dort steht der Ball aber **vorn**, nach
+hinten rückt der Trainer. Wer die Erklärung las, merkte sich das Gegenteil dessen, was auf
+dem Bildschirm stand. Kein Quellenfall — nur genau hinsehen.
+
+**`satz-nebensatz` sagte zweimal „immer“, wo die App selbst die Ausnahme kennt.** Erstens:
+„Nach einer unterordnenden Konjunktion steht das gebeugte Verb ganz am Schluss“ — beim
+doppelten Infinitiv rückt es davor („…, weil ich nicht **habe** kommen können“), und genau
+das steht seit jeher in `satz-modal`. Zweitens: „Steht der Nebensatz am Anfang, füllt er
+Position 1 komplett aus. Direkt danach folgt das Verb.“ Das gilt nicht, wenn ein Korrelat
+dazwischensteht: „Wenn du Zeit hast, **dann** ruf mich an“ — dann besetzt „dann“ Position 1.
+Beide Ausnahmen stehen jetzt dabei.
+
+**`satz-klammer` ließ Test und Liste im selben Absatz auseinanderlaufen.** Der Betonungstest
+(„Liegt die Betonung auf der Vorsilbe, ist sie trennbar“) galt dort ohne Einschränkung —
+zwei Zeilen darunter steht `miss-` unter „Nie trennbar“. Beides stimmt für sich, zusammen
+nicht: „missverstehen“ trägt den Ton auf **miss** und bleibt ungetrennt. Der Duden führt das
+Verb als unregelmäßig; nur das „zu“ rutscht hinein („misszuverstehen“). Der Test gilt jetzt
+ausdrücklich für die Wechselvorsilben durch-, über-, um-, unter-, wider- — genau die, die
+die Beispiele zeigen.
+
+**`gram-plural` behandelte gleiche Fälle ungleich.** Bei „Schema“ standen alle drei
+zugelassenen Formen da, bei „Lexikon“ nur eine — der Duden führt „Lexika, Lexiken“. Ebenso
+bei „Level“: Duden schreibt „die Level[s]“, also beides. Beide Varianten stehen jetzt dabei,
+die gebräuchlichere zuerst, wie es Grundsatz 1 verlangt.
+
+**`gram-kongruenz` behauptete eine Rangfolge.** „Mehrdeutige Bezüge sind der häufigste
+Verständlichkeitsfehler in Hausarbeiten“ — dafür gibt es keine Quelle, und der Rat wird
+nicht schlechter ohne sie. Jetzt steht dort, was der Leser davon hat: Ein mehrdeutiger Bezug
+zwingt zum Zurücklesen und fällt beim eigenen Text kaum auf.
+
+**`gram-akkverben` stempelte „Ich rufe dir an“ ab.** In der Regel stand ein nacktes
+„(nicht: dir)“ in der Klasse `.nope`, also in Fehlerrot — während dieselbe Form an sechs
+anderen Stellen sauber eingeordnet ist („südwestdeutsch und schweizerisch verbreitet“). Die
+Regel sagt es jetzt auch, und `tests/inhalt.js` bewacht alle sieben Stellen.
+
 **Drei Regeln, die etwas Richtiges zu schmal gesagt haben (15.09.2026, zweite Runde).**
 
 Ein Prüflauf über die 40 Regeln, die bisher keinen Quellenbezug tragen, läuft noch. Diese
