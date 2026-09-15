@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 101 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~717 KB, eine Datei, kein Build |
+| Dateigröße | ~738 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,33 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Der Spickzettel, Zelle für Zelle (15.09.2026, elfte Runde).**
+
+CLAUDE.md, Abschnitt 7, Schritt 4 sagt: „Spickzettel prüfen: Er wiederholt Teile des
+Bestands teils handgeschrieben.“ Genau das war nie systematisch geschehen. Alle zwölf
+Abschnitte sind jetzt Zeile für Zeile gegen die Regel gelesen worden, aus der sie stammen.
+
+- **wider / wieder.** Der Spickzettel führte „widerspiegeln“ als Beispiel für „wider =
+  gegen“ — die Regel `recht-wider` führt es seit Langem als eine der drei Ausnahmen, in
+  denen „wider“ nicht „gegen“, sondern „zurück“ heißt (widerspiegeln, Widerhall,
+  Widerschein). Dieselbe falsche Zuordnung stand in der Erklärung des Prüfmusters **x15**.
+  Beide sagen jetzt, was die Regel sagt; die Übung r17 war schon richtig.
+- **ss / ß.** Der Spickzettel gab nur die Vokallänge an und führte ausgerechnet „dass“ als
+  Beispiel — also genau das Wort, dessen Partner „das“ die Ausnahme ist. Die Regel
+  `recht-sz` hängt die Entscheidung an drei Bedingungen: scharfes s, Vokallänge, und eine
+  Handvoll kurzer Wörter mit einfachem s. Alle drei stehen jetzt auch im Spickzettel.
+- **Apostroph vor -sch.** Nur „Newton'sche Gesetze“ stand da; die Regel nennt „newtonsche“
+  ausdrücklich als ebenso richtig. Grundsatz 1: Varianten kennzeichnen.
+- **Die Präpositionslisten.** Der Spickzettel zählt sie auf; die Regeln führen drei davon
+  ausdrücklich als Sonderfälle (`bis` mit Artikel, `entlang` vorangestellt, `ab` ohne
+  Artikel). Wer die Liste liest und den Vorbehalt nicht, schreibt „entlang den Fluss“.
+  Die drei stehen jetzt als zweite Fußnote unter Abschnitt 2.
+
+Die Prüfung dazu ist `tests/inhalt.js`, Abschnitt K. Sie hält je Spickzettelzeile fest, was
+dort stehen muss und was dort nicht mehr stehen darf, plus die drei Sonderfälle als
+Abschnittsprobe. Gegen den Stand vor dieser Runde schlägt sie an beiden Stellen an —
+gegengeprüft, nicht angenommen.
 
 **Wenn die Stufe etwas anderes sagt als die Regel dahinter (15.09.2026, zehnte Runde).**
 

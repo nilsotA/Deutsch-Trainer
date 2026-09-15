@@ -7963,7 +7963,7 @@ const CHECKS = [
 {id:"x13",sev:"hart",re:/\bIntresse/gi,t:"Interesse",k:"<b>Interesse</b> — das e in der Mitte gehört hin.",r:"recht-klassiker"},
 {id:"x14",sev:"hart",re:/\bvorraus\b/gi,t:"Voraus",k:"<b>voraus</b> mit einem r; in „im Voraus“ zusätzlich groß.",r:"gross-subst"},
 {id:"x15",sev:"hart",re:/\bwieder(spr[iaeäöüu]ch|sprech|sproch|leg(en|t|te|ung)|spiegel|st[aä]nd|steh|ruf|rechtlich|wärtig|sinnig|sacher|hall)/gi,t:"wider statt wieder",
- k:"<b>wider</b> = gegen: widersprechen, widerlegen, widerspiegeln. <b>wieder</b> = erneut.",r:"recht-wider"},
+ k:"<b>wider</b> = gegen: widersprechen, widerlegen. In <b>widerspiegeln</b> heißt „wider“ nicht „gegen“, sondern „zurück“ — geschrieben trotzdem ohne e. <b>wieder</b> = erneut.",r:"recht-wider"},
 {id:"x16",sev:"hart",re:/\b[Ww]ieder\s+Erwarten\b/g,t:"wider Erwarten",k:"<b>wider Erwarten</b> = entgegen der Erwartung. Das Verb bleibt klein und mit ie: „Wir dürfen die Klasse wieder erwarten.“",r:"recht-wider"},
 {id:"x17",sev:"pruef",re:/(?<!\b(?:ihr|beide|alle|wir)\s)\bseid\s+(dem|der|einem|einer|zwei|drei|vier|fünf|vielen|langem|kurzem|Anfang|Beginn|Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag|Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/gi,
  t:"seit oder seid?",k:"Zeitangabe? Dann <b>seit</b> (Zei<b>t</b> → sei<b>t</b>): „seit dem letzten Spiel“. Form von „sein“? Dann bleibt <b>seid</b>: „Ihr seid dem Gegner überlegen“, „Seid Montag pünktlich da“.",r:"recht-seit"},
@@ -8584,7 +8584,8 @@ function cheatHTML(){
   '<tr><th>Wechsel</th><td>'+esc(wechsel)+' — <b>wohin?</b> Akkusativ · <b>wo?</b> Dativ</td></tr>'+
   '</tbody></table>'+
   '<p class="ch-n"><b>Verbtest bei Wechselpräpositionen:</b> legen, stellen, setzen, hängen → Akkusativ · '+
-  'liegen, stehen, sitzen, hängen → Dativ. <b>Themen</b> immer Akkusativ, <b>Zeitangaben</b> meist Dativ — für einen Zeitraum aber Akkusativ: über das Wochenende.</p></section>'+
+  'liegen, stehen, sitzen, hängen → Dativ. <b>Themen</b> immer Akkusativ, <b>Zeitangaben</b> meist Dativ — für einen Zeitraum aber Akkusativ: über das Wochenende.</p>'+
+  '<p class="ch-n"><b>Drei aus den Listen fallen aus der Reihe:</b> <i>bis</i> steht meist ohne Artikel („bis Montag“); kommt einer dazu, regiert die zweite Präposition („bis zum Montag“, Dativ). <i>entlang</i> nachgestellt mit Akkusativ („den Fluss entlang“), vorangestellt beim Duden mit Genitiv („entlang des Flusses“). <i>ab</i> schwankt ohne Artikel: „ab nächstem Montag“ (Dativ, vom Duden empfohlen) und „ab nächsten Montag“ (Akkusativ) sind beide richtig, mit Artikel bleibt der Dativ.</p></section>'+
 
   '<section class="ch-sec"><h2>3 · Verben — Dativ oder Akkusativ</h2>'+
   '<div class="ch-2col">'+
@@ -8621,9 +8622,9 @@ function cheatHTML(){
   '<table class="ch-t"><tbody>'+
   '<tr><th>das / dass</th><td>Ersatzprobe: Passt <i>dieses, jenes, welches</i>? → <b>das</b>. Sonst <b>dass</b>.</td></tr>'+
   '<tr><th>seit / seid</th><td>Zei<b>t</b> → sei<b>t</b>. „ihr seid“ ist die Verbform.</td></tr>'+
-  '<tr><th>wider / wieder</th><td><b>wider</b> = gegen (widersprechen, widerlegen, widerspiegeln) · <b>wieder</b> = erneut.</td></tr>'+
-  '<tr><th>ss / ß</th><td>Kurzer Vokal → ss (Fluss, muss, dass) · langer Vokal oder Diphthong → ß (Maß, Straße, außer, heiß).</td></tr>'+
-  '<tr><th>Apostroph</th><td>Genitiv-s ohne Apostroph: Peters Auto. Apostroph bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce): Andreas’ Buch, Alice’ Idee — und bei Auslassungen freigestellt: geht’s oder gehts. Nie im Plural: Fotos, DVDs. Zulässig in Ladennamen (Andrea’s Blumenladen) und vor -sch (Newton’sche Gesetze).</td></tr>'+
+  '<tr><th>wider / wieder</th><td><b>wider</b> = gegen (widersprechen, widerlegen, widerstehen) · <b>wieder</b> = erneut. Drei Ausnahmen ohne e, in denen „wider“ <i>zurück</i> heißt: widerspiegeln, Widerhall, Widerschein.</td></tr>'+
+  '<tr><th>ss / ß</th><td>Gilt nur für das <b>scharfe</b> s: kurzer Vokal → ss (Fluss, muss, dass) · langer Vokal oder Diphthong → ß (Maß, Straße, außer, heiß). Weiches s bleibt einfach (reisen gegen reißen), und ein paar kurze Wörter haben trotz kurzem Vokal nur eins: das, was, bis, des, Bus.</td></tr>'+
+  '<tr><th>Apostroph</th><td>Genitiv-s ohne Apostroph: Peters Auto. Apostroph bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce): Andreas’ Buch, Alice’ Idee — und bei Auslassungen freigestellt: geht’s oder gehts. Nie im Plural: Fotos, DVDs. Zulässig in Ladennamen (Andrea’s Blumenladen) und vor -sch (Newton’sche Gesetze — ebenso richtig: newtonsche).</td></tr>'+
   '<tr><th>als / wie</th><td>ungleich → <b>als</b> („größer als“) · gleich → <b>wie</b> („so groß wie“).</td></tr>'+
   '<tr><th>scheinbar / anscheinend</th><td><b>scheinbar</b> = in Wirklichkeit nicht · <b>anscheinend</b> = wahrscheinlich.</td></tr>'+
   '</tbody></table></section>'+

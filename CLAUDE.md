@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~717 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~738 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
@@ -321,6 +321,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Beide Themes gleich gemessen | Ein Kontrastprüfer schnitt den hellen Themenblock bei `:root[data-theme="dark"]` ab — im CSS steht aber `[data-theme="dark"]` ohne `:root`. Der Schnitt lief ins Leere, die dunklen Tokens überschrieben die hellen, und die Prüfung meldete null Fehler, obwohl elf Paare zu blass waren. Wer Themes vergleicht, muss **hart abbrechen**, wenn er beide Blöcke nicht findet. |
 | `\b` in JavaScript | Kennt nur `[A-Za-z0-9_]`. Vor „überlegen“ liegt zwischen ü und b eine Wortgrenze — ein Prüfmuster traf erst ab dem b, der Textcheck unterstrich „berlegen ob“. `analyse()` dehnt Treffer jetzt auf ganze Wörter; für die Musterlogik selbst `(?<![\wäöüßÄÖÜ])` statt `\b` schreiben. |
 | Markierung beim Strippen verloren | In den Regelkörpern trägt die Bedeutung nicht der Text, sondern die Klasse: `<span class="nope">,</span>` zeigt ein Komma, das gerade **nicht** stehen soll. Wer solchen Text durch `strip()` schickt, macht aus der Falschform eine Empfehlung — „die neue, rote Trainingsjacke“ liest sich dann wie ein Vorbild. Genau so habe ich beim Durchsehen einen Widerspruch gemeldet, den es nicht gab. Die App ist sauber (Regelkörper werden als HTML gerendert, der Suchindex strippt nur fürs Treffen und zeigt nichts davon); `tests/suite.js` hält die Bedingung, die das sichert: kein vorgelesenes Feld mit einer solchen Klasse. |
+| Spickzettel hinkt der Regel hinterher | Der Spickzettel schreibt Regeln handgeschrieben nach. Die Regel `recht-wider` führt „widerspiegeln“ seit Langem als eine der drei Ausnahmen, in denen „wider“ nicht „gegen“, sondern „zurück“ heißt — im Spickzettel und in der Erklärung des Prüfmusters x15 stand es weiter als Beispiel für „wider = gegen“. Wer eine Regel korrigiert, muss die Kurzfassungen mitziehen; `tests/inhalt.js`, Abschnitt K hält die geprüften Zeilen fest. |
 | Dieselbe Grenze, andersherum | Weil ä, ö, ü und ß keine Wortzeichen sind, endet „Brüder“ für JavaScript auf einer Wortgrenze plus „der“. Ein mit `\b` verankertes Muster springt dort **mitten im Wort** an: y05 hielt „Alle Brüder gleiche Chancen“ für einen Zweifelsfall, x23 meldete „Grüße aus dem Süden Herr Meier war auch da“ als harten Fehler. Das Dehnen auf ganze Wörter macht es schlimmer, nicht besser — angestrichen wird „Süden Herr“. `tests/suite.js` sucht die Paarung jetzt selbst: verankerte ASCII-Alternative gegen jedes Wort mit Umlaut aus dem eigenen Bestand. |
 
 ## 7 · Wenn Nils etwas ergänzt haben will

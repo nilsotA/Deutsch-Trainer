@@ -437,4 +437,67 @@ P.ok("Amtsdeutsch ist als Amtsdeutsch gekennzeichnet", !registerSchief.length, r
 P.ok("Die Registerprüfung erkennt eine fehlende Kennzeichnung",
   !REGISTER[0].muss.test("zwecks besserer Planung — Genitiv."), "Positivprobe blieb stumm");
 
+P.titel("K · Der Spickzettel gegen die Regel dahinter");
+/* Der Spickzettel wiederholt Teile des Bestands handgeschrieben (CLAUDE.md, Abschnitt 7).
+   Wird eine Regel korrigiert, bleibt die Kurzfassung stehen — niemand liest sie mit.
+   Genau so stand am 15.09.2026 im Spickzettel „wider = gegen (widersprechen, widerlegen,
+   widerspiegeln)“, während die Regel recht-wider widerspiegeln seit Langem ausdrücklich
+   als eine der drei Ausnahmen führt, in denen „wider“ nicht „gegen“, sondern „zurück“
+   heißt. Dieselbe Behauptung stand auch in der Erklärung des Prüfmusters x15.
+   Die Tabelle hält je Spickzettelzeile fest, was dort stehen muss und was dort nicht
+   stehen darf. `regel` ist nur die Fundstelle für den, der prüfen will. */
+const cheatDom = w.document.createElement("div");
+cheatDom.innerHTML = w.eval("cheatHTML()");
+const spickZeile = (kopf) => {
+  const tr = [...cheatDom.querySelectorAll("tr")]
+    .find(x => x.children[0] && x.children[0].textContent.trim() === kopf);
+  if (!tr) return null;
+  return [...tr.children].slice(1).map(x => x.textContent).join(" ");
+};
+const spickAbschnitt = (nr) => {
+  const sec = [...cheatDom.querySelectorAll("section.ch-sec")]
+    .find(x => x.querySelector("h2").textContent.trim().startsWith(nr + " ·"));
+  return sec ? sec.textContent : null;
+};
+const SPICK = [
+  { zeile: "wider / wieder", regel: "recht-wider",
+    muss: [/widerspiegeln/, /zurück/],
+    darfNicht: [/gegen \(widersprechen, widerlegen, widerspiegeln/] },
+  /* Die Regel recht-sz hängt die ss/ß-Entscheidung an drei Bedingungen: scharfes s,
+     Vokallänge — und eine Handvoll kurzer Wörter mit einfachem s. Der Spickzettel gab
+     bis zum 15.09.2026 nur die Vokallänge an und führte ausgerechnet „dass“ als Beispiel,
+     also genau das Wort, dessen Partner „das“ die Ausnahme ist. */
+  { zeile: "ss / ß", regel: "recht-sz",
+    muss: [/scharfe/, /[Ww]eich/, /\bbis\b/], darfNicht: [] },
+  /* Grundsatz 1: Wo mehrere Formen zulässig sind, steht das da. Die Regel z-schraeg nennt
+     „die newtonschen Gesetze“ ausdrücklich als ebenso richtig; der Spickzettel nannte
+     nur die Form mit Apostroph. */
+  { zeile: "Apostroph", regel: "z-schraeg",
+    muss: [/newtonsche/], darfNicht: [] },
+];
+const spickSchief = [];
+SPICK.forEach(e => {
+  const t = spickZeile(e.zeile);
+  if (t === null) { spickSchief.push("Zeile fehlt: " + e.zeile); return; }
+  e.muss.filter(re => !re.test(t)).forEach(re => spickSchief.push(e.zeile + ": fehlt " + re));
+  e.darfNicht.filter(re => re.test(t)).forEach(re => spickSchief.push(e.zeile + ": steht noch " + re));
+});
+P.ok("Der Spickzettel sagt dasselbe wie die Regel dahinter", !spickSchief.length, spickSchief.join(" · "));
+/* Positivprobe: an der alten Fassung muss die Prüfung anschlagen. */
+const alteWiderZeile = "wider = gegen (widersprechen, widerlegen, widerspiegeln) · wieder = erneut.";
+P.ok("Die Spickzettelprüfung erkennt die alte Fassung",
+  SPICK[0].darfNicht.some(re => re.test(alteWiderZeile)) && !/zurück/.test(alteWiderZeile),
+  "Positivprobe blieb stumm");
+
+/* Zweite Achse: Der Spickzettel zählt Präpositionen listenweise auf. Drei davon führt die
+   Regel gram-praepakk beziehungsweise gram-praepdat ausdrücklich als Sonderfälle — wer
+   sie in der Liste liest und den Vorbehalt nicht, schreibt „entlang den Fluss“. */
+const praepAbschnitt = spickAbschnitt("2") || "";
+const praepFehlt = [[/entlang des Flusses/, "entlang vorangestellt mit Genitiv"],
+                    [/bis zum Montag/, "bis mit Artikel"],
+                    [/ab nächsten Montag/, "ab ohne Artikel mit Akkusativ"]]
+  .filter(([re]) => !re.test(praepAbschnitt)).map(([, was]) => was);
+P.ok("Die Sonderfälle der Präpositionslisten stehen im Spickzettel dabei",
+  praepAbschnitt && !praepFehlt.length, praepFehlt.join(", "));
+
 P.abschluss();
