@@ -58,6 +58,53 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die 20 unbelegten Grammatik- und Satzregeln (16.09.2026, vierzehnte Runde).**
+
+Punkt 1 der Ideenliste, der große Rest: 20 der 35 `gram-` und `satz-`Regeln nannten keine
+Quelle. Zehn Prüfer haben je zwei davon Satz für Satz gegen Duden, grammis (IDS) und die
+Gesellschaft für deutsche Sprache gelesen, jede Meldung danach von einem Gegenprüfer
+angegriffen, dessen Auftrag war, sie zu **widerlegen**. Von zwölf Meldungen hielten vier.
+Jede habe ich anschließend selbst mit zwei eigenen Suchen nachgeprüft, bevor etwas in die
+Datei ging — bei einer zu Recht, dazu unten.
+
+Drei der vier gehören zu **einer** Fehlerklasse: Die Regel zählt ihre Ausnahmen, und zählt
+zu wenige.
+
+- **sa02** sagte „mit einer Ausnahme" (doppelter Infinitiv). Beim irrealen Vergleich mit
+  bloßem „als" steht das gebeugte Verb aber direkt hinter der Konjunktion, nicht am Ende:
+  „Er tut, als wäre er der Trainer." Mit „als ob" bleibt es hinten. Beides ist richtig, der
+  Konjunktiv bei bloßem „als" ist Pflicht. Das zeitliche und das vergleichende „als" in der
+  Wortliste bleiben unberührt — der Gegenprüfer hat den Vorschlag des Melders an genau
+  diesem Punkt zerlegt, und er hatte recht.
+- **sa04** sagte „Eine Ausnahme, und nur diese" (Korrelat dann/so) und übersah `je … desto`,
+  wo „desto" und der Komparativ die Position 1 füllen. Die App widersprach sich hier selbst:
+  Genau dieser Satz steht als Übung k08 in der Datei.
+- **sa13** sagte, das Kasussignal müsse „genau einmal" vorkommen. Bei mehreren Adjektiven
+  ohne Artikel steht es zweimal: „bei gutem, warmem Wetter."
+- **gram-kongruenz** kannte als Abweichung nur die Mengenangaben. Steht der
+  Gleichsetzungsnominativ im Plural, folgt das Verb meist ihm, nicht dem Subjektkern:
+  „Das Problem waren die fehlenden Bälle."
+
+**Wo der Prüfagent danebenlag.** Er schlug für sa13 vor, die gleiche Endung sei „die
+empfohlene Form". Meine dritte Suche zeigte etwas anderes: Der Duden hat seine frühere
+Empfehlung zurückgenommen, die GfdS nennt beide Formen richtig und gibt ein inhaltliches
+Kriterium — wechselnde Beugung, wenn das zweite Adjektiv mit dem Substantiv eine Einheit
+bildet; gleiche Endung bei gleichrangigen Adjektiven. Genau so steht es jetzt da, ohne
+Empfehlung. Die acht gefallenen Meldungen fielen meist am selben Grund wie im letzten
+Durchgang: Die vermisste Einschränkung stand schon woanders im Bestand.
+
+**Zwei Funde daneben, aus dem eigenen Lesen.** Die Karte sa18 schloss mit „Die Liste unten
+rechts ist kurz. Wer diese sieben Dinge sichert …" — „unten rechts" beschreibt den
+Spickzettel, nicht das Regelwerk, und „sieben" stimmte nur auf einer der beiden Seiten: Der
+Spickzettel führte acht Punkte, weil er „mit was" statt „womit" mitzählte. Die Regel führt
+es jetzt auch; der Positionsverweis und die Zahl sind weg.
+
+**Zwei neue Prüfungen.** `tests/suite.js` lässt keine gezählte Ausnahme mehr durch
+(„mit einer Ausnahme", „und nur diese", „genau einmal") — mit drei Positivproben, je eine
+pro alter Fassung, und einer Gegenprobe für das hinweisende „nur diese" in komma-adjektive.
+`tests/inhalt.js`, Abschnitt K prüft Spickzettel 8 und satz-sprechen gegen dieselben 15
+Stichwörter. Beide sind gegen den Stand davor rot.
+
 **„immer“ und „nie“ in den Grammatik- und Satzregeln (15.09.2026, dreizehnte Runde).**
 
 Grundsatz 5 nennt „immer“, „nie“, „ausschließlich“ als Warnsignale; geprüft war bisher nur
@@ -2068,10 +2115,12 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
    Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.
    Offen sind die 23 Grammatikregeln (`gram-*`), die 14 Satzbauregeln (`satz-*`), die
-   17 Stilregeln (`stil-*`) und die 26 Formulierungsregeln (`form-*`). Die Grundsatz-3-Frage
-   für diese beiden Gruppen — sind Empfehlungen als Empfehlungen gekennzeichnet? — ist am
-   15.09.2026 beantwortet und in `tests/suite.js` festgehalten; offen sind dort nur noch
-   die Belege. Vorgehen wie gehabt.
+   17 Stilregeln (`stil-*`) und die 26 Formulierungsregeln (`form-*`). **Die 20 unbelegten
+   `gram-` und `satz-`Regeln sind am 16.09.2026 durch** (siehe „Zuletzt geändert"); von den
+   35 nennen jetzt 19 eine Quelle, der Rest ist gelesen und hat nichts hergegeben. Die
+   Grundsatz-3-Frage für stil und form — sind Empfehlungen als Empfehlungen gekennzeichnet? —
+   ist am 15.09.2026 beantwortet und in `tests/suite.js` festgehalten; offen sind dort nur
+   noch die Belege. Vorgehen wie gehabt.
 
 2. **Aus der alten Liste: restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
    Doppelpunkt und Bis-Strich sind erledigt (siehe „Zuletzt geändert“). Offen:

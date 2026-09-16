@@ -390,6 +390,48 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   P.ok("Keine tote Ausnahme in der Absolutliste", !absTot.length, absTot.join(", "));
 }
 
+/* Dieselbe Falle, eine Stufe subtiler: Eine Regel zählt ihre Ausnahmen. „mit einer Ausnahme",
+   „und nur diese", „genau einmal" sind Absolutaussagen, die der Wortwächter oben nicht sieht,
+   weil sie ohne „immer" und „nie" auskommen. Und eine gezählte Ausnahme ist genau die Sorte
+   Behauptung, die beim naechsten Fund falsch wird.
+
+   Am 16.09.2026 kostete das drei Stellen:
+   - sa02 sagte „mit einer Ausnahme" (doppelter Infinitiv) und übersah den irrealen Vergleich
+     mit bloßem „als": „Er tut, als wäre er der Trainer" — das Verb steht dort direkt hinter
+     der Konjunktion, nicht am Ende.
+   - sa04 sagte „Eine Ausnahme, und nur diese" (Korrelat dann/so) und übersah „je … desto",
+     wo desto plus Komparativ die Position 1 füllen. Die App fuehrte genau diesen Satz in k08.
+   - sa13 sagte, das Kasussignal müsse „genau einmal" vorkommen. Bei mehreren Adjektiven ohne
+     Artikel steht es zweimal: „bei gutem, warmem Wetter".
+
+   Keine Ausnahmenliste hier: Wer künftig eine Ausnahme zaehlt, soll das begründen müssen —
+   und die einfachste Begründung ist, sie nicht zu zaehlen, sondern den Mechanismus zu nennen. */
+{
+  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine)/gi;
+  const ohneTags = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const zaehlStellen = new Set();
+  const zaehlSammle = (art, id, b) => {
+    if (GEZAEHLT.test(ohneTags(b))) zaehlStellen.add(art + " " + id);
+    GEZAEHLT.lastIndex = 0;
+  };
+  RA.forEach(r => zaehlSammle("Regel", r.id, r.b));
+  SATZ.forEach(x => zaehlSammle("Satzkarte", x.id, x.b));
+  P.ok("Keine Regel zählt ihre Ausnahmen", !zaehlStellen.size, [...zaehlStellen].join(" · "));
+  /* Drei Positivproben: die Fassungen vom 16.09.2026, jede einzeln. */
+  const zaehlProbe = (t) => { const r = GEZAEHLT.test(ohneTags(t)); GEZAEHLT.lastIndex = 0; return r; };
+  P.ok("Der Zähl-Erkenner schlägt bei allen drei alten Fassungen an",
+    zaehlProbe("<p>… steht das gebeugte Verb <b>ganz am Schluss</b> — mit einer Ausnahme: Beim doppelten Infinitiv …</p>") &&
+    zaehlProbe("<p><b>Eine Ausnahme, und nur diese:</b> Steht im Hauptsatz ein Korrelat …</p>") &&
+    zaehlProbe("<p>Das <b>Kasussignal</b> muss <b>genau einmal</b> im Ausdruck vorkommen …</p>"),
+    "Positivprobe blieb stumm");
+  /* Gegenprobe: ein hinweisendes „nur diese" ist keine gezählte Ausnahme. So steht es in
+     komma-adjektive („nur diese Auflage ist überarbeitet") — ohne diese Trennung wäre die
+     Prüfung dort grundlos rot. */
+  P.ok("… und schweigt beim hinweisenden „nur diese“",
+    !zaehlProbe("<p>„die 6., vollständig überarbeitete Auflage“ (nur diese Auflage ist überarbeitet; Duden)</p>"),
+    "Gegenprobe schlug an");
+}
+
 /* ---------- D · Textcheck ---------- */
 P.titel("D · Textcheck");
 const muster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,re:String(c.re),sev:c.sev,r:c.r||null}))");

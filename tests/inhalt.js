@@ -500,6 +500,61 @@ const praepFehlt = [[/entlang des Flusses/, "entlang vorangestellt mit Genitiv"]
 P.ok("Die Sonderfälle der Präpositionslisten stehen im Spickzettel dabei",
   praepAbschnitt && !praepFehlt.length, praepFehlt.join(", "));
 
+/* Dritte Achse: Abschnitt 8 des Spickzettels ist keine Kurzfassung, sondern eine zweite
+   Fassung derselben zwei Listen aus satz-sprechen (Karte sa18). Zwei Listen, die dasselbe
+   sagen sollen, laufen auseinander, ohne dass es jemand merkt — am 16.09.2026 führte der
+   Spickzettel „mit was“ statt „womit“ unter „Fällt auf“, die Regel nicht. Abgedeckt war es
+   sonst überall: Übung d27 und Prüfmuster a08 sagen beide, es sei gesprochen geläufig.
+   Geprüft werden Stichwörter, nicht Wortlaute — der Spickzettel darf kürzen. */
+const sprechRegel = RULES_ALL.find(r => r.id === "satz-sprechen");
+const sprechDom = w.document.createElement("div");
+sprechDom.innerHTML = sprechRegel ? sprechRegel.b : "";
+const sprechListen = [...sprechDom.querySelectorAll("ul")]
+  .map(ul => [...ul.querySelectorAll("li")].map(li => li.textContent).join(" · "));
+const spickSpalten = (() => {
+  const sec = [...cheatDom.querySelectorAll("section.ch-sec")]
+    .find(x => x.querySelector("h2").textContent.trim().startsWith("8 ·"));
+  if (!sec) return null;
+  return [...sec.querySelectorAll(".ch-2col > div")]
+    .map(d => [...d.querySelectorAll("li")].map(li => li.textContent).join(" · "));
+})();
+/* Stichwörter je Spalte, in der Reihenfolge der Listen: erst unauffällig, dann fällt auf. */
+const SPRECH_STICH = [
+  ["wegen dem Wetter", "Perfekt", "weil", "hab", "gestanden", "brauchen", "gehabt"],
+  ["rufe dir an", "größer wie", "mit was", "Kollege", "würde", "Relativpronomen", "Satzabbruch", "Satzklammer"],
+];
+const sprechSchief = [];
+if (!spickSpalten || spickSpalten.length !== 2 || sprechListen.length !== 2) {
+  sprechSchief.push("Listen nicht gefunden: Regel " + sprechListen.length + ", Spickzettel " +
+    (spickSpalten ? spickSpalten.length : 0));
+} else {
+  SPRECH_STICH.forEach((stich, i) => stich.forEach(x => {
+    if (!sprechListen[i].includes(x)) sprechSchief.push("Regel, Liste " + (i + 1) + ": „" + x + "“ fehlt");
+    if (!spickSpalten[i].includes(x)) sprechSchief.push("Spickzettel, Spalte " + (i + 1) + ": „" + x + "“ fehlt");
+  }));
+}
+P.ok("Spickzettel 8 und satz-sprechen führen dieselben Punkte (" +
+  SPRECH_STICH.flat().length + " Stichwörter)", !sprechSchief.length, sprechSchief.join(" · "));
+/* Positivprobe: derselbe Vergleich gegen die Fassung vom 16.09.2026, in der „mit was“ nur
+   im Spickzettel stand. Sie muss genau eine Lücke melden — auf der Regelseite. */
+const probeVergleich = (regelListe, spickSpalte, stich) => {
+  const fehlt = [];
+  stich.forEach(x => {
+    if (!regelListe.includes(x)) fehlt.push("Regel: " + x);
+    if (!spickSpalte.includes(x)) fehlt.push("Spickzettel: " + x);
+  });
+  return fehlt;
+};
+const alteRegelListe = "„Ich rufe dir an“ statt „dich“ · „größer wie“ statt „größer als“ · " +
+  "Fehlende n-Deklination: „mit dem Kollege“ · Doppeltes „würde“ · Falsches Relativpronomen · " +
+  "Satzabbruch mitten im Gedanken · Verlorene Satzklammer bei langen Sätzen";
+const alteSpickSpalte = "„Ich rufe dir an“ statt dich · „größer wie“ statt als · „mit was“ statt womit · " +
+  "„mit dem Kollege“ — n-Deklination · doppeltes „würde“ · falsches Relativpronomen · " +
+  "Satzabbruch mitten im Gedanken · verlorene Satzklammer bei langen Sätzen";
+const probeFehlt = probeVergleich(alteRegelListe, alteSpickSpalte, SPRECH_STICH[1]);
+P.ok("Die Listenprüfung erkennt einen Punkt, der nur auf einer Seite steht",
+  probeFehlt.length === 1 && probeFehlt[0] === "Regel: mit was", probeFehlt.join(", ") || "blieb stumm");
+
 P.titel("L · Kein Ablenker, den die App selbst erlaubt");
 /* Grundsatz 2 ist der teuerste des Projekts: Kein Ablenker darf richtig sein. Eine Sorte
    davon lässt sich maschinell suchen — die, bei der die App sich selbst widerspricht.
