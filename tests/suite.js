@@ -157,6 +157,62 @@ KORREKTUR.forEach(t => t.errs.forEach(e => {
 P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   markSchief.slice(0, 5).join(" · "));
 
+/* Grundsatz 4, auf die Fehlersuche angewandt: Derselbe Fehler muss überall gleich
+   eingeordnet sein. „vorraus“ → „Voraus“ ist in zwei Texten markiert; kt01 und das
+   Prüfmuster x14 schickten Nils nach gross-subst, kt03 nach form-danken — einer Regel
+   übers Danken, die zur Schreibung nichts sagt. Im Fehlerjournal sortierte sich derselbe
+   Rechtschreibfehler damit einmal unter Großschreibung und einmal unter Wirkung und Ton. */
+{
+  const wortKern = x => String(x).toLowerCase().replace(/[^a-zäöüß]/g, "");
+  const gleiche = {};
+  KORREKTUR.forEach(t => t.errs.forEach(e => {
+    const schl = wortKern(e.w) + "→" + wortKern(e.ok);
+    (gleiche[schl] = gleiche[schl] || []).push({ id: t.id, r: e.r, c: e.c, w: e.w, ok: e.ok });
+  }));
+  const uneins = Object.values(gleiche).filter(v => v.length > 1 &&
+    new Set(v.map(x => x.r + "/" + x.c)).size > 1);
+  P.ok("Derselbe Fehler ist in jedem Fehlersuchtext gleich eingeordnet",
+    !uneins.length,
+    uneins.map(v => "„" + v[0].w + "“: " + v.map(x => x.id + "→" + x.r + "/" + x.c).join(" gegen ")).join(" · "));
+  /* Positivprobe an der Fassung vom 21.09.2026. */
+  const probePaar = [{ id: "kt01", r: "gross-subst", c: "gross" }, { id: "kt03", r: "form-danken", c: "form" }];
+  P.ok("Die Einordnungsprüfung erkennt zwei verschiedene Zuordnungen",
+    new Set(probePaar.map(x => x.r + "/" + x.c)).size === 2, "Positivprobe blieb stumm");
+
+  /* Die Fehlersuche zeigt jede Markierung als „falsch → richtig“ (siehe die Zeile mit
+     kerr-h). Rechts vom Pfeil muss also die richtige Form stehen — nicht noch einmal die
+     falsche. kt02 zeigte „selben → selben Verein (zusammen: demselben)“: Die richtige Form
+     stand nur in der Klammer, links und rechts dasselbe falsche Wort.
+
+     Ausgenommen sind stil, form und satz: Dort ist das ok-Feld von Haus aus ein Hinweis
+     oder eine ganze Umschreibung („(streichen)“, „an der Veranstaltung teilnehmen“), in
+     der das beanstandete Wort zwangsläufig wieder vorkommt. Ebenso ausgenommen ist die
+     reine Kommaergänzung („fragen“ → „fragen,“) — die ist eindeutig. */
+  const roh = x => String(x).replace(/^[^\wÄÖÜäöüß]+|[^\wÄÖÜäöüß]+$/g, "");
+  const alsWort = (t, x) =>
+    new RegExp("(?<![\\wäöüßÄÖÜ])" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![\\wäöüßÄÖÜ])").test(t);
+  const spiegelt = (e) => {
+    if (["stil", "form", "satz"].includes(e.c)) return false;
+    const wk = roh(e.w), ok = String(e.ok);
+    if (!wk) return false;
+    if (ok === e.w + "," || ok === wk + "," || ok === wk) return false;
+    return alsWort(ok, wk);
+  };
+  const gespiegelt = [];
+  KORREKTUR.forEach(t => t.errs.forEach(e => {
+    if (spiegelt(e)) gespiegelt.push(t.id + ": „" + e.w + "“ → „" + e.ok + "“");
+  }));
+  P.ok("Rechts vom Pfeil steht die richtige Form, nicht noch einmal die falsche",
+    !gespiegelt.length, gespiegelt.join(" · "));
+  P.ok("Der Spiegel-Erkenner schlägt bei der alten Fassung von kt02 an",
+    spiegelt({ c: "gram", w: "selben", ok: "selben Verein (zusammen: demselben)" }),
+    "Positivprobe blieb stumm");
+  P.ok("… und schweigt bei einer Kommaergänzung und bei einer Umschreibung",
+    !spiegelt({ c: "komma", w: "fragen", ok: "fragen," }) &&
+    !spiegelt({ c: "satz", w: "teilnehmen", ok: "an der Veranstaltung teilnehmen" }),
+    "Gegenprobe schlug an");
+}
+
 /* ---------- B · Formulierung der Aufgaben ---------- */
 P.titel("B · Formulierung");
 const POS = /\b(Fassung [ABC]\b|Option [ABC]\b|die (erste|zweite|dritte) (Fassung|Variante|Version|Option|Antwort))/i;

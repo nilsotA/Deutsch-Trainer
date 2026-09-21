@@ -58,6 +58,46 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Fehlersuche, Markierung für Markierung (21.09.2026, sechzehnte Runde).**
+
+Die zwölf Fehlersuchtexte mit ihren 86 Markierungen waren strukturell gut abgesichert —
+auffindbar, nicht doppelt, Verweis in eine Regel der passenden Kategorie —, aber nie
+daraufhin gelesen, ob das, was rechts vom Pfeil steht, auch stimmt. Der Einstieg war eine
+Messung: alle Korrekturen anwenden und den fertigen Text durch den Textcheck schicken.
+Zwei Stellen blieben hängen, und beide waren echt.
+
+- **Derselbe Fehler, zwei Schubladen.** „vorraus“ → „Voraus“ ist in zwei Texten markiert.
+  kt01 ordnet es als Rechtschreibfehler ein und verweist auf `gross-subst` — genau wie das
+  Prüfmuster x14. kt03 ordnete es als `form` ein und verwies auf `form-danken`, eine Regel
+  übers Danken, die zur Schreibung nichts sagt. Nils wäre also beim Antippen in einem Text
+  über Höflichkeit gelandet, und im Fehlerjournal hätte sich derselbe Fehler einmal unter
+  Großschreibung und einmal unter „Wirkung und Ton“ einsortiert. Jetzt beide gleich.
+  Nebenbei: `gross-subst` führte „im Voraus“ nur in der Liste der großgeschriebenen
+  Wendungen, ohne ein Wort zum einfachen r — obwohl drei Stellen der App für genau diesen
+  Fehler dorthin verweisen. Das steht jetzt dabei.
+- **Rechts vom Pfeil stand die Falschform.** kt02 zeigte „selben → selben Verein
+  (zusammen: demselben)“. Die Anzeige heißt „falsch → richtig“; rechts stand aber dasselbe
+  falsche Wort, und die richtige Form nur in der Klammer. Der Fehler geht über zwei Wörter
+  („aus dem selben“), die Markierung kann nur eines tragen — deshalb jetzt
+  „demselben (zusammengeschrieben, das „dem“ davor entfällt)“. Die Regel `gram-derselbe`
+  führt genau diesen Satz als Beispiel: „Wir kommen aus demselben Verein.“
+
+**Zwei Prüfungen**, beide in `tests/suite.js` bei den Markierungsprüfungen: Ein mehrfach
+markierter Fehler muss überall dieselbe Regel und Kategorie tragen; und rechts vom Pfeil
+darf die Falschform nicht wiederkehren — ausgenommen `stil`, `form` und `satz`, wo das
+ok-Feld von Haus aus ein Hinweis oder eine ganze Umschreibung ist, und ausgenommen die
+reine Kommaergänzung („fragen“ → „fragen,“). Gegen den Stand davor sind beide rot, mit
+genau diesen zwei Funden.
+
+**Punkt 2 der Ideenliste ist damit zu.** Alle 17 Komma- und Zeichenregeln nennen eine
+Quelle; die letzte ohne war `komma-aufzaehlung`. Beim Belegen kam eine Gegenausnahme
+dazu, die dort fehlte: Steht die Paarformel selbst **in** einem Nebensatz, ist sie wieder
+eine gewöhnliche Aufzählung ohne Komma — „Er weiß, dass er sowohl im Verein trainieren als
+auch an der Uni Sport machen darf.“ Mit zwei verschieden formulierten Suchen belegt.
+
+`npm run kalender` war für diese Runde nicht nötig: An Lernlogik, `NEU_GELERNT` und den
+Fixtures hat sich nichts geändert.
+
 **Ein Prüflauf, der ohne Änderung rot wird (21.09.2026, fünfzehnte Runde).**
 
 `npm test` war am 16.09. grün und stand am 21.09. rot — ohne dass jemand etwas geändert
@@ -2152,7 +2192,9 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    ist am 15.09.2026 beantwortet und in `tests/suite.js` festgehalten; offen sind dort nur
    noch die Belege. Vorgehen wie gehabt.
 
-2. **Aus der alten Liste: restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
+2. **Erledigt (21.09.2026): Zeichensetzung ist belegt.** Alle 17 Komma- und Zeichenregeln
+   nennen eine Quelle; die letzte ohne war `komma-aufzaehlung`. Der alte Eintrag lautete:
+   **Aus der alten Liste: restliche Zeichensetzung belegen.** Infinitivgruppen, Partizipgruppen,
    Doppelpunkt und Bis-Strich sind erledigt (siehe „Zuletzt geändert“). Offen:
    `komma-nebensatz`, `komma-hauptsatz`, `komma-einschub`, `komma-vergleich`,
    `komma-adjektive`, `komma-brief` und die übrigen `z-`-Regeln gegen das Regelwerk
