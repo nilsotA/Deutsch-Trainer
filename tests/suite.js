@@ -392,7 +392,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      Quelle, die der Erkenner nicht sah, weil er nur eine feste Liste von Superlativen kannte.
      „die meisten“ bleibt getrennt behandelt; ausgenommen ist es über den Eintrag zu
      gross-subst, wo „das Meiste“ das Beispielwort der Regel ist. */
-  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
      „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
      häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
@@ -434,7 +434,9 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   /* Die beiden Fassungen vom 21.09.2026, wörtlich aus z23 und q01. */
   sammle2("Übung", "probe-z23", "<p>Ein <b>Anakoluth</b>. Häufigster Stolperstein beim freien Sprechen.</p>");
   sammle2("Übung", "probe-q01", "<p>Die Zeitungskonvention ist am verbreitetsten.</p>");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 4, "Positivprobe blieb stumm");
+  /* Und die Fassung aus pr29 vom 21.09.2026: ein Zahlwort zwischen Artikel und Superlativ. */
+  sammle2("Schreibwerkstatt", "probe-pr29", "<p>Das sind die zwei häufigsten Konfliktverstärker der deutschen Sprache.</p>");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 5, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -506,6 +508,20 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Satzkarte sa16":     "Satzkarte zu gram-wechsel, trägt denselben Satz",
     "Regel satz-klammer": "„Nie trennbar: be-, ge-, er-, ver-, zer-, ent-, emp-, miss-“ — diese Vorsilben trennen sich nicht ab; der Sonderfall miss- steht im Satz danach",
     "Satzkarte sa08":     "Satzkarte zu satz-klammer, trägt denselben Satz",
+    "Prüfmuster x22":     "„Mit dem Akkusativ liegst du immer richtig“ — der Akkusativ ist in beiden Lesarten zulässig, das ist keine verschwiegene Ausnahme",
+    "Prüfmuster f08":     "Das Muster handelt von den Wörtern „immer“ und „nie“ selbst; sie stehen dort im Zitat",
+    "Prüfmuster t06":     "„nie gemischt“ — von-bis und Bis-Strich schließen einander aus; n-datum sagt denselben Satz",
+    "Schreibauftrag w11": "„Wörter, die er sonst nie benutzt“ — Aussage über den Schreibenden, nicht über die Sprache",
+    "Baustein ph14":      "zitierte Falschform: „Immer weiter im gleichen Ton nachfassen“ steht in der Liste dessen, was nicht geht",
+    "Baustein ph15":      "zitierte Falschform: „Immer muss ich hinterherlaufen“",
+    "Baustein ph22":      "zitierte Falschform: „Du bist immer unpünktlich“ — und der Satz daneben sagt selbst, „immer“ sei fast nie wahr",
+    "Baustein ph25":      "zitierte Falschform: „Das habe ich nie gesagt“",
+    "Baustein ph32":      "Ratgebersatz („Beim Beenden immer einen Anschluss nennen“), kein Befund über die Sprache",
+    "Baustein ph39":      "Ratgebersatz („Nenn immer das Thema“), kein Befund über die Sprache",
+    "Baustein ph48":      "Ratgebersatz („beim Ausstieg immer einen Grund nennen“), kein Befund über die Sprache",
+    "Vorher/Nachher pr03": "zitierte Falschform: „Bereits mehrfach“ und „noch immer“ sind der Gegenstand des Eintrags",
+    "Vorher/Nachher pr04": "„„Immer“ ist fast nie wahr“ — das Wort ist selbst der Gegenstand",
+    "Vorher/Nachher pr29": "„„Nie“ und „immer“ verschärfen fast jeden Konflikt“ — die beiden Wörter sind der Gegenstand des Eintrags",
   };
   const nurText = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   const absStellen = new Set();
@@ -519,8 +535,29 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   };
   RA.filter(r => r.c === "gram" || r.c === "satz").forEach(r => absSammle("Regel", r.id, r.b));
   SATZ.forEach(x => absSammle("Satzkarte", x.id, x.b));
+  /* Dazu die beiden Sorten, die in der Stimme der App raten: die Hinweise des Textchecks
+     und die Tipps der Schreibwerkstatt. Genau dort stand die Fassung, die niemand sah.
+     Die übrigen Sorten bleiben bewusst draußen: In Übungen, Regeln und Fallkarten steht
+     „immer“ meist für eine feste Rektion („über steht immer mit Akkusativ“), und die Liste
+     würde zum Katalog statt zum Wächter. Gemessen am 21.09.2026: 64 Stellen im ganzen
+     Bestand, davon 59 dieser Art. */
+  daten(w, "CHECKS_ALL.map(c=>({id:c.id,t:c.t,k:c.k||\"\"}))").forEach(c => {
+    absSammle("Prüfmuster", c.id, c.k); absSammle("Prüfmuster", c.id, c.t);
+  });
+  daten(w, "PROMPTS.map(p=>({id:p.id,tip:p.tip||\"\",crit:(p.crit||[]).join(\" · \")}))").forEach(p => {
+    absSammle("Schreibauftrag", p.id, p.tip); absSammle("Schreibauftrag", p.id, p.crit);
+  });
+  daten(w, "PHRASES.map(p=>({id:p.id,tip:p.tip||\"\",no:(p.no||[]).join(\" · \")}))").forEach(p => {
+    absSammle("Baustein", p.id, p.tip); absSammle("Baustein", p.id, p.no);
+  });
+  daten(w, "PAIRS.map(p=>({id:p.id,why:p.why||\"\",note:p.note||\"\"}))").forEach(p => {
+    absSammle("Vorher/Nachher", p.id, p.why); absSammle("Vorher/Nachher", p.id, p.note);
+  });
+  daten(w, "SCENES.map(p=>({id:p.id,why:p.why||\"\",alt:p.alt||\"\"}))").forEach(p => {
+    absSammle("Situation", p.id, p.why); absSammle("Situation", p.id, p.alt);
+  });
   const absNeu = [...absStellen].filter(x => !(x in ABS_ERLAUBT));
-  P.ok("Kein ungelistetes Absolutwort in Grammatik- und Satzregeln (" + absStellen.size +
+  P.ok("Kein ungelistetes Absolutwort in Regeln, Satzkarten, Prüfmustern und Werkstatt (" + absStellen.size +
     " Stellen, " + Object.keys(ABS_ERLAUBT).length + " begründet erlaubt)", !absNeu.length, absNeu.join(" · "));
   /* Positivprobe an der alten Fassung von sa07, Gegenproben an Abschwächung und fester Fügung. */
   const probeAbs = (b) => { const v = new Set();
@@ -1213,6 +1250,80 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
 }
 
 const offeneWdh = muster.filter(c => /\[\^[^\]]*\]\{\d+,\}/.test(c.re));
+
+{
+  /* Fehlerklasse „der Hinweis widerspricht seinem eigenen Muster“. Jedes Prüfmuster trägt
+     einen Erklärtext, den Nils im Textcheck neben der Unterstreichung liest. Steht darin
+     ein Beispiel, muss es zum Muster passen — sonst sucht er in seinem Text nach etwas,
+     das das Muster gar nicht trifft, oder er soll eine Form schreiben, die es gleich
+     wieder anstreicht.
+
+     Gefunden am 21.09.2026 beim Durchgang über alle 101 Muster. a02 („Nominalstil-Kette“)
+     verlangt drei Substantive auf -ung/-heit/-keit, führte als Beispiel aber einen Satz
+     mit zweien: „Die Durchführung der Untersuchung erfolgte“ löst das eigene Muster nicht
+     aus. Dieselbe Klasse, andere Richtung: y11 fing sein eigenes Beispiel „pünktlich zu
+     sein“ nicht, weil „sein“ anders als bei y02 nicht in der Verbliste stand.
+
+     Zwei Zusicherungen. Erstens die Pfeilform „falsch“ → „richtig“: Die linke Seite muss
+     das Muster auslösen, die rechte nicht. Zweitens die im Hinweis fett empfohlene Form:
+     Sie darf das eigene Muster nicht auslösen. Ausgenommen sind die drei Zweifelsfall-
+     Muster, die beide Varianten anstreichen und eine davon im Hinweis nennen — dort ist
+     der Treffer gewollt. */
+  const bauRe = s => { const m = s.match(/^\/(.*)\/([a-z]*)$/s);
+    return new RegExp(m[1], m[2].includes("g") ? m[2] : m[2] + "g"); };
+  const ohneTag = h => String(h).replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+  const VORBILD_ERLAUBT = {
+    "y04": "Zweifelsfall scheinbar/anscheinend: das Muster streicht beide Formen an, der Hinweis nennt eine davon",
+    "y05": "Zweifelsfall derselbe/der gleiche: dieselbe Bauart",
+    "y12": "vor Kurzem/vor kurzem: beide Schreibungen sind zulässig, der Hinweis mahnt nur Einheitlichkeit an",
+  };
+  const pfeilPruefen = (c) => {
+    const raus = [];
+    const re = bauRe(c.re);
+    for (const m of ohneTag(c.k).matchAll(/„([^“]{3,90})“\s*→\s*„([^“]{3,90})“/g)) {
+      re.lastIndex = 0; const links = re.test(m[1]);
+      re.lastIndex = 0; const rechts = re.test(m[2]);
+      if (!links || rechts) raus.push(c.id + ": „" + m[1] + "“ → „" + m[2] + "“ (links " +
+        (links ? "trifft" : "STILL") + ", rechts " + (rechts ? "TRIFFT" : "still") + ")");
+    }
+    return raus;
+  };
+  const vorbildPruefen = (c) => {
+    const raus = [];
+    if (c.id in VORBILD_ERLAUBT) return raus;
+    const re = bauRe(c.re);
+    for (const m of String(c.k).matchAll(/<b>([^<]{4,60})<\/b>/g)) {
+      const form = m[1].replace(/^[„»]|[“«.,;:!?]+$/g, "").trim();
+      if (form.length < 4) continue;
+      re.lastIndex = 0;
+      if (re.test(form)) raus.push(c.id + ": „" + form + "“");
+    }
+    return raus;
+  };
+  const vollMuster = daten(w, "CHECKS_ALL.map(c=>({id:c.id,sev:c.sev,k:c.k||\"\",re:String(c.re)}))");
+  const pfeilSchief = [], vorbildSchief = [];
+  vollMuster.forEach(c => { pfeilSchief.push(...pfeilPruefen(c)); vorbildSchief.push(...vorbildPruefen(c)); });
+  const mitPfeil = vollMuster.filter(c => /„[^“]{3,90}“\s*→\s*„/.test(ohneTag(c.k))).length;
+  P.ok("Das Gegenbeispiel im Hinweis löst sein eigenes Muster aus (" + mitPfeil + " Pfeilbeispiele)",
+    !pfeilSchief.length, pfeilSchief.join(" · "));
+  P.ok("Keine im Hinweis empfohlene Form löst ihr eigenes Muster aus (" +
+    Object.keys(VORBILD_ERLAUBT).length + " begründete Ausnahmen)", !vorbildSchief.length, vorbildSchief.join(" · "));
+  /* Positivproben an den Fassungen vom 21.09.2026. */
+  P.ok("Der Beispielabgleich erkennt die alte Fassung von a02",
+    pfeilPruefen({ id: "probe", re: String(/\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b(?:[^.!?]{0,45}\b[A-Za-zÄÖÜäöü]{4,}(ung|heit|keit)\b){2}/g),
+      k: 'Löse die Handlung ins Verb auf: „Die Durchführung der Untersuchung erfolgte“ → „Wir untersuchten“.' }).length === 1,
+    "Positivprobe blieb stumm");
+  P.ok("… und schweigt bei einem Paar, das passt",
+    !pfeilPruefen({ id: "probe", re: String(/\bwieviel\b/g),
+      k: 'Getrennt: „wieviel“ → „wie viel“.' }).length,
+    "Gegenprobe schlug an");
+  P.ok("Der Vorbildabgleich erkennt eine empfohlene Form, die selbst anschlägt",
+    vorbildPruefen({ id: "probe", re: String(/\bzeitnah\b/gi), k: "Besser: <b>zeitnah bis Freitag</b>." }).length === 1,
+    "Positivprobe blieb stumm");
+  /* Und jede Ausnahme muss es noch geben. */
+  const vorbildTot = Object.keys(VORBILD_ERLAUBT).filter(id => !vollMuster.some(c => c.id === id));
+  P.ok("Jede gelistete Vorbild-Ausnahme gibt es noch", !vorbildTot.length, vorbildTot.join(", "));
+}
 P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer verneinten Klasse",
   !offeneWdh.length, offeneWdh.map(c => c.id + ": " + c.re).join(" · "));
 

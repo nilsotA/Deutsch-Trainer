@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 101 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~757 KB, eine Datei, kein Build |
+| Dateigröße | ~765 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,91 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Die 101 Prüfmuster, gegen ihre eigene Regel gelesen (21.09.2026, einundzwanzigste Runde).**
+
+Dieselbe Frage wie eine Runde vorher, ein Bestand weiter: Jedes Prüfmuster des Textchecks
+verweist auf eine Regel — sagen beide dasselbe? 17 Prüfer über je sechs Muster, dazu vier
+Querschnittsprüfer (Stufenzuordnung, doppelt erklärte Sachen, regionale Einordnung, Regex
+gegen Text), jede Meldung danach von einem Widerleger angegriffen. 109 Agenten, 88
+Meldungen, 58 gehalten. **43 der 101 Muster sind geändert.** Alle 58 habe ich vor dem
+Einbau selbst nachgemessen — die Regex-Befunde in node, die Sprachbehauptungen mit je zwei
+verschieden formulierten Suchen. Ein Agent hatte einen Regelwortlaut falsch zitiert und
+einer ein Gegenbeispiel erfunden, das die Regex gar nicht trifft; beides fiel beim
+Nachmessen auf.
+
+**Der große Befund, 31 von 58 Meldungen: Der Hinweis beschreibt einen Geltungsbereich,
+den die Regex nicht prüft.** Beispiele, alle selbst nachgemessen:
+
+- `a06` („Etikett statt Beobachtung“) trifft „unzuverlässig“ auch in „die Zeitmessung war
+  unzuverlässig“ — dort bewertet niemand eine Person.
+- `s01` lief mit `i`-Flag und hielt deshalb das Substantiv „Halt“ für ein Füllwort: „Beim
+  Sprung verlor er den Halt“ bekam den Rat „streich es testweise“.
+- `a05` meldet schon zwei Genitive („dem Trainer der Mannschaft des Vereins“) und erklärte
+  sie mit „drei Genitive lesen sich zäh“ — genau die Zahl, die die eigene Regel für lesbar
+  erklärt.
+- `f13` nannte „Ich versuche seit zwei Wochen, einen Termin zu bekommen“ eine halbe Absage.
+- `a03` meldet „wurde von der Halle bis zum Platz vermessen“ und riet zum Aktiv, obwohl es
+  dort gar keinen Handelnden gibt.
+- `a04` meldet jeden Block ohne Satzpunkt als „sehr langen Satz“, weil `[^.!?]` den
+  Zeilenumbruch einschließt — ein zeilenweise notierter Trainingsplan reicht.
+
+Der Ausweg war fast nie die engere Regex — die verliert echte Treffer —, sondern der
+Hinweis, der seine Bedingung selbst nennt.
+
+**Zwei Muster trafen ihr eigenes Beispiel nicht.** `a02` verlangt drei Substantive auf
+-ung/-heit/-keit und führte einen Satz mit zweien vor. `y11` fing sein eigenes „pünktlich
+zu sein“ nicht, weil „sein“ anders als bei `y02` nicht in der Verbliste stand — dieser
+zweite Fund ist beim Nachmessen entstanden, nicht gemeldet worden.
+
+**Und die Umlautfalle aus CLAUDE.md schnappte wieder zu.** In „Alles fließt.“ markierte
+`y08` die Zeichenfolge **Alles flie** als fehlende Großschreibung: Weil ß für JavaScript
+kein Wortzeichen ist, liegt hinter „flie“ eine Wortgrenze. Dasselbe Muster ließ „etwas
+müde“ und „etwas lange“ anstreichen, wo „etwas“ Gradangabe ist und die Kleinschreibung
+stimmt. Die Regex trennt jetzt: `-es` nach allen fünf Wörtern, `-e` nur nach „alles“, und
+die Wortgrenze am Ende ist umlautfest.
+
+**Vier Hinweise waren absoluter als ihre Regel.** „in Großbuchstaben steht ohnehin SS“,
+obwohl `recht-sz` daneben das große ẞ führt. „Klein bleibt nur das Adverb früh“, obwohl
+`gross-zeit` „morgen Früh“ als zulässige, süddeutsch-österreichisch geprägte Variante
+nennt. Die n-Deklination „bekommt überall -en“, obwohl die Wortliste desselben Musters
+**Herr** und **Bauer** führt, die -n bekommen — wer dem Hinweis folgte, schrieb „dem Herren
+Weber“. Und `x03` („während“) trug als einziges der drei Genitivpräpositions-Muster die
+regionale Einordnung nicht.
+
+**Dazu:** `x24` gibt die Herkunft von „in 2026“ jetzt als das aus, was sie ist — die
+Einordnung des Dudens, der Sprachwissenschaftler widersprechen; belegt ist die Fügung im
+Deutschen schon im 18. Jahrhundert. Die Stufen sind angeglichen: „S.12“ stand auf „bitte
+prüfen“, „§5“ auf „klarer Fehler“, obwohl derselbe Satz derselben Regel dahintersteht —
+beides ist jetzt hart. Zwei Regeln haben eine Lücke geschlossen, in die ihr Prüfmuster
+zeigte: `sa22` sagte nichts zu wo(r)-, `getrennt-praep` führte von „irgendwann“ und
+„irgendwo“ nichts.
+
+**Drei Prüfungen sind dazugekommen oder weiter geworden**, alle gegen den Bestand vor
+dieser Runde rot gegengeprobt:
+
+- *Der Hinweis widerspricht seinem eigenen Muster.* Die linke Seite eines „falsch →
+  richtig“ muss das Muster auslösen, die rechte nicht; und keine im Hinweis fett
+  empfohlene Form darf ihr eigenes Muster auslösen (drei begründete Ausnahmen: die
+  Zweifelsfall-Muster, die beide Varianten anstreichen).
+- *Der Absolutwort-Wächter* las nur Grammatik- und Satzregeln — zum dritten Mal dieselbe
+  Klasse. Er liest jetzt auch die Prüfmuster und die Schreibwerkstatt. Dort stand der
+  Fund, den niemand sah: `ph06` sagte „Nenn **immer** ein Datum, **nie** eine
+  Dringlichkeitsstufe“ und widersprach damit der Regel `form-frist` **und** den eigenen
+  Beispielen derselben Karte („Bis Freitag würde mir reichen“). 19 Stellen stehen jetzt
+  mit Grund in der Liste, die übrigen Sorten bleiben mit Begründung draußen.
+- *Der Rang-Wächter* verlangte den Superlativ direkt hinter dem Artikel. `pr29` nannte
+  „nie“ und „immer“ „die **zwei häufigsten** Konfliktverstärker der deutschen Sprache“ —
+  ein Zahlwort dazwischen, und der Erkenner schwieg.
+
+**Ein Nachzügler von gestern.** Die Korrektur an `f06` („Der Konjunktiv macht sie nicht
+höflicher“) war in der Schreibwerkstatt liegen geblieben: `pr01` trug den Satz wörtlich
+weiter. Beim Nachmessen kam heraus, wie groß die Kopplung ist — **97 Sätze stehen in zwei
+oder mehr voneinander unabhängigen Beständen**, die 230 generierten Regel↔Satzkarte-Paare
+nicht mitgezählt. Wer eine Formulierung ändert, sucht sie vorher im ganzen Bestand.
+
+`npm run kalender` war nicht nötig: keine Änderung an Lernlogik, `NEU_GELERNT` oder
+Fixtures, und keine Karte hat eine andere richtige Antwort bekommen.
 
 **Die 381 Erklärungen, gegen ihre eigene Regel gelesen (21.09.2026, zwanzigste Runde).**
 
