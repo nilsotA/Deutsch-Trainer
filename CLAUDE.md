@@ -289,6 +289,11 @@ Regeln, Fallkarten, Prüfmuster oder Fehlersuchtexte hinzufügt, ändert die Tab
 Abschnitt 2 mit — sonst schlägt der Lauf fehl. (Die Zahl der Übungen stand hier lange
 falsch: 331 statt 371.)
 
+**Alle zehn Tabellen laufen gegen ein Paradigma.** Es steht in `tests/inhalt.js`, Abschnitt B —
+unabhängig aufgeschrieben, nicht aus der App abgelesen. Ein Wächter daneben meldet, wenn eine
+neue Tabelle dazukommt, für die niemand ein Paradigma hinterlegt hat; wer eine Tabelle bewusst
+ausnimmt, trägt sie mit Grund in `TB_OHNE_PARADIGMA` ein.
+
 **Zwei Prüfungen sichern die häufigsten Inhaltsfehler ab.** `tests/suite.js` lässt vier
 korrekte Bestände gegen die harten Textcheck-Muster laufen: die richtigen Antworten der
 Übungen, die Beispiele der Regeln (`class="ok"`, `class="ex"`), die Musterformulierungen
@@ -337,6 +342,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Ein Wächter sieht nicht alle Bestände | Die Rangbehauptungsprüfung sammelte Regeln, Satzkarten, Übungen, Prüfmuster und Fallkarten — **Wortkarten nicht**. Genau dort stand „das meistverwechselte Paar der deutschen Sprache“, jahrelang ungesehen. Dieselbe Falle wie „Kartensorte verschwindet“, nur im Prüflauf. Wer einen Wächter über den Bestand laufen lässt, zählt die Sorten ab — und die Positivprobe gehört an ein Beispiel aus jeder. |
 | `.test()` auf einem `/g`-Muster | JavaScript merkt sich bei `g` den `lastIndex`: Derselbe Aufruf liefert abwechselnd true und false. In `tests/suite.js` lief der Rang-Wächter so über den halben Bestand — aufgefallen erst, als eine zweite Positivprobe dazukam und stumm blieb. **Für `.test()` nie das `g`-Flag setzen**, oder `lastIndex` nach jedem Aufruf zurückstellen. Die App selbst ist sauber: Ihre Prüfmuster laufen über `matchAll`. |
 | Eine Karte meidet ihr eigenes Synonym | Elf Wortkarten bauen ihre Bedeutung als „… — statt: X“. Bei `erörtern` stand „diskutieren“ in der statt-Liste **und** unter den Synonymen — die Karte riet ab und empfahl dasselbe Wort. `tests/inhalt.js`, Abschnitt M prüft die beiden Listen gegeneinander. Achtung: Ändert sich das Feld `d`, ändert sich die **richtige Antwort** („Was bedeutet X?“) — dann gehört die Karte mit ihrem Schlüssel `w:…` in `NEU_GELERNT`. |
+| Die Tabelle kennt die Ausnahme nicht | `gram-ndekl` und die Satzkarte sa14 nennen beide, dass **Herr** im Singular nur ein -n bekommt („dem Herrn Weber“) und erst im Plural -en. Die Tabelle `tb09` führte Herr in ihrer Wortliste und schrieb darüber „Alles außer dem Nominativ Singular endet auf -en“ — die Ausnahme fehlte genau dort, wo Nils nachschlägt. Dieselbe Liste an zwei Stellen, eine mit Vorbehalt und eine ohne. |
 | Dieselbe Grenze, andersherum | Weil ä, ö, ü und ß keine Wortzeichen sind, endet „Brüder“ für JavaScript auf einer Wortgrenze plus „der“. Ein mit `\b` verankertes Muster springt dort **mitten im Wort** an: y05 hielt „Alle Brüder gleiche Chancen“ für einen Zweifelsfall, x23 meldete „Grüße aus dem Süden Herr Meier war auch da“ als harten Fehler. Das Dehnen auf ganze Wörter macht es schlimmer, nicht besser — angestrichen wird „Süden Herr“. `tests/suite.js` sucht die Paarung jetzt selbst: verankerte ASCII-Alternative gegen jedes Wort mit Umlaut aus dem eigenen Bestand. |
 
 ## 7 · Wenn Nils etwas ergänzt haben will

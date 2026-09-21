@@ -54,7 +54,31 @@ const SOLL = {
          ["Dativ", "einem guten", "einem guten", "einer guten", "keinen guten"],
          ["Genitiv", "eines guten", "eines guten", "einer guten", "keiner guten"]],
   tb07: [["Nominativ", "der", "das", "die", "die"], ["Akkusativ", "den", "das", "die", "die"],
-         ["Dativ", "dem", "dem", "der", "denen"], ["Genitiv", "dessen", "dessen", "deren", "deren"]]
+         ["Dativ", "dem", "dem", "der", "denen"], ["Genitiv", "dessen", "dessen", "deren", "deren"]],
+  /* Bis zum 21.09.2026 liefen fünf der zehn Tabellen nur als korrekter Bestand gegen die
+     harten Textcheck-Muster mit — gegen ein Paradigma geprüft waren sie nicht. CLAUDE.md
+     hat das selbst als offene Stelle geführt. Vier davon haben ein geschlossenes Paradigma,
+     das sich unabhängig hinschreiben lässt; es steht hier, aus der Grammatik und nicht aus
+     der App. Inhaltlich stimmten alle vier — die Lücke in der Absicherung war es trotzdem.
+     tb09 ist keine Formentabelle, sondern ein Beispielwort (Kollege) durchdekliniert. */
+  tb02: [["Nominativ", "ein —", "ein —", "eine", "keine / meine"],
+         ["Akkusativ", "einen", "ein —", "eine", "keine / meine"],
+         ["Dativ", "einem", "einem", "einer", "keinen / meinen"],
+         ["Genitiv", "eines + s", "eines + s", "einer", "keiner / meiner"]],
+  tb05: [["Nominativ", "guter Kaffee", "gutes Wetter", "gute Laune", "gute Ideen"],
+         ["Akkusativ", "guten Kaffee", "gutes Wetter", "gute Laune", "gute Ideen"],
+         ["Dativ", "gutem Kaffee", "gutem Wetter", "guter Laune", "guten Ideen"],
+         ["Genitiv", "guten Kaffees", "guten Wetters", "guter Laune", "guter Ideen"]],
+  tb09: [["Nominativ", "der Kollege", "die Kollegen"], ["Akkusativ", "den Kollegen", "die Kollegen"],
+         ["Dativ", "dem Kollegen", "den Kollegen"], ["Genitiv", "des Kollegen", "der Kollegen"]],
+  /* tb06 ist nach der Nominativform sortiert, nicht nach dem Fall — die erste Spalte
+     dient hier als Schlüssel. tb08 trägt eine vierte Spalte mit einem Beispielsatz;
+     geprüft werden nur die Formen, der Beispielsatz darf umformuliert werden. */
+  tb06: [["ich", "mich", "mir"], ["du", "dich", "dir"], ["er", "ihn", "ihm"], ["es", "es", "ihm"],
+         ["sie", "sie", "ihr"], ["wir", "uns", "uns"], ["ihr", "euch", "euch"],
+         ["sie / Sie", "sie / Sie", "ihnen / Ihnen"]],
+  tb08: [["Nominativ", "wer", "was"], ["Akkusativ", "wen", "was"],
+         ["Dativ", "wem", "—"], ["Genitiv", "wessen", "wessen"]]
 };
 Object.keys(SOLL).forEach(id => {
   const ist = zeilen(id);
@@ -69,6 +93,28 @@ Object.keys(SOLL).forEach(id => {
   });
   P.ok("Tabelle " + id + " stimmt mit dem Paradigma überein", !abweichung.length, abweichung.join(" · "));
 });
+
+/* Lehre aus dem 21.09.2026 („ein Wächter sieht nicht alle Bestände“): Wer über einen
+   Bestand prüft, zählt die Sorten ab. Kommt eine Tabelle dazu, ohne dass jemand ein
+   Paradigma hinterlegt, fällt das sonst niemandem auf — sie läuft dann nur noch als
+   korrektes Material gegen die Textcheck-Muster mit, und ein falsches Feld bliebe stumm. */
+const TB_OHNE_PARADIGMA = {
+  tb10: "wird unten gegen die Konjunktiv-II-Formen geprüft, nicht gegen ein Kasusparadigma",
+};
+const tbUngeprueft = TABLES.map(t => t.id)
+  .filter(id => !(id in SOLL) && !(id in TB_OHNE_PARADIGMA));
+P.ok("Jede Tabelle wird gegen ein Paradigma geprüft (" + TABLES.length + ")",
+  !tbUngeprueft.length, tbUngeprueft.join(", "));
+const tbTot = Object.keys(SOLL).concat(Object.keys(TB_OHNE_PARADIGMA))
+  .filter(id => !TABLES.some(t => t.id === id));
+P.ok("Kein Paradigma ohne Tabelle", !tbTot.length, tbTot.join(", "));
+/* Zwei Proben für den Abdeckungswächter selbst: Er muss eine neue Tabelle ohne Paradigma
+   melden und ein Paradigma ohne Tabelle ebenso. Sonst ist er eine leere Zusage. */
+const abdeckung = (ids, soll, frei) => ids.filter(id => !(id in soll) && !(id in frei));
+P.ok("Der Abdeckungswächter meldet eine Tabelle ohne Paradigma",
+  abdeckung(["tb01", "tb99"], { tb01: 1 }, {}).join() === "tb99", "Positivprobe blieb stumm");
+P.ok("… und schweigt bei einer ausgenommenen Tabelle",
+  !abdeckung(["tb01", "tb99"], { tb01: 1 }, { tb99: "Grund" }).length, "Gegenprobe schlug an");
 
 const konj = zeilen("tb10");
 if (konj) {

@@ -58,6 +58,42 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Deklinationstabellen, gegen ein Paradigma gestellt (21.09.2026, achtzehnte Runde).**
+
+CLAUDE.md führte es selbst als offene Stelle: Fünf der zehn Tabellen liefen nur als
+korrektes Material gegen die harten Textcheck-Muster mit, gegen ein Paradigma geprüft
+waren sie nicht. Ein falsches Feld dort wäre unsichtbar gewesen — und Tabellen sind
+Nachschlagematerial, Nils liest sie, statt sie zu üben.
+
+Vier der fünf haben ein geschlossenes Paradigma, das sich unabhängig hinschreiben lässt
+(`tb02` unbestimmter Artikel, `tb05` starke Adjektivbeugung, `tb06` Personalpronomen,
+`tb08` Fragewörter), die fünfte (`tb09`) ist ein durchdekliniertes Beispielwort. Alle fünf
+stehen jetzt in `tests/inhalt.js`, Abschnitt B — aus der Grammatik geschrieben, nicht aus
+der App abgelesen. **Inhaltlich stimmten alle fünf.** Die Lücke in der Absicherung war es
+trotzdem; der Beweis, dass die Prüfung beißt, ist eine verdorbene Zelle („guten Wetter“
+statt „gutem Wetter“), die sie auf Anhieb mit Zeile und Spalte meldet.
+
+**Ein Fund am Rand.** Die Tabelle `tb09` führt in ihrer Wortliste **Herr** und schreibt
+darüber „Alles außer dem Nominativ Singular endet auf -en“. Für Herr stimmt das nicht: im
+Singular nur ein -n („dem Herrn Weber“), erst im Plural -en („Sehr geehrte Damen und
+Herren“). Die Regel `gram-ndekl` und die Satzkarte sa14 nennen die Ausnahme beide seit
+Langem — nur die Tabelle nicht, also ausgerechnet die Stelle zum Nachschlagen. Mit zwei
+verschieden formulierten Suchen belegt (Duden-Eintrag „Herr“, dazu die Deklinationstabellen
+von verbformen.com und korrekturen.de).
+
+**Ein Wächter für die Abdeckung.** Nach der Lehre vom selben Tag — ein Wächter sah fünf
+Bestände von sechs — zählt der Prüflauf die Tabellen jetzt selbst ab: Kommt eine dazu, für
+die niemand ein Paradigma hinterlegt hat, wird der Lauf rot. Wer eine bewusst ausnimmt,
+trägt sie mit Grund in `TB_OHNE_PARADIGMA` ein; dort steht heute nur `tb10`, die gegen die
+Konjunktiv-II-Formen geprüft wird statt gegen ein Kasusparadigma. Beide Richtungen haben
+eine Probe — eine Tabelle ohne Paradigma und ein Paradigma ohne Tabelle.
+
+Der Absatz „Stand der Prüfung“ in der App sagte bis heute „fünf der zehn Tabellen“. Er
+sagt jetzt, was gilt.
+
+`npm run kalender` war nicht nötig: An Lernlogik, `NEU_GELERNT` und den Fixtures hat sich
+nichts geändert.
+
 **Die 155 Wortkarten, erstmals inhaltlich gelesen (21.09.2026, siebzehnte Runde).**
 
 Die Wortkarten waren strukturell abgesichert — keine Dubletten, Beispiel lang genug,
