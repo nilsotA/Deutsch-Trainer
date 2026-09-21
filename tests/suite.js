@@ -320,7 +320,12 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      Geprüft wird die Stelle, nicht die Zahl der Formeln in ihr: Wer in einer gelisteten
      Regel eine zweite Rangformel ergänzt, fällt nicht auf. Das ist der Preis dafür, dass
      eine Umformulierung des Beispiels den Lauf nicht grundlos rot macht. */
-  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+häufigsten(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/gi;
+  /* Am 21.09.2026 kam die meist-Bildung dazu: Die Wortkarte „scheinbar / anscheinend“ nannte
+     sich „das meistverwechselte Paar der deutschen Sprache“ — eine Häufigkeitsordnung ohne
+     Quelle, die der Erkenner nicht sah, weil er nur eine feste Liste von Superlativen kannte.
+     „die meisten“ bleibt getrennt behandelt; ausgenommen ist es über den Eintrag zu
+     gross-subst, wo „das Meiste“ das Beispielwort der Regel ist. */
+  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+häufigsten(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   const ERLAUBT = {
     "Regel gross-subst":    "„das Beste“ und „die meisten“ sind dort die Beispielwörter der Regel",
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
@@ -338,6 +343,12 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   ALL.forEach(i => { sammle("Übung", i.id, i.e); sammle("Übung", i.id, i.q); });
   daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||''}))").forEach(c => sammle("Prüfmuster", c.id, c.k));
   CASEREF.forEach(e => sammle("Fallkarte", e.w, e.n));
+  /* Die Wortkarten fehlten hier bis zum 21.09.2026 — dieselbe Falle wie „Kartensorte
+     verschwindet“, nur im Prüflauf: Der Wächter sah fünf Bestände und einen nicht, und
+     genau dort stand eine Rangbehauptung („das meistverwechselte Paar der deutschen
+     Sprache“, Karte scheinbar / anscheinend). Geprüft werden Bedeutung und Abgrenzung;
+     das Beispiel bleibt draußen, dort sind Superlative Sprachmaterial. */
+  WORDS.forEach(x => { sammle("Wortkarte", x.w, x.d); sammle("Wortkarte", x.w, x.t); });
   const neu = [...rangStellen].filter(x => !(x in ERLAUBT));
   P.ok("Keine ungelistete Rangbehauptung (" + rangStellen.size + " Stellen, " +
     Object.keys(ERLAUBT).length + " begründet erlaubt)", !neu.length, neu.join(" · "));
@@ -345,7 +356,8 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const probe = new Set();
   const sammle2 = (art, id, t) => { if (t && RANG.test(String(t))) probe.add(art + " " + id); };
   sammle2("Regel", "probe-rang", "<p>Das ist der häufigste Fehler in Alltagstexten.</p>");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 1, "Positivprobe blieb stumm");
+  sammle2("Wortkarte", "probe-meist", "<p>Das meistverwechselte Paar der deutschen Sprache.</p>");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 2, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && RANG.test(String(t))) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -710,6 +722,23 @@ const beide = x => { vorlagen.push(x); vorbild.push(x); };
 PHRASES.forEach(ph => Object.keys(ph.lv || {}).forEach(stufe =>
   (ph.lv[stufe] || []).forEach(t => beide({ id: "ph:" + ph.id, t: strip(t) }))));
 PAIRS.forEach(pr => beide({ id: "pr:" + pr.id, t: strip(pr.good) }));
+/* Bis zum 21.09.2026 fehlten hier ausgerechnet die Mustertexte — geprüft wurden der
+   Szenariotext und die Aufgabenstellung, nicht aber das, was Nils abschreibt: die
+   Musterantwort eines Schreibauftrags, die Musterformulierung einer Situation und ihre
+   Kurzfassung, dazu die Begründungen und Merksätze. 129 Proben, alle sauber; die Lücke
+   in der Absicherung war es trotzdem. Zwei Fehlalarme von y08 kamen dabei ans Licht
+   („genauso wenig wie“, „wenn ich nichts habe“) und sind im Muster behoben. */
+daten(w, "PROMPTS").forEach(pr => {
+  if (pr.model) beide({ id: "w:" + pr.id + " (Musterantwort)", t: strip(pr.model) });
+  if (pr.tip) beide({ id: "w:" + pr.id + " (Merksatz)", t: strip(pr.tip) });
+});
+daten(w, "SCENES").forEach(sc => {
+  if (sc.model) beide({ id: "sc:" + sc.id + " (Muster)", t: strip(sc.model) });
+  if (sc.alt) beide({ id: "sc:" + sc.id + " (Kurzfassung)", t: strip(sc.alt) });
+  if (sc.why) beide({ id: "sc:" + sc.id + " (Begründung)", t: strip(sc.why) });
+});
+PAIRS.forEach(pr => { if (pr.note) beide({ id: "pr:" + pr.id + " (Merksatz)", t: strip(pr.note) }); });
+PHRASES.forEach(ph => { if (ph.tip) beide({ id: "ph:" + ph.id + " (Merksatz)", t: strip(ph.tip) }); });
 /* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
    Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
    korrektes Deutsch vorgesetzt bekommt. */

@@ -608,4 +608,38 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   !variantenTreffer("Das ist Standard.", "Das ist Standart.").length,
   "Gegenprobe schlug an");
 
+P.titel("M · Wortkarten, die sich selbst widersprechen");
+/* Elf Wortkarten bauen ihre Bedeutung nach dem Muster „… — statt: X, Y“: X und Y sind die
+   unscharfen Alltagswörter, die das Stichwort ersetzen soll. Steht dasselbe Wort zugleich
+   im Feld s, sagt die Karte beides — meide es und nimm es. Genau so stand es bei
+   „erörtern“: d riet von „diskutieren“ ab, s führte es als Sinnverwandtes. Der Duden
+   definiert „erörtern“ selbst mit „diskutieren“; unscharf ist nur „reden über“.
+   Geprüft wird der Wortlaut, nicht die Bedeutung — zwei verschiedene Wörter für dieselbe
+   Sache sind kein Fund, dasselbe Wort in beiden Listen schon. */
+const stattListe = (d) => {
+  const m = String(d).match(/—\s*statt:\s*(.+)$/);
+  return m ? m[1].split(/\s*,\s*/).map(x => x.toLowerCase().trim()).filter(Boolean) : null;
+};
+const synListe = (s) => String(s || "").split(/\s*,\s*/).map(x => x.toLowerCase().trim()).filter(Boolean);
+const doppelt = (karte) => {
+  const meiden = stattListe(karte.d);
+  if (!meiden) return [];
+  const syn = synListe(karte.s);
+  return meiden.filter(x => syn.includes(x));
+};
+const stattSchief = [], mitStatt = WORDS.filter(x => stattListe(x.d));
+WORDS.forEach(x => doppelt(x).forEach(y =>
+  stattSchief.push(x.w + ": „" + y + "“ steht in der statt-Liste und unter den Synonymen")));
+P.ok("Keine Wortkarte meidet ein Wort, das sie selbst als Synonym führt (" +
+  mitStatt.length + " Karten mit statt-Liste)", !stattSchief.length, stattSchief.join(" · "));
+/* Positivprobe an der Fassung vom 21.09.2026. */
+P.ok("Die Widerspruchsprüfung erkennt die alte Fassung von erörtern",
+  doppelt({ d: "eine offene Frage eingehend und von mehreren Seiten besprechen — statt: reden über, diskutieren",
+            s: "besprechen, abhandeln, diskutieren" }).length === 1,
+  "Positivprobe blieb stumm");
+/* Gegenprobe: verschiedene Wörter für dieselbe Sache dürfen nebeneinander stehen. */
+P.ok("… und schweigt bei zwei verschiedenen Wörtern",
+  !doppelt({ d: "etwas sichtbar machen — statt: zeigen", s: "verdeutlichen, illustrieren" }).length,
+  "Gegenprobe schlug an");
+
 P.abschluss();

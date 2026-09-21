@@ -58,6 +58,76 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die 155 Wortkarten, erstmals inhaltlich gelesen (21.09.2026, siebzehnte Runde).**
+
+Die Wortkarten waren strukturell abgesichert — keine Dubletten, Beispiel lang genug,
+Bedeutung lang genug — aber nie daraufhin geprüft, ob die Bedeutung stimmt. Das ist der
+Bestand, den Nils auswendig lernt: 155 Karten, und `d` ist die richtige Antwort auf „Was
+bedeutet X?“. Zwölf Prüfer, je rund dreizehn Karten, jede Meldung danach von einem
+Gegenprüfer angegriffen, der sie widerlegen sollte. Von 28 Meldungen hielten acht; jede
+habe ich anschließend selbst mit zwei verschieden formulierten Suchen nachgeprüft.
+
+**Zwei Karten widersprachen sich selbst** — das ließ sich ohne jede Quelle nachweisen:
+
+- **erörtern** riet in `d` von „diskutieren“ ab („— statt: reden über, diskutieren“) und
+  führte es in `s` als sinnverwandt. Der Duden definiert „erörtern“ selbst mit
+  „diskutieren“; unscharf ist nur „reden über“.
+- **herausstellen** erklärte „deutlich hervortreten lassen“ — transitiv —, während
+  Beispielsatz („Es stellte sich heraus, dass …“) und Synonyme („zeigen, ergeben“ )
+  ausschließlich die reflexive Bedeutung zeigen. Nils lernte eine Bedeutung und übte
+  einen Satz, der sie nicht enthält.
+
+**Eine falsche Regel in einem Fachbegriff:** **hinreichend** erklärte, eine notwendige
+Bedingung „reicht allein aber nicht aus“. Das ist logisch falsch — eine Bedingung kann
+zugleich notwendig und hinreichend sein. Jetzt steht da, was das Wort sagt und was nicht.
+
+**Eine Quellenzuschreibung, die nicht stimmte:** **lapidar** schrieb dem Duden „kurz und
+bündig, aber wirkungsvoll“ zu. Der Duden sagt „überraschend kurz und knapp (aber
+treffend)“ und führt das Wort als bildungssprachlich; die zitierte Fassung steht im DWDS.
+
+**Eine Rangbehauptung:** **scheinbar / anscheinend** nannte sich „das meistverwechselte
+Paar der deutschen Sprache“. Dazu unten mehr — der Wächter dafür hat sie nicht gesehen.
+
+**Drei zu eng gefasste Bedeutungen:** **vorwegnehmen** (nicht nur aussprechen, auch tun —
+„eine Entscheidung vorwegnehmen“), **diffizil** (die Schwierigkeit liegt in der verlangten
+Sorgfalt, nicht in feinen Unterscheidungen) und **Reflexion** (prüfendes Nachdenken über
+etwas; die Bindung an die eigene Praxis ist der Lehramtsfall, nicht die Bedeutung).
+
+Fünf davon ändern das Feld `d` und damit die richtige Antwort — sie stehen mit ihrem
+Schlüssel `w:…` in `NEU_GELERNT` und kommen einmal auf Fach 1 zurück. Die drei, bei denen
+nur die Abgrenzung `t` nachgezogen wurde, stehen bewusst nicht dort.
+
+**Drei Funde im Prüflauf selbst — der wertvollste Teil dieser Runde.**
+
+- **Der Rang-Wächter sah die Wortkarten nicht.** Er sammelte Regeln, Satzkarten, Übungen,
+  Prüfmuster und Fallkarten — fünf Bestände von sechs. Deshalb stand „das
+  meistverwechselte Paar“ ungesehen da. Dieselbe Falle wie „Kartensorte verschwindet“,
+  nur eine Ebene höher.
+- **`.test()` auf einem `/g`-Muster ist zustandsbehaftet.** `RANG` trug das `g`-Flag; jeder
+  Treffer verschob `lastIndex`, der nächste Aufruf begann mitten im Text, und der Wächter
+  prüfte nur jedes zweite Feld. Aufgefallen ist das erst, als eine zweite Positivprobe
+  dazukam und stumm blieb. Heute hat die Lücke zufällig nichts verdeckt — die Zahl blieb
+  bei acht Stellen —, der Fehler war trotzdem echt. Die App ist davon nicht betroffen:
+  Ihre Prüfmuster laufen über `matchAll`, und die beiden `.test()`-Stellen tragen kein `g`.
+- **Die Mustertexte der Schreibwerkstatt liefen nicht gegen den Textcheck.** Geprüft waren
+  Szenariotext und Aufgabenstellung — nicht `PROMPTS.model`, `SCENES.model`, `SCENES.alt`,
+  `SCENES.why`, `PAIRS.note`, `PHRASES.tip`. Also gerade das, was Nils abschreibt. 129
+  Proben: null harte Treffer, aber zwei Fehlalarme von **y08** auf sauberem Text
+  („genauso wenig wie“, „wenn ich bis Freitag nichts habe“ — ein Vergleichspartikel und
+  eine finite Verbform, beide auf -e). Beide sind jetzt ausgeschlossen; ein echter
+  Großschreibfehler kann dahinter nicht verschwinden, weil keines der beiden ein Adjektiv ist.
+
+**Drei Prüfungen**, alle gegen den Stand davor rot: Wortkarten im Rang-Wächter, die
+Mustertexte im Korpus (`tests/suite.js`), und in `tests/inhalt.js`, Abschnitt M die Probe,
+dass keine Karte ein Wort meidet, das sie selbst als Synonym führt.
+
+**Zwei Messungen ohne Fund**, damit sie niemand wiederholt: Von den 30 Gegensatzpaaren der
+Schreibwerkstatt unterscheiden sich zwölf für den Textcheck nicht — der Unterschied ist
+pragmatisch („Du machst mich echt wütend“ gegen „Ich werde wütend, wenn Absprachen nicht
+halten“), und dafür ein Muster zu bauen hieße, Ton als Rechtschreibung auszugeben. Und die
+Ausrufezeichen: 14 Stellen in 1490 Feldern, alle in Zitaten oder Musterformulierungen —
+die App ruft nie in eigener Stimme aus.
+
 **Die Fehlersuche, Markierung für Markierung (21.09.2026, sechzehnte Runde).**
 
 Die zwölf Fehlersuchtexte mit ihren 86 Markierungen waren strukturell gut abgesichert —
