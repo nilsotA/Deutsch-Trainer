@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 101 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~738 KB, eine Datei, kein Build |
+| Dateigröße | ~749 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,45 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Kein Wächter sammelt mehr selbst (21.09.2026, neunzehnte Runde).**
+
+Die Falle „ein Wächter sieht nicht alle Bestände“ war an einem Tag zweimal zugeschnappt:
+Erst übersah die Rangbehauptungsprüfung die Wortkarten, dann — nach der Korrektur — immer
+noch die Schreibwerkstatt, die Fehlersuche, die Tabellen und den Spickzettel. Vier Sorten
+von zehn. Diese Runde hat das systematisch nachgemessen und die Ursache beseitigt, statt
+die Symptome ein drittes Mal zu flicken.
+
+**Der Fund in der übersehenen Sorte.** Der Schreibauftrag `w01` gab als Hinweis mit:
+„**Der häufigste Fehler** in Reflexionen: Bewertung schleicht sich in die Beschreibung.“
+Das ist wörtlich die Formel, die CLAUDE.md als Beispiel für eine Häufigkeitsbehauptung
+ohne Quelle führt — und sie stand an der Stelle, die Nils vor dem Schreiben liest. Der
+Mechanismus dahinter stimmt und bleibt; nur die Rangaussage ist weg („Die Falle in
+Reflexionen: …“).
+
+**Fünf weitere Fundstellen halten und stehen jetzt mit Grund in der Ausnahmeliste:** „die
+beste Übung gegen Wortballast“ (ein Rat zur Übung), „der wichtigste“ Satz einer bestimmten
+Mail, „was ist der beste Weg, dich zu erreichen?“ (wörtliche Rede in einer
+Musterformulierung), „die beste Investition“ (derselbe Rat wie in `form-eltern`, dort schon
+begründet) und „Das Wichtigste aus dem Trainer auf einen Blick“ als Auswahlansage des
+Spickzettels.
+
+**Der Wächter über gezählte Ausnahmen las ebenfalls nur zwei Sorten.** Über den ganzen
+Bestand findet er genau eine Stelle: `p22` sagt „Einzige Ausnahme sind Laden- und
+Firmennamen“. Die Zählung gilt dort dem Genitiv-s, und in dieser Reichweite stimmt sie —
+der Apostroph vor `-sch` ist keine Genitivform. Sie steht deshalb mit Begründung in der
+Liste, ungeändert.
+
+**Die strukturelle Änderung.** `tests/suite.js` legt den Bestand jetzt einmal in `BESTAND`
+an — zehn Sorten, 1819 Felder, von der Regel bis zum Spickzettel. Beide Wächter laufen
+darüber statt über eigene Sammlungen. Und darunter steht die Zusicherung, die das offen
+hält: Sie liest die Datentabelle aus CLAUDE.md, ordnet jede Konstante einer Sorte zu und
+verlangt, dass die Sorte in `BESTAND` vorkommt. Wer der App einen neuen Datenbestand
+hinzufügt und ihn in der Tabelle einträgt, bekommt einen roten Lauf, bis der Bestand auch
+gesammelt wird. Eine Positivprobe zeigt, dass sie eine fehlende Sorte erkennt.
+
+`npm run kalender` war nicht nötig: An Lernlogik, `NEU_GELERNT` und den Fixtures hat sich
+nichts geändert. Die Dateigröße in CLAUDE.md und hier steht jetzt auf 749 KB.
 
 **Die Deklinationstabellen, gegen ein Paradigma gestellt (21.09.2026, achtzehnte Runde).**
 

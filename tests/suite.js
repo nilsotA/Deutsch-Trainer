@@ -13,6 +13,41 @@ const SATZ = daten(w, "SATZ");
 const KORREKTUR = daten(w, "KORREKTUR");
 const strip = h => String(h).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
+/* ---------- Der ganze Bestand an einem Ort ----------
+   Fehlerklasse „ein Wächter sieht nicht alle Bestände“, zweimal zugeschnappt: Die
+   Rangbehauptungsprüfung las erst fünf Sorten von zehn, dann sechs — beide Male stand der
+   Fund in einer der übersehenen. Wer jeden Wächter selbst zusammenstellen lässt, wiederholt
+   das. Hier steht der Bestand einmal, jeder Wächter läuft darüber, und darunter prüft eine
+   Zusicherung, dass keine Sorte fehlt. */
+const BESTAND = [];
+const nimmAuf = (sorte, id, t) => { if (t) BESTAND.push({ sorte, id, t: strip(t) }); };
+RA.forEach(r => nimmAuf("Regel", r.id, r.b));
+SATZ.forEach(x => nimmAuf("Satzkarte", x.id, x.b));
+ALL.forEach(i => { nimmAuf("Übung", i.id, i.e); nimmAuf("Übung", i.id, i.q); });
+daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||''}))").forEach(c => nimmAuf("Prüfmuster", c.id, c.k));
+CASEREF.forEach(e => nimmAuf("Fallkarte", e.w, e.n));
+WORDS.forEach(x => { nimmAuf("Wortkarte", x.w, x.d); nimmAuf("Wortkarte", x.w, x.t); });
+daten(w, "TABLES").forEach(t => nimmAuf("Tabelle", t.id, t.b));
+KORREKTUR.forEach(t => t.errs.forEach(e => nimmAuf("Fehlersuche", t.id + ":" + e.w, e.k)));
+daten(w, "PROMPTS").forEach(x => {
+  nimmAuf("Schreibwerkstatt", x.id + ".tip", x.tip);
+  nimmAuf("Schreibwerkstatt", x.id + ".model", x.model);
+  (x.crit || []).forEach((c, i) => nimmAuf("Schreibwerkstatt", x.id + ".crit" + i, c));
+});
+daten(w, "SCENES").forEach(x => ["s", "model", "why", "alt"]
+  .forEach(f => nimmAuf("Schreibwerkstatt", x.id + "." + f, x[f])));
+daten(w, "PAIRS").forEach(x => ["bad", "good", "why", "note"]
+  .forEach(f => nimmAuf("Schreibwerkstatt", x.id + "." + f, x[f])));
+daten(w, "PHRASES").forEach(x => {
+  nimmAuf("Schreibwerkstatt", x.id + ".tip", x.tip);
+  (x.no || []).forEach((n, i) => nimmAuf("Schreibwerkstatt", x.id + ".no" + i, n));
+});
+nimmAuf("Spickzettel", "cheat", daten(w, "cheatHTML()"));
+/* Ein Wächter, der über BESTAND läuft, filtert mit dieser Hilfe auf seine Sorten —
+   und wer alles will, lässt sie weg. */
+const ausBestand = (...sorten) =>
+  sorten.length ? BESTAND.filter(x => sorten.includes(x.sorte)) : BESTAND;
+
 /* ---------- A · Datenbestand ---------- */
 const ids = new Set();
 let doppelt = 0;
@@ -42,6 +77,38 @@ const dokuZahlen = [
 const dokuSchief = dokuZahlen.filter(([, dok, app]) => dok !== app)
   .map(([was, d, a]) => was + ": CLAUDE.md " + d + ", App " + a);
 P.ok("Die Zahlen in CLAUDE.md stimmen mit der App überein", !dokuSchief.length, dokuSchief.join(" · "));
+
+/* Dieselbe Tabelle, andere Frage: Ist jeder Datenbestand, den sie nennt, auch in BESTAND
+   vertreten? Nur dann können die Wächter darunter ihn überhaupt sehen. Kommt eine Zeile
+   dazu — ein neuer Datenbestand —, wird dieser Lauf rot, bis jemand ihn oben einträgt.
+   Genau das hat zweimal gefehlt: Die Rangbehauptungsprüfung übersah erst die Wortkarten,
+   dann die Schreibwerkstatt, die Fehlersuche, die Tabellen und den Spickzettel. */
+const KONSTANTE_ZU_SORTE = {
+  ALL: "Übung", WORDS: "Wortkarte", RULES_ALL: "Regel", SATZ: "Satzkarte",
+  CASEREF: "Fallkarte", TABLES: "Tabelle", KORREKTUR: "Fehlersuche",
+  CHECKS_ALL: "Prüfmuster", PROMPTS: "Schreibwerkstatt",
+};
+const tabelle = doku.slice(doku.indexOf("### Datenbestände"), doku.indexOf("**Kategorien"));
+const zeilenDerTabelle = tabelle.split("\n")
+  .filter(z => z.startsWith("|") && z.includes("`") && !z.includes("Konstante") && !z.includes("---"));
+const sortenDa = new Set(BESTAND.map(x => x.sorte));
+const bestandLuecken = [];
+zeilenDerTabelle.forEach(z => {
+  const namen = (z.match(/`([A-Z_][A-Z_0-9]*)`/g) || []).map(x => x.replace(/`/g, ""));
+  const bekannt = namen.filter(n => n in KONSTANTE_ZU_SORTE);
+  if (!bekannt.length) { bestandLuecken.push("Zeile ohne bekannte Konstante: " + namen.join(", ")); return; }
+  bekannt.forEach(n => {
+    if (!sortenDa.has(KONSTANTE_ZU_SORTE[n]))
+      bestandLuecken.push(n + " → Sorte „" + KONSTANTE_ZU_SORTE[n] + "“ fehlt in BESTAND");
+  });
+});
+P.ok("Jeder Datenbestand aus der Tabelle steckt in BESTAND (" + zeilenDerTabelle.length +
+  " Zeilen, " + sortenDa.size + " Sorten, " + BESTAND.length + " Felder)",
+  !bestandLuecken.length, bestandLuecken.join(" · "));
+/* Positivprobe: Ohne die Wortkarten — der Stand vor dem 21.09.2026 — muss sie anschlagen. */
+P.ok("Die Bestandsprüfung erkennt eine fehlende Sorte",
+  !new Set(BESTAND.filter(x => x.sorte !== "Wortkarte").map(x => x.sorte)).has("Wortkarte"),
+  "Positivprobe blieb stumm");
 
 /* Dieselbe Falle ein drittes Mal, diesmal in der App selbst: Ihre Kommentare begründen
    Entscheidungen mit Bestandszahlen — „320 der 699 Karten waren über Heute unerreichbar“,
@@ -335,20 +402,17 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Übung g07":            "„die meisten wissen das“ ist der Beispielsatz der Aufgabe",
     "Übung m02":            "„die häufigsten“ meint die häufigsten Präpositionen, kein Fehlerranking",
     "Übung q25":            "Frage nach dem, was Leitfäden raten",
+    "Schreibwerkstatt w05.tip":  "„die beste Übung gegen Wortballast“ ist ein Rat zur Übung, kein Befund über Fehler",
+    "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieser einen Mail, nicht eine Rangordnung",
+    "Schreibwerkstatt pr29.good": "„was ist der beste Weg, dich zu erreichen?“ ist wörtliche Rede in einer Musterformulierung",
+    "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
+    "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
   };
   const rangStellen = new Set();
   const sammle = (art, id, t) => { if (t && RANG.test(String(t).replace(/<[^>]+>/g, " "))) rangStellen.add(art + " " + id); };
-  RA.forEach(r => sammle("Regel", r.id, r.b));
-  SATZ.forEach(x => sammle("Satzkarte", x.id, x.b));
-  ALL.forEach(i => { sammle("Übung", i.id, i.e); sammle("Übung", i.id, i.q); });
-  daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||''}))").forEach(c => sammle("Prüfmuster", c.id, c.k));
-  CASEREF.forEach(e => sammle("Fallkarte", e.w, e.n));
-  /* Die Wortkarten fehlten hier bis zum 21.09.2026 — dieselbe Falle wie „Kartensorte
-     verschwindet“, nur im Prüflauf: Der Wächter sah fünf Bestände und einen nicht, und
-     genau dort stand eine Rangbehauptung („das meistverwechselte Paar der deutschen
-     Sprache“, Karte scheinbar / anscheinend). Geprüft werden Bedeutung und Abgrenzung;
-     das Beispiel bleibt draußen, dort sind Superlative Sprachmaterial. */
-  WORDS.forEach(x => { sammle("Wortkarte", x.w, x.d); sammle("Wortkarte", x.w, x.t); });
+  /* Läuft über den gemeinsamen Bestand von oben — keine eigene Sammlung mehr,
+     damit hier nie wieder eine Sorte fehlen kann. */
+  BESTAND.forEach(x => sammle(x.sorte, x.id, x.t));
   const neu = [...rangStellen].filter(x => !(x in ERLAUBT));
   P.ok("Keine ungelistete Rangbehauptung (" + rangStellen.size + " Stellen, " +
     Object.keys(ERLAUBT).length + " begründet erlaubt)", !neu.length, neu.join(" · "));
@@ -482,9 +546,18 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     if (GEZAEHLT.test(ohneTags(b))) zaehlStellen.add(art + " " + id);
     GEZAEHLT.lastIndex = 0;
   };
-  RA.forEach(r => zaehlSammle("Regel", r.id, r.b));
-  SATZ.forEach(x => zaehlSammle("Satzkarte", x.id, x.b));
-  P.ok("Keine Regel zählt ihre Ausnahmen", !zaehlStellen.size, [...zaehlStellen].join(" · "));
+  /* Auch dieser Wächter las nur zwei Sorten. Eine gezählte Ausnahme kann überall stehen,
+     wo die App erklärt. Er läuft jetzt über denselben gemeinsamen Bestand. */
+  BESTAND.forEach(x => zaehlSammle(x.sorte, x.id, x.t));
+  /* Was zählen darf, steht hier mit Grund. */
+  const ZAEHL_ERLAUBT = {
+    "Übung p22": "„Einzige Ausnahme sind Laden- und Firmennamen“ — die Zählung gilt dem Genitiv-s, und dort stimmt sie; der Apostroph vor -sch ist keine Genitivform",
+  };
+  const zaehlNeu = [...zaehlStellen].filter(x => !(x in ZAEHL_ERLAUBT));
+  P.ok("Keine ungelistete gezählte Ausnahme (" + zaehlStellen.size + " Stellen, " +
+    Object.keys(ZAEHL_ERLAUBT).length + " begründet erlaubt)", !zaehlNeu.length, zaehlNeu.join(" · "));
+  const zaehlTot = Object.keys(ZAEHL_ERLAUBT).filter(x => !zaehlStellen.has(x));
+  P.ok("Keine tote Ausnahme in der Zählliste", !zaehlTot.length, zaehlTot.join(", "));
   /* Drei Positivproben: die Fassungen vom 16.09.2026, jede einzeln. */
   const zaehlProbe = (t) => { const r = GEZAEHLT.test(ohneTags(t)); GEZAEHLT.lastIndex = 0; return r; };
   P.ok("Der Zähl-Erkenner schlägt bei allen drei alten Fassungen an",
