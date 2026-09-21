@@ -365,7 +365,7 @@ const EINORDNUNG = [
   { was: "trotz", muss: [/Schweiz/, /Österreich/, /[Ss]üddeutschland|Süden Deutschlands/],
     stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"],
               ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
-  { was: "während", muss: [/umgangssprachlich/],
+  { was: "während", muss: [/umgangssprachlich/, /Schweiz/, /Westösterreich|Österreich/],
     stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
   { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
     stellen: [["Fallkarte", "statt / anstatt"]] },

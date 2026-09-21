@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 101 |
 | Fehlersuchtexte | 12 mit 86 markierten Fehlern |
-| Dateigröße | ~749 KB, eine Datei, kein Build |
+| Dateigröße | ~757 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -57,6 +57,83 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Die 381 Erklärungen, gegen ihre eigene Regel gelesen (21.09.2026, zwanzigste Runde).**
+
+Jede Übung trägt eine Erklärung und verweist auf eine Regel. Geprüft war bisher, dass der
+Verweis existiert — nicht, dass beide dasselbe sagen. Zwanzig Prüfer haben je rund zwanzig
+Erklärungen Satz für Satz gegen die Regel gelesen, in die sie zeigen; jede Meldung ist
+danach von einem Gegenprüfer angegriffen worden. Von 23 Meldungen hielten 18. Alle 18 habe
+ich vor dem Einbau selbst nachgeprüft, die strittigen mit je zwei verschieden formulierten
+Suchen.
+
+**Zwei Ablenker waren nicht sicher falsch** — Grundsatz 2, und beide, ohne dass jemand die
+Aufgabe je angefasst hätte:
+
+- `x05` fragte „Welche Form ist standardsprachlich?“ und wertete **gewunken** als falsch.
+  Der Duden führt seit 2005 „gewinkt, auch: gewunken“ ohne Zusatz, grammis (IDS) stuft
+  beide Partizipien als standardsprachlich ein. Die Einordnung „umgangssprachlich“ in der
+  App ist der Duden-Stand von 1998. Aus der Entscheidungsfrage ist eine Variantenfrage
+  geworden; `sa24` und die Quellenzeile daneben sind mitgezogen.
+- `f01` fragte nach der Anrede beim Erstkontakt mit einer Professorin und gab „Sehr geehrte
+  Frau Weber“ als richtig aus. Der Duden-Sprachratgeber trennt sauber: In der **Anrede**
+  steht der höchste Titel, ausgeschrieben, der Doktortitel entfällt daneben („Sehr geehrte
+  Frau Professorin Weber“); abgekürzt und vollständig steht er im **Anschriftenfeld**
+  („Frau Prof. Dr. Claudia Weber“). Damit war der Ablenker nicht schlechter als die
+  Antwort. Die Regel `form-anrede` trägt die Unterscheidung jetzt auch.
+
+Beide Karten stehen mit dem heutigen Datum in `NEU_GELERNT` und kommen einmal auf Fach 1
+zurück. **`npm run kalender` ist deshalb gelaufen** — alle sechs Versätze grün.
+
+**Der Rest waren Erklärungen, die absoluter klangen als ihre Regel.** `s03` sagte
+„Füllwörter schwächen jede Aussage“, während `stil-fuellwort` die Ausnahme fürs Gespräch
+selbst nennt (Grundsatz 3). `d18` nannte „während dem Vortrag“ nur
+umgangssprachlich, während `gram-genitiv` den Dativ für die Schweiz und Westösterreich
+auch geschrieben führt (Grundsatz 4) — jetzt steht beides da. `x07` schrieb, „wenn“
+passe **nur** bei Wiederholung oder in Gegenwart und Zukunft — der irreale Bedingungssatz
+steht auch für einen einzelnen Fall in der Vergangenheit. `d15` behauptete, im Dativ Plural
+ende auch das Substantiv auf -n; Plurale auf -s tun das nicht, und „den Trainings“ steht in
+derselben App. `m09` leitete „lateinische Neutra auf -um bilden den Plural auf -a“ her und
+widerlegte sich in der nächsten Zeile mit Zentren und Museen. `n16` und `gram-ndekl`
+beschrieben die n-Deklination als Sache der Personenbezeichnungen — Automat, Planet,
+Diamant und Satellit gehen genauso, und „am Automat“ war damit die naheliegende Folgerung.
+`r18` bot die Verlängerungsprobe für *seit/seid* an, wo sie nicht trägt. `v08` ließ das
+„meist“ und die fest ans Verb gebundenen Präpositionen weg, die `gram-kasusfinden` nennt.
+`f06` sagte, der Konjunktiv mache eine Bitte nicht höflicher, während `form-hedging` sagt,
+er trage die Höflichkeit allein — beides stimmt nur getrennt nach Frage und Feststellung.
+`q24` erklärte nur das Leerzeichen am Paragrafenzeichen und unterschied damit den dritten
+Ablenker („Abs 2.“) nicht. Und `z04` samt `sa04` behauptete, man höre „Komma, Verb, Verb“;
+zu hören sind die beiden Verben, die am Komma aneinanderstoßen („… müde **war**, **bin**
+ich …“).
+
+**Zwei Fehlerklassen, die kein Wächter sah.** Beide sind gefunden worden, weil dieselbe
+Behauptung in einer Formulierung stand, die knapp an der Erkennung vorbeiging:
+
+- *Der Superlativ ohne Artikel.* Der Rangwächter verlangte „der/die/das“ davor. `z23`
+  schrieb „**Häufigster** Stolperstein beim freien Sprechen“, `q01` „ist **am
+  verbreitetsten**“. Er prüft jetzt auch die artikellose Fassung — groß geschrieben und mit
+  Substantiv dahinter, damit „in häufigster Verwendung“ und „Beste Grüße“ draußen bleiben.
+- *Die Ausnahme mit Zahlwort gezählt.* Der Zählwächter kannte nur ausgeschriebene Formeln.
+  Sieben Stellen zählten mit einem Zahlwort: „gehört zu den drei Ausnahmen“ (`r17`), „Merk
+  dir die drei als Ausnahmen“ (`recht-wider`) und fünf Überschriften „Zwei Ausnahmen“. Bei
+  `gross-subst` und `sa04` stimmte die Zahl schon nicht mehr — beide nennen hinter der
+  Zählung noch einen weiteren Fall. Alle sieben zählen nicht mehr, die Listen sind
+  geblieben.
+
+Beide Wächter sind gegen den Bestand **vor** dieser Runde gegengeprobt: Sie werden dort rot
+und nennen genau z23, q01 und die elf Zählstellen.
+
+**Vier Fundstellen kamen beim Nachziehen dazu.** Die Aussage „klein bleiben die
+Zahladjektive“ stand an vier Stellen — `g03`, `g23`, dem Prüfmuster `y08` und in
+`gross-subst`. Nur die Regel nannte den Vorbehalt (groß ist zulässig, wenn der
+substantivische Charakter betont wird); die drei Kurzfassungen nicht. Und der Spickzettel
+zählte die drei „wider“-Ausnahmen weiter mit, nachdem `recht-wider` damit aufgehört hatte —
+dieselbe Zeile, die schon einmal hinterherhinkte.
+
+**Eine Prüfung ist schärfer geworden.** `tests/inhalt.js` verlangte für „während“ nur das
+Wort „umgangssprachlich“; die geografische Hälfte der Landkarte stand nur auf der
+Fallkarte. Genau in die Lücke ist meine erste Fassung von `d18` gefallen. Beide Hälften
+werden jetzt an beiden Stellen verlangt.
 
 **Kein Wächter sammelt mehr selbst (21.09.2026, neunzehnte Runde).**
 
@@ -95,7 +172,7 @@ hinzufügt und ihn in der Tabelle einträgt, bekommt einen roten Lauf, bis der B
 gesammelt wird. Eine Positivprobe zeigt, dass sie eine fehlende Sorte erkennt.
 
 `npm run kalender` war nicht nötig: An Lernlogik, `NEU_GELERNT` und den Fixtures hat sich
-nichts geändert. Die Dateigröße in CLAUDE.md und hier steht jetzt auf 749 KB.
+nichts geändert. Die Dateigröße in CLAUDE.md und hier stand danach auf 749 KB.
 
 **Die Deklinationstabellen, gegen ein Paradigma gestellt (21.09.2026, achtzehnte Runde).**
 

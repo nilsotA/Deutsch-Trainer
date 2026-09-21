@@ -392,7 +392,14 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      Quelle, die der Erkenner nicht sah, weil er nur eine feste Liste von Superlativen kannte.
      „die meisten“ bleibt getrennt behandelt; ausgenommen ist es über den Eintrag zu
      gross-subst, wo „das Meiste“ das Beispielwort der Regel ist. */
-  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+häufigsten(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
+     „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
+     häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
+     Fassung prüft gross geschrieben und verlangt ein Substantiv dahinter, sonst
+     träfe sie Wendungen wie „in häufigster Verwendung“. „Best…“ und „Schwerst…“
+     bleiben draussen: „Beste Grüße“ und „Besten Dank“ sind Formeln, keine Befunde. */
+  const RANG_OHNE_ARTIKEL = /(?:^|[^\wäöüßÄÖÜ])(?:Häufigst|Größt|Schlimmst|Wichtigst|Verbreitetst|Typischst)(?:er|e|es)\s+[A-ZÄÖÜ][a-zäöüß]/;
   const ERLAUBT = {
     "Regel gross-subst":    "„das Beste“ und „die meisten“ sind dort die Beispielwörter der Regel",
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
@@ -406,10 +413,13 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieser einen Mail, nicht eine Rangordnung",
     "Schreibwerkstatt pr29.good": "„was ist der beste Weg, dich zu erreichen?“ ist wörtliche Rede in einer Musterformulierung",
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
+    "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",
     "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
   };
   const rangStellen = new Set();
-  const sammle = (art, id, t) => { if (t && RANG.test(String(t).replace(/<[^>]+>/g, " "))) rangStellen.add(art + " " + id); };
+  const rang = t => { const s = String(t).replace(/<[^>]+>/g, " ");
+    return RANG.test(s) || RANG_OHNE_ARTIKEL.test(s); };
+  const sammle = (art, id, t) => { if (t && rang(t)) rangStellen.add(art + " " + id); };
   /* Läuft über den gemeinsamen Bestand von oben — keine eigene Sammlung mehr,
      damit hier nie wieder eine Sorte fehlen kann. */
   BESTAND.forEach(x => sammle(x.sorte, x.id, x.t));
@@ -418,13 +428,20 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     Object.keys(ERLAUBT).length + " begründet erlaubt)", !neu.length, neu.join(" · "));
   /* Positivprobe: Der Erkenner muss anschlagen, sonst ist die Liste eine leere Zusage. */
   const probe = new Set();
-  const sammle2 = (art, id, t) => { if (t && RANG.test(String(t))) probe.add(art + " " + id); };
+  const sammle2 = (art, id, t) => { if (t && rang(t)) probe.add(art + " " + id); };
   sammle2("Regel", "probe-rang", "<p>Das ist der häufigste Fehler in Alltagstexten.</p>");
   sammle2("Wortkarte", "probe-meist", "<p>Das meistverwechselte Paar der deutschen Sprache.</p>");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 2, "Positivprobe blieb stumm");
+  /* Die beiden Fassungen vom 21.09.2026, wörtlich aus z23 und q01. */
+  sammle2("Übung", "probe-z23", "<p>Ein <b>Anakoluth</b>. Häufigster Stolperstein beim freien Sprechen.</p>");
+  sammle2("Übung", "probe-q01", "<p>Die Zeitungskonvention ist am verbreitetsten.</p>");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 4, "Positivprobe blieb stumm");
   const leer = new Set();
-  const sammle3 = (art, id, t) => { if (t && RANG.test(String(t))) leer.add(art + " " + id); };
+  const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
+  /* Gegenprobe zum artikellosen Erkenner: kleingeschrieben ist es keine Behauptung
+     über eine Rangordnung, sondern eine gewöhnliche Fügung. */
+  sammle3("Regel", "probe-klein", "<p>Das Wort steht in häufigster Verwendung.</p>");
+  sammle3("Regel", "probe-gruss", "<p>Beste Grüße und besten Dank für die Rückmeldung.</p>");
   P.ok("… und schweigt bei einem Satz ohne Rangformel", leer.size === 0, "Gegenprobe schlug an");
 }
 
@@ -539,7 +556,15 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
    Keine Ausnahmenliste hier: Wer künftig eine Ausnahme zaehlt, soll das begründen müssen —
    und die einfachste Begründung ist, sie nicht zu zaehlen, sondern den Mechanismus zu nennen. */
 {
-  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine)/gi;
+  /* Am 21.09.2026 kam das Zahlwort dazu. Der Erkenner kannte nur ausgeschriebene
+     Formeln und sah deshalb sieben Stellen nicht, die genauso zählen: „gehört zu den
+     drei Ausnahmen“ (r17), „Merk dir die drei als Ausnahmen“ (recht-wider), dazu fünf
+     Überschriften „Zwei Ausnahmen“. Bei zwei davon stimmte die Zahl schon nicht mehr —
+     gross-subst und sa04 nennen hinter der Zählung noch einen weiteren Fall, sa04 seit
+     je … desto dazukam. Das Zwischenwort in (?:[\wäöüßÄÖÜ]+\s+)? fängt „die drei als Ausnahmen“.
+     „eine Ausnahme“ allein bleibt draussen: „Eine Ausnahme ist X“ führt eine ein,
+     statt den Vorrat zu beziffern. */
+  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+)?Ausnahmen)/gi;
   const ohneTags = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   const zaehlStellen = new Set();
   const zaehlSammle = (art, id, b) => {
@@ -565,6 +590,16 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     zaehlProbe("<p><b>Eine Ausnahme, und nur diese:</b> Steht im Hauptsatz ein Korrelat …</p>") &&
     zaehlProbe("<p>Das <b>Kasussignal</b> muss <b>genau einmal</b> im Ausdruck vorkommen …</p>"),
     "Positivprobe blieb stumm");
+  /* Und bei den Fassungen mit Zahlwort vom 21.09.2026, mit und ohne Zwischenwort. */
+  P.ok("… und beim Zahlwort vor der Ausnahme",
+    zaehlProbe("<p>„widerspiegeln“ gehört zu den drei Ausnahmen, in denen „wider“ „zurück“ heißt.</p>") &&
+    zaehlProbe("<p>… trotzdem ohne e. Merk dir die drei als Ausnahmen.</p>") &&
+    zaehlProbe("<p><b>Zwei Ausnahmen:</b> am + Superlativ bleibt klein …</p>"),
+    "Positivprobe blieb stumm");
+  /* Gegenprobe: eine einzelne eingeführte Ausnahme beziffert den Vorrat nicht. */
+  P.ok("… und schweigt bei der eingeführten einzelnen Ausnahme",
+    !zaehlProbe("<p>Eine Ausnahme ist der doppelte Infinitiv: Dort rückt das Verb davor.</p>"),
+    "Gegenprobe schlug an");
   /* Gegenprobe: ein hinweisendes „nur diese" ist keine gezählte Ausnahme. So steht es in
      komma-adjektive („nur diese Auflage ist überarbeitet") — ohne diese Trennung wäre die
      Prüfung dort grundlos rot. */
