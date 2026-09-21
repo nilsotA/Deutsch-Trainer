@@ -10,12 +10,31 @@ const APP = path.join(__dirname, "..", "Deutsch-Trainer.html");
 const KEY = "deutschtrainer.v1";
 const HTML = fs.readFileSync(APP, "utf8");
 
-/* Datum als YYYY-MM-DD, wahlweise verschoben */
+/* Kalenderversatz für die Prüfläufe. `DT_TAGE=30 npm test` verschiebt den heutigen Tag
+   um 30 Tage — für die App und für die Prüfläufe gleichermaßen. Gebraucht wird das, weil
+   ein Prüflauf still rot werden kann, sobald der Kalender weiterläuft: `regelAenderungen()`
+   setzt Karten aus NEU_GELERNT je nach Datum zurück oder nicht. Genau daran stand
+   tests/lernen.js, Abschnitt J am 21.09.2026 rot, nachdem er am 16.09. noch grün war.
+   `npm run kalender` fährt die Läufe über mehrere Versätze. */
+const TAGE = Number(process.env.DT_TAGE || 0);
+
+/* Datum als YYYY-MM-DD, wahlweise verschoben — TAGE kommt immer obendrauf */
 function tag(versatz = 0) {
   const d = new Date();
-  d.setDate(d.getDate() + versatz);
+  d.setDate(d.getDate() + versatz + TAGE);
   d.setHours(12, 0, 0, 0);
   return d.toISOString().slice(0, 10);
+}
+
+/* Verschiebt die Uhr im jsdom-Fenster. Das Fenster hat einen eigenen V8-Kontext mit
+   eigenem Date — Node zu patchen reicht also nicht. Ohne Versatz passiert nichts. */
+function uhrStellen(w) {
+  if (!TAGE) return;
+  w.eval("(function(){ var E = Date, ms = " + (TAGE * 86400000) + ";" +
+    " function D(){ if(arguments.length) return new (Function.prototype.bind.apply(E, [null].concat([].slice.call(arguments))));" +
+    " return new E(E.now() + ms); }" +
+    " D.prototype = E.prototype; D.now = function(){ return E.now() + ms; };" +
+    " D.parse = E.parse; D.UTC = E.UTC; Date = D; })()");
 }
 
 /* App starten. `stand` wird vorher in den localStorage gelegt. */
@@ -25,6 +44,7 @@ function boot(stand, optionen = {}) {
     pretendToBeVisual: true,
     url: "http://localhost/",
     beforeParse(w) {
+      uhrStellen(w);
       /* optionen.roh legt den Lernstand als Rohtext ab — für beschädigte Datensätze,
          die sich als Objekt gar nicht ausdrücken lassen. */
       if (optionen.roh !== undefined) w.localStorage.setItem(KEY, optionen.roh);

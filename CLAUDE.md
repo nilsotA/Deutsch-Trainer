@@ -274,7 +274,13 @@ node tests/unterwegs.js   # Kartenmix, Automatik, Rückblick, Fehlerrunde
 node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
+npm run kalender          # dieselben Läufe über sechs Kalenderversätze (dauert Minuten)
 ```
+
+**`npm run kalender` gehört nicht in `npm test`**, aber vor jeden Commit, der an der
+Lernlogik, an `NEU_GELERNT` oder an einem Fixture mit Fälligkeiten rührt. Er fährt die
+Prüfläufe mit verschobener Uhr (`DT_TAGE`, verschiebt Prüflauf **und** App-Fenster) und
+fängt die Läufe, die still rot werden, sobald der Kalender weiterläuft.
 
 Jeder Lauf endet mit „Alles bestanden.“ oder einer Fehlerliste und Exitcode 1.
 
@@ -325,6 +331,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Spickzettel hinkt der Regel hinterher | Der Spickzettel schreibt Regeln handgeschrieben nach. Die Regel `recht-wider` führt „widerspiegeln“ seit Langem als eine der drei Ausnahmen, in denen „wider“ nicht „gegen“, sondern „zurück“ heißt — im Spickzettel und in der Erklärung des Prüfmusters x15 stand es weiter als Beispiel für „wider = gegen“. Wer eine Regel korrigiert, muss die Kurzfassungen mitziehen; `tests/inhalt.js`, Abschnitt K hält die geprüften Zeilen fest. |
 | Eine Regel zählt ihre Ausnahmen | „mit einer Ausnahme“, „und nur diese“, „genau einmal“ sind Absolutaussagen, die ohne „immer“ und „nie“ auskommen — der Wortwächter aus Grundsatz 5 sieht sie nicht. Alle drei waren zu knapp gezählt: sa02 übersah den irrealen Vergleich mit bloßem „als“ („Er tut, als wäre er der Trainer“), sa04 übersah `je … desto` (obwohl die App genau diesen Satz in k08 führt), sa13 übersah die Parallelflexion („bei gutem, warmem Wetter“). `tests/suite.js` lässt seitdem keine gezählte Ausnahme mehr durch — wer eine Ausnahme zählen will, nennt besser den Mechanismus. |
 | Zwei Fassungen derselben Liste | Abschnitt 8 des Spickzettels ist keine Kurzfassung von `satz-sprechen`, sondern eine zweite Fassung derselben zwei Listen. Sie liefen auseinander: „mit was“ statt „womit“ stand im Spickzettel, in der Regel nicht. `tests/inhalt.js`, Abschnitt K prüft beide Seiten gegen dieselben Stichwörter. |
+| Prüflauf wird ohne Änderung rot | `tests/lernen.js`, Abschnitt J stand am 21.09.2026 rot, nachdem er am 16.09. grün war — niemand hatte etwas geändert. Das Fixture legte 40 Karten auf Fach 5 mit Fälligkeit heute+20, also letzter Antwort heute−15. `k20` steht mit dem 04.09. in `NEU_GELERNT`: Bis zum 19.09. lag heute−15 davor, `regelAenderungen()` setzte die Karte zurück, und die Ansicht zeigte 39 statt 40. Eine zweite Zusicherung im selben Abschnitt war schon vorher mit „24 oder 25“ umschifft worden — dieselbe Falle, einmal zugeschnappt und nicht erkannt. **Fixtures ziehen ihre IDs jetzt aus dem Bestand und filtern gegen `NEU_GELERNT`**, und `npm run kalender` fährt alles über sechs Versätze. |
 | Dieselbe Grenze, andersherum | Weil ä, ö, ü und ß keine Wortzeichen sind, endet „Brüder“ für JavaScript auf einer Wortgrenze plus „der“. Ein mit `\b` verankertes Muster springt dort **mitten im Wort** an: y05 hielt „Alle Brüder gleiche Chancen“ für einen Zweifelsfall, x23 meldete „Grüße aus dem Süden Herr Meier war auch da“ als harten Fehler. Das Dehnen auf ganze Wörter macht es schlimmer, nicht besser — angestrichen wird „Süden Herr“. `tests/suite.js` sucht die Paarung jetzt selbst: verankerte ASCII-Alternative gegen jedes Wort mit Umlaut aus dem eigenen Bestand. |
 
 ## 7 · Wenn Nils etwas ergänzt haben will

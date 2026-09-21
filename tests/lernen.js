@@ -629,13 +629,29 @@ P.titel("J · Ansicht nach Import und Zurücksetzen");
      stand oben „🔥 21 · 4300 XP“ und der Toast „Sicherung geladen“, zwei Zeilen darunter
      unverändert „0 sitzt sicher · 696 noch nicht dran“. Beim Zurücksetzen dasselbe
      rückwärts: der Speicher war leer, die Zeile zeigte weiter die alten Zahlen. */
+  /* Die Kartenmenge muss unabhängig vom Kalender sein. Steht eine ID in NEU_GELERNT,
+     setzt regelAenderungen() sie je nach heutigem Datum auf Fach 1 zurück — oder eben
+     nicht —, und die Zahl in der Zeile wackelt. Genau daran ging dieser Abschnitt am
+     21.09.2026 rot: k20 steht mit dem 04.09. in NEU_GELERNT; die Karte liegt auf Fach 5
+     mit Fälligkeit heute+20, die letzte Antwort also bei heute−15. Bis zum 19.09. lag
+     die vor dem 04.09. (Rücksetzer, 39 sitzt sicher), seitdem dahinter (kein Rücksetzer,
+     40). Die zweite Zusicherung unten hatte man damals mit „24 oder 25“ umschifft,
+     statt die Ursache zu beseitigen. Jetzt werden die IDs aus dem Bestand gezogen und
+     gegen NEU_GELERNT gefiltert — das hält auch, wenn dort etwas dazukommt. */
+  const wRef = boot(null);
+  const neuGelernt = Object.keys(daten(wRef, "NEU_GELERNT"));
+  const frei = daten(wRef, 'ALL.filter(i=>i.t!=="fill").map(i=>i.id)')
+    .filter(id => !neuGelernt.includes(id)).slice(0, 40);
+  P.ok("die Kartenmenge hängt nicht am Kalender",
+    frei.length === 40 && !frei.some(id => neuGelernt.includes(id)),
+    frei.length + " IDs, davon aus NEU_GELERNT: " + frei.filter(id => neuGelernt.includes(id)).join(", "));
   const cards = {};
-  for (let i = 1; i <= 40; i++) cards["k" + String(i).padStart(2, "0")] = { b: 5, d: tag(20), s: 6, w: 0 };
+  frei.forEach(id => cards[id] = { b: 5, d: tag(20), s: 6, w: 0 });
   const w = boot(leererStand({ xp: 400, streak: 9, cards }));
   const d = w.document;
   w.eval('go("fortschritt")');
   const zeile = () => d.querySelector("#statHost").textContent.replace(/\s+/g, " ");
-  P.ok("vorher steht der gelernte Stand da", /39\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
+  P.ok("vorher steht der gelernte Stand da", /40\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
 
   d.querySelector("#rst").click();                       // confirm() ist im Prüflauf immer ja
   P.ok("der Speicher ist zurückgesetzt", daten(w, "S.streak") === 0 && daten(w, "S.xp") === 0);
@@ -651,7 +667,7 @@ P.titel("J · Ansicht nach Import und Zurücksetzen");
     "); save(); regelAenderungen(); renderAll();");   // genau die Schritte des Import-Rückrufs
   P.ok("nach dem Laden einer Sicherung stimmt die Kopfzeile",
     d.querySelector("#hudStreak").textContent.includes("21"));
-  P.ok("und die Ansicht darunter genauso", /2[45]\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
+  P.ok("und die Ansicht darunter genauso", /25\s*sitzt sicher/.test(zeile()), zeile().slice(0, 100));
 }
 {
   /* Gegenstück: die laufende Einstufung darf renderFortschritt() nicht wegzeichnen. */

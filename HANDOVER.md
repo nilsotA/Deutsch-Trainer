@@ -58,6 +58,36 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ein Prüflauf, der ohne Änderung rot wird (21.09.2026, fünfzehnte Runde).**
+
+`npm test` war am 16.09. grün und stand am 21.09. rot — ohne dass jemand etwas geändert
+hätte. `tests/lernen.js`, Abschnitt J legte 40 Karten auf Fach 5 mit Fälligkeit heute+20,
+die letzte Antwort also bei heute−15. `k20` steht mit dem 04.09. in `NEU_GELERNT`: Bis zum
+19.09. lag heute−15 davor, `regelAenderungen()` setzte die Karte auf Fach 1 zurück, und die
+Ansicht zeigte 39 statt 40. Danach nicht mehr. Die App war die ganze Zeit in Ordnung — der
+Prüflauf hing am Kalender.
+
+Auffällig war dabei die zweite Zusicherung desselben Abschnitts: Sie stand auf
+„24 oder 25 sitzt sicher“. Dieselbe Falle hatte also schon einmal zugeschnappt, und
+jemand hatte sie mit einer Toleranz umschifft, statt die Ursache zu beseitigen.
+
+**Behoben, nicht umschifft.** Das Fixture zieht seine IDs jetzt aus dem Bestand und filtert
+gegen `NEU_GELERNT`; beide Zahlen stehen wieder fest (40 und 25). Eine eigene Zusicherung
+sagt, dass die Kartenmenge nicht am Kalender hängt — wer später eine ID nachträgt, die
+kollidiert, liest den Grund, statt eine wackelnde Zahl zu sehen.
+
+**Die Prüfung dazu ist neu und heißt `npm run kalender`.** `tests/setup.js` liest `DT_TAGE`
+und verschiebt beide Uhren: die des Prüflaufs und die im jsdom-Fenster. Das Fenster hat
+einen eigenen V8-Kontext mit eigenem `Date`, Node allein zu patchen reicht also nicht.
+`tests/kalender.js` fährt suite, inhalt, unterwegs und lernen über sechs Versätze
+(0, 1, 7, 40, 200, 400 Tage) — 24 Läufe, alle grün. Gegen die alte Fassung ist er bei
+DT_TAGE=−10 grün und bei 0 rot, mit Exitcode 1; der Fehlerpfad ist also mitgeprüft.
+
+Der Lauf dauert Minuten und gehört deshalb nicht in `npm test`, wohl aber vor jeden
+Commit, der an der Lernlogik, an `NEU_GELERNT` oder an einem Fixture mit Fälligkeiten
+rührt. Andere Fixtures greifen ebenfalls auf `k20` und `g05` zu (`K.aufgaben.slice(…)`,
+`"k"+padStart`); sie halten heute, aber das weiß man erst seit diesem Durchlauf.
+
 **Die 20 unbelegten Grammatik- und Satzregeln (16.09.2026, vierzehnte Runde).**
 
 Punkt 1 der Ideenliste, der große Rest: 20 der 35 `gram-` und `satz-`Regeln nannten keine
