@@ -90,6 +90,23 @@ const P = pruefer("A · Erster Start und Einstufung");
     const kats = daten(w, "buildDaily().map(q=>q.cat)");
     const anteil = kats.filter(c => c === fokus).length / kats.length;
     P.ok("Tagesaufgabe zieht aus dem Schwerpunkt", anteil >= 0.25, Math.round(anteil * 100) + " %");
+    /* Die Planansicht versprach bis zum 22.09.2026, „die Hälfte der Tagesaufgabe“ komme aus
+       dem Schwerpunkt. buildDaily() reserviert aber keine Hälfte, es zieht neuen Stoff
+       zuerst aus dem Schwerpunkt; Wiederholungen gehen nach Termin vor. In einem Lauf über
+       sechs Wochen mit lauter richtigen Antworten waren es in den ersten zwei Wochen 5 bis 8
+       von 12 Karten, ab der dritten 0 bis 2 — der Rest waren fällige Wiederholungen. Die
+       Ansicht sagt jetzt, was der Code tut, und hier steht genau das: Solange es im
+       Schwerpunkt noch ungesehene Übungen gibt, ist jede neue Übung der Tagesaufgabe eine
+       aus dem Schwerpunkt. */
+    const neueUebungen = daten(w, "buildDaily().filter(q=>!/^[wc]:/.test(q.key)).map(q=>q.cat)");
+    const fremd = neueUebungen.filter(c => c !== fokus);
+    P.ok("Neue Übungen kommen zuerst aus dem Schwerpunkt", neueUebungen.length > 0 && !fremd.length,
+      fremd.join(","));
+    /* Am gerenderten Element, nicht am Quelltext: kurz ohne Plan zeichnen, dann zurück. */
+    const planText = String(w.eval("(function(){ const p = S.plan; S.plan = null; renderPlan();" +
+      " const t = $('#pSub').textContent; S.plan = p; renderPlan(); return t; })()"));
+    P.ok("Die Planansicht verspricht keinen festen Anteil", /zuerst aus dem Schwerpunkt/.test(planText) && !/Hälfte/.test(planText),
+      planText.slice(0, 160));
   }
 
   d.querySelector("#wkNew").click();
@@ -848,6 +865,40 @@ P.titel("L · Der lange Horizont");
     ohne.gesehen < ohne.gesamt / 2, ohne.gesehen + "/" + ohne.gesamt);
   P.ok("mit zwei Runden am Tag ist der ganze Bestand binnen vier Monaten durch",
     zwei.gesehen === zwei.gesamt, zwei.gesehen + "/" + zwei.gesamt);
+}
+
+/* ---------- M · Was die Oberfläche übers Zählen sagt ---------- */
+P.titel("M · Was die Oberfläche übers Zählen sagt");
+/* Bis zum 22.09.2026 stand unter den Kacheln „Graue Felder sind Tage ohne Tagesaufgabe“.
+   Gefärbt wird aber nach dem Tagesziel, und das zählt jede Antwort — tagesZiel() läuft aus
+   grade() heraus, egal ob Tagesaufgabe, Unterwegs-Runde oder Fehlerrunde. Ein Spaziergang
+   mit 20 Karten färbte das Feld, eine halbe Tagesaufgabe nicht. Die Legende nennt jetzt
+   das Tagesziel; hier steht beides nachgemessen, am gerenderten Element. */
+{
+  const w = boot(null);
+  const kachel = n => String(w.eval("(function(){ S.days = {}; for (let i = 0; i < " + n + "; i++) tagesZiel(true);" +
+    " PT.tab = 'ueber'; renderFortschritt(); const d = document.querySelectorAll('.dots .dot');" +
+    " return d[d.length - 1].className; })()"));
+  const ziel = w.eval("TAGESZIEL");
+  P.ok("ein Tag knapp unter dem Tagesziel bleibt grau", kachel(ziel - 1) === "dot", kachel(ziel - 1));
+  P.ok("ein Tag mit dem Tagesziel ist gefärbt, auch ohne Tagesaufgabe", /\bf[1-5]\b/.test(kachel(ziel)), kachel(ziel));
+  const legende = String(w.eval("(function(){ const d = document.querySelector('.dots'); return d.nextElementSibling.textContent; })()"));
+  P.ok("die Legende nennt das Tagesziel, nicht die Tagesaufgabe",
+    legende.includes("Tagesziel von " + ziel + " Karten") && !/ohne Tagesaufgabe/.test(legende), legende);
+}
+/* Dieselbe Klasse auf der Startseite: Über „Gezielt trainieren“ stand „Ohne Wertung für die
+   Serie“. Die Antworten laufen aber durch grade() und damit durch tagesZiel() — sie zählen
+   für die Serie und legen Lernkarten an. Nachgemessen am echten Klickweg. */
+{
+  const w = boot(null), d = w.document;
+  const text = d.querySelector("#freePractice").textContent;
+  const chip = d.querySelector("#catChips button");
+  chip.click();
+  tippe(w, d.querySelector(".opt"));
+  const heute = daten(w, "S.days[today()]") || {};
+  P.ok("eine Antwort im freien Üben zählt fürs Tagesziel", heute.a === 1, JSON.stringify(heute));
+  P.ok("und legt eine Lernkarte an", Object.keys(daten(w, "S.cards")).length === 1);
+  P.ok("die Startseite verspricht nichts anderes", !/[Oo]hne Wertung/.test(text) && /Tagesziel/.test(text), text.trim().slice(0, 120));
 }
 
   P.abschluss();

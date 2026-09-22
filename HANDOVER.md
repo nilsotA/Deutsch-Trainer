@@ -58,6 +58,48 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Oberflächentexte gegen den Code gelesen (22.09.2026, vierundzwanzigste Runde).**
+
+Bisher geprüft war der Inhalt — Regeln, Übungen, Karten, Werkstatt. Nicht geprüft waren die
+Sätze, mit denen die App sich selbst erklärt: Hilfetexte, Legenden, die Planansicht. Sie
+stehen im Logikteil, gehören zu keinem Datenbestand und laufen durch keinen Wächter. Ich
+habe die 168 längeren Texte dort gelesen und jede Zusage über das Verhalten am Code und
+an einer Messung nachgeprüft.
+
+**Drei Zusagen stimmten nicht:**
+
+- **Lernplan:** „Solange er läuft, kommt die Hälfte der Tagesaufgabe aus dem Schwerpunkt
+  der Woche.“ `buildDaily()` reserviert keine Hälfte; es zieht neuen Stoff zuerst aus dem
+  Schwerpunkt, Wiederholungen gehen nach Termin vor. Gemessen über sechs Planwochen mit
+  lauter richtigen Antworten: in den ersten zwei Wochen 5 bis 8 von 12 Karten aus dem
+  Schwerpunkt, ab der dritten 0 bis 2. Die Ansicht sagt jetzt, was der Code tut. Die
+  Prüfung dazu verlangte bisher nur 25 % am ersten Tag; jetzt: jede neue Übung kommt aus
+  dem Schwerpunkt, solange er ungesehene hat, und die Ansicht verspricht keinen Anteil.
+- **Kalenderkacheln:** „Graue Felder sind Tage ohne Tagesaufgabe.“ Gefärbt wird nach dem
+  Tagesziel von 12 Karten, gleich aus welcher Ansicht.
+- **Freies Üben:** „Ohne Wertung für die Serie.“ Jede Antwort läuft durch `grade()` und
+  `tagesZiel()` — sie zählt für die Serie und legt eine Lernkarte an. Am echten Klickweg
+  nachgemessen.
+
+Beide neuen Prüfungen stehen in `tests/lernen.js`, Abschnitt M, am gerenderten Element.
+
+**Offene Designfrage, nicht angefasst:** Dass der Plan ab Woche drei in der Tagesaufgabe
+kaum noch sichtbar ist, ist eine Folge der festen zwölf Plätze — Wiederholung geht vor.
+Wenn Nils den Plan wirklich spüren soll, bräuchte `buildDaily()` einen reservierten
+Anteil für fällige und neue Karten des Schwerpunkts. Das ändert die Lernlogik und gehört
+mit `npm run kalender` und einer Messung des Rückstands abgesprochen, nicht nebenbei.
+
+**Sonst in dieser Runde:** Die Tabellenansicht behauptete, hervorgehoben seien „die Felder,
+bei denen im Alltag die meisten Fehler passieren“ — hervorgehoben sind die verwechselbaren
+Formen (den/dem, mich/mir, dessen/deren), und das steht jetzt da. `tb10` hieß „Konjunktiv II
+der wichtigsten Verben“. Übrig gebliebene „fast jedem“ und „fast jeden Konflikt“ aus der
+Runde davor (Prüfmuster, Fehlersuche `kt09`, `pr29`, `form-kritik`) sind abgeschwächt.
+
+**Gemessen, nicht gebaut:** Ein Wächter über die Oberflächentexte müsste die String-Literale
+des Logikteils zuverlässig einsammeln. Ein Regex-Scan gerät dabei in Kommentare und
+typografische Anführungszeichen; brauchbar wäre nur ein Durchgang über alle gerenderten
+Ansichten. Der Scan hat inhaltlich keine weitere Rang- oder Absolutformel gefunden.
+
 **Stil- und Formulierungsregeln gelesen, Fallkartenhinweise dazu (22.09.2026, dreiundzwanzigste Runde).**
 
 Ohne Agenten, alles selbst gelesen: die 17 Stil- und 26 Formulierungsregeln (Punkt 1 der
