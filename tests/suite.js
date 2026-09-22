@@ -43,8 +43,23 @@ daten(w, "PHRASES").forEach(x => {
   (x.no || []).forEach((n, i) => nimmAuf("Schreibwerkstatt", x.id + ".no" + i, n));
 });
 nimmAuf("Spickzettel", "cheat", daten(w, "cheatHTML()"));
+/* Die Oberflächentexte: Hilfen, Legenden, Planansicht, Startseite. Sie stehen im Logikteil
+   und im Markup, in keinem Datenbestand — am 22.09.2026 versprachen drei von ihnen ein
+   Verhalten, das der Code nie hatte, und die Tabellenansicht behauptete, wo „die meisten
+   Fehler passieren“. Kein Wächter hatte sie gelesen. tests/literale.js sammelt sie ein. */
+const OBERFLAECHE = require("./literale").oberflaeche(require("fs").readFileSync(require("./setup").APP, "utf8"));
+OBERFLAECHE.forEach(x => nimmAuf("Oberfläche", x.id, x.t));
 /* Ein Wächter, der über BESTAND läuft, filtert mit dieser Hilfe auf seine Sorten —
    und wer alles will, lässt sie weg. */
+/* Der Tokenizer darf nicht still leer laufen oder Code für Text halten. */
+P.ok("Die Oberflächentexte sind eingesammelt (" + OBERFLAECHE.length + ")",
+  OBERFLAECHE.length >= 120 &&
+  OBERFLAECHE.some(x => x.t.startsWith("Zum Nachschlagen im Zweifelsfall")) &&
+  OBERFLAECHE.some(x => x.t.startsWith("Such dir ein Thema aus")),
+  OBERFLAECHE.length + " Texte");
+P.ok("… und keiner davon ist ein Codefetzen",
+  !OBERFLAECHE.some(x => /\bfunction\b|=>|\)\s*\{|;\s*(const|let)\b/.test(x.t)),
+  OBERFLAECHE.filter(x => /\bfunction\b|=>|\)\s*\{|;\s*(const|let)\b/.test(x.t)).map(x => x.t.slice(0, 60)).join(" · "));
 const ausBestand = (...sorten) =>
   sorten.length ? BESTAND.filter(x => sorten.includes(x.sorte)) : BESTAND;
 
@@ -191,6 +206,31 @@ ALL.forEach(i => {
   if (i.o.some(o => !String(o).trim())) schief++;
 });
 P.ok("Antwortangaben gültig", schief === 0, schief);
+
+/* Tippaufgaben werden über norm() verglichen: klein geschrieben, Anführungszeichen und
+   Schlusszeichen entfernt. Was eine Aufgabe dieser Kategorien prüft — Großschreibung,
+   Komma, Satzzeichen —, würde also vor dem Vergleich weggeworfen, und „im voraus“ zählte
+   als richtig. Am 22.09.2026 gemessen: 44 Tippaufgaben, alle in recht, gram und satz.
+   Die Prüfung hält das fest, bevor jemand eine Tippaufgabe zur Großschreibung ergänzt.
+   Zusätzlich: Zwei akzeptierte Antworten, die nach norm() gleich sind, sind doppelt, und
+   eine Antwort, die norm() verändert, verspricht eine Unterscheidung, die es nicht gibt. */
+{
+  const OHNE_TIPP = ["gross", "komma", "zeichen"];
+  const normApp = s => daten(w, "norm(" + JSON.stringify(s) + ")");
+  const tipp = ALL.filter(i => i.t === "fill");
+  const falscheKat = tipp.filter(i => OHNE_TIPP.includes(i.c)).map(i => i.id);
+  P.ok("Keine Tippaufgabe prüft, was norm() wegwirft (" + tipp.length + " Tippaufgaben)",
+    !falscheKat.length, falscheKat.join(","));
+  const verformt = [];
+  tipp.forEach(i => {
+    const n = i.a.map(normApp);
+    if (new Set(n).size !== n.length) verformt.push(i.id + " doppelt");
+    i.a.forEach((a, k) => { if (n[k] !== a.toLowerCase().trim()) verformt.push(i.id + " „" + a + "“"); });
+  });
+  P.ok("… und keine akzeptierte Antwort hängt an Schlusszeichen oder Anführung", !verformt.length, verformt.join(" · "));
+  P.ok("… und norm() wirft Groß- und Kleinschreibung wirklich weg (Positivprobe)",
+    normApp("Im Voraus.") === normApp("im voraus"), "norm() unterscheidet jetzt Groß und Klein — dann darf die Liste oben kürzer werden");
+}
 
 let fehlmark = 0, dopmark = 0;
 KORREKTUR.forEach(t => {
@@ -423,6 +463,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
     "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",
     "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
+    "Oberfläche Stand der Prüfung Rund": "„Der häufigste Befund“ ist gezählt: 31 von 58 gehaltenen Meldungen der Prüfmusterrunde",
     "Satzkarte sa20":        "„der schnellste Läufer“ ist das Beispiel für den Superlativ, keine Aussage über Sprache",
   };
   const rangStellen = new Set();
@@ -448,7 +489,10 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   sammle2("Schreibwerkstatt", "probe-w04", "Präzise Beschreibung ist die härteste Schule für Sprachgenauigkeit.");
   sammle2("Übung", "probe-f45", "Warum ist „Wir müssen reden“ die schlechteste Gesprächseröffnung?");
   sammle2("Regel", "probe-mitgefuehl", "Genau derjenige, der Hilfe braucht, fragt am seltensten danach.");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 8, "Positivprobe blieb stumm");
+  /* Die Fassung der Tabellenansicht vor dem 22.09.2026 — der Fund, der den Oberflächentexten
+     einen Platz in BESTAND verschafft hat. */
+  sammle2("Oberfläche", "probe-tabellen", "Zum Nachschlagen im Zweifelsfall. Hervorgehoben sind die Felder, bei denen im Alltag die meisten Fehler passieren.");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 9, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -515,6 +559,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const WEICH = /(fast|nicht|meist|so gut wie|beinahe|nahezu|wann)\s+$/i;
   const FEST = /^(immer\s+wenn|immer\s+noch)/i;
   const ABS_ERLAUBT = {
+    "Oberfläche und hast noch nie": "„… und hast noch nie gesichert“ beschreibt den Lernstand, keine Sprachregel",
     "Regel gram-kasus":  "„über beim Thema immer Akkusativ“ und „vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
     "Regel gram-wechsel": "dieselbe Aussage über Themen mit „über“",
     "Satzkarte sa16":     "Satzkarte zu gram-wechsel, trägt denselben Satz",
@@ -568,6 +613,8 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   daten(w, "SCENES.map(p=>({id:p.id,why:p.why||\"\",alt:p.alt||\"\"}))").forEach(p => {
     absSammle("Situation", p.id, p.why); absSammle("Situation", p.id, p.alt);
   });
+  /* Und die Oberfläche: Sie rät in der Stimme der App wie die Werkstatt. */
+  ausBestand("Oberfläche").forEach(x => absSammle("Oberfläche", x.id, x.t));
   const absNeu = [...absStellen].filter(x => !(x in ABS_ERLAUBT));
   P.ok("Kein ungelistetes Absolutwort in Regeln, Satzkarten, Prüfmustern und Werkstatt (" + absStellen.size +
     " Stellen, " + Object.keys(ABS_ERLAUBT).length + " begründet erlaubt)", !absNeu.length, absNeu.join(" · "));
@@ -626,6 +673,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   /* Was zählen darf, steht hier mit Grund. */
   const ZAEHL_ERLAUBT = {
     "Übung p22": "„Einzige Ausnahme sind Laden- und Firmennamen“ — die Zählung gilt dem Genitiv-s, und dort stimmt sie; der Apostroph vor -sch ist keine Genitivform",
+    "Oberfläche Stand der Prüfung Rund": "zitiert „die drei Ausnahmen“ und „Zwei Ausnahmen:“ als Beispiel für den behobenen Fehler — Metasprache, keine Zählung",
   };
   const zaehlNeu = [...zaehlStellen].filter(x => !(x in ZAEHL_ERLAUBT));
   P.ok("Keine ungelistete gezählte Ausnahme (" + zaehlStellen.size + " Stellen, " +
