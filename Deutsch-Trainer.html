@@ -1484,7 +1484,7 @@ const WORDS = [
 {w:"effektiv / effizient",p:"Paar",d:"effektiv = wirksam, erreicht das Ziel · effizient = wirtschaftlich, mit wenig Aufwand",ex:"Effektiv ist, das Richtige zu tun; effizient, es richtig zu tun.",s:"—"},
 {w:"tendenziell / tendenziös",p:"Paar",d:"tendenziell = der Tendenz nach · tendenziös = parteiisch gefärbt",ex:"Die Werte steigen tendenziell. — Der Bericht ist tendenziös.",s:"—"},
 {w:"sensibel / sensitiv",p:"Paar",d:"sensibel = empfindsam, feinfühlig · sensitiv = überempfindlich, extrem reizempfindlich — und fachsprachlich: fein reagierend",ex:"Ein sensibler Umgang; ein sensitives Testverfahren.",s:"—",t:"„sensitiv“ ist nicht auf Technik beschränkt; es gilt auch für Personen im Sinne von überempfindlich. Die Bedeutungen überschneiden sich stark."},
-{w:"kompliziert / komplex",p:"Paar",d:"kompliziert = schwer zu durchschauen, aber auflösbar · komplex = aus vielen wechselwirkenden Teilen bestehend",ex:"Eine Uhr ist kompliziert, ein Ökosystem ist komplex.",s:"—",t:"Das ist eine <b>fachliche</b> Unterscheidung aus der Systemtheorie, keine des Wörterbuchs — im Alltag werden beide Wörter weitgehend gleich gebraucht. In Fachtexten ist sie trotzdem nützlich."},
+{w:"kompliziert / komplex",p:"Paar",d:"kompliziert = schwer zu durchschauen, aber auflösbar · komplex = aus vielen wechselwirkenden Teilen bestehend",ex:"Eine Uhr ist kompliziert, ein Ökosystem ist komplex.",s:"—",t:"Das ist eine fachliche Unterscheidung aus der Systemtheorie, keine des Wörterbuchs — im Alltag werden beide Wörter weitgehend gleich gebraucht. In Fachtexten ist sie trotzdem nützlich."},
 {w:"scheuen / scheuern",p:"Paar",d:"scheuen = meiden, zurückschrecken · scheuern = reiben, wund reiben",ex:"Er scheut den Wettkampf. — Der Riemen scheuert.",s:"—"},
 {w:"anhand / anhand von",p:"Paar",d:"anhand + Genitiv („anhand der Daten“) · „anhand von“ nur, wenn der Genitiv nicht erkennbar ist",ex:"anhand der Ergebnisse — anhand von Beispielen",s:"—"},
 {w:"selbständig / selbstständig",p:"Paar",d:"Beide Schreibungen sind korrekt; „selbstständig“ ist die Duden-Empfehlung",ex:"Die Gruppe arbeitete selbstständig.",s:"eigenverantwortlich"},
@@ -5772,16 +5772,29 @@ function kannVorlesen(){
 function sprechbar(t){
   return String(t)
     .replace(/<[^>]*>/g," ")
+    .replace(/\u00AD/g,"")          // weiches Trennzeichen („gewisser­maßen“)
     .replace(/[„“”‚‘’"»«›‹]/g,"")    // Anführungszeichen nicht mitlesen, auch Guillemets
     .replace(/\s[–—-]\s/g,", ")      // Gedankenstrich als kurze Pause
+    .replace(/—/g,", ")              // auch ohne Leerzeichen („zum Mindesten —, vor …“)
     .replace(/[·•]/g,", ")
-    .replace(/\.\.\.|…/g," und so weiter ")
+    .replace(/⚠/g,". ")              // Warnzeichen vor dem Hinweis einer Wortkarte
+    /* Auslassungspunkte als Pause. Vorher „und so weiter“ — das passt zu einer offenen
+       Liste, aber nicht zu „sowohl … als auch“, „je … desto“ oder „Ja, …“: Dort hörte man
+       „sowohl und so weiter als auch“. */
+    .replace(/\.\.\.|…/g,", ")
     .replace(/[→⇒]/g,", ")           // Pfeil als Pause
     .replace(/[\[\]()]/g," ")
     .replace(/_{2,}/g," Lücke ")
     .replace(/(\d)\s*%/g,"$1 Prozent")
+    .replace(/(\d)\s*°\s*C(?![\p{L}])/gu,"$1 Grad Celsius")   // sonst „12 GradC“
     .replace(/(\d)\s*°/g,"$1 Grad")
     .replace(/§/g,"Paragraf ")
+    /* Wortart und Fall stehen auf den Karten abgekürzt („lapidar (Adj.)“, „Akk / Dat“);
+       vorgelesen klang das wie ein Fremdwort. */
+    .replace(/(?<![\p{L}])Adj\./gu,"Adjektiv").replace(/(?<![\p{L}])Subst\./gu,"Substantiv")
+    .replace(/(?<![\p{L}])Adv\./gu,"Adverb")
+    .replace(/(?<![\p{L}])Akk(?![\p{L}])/gu,"Akkusativ").replace(/(?<![\p{L}])Dat(?![\p{L}])/gu,"Dativ")
+    .replace(/km\s*\/\s*h/g,"Kilometer pro Stunde")   // ein Schrägstrich, der kein „oder“ ist
     .replace(/(\p{L})\s*\/\s*(\p{L})/gu,"$1 oder $2")
     .replace(/(,\s*){2,}/g,", ")     // doppelte Pausen zusammenfassen
     .replace(/\s+/g," ").trim();

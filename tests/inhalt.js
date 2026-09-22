@@ -161,6 +161,44 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 });
 P.ok("Keine unlesbaren Sonderzeichen im Sprechtext", restZeichen.size === 0, [...restZeichen].join(" "));
 
+/* Fehlerklasse „der Wächter hört nur die Hälfte“: Die Prüfung oben las Frage und Optionen
+   der Übungen — nicht die Erklärung, die nach der Antwort vorgelesen wird, und keine Wort-
+   und Fallkarte. Genau dort lag am 22.09.2026 alles, was falsch klang: das Warnzeichen vor
+   58 Wortkarten-Hinweisen, „12 GradC“, „km oder h“ für km/h und „sowohl und so weiter als
+   auch“, weil Auslassungspunkte als „und so weiter“ gelesen wurden. Dazu stand in einer
+   Wortkarte HTML, das die Ansicht escaped — Nils sah „<b>fachliche</b>“ als Text. Hier
+   läuft jetzt alles, was unterwegs gesprochen wird, durch dieselbe Kette wie in der App. */
+const gesprochen = w.eval(`(function(){
+  const r = rng(1), out = [];
+  const nimm = (id, q) => { out.push({ id, t: sprechbar(sprechFrage(q)) }); out.push({ id: id + " (Erklärung)", t: sprechbar(strip(q.exp || "")) }); };
+  ALL.filter(i => i.t !== "fill").forEach(i => nimm(i.id, exQuestion(i)));
+  WORDS.forEach(x => nimm("w:" + x.w, wordQuestion(x, r)));
+  drillPool().forEach(x => nimm("c:" + x.w, caseQuestion(x)));
+  return out; })()`);
+const KLINGT_FALSCH = [
+  [/[_§°%→<>&\\\[\]{}⚠\u00AD]/u, "Sonderzeichen"],
+  [/(?<![\d\s])\s*\/|\/\s*(?!\d)/, "Schrägstrich außerhalb einer Zahl"],
+  [/Grad[A-Z]/, "Einheit klebt am Grad"],
+  [/und so weiter (als|desto|noch|oder)\b/, "Auslassung als „und so weiter“ gelesen"],
+  [/(?<![\p{L}])(Adj|Subst|Adv)\.|(?<![\p{L}])(Akk|Dat)(?![\p{L}])/u, "Kürzel für Wortart oder Fall"],
+];
+const klingtFalsch = [];
+gesprochen.forEach(x => KLINGT_FALSCH.forEach(([re, was]) => { if (re.test(x.t)) klingtFalsch.push(was + ": " + x.id); }));
+P.ok("Auch Erklärungen, Wort- und Fallkarten klingen richtig (" + gesprochen.length + " Sprechtexte)",
+  !klingtFalsch.length, klingtFalsch.slice(0, 8).join(" · ") + (klingtFalsch.length > 8 ? " …(" + klingtFalsch.length + ")" : ""));
+/* Positivprobe mit den Fassungen vom 22.09.2026 */
+const probeSprech = ["Sinnverwandt: knapp ⚠ Der Duden …", "Empfohlen ist 12 °C", "Bei einzelnen Wörtern: km/h",
+  "„sowohl … als auch“"].map(t => String(w.eval("sprechbar(" + JSON.stringify(t) + ")")));
+const probeAlt = ["Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "sowohl und so weiter als auch", "lapidar Adj. , kurz"];
+P.ok("… und die Prüfung erkennt die alten Fassungen",
+  probeAlt.every(t => KLINGT_FALSCH.some(([re]) => re.test(t))), "Positivprobe blieb stumm");
+P.ok("… während die neuen sauber sind", probeSprech.every(t => !KLINGT_FALSCH.some(([re]) => re.test(t))), probeSprech.join(" | "));
+const WORD_ESC = ["w", "p", "d", "ex", "s", "t"];
+const htmlInWort = WORDS.filter(x => WORD_ESC.some(k => /<[a-z\/]|&[a-z#0-9]+;/i.test(String(x[k] || "")))).map(x => x.w);
+P.ok("Keine Wortkarte trägt HTML — die Ansicht escaped jedes Feld", !htmlInWort.length, htmlInWort.join(" · "));
+P.ok("… und die Prüfung erkennt die alte Fassung von „kompliziert / komplex“",
+  /<[a-z\/]|&[a-z#0-9]+;/i.test("Das ist eine <b>fachliche</b> Unterscheidung"), "Positivprobe blieb stumm");
+
 /* Fehlerklasse „Hinweis nennt das falsche Zeichen“: Unterscheiden sich zwei Optionen beim
    Hören nur durch ein Satzzeichen, muss der Hörhinweis genau dieses Zeichen beim Namen
    nennen. Bei p03 nannte er nur die Kommas — der Hörer hätte sie zählen müssen, um die

@@ -58,6 +58,43 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Was unterwegs vorgelesen wird (22.09.2026, fünfundzwanzigste Runde).**
+
+Der Hauptanwendungsfall, von der Tonspur her gelesen: Alle 657 Karten, die unterwegs
+drankommen (Übungen ohne Tippaufgaben, Wort- und Fallkarten), durch `sprechFrage()` und
+`sprechbar()` geschickt — Frage samt Optionen und die Erklärung, die nach der Antwort
+kommt. 1314 Sprechtexte.
+
+**Was falsch klang:**
+
+- **Auslassungspunkte las `sprechbar()` als „und so weiter“.** Das passt zu einer offenen
+  Liste, nicht zu den Paarformeln: „sowohl und so weiter als auch“, „je und so weiter
+  desto“, „Ja, und so weiter“ — 84 Stellen, fast alle in Erklärungen. Jetzt eine Pause.
+- **Das Warnzeichen ⚠** vor dem Hinweis von 58 Wortkarten ging an die Sprachausgabe. Jetzt
+  ein Punkt.
+- **„12 °C“ wurde „12 GradC“**, **„km/h“ wurde „km oder h“** (die Regel für Schrägstriche
+  zwischen Buchstaben machte daraus ein „oder“).
+- **Kürzel:** „lapidar Adj.“, „die Prämisse Subst.“, „sukzessive Adv.“, „Akk oder Dat“ —
+  jetzt ausgeschrieben.
+- Ein Geviertstrich ohne Leerzeichen und ein weiches Trennzeichen blieben stehen; beide
+  weg.
+
+**Nebenbei, nicht hörbar, aber sichtbar:** Die Wortkarte „kompliziert / komplex“ trug im
+Feld `t` ein `<b>`. Die Ansicht escaped jedes Wortkartenfeld — Nils sah `<b>fachliche</b>`
+als Text. Gegengeprüft: Alle anderen HTML-haltigen Felder (Erklärungen, Mustertexte,
+Merksätze der Bausteine, Situationen, Fehlermarkierungen) werden roh gerendert, dort ist
+HTML richtig.
+
+**Warum es keiner sah:** Die Prüfung auf unlesbare Zeichen in `tests/inhalt.js` las nur
+Frage und Optionen der Übungen. Sie läuft jetzt über alle Sprechtexte, mit Positivproben aus
+den alten Fassungen, und eine zweite Zusicherung hält die Wortkarten HTML-frei. Die
+Hörbarkeitsprüfung (gleich klingende Optionen) ist nach dem Umbau weiter grün.
+
+**Gelesen, nicht geändert:** „=“ (337-mal, liest die Sprachausgabe als „gleich“), „+“
+(„plus“) und Abkürzungen wie „z. B.“ und „vgl.“, die gängige Sprachausgaben selbst
+auflösen. Zahlenspannen wie „1990–1995“ bleiben, wie sie sind: Als „bis“ vorgelesen
+verrieten sie in p07 und q14 die Antwort, weil die Aufgabe gerade nach diesem Zeichen fragt.
+
 **Die Oberflächentexte gegen den Code gelesen (22.09.2026, vierundzwanzigste Runde).**
 
 Bisher geprüft war der Inhalt — Regeln, Übungen, Karten, Werkstatt. Nicht geprüft waren die
