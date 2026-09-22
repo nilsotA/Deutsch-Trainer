@@ -337,6 +337,13 @@
   ]
  },
  {
+  "satz": "Ein Anruf von der Schule löst bei vielen Eltern sofort Alarm aus.",
+  "stellen": [
+   "Regel form-eltern",
+   "Situation sc04"
+  ]
+ },
+ {
   "satz": "Ein Gespräch, das vertagt wird, endet ohne Kränkung;",
   "stellen": [
    "Baustein ph32",
@@ -393,14 +400,6 @@
    "Prüfmuster x01",
    "Prüfmuster x02",
    "Übung d18"
-  ]
- },
- {
-  "satz": "Genau derjenige, der Hilfe braucht, fragt am seltensten danach.",
-  "stellen": [
-   "Regel form-mitgefuehl",
-   "Vorher/Nachher pr17",
-   "Übung f46"
   ]
  },
  {
@@ -633,7 +632,7 @@
   ]
  },
  {
-  "satz": "Vage Angaben zu Menge, Ausmaß oder Häufigkeit sagen wenig:",
+  "satz": "Vage Angaben zu Menge, Ausmaß oder Häufigkeit sagen wenig, wo sich etwas zählen lässt:",
   "stellen": [
    "Prüfmuster s08",
    "Regel stil-konkret"
@@ -722,6 +721,14 @@
   "stellen": [
    "Baustein ph04",
    "Übung f40"
+  ]
+ },
+ {
+  "satz": "Wer Hilfe braucht, fragt oft gerade nicht danach.",
+  "stellen": [
+   "Regel form-mitgefuehl",
+   "Vorher/Nachher pr17",
+   "Übung f46"
   ]
  },
  {

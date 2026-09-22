@@ -58,6 +58,63 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Stil- und Formulierungsregeln gelesen, Fallkartenhinweise dazu (22.09.2026, dreiundzwanzigste Runde).**
+
+Ohne Agenten, alles selbst gelesen: die 17 Stil- und 26 Formulierungsregeln (Punkt 1 der
+Ideenliste), die 68 Hinweise der Fallkarten, dazu der offene Punkt aus der Runde davor —
+Vorbildtexte der Werkstatt, die Stilhinweise des eigenen Textchecks auslösen.
+
+**Der Ausgangspunkt war der offene Punkt.** Zehn Vorbildtexte lösten Muster der Stufen
+`stil` und `form` aus. Die meisten zu Recht (Vorher-Texte, zitierte Negativbeispiele), vier
+nicht — und dort lag der Fehler jedes Mal im Hinweis, nicht im Vorbild:
+
+- `s07` und die Regel `form-verbindlich`: „Wo „man“ steht, ist niemand zuständig“ — richtig
+  für Absprachen, falsch für „Man kann sich das wie ein Konto vorstellen“ (Musterlösung
+  `w13`) und für „woran erkennt man“ in derselben Regel. Jetzt „In Absprachen ist „man“ ein
+  Fluchtwort“, auch in `pr21` und `f41`.
+- `a02` meldete eine Aufzählung („Körperbau, Vorerfahrung, Vereinsanbindung“) als
+  Nominalstil-Kette. Der Hinweis nennt jetzt die Bedingung: ein Substantiv hängt vom
+  nächsten ab.
+- `s08` und `stil-konkret`: „deutlich zu groß: 9 statt 4 Prozent“ und „ziemlich geladen“ —
+  wo die Zahl folgt oder ein Gefühl gemeint ist, ist nichts zu tun. Der Kopplungswächter
+  hat die einseitige Änderung zwischen Muster und Regel sofort gemeldet.
+- `ph29`: Der Merksatz „Konkretes Lob wirkt, allgemeines verpufft“ stand über „Das haben
+  Sie sehr souverän gelöst“. Beide allgemeinen Beispiele sind jetzt konkret.
+
+**Stilregeln:** `stil-passiv` sagte „Das Passiv verschweigt, wer handelt“ über einem
+Falschbeispiel mit „von den Teilnehmenden“; `stil-verneinung` setzte „nicht
+unwahrscheinlich“ mit „wahrscheinlich“ gleich und erklärte zwei Zeilen tiefer, die
+Litotes sei schwächer; `stil-fuellwort` sagte, ja, doch, wohl, eher trügen „fast nie
+Bedeutung“ — „Das liegt wohl an der Hitze“ ist eine Vermutung. „persönlich anwesend“ ist
+aus der Pleonasmusliste raus (Regel, `s04`, Spickzettel): Seit es Videositzungen gibt,
+unterscheidet es etwas. `s04` fragte, was an „bereits schon“ „falsch“ sei — Grundsatz 3.
+
+**Formulierungsregeln:** Die meisten Aussagen sind Ratschläge, die keinen Beleg brauchen.
+Eine Sachaussage hatte keinen: „Freundliche Grüße … in Norddeutschland verbreitet“ — zwei
+Suchen, kein Beleg, die Seiten dahinter vom Proxy gesperrt; gestrichen. Abgeschwächt:
+„durchschaut jeder“ (viermal), „bei fast jedem Menschen“ (dreimal), „am seltensten“
+(dreimal), „entschärfen jede Eröffnung“, der Anruf der Schule, der „sofort Alarm“ auslöse
+(`form-eltern`, passend zu `sc04` aus der Runde davor). `form-absagen` sagte „Drei Teile —
+mehr nicht“ mit einer optionalen vierten darunter und dem Dank als Pflicht; der Merksatz
+von `ph09` ordnet ihn seit gestern nach Register ein — jetzt beide gleich.
+
+**Zählungen in richtigen Antworten, zum zweiten Mal:** `f07` „Vier Abschwächungen“ — die
+Erklärung empfahl den Konjunktiv „hätten“ als die eine, die bleibt, also fünf; `f20` „Drei
+Ausweichmanöver“ neben einem „sollte“, das die Erklärung als Konjunktiv verbietet. Beide
+jetzt „Mehrere …“ und in `NEU_GELERNT`. Neue Prüfung in `tests/suite.js`: Eine gezählte
+richtige Antwort in einer Stil- oder Formübung braucht einen Eintrag mit Grund (derzeit
+nur `f39`), Zitate und Ziffern zählen nicht.
+
+**Rangformeln:** f45 („die schlechteste Gesprächseröffnung“), f30, f39 („der schnellste
+Weg“), `sc09`, `ph33` und `form-nachfragen` („die stärkste Nachfrage/Form“),
+`form-mitgefuehl`, `f46`, `pr17` („am seltensten“). Der Rangwächter kennt jetzt
+„schlechteste“, „schnellste“, „stärkste“ und „am seltensten“, mit Positivproben.
+
+**Fallkarten:** „wegen“ und die Satzkarte `sa17` schrieben „meinetwegen, nicht „wegen
+mir““, `m16` und `a11` „umgangssprachlich“. Jetzt überall „umgangssprachlich“, und
+`tests/inhalt.js`, Abschnitt G prüft den Satz selbst. Die Aussage zu „ich erinnere das
+Spiel“ („breitet sich vom Norden aus“) hält: Der Duden-Sprachratgeber sagt es so.
+
 **Die Schreibwerkstatt, gegen ihre Regeln gelesen (22.09.2026, zweiundzwanzigste Runde).**
 
 Nach Übungen und Prüfmustern der dritte Bestand: 105 Einträge (Schreibaufträge,
@@ -2606,8 +2663,10 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
    `gram-` und `satz-`Regeln sind am 16.09.2026 durch** (siehe „Zuletzt geändert"); von den
    35 nennen jetzt 19 eine Quelle, der Rest ist gelesen und hat nichts hergegeben. Die
    Grundsatz-3-Frage für stil und form — sind Empfehlungen als Empfehlungen gekennzeichnet? —
-   ist am 15.09.2026 beantwortet und in `tests/suite.js` festgehalten; offen sind dort nur
-   noch die Belege. Vorgehen wie gehabt.
+   ist am 15.09.2026 beantwortet und in `tests/suite.js` festgehalten. **Am 22.09.2026 sind
+   alle 43 Stil- und Formregeln gelesen** (siehe „Zuletzt geändert“): Sie enthalten fast nur
+   Ratschläge; die eine regionale Sachaussage ohne Beleg ist gestrichen, Absolut- und
+   Rangaussagen sind abgeschwächt. Erledigt.
 
 2. **Erledigt (21.09.2026): Zeichensetzung ist belegt.** Alle 17 Komma- und Zeichenregeln
    nennen eine Quelle; die letzte ohne war `komma-aufzaehlung`. Der alte Eintrag lautete:

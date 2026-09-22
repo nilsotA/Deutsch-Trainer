@@ -394,8 +394,13 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      gross-subst, wo „das Meiste“ das Beispielwort der Regel ist. */
   /* Am 22.09.2026 kam „härteste“ dazu: Der Merksatz von w04 nannte die Bewegungsbeschreibung
      „die härteste Schule für Sprachgenauigkeit“. Die feste Liste bleibt der Preis dafür, dass
-     „die nächste Stunde“ und „am Montag“ nicht anschlagen. */
-  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|härteste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+     „die nächste Stunde“ und „am Montag“ nicht anschlagen. Am selben Tag, eine Runde später,
+     „schlechteste“, „schnellste“ und „stärkste“: f45 fragte, warum „Wir müssen reden“ „die
+     schlechteste Gesprächseröffnung“ sei, f39 nach dem „schnellsten Weg“, eine Mail unlesbar
+     zu machen, ph33 nannte die Zusammenfassung „die stärkste Nachfrage“. Dazu „am seltensten“,
+     dieselbe Rangordnung von unten: „Genau derjenige, der Hilfe braucht, fragt am seltensten
+     danach“ stand in form-mitgefuehl, f46 und pr17. */
+  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|schlechteste|wichtigste|beste|schwerste|härteste|schnellste|stärkste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|seltensten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
      „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
      häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
@@ -418,6 +423,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
     "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",
     "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
+    "Satzkarte sa20":        "„der schnellste Läufer“ ist das Beispiel für den Superlativ, keine Aussage über Sprache",
   };
   const rangStellen = new Set();
   const rang = t => { const s = String(t).replace(/<[^>]+>/g, " ");
@@ -440,7 +446,9 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   /* Und die Fassung aus pr29 vom 21.09.2026: ein Zahlwort zwischen Artikel und Superlativ. */
   sammle2("Schreibwerkstatt", "probe-pr29", "<p>Das sind die zwei häufigsten Konfliktverstärker der deutschen Sprache.</p>");
   sammle2("Schreibwerkstatt", "probe-w04", "Präzise Beschreibung ist die härteste Schule für Sprachgenauigkeit.");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 6, "Positivprobe blieb stumm");
+  sammle2("Übung", "probe-f45", "Warum ist „Wir müssen reden“ die schlechteste Gesprächseröffnung?");
+  sammle2("Regel", "probe-mitgefuehl", "Genau derjenige, der Hilfe braucht, fragt am seltensten danach.");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 8, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -1058,6 +1066,33 @@ P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0,
   ];
   const stumm = proben.map((p, i) => werkstattZahlen(p, leerer).length ? null : i + 1).filter(Boolean);
   P.ok("Die Zahlenprüfung schlägt bei jeder der " + proben.length + " Proben an", !stumm.length, "stumm bei Probe " + stumm.join(", "));
+}
+
+/* Dieselbe Klasse in den richtigen Antworten der Stil- und Formulierungsübungen, und dort
+   ist sie teurer: Was in der richtigen Antwort steht, lernt Nils. Dreimal stand die Zahl
+   falsch — f43 „Fünffach abgesichert“ bei vier Absicherungen, f07 „Vier Abschwächungen“,
+   obwohl die Erklärung den Konjunktiv „hätten“ als fünfte empfahl, f20 „Drei
+   Ausweichmanöver“ neben einem „sollte“, das die Erklärung selbst als Ausweichen nennt.
+   Wie viele Abschwächungen ein Satz trägt, kann keine Prüfung zählen. Sie kann aber
+   verlangen, dass eine gezählte Antwort eine bewusste Entscheidung ist: Jede steht hier mit
+   Grund, jede neue macht den Lauf rot. Zitate zählen nicht mit — „Dreimal zu spät“ in f25
+   ist das Beispiel, nicht die Zählung —, Ziffern auch nicht: „um 12 Prozent“ in s11 ist die
+   Musterformulierung selbst. */
+{
+  const ZAEHLT = /(?<![\wäöüßÄÖÜ])(zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|zweifach|dreifach|vierfach|fünffach|zweimal|dreimal|viermal)(?![\wäöüßÄÖÜ])/i;
+  const ZAEHL_ERLAUBT = {
+    f39: "„Drei Sätze Vorrede“ beschreibt eine Mail, die es nicht gibt — eine Faustregel, keine Zählung an einem gezeigten Text",
+  };
+  const ohneZitat = t => String(t).replace(/„[^“]*“/g, " ");
+  const gezaehlt = ALL.filter(i => (i.c === "stil" || i.c === "form") && i.t !== "fill" && Array.isArray(i.o))
+    .filter(i => ZAEHLT.test(ohneZitat(i.o[i.a]))).map(i => i.id);
+  const neu = gezaehlt.filter(id => !(id in ZAEHL_ERLAUBT));
+  P.ok("Keine ungeprüfte Zählung in einer richtigen Stil- oder Formantwort (" + gezaehlt.length + " begründet)",
+    !neu.length, neu.join(" · "));
+  const altF07 = "Vier Abschwächungen in einem Satz";
+  P.ok("… und die Prüfung erkennt die Fassung von f07 vor dem 22.09.2026", ZAEHLT.test(ohneZitat(altF07)), "Positivprobe blieb stumm");
+  const verwaist = Object.keys(ZAEHL_ERLAUBT).filter(id => !gezaehlt.includes(id));
+  P.ok("… und führt keine Erlaubnis für eine Antwort, die nicht mehr zählt", !verwaist.length, verwaist.join(" · "));
 }
 
 /* Vierter korrekter Bestand: der Spickzettel. CLAUDE.md nennt ihn selbst als Risiko — er

@@ -426,6 +426,14 @@ const EINORDNUNG = [
   { was: "anrufen mit Dativ", muss: [/[Ss]üdwest/, /[Ss]chweiz/],
     stellen: [["Regel", "gram-akkverben"], ["Übung", "n11"], ["Übung", "d03"], ["Übung", "d28"],
               ["Fallkarte", "anrufen"], ["Prüfmuster", "x20"]] },
+  /* „wegen mir“: Übung m16 und Prüfmuster a11 ordneten es als umgangssprachlich ein, die
+     Satzkarte sa17 (Regel gram-genalltag) und die Fallkarte „wegen“ schrieben „meinetwegen, nicht wegen
+     mir“ — also als Fehler. Der Duden führt „wegen“ mit Dativ des Personalpronomens als
+     umgangssprachlich. Seit dem 22.09.2026 an allen vier Stellen gleich; geprüft wird der
+     Satz selbst, nicht das Wort irgendwo im Text, sonst genügte die Einordnung von
+     „wegen dem Wetter“ zwei Sätze davor. */
+  { was: "wegen mir", muss: [/[Ww]egen mir“ ist umgangssprachlich/],
+    stellen: [["Fallkarte", "wegen"], ["Übung", "m16"], ["Prüfmuster", "a11"], ["Regel", "gram-genalltag"]] },
   { was: "Sinn machen", muss: [/umgangssprachlich/, /umstritten/],
     stellen: [["Übung", "s08"], ["Prüfmuster", "s06"], ["Fehlersuche", "macht"],
               ["Regel", "stil-anglizismus"]] },
@@ -462,6 +470,10 @@ P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schie
 const alteFassung = "Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus. In Österreich ist „trotz dem“ verbreitet.";
 P.ok("Die Einordnungsprüfung erkennt eine unvollständige Landkarte",
   EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length === 2,
+  "Positivprobe blieb stumm");
+const alteWegen = "„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.";
+P.ok("… und ein „nicht“, wo woanders „umgangssprachlich“ steht",
+  EINORDNUNG.find(e => e.was === "wegen mir").muss.some(re => !re.test(alteWegen)),
   "Positivprobe blieb stumm");
 
 /* Zweite Achse derselben Fehlerklasse: das Register. Die Übung g13 sagt zu „bezüglich“,
