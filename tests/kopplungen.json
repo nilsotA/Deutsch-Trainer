@@ -1,0 +1,748 @@
+[
+ {
+  "satz": "…, weil ich nicht habe kommen können.",
+  "stellen": [
+   "Regel satz-modal",
+   "Satzkarte sa10",
+   "Übung z11"
+  ]
+ },
+ {
+  "satz": "…, weil ich nicht kommen können habe.",
+  "stellen": [
+   "Regel satz-modal",
+   "Satzkarte sa10",
+   "Übung z11"
+  ]
+ },
+ {
+  "satz": "„ab nächstem Montag“ (Dativ, vom Duden empfohlen) und „ab nächsten Montag“ (Akkusativ, in Deutschland verbreitet) sind beide richtig.",
+  "stellen": [
+   "Fallkarte ab",
+   "Regel gram-praepdat"
+  ]
+ },
+ {
+  "satz": "„auf die Post“ ist im Süden und in Österreich verbreitet, „zur Post“ in der Mitte und im Norden.",
+  "stellen": [
+   "Fallkarte auf (Richtung)",
+   "Regel gram-richtung"
+  ]
+ },
+ {
+  "satz": "„Bezug“ ist ein Substantiv und bleibt groß:",
+  "stellen": [
+   "Prüfmuster x29",
+   "Übung g13"
+  ]
+ },
+ {
+  "satz": "„Das Training (der Platz ist gesperrt) fällt aus.“",
+  "stellen": [
+   "Regel z-klammern",
+   "Übung p16"
+  ]
+ },
+ {
+  "satz": "„Die vom Trainer, der seit drei Jahren, seit er die Lizenz hat, arbeitet, geplante Einheit fiel aus.“",
+  "stellen": [
+   "Regel stil-schachtel",
+   "Übung s09"
+  ]
+ },
+ {
+  "satz": "„einzig“ ist ein Absolutadjektiv und lässt sich nicht steigern.",
+  "stellen": [
+   "Prüfmuster x06",
+   "Übung r05"
+  ]
+ },
+ {
+  "satz": "„Es tut mir leid, dass es so angekommen ist“ bleibt ehrlich und deeskaliert trotzdem.",
+  "stellen": [
+   "Baustein ph18",
+   "Regel form-fehler"
+  ]
+ },
+ {
+  "satz": "„Ich habe es dir gesagt“ klingt richtig, „Ich habe dir es gesagt“ nicht.",
+  "stellen": [
+   "Regel satz-dativakk",
+   "Satzkarte sa06",
+   "Übung z08"
+  ]
+ },
+ {
+  "satz": "„Ich habe gestern nach dem Training, das wegen des Regens verlegt wurde, mit Lena noch zwei Stunden für die Klausur gelernt.“",
+  "stellen": [
+   "Regel satz-klammer",
+   "Satzkarte sa03",
+   "Übung z21"
+  ]
+ },
+ {
+  "satz": "„Ich habe nicht gestern trainiert, sondern vorgestern.“",
+  "stellen": [
+   "Regel satz-negation",
+   "Satzkarte sa07",
+   "Übung z18"
+  ]
+ },
+ {
+  "satz": "„Ich muss ein Praktikum machen“ macht dich zum Verwaltungsvorgang.",
+  "stellen": [
+   "Fehlersuche kt6",
+   "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "„Ich schlage vor, dass wir das im nächsten Treffen entscheiden.“",
+  "stellen": [
+   "Regel form-verbindlich",
+   "Übung f41"
+  ]
+ },
+ {
+  "satz": "„Ich will ja nichts sagen, aber …“ — dann sag es einfach.",
+  "stellen": [
+   "Baustein ph19",
+   "Regel form-widerspruch"
+  ]
+ },
+ {
+  "satz": "„Ist ja gut.“ — Abwehr im Gewand der Zustimmung",
+  "stellen": [
+   "Baustein ph25",
+   "Regel form-kritikannehmen"
+  ]
+ },
+ {
+  "satz": "„Man“ ist das Fluchtwort der deutschen Sprache.",
+  "stellen": [
+   "Regel form-verbindlich",
+   "Vorher/Nachher pr21",
+   "Übung f41"
+  ]
+ },
+ {
+  "satz": "„Sie hat gefragt, ob du Zeit hast.“",
+  "stellen": [
+   "Regel satz-frage",
+   "Satzkarte sa22",
+   "Übung z19"
+  ]
+ },
+ {
+  "satz": "„Über eine Rückmeldung würde ich mich freuen.",
+  "stellen": [
+   "Prüfmuster f01",
+   "Regel form-danken"
+  ]
+ },
+ {
+  "satz": "„Vielleicht übersehe ich etwas“ ist keine Selbstverkleinerung, sondern eine Einladung zur Erklärung.",
+  "stellen": [
+   "Baustein ph21",
+   "Regel form-widerspruch"
+  ]
+ },
+ {
+  "satz": "„Wenn ich damals mehr trainiert hätte, wäre ich weitergekommen.“",
+  "stellen": [
+   "Regel satz-wennals",
+   "Satzkarte sa23",
+   "Übung x07"
+  ]
+ },
+ {
+  "satz": "„Wie ist der Stand?“ öffnet ein Gespräch, „Du hattest versprochen“ beendet es.",
+  "stellen": [
+   "Baustein ph15",
+   "Regel form-nachhaken"
+  ]
+ },
+ {
+  "satz": "Alles, was nach 22 Uhr getippt wird und länger als drei Zeilen ist, wird am nächsten Morgen kürzer und besser.",
+  "stellen": [
+   "Regel form-konflikt",
+   "Situation sc10"
+  ]
+ },
+ {
+  "satz": "Als ich klein war, habe ich Handball gespielt.",
+  "stellen": [
+   "Regel satz-wennals",
+   "Satzkarte sa23",
+   "Übung x07"
+  ]
+ },
+ {
+  "satz": "Bedauern über die Wirkung ist keine Schuldübernahme.",
+  "stellen": [
+   "Baustein ph18",
+   "Regel form-fehler"
+  ]
+ },
+ {
+  "satz": "beim beharrenden „bestehen auf“ verzeichnet das DWDS den Akkusativ als seltene Nebenform.",
+  "stellen": [
+   "Fallkarte bestehen aus / in / auf",
+   "Regel gram-praep"
+  ]
+ },
+ {
+  "satz": "beim Duzen darfst du auch du/dein großschreiben.",
+  "stellen": [
+   "Prüfmuster a01",
+   "Regel form-anrede",
+   "Übung f05",
+   "Übung k14"
+  ]
+ },
+ {
+  "satz": "Bis 1998 stand „gewunken“ im Duden noch als landschaftlich — daher hält sich der Ruf, es sei ein Fehler.",
+  "stellen": [
+   "Regel gram-verbformen",
+   "Satzkarte sa24",
+   "Übung x05"
+  ]
+ },
+ {
+  "satz": "Dann entscheidet meist sie — außer bei fest ans Verb gebundenen Präpositionen:",
+  "stellen": [
+   "Regel gram-kasusfinden",
+   "Übung v08"
+  ]
+ },
+ {
+  "satz": "Dann ist die Litotes ein legitimes Stilmittel.",
+  "stellen": [
+   "Prüfmuster s05",
+   "Regel stil-verneinung"
+  ]
+ },
+ {
+  "satz": "Das einfache Verb ist fast immer stärker.",
+  "stellen": [
+   "Prüfmuster s02",
+   "Übung s02"
+  ]
+ },
+ {
+  "satz": "Das ist eine Empfehlung zur Lesbarkeit, keine Rechtschreibregel.",
+  "stellen": [
+   "Regel n-gliederung",
+   "Übung q26"
+  ]
+ },
+ {
+  "satz": "Das Rückgrat — verwandt mit „Gräte“, nicht mit „Rad“.",
+  "stellen": [
+   "Prüfmuster x10",
+   "Übung r07"
+  ]
+ },
+ {
+  "satz": "Das unterscheidet dich von zwanzig gleichlautenden Anfragen.",
+  "stellen": [
+   "Baustein ph44",
+   "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "Der andere kommt in Abwehrhaltung ins Gespräch, bevor es begonnen hat.",
+  "stellen": [
+   "Regel form-konflikt",
+   "Vorher/Nachher pr09"
+  ]
+ },
+ {
+  "satz": "Der Duden führt „der selbe“ als Falschschreibung.",
+  "stellen": [
+   "Regel gram-derselbe",
+   "Übung m26"
+  ]
+ },
+ {
+  "satz": "der Duden führt sie als standardsprachlich, andere Sprachpflegestellen sehen das enger.",
+  "stellen": [
+   "Regel satz-konjunktiv",
+   "Satzkarte sa12",
+   "Übung z16"
+  ]
+ },
+ {
+  "satz": "Der Fragebogen wurde von den Teilnehmenden ausgefüllt.",
+  "stellen": [
+   "Regel stil-passiv",
+   "Übung s06"
+  ]
+ },
+ {
+  "satz": "Der Konjunktiv „hätten“ trägt die Höflichkeit allein.",
+  "stellen": [
+   "Regel form-hedging",
+   "Vorher/Nachher pr02"
+  ]
+ },
+ {
+  "satz": "Der Name folgt in der nächsten Zeile.",
+  "stellen": [
+   "Regel form-grussformel",
+   "Übung f04"
+  ]
+ },
+ {
+  "satz": "Der vorangestellte Nebensatz wird durch Komma abgetrennt.",
+  "stellen": [
+   "Fehlersuche kt11",
+   "Fehlersuche kt8",
+   "Fehlersuche kt9"
+  ]
+ },
+ {
+  "satz": "Die Frage in der Mitte ist entscheidend:",
+  "stellen": [
+   "Baustein ph42",
+   "Regel form-eltern",
+   "Übung f47"
+  ]
+ },
+ {
+  "satz": "Die Nachfrage kauft dir Zeit, zeigt Zuhören und stellt sicher, dass du dich nicht gegen etwas verteidigst, das gar nicht gemeint war.",
+  "stellen": [
+   "Regel form-kritikannehmen",
+   "Übung f29"
+  ]
+ },
+ {
+  "satz": "Die Zahladjektive bleiben dagegen in der Regel klein:",
+  "stellen": [
+   "Prüfmuster y08",
+   "Übung g03"
+  ]
+ },
+ {
+  "satz": "Ein Gespräch, das vertagt wird, endet ohne Kränkung;",
+  "stellen": [
+   "Baustein ph32",
+   "Übung f38"
+  ]
+ },
+ {
+  "satz": "Ein klares Nein ist respektvoller als ein weiches Vielleicht.",
+  "stellen": [
+   "Regel form-absagen",
+   "Schreibauftrag w12",
+   "Übung f12"
+  ]
+ },
+ {
+  "satz": "Ein Punkt statt eines „aber“ ändert die Wirkung erheblich.",
+  "stellen": [
+   "Baustein ph20",
+   "Übung f24"
+  ]
+ },
+ {
+  "satz": "Eine Entschuldigung ohne „aber“ ist die einzige, die ankommt.",
+  "stellen": [
+   "Baustein ph47",
+   "Übung f21"
+  ]
+ },
+ {
+  "satz": "Eine präzise Frage zeigt, dass du bis zu einem bestimmten Punkt gekommen bist.",
+  "stellen": [
+   "Prüfmuster a07",
+   "Vorher/Nachher pr15"
+  ]
+ },
+ {
+  "satz": "Eine Zusage enthält was und bis wann .",
+  "stellen": [
+   "Baustein ph26",
+   "Regel form-zusagen"
+  ]
+ },
+ {
+  "satz": "Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich:",
+  "stellen": [
+   "Vorher/Nachher pr21",
+   "Übung f41"
+  ]
+ },
+ {
+  "satz": "Frag nach dem Stand , nicht nach dem Versäumnis.",
+  "stellen": [
+   "Baustein ph15",
+   "Regel form-nachhaken",
+   "Übung f18"
+  ]
+ },
+ {
+  "satz": "Für Schule und Uni in Deutschland bleibt der Genitiv die sichere Wahl.",
+  "stellen": [
+   "Prüfmuster x01",
+   "Prüfmuster x02",
+   "Übung d18"
+  ]
+ },
+ {
+  "satz": "Genau derjenige, der Hilfe braucht, fragt am seltensten danach.",
+  "stellen": [
+   "Regel form-mitgefuehl",
+   "Vorher/Nachher pr17",
+   "Übung f46"
+  ]
+ },
+ {
+  "satz": "Grenzen werden nicht durch Ansage etabliert, sondern durch Verhalten .",
+  "stellen": [
+   "Baustein ph31",
+   "Regel form-grenzen"
+  ]
+ },
+ {
+  "satz": "Ich denke, dass die Daten vielleicht irgendwie einen Zusammenhang zeigen könnten.",
+  "stellen": [
+   "Regel stil-hedging",
+   "Übung s18"
+  ]
+ },
+ {
+  "satz": "Ich muss die Anmeldung bis dahin abschicken.",
+  "stellen": [
+   "Regel form-bitten",
+   "Übung f06"
+  ]
+ },
+ {
+  "satz": "Ich weiß nicht, wann das Training anfängt.",
+  "stellen": [
+   "Regel satz-wennals",
+   "Satzkarte sa23",
+   "Übung x09"
+  ]
+ },
+ {
+  "satz": "Im Ruhrgebiet, im nördlichen Rheinland und in Ostfriesland ist „nach dem Bäcker“, „nach Aldi“ die verbreitete Form.",
+  "stellen": [
+   "Fallkarte zu (Richtung)",
+   "Übung n09"
+  ]
+ },
+ {
+  "satz": "Immer wenn ich in Köln war, hat es geregnet.",
+  "stellen": [
+   "Regel satz-wennals",
+   "Satzkarte sa23",
+   "Übung x08"
+  ]
+ },
+ {
+  "satz": "In Zusammensetzungen wird durchgekoppelt und das Leerzeichen entfällt:",
+  "stellen": [
+   "Regel n-einheiten",
+   "Übung q10"
+  ]
+ },
+ {
+  "satz": "Je enger die Frage, desto brauchbarer die Antwort.",
+  "stellen": [
+   "Baustein ph08",
+   "Regel form-feedback",
+   "Übung f10"
+  ]
+ },
+ {
+  "satz": "Je länger er trainierte, desto ruhiger wurde sein Puls.",
+  "stellen": [
+   "Regel satz-nebensatz",
+   "Satzkarte sa04",
+   "Satzkarte sa20"
+  ]
+ },
+ {
+  "satz": "Konkretes Angebot mit Opt-out statt vages Angebot mit Opt-in.",
+  "stellen": [
+   "Vorher/Nachher pr17",
+   "Übung f46"
+  ]
+ },
+ {
+  "satz": "Man ruft jemanden an, wie man jemanden fragt.",
+  "stellen": [
+   "Fallkarte anrufen",
+   "Übung n11"
+  ]
+ },
+ {
+  "satz": "Mich nervt sein dauerndes „Ich kann nicht mehr!“.",
+  "stellen": [
+   "Regel z-anfuehrung",
+   "Übung p12"
+  ]
+ },
+ {
+  "satz": "Nach „Mit freundlichen Grüßen“ steht kein Satzzeichen .",
+  "stellen": [
+   "Prüfmuster x25",
+   "Übung f04"
+  ]
+ },
+ {
+  "satz": "Nach dem Anredekomma geht es klein weiter — die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab:",
+  "stellen": [
+   "Fehlersuche kt1",
+   "Prüfmuster a01"
+  ]
+ },
+ {
+  "satz": "Nach dem Anredekomma geht es klein weiter:",
+  "stellen": [
+   "Regel form-anrede",
+   "Übung f05",
+   "Übung k14"
+  ]
+ },
+ {
+  "satz": "Nach weil wandert das gebeugte Verb ans Satzende.",
+  "stellen": [
+   "Fehlersuche kt8",
+   "Prüfmuster y03",
+   "Übung z02"
+  ]
+ },
+ {
+  "satz": "Nenn den Aspekt, auf den geschaut werden soll — und den, auf den nicht .",
+  "stellen": [
+   "Baustein ph08",
+   "Regel form-feedback"
+  ]
+ },
+ {
+  "satz": "Nenn einen inhaltlichen Grund, warum ausgerechnet dort.",
+  "stellen": [
+   "Baustein ph44",
+   "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "Nur im Nominativ Singular und im Akkusativ Neutrum/Femininum steht -e.",
+  "stellen": [
+   "Regel gram-adjektiv",
+   "Satzkarte sa13",
+   "Übung n29"
+  ]
+ },
+ {
+  "satz": "Nur wenn das Zeichen Teil eines Wortes ist, entfällt es:",
+  "stellen": [
+   "Prüfmuster t03",
+   "Übung q08"
+  ]
+ },
+ {
+  "satz": "Regelgerecht wäre brauchte — „brauchen“ ist ein schwaches Verb.",
+  "stellen": [
+   "Regel satz-konjunktiv",
+   "Satzkarte sa12",
+   "Übung z16"
+  ]
+ },
+ {
+  "satz": "Relativierendes Lob wirkt auch — nur anders, als du willst.",
+  "stellen": [
+   "Vorher/Nachher pr18",
+   "Übung f34"
+  ]
+ },
+ {
+  "satz": "Sag, was gut war und warum es einen Unterschied gemacht hat.",
+  "stellen": [
+   "Baustein ph29",
+   "Regel form-loben"
+  ]
+ },
+ {
+  "satz": "scheinbar = nur dem Schein nach, in Wirklichkeit nicht:",
+  "stellen": [
+   "Prüfmuster y04",
+   "Übung r11"
+  ]
+ },
+ {
+  "satz": "Schreibt dem anderen die Kontrolle über deine Gefühle zu.",
+  "stellen": [
+   "Prüfmuster f09",
+   "Vorher/Nachher pr23"
+  ]
+ },
+ {
+  "satz": "Setzt die Zusage voraus und macht das Nein teurer.",
+  "stellen": [
+   "Prüfmuster f01",
+   "Vorher/Nachher pr14"
+  ]
+ },
+ {
+  "satz": "Sie macht Eltern zu Partnern statt zu Angeklagten.",
+  "stellen": [
+   "Baustein ph42",
+   "Regel form-eltern",
+   "Übung f47"
+  ]
+ },
+ {
+  "satz": "Standardsprachlich steht nach „brauchen“ der Infinitiv mit „zu“ .",
+  "stellen": [
+   "Prüfmuster a09",
+   "Übung d25"
+  ]
+ },
+ {
+  "satz": "Steht „von“ davor, muss „bis“ ausgeschrieben werden.",
+  "stellen": [
+   "Regel z-gedankenstrich",
+   "Übung p08"
+  ]
+ },
+ {
+  "satz": "Thema nennen und den Zeitpunkt zur Wahl stellen.",
+  "stellen": [
+   "Fehlersuche kt9",
+   "Prüfmuster f03",
+   "Vorher/Nachher pr09",
+   "Übung f45"
+  ]
+ },
+ {
+  "satz": "Über Beobachtungen kann man reden, über Etiketten nur streiten.",
+  "stellen": [
+   "Baustein ph22",
+   "Regel form-kritik",
+   "Übung f25"
+  ]
+ },
+ {
+  "satz": "Vage Angaben zu Menge, Ausmaß oder Häufigkeit sagen wenig:",
+  "stellen": [
+   "Prüfmuster s08",
+   "Regel stil-konkret"
+  ]
+ },
+ {
+  "satz": "Variiere über Synonyme, Oberbegriffe oder Pronomen — aber nur, solange der Bezug eindeutig bleibt.",
+  "stellen": [
+   "Regel stil-wiederholung",
+   "Übung s20"
+  ]
+ },
+ {
+  "satz": "Viele empfinden es als höflich verpackten Druck.",
+  "stellen": [
+   "Regel form-danken",
+   "Vorher/Nachher pr14",
+   "Übung f35"
+  ]
+ },
+ {
+  "satz": "Vor dem Nebensatz mit „dass“ fehlt das Komma.",
+  "stellen": [
+   "Fehlersuche kt1",
+   "Fehlersuche kt12",
+   "Fehlersuche kt3",
+   "Fehlersuche kt8"
+  ]
+ },
+ {
+  "satz": "Vor dem Nebensatz mit „ob“ fehlt das Komma.",
+  "stellen": [
+   "Fehlersuche kt1",
+   "Fehlersuche kt11",
+   "Fehlersuche kt6"
+  ]
+ },
+ {
+  "satz": "vorangestellt verlangt der Duden den Genitiv („entlang des Flusses“), seltener den Dativ.",
+  "stellen": [
+   "Fallkarte entlang",
+   "Regel gram-praepakk"
+  ]
+ },
+ {
+  "satz": "Was du erklären willst, kannst du später sagen — nicht im selben Satz.",
+  "stellen": [
+   "Baustein ph47",
+   "Übung f21"
+  ]
+ },
+ {
+  "satz": "Weil ich müde war, ich bin früher gegangen.",
+  "stellen": [
+   "Regel satz-nebensatz",
+   "Satzkarte sa04",
+   "Übung z04"
+  ]
+ },
+ {
+  "satz": "Welche Aussage stimmt zu „Ich bin gestanden“?",
+  "stellen": [
+   "Übung x11",
+   "Übung z14"
+  ]
+ },
+ {
+  "satz": "Welche Fassung gehört in einen geschriebenen Text?",
+  "stellen": [
+   "Übung d25",
+   "Übung z02"
+  ]
+ },
+ {
+  "satz": "Wenn ich Zeit haben würde, würde ich kommen.",
+  "stellen": [
+   "Regel gram-konjunktiv",
+   "Regel satz-konjunktiv",
+   "Satzkarte sa12",
+   "Übung m06",
+   "Übung z15"
+  ]
+ },
+ {
+  "satz": "Wer 200 Mails am Tag bekommt, entscheidet daran, wann er antwortet.",
+  "stellen": [
+   "Baustein ph04",
+   "Übung f40"
+  ]
+ },
+ {
+  "satz": "Widerspruch, der zeigt, wo genau er einsetzt, ist ein Argument.",
+  "stellen": [
+   "Regel form-widerspruch",
+   "Vorher/Nachher pr12"
+  ]
+ },
+ {
+  "satz": "Wie schreibt man das Datum im Fließtext?",
+  "stellen": [
+   "Übung g20",
+   "Übung q15"
+  ]
+ },
+ {
+  "satz": "Zwischen Ort und Datum steht ein Komma.",
+  "stellen": [
+   "Regel komma-brief",
+   "Übung k25"
+  ]
+ },
+ {
+  "satz": "Zwischen Zahl und Zeichen steht ein Leerzeichen .",
+  "stellen": [
+   "Prüfmuster t03",
+   "Übung q08"
+  ]
+ }
+]

@@ -58,6 +58,51 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Ein Wächter für die gekoppelten Sätze (22.09.2026).**
+
+Die Falle „die Korrektur bleibt auf einer Ebene liegen“ stand seit gestern in CLAUDE.md,
+aber keine Prüfung hielt sie. Jetzt schon.
+
+**Was gemessen ist.** 101 Sätze stehen wörtlich an zwei oder mehr Stellen in voneinander
+unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
+Vorher/Nachher-Paar, ein Baustein und eine Regel. 67 davon an zwei Stellen, 30 an drei,
+vier an vier oder fünf. Die Paare aus Regel und Satzkarte zählen nicht mit: `RULES_SATZ`
+wird über `SATZ_RULEMAP` aus `SATZ` erzeugt, beide tragen denselben Text von Haus aus.
+
+**Warum auf Satzebene und nicht auf Paarebene.** Am 21.09. teilten die Übung `f06` und das
+Vorher/Nachher-Paar `pr01` drei Sätze. Nach der Korrektur an `f06` noch zwei. Eine Prüfung
+„teilen die beiden noch irgendetwas?“ hätte geschwiegen. Der Wächter vergleicht deshalb
+Satz für Satz und meldet genau einen Fall: **Ein gespeicherter Satz steht noch an manchen
+seiner Stellen und an anderen nicht mehr.** Verschwindet er überall, war es ein sauberer
+Umbau — das bleibt still und wird nur als abgelaufener Eintrag gezählt.
+
+**Neu im Repo:** `tests/kopplung.js` (die geteilte Sammel- und Normierlogik, mit der
+Begründung im Kopf), `tests/kopplungen-schreiben.js` und `tests/kopplungen.json` (der
+Stand), dazu `npm run kopplungen`. Wer einen gekoppelten Satz umschreibt, ruft das Skript
+und legt die neue Fassung in denselben Commit.
+
+**Gegengeprobt am echten Bestand**, nicht nur an einer Attrappe: In einer Kopie habe ich
+eine Seite eines gekoppelten Satzes geändert — der Lauf wird rot und nennt beide Seiten
+(„noch bei Regel z-klammern, nicht mehr bei Übung p16“). Dazu drei Proben im Lauf selbst,
+alle durch dieselbe Urteilsfunktion wie der Bestand: einseitig geändert → rot, überall
+umgeschrieben → still, überall unverändert → still.
+
+**Zwei Messungen nebenbei, beide noch nicht bearbeitet:**
+
+- **Regelverweise fehlen der halben App.** Übungen (381), Prüfmuster (101) und
+  Fehlermarkierungen (86) tragen alle ein Feld `r` und führen damit in eine Regel — das
+  ist die Grundlage der Runden 20 und 21. Wortkarten (155), Fallkarten (182), Tabellen
+  (10) und die ganze Schreibwerkstatt (105) tragen **keinen einzigen**. Genau deshalb
+  konnte `pr01` von `form-bitten` wegdriften, ohne dass etwas anschlug. Umgekehrt ist der
+  Bestand sauber: Auf jede der 118 Regeln zeigt mindestens eine Übung, ein Prüfmuster oder
+  eine Fehlermarkierung — es gibt keine unerreichbare Regel.
+- **Zehn Vorbildtexte lösen den eigenen Textcheck aus**, alle auf den Stufen `stil` und
+  `form` (`hart` und `prüfen` sind schon abgesichert). Mehrere davon zu Recht: Die
+  Mustertexte von `w10` und `sc11` zitieren absichtlich eine schlechte Fassung, bevor sie
+  die gute zeigen. Zwei bis drei sehen nach echter Selbstwidersprüchlichkeit aus, darunter
+  `ph29` — eine förmliche Musterformulierung mit „deutlich“, das `s08` als vage Angabe
+  anstreicht.
+
 **Die 101 Prüfmuster, gegen ihre eigene Regel gelesen (21.09.2026, einundzwanzigste Runde).**
 
 Dieselbe Frage wie eine Runde vorher, ein Bestand weiter: Jedes Prüfmuster des Textchecks

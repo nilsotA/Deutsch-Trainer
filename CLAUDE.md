@@ -23,7 +23,9 @@ manifest.webmanifest      macht die gehostete Fassung auf dem Handy installierba
 sw.js                     Service Worker: hält die App offline verfügbar
 icon-180/192/512.png      Symbol für den Home-Bildschirm
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
-                          Formentabelle, unabhängig von der App aufgestellt
+                          Formentabelle, unabhängig von der App aufgestellt;
+                          tests/kopplungen.json hält fest, welcher Satz an welchen
+                          Stellen steht (siehe tests/kopplung.js)
 package.json              npm-Skripte für die Prüfläufe
 ```
 
@@ -275,7 +277,17 @@ node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
 npm run kalender          # dieselben Läufe über sechs Kalenderversätze (dauert Minuten)
+npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
+
+**Wer einen gekoppelten Satz umschreibt, ruft `npm run kopplungen`** und legt die neue
+Fassung in denselben Commit. 101 Sätze stehen wörtlich an zwei oder mehr Stellen in
+voneinander unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
+Vorher/Nachher-Paar. Der Wächter in `tests/suite.js` meldet genau den Fall, in dem ein
+solcher Satz an manchen seiner Stellen noch steht und an anderen nicht mehr: Dann hat
+jemand eine Seite geändert und die andere übersehen. Wird er überall umgeschrieben,
+bleibt der Lauf still — das ist ein sauberer Umbau, und die Datei wird beim nächsten
+Lauf neu geschrieben.
 
 **`npm run kalender` gehört nicht in `npm test`**, aber vor jeden Commit, der an der
 Lernlogik, an `NEU_GELERNT` oder an einem Fixture mit Fälligkeiten rührt. Er fährt die

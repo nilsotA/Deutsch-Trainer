@@ -1249,6 +1249,68 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   P.ok("Jede gelistete Ausnahme gibt es noch", !tot.length, tot.join(", "));
 }
 
+{
+  /* Fehlerklasse „die Korrektur bleibt auf einer Ebene liegen“ — siehe tests/kopplung.js
+     für die ganze Begründung. Kurz: 101 Sätze stehen wörtlich an zwei oder mehr Stellen
+     in voneinander unabhängigen Beständen. Wer einen davon an einer Stelle korrigiert und
+     die andere übersieht, hinterlässt zwei Fassungen derselben Aussage.
+
+     Geprüft wird auf Satzebene, nicht auf Paarebene: Am 21.09.2026 teilten die Übung f06
+     und das Vorher/Nachher-Paar pr01 drei Sätze; nach der Korrektur an f06 noch zwei. Eine
+     Prüfung „teilen die beiden noch irgendetwas?“ hätte geschwiegen.
+
+     Rot wird genau der eine Fall: Ein gespeicherter Satz steht noch an manchen seiner
+     Stellen und an anderen nicht mehr. Verschwindet er überall, war es ein sauberer Umbau
+     — das bleibt still und zählt nur als abgelaufener Eintrag. Wer viele abgelaufene
+     Einträge sieht, ruft `npm run kopplungen` und legt die neue Fassung dazu. */
+  const { gleich, stellenSammeln } = require("./kopplung");
+  const gespeichert = JSON.parse(fs.readFileSync(path.join(__dirname, "kopplungen.json"), "utf8"));
+  const jetzt = stellenSammeln(daten, w);
+  const hatSatz = new Map();               /* normierter Satz -> Set der Stellen */
+  for (const [stelle, liste] of jetzt) liste.forEach(s => {
+    const g = gleich(s);
+    if (!hatSatz.has(g)) hatSatz.set(g, new Set());
+    hatSatz.get(g).add(stelle);
+  });
+  /* Ein Urteil je gespeicherter Gruppe. Dieselbe Funktion prüft den Bestand und die
+     Proben darunter — sonst misst die Probe etwas anderes als der Lauf. */
+  const urteil = (g, wo) => {
+    const da = wo.get(gleich(g.satz)) || new Set();
+    const fehlt = g.stellen.filter(s => !da.has(s));
+    if (!fehlt.length) return { stand: "heil" };
+    if (fehlt.length === g.stellen.length) return { stand: "abgelaufen" };
+    return { stand: "gerissen", noch: g.stellen.filter(s => da.has(s)), fehlt };
+  };
+  const gerissen = [], abgelaufen = [];
+  gespeichert.forEach(g => {
+    const u = urteil(g, hatSatz);
+    if (u.stand === "abgelaufen") abgelaufen.push(g.satz.slice(0, 50));
+    if (u.stand === "gerissen") gerissen.push("„" + g.satz.slice(0, 60) + "…“ — noch bei " +
+      u.noch.join(", ") + ", nicht mehr bei " + u.fehlt.join(", "));
+  });
+  P.ok("Kein gekoppelter Satz ist nur an einer Seite geändert worden (" +
+    gespeichert.length + " Sätze)", !gerissen.length, gerissen.slice(0, 4).join(" · ") +
+    (gerissen.length > 4 ? " …(" + gerissen.length + ")" : ""));
+  P.info("Gekoppelte Sätze, die überall umgeschrieben wurden: " + abgelaufen.length +
+    (abgelaufen.length > 20 ? " — Zeit für npm run kopplungen" : ""));
+  /* Drei Proben durch dieselbe Funktion. Die erste ist die Lage vom 21.09.2026: Der Satz
+     stand in f06 und in pr01, f06 wurde korrigiert, pr01 blieb stehen. */
+  const probeGruppe = { satz: "Der Konjunktiv macht sie nicht höflicher, nur indirekter.",
+    stellen: ["Übung f06", "Vorher/Nachher pr01"] };
+  const alsKarte = (...stellen) => new Map([[gleich(probeGruppe.satz), new Set(stellen)]]);
+  P.ok("Der Kopplungswächter erkennt die einseitige Änderung",
+    urteil(probeGruppe, alsKarte("Vorher/Nachher pr01")).stand === "gerissen",
+    "Positivprobe blieb stumm");
+  P.ok("… und schweigt, wenn alle Seiten umgeschrieben sind",
+    urteil(probeGruppe, new Map()).stand === "abgelaufen", "Gegenprobe schlug an");
+  P.ok("… und wenn der Satz überall unverändert steht",
+    urteil(probeGruppe, alsKarte("Übung f06", "Vorher/Nachher pr01")).stand === "heil",
+    "Gegenprobe schlug an");
+  /* Und die Datei muss zum Bestand passen: jede gespeicherte Stelle muss es geben. */
+  const unbekannt = [...new Set(gespeichert.flatMap(g => g.stellen))].filter(s => !jetzt.has(s));
+  P.ok("Jede Stelle in kopplungen.json gibt es noch", !unbekannt.length, unbekannt.join(" · "));
+}
+
 const offeneWdh = muster.filter(c => /\[\^[^\]]*\]\{\d+,\}/.test(c.re));
 
 {

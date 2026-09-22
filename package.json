@@ -12,7 +12,8 @@
     "syntax": "node -e \"const fs=require('fs');fs.writeFileSync('/tmp/dt-check.js',fs.readFileSync('Deutsch-Trainer.html','utf8').split('<script>')[1].split('</'+'script>')[0])\" && node --check /tmp/dt-check.js && echo \"Syntax in Ordnung\"",
     "oeffnen": "open Deutsch-Trainer.html || xdg-open Deutsch-Trainer.html",
     "test:fallform": "node tests/fallform.js",
-    "kalender": "node tests/kalender.js"
+    "kalender": "node tests/kalender.js",
+    "kopplungen": "node tests/kopplungen-schreiben.js"
   },
   "devDependencies": {
     "jsdom": "^24.0.0"
