@@ -117,14 +117,6 @@
   ]
  },
  {
-  "satz": "„Man“ ist das Fluchtwort der deutschen Sprache.",
-  "stellen": [
-   "Regel form-verbindlich",
-   "Vorher/Nachher pr21",
-   "Übung f41"
-  ]
- },
- {
   "satz": "„Sie hat gefragt, ob du Zeit hast.“",
   "stellen": [
    "Regel satz-frage",
@@ -144,6 +136,14 @@
   "stellen": [
    "Baustein ph21",
    "Regel form-widerspruch"
+  ]
+ },
+ {
+  "satz": "„Wenn du Zeit hast, dann ruf mich an.“",
+  "stellen": [
+   "Regel satz-nebensatz",
+   "Satzkarte sa04",
+   "Übung z04"
   ]
  },
  {
@@ -222,6 +222,13 @@
   ]
  },
  {
+  "satz": "Das „aber“ gehört nicht in den Satz mit der Entschuldigung.",
+  "stellen": [
+   "Baustein ph47",
+   "Übung f21"
+  ]
+ },
+ {
   "satz": "Das einfache Verb ist fast immer stärker.",
   "stellen": [
    "Prüfmuster s02",
@@ -247,6 +254,13 @@
   "stellen": [
    "Baustein ph44",
    "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "Dass sonst niemand fragt, heißt nicht, dass alle mitgekommen sind.",
+  "stellen": [
+   "Regel form-nachfragen",
+   "Situation sc11"
   ]
  },
  {
@@ -342,13 +356,6 @@
   "stellen": [
    "Baustein ph20",
    "Übung f24"
-  ]
- },
- {
-  "satz": "Eine Entschuldigung ohne „aber“ ist die einzige, die ankommt.",
-  "stellen": [
-   "Baustein ph47",
-   "Übung f21"
   ]
  },
  {
@@ -715,6 +722,13 @@
   "stellen": [
    "Baustein ph04",
    "Übung f40"
+  ]
+ },
+ {
+  "satz": "Wer zuerst Aufgaben und Termine aufschreibt, führt die Gruppe — ohne dass es nach Führung aussieht.",
+  "stellen": [
+   "Baustein ph40",
+   "Regel form-absprachen"
   ]
  },
  {

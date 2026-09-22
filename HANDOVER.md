@@ -58,6 +58,71 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Schreibwerkstatt, gegen ihre Regeln gelesen (22.09.2026, zweiundzwanzigste Runde).**
+
+Nach Übungen und Prüfmustern der dritte Bestand: 105 Einträge (Schreibaufträge,
+Situationen, Vorher/Nachher-Paare, Bausteine) in 15 Paketen, dazu 79 fast gleiche
+Satzpaare aus gekoppelten Einträgen in 10 Paketen und drei Querschnittsprüfer; jede
+Meldung danach von einem Widerleger angegriffen. 134 Agenten, 106 Meldungen, 59 gehalten.
+Ein Widerleger (`w10.tip`) lief ins Wochenlimit — die Meldung habe ich selbst geprüft und
+eingebaut, also 60. Alle 60 vor dem Einbau nachgemessen: Zählungen selbst nachgezählt,
+Sprachbehauptungen mit je zwei verschieden formulierten Suchen.
+
+**Die Befunde nach Klasse:** 22 Einträge widersprachen sich selbst, 13 ihrer Regel, 12
+waren sachlich falsch, vier Vorbildtexte hatten einen Sprachfehler, je zwei Rang- und
+Absolutaussagen, zwei regionale Formen ohne Einordnung, zwei sonstige.
+
+- **Zahlen, die nicht stimmten.** `w06` „Aus 46 Wörtern werden 28“ (38 und 26), `w10`
+  „Vorher (68 Wörter)“ über einem Absatz mit 53, `pr06` und `pr09` zählten Sätze und Wörter
+  falsch, `pr24` hieß „fünffach abgesichert“ bei vier Absicherungen. Die Übung `f43` trug
+  dieselbe Zahl in ihrer **richtigen Antwort** — jetzt „Mehrfach abgesichert“, und `f43`
+  steht mit dem 22.09. in `NEU_GELERNT`.
+- **Tipps gegen die eigenen Beispiele:** `ph05`, `ph19`, `ph29`, `ph32`, `ph36`, `ph48` —
+  der Merksatz empfahl, was die Formulierungen darüber nicht taten, oder umgekehrt.
+- **Regional:** `ph09` bot „es geht sich zeitlich nicht aus“ als förmliche Absage an — das
+  ist österreichisch. Jetzt „zeitlich ist es mir nicht möglich“.
+- **Komma vor „statt … zu“** fehlte in `pr12` und `pr28`. Der Textcheck sah es nicht: `y02`
+  kannte nur „um … zu“ und bekam einen schmalen Zweig für statt/anstatt (breiter getestet
+  meldete er „ohne Weiteres zu erklären“). Und die Begründungen der Paare liefen gar nicht
+  im Vorbildkorpus — jetzt schon; die Gegenprobe mit dem alten `pr12` wird rot.
+- **Eine eigene Korrektur der Runde 20 war ungenau:** In der Anrede wird der
+  Professorentitel ausgeschrieben, der Doktortitel bleibt abgekürzt („Sehr geehrter Herr
+  Dr. Lang“). `form-anrede` und `f01` sagen das jetzt.
+- **Der Kopplungswächter hat zum ersten Mal echt angeschlagen**, und zwar bei mir: Ich hatte
+  in `g03` „dagegen“ durch „ebenfalls“ ersetzt, während `y08` den Satz weiter trug. `g03`
+  folgt jetzt der Reihenfolge von `y08`.
+- Die Kopfzeile eines Schreibauftrags zeigte „Umformulierung Wörter“ — `umfang()` hängt
+  „Wörter“ nur noch an Zahlen.
+
+**Beim Nachzählen selbst gefunden, nach dem Workflow:**
+
+- **Alle 13 Musterlösungen mit Wortbereich lagen darunter** (`w01`: 200–280 verlangt, 153
+  gezeigt). Die Vorgaben sind an die Muster angepasst — kürzer schreiben ist ohnehin, was
+  die Werkstatt übt. Neue Prüfung in `tests/suite.js`: Wortbereich (bei „2 × a–b“ je
+  Fassung), Zählköpfe „(N Wörter)“, Prozentangabe, „Aus N Wörtern werden M“ und die
+  zählbaren Selbstcheck-Punkte („Genau fünf Sätze“, „Kein Satz länger als 25 Wörter“),
+  gezählt wie das Schreibfeld der App. Sieben Positivproben aus den alten Fassungen, eine
+  Abdeckungszusicherung. Zahlen im Fließtext sieht sie nicht.
+- **`w10` erfand beim Kürzen eine Zahl** („über vierzig empirische Studien seit 2015“) —
+  unter meinem eigenen neuen Tipp „du nimmst nur weg“. Das Nachher sagt jetzt nur, was das
+  Vorher sagte (15 Wörter, −72 %); der Titel heißt „Ein Viertel kürzer“, passend zur
+  Aufgabe (mindestens 25 Prozent), statt „Zehn Wörter kürzer“.
+- **`w05` und `kt10` schrieben Dietrich Kurz einen Aufsatz „Erziehender Sportunterricht“
+  samt Ergebnis zu.** So heißt ein Buch von Peter Neumann (2004); Kurz' Titel von 2001
+  lautet „Pädagogische Perspektiven für den Schulsport. Orientierungen für einen
+  erziehenden Sportunterricht“. Das Ergebnis war ausgedacht. Jetzt „Weber“ mit dem Aufsatz
+  „Zwei Ziele, eine Stunde“ — erkennbar erfunden, wie Frau Dr. Weber in den Mails. Mit dem
+  weiblichen Subjekt wurden zwei „sie“ in `w05` doppeldeutig; umformuliert.
+- `w04` nannte die Bewegungsbeschreibung „die härteste Schule für Sprachgenauigkeit“; der
+  Rangwächter kannte „härteste“ nicht. Jetzt schon, mit Positivprobe.
+
+**Gemessen, nicht bearbeitet:** `BESTAND` in `tests/suite.js` heißt „der ganze Bestand“,
+nimmt aber nur die erklärenden Felder auf — nicht `PROMPTS.p`, `SCENES.ask`,
+`PHRASES.lv`, `WORDS.ex`/`s`, `CASEREF.ex`/`s`, `SATZ.short`, `ALL.o`, `KORREKTUR.txt`
+und die Titel der Prüfmuster. Rang- und Absolutwächter über diese 1280 Felder: sauber,
+die Treffer sind Beispielsätze („die drei wichtigsten Korrekturen“). Wer sie aufnimmt,
+bekommt eine Erlaubnisliste für Beispielsätze dazu.
+
 **Ein Wächter für die gekoppelten Sätze (22.09.2026).**
 
 Die Falle „die Korrektur bleibt auf einer Ebene liegen“ stand seit gestern in CLAUDE.md,

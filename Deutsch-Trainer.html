@@ -908,7 +908,7 @@ const EX_A = [
  e:"Feste Wendung mit substantivierten Adjektiven — beide werden großgeschrieben.",r:"gross-subst"},
 
 {id:"g03",c:"gross",q:"Wie schreibt man?",o:["Ich wünsche dir alles Gute.","Ich wünsche dir alles gute."],a:0,
- e:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das folgende Adjektiv substantiviert und großgeschrieben: etwas Neues, nichts Besonderes, viel Interessantes. Die Zahladjektive bleiben dagegen in der Regel klein: etwas anderes, alles andere — groß ist dort zulässig, wenn der substantivische Charakter betont werden soll, der Duden empfiehlt klein.",r:"gross-subst"},
+ e:"Nach <b>alles, etwas, nichts, viel, wenig</b> wird das folgende Adjektiv substantiviert und großgeschrieben: etwas Neues, nichts Besonderes, viel Interessantes. Die Zahladjektive bleiben dagegen in der Regel klein: etwas anderes, alles andere — groß ist dort zulässig, wenn der substantivische Charakter betont werden soll, der Duden empfiehlt klein. Klein bleibt es auch vor einem Substantiv („viel frische Luft“) und dort, wo etwas, viel oder wenig nur den Grad angeben („etwas müde“).",r:"gross-subst"},
 
 {id:"g04",c:"gross",q:"Korrekt ist …",o:["Heute Morgen war es kalt.","Heute morgen war es kalt."],a:0,
  e:"Tageszeiten nach heute/gestern/morgen sind Substantive: <b>heute Morgen, gestern Abend, morgen Nachmittag</b>.",r:"gross-zeit"},
@@ -2085,7 +2085,7 @@ Zweifel <b>hegen</b> · einen Eindruck <b>gewinnen</b> · Verantwortung <b>über
    ============================================================ */
 const PROMPTS = [
 
-{id:"w01",k:"Reflexion",t:"Eine Stunde, die nicht lief",min:20,words:"200–280",
+{id:"w01",k:"Reflexion",t:"Eine Stunde, die nicht lief",min:20,words:"150–220",
 p:"Beschreibe eine Unterrichts-, Trainings- oder Lernsituation, die anders verlief als geplant. Halte dich an die Reihenfolge: <b>1.</b> Was ist konkret passiert (ohne Wertung)? <b>2.</b> Wie hast du reagiert? <b>3.</b> Welche Erklärung hast du dafür? <b>4.</b> Was würdest du beim nächsten Mal anders machen?",
 crit:["Beschreibung und Deutung sind klar getrennt","Ich-Form konsequent durchgehalten","Mindestens eine Alternativhandlung konkret benannt","Keine Pauschalurteile über Beteiligte","Sätze im Schnitt unter 20 Wörtern"],
 tip:"Die Falle in Reflexionen: Bewertung schleicht sich in die Beschreibung („Die Gruppe war unmotiviert“ ist schon eine Deutung). Schreib erst, was sichtbar war.",
@@ -2093,7 +2093,7 @@ model:`<p>Die Aufwärmphase war für zehn Minuten angesetzt. Nach vier Minuten h
 <p>Rückblickend halte ich zwei Faktoren für ausschlaggebend. Erstens hatte ich die Regeln im Stehen erklärt, während die Gruppe bereits die Bälle in der Hand hielt — die Aufmerksamkeit lag beim Material, nicht bei mir. Zweitens war die Spielform für 24 Personen auf einem Drittel der Halle zu eng angelegt.</p>
 <p>Beim nächsten Mal gebe ich die Bälle erst nach der Erklärung aus und lasse die Gruppe die Regel einmal in eigenen Worten wiederholen. Die Fläche vergrößere ich auf zwei Hallendrittel und reduziere die Gruppengröße auf zwölf pro Feld. Ob das reicht, werde ich an derselben Klasse überprüfen.</p>`},
 
-{id:"w02",k:"Argumentation",t:"Position beziehen und abwägen",min:20,words:"250–320",
+{id:"w02",k:"Argumentation",t:"Position beziehen und abwägen",min:20,words:"180–260",
 p:"Formuliere eine These zu einer strittigen Frage aus deinem Feld (z. B. „Noten im Sportunterricht sollten abgeschafft werden“). Baue den Text so auf: <b>These → stärkstes Gegenargument → Entkräftung → eigene Begründung → Fazit.</b> Beginne bewusst mit dem Gegenargument, nicht mit deinem eigenen.",
 crit:["These steht im ersten Absatz und ist eindeutig","Gegenargument ist in seiner stärksten Form dargestellt","Mindestens ein Beleg oder Beispiel stützt die eigene Position","Keine rhetorischen Fragen","Fazit wiederholt nicht bloß die These"],
 tip:"Wer das Gegenargument schwach darstellt, überzeugt niemanden. Formuliere es so, dass ein Gegner sagen würde: „Ja, genau das meine ich.“",
@@ -2103,7 +2103,7 @@ model:`<p>Sportnoten sollten durch eine kriteriengeleitete Rückmeldung ohne Zif
 <p>Für den Verzicht spricht vor allem die Konstruktion der Sportnote selbst. Sie mischt Merkmale, die kaum beeinflussbar sind — Körperbau, motorische Vorerfahrung, Vereinsanbindung — mit solchen, die es sind: Anstrengung, Kooperation, Lernzuwachs. Diese Mischung macht die Ziffer als Lernsignal unbrauchbar, weil unklar bleibt, worauf sie antwortet.</p>
 <p>Der Verzicht auf die Ziffer ist deshalb kein Verzicht auf Leistungsbewertung, sondern der Versuch, sie präzise zu machen. Entscheidend ist nicht, ob bewertet wird, sondern ob die Rückmeldung dem Lernenden sagt, was er als Nächstes tun kann.</p>`},
 
-{id:"w03",k:"E-Mail",t:"Eine heikle E-Mail schreiben",min:12,words:"120–180",
+{id:"w03",k:"E-Mail",t:"Eine heikle E-Mail schreiben",min:12,words:"80–130",
 p:"Du musst einer Dozentin mitteilen, dass du eine Abgabefrist nicht einhalten kannst. Schreib die E-Mail: Anrede, Anliegen im ersten Satz, kurze Begründung ohne Rechtfertigungsschleife, konkreter Vorschlag, Grußformel.",
 crit:["Anliegen steht im ersten Satz","Begründung höchstens zwei Sätze","Konkreter neuer Termin vorgeschlagen","Keine Unterwürfigkeitsfloskeln („Es tut mir schrecklich leid …“)","Anrede- und Grußformel korrekt gesetzt"],
 tip:"Faustregel für berufliche E-Mails: Der Empfänger soll nach dem ersten Satz wissen, worum es geht und was von ihm erwartet wird.",
@@ -2114,19 +2114,19 @@ model:`<p>Sehr geehrte Frau Dr. Weber,</p>
 <p>Vielen Dank für Ihre Rückmeldung.</p>
 <p>Mit freundlichen Grüßen<br>Nils Otten</p>`},
 
-{id:"w04",k:"Beschreibung",t:"Einen Bewegungsablauf beschreiben",min:15,words:"180–250",
+{id:"w04",k:"Beschreibung",t:"Einen Bewegungsablauf beschreiben",min:15,words:"150–220",
 p:"Beschreibe einen Bewegungsablauf (z. B. Hocksprung über den Kasten, Volleyball-Aufschlag von oben) so präzise, dass jemand ihn ohne Bild nachvollziehen kann. Gliedere in Vorbereitung, Hauptphase und Endphase. Verwende Fachsprache, aber erkläre jeden Fachbegriff bei der ersten Nennung.",
 crit:["Drei Phasen klar voneinander getrennt","Räumliche Angaben eindeutig (rechts/links, vorwärts/rückwärts)","Fachbegriffe erklärt","Präsens durchgehalten","Keine unklaren Pronomenbezüge („es“, „das“)"],
-tip:"Präzise Beschreibung ist die härteste Schule für Sprachgenauigkeit. Jedes „irgendwie“ fällt hier sofort auf.",
+tip:"Eine Beschreibung ohne Bild verzeiht keine Ungenauigkeit: Jedes „irgendwie“ fällt hier sofort auf.",
 model:`<p><b>Vorbereitungsphase.</b> Der Anlauf erfolgt geradlinig auf das Sprungbrett zu und umfasst sechs bis acht Schritte mit steigender Frequenz. Der letzte Schritt vor dem Brett wird verkürzt; beide Beine schließen zum beidbeinigen Absprung. Der Oberkörper bleibt aufgerichtet, die Arme schwingen aus der Rücklage nach vorn oben.</p>
-<p><b>Hauptphase.</b> Mit dem Abdruck vom Brett strecken sich Fuß-, Knie- und Hüftgelenk vollständig — man spricht von der Streckschlinge. Unmittelbar danach folgt das Anhocken: Die Knie werden zur Brust gezogen, der Rumpf beugt sich vor, die Hände stützen auf dem vorderen Kastenrand auf. Der Körperschwerpunkt bleibt dabei über der Stützfläche; kippt er dahinter, bricht die Bewegung ab.</p>
-<p><b>Endphase.</b> Über dem Kasten öffnet sich die Hocke, die Beine strecken sich nach vorn unten. Die Landung erfolgt beidbeinig in der Schrittstellung leicht gebeugter Knie, der Blick geht nach vorn. Ein kurzes Nachfedern in Knie und Hüfte bremst den Impuls ab, ohne dass die Fersen den Boden vor den Fußballen berühren.</p>`},
+<p><b>Hauptphase.</b> Mit dem Abdruck vom Brett strecken sich Fuß-, Knie- und Hüftgelenk vollständig. Die Muskeln, die das gemeinsam leisten — Gesäß-, Oberschenkel- und Wadenmuskulatur —, nennt man eine Streckschlinge. Unmittelbar danach folgt das Anhocken: Die Knie werden zur Brust gezogen, der Rumpf beugt sich vor, die Hände stützen auf dem vorderen Kastenrand auf. Der Körperschwerpunkt bleibt dabei über der Stützfläche; kippt er dahinter, bricht die Bewegung ab.</p>
+<p><b>Endphase.</b> Über dem Kasten öffnet sich die Hocke, die Beine strecken sich nach vorn unten. Die Landung erfolgt beidbeinig mit etwa hüftbreit geöffneten Füßen, die Knie geben nach, der Blick geht nach vorn. Ein kurzes Nachfedern in Knie und Hüfte bremst den Impuls ab, ohne dass die Fersen den Boden vor den Fußballen berühren.</p>`},
 
-{id:"w05",k:"Zusammenfassung",t:"In fünf Sätzen zusammenfassen",min:12,words:"90–130",
+{id:"w05",k:"Zusammenfassung",t:"In fünf Sätzen zusammenfassen",min:12,words:"70–110",
 p:"Nimm einen Fachtext, Artikel oder ein Kapitel, das du gerade liest. Fasse es in genau fünf Sätzen zusammen: <b>1.</b> Worum geht es? <b>2.</b> Welche Frage stellt der Text? <b>3.</b> Wie geht er vor? <b>4.</b> Was ist das Ergebnis? <b>5.</b> Was folgt daraus?",
 crit:["Genau fünf Sätze","Keine Zitate, alles in eigenen Worten","Kein Satz länger als 25 Wörter","Kein eigenes Urteil eingemischt","Autor und Werk im ersten Satz genannt"],
 tip:"Die Fünf-Satz-Zusammenfassung ist die beste Übung gegen Wortballast: Jeder überflüssige Nebensatz kostet dich Platz für Inhalt.",
-model:`<p>In seinem Aufsatz „Erziehender Sportunterricht“ untersucht Kurz das Verhältnis von Bewegungslernen und Persönlichkeitsbildung. Er fragt, ob sich beide Ziele im selben Unterricht verfolgen lassen oder ob sie einander verdrängen. Dazu vergleicht er sechs pädagogische Perspektiven auf den Schulsport und prüft, welche Handlungsanforderungen sie jeweils erzeugen. Sein Ergebnis: Die Ziele konkurrieren nicht grundsätzlich, wohl aber in der begrenzten Unterrichtszeit, weshalb eine bewusste Schwerpunktsetzung nötig ist. Für die Praxis folgt daraus, dass Lehrkräfte je Unterrichtsvorhaben eine Perspektive führend setzen und die übrigen bewusst zurückstellen sollten.</p>`},
+model:`<p>In ihrem Aufsatz „Zwei Ziele, eine Stunde“ untersucht Weber das Verhältnis von Bewegungslernen und Persönlichkeitsbildung. Sie fragt, ob sich beide Ziele im selben Unterricht verfolgen lassen oder ob eines das andere verdrängt. Dazu vergleicht sie sechs pädagogische Perspektiven auf den Schulsport und prüft, welche Handlungsanforderungen jede Perspektive erzeugt. Ihr Ergebnis: Die Ziele konkurrieren nicht grundsätzlich, wohl aber in der begrenzten Unterrichtszeit, weshalb eine bewusste Schwerpunktsetzung nötig ist. Für die Praxis folgt daraus, dass Lehrkräfte je Unterrichtsvorhaben eine Perspektive führend setzen und die übrigen bewusst zurückstellen sollten.</p>`},
 
 {id:"w06",k:"Umformulieren",t:"Nominalstil auflösen",min:10,words:"Umformulierung",
 p:"Schreib die folgenden Sätze so um, dass die Handlung im Verb steht:<br><br><i>1. Die Durchführung der Erhebung der Daten erfolgte im Mai.</i><br><i>2. Nach erfolgter Auswertung kam es zur Feststellung einer Verbesserung der Werte.</i><br><i>3. Die Inanspruchnahme des Angebots durch die Teilnehmenden war gering.</i><br><i>4. Es erfolgte eine Überprüfung der Hypothese durch die Forschungsgruppe.</i>",
@@ -2136,18 +2136,18 @@ model:`<p>1. Wir erhoben die Daten im Mai.</p>
 <p>2. Die Auswertung zeigte, dass sich die Werte verbessert hatten.</p>
 <p>3. Die Teilnehmenden nutzten das Angebot kaum.</p>
 <p>4. Die Forschungsgruppe überprüfte die Hypothese.</p>
-<p class="tiny muted" style="margin-top:14px">Beobachte, was passiert: Aus 46 Wörtern werden 28, und in jedem Satz ist jetzt klar, wer handelt.</p>`},
+<p class="tiny muted" style="margin-top:14px">Beobachte, was passiert: Aus 38 Wörtern werden 26, und in jedem Satz ist jetzt klar, wer handelt.</p>`},
 
-{id:"w07",k:"Erzählung",t:"Eine Szene ohne Adjektive",min:15,words:"150–220",
+{id:"w07",k:"Erzählung",t:"Eine Szene ohne Adjektive",min:15,words:"100–160",
 p:"Erzähl eine kurze Szene aus deinem Alltag — <b>ohne ein einziges Adjektiv</b>. Alle Wirkung muss über Verben, Substantive und Details entstehen. Erlaubt sind Zahlen und Farbwörter, wenn sie sachlich nötig sind.",
 crit:["Kein einziges Adjektiv verwendet","Mindestens fünf präzise Verben","Konkrete Details statt allgemeiner Aussagen","Die Stimmung wird spürbar, ohne benannt zu werden","Kein Adverb als Adjektiv-Ersatz eingeschmuggelt"],
 tip:"Diese Übung stammt aus der Journalistenausbildung. Sie zwingt dich, die Arbeit ans Verb zu delegieren — und Verben tragen weiter als Adjektive.",
 model:`<p>Um Viertel nach sechs klingelt der Wecker zum zweiten Mal. Ich taste nach dem Handy, treffe die Wasserflasche, höre sie über die Dielen rollen. Draußen fährt die erste Bahn.</p>
-<p>In der Küche tropft die Maschine. Ich stelle die Tasse zu früh unter, verbrenne mir zwei Finger, stelle sie zurück. Der Trainingsplan liegt auf dem Tisch, wo ich ihn gestern hingelegt habe: Intervalle, sechs mal drei Minuten.</p>
-<p>Ich ziehe die Schuhe an, schnüre den linken zweimal, weil der Knoten rutscht. Auf der Treppe rieche ich den Regen, bevor ich ihn sehe. Vor der Haustür bleibe ich stehen und zähle bis fünf.</p>
+<p>In der Küche tropft die Maschine. Ich stelle die Tasse unter, bevor die Maschine durchgelaufen ist, verbrenne mir zwei Finger, ziehe die Hand zurück. Der Trainingsplan liegt auf dem Tisch, wo ich ihn gestern hingelegt habe: Intervalle, sechs mal drei Minuten.</p>
+<p>Ich ziehe die Schuhe an, schnüre einen zweimal, weil der Knoten rutscht. Auf der Treppe rieche ich den Regen, bevor ich ihn sehe. Vor der Haustür bleibe ich stehen und zähle bis fünf.</p>
 <p>Dann laufe ich los.</p>`},
 
-{id:"w08",k:"Reflexion",t:"Eine Rückmeldung, die gesessen hat",min:18,words:"200–260",
+{id:"w08",k:"Reflexion",t:"Eine Rückmeldung, die gesessen hat",min:18,words:"140–200",
 p:"Erinnere dich an eine Rückmeldung, die du erhalten hast und die etwas verändert hat. Beschreibe: Was wurde gesagt? Wie hast du im Moment reagiert? Was hast du später damit gemacht? Was macht diese Rückmeldung im Rückblick brauchbar — oder unbrauchbar?",
 crit:["Wörtliche oder sinngemäße Wiedergabe der Rückmeldung","Erste Reaktion ehrlich beschrieben, nicht geschönt","Zeitliche Distanz erkennbar (damals vs. heute)","Ein übertragbares Kriterium für gute Rückmeldung abgeleitet","Keine Verallgemeinerung über „die Menschen“"],
 tip:"Reflexion wird stark, wenn sie den unangenehmen Moment nicht überspringt. Der Erkenntnisgewinn liegt fast immer in der ersten, ungefilterten Reaktion.",
@@ -2156,7 +2156,7 @@ model:`<p>Nach meiner ersten eigenständigen Trainingseinheit sagte der betreuen
 <p>In der Woche darauf schrieb ich mir die Erklärungen vorher auf und kürzte sie auf jeweils zwei Sätze. Was ich nicht in zwei Sätze bekam, demonstrierte ich. Die Bewegungszeit stieg auf 21 Minuten, ohne dass mehr Unklarheiten entstanden.</p>
 <p>Brauchbar war die Rückmeldung aus drei Gründen: Sie nannte eine Zahl statt eines Urteils, sie bezog sich auf etwas, das ich unmittelbar ändern konnte, und sie verzichtete auf jede Bewertung meiner Person. Ich versuche seitdem, Rückmeldungen an Schülerinnen und Schüler nach demselben Muster zu geben — beobachtbar, veränderbar, ohne Etikett.</p>`},
 
-{id:"w09",k:"Argumentation",t:"Den Advocatus Diaboli spielen",min:18,words:"200–280",
+{id:"w09",k:"Argumentation",t:"Den Advocatus Diaboli spielen",min:18,words:"140–200",
 p:"Wähle eine Position, die du <b>nicht</b> teilst, und schreib die stärkste Verteidigung dafür, die dir möglich ist. Kein ironischer Unterton, keine Distanzierung am Ende. Ziel ist ein Text, den ein Vertreter dieser Position unterschreiben würde.",
 crit:["Keine ironischen Signale oder Anführungszeichen","Mindestens zwei eigenständige Argumente","Ein Einwand vorweggenommen und beantwortet","Keine Distanzierung am Schluss","Sachlicher Ton durchgehend"],
 tip:"Diese Übung schärft zwei Dinge zugleich: dein Argumentieren und dein Verständnis der Gegenseite. Wer die Gegenposition nicht formulieren kann, hat die eigene noch nicht geprüft.",
@@ -2167,17 +2167,17 @@ model:`<p><i>Position: Handschriftliche Klausuren sollten beibehalten werden.</i
 <p>Ein naheliegender Einwand lautet, die Handschrift benachteilige Menschen mit motorischen Einschränkungen. Das trifft zu — und wird durch Nachteilsausgleiche gelöst, wie bei jeder anderen Prüfungsform auch. Aus einem lösbaren Sonderfall folgt keine Abschaffung des Regelfalls.</p>
 <p>Wer die Handschrift verteidigt, verteidigt daher nicht die Vergangenheit, sondern ein Prüfungsformat, für das bislang kein gleichwertiger Ersatz vorliegt.</p>`},
 
-{id:"w10",k:"Umformulieren",t:"Zehn Wörter kürzer",min:10,words:"Kürzung",
+{id:"w10",k:"Umformulieren",t:"Ein Viertel kürzer",min:10,words:"Kürzung",
 p:"Nimm einen eigenen Absatz — aus einer Hausarbeit, einer E-Mail, einem Beitrag. Kürze ihn um <b>mindestens 25 Prozent</b>, ohne Inhalt zu verlieren. Zähl die Wörter vorher und nachher.",
 crit:["Wortzahl vorher und nachher notiert","Mindestens 25 Prozent gekürzt","Kein Inhaltspunkt entfallen","Füllwörter vollständig gestrichen","Der gekürzte Text liest sich flüssiger, nicht gehetzt"],
-tip:"Kürzen ist die schnellste Stilverbesserung überhaupt. Streich in dieser Reihenfolge: Füllwörter, Doppelungen, Streckverben, Nebensätze, die nur wiederholen.",
-model:`<p><b>Vorher (68 Wörter):</b><br>
+tip:"Kürzen braucht keine neue Idee — du nimmst nur weg. Streich in dieser Reihenfolge: Füllwörter, Doppelungen, Streckverben, Nebensätze, die nur wiederholen.",
+model:`<p><b>Vorher (53 Wörter):</b><br>
 <i>Im Rahmen dieser Arbeit soll an dieser Stelle zunächst einmal darauf hingewiesen werden, dass die Thematik der Motivation im Sportunterricht eigentlich als durchaus relevant erachtet werden kann, was sich nicht zuletzt darin zeigt, dass es eine relativ große Anzahl von Studien gibt, die sich in den letzten Jahren mit dieser Frage beschäftigt haben.</i></p>
-<p><b>Nachher (24 Wörter, −65 %):</b><br>
-Motivation im Sportunterricht ist ein gut erforschtes Feld: Allein seit 2015 sind dazu über vierzig empirische Studien im deutschsprachigen Raum erschienen.</p>
-<p class="tiny muted" style="margin-top:14px">Gestrichen wurden: „im Rahmen dieser Arbeit“, „an dieser Stelle“, „zunächst einmal“, „eigentlich“, „durchaus“, „nicht zuletzt“, „relativ“ — und die Ankündigung, dass gleich etwas gesagt wird. Hinzugekommen ist eine Zahl.</p>`},
+<p><b>Nachher (15 Wörter, −72 %):</b><br>
+Motivation im Sportunterricht ist ein relevantes Thema, wie die zahlreichen Studien der letzten Jahre zeigen.</p>
+<p class="tiny muted" style="margin-top:14px">Gestrichen wurden: „im Rahmen dieser Arbeit“, „an dieser Stelle“, „zunächst einmal“, „eigentlich“, „durchaus“, „nicht zuletzt“, „relativ“ — und die Ankündigung, dass gleich etwas gesagt wird. Aus „als relevant erachtet werden kann“ ist „ist relevant“ geworden. Hinzugekommen ist nichts.</p>`},
 
-{id:"w11",k:"Beschreibung",t:"Ein Ort in drei Sinnen",min:15,words:"150–200",
+{id:"w11",k:"Beschreibung",t:"Ein Ort in drei Sinnen",min:15,words:"110–160",
 p:"Beschreibe einen Ort, den du gut kennst, über <b>drei verschiedene Sinne</b> — aber nicht über das Sehen. Also: Geräusche, Gerüche, Temperatur, Oberflächen, Bewegung des Raums.",
 crit:["Sehsinn kommt nicht vor","Mindestens drei verschiedene Sinne angesprochen","Konkrete Details statt allgemeiner Kategorien","Der Ort wird erkennbar, ohne benannt zu werden","Keine Wiederholung derselben Satzstruktur"],
 tip:"Wer das Sehen streichen muss, entdeckt Wörter, die er sonst nie benutzt. Das erweitert den aktiven Wortschatz schneller als jede Vokabelliste.",
@@ -2185,7 +2185,7 @@ model:`<p>Es riecht nach warmem Gummi und dem Reiniger, den sie freitags nehmen 
 <p>Der Boden gibt unter den Sohlen leicht nach und quietscht bei jeder Richtungsänderung, ein kurzer, hoher Ton. Wenn jemand am anderen Ende einen Ball aufsetzt, kommt der Schlag mit halber Sekunde Verzögerung zurück; darüber liegt das Summen der Deckenlampen, das man erst hört, wenn niemand spricht.</p>
 <p>An den Wänden ist die Farbe kalt und glatt, auf Hüfthöhe abgegriffen. Das Seil, das von der Decke hängt, fühlt sich rau an und riecht nach Staub. Aus der Umkleide dringt Wasserrauschen und das Klappern der Schranktüren, das immer eine Spur zu laut ist.</p>`},
 
-{id:"w12",k:"E-Mail",t:"Nein sagen, ohne unhöflich zu werden",min:12,words:"110–160",
+{id:"w12",k:"E-Mail",t:"Nein sagen, ohne unhöflich zu werden",min:12,words:"70–120",
 p:"Jemand bittet dich um etwas, das du nicht übernehmen kannst oder willst — eine Vertretung, eine Mitarbeit, ein Gefallen. Schreib die Absage: klar in der Sache, freundlich im Ton, ohne Ausflüchte und ohne übertriebene Entschuldigung.",
 crit:["Absage steht eindeutig im ersten Absatz","Begründung kurz und ohne Selbsterniedrigung","Kein „vielleicht“, das falsche Hoffnung macht","Wenn möglich: Alternative angeboten","Freundlicher Schlusssatz ohne Floskel"],
 tip:"Unklare Absagen erzeugen Nachfragen. Ein klares Nein ist respektvoller als ein weiches Vielleicht.",
@@ -2196,7 +2196,7 @@ model:`<p>Hallo Julia,</p>
 <p>Für die Woche darauf bin ich gern dabei, wenn dann noch etwas offen ist.</p>
 <p>Viele Grüße<br>Nils</p>`},
 
-{id:"w13",k:"Argumentation",t:"Ein Konzept in einer Analogie erklären",min:15,words:"150–220",
+{id:"w13",k:"Argumentation",t:"Ein Konzept in einer Analogie erklären",min:15,words:"140–200",
 p:"Erkläre einen Fachbegriff aus deinem Studium über eine <b>Analogie</b> aus einem völlig anderen Lebensbereich. Nenne am Ende explizit, wo die Analogie <b>nicht</b> mehr trägt.",
 crit:["Fachbegriff zuerst knapp fachlich definiert","Analogie stammt aus einem anderen Feld","Mindestens zwei Aspekte werden übertragen","Grenze der Analogie klar benannt","Keine Fachbegriffe in der Analogie selbst"],
 tip:"Der eigentliche Denkschritt ist, die Grenze der Analogie zu benennen. Sie zeigt, dass du das Bild beherrschst und nicht umgekehrt.",
@@ -2205,7 +2205,7 @@ model:`<p><b>Superkompensation</b> bezeichnet den Vorgang, dass der Körper nach
 <p>Zwei Dinge trägt das Bild: Es macht deutlich, warum Pausen kein Trainingsausfall sind, und es erklärt, warum sowohl zu häufiges als auch zu seltenes Training den Effekt verfehlt.</p>
 <p>Die Analogie endet dort, wo es um Messbarkeit geht. Ein Kontostand ist eindeutig ablesbar, der Erholungszustand nicht. Es gibt keine Zahl, die den optimalen Zeitpunkt der nächsten Einheit anzeigt — deshalb bleibt Trainingssteuerung eine Abwägung und keine Rechnung.</p>`},
 
-{id:"w14",k:"Zusammenfassung",t:"Für zwei Zielgruppen schreiben",min:18,words:"2 × 80–110",
+{id:"w14",k:"Zusammenfassung",t:"Für zwei Zielgruppen schreiben",min:18,words:"2 × 40–80",
 p:"Nimm einen fachlichen Sachverhalt und erkläre ihn zweimal: <b>a)</b> für Fachkolleginnen, <b>b)</b> für Eltern ohne Fachhintergrund. Gleicher Inhalt, unterschiedliche Sprache. Keine Version darf falsch werden.",
 crit:["Beide Fassungen enthalten dieselbe Kernaussage","Fassung b) verzichtet vollständig auf Fachbegriffe","Fassung b) vereinfacht, ohne zu verfälschen","Unterschiedliche Satzlängen in beiden Fassungen","Keine herablassende Formulierung in b)"],
 tip:"Der Test für echtes Verständnis: Kannst du es ohne Fachvokabular sagen, ohne dass es falsch wird? Vereinfachen heißt nicht weglassen, sondern übersetzen.",
@@ -2214,7 +2214,7 @@ Die Leistungsdifferenz innerhalb der Lerngruppe wird über eine Binnendifferenzi
 <p><b>b) Für Eltern</b><br>
 In der Klasse sind die Kinder unterschiedlich weit — das ist normal. Deshalb üben alle dieselbe Sache, aber jedes Kind sucht sich die Schwierigkeit selbst aus: näher oder weiter weg, größeres oder kleineres Ziel. Wer merkt, dass es zu leicht oder zu schwer ist, wechselt einfach. So hat jedes Kind eine Aufgabe, an der es wachsen kann, ohne über- oder unterfordert zu sein.</p>`},
 
-{id:"w15",k:"Reflexion",t:"Was ich noch nicht kann",min:18,words:"180–250",
+{id:"w15",k:"Reflexion",t:"Was ich noch nicht kann",min:18,words:"140–200",
 p:"Benenne eine fachliche oder persönliche Fähigkeit, die dir noch fehlt. Beschreibe: <b>1.</b> Woran merkst du das konkret? <b>2.</b> Was hast du bisher versucht? <b>3.</b> Warum hat es nicht gereicht? <b>4.</b> Was ist der nächste, kleinste sinnvolle Schritt?",
 crit:["Konkrete Situation statt allgemeiner Selbstbeschreibung","Bisherige Versuche benannt","Erklärung, warum sie nicht gereicht haben","Nächster Schritt ist klein und überprüfbar","Kein abwertender Ton gegen sich selbst"],
 tip:"Achte darauf, nüchtern zu bleiben. Eine Lernstandsanalyse ist keine Selbstkritik — sie beschreibt eine Lücke, nicht einen Charakterzug.",
@@ -2238,7 +2238,7 @@ lv:{f:["Sehr geehrte Frau Professorin Weber,","Sehr geehrter Herr Dr. Lang,","Se
     l:["Hallo Julia,","Hi Julia,","Moin Julia,"]},
 no:["„Sehr geehrte Frau Prof. Dr. Weber,“ — Titelketten wirken angestrengt. Ein Titel genügt.",
     "„Hallo Frau Prof. Weber,“ — Hallo und akademischer Titel passen nicht zusammen.",
-    "„Sehr geehrte Damen und Herren,“ an eine Person, deren Namen auf der Institutsseite steht."],
+    "„Sehr geehrte Damen und Herren,“ an eine Person, deren Name auf der Institutsseite steht."],
 tip:"Im Zweifel spiegelst du die Anrede, die dein Gegenüber verwendet hat. Wer dich mit „Hallo Herr Otten“ anschreibt, erwartet kein „Sehr geehrter“."},
 
 {id:"ph02",g:"Mail-Rahmen",f:"Erster Satz — direkt zum Anliegen",ctx:["uni","beruf"],
@@ -2246,20 +2246,20 @@ lv:{f:["ich schreibe Ihnen wegen der Prüfungsanmeldung im Modul B3.","ich wende
     n:["ich habe eine Frage zur Anmeldung für das Seminar.","kurz zum Termin am Donnerstag: …","es geht um die Materialien aus der letzten Sitzung."],
     l:["kurze Frage zum Donnerstag:","ich melde mich wegen der Abgabe.","eine Sache noch zum Projekt:"]},
 no:["„Ich hoffe, es geht Ihnen gut“ beim Erstkontakt — höflich gemeint, aber inhaltsleer und verzögert das Anliegen.",
-    "„Ich wollte mal fragen, ob …“ — „mal“ und „wollte“ schwächen die Bitte ohne Gewinn."],
+    "„Ich wollte mal fragen, ob …“ — zwei Abschwächungen, bevor das Anliegen dasteht. Eine reicht: „Ich wollte fragen, ob …“"],
 tip:"Faustregel: Nach dem ersten Satz soll klar sein, worum es geht. Der Grund kommt danach, nicht davor."},
 
 {id:"ph03",g:"Mail-Rahmen",f:"Schlusssatz und Grußformel",ctx:["uni","beruf","privat"],
 lv:{f:["Für eine kurze Rückmeldung wäre ich Ihnen dankbar.\nMit freundlichen Grüßen","Vielen Dank für Ihre Mühe.\nMit freundlichen Grüßen","Gern können wir das auch telefonisch klären.\nMit freundlichen Grüßen"],
     n:["Vielen Dank vorab.\nViele Grüße","Sag gern Bescheid, ob das passt.\nBeste Grüße","Ich freue mich auf Ihre Rückmeldung.\nFreundliche Grüße"],
     l:["Danke dir!\nViele Grüße","Meld dich einfach.\nLiebe Grüße","Bis dann!\nGruß"]},
-no:["„Danke im Voraus“ — wird oft als Vorabdruck empfunden, weil es die Zusage schon voraussetzt.",
+no:["„Danke im Voraus“ — wird oft als höflich verpackter Druck empfunden, weil es die Zusage schon voraussetzt.",
     "„Mit freundlichen Grüßen,“ — nach der Grußformel steht kein Komma.",
     "„Liebe Grüße“ an Dozierende, die du nicht persönlich kennst."],
 tip:"„Beste Grüße“ ist der sichere Mittelweg: freundlicher als „Mit freundlichen Grüßen“, distanzierter als „Liebe Grüße“."},
 
 {id:"ph04",g:"Mail-Rahmen",f:"Betreffzeile schreiben",ctx:["uni","beruf"],
-lv:{f:["Rückfrage zur Prüfungsanmeldung Modul B3 (Matrikelnr. 1234567)","Terminanfrage Sprechstunde — Bachelorarbeit","Antrag auf Fristverlängerung — Hausarbeit Seminar 'Bewegungslehre'"],
+lv:{f:["Rückfrage zur Prüfungsanmeldung Modul B3 (Matrikelnr. 1234567)","Terminanfrage Sprechstunde — Bachelorarbeit","Antrag auf Fristverlängerung — Hausarbeit Seminar „Bewegungslehre“"],
     n:["Frage zur Abgabefrist — Seminar Bewegungslehre","Terminvorschlag für die Hospitation","Material aus Sitzung 4 — kurze Nachfrage"],
     l:["Kurze Frage zum Donnerstag","Projekt: Aufgabenverteilung","Nachtrag zu unserem Gespräch"]},
 no:["„Frage“ — zu unspezifisch, geht in einem vollen Postfach unter.",
@@ -2275,12 +2275,12 @@ lv:{f:["Könnten Sie mir die Folien der letzten Sitzung zusenden?","Ich wäre Ih
 no:["„Ich bräuchte bis Freitag eine Rückmeldung.“ — als Feststellung getarnte Aufforderung. Wirkt fordernd.",
     "„Sie müssten mir noch …“ — der Konjunktiv macht eine Anweisung nicht zur Bitte.",
     "„Ich hätte da mal eine ganz kurze klitzekleine Frage“ — Verkleinerung entwertet dein Anliegen."],
-tip:"Eine echte Frage lässt ein Nein zu. Eine Feststellung im Konjunktiv nicht. Der Unterschied entscheidet über den Ton."},
+tip:"Eine echte Frage lässt ein Nein zu. Ein Satz, der deinen Bedarf oder die Pflicht des anderen feststellt, nicht — daran ändert der Konjunktiv nichts. Der Unterschied entscheidet über den Ton."},
 
 {id:"ph06",g:"Bitten & Anfragen",f:"Frist oder Zeitrahmen nennen",ctx:["uni","beruf","privat"],
 lv:{f:["Für die Planung wäre mir eine Rückmeldung bis Freitag, den 7. August, eine große Hilfe.","Falls es Ihnen zeitlich nicht passt, sagen Sie gern Bescheid — ich richte mich danach."],
     n:["Passt es dir, wenn ich bis Freitag eine Antwort bekomme?","Ich brauche das bis Mittwoch, um weiterarbeiten zu können — geht das?"],
-    l:["Bis Freitag würde mir reichen — schaffst du das?","Kein Stress, aber bis Mittwoch bräuchte ich es."]},
+    l:["Bis Freitag würde mir reichen — schaffst du das?","Kein Stress — aber kriegst du es bis Mittwoch hin?"]},
 no:["„so schnell wie möglich“ — jeder legt das anders aus.",
     "„zeitnah“ — Amtsdeutsch ohne Informationsgehalt.",
     "Gar keine Frist nennen und sich dann über die späte Antwort ärgern."],
@@ -2304,13 +2304,13 @@ tip:"Je enger die Frage, desto brauchbarer die Antwort. Nenn den Aspekt, auf den
 
 /* ---------- ABSAGEN & NEIN SAGEN ---------- */
 {id:"ph09",g:"Absagen & Nein sagen",f:"Eine Anfrage ablehnen",ctx:["uni","beruf","privat"],
-lv:{f:["Vielen Dank für die Anfrage. Ich kann die Aufgabe leider nicht übernehmen, da ich in diesem Semester bereits zwei Projekte betreue.","So gern ich zugesagt hätte — es geht sich zeitlich nicht aus."],
+lv:{f:["Vielen Dank für die Anfrage. Ich kann die Aufgabe leider nicht übernehmen, da ich in diesem Semester bereits zwei Projekte betreue.","So gern ich zugesagt hätte — zeitlich ist es mir nicht möglich."],
     n:["Danke fürs Fragen, aber das schaffe ich nicht.","Ich muss diesmal passen — ich bin bis Ende des Monats ausgebucht."],
     l:["Diesmal nicht, sorry. Ich hab schon zu viel am Hals.","Ich sag lieber ab, als es halbherzig zu machen."]},
 no:["„Ich schaue mal, ob ich es hinbekomme“ — ein Vielleicht, das keins ist, erzeugt nur Nachfragen.",
     "„Eigentlich schon, aber …“ — der Absage geht die Klarheit verloren.",
     "Eine Rechtfertigungsschleife über fünf Sätze."],
-tip:"Ein Nein braucht drei Teile: Dank, klare Absage, ein Satz Begründung. Alles darüber hinaus wirkt wie eine Bitte um Erlaubnis."},
+tip:"Eine klare Absage und ein Satz Begründung tragen das Nein; je förmlicher die Lage, desto eher gehört der Dank für die Anfrage davor. Alles darüber hinaus wirkt wie eine Bitte um Erlaubnis."},
 
 {id:"ph10",g:"Absagen & Nein sagen",f:"Eine Alternative anbieten",ctx:["uni","beruf","privat"],
 lv:{f:["Für den 12. kann ich nicht zusagen. Der 19. oder der 26. wären bei mir möglich.","Die Betreuung kann ich nicht übernehmen, aber ich stelle gern den Kontakt zu Frau Dr. Lang her."],
@@ -2326,7 +2326,7 @@ lv:{f:["leider muss ich unseren Termin am Donnerstag absagen. Ich schlage als Er
     l:["Ich muss Donnerstag absagen, sorry. Nächste Woche?","Schaffe es heute doch nicht — verschieben wir?"]},
 no:["Absagen ohne Ersatzvorschlag — die Terminfindung landet komplett beim anderen.",
     "„Mir ist was dazwischengekommen“ ohne jede weitere Angabe wirkt beliebig, wenn es öfter vorkommt."],
-tip:"Absage + Ersatztermin in derselben Nachricht. Sonst entstehen drei zusätzliche Mails."},
+tip:"Absage + Ersatztermin in derselben Nachricht — das spart das Hin und Her, das sonst erst danach beginnt."},
 
 {id:"ph12",g:"Absagen & Nein sagen",f:"Etwas nicht mehr weitermachen",ctx:["uni","beruf","privat"],
 lv:{f:["Nach reiflicher Überlegung möchte ich die Mitarbeit im Projekt zum Ende des Semesters beenden. Bis dahin führe ich meine Aufgaben selbstverständlich zu Ende."],
@@ -2392,7 +2392,7 @@ tip:"Bedauern über die Wirkung ist keine Schuldübernahme: „Es tut mir leid, 
 {id:"ph19",g:"Widersprechen",f:"Anderer Meinung sein",ctx:["uni","beruf"],
 lv:{f:["Ich sehe das an einem Punkt anders: …","Dem würde ich in Teilen widersprechen, und zwar aus folgendem Grund: …","Das überzeugt mich noch nicht ganz — mir fehlt der Beleg für …"],
     n:["Da bin ich anderer Meinung, weil …","Ich kann dem folgen bis zu dem Punkt, an dem …","Das sehe ich anders. Für mich spricht dagegen, dass …"],
-    l:["Da bin ich raus — ich sehe das anders.","Hm, das überzeugt mich nicht. Warum sollte …?"]},
+    l:["Da bin ich raus — spätestens bei …","Hm, das überzeugt mich nicht. Warum sollte …?"]},
 no:["„Das ist doch Quatsch.“ — beendet das Gespräch statt es zu führen.",
     "„Mit Verlaub, aber …“ — die Höflichkeitsformel kündigt den Angriff an und wirkt herablassend.",
     "„Ich will ja nichts sagen, aber …“ — dann sag es einfach."],
@@ -2478,7 +2478,7 @@ tip:"„Gern“ nimmt den Dank an. „Kein Problem“ weist ihn ab. Kleiner Unte
 {id:"ph29",g:"Zusagen & Danken",f:"Anerkennung aussprechen",ctx:["beruf","privat"],
 lv:{f:["Ihre Vorbereitung der Sitzung war ausgesprochen sorgfältig — das hat die Diskussion deutlich getragen.","Das haben Sie sehr souverän gelöst."],
     n:["Das war richtig gut vorbereitet — man hat gemerkt, wie viel Arbeit drinsteckt.","Wie du mit der Situation umgegangen bist, hat mich beeindruckt."],
-    l:["Stark gemacht.","Das war richtig gut, ehrlich."]},
+    l:["Stark, wie du die Gruppe zusammengehalten hast — danach lief die Stunde von allein.","Richtig gut, vor allem der Aufbau — da musste keiner lange warten."]},
 no:["„Nicht schlecht.“ — als Lob gemeint, als Einschränkung gehört.",
     "„Für deine Verhältnisse gut.“ — herablassend, auch wenn nett gemeint.",
     "Lob nur als Einleitung zur Kritik zu benutzen — das durchschaut jeder nach dem zweiten Mal."],
@@ -2504,7 +2504,7 @@ tip:"Grenzen werden nicht durch Ansage etabliert, sondern durch Verhalten. Die F
 {id:"ph32",g:"Grenzen setzen",f:"Ein Gespräch beenden",ctx:["uni","beruf","privat"],
 lv:{f:["Ich muss die Sitzung leider verlassen — können wir das nächste Woche fortsetzen?","Ich merke, dass wir uns im Kreis drehen. Lassen Sie uns morgen mit frischem Kopf weitermachen."],
     n:["Ich muss gleich los — lass uns das vertagen.","Ich glaube, wir kommen gerade nicht weiter. Pause?"],
-    l:["Ich muss weiter — reden wir später?","Lass uns hier aufhören, wir drehen uns im Kreis."]},
+    l:["Ich muss weiter — reden wir später?","Lass uns hier aufhören, wir drehen uns im Kreis. Morgen weiter?"]},
 no:["Sich unauffällig verabschieden und mitten im Satz gehen.",
     "„Ich habe jetzt keine Lust mehr.“ — ehrlich, aber teuer."],
 tip:"Beim Beenden immer einen Anschluss nennen. Ein Gespräch, das vertagt wird, endet ohne Kränkung; eines, das abbricht, nicht."},
@@ -2539,7 +2539,7 @@ tip:"Reihenfolge: Nachricht, Grund, nächster Schritt. Nicht umgekehrt. Menschen
 {id:"ph36",g:"Schwierige Nachrichten",f:"Kondolenz",ctx:["privat","beruf"],
 lv:{f:["Vom Tod Ihres Vaters habe ich mit großer Bestürzung erfahren. Mein aufrichtiges Mitgefühl gilt Ihnen und Ihrer Familie.","Ich wünsche Ihnen die Kraft, die Sie in diesen Tagen brauchen."],
     n:["Es tut mir sehr leid zu hören, dass deine Mutter gestorben ist. Ich denke an dich.","Ich weiß nicht, was man in so einem Moment sagt. Ich bin da, wenn du etwas brauchst."],
-    l:["Ich hab's gehört. Es tut mir so leid. Melde dich, wann immer du willst — auch nachts."]},
+    l:["Ich hab's gehört. Es tut mir so leid. Ich komme morgen Abend vorbei und bring was zu essen mit — sag ruhig ab, wenn es dir zu viel ist."]},
 no:["„Zeit heilt alle Wunden.“ — tröstet niemanden und schiebt das Gefühl weg.",
     "„Sie hat es jetzt besser.“ — deutet den Verlust um, statt ihn stehen zu lassen.",
     "„Wenn du was brauchst, melde dich.“ — gut gemeint, aber die Bringschuld liegt beim Trauernden."],
@@ -2555,7 +2555,7 @@ tip:"Ein einziger persönlicher Halbsatz hebt den Glückwunsch aus der Masse: Ne
 
 /* ---------- UNI-SPEZIFISCH ---------- */
 {id:"ph38",g:"Uni & Studium",f:"Fristverlängerung erbitten",ctx:["uni"],
-lv:{f:["ich schreibe Ihnen mit der Bitte um eine Verlängerung der Abgabefrist für die Hausarbeit im Seminar „Bewegungslehre“. Grund ist eine Verzögerung bei der Datenerhebung im Verein, die erst Ende August abgeschlossen sein wird. Ich schlage als neuen Termin den 5. September vor. Die theoretischen Kapitel sind fertig und könnte ich Ihnen vorab zusenden."],
+lv:{f:["ich schreibe Ihnen mit der Bitte um eine Verlängerung der Abgabefrist für die Hausarbeit im Seminar „Bewegungslehre“. Grund ist eine Verzögerung bei der Datenerhebung im Verein, die erst Ende August abgeschlossen sein wird. Ich schlage als neuen Termin den 5. September vor. Die theoretischen Kapitel sind fertig; ich könnte sie Ihnen vorab zusenden."],
     n:["ich brauche für die Hausarbeit zwei Wochen länger. Grund: Die Erhebung hat sich verzögert. Wäre der 5. September möglich?"],
     l:["—"]},
 no:["Erst am Abgabetag fragen.",
@@ -2577,7 +2577,7 @@ lv:{f:["ich fasse unsere Aufgabenteilung zusammen, damit wir denselben Stand hab
     l:["Kurzer Plan: ich Einleitung, du Methode, Lena Diskussion. Einverstanden?","Wer macht was? Ich schreib's dann zusammen."]},
 no:["„Wir sollten mal anfangen.“ — kein Name, kein Datum, keine Aufgabe.",
     "Warten, bis sich jemand anders kümmert."],
-tip:"Der erste, der Aufgaben und Termine aufschreibt, führt die Gruppe — ohne dass es nach Führung aussieht."},
+tip:"Wer zuerst Aufgaben und Termine aufschreibt, führt die Gruppe — ohne dass es nach Führung aussieht."},
 
 {id:"ph41",g:"Uni & Studium",f:"Bei einer schlechten Note nachfragen",ctx:["uni"],
 lv:{f:["ich habe die Bewertung meiner Hausarbeit erhalten und würde die Rückmeldung gern besser verstehen. Ist es möglich, in Ihrer Sprechstunde die Bewertungskriterien durchzugehen? Es geht mir nicht um die Note, sondern darum, was ich beim nächsten Mal anders machen kann."],
@@ -2638,7 +2638,7 @@ lv:{f:["—"],
 no:["„Es tut mir leid, aber du hast angefangen.“ — hebt die Entschuldigung auf.",
     "„Tut mir leid, dass du dich aufgeregt hast.“ — verschiebt das Problem zum anderen.",
     "Eine Entschuldigung, die sofort eine Gegenleistung erwartet."],
-tip:"Eine Entschuldigung ohne „aber“ ist die einzige, die ankommt. Was du erklären willst, kannst du später sagen — nicht im selben Satz."},
+tip:"Das „aber“ gehört nicht in den Satz mit der Entschuldigung. Was du erklären willst, kannst du später sagen — nicht im selben Satz."},
 
 {id:"ph48",g:"Privat & Gespräch",f:"Smalltalk beginnen und beenden",ctx:["privat","beruf"],
 lv:{f:["Waren Sie schon einmal auf dieser Tagung? — Wie sind Sie zu dem Thema gekommen?","Ich möchte Sie nicht länger aufhalten — es war schön, mit Ihnen zu sprechen."],
@@ -2646,7 +2646,7 @@ lv:{f:["Waren Sie schon einmal auf dieser Tagung? — Wie sind Sie zu dem Thema 
     l:["Und, wie kommst du hierher? — Kennst du hier noch jemanden?","Ich dreh noch eine Runde — bis später!"]},
 no:["„Und, was machst du so?“ als erste Frage — legt sofort die Statusachse offen.",
     "Ein Gespräch beenden, indem man einfach wortlos wegdriftet."],
-tip:"Offene W-Fragen halten Smalltalk am Leben, Ja/Nein-Fragen töten ihn. Und beim Ausstieg immer einen Grund nennen — das nimmt die Kränkung."}
+tip:"Offene W-Fragen geben dem anderen etwas zu erzählen; eine Ja/Nein-Frage ist nach einem Wort beantwortet und braucht meist eine offene hinterher. Und beim Ausstieg immer einen Grund nennen — das nimmt die Kränkung."}
 
 ];
 
@@ -2680,7 +2680,7 @@ const PAIRS = [
  note:"Wer den Fehler benennt, gewinnt Vertrauen. Wer ihn verschleiert, verliert es doppelt."},
 
 {id:"pr06",ctx:"uni",bad:"Ich hoffe, es geht Ihnen gut. Ich schreibe Ihnen, weil ich eine Frage hätte, und zwar geht es um Folgendes:",
- why:"Drei Sätze, bevor das Anliegen kommt. In einem vollen Postfach entscheidet der erste Satz, ob weitergelesen wird.",
+ why:"Zwei Sätze Vorlauf, und das Anliegen steht immer noch aus. In einem vollen Postfach entscheidet der erste Satz, ob weitergelesen wird.",
  good:"ich habe eine Frage zur Anmeldung für das Modul B3.",
  note:"Höflichkeit steckt in der Anrede und im Schluss — nicht in der Verzögerung."},
 
@@ -2692,10 +2692,10 @@ const PAIRS = [
 {id:"pr08",ctx:"beruf",bad:"Ich versuche, das bis Freitag zu schaffen.",
  why:"Weder Zusage noch Absage. Der andere kann nicht planen und muss nachfragen.",
  good:"Bis Freitag schaffe ich die Auswertung. Die Grafiken brauchen bis Dienstag.",
- note:"Wenn du unsicher bist, sag genau das — mit Datum: „Ich weiß es Mittwoch und melde mich dann.“"},
+ note:"Wenn du unsicher bist, sag genau das — mit einem festen Zeitpunkt: „Ich weiß es Mittwoch und melde mich dann.“"},
 
 {id:"pr09",ctx:"privat",bad:"Wir müssen reden.",
- why:"Vier Wörter, die bei fast jedem Menschen Alarm auslösen. Der andere kommt in Abwehrhaltung ins Gespräch, bevor es begonnen hat.",
+ why:"Drei Wörter, die bei fast jedem Menschen Alarm auslösen. Der andere kommt in Abwehrhaltung ins Gespräch, bevor es begonnen hat.",
  good:"Ich würde gern über Samstag sprechen. Hast du heute Abend Zeit dafür?",
  note:"Thema nennen und den Zeitpunkt zur Wahl stellen. Beides senkt die Anspannung erheblich."},
 
@@ -2710,7 +2710,7 @@ const PAIRS = [
  note:"Frag nach dem Lernen. Wer erklären darf, erklärt gern — und erklärt dabei oft mehr, als er müsste."},
 
 {id:"pr12",ctx:"beruf",bad:"Das ist doch völliger Unsinn.",
- why:"Bewertet die Aussage statt sie zu prüfen. Danach ist das Gespräch ein Streit.",
+ why:"Bewertet die Aussage, statt sie zu prüfen. Danach ist das Gespräch ein Streit.",
  good:"Da komme ich nicht mit. Woraus schließt du, dass die Gruppe größer sein müsste?",
  note:"Widerspruch, der zeigt, wo genau er einsetzt, ist ein Argument. Pauschaler Widerspruch ist nur Ablehnung."},
 
@@ -2752,12 +2752,12 @@ const PAIRS = [
 {id:"pr20",ctx:"privat",bad:"Ich bin eigentlich schon dabei, aber mal schauen, wie es zeitlich aussieht.",
  why:"Weder Zu- noch Absage. Der Gastgeber muss zweimal planen und einmal nachfragen.",
  good:"Ich sage zu. Falls doch etwas dazwischenkommt, sage ich dir bis Donnerstag Bescheid.",
- note:"Wenn du wirklich nicht weißt, ob du kannst: Nenn ein Datum, an dem du es weißt."},
+ note:"Wenn du wirklich nicht weißt, ob du kannst: Nenn den Zeitpunkt, an dem du es weißt."},
 
 {id:"pr21",ctx:"beruf",bad:"Man sollte da vielleicht mal drüber nachdenken.",
  why:"„Man“, „vielleicht“, „mal“ — niemand ist zuständig, nichts passiert. So werden Ideen beerdigt.",
  good:"Ich schlage vor, dass wir das im nächsten Treffen entscheiden. Ich bereite zwei Varianten vor.",
- note:"„Man“ ist das Fluchtwort der deutschen Sprache. Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich."},
+ note:"„Man“ ist ein Fluchtwort. Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich."},
 
 {id:"pr22",ctx:"uni",bad:"Sorry für die späte Antwort, ich war total im Stress, hatte drei Abgaben und dann war auch noch mein Laptop kaputt.",
  why:"Die Erklärung ist länger als die Entschuldigung und drängt sich vor die eigentliche Antwort.",
@@ -2767,10 +2767,10 @@ const PAIRS = [
 {id:"pr23",ctx:"privat",bad:"Du machst mich echt wütend.",
  why:"Schreibt dem anderen die Kontrolle über deine Gefühle zu. Die typische Antwort ist Abwehr, nicht Einsicht.",
  good:"Ich werde wütend, wenn Absprachen nicht halten. Das ist mir gerade so gegangen.",
- note:"Der Unterschied zwischen Du- und Ich-Botschaft ist kein Höflichkeitstrick — er ist inhaltlich präziser."},
+ note:"Die Ich-Botschaft ist kein Höflichkeitstrick — sie ist inhaltlich präziser als die Du-Botschaft."},
 
 {id:"pr24",ctx:"beruf",bad:"Ich würde sagen, dass das eventuell ein möglicher Ansatz sein könnte.",
- why:"Fünffach abgesichert. Der Satz behauptet nichts mehr und ist deshalb nicht widerlegbar — aber auch nicht brauchbar.",
+ why:"Vier Absicherungen in einem Satz — „würde sagen“, „eventuell“, „möglicher“, „könnte“. Der Satz behauptet nichts mehr und ist deshalb nicht widerlegbar — aber auch nicht brauchbar.",
  good:"Das halte ich für den besseren Weg, weil er ohne zusätzliche Erhebung auskommt.",
  note:"Eine Absicherung pro Aussage. Wähl die passende Stärke, statt mehrere zu stapeln."},
 
@@ -2792,17 +2792,17 @@ const PAIRS = [
 {id:"pr28",ctx:"uni",bad:"Ich hätte da mal eine ganz kurze kleine Frage, wenn es nicht zu viele Umstände macht.",
  why:"Verkleinerungen entwerten dein Anliegen im Voraus. Wenn die Frage so klein ist, warum sollte man sie beantworten?",
  good:"Ich habe eine Frage zur Prüfungsanmeldung — passt es Ihnen jetzt kurz?",
- note:"Frag nach dem Zeitpunkt statt die Frage zu verkleinern. Das respektiert die Zeit des anderen, ohne dich klein zu machen."},
+ note:"Frag nach dem Zeitpunkt, statt die Frage zu verkleinern. Das respektiert die Zeit des anderen, ohne dich klein zu machen."},
 
 {id:"pr29",ctx:"privat",bad:"Ich hab schon versucht, dich zu erreichen, aber du gehst ja nie ran.",
- why:"Der Nebensatz macht aus einer Information einen Vorwurf. Das Gespräch beginnt mit einer Verteidigung.",
+ why:"Der angehängte Teil „aber du gehst ja nie ran“ macht aus einer Information einen Vorwurf. Das Gespräch beginnt mit einer Verteidigung.",
  good:"Ich hab es gestern zweimal probiert — was ist der beste Weg, dich zu erreichen?",
  note:"„Nie“ und „immer“ verschärfen fast jeden Konflikt: Dein Gegenüber sucht die eine Ausnahme und diskutiert über sie statt über die Sache."},
 
 {id:"pr30",ctx:"beruf",bad:"Ich bin sehr teamfähig, belastbar und lernbereit.",
  why:"Drei Behauptungen ohne Beleg. Jeder schreibt das, also gewichtet es niemand.",
- good:"Im Praxissemester habe ich mit zwei Kolleginnen eine Sportwoche organisiert. Als eine kurzfristig ausfiel, habe ich ihre Stationen übernommen und die Planung angepasst.",
- note:"Situation, Handlung, Ergebnis. Eine Anekdote schlägt drei Adjektive — im Anschreiben wie im Gespräch."}
+ good:"Im Praxissemester habe ich mit zwei Kolleginnen eine Sportwoche organisiert. Als eine kurzfristig ausfiel, habe ich ihre Stationen übernommen und die Planung angepasst. Gelernt habe ich dabei, Puffer von Anfang an einzuplanen.",
+ note:"Situation, Handlung, Erkenntnis. Eine Anekdote schlägt drei Adjektive — im Anschreiben wie im Gespräch."}
 ];
 
 /* ============================================================
@@ -2832,13 +2832,13 @@ const SCENES = [
 
 {id:"sc04",ctx:"beruf",t:"Das Elterngespräch, das schieflaufen könnte",
  s:"Du hast bemerkt, dass eine Schülerin seit Wochen nicht am Schwimmunterricht teilnimmt und immer neue Entschuldigungen mitbringt. Du rufst die Mutter an. Du weißt nicht, ob dahinter Scham, ein Konflikt oder etwas Ernsteres steckt.",
- ask:"Formuliere den Gesprächseinstieg — die ersten drei bis vier Sätze.",
+ ask:"Formuliere den Gesprächseinstieg — bis die Mutter zum ersten Mal antwortet.",
  model:"<p>„Guten Tag, Frau Aydin, hier ist Nils Otten, der Sportlehrer von Elif. Ich rufe an, weil mir etwas aufgefallen ist — es ist nichts Schlimmes passiert, ich möchte nur nachfragen.</p><p>Elif war in den letzten fünf Wochen nicht beim Schwimmen. Jedes Mal lag eine Entschuldigung vor, das ist also alles in Ordnung — aber ich habe den Eindruck, dass etwas dahintersteckt, das wir vielleicht lösen könnten.</p><p>Wissen Sie, ob es einen Grund gibt? Und wäre es Ihnen recht, wenn wir gemeinsam überlegen, wie Elif wieder teilnehmen kann?“</p>",
- why:"Der zweite Satz — „es ist nichts Schlimmes passiert“ — ist der wichtigste. Ein Anruf von der Schule löst bei Eltern sofort Alarm aus; wer ihn nicht entschärft, redet gegen Angst an. Danach: zählbare Beobachtung, ausdrückliche Anerkennung, dass formal alles korrekt war, offene Frage, gemeinsames Ziel. Keine Vermutung wird ausgesprochen.",
+ why:"Der zweite Satz — „es ist nichts Schlimmes passiert“ — ist der wichtigste. Ein Anruf von der Schule löst bei vielen Eltern sofort Alarm aus; wer ihn nicht entschärft, redet gegen Angst an. Danach: zählbare Beobachtung, ausdrückliche Anerkennung, dass formal alles korrekt war, offene Frage, gemeinsames Ziel. Der Einstieg sagt nur, dass etwas dahintersteckt, und lässt offen, was.",
  alt:"Wichtig auch, was <i>nicht</i> gesagt wird: keine Diagnose („Vielleicht schämt sie sich?“), kein Vorwurf, keine Handlungsanweisung an die Mutter."},
 
 {id:"sc05",ctx:"uni",t:"Die Gruppenarbeit, in der du alles machst",
- s:"Drei Wochen vor Abgabe hast du zwei von drei Kapiteln geschrieben. Die anderen beiden reagieren freundlich, aber liefern nichts. Ihr müsst euch bald wiedersehen.",
+ s:"Drei Wochen vor Abgabe hast du zwei von vier Kapiteln geschrieben. Die anderen beiden reagieren freundlich, aber liefern nichts. Ihr müsst euch bald wiedersehen.",
  ask:"Schreib die Nachricht an die Gruppe.",
  model:"<p>Hallo ihr zwei,</p><p>ich will kurz Klarheit schaffen, bevor es eng wird. Stand jetzt: Einleitung und Methodik sind fertig (von mir), Ergebnisse und Diskussion fehlen noch.</p><p>Mein Vorschlag: Lena übernimmt die Ergebnisse, Tim die Diskussion, beides bis zum 20. Dann habe ich eine Woche, um alles zusammenzuziehen.</p><p>Wenn das bei euch nicht geht, sagt mir das bitte bis Freitag — dann planen wir anders. Ich möchte nur nicht in der letzten Woche feststellen, dass nichts da ist.</p><p>Viele Grüße<br>Nils</p>",
  why:"Kein Vorwurf, aber auch keine Beschönigung: Der Stand wird nüchtern benannt, inklusive „von mir“. Dann kommt das, was fehlt — ein konkreter Vorschlag mit Namen und Datum. Der letzte Absatz benennt die Sorge offen, ohne jemandem etwas zu unterstellen.",
@@ -2855,8 +2855,8 @@ const SCENES = [
  s:"Ein guter Freund sagt seit Monaten kurzfristig Verabredungen ab, meist per Nachricht eine Stunde vorher. Du magst ihn, aber du hast keine Lust mehr, dich darauf einzustellen.",
  ask:"Formuliere, wie du es ansprichst — persönlich, nicht schriftlich.",
  model:"<p>„Ich will dir was sagen, und das ist mir ein bisschen unangenehm.</p><p>Du hast in den letzten Monaten viermal kurzfristig abgesagt — zuletzt am Samstag, eine Stunde vorher. Ich weiß, dass bei dir gerade viel los ist.</p><p>Trotzdem geht mir das nach. Ich fange an, unsere Verabredungen nicht mehr fest einzuplanen, und das gefällt mir nicht, weil ich dich gern sehe.</p><p>Mein Wunsch wäre: Sag lieber gleich ab, wenn du merkst, dass es nicht wird — auch drei Tage vorher. Das wäre für mich viel leichter als kurz vorher.“</p>",
- why:"Der Aufbau ist der Vierschritt, mit vorgezogenem Kontext: Beobachtung (zählbar, mit Beispiel), Anerkennung des Kontexts, eigene Wirkung („ich plane nicht mehr fest ein“), konkreter Wunsch — das „Trotzdem“ braucht die Entlastung davor. Entscheidend ist, dass die Wirkung ehrlich benannt wird — und dass der Wunsch machbar ist. „Sag nicht mehr ab“ wäre unerfüllbar, „sag früher ab“ nicht.",
- alt:"Das Eingangssignal „das ist mir unangenehm“ ist kein Zögern, sondern ein Rahmen: Es sagt dem anderen, dass gleich etwas Wichtiges kommt, und senkt die Abwehr."},
+ why:"Der Aufbau ist der Vierschritt, mit vorgezogenem Kontext: Beobachtung (zählbar, mit Beispiel), Anerkennung des Kontexts, eigene Wirkung (dass du nicht mehr fest mit ihm planst), konkreter Wunsch — das „Trotzdem“ braucht die Entlastung davor. Entscheidend ist, dass die Wirkung ehrlich benannt wird — und dass der Wunsch machbar ist. „Sag nicht mehr ab“ wäre unerfüllbar, „sag früher ab“ nicht.",
+ alt:"Das Eingangssignal „das ist mir ein bisschen unangenehm“ ist kein Zögern, sondern ein Rahmen: Es sagt dem anderen, dass gleich etwas Wichtiges kommt, und senkt die Abwehr."},
 
 {id:"sc08",ctx:"uni",t:"Der Fehler, der auffliegen wird",
  s:"Du merkst zwei Tage nach der Abgabe, dass du in deiner Auswertung eine Gruppe doppelt gezählt hast. Die Ergebnisse ändern sich dadurch spürbar. Niemand hat es bisher bemerkt.",
@@ -2883,7 +2883,7 @@ const SCENES = [
  s:"Du hast eine Verständnisfrage zur Vorlesung. Der Saal ist voll, alle wirken, als hätten sie es verstanden. Du willst nicht dumm dastehen — brauchst die Antwort aber wirklich.",
  ask:"Formuliere die Frage so, wie du sie stellen würdest.",
  model:"<p>„Ich komme beim Übergang von Folie 12 auf 13 nicht mit: Gilt die Formel auch, wenn die Gruppen unterschiedlich groß sind — oder setzt sie gleiche Gruppengrößen voraus?“</p>",
- why:"Zwei Merkmale machen eine gute Frage im Plenum aus. Erstens: Sie verortet die Lücke präzise („Folie 12 auf 13“) — das zeigt, dass du bis dorthin gefolgt bist. Zweitens: Sie ist geschlossen genug, um in einem Satz beantwortbar zu sein. Erfahrungsgemäß hat mindestens ein Drittel des Saals dieselbe Lücke.",
+ why:"Zwei Merkmale machen eine gute Frage im Plenum aus. Erstens: Sie verortet die Lücke präzise („Folie 12 auf 13“) — das zeigt, dass du bis dorthin gefolgt bist. Zweitens: Sie ist geschlossen genug, um in einem Satz beantwortbar zu sein. Dass sonst niemand fragt, heißt nicht, dass alle mitgekommen sind.",
  alt:"Vermeide: „Ich hab das irgendwie nicht verstanden“ (zu vage, kostet alle Zeit) und die Selbstabwertung vorweg („Blöde Frage, aber …“) — die färbt auf die Antwort ab."},
 
 {id:"sc12",ctx:"beruf",t:"Zu viel auf dem Tisch",
@@ -2904,7 +2904,7 @@ const EX_C = [
  "Sehr geehrte Frau Professorin Weber,",
  "Sehr geehrte Frau Prof. Dr. Weber,",
  "Hallo Frau Weber,"],a:0,
- e:"Beim Erstkontakt ist „Sehr geehrte“ richtig, und der Titel gehört dazu. In der <b>Anrede</b> wird er laut Duden ausgeschrieben, und der Doktortitel entfällt daneben — ein Titel genügt, der höchste. Abgekürzt und gestapelt steht er nur im <b>Anschriftenfeld</b>: „Frau Prof. Dr. Claudia Weber“. „Hallo“ funktioniert erst, wenn die andere Seite es vorgibt.",r:"form-anrede"},
+ e:"Beim Erstkontakt ist „Sehr geehrte“ richtig, und der Titel gehört dazu. Den Professorentitel schreibt man in der <b>Anrede</b> laut Duden aus, und der Doktortitel entfällt daneben — ein Titel genügt, der höchste. Abgekürzt und gestapelt steht er nur im <b>Anschriftenfeld</b>: „Frau Prof. Dr. Claudia Weber“. „Hallo“ funktioniert erst, wenn die andere Seite es vorgibt.",r:"form-anrede"},
 
 {id:"f02",c:"form",q:"Deine Dozentin antwortet dir mit „Hallo Herr Otten, …“. Wie schreibst du zurück?",o:[
  "Hallo Frau Weber,","Sehr geehrte Frau Weber,","Liebe Frau Weber,"],a:0,
@@ -3013,7 +3013,7 @@ const EX_C = [
 {id:"f21",c:"form",q:"Warum ist „Sorry, aber du hattest ja auch …“ keine Entschuldigung?",o:[
  "Das „aber“ hebt sie im selben Satz wieder auf",
  "„Sorry“ ist zu locker","Sie ist zu kurz"],a:0,
- e:"Eine Entschuldigung <b>ohne „aber“</b> ist die einzige, die ankommt. Was du erklären willst, kannst du später sagen — nicht im selben Satz.",r:"form-fehler"},
+ e:"Das <b>„aber“</b> gehört nicht in den Satz mit der Entschuldigung. Was du erklären willst, kannst du später sagen — nicht im selben Satz.",r:"form-fehler"},
 
 {id:"f22",c:"form",q:"Du bist eine Woche zu spät mit der Antwort. Was ist die elegantere Variante?",o:[
  "„Danke fürs Warten — hier kommt die Rückmeldung.“",
@@ -3119,7 +3119,7 @@ const EX_C = [
 {id:"f41",c:"form",q:"„Man sollte da vielleicht mal drüber nachdenken.“ Was ist das Problem?",o:[
  "Niemand ist zuständig",
  "Der Satz ist zu lang","„Man“ ist grammatisch falsch"],a:0,
- e:"<b>„Man“ ist das Fluchtwort der deutschen Sprache.</b> Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich: „Ich schlage vor, dass wir das im nächsten Treffen entscheiden.“",r:"form-verbindlich"},
+ e:"<b>„Man“ ist ein Fluchtwort.</b> Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich: „Ich schlage vor, dass wir das im nächsten Treffen entscheiden.“",r:"form-verbindlich"},
 
 {id:"f42",c:"form",q:"Wie überbringst du eine schlechte Nachricht?",o:[
  "Nachricht — Grund — nächster Schritt",
@@ -3128,7 +3128,7 @@ const EX_C = [
  e:"Menschen kommen mit schlechten Nachrichten zurecht — <b>nicht aber mit Unklarheit</b>. Die Nachricht hinter Absätzen zu verstecken oder sie weichzuzeichnen, verlängert nur die Unsicherheit.",r:"form-schlechtenachricht"},
 
 {id:"f43",c:"form",q:"Was ist das Problem an „Ich würde sagen, dass das eventuell ein möglicher Ansatz sein könnte“?",o:[
- "Fünffach abgesichert — der Satz behauptet nichts mehr",
+ "Mehrfach abgesichert — der Satz behauptet nichts mehr",
  "Er ist zu direkt","Der Konjunktiv ist falsch gebildet"],a:0,
  e:"Nicht widerlegbar, aber auch nicht brauchbar. <b>Eine Absicherung pro Aussage</b>, und wähl die passende Stärke: „Das halte ich für den besseren Weg, weil …“",r:"stil-hedging"},
 
@@ -3185,7 +3185,7 @@ const RULES_FORM = [
 <p><b>Die wichtigste Regel: spiegeln.</b> Wer dich mit „Hallo Herr Otten“ anschreibt, erwartet kein „Sehr geehrte“. Wer beim „Sehr geehrte“ bleibt, wirkt distanziert oder unsicher.</p>
 <div class="ex"><span class="ok">Sehr geehrte Frau Weber,</span> · <span class="nope">Sehr geehrte Frau Prof. Dr. Weber,</span> (Titelkette)<br>
 <span class="ok">Hallo Frau Weber,</span> · <span class="nope">Hallo Frau Prof. Weber,</span> (Register-Bruch)</div>
-<p><b>Wenn ein Titel im Spiel ist</b>, trennt der Duden Anrede und Anschrift: In der <b>Anrede</b> steht nur der höchste Titel, ausgeschrieben, der Doktortitel entfällt daneben — <code>Sehr geehrte Frau Professorin Weber,</code>. Im <b>Anschriftenfeld</b> stehen alle Titel, abgekürzt — <code>Frau Prof. Dr. Claudia Weber</code>. Ohne Titel bleibt es schlicht bei <code>Sehr geehrte Frau Weber,</code>.</p>
+<p><b>Wenn ein Titel im Spiel ist</b>, trennt der Duden Anrede und Anschrift: In der <b>Anrede</b> steht nur der höchste Titel. Den Professorentitel schreibst du aus, und der Doktortitel entfällt daneben — <code>Sehr geehrte Frau Professorin Weber,</code>; steht der Doktor allein, bleibt er abgekürzt — <code>Sehr geehrter Herr Dr. Lang,</code>. Im <b>Anschriftenfeld</b> stehen alle Titel, abgekürzt — <code>Frau Prof. Dr. Claudia Weber</code>. Ohne Titel bleibt es schlicht bei <code>Sehr geehrte Frau Weber,</code>.</p>
 <p>Bei mehreren Personen: <code>Sehr geehrte Frau Weber, sehr geehrter Herr Lang,</code> — je eigene Zeile, ranghöchste oder direkt angesprochene Person zuerst.</p>
 <p>Nach dem Anredekomma geht es <b>klein</b> weiter. Groß bleiben Nomen, Namen und Sie/Ihre; beim Duzen darfst du auch du/dein großschreiben.</p>`},
 
@@ -3323,7 +3323,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <p>Eine Zusage enthält <b>was</b> und <b>bis wann</b>. Ohne Termin ist es eine Absichtserklärung.</p>
 <div class="ex"><span class="ok">Gern — bis Freitag hast du den ersten Entwurf.</span><br>
 <span class="nope">Ich versuche es.</span> · <span class="nope">Ich glaube, das könnte klappen.</span></div>
-<p>„Ich versuche es“ klingt wie eine halbe Absage. Wenn du wirklich unsicher bist, sag <b>genau das</b> — mit Datum: „Ich weiß es Mittwoch und melde mich dann.“</p>
+<p>„Ich versuche es“ klingt wie eine halbe Absage. Wenn du wirklich unsicher bist, sag <b>genau das</b> — mit einem festen Zeitpunkt: „Ich weiß es Mittwoch und melde mich dann.“</p>
 <p><b>Bei Vorbehalten:</b> „Ich sage zu. Falls doch etwas dazwischenkommt, sage ich dir bis Donnerstag Bescheid.“ Das ist verbindlich und ehrlich zugleich.</p>`},
 
 {id:"form-danken",c:"form",t:"Danken und auf Dank antworten",b:`
@@ -3358,7 +3358,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <p><b>Gespräche beenden:</b> immer mit Anschluss. „Lass uns morgen mit frischem Kopf weitermachen.“ Ein vertagtes Gespräch endet ohne Kränkung, ein abgebrochenes nicht.</p>`},
 
 {id:"form-verbindlich",c:"form",t:"Verbindlich formulieren",b:`
-<p><b>„Man“ ist das Fluchtwort der deutschen Sprache.</b> Wo „man“ steht, ist niemand zuständig — und nichts passiert.</p>
+<p><b>„Man“ ist ein Fluchtwort.</b> Wo „man“ steht, ist niemand zuständig — und nichts passiert.</p>
 <div class="ex"><span class="nope">Man sollte da vielleicht mal drüber nachdenken.</span><br>
 <span class="ok">Ich schlage vor, dass wir das im nächsten Treffen entscheiden. Ich bereite zwei Varianten vor.</span></div>
 <p><b>Verbindlichkeitsprüfung</b> für jeden Vorschlag:</p>
@@ -3445,7 +3445,7 @@ Nicht: „Frage“, nicht „WICHTIG!!!“, nie leer.</p>
 <div class="ex"><span class="ok">Beim Übergang von Folie 12 auf 13 komme ich nicht mit: Gilt die Formel auch bei unterschiedlich großen Gruppen?</span><br>
 <span class="nope">Ich hab das irgendwie nicht verstanden.</span></div>
 <p><b>Die stärkste Form ist die Zusammenfassung:</b> „Ich fasse kurz zusammen, damit ich sicher bin: Du meinst also …“ Sie zeigt, was angekommen ist, und macht die Lücke präzise sichtbar.</p>
-<p><b>Nie vorweg entwerten:</b> „Blöde Frage, aber …“ oder „Ich bin wahrscheinlich zu blöd …“ färbt auf die Antwort ab. Erfahrungsgemäß hat mindestens ein Drittel des Raums dieselbe Lücke.</p>`},
+<p><b>Nie vorweg entwerten:</b> „Blöde Frage, aber …“ oder „Ich bin wahrscheinlich zu blöd …“ färbt auf die Antwort ab. Dass sonst niemand fragt, heißt nicht, dass alle mitgekommen sind.</p>`},
 
 {id:"form-absprachen",c:"form",t:"Absprachen festhalten",b:`
 <p>Ein Zweizeiler nach jedem wichtigen Gespräch spart im Konfliktfall Stunden — <b>auch unter Freunden</b>.</p>
@@ -3818,7 +3818,7 @@ Ich <b>habe</b> mich beeilt. (reflexiv)</div>
 können → <b>könnte</b> · müssen → <b>müsste</b> · dürfen → <b>dürfte</b> · sollen → <b>sollte</b> · mögen → <b>möchte</b><br>
 wissen → <b>wüsste</b> · gehen → <b>ginge</b> · kommen → <b>käme</b> · tun → <b>täte</b> · brauchen → <b>bräuchte</b> / <b>brauchte</b></div>
 <p><b>Zu „brauchen“:</b> Regelgerecht wäre <b>brauchte</b> — „brauchen“ ist ein schwaches Verb. Durchgesetzt hat sich <b>bräuchte</b>, weil die Umlautform den Konjunktiv vom gleichlautenden Präteritum unterscheidet; der Duden führt sie als standardsprachlich, andere Sprachpflegestellen sehen das enger. Beide Formen sind vertretbar.</p>
-<p><b>Empfehlung:</b> Wo die eigene Form existiert und gebräuchlich ist, nimm sie. Die „würde“-Umschreibung ist nicht falsch — nur oft länger. Unentbehrlich bleibt sie, wo die eigene Form altertümlich klingt („würde helfen“ statt „hülfe“).</p>
+<p><b>Empfehlung:</b> Wo die eigene Form existiert und gebräuchlich ist, nimm sie. Die „würde“-Umschreibung ist nicht falsch — nur oft länger. Gebraucht wird sie, wo die eigene Form mit dem Präteritum zusammenfällt („wenn er härter trainieren würde“ — „trainierte“ kann auch die Vergangenheit meinen) und wo sie altertümlich klingt („würde helfen“ statt „hülfe“).</p>
 <div class="ex"><span class="ok">Wenn ich Zeit hätte, käme ich.</span><br>
 <span class="nope">Wenn ich Zeit haben würde, würde ich kommen.</span></div>
 <p><b>Zweimal „würde“ in einem Satzgefüge</b> gilt als unschön — grammatisch falsch ist es nicht. Der Duden rät zum Ausweichen: „Wenn er mich fragen <b>sollte</b>, würde ich sofort zusagen.“</p>
@@ -4276,7 +4276,7 @@ const EX_D = [
 {id:"z04",c:"satz",q:"Welche Fassung stimmt?",o:[
  "Weil ich müde war, bin ich früher gegangen.",
  "Weil ich müde war, ich bin früher gegangen."],a:0,
- e:"Der Nebensatz füllt <b>Position 1 komplett</b> aus. Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander: „… müde <b>war</b>, <b>bin</b> ich …“.",r:"satz-nebensatz"},
+ e:"Der Nebensatz füllt <b>Position 1 komplett</b> aus. Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander: „… müde <b>war</b>, <b>bin</b> ich …“. Anders, sobald <b>dann</b>, <b>so</b> oder <b>desto</b> die Position 1 besetzen: „Wenn du Zeit hast, <b>dann</b> ruf mich an.“",r:"satz-nebensatz"},
 
 {id:"z05",c:"satz",q:"Wo steht die Vorsilbe? „aufstehen“ im Satz „Ich ___ um sechs ___.“",t:"fill",a:["stehe auf","stehe, auf"],
  e:"Trennbare Verben werden im einfachen Hauptsatz gespalten: der gebeugte Teil auf Position 2, die Vorsilbe ans Ende. Im Nebensatz bleiben sie zusammen: „…, weil ich um sechs aufstehe.“",r:"satz-klammer"},
@@ -4763,7 +4763,7 @@ errs:[
 ]},
 
 {id:"kt10",t:"Zusammenfassung eines Fachtexts",ctx:"Wissenschaftlicher Text",lvl:"schwer",
-txt:"In seinem Aufsatz untersucht Kurz das Verhältnis von Bewegungslernen und Persönlichkeitsbildung. Er fragt ob sich beide Ziele im selben Unterricht verfolgen lassen. Dazu vergleicht er sechs pädagogische Perspektiven, wobei er scheinbar zu dem Ergebnis kommt, dass die Ziele nicht grundsätzlich konkurrieren. Die Argumentation macht Sinn, ist aber an einer Stelle nicht ganz unproblematisch. Es gibt nämlich Studien, die zeigen das die Unterrichtszeit der entscheidende Faktor ist. Des öfteren wird zudem übersehen, dass Lehrkräfte eine Perspektive führend setzen müssen.",
+txt:"In ihrem Aufsatz untersucht Weber das Verhältnis von Bewegungslernen und Persönlichkeitsbildung. Sie fragt ob sich beide Ziele im selben Unterricht verfolgen lassen. Dazu vergleicht sie sechs pädagogische Perspektiven, wobei sie scheinbar zu dem Ergebnis kommt, dass die Ziele nicht grundsätzlich konkurrieren. Die Argumentation macht Sinn, ist aber an einer Stelle nicht ganz unproblematisch. Es gibt nämlich Studien, die zeigen das die Unterrichtszeit der entscheidende Faktor ist. Des öfteren wird zudem übersehen, dass Lehrkräfte eine Perspektive führend setzen müssen.",
 errs:[
  {w:"fragt",nth:1,ok:"fragt,",k:"Vor dem indirekten Fragesatz mit „ob“ fehlt das Komma.",r:"komma-nebensatz",c:"komma"},
  {w:"scheinbar",ok:"anscheinend",k:"„scheinbar“ heißt: in Wirklichkeit nicht. Gemeint ist „anscheinend“ (= allem Anschein nach).",r:"recht-verwechsel",c:"recht"},
@@ -5352,7 +5352,9 @@ const NEU_GELERNT = {
   "w:diffizil": "2026-09-21",          // die Schwierigkeit liegt in der verlangten Sorgfalt, nicht in feinen Unterscheidungen
   /* Übungen, deren Ablenker nicht sicher falsch war. Geaendert am 21.09.2026. */
   x05: "2026-09-21",   // gewinkt/gewunken: der Duden führt beide, das IDS stuft beide als standardsprachlich ein — aus der Entscheidungsfrage wurde eine Variantenfrage
-  f01: "2026-09-21"    // Anrede an eine Professorin: beim Erstkontakt gehört der Titel dazu, richtige Antwort jetzt „Sehr geehrte Frau Professorin Weber,“
+  f01: "2026-09-21",   // Anrede an eine Professorin: beim Erstkontakt gehört der Titel dazu, richtige Antwort jetzt „Sehr geehrte Frau Professorin Weber,“
+  /* Richtige Antwort mit einer falschen Zahl. Geändert am 22.09.2026. */
+  f43: "2026-09-22"    // „Fünffach abgesichert“ — der Satz trägt vier Absicherungen; jetzt „Mehrfach abgesichert“
 };
 const SRS_RUNDE = 20;                // höchstens so viele Karten je Wiederholungsrunde
 const TAGESZIEL = 12;                // so viele Karten am Tag zählen als erledigt
@@ -5529,6 +5531,9 @@ const $$ = s => Array.from(document.querySelectorAll(s));
 const qEl  = s => (Q && Q.host ? Q.host.querySelector(s) : $(s));
 const qAll = s => (Q && Q.host ? Array.from(Q.host.querySelectorAll(s)) : $$(s));
 function esc(t){ return String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+/* Umfang eines Schreibauftrags für die Kopfzeile: „180–250 Wörter“, aber „Umformulierung“
+   ohne angehängtes „Wörter“ — nicht jeder Auftrag hat eine Wortspanne. */
+function umfang(p){ return /\d/.test(p.words) ? p.words + " Wörter" : p.words; }
 function iso(d){ const x = new Date(d); x.setHours(12,0,0,0); return x.toISOString().slice(0,10); }
 function today(){ return iso(new Date()); }
 function addDays(isoStr,n){ const d = new Date(isoStr+"T12:00:00"); d.setDate(d.getDate()+n); return iso(d); }
@@ -6328,7 +6333,7 @@ function finish(){
       '<hr class="sep">'+
       '<div class="eyebrow">Schreibimpuls des Tages</div>'+
       "<h4>"+esc(wp.t)+"</h4>"+
-      '<p class="small muted" style="margin-top:4px">'+esc(wp.k)+" · "+esc(wp.words)+" Wörter · ca. "+wp.min+" Minuten</p>"+
+      '<p class="small muted" style="margin-top:4px">'+esc(wp.k)+" · "+esc(umfang(wp))+" · ca. "+wp.min+" Minuten</p>"+
       '<div class="row" style="justify-content:center;margin-top:14px">'+
         '<button class="btn" id="toWrite">Zum Schreibimpuls</button>'+
         '<button class="btn ghost" id="again">Weiter üben</button>'+
@@ -6710,7 +6715,7 @@ function renderWrite(sel){
     '<div class="card">'+
       '<div class="eyebrow">Impuls des Tages</div>'+
       "<h2>"+esc(wp.t)+"</h2>"+
-      '<p class="small muted" style="margin-top:6px">'+esc(wp.k)+" · "+esc(wp.words)+" Wörter · ca. "+wp.min+" Minuten</p>"+
+      '<p class="small muted" style="margin-top:6px">'+esc(wp.k)+" · "+esc(umfang(wp))+" · ca. "+wp.min+" Minuten</p>"+
       '<div class="row" style="margin-top:14px"><button class="btn" data-open="'+wp.id+'">Schreiben</button></div>'+
     "</div>"+
     '<div class="card">'+
@@ -6734,7 +6739,7 @@ function openPrompt(id){
   host.innerHTML =
     '<div class="card">'+
       '<button class="btn ghost sm" id="backW" style="margin-bottom:14px">‹ Zurück</button>'+
-      '<div class="eyebrow">'+esc(p.k)+" · "+esc(p.words)+" Wörter · ca. "+p.min+" Minuten</div>"+
+      '<div class="eyebrow">'+esc(p.k)+" · "+esc(umfang(p))+" · ca. "+p.min+" Minuten</div>"+
       "<h2>"+esc(p.t)+"</h2>"+
       '<p style="margin-top:10px">'+p.p+"</p>"+
       '<div class="fb" style="margin-top:14px"><b class="hd">Stilhinweis</b>'+esc(p.tip)+"</div>"+
@@ -6846,7 +6851,7 @@ function drawRules(){
       "<li>Wo <b>Duden und DIN 5008</b> auseinandergehen — Tausendertrennung, Uhrzeit, Bis-Strich —, sind beide Konventionen genannt statt einer erfundenen Eindeutigkeit.</li>"+
       "<li><b>Stil ist keine Regel.</b> Hinweise zu Füllwörtern, Nominalstil oder Tonfall sind Empfehlungen; sie stehen in den Bereichen Stil und Formulierung, nicht in der Rechtschreibung.</li>"+
       "<li>Was <b>umgangssprachlich verbreitet, aber nicht standardsprachlich</b> ist, wird ausdrücklich so benannt — etwa „wegen dem Wetter“ oder „weil ich hab keine Zeit“.</li>"+
-      "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung, Regel für Regel gegen Duden, GfdS und das Regelwerk 2024 gelesen: Das Komma bei erweiterten Infinitivgruppen ist seit 2024 Pflicht (§ 73), das schließende Komma nach mehrteiligen Datumsangaben ebenfalls — die App war an beiden Stellen auf dem Stand von 2006 und ist nachgezogen. Abgeschwächt wurden absolute Aussagen, wo Duden oder Regelwerk Freiräume lassen: kurze Formeln wie „wie besprochen“, das Komma in „vorausgesetzt(,) dass“, Kurzformeln als Zusatz, das Komma vor „und“ zwischen Hauptsätzen, das Adjektivkomma als Bedeutungsträger. Ergänzt: Nebensätze ohne Einleitewort, „denn“, mehrteilige Einleitungen („nur weil“), Komma vor „als“ mit zu-Infinitiv, gerade Zollzeichen sind keine englischen Anführungszeichen. Sechs Übungen hatten einen Ablenker, der laut Duden, Regelwerk oder Zitierkonvention ebenfalls richtig war (k18, p25, p11, p15, p18, p21) — behoben. Frage-, Ausrufezeichen, Klammern, Auslassungspunkte und Semikolon sind gegen den Regeltext geprüft; die Paragraphenzählung der Fassung 2024 ist dort nicht verifiziert, deshalb nennen die Regeln keine Nummern. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. <b>Im September 2026</b> ist der ganze Bestand noch einmal durchgegangen worden — Regeln, Übungen, Fall- und Wortkarten, Prüfmuster und dieser Spickzettel —, jede Meldung danach von zwei unabhängigen Gegenprüfern angegriffen. Von 49 Meldungen hielten 13 der Gegenprüfung stand und sind eingebaut; 36 fielen durch, meist weil die beanstandete Einschränkung schon woanders in derselben Regel stand. Herausgekommen sind unter anderem: der Apostroph bei Auslassungen ist freigestellt (<b>geht’s</b> wie <b>gehts</b>), „Themata“ führt der Duden weiterhin als Plural, „zumindest“ ist vor einer Zahl nicht falsch, und zum Perfekt mit „sein“ gehören auch <b>geschehen, passieren, gelingen, misslingen, begegnen, folgen</b>. <b>Danach zwei Durchgänge mit einer einzigen Frage:</b> Ist jede als falsch markierte Antwort auch <i>sicher</i> falsch? Erst über alle Übungen, dann über die Fallkarten. Zwei Aufgaben hatten zwei richtige Antworten (k29, m19) und fragen jetzt nach dem strittigen Punkt statt nach „der richtigen Variante“. Zehn Tippaufgaben prüften den Kasus, nahmen aber nur eine einzige Form — „innerhalb der Woche“ ist derselbe Genitiv wie „innerhalb einer Woche“ und wurde als Fehler gewertet. Drei Fallkarten hatten einen Ablenker, der in einer Lesart richtig war. Und wo eine Form regional oder umgangssprachlich gilt, sagt die App es jetzt überall gleich: der Dativ nach <b>trotz</b>, <b>während</b> und <b>statt</b>, „den Opfern gedenken“, „nach dem Bäcker“ — dazu <b>zwecks</b> und <b>seitens</b> als Amtsdeutsch. Bei der Uhrzeit stand die Zuordnung falsch herum: Punkt und Doppelpunkt lässt der Duden beide zu, festgelegt ist nur DIN 5008. Eine Einschränkung dazu, damit du sie einordnen kannst: Nachgeschlagen wurde über die Websuche, nicht auf den Seiten selbst — zitierte Wortlaute stammen aus Suchergebnissen. Wo die Belege dünn blieben, ist die Aussage abgeschwächt statt umgeschrieben. <b>Zuletzt der Spickzettel</b>, Zelle für Zelle gegen die Regeln gelesen, aus denen er abschreibt: „widerspiegeln“ stand dort als Beispiel für „wider = gegen“, obwohl dort „wider“ nicht „gegen“, sondern „zurück“ heißt; die ss/ß-Zeile nannte nur die Vokallänge, nicht das scharfe s und nicht die kurzen Wörter wie <b>das</b> und <b>bis</b>; vor -sch fehlte die zweite zulässige Form (<b>newtonsche</b>); und die Präpositionslisten führten <i>bis</i>, <i>entlang</i> und <i>ab</i> ohne ihre Sonderfälle. Dazu die Stilregeln daraufhin gelesen, ob sie Empfehlungen als Empfehlungen ausweisen — vier Stellen sagten „falsch“ oder „Regel“, wo es um Wirkung geht. Und zwei Satzbaukarten: „nicht“ rückt vor Ortsangabe, Adjektiv und Präpositionalobjekt nur, solange die im Mittelfeld stehen („Nach Köln fahre ich nicht“); bei <b>miss-</b> ist die Vorsilbe meist unbetont und verhält sich wie <i>ver-</i> (<b>zu missachten</b>) — nur wenn sie den Ton trägt, rutscht das „zu“ hinein (<b>misszuverstehen</b>). Belegt über den Duden-Sprachratgeber und die Gesellschaft für deutsche Sprache. <b>Zuletzt die 20 Grammatik- und Satzregeln</b>, die noch keine Quelle nannten — zehn Prüfer, je zwei Regeln, jede Meldung danach von einem Gegenprüfer angegriffen, der sie widerlegen sollte. Von zwölf Meldungen hielten vier. Drei davon zählten eine Ausnahme und zählten zu wenige: Nach einer Konjunktion steht das Verb am Ende — beim irrealen Vergleich mit bloßem „als“ aber direkt dahinter (<b>Er tut, als wäre er der Trainer</b>); ein vorangestellter Nebensatz füllt Position 1 — bei <b>je … desto</b> tun das aber „desto“ und der Komparativ; das Kasussignal steht einmal — bei mehreren Adjektiven ohne Artikel aber zweimal (<b>bei gutem, warmem Wetter</b>). Dazu die Kongruenz im Gleichsetzungssatz: <b>Das Problem waren die fehlenden Bälle</b> — steht der Gleichsetzungsnominativ im Plural, folgt das Verb meist ihm, nicht dem Subjektkern. Belegt über grammis (IDS), den Duden-Sprachratgeber und die Gesellschaft für deutsche Sprache. <b>Zuletzt die zwölf Fehlersuchtexte</b>, Markierung für Markierung: „Vorraus“ war in kt01 als Rechtschreibfehler eingeordnet und in kt03 als Frage des Tons, mit einem Verweis in eine Regel übers Danken — jetzt beide Male dieselbe Stelle, und die Regel sagt auch, warum „voraus“ nur ein r hat. In kt02 stand rechts vom Pfeil, wo die richtige Form hingehört, noch einmal die falsche: „selben → selben Verein (zusammen: demselben)“ statt <b>demselben</b>. Damit sind alle Komma- und Zeichenregeln belegt; bei den Paarformeln kam eine Gegenausnahme dazu: Steht <i>sowohl … als auch</i> selbst in einem Nebensatz, ist sie wieder eine gewöhnliche Aufzählung ohne Komma. <b>Zuletzt die 155 Wortkarten</b>, erstmals Feld für Feld gegen Duden und DWDS gelesen — zwölf Prüfer, jede Meldung danach von einem Gegenprüfer angegriffen. Von 28 Meldungen hielten acht. Zwei Karten widersprachen sich selbst: <b>erörtern</b> riet von „diskutieren“ ab und führte es zugleich als sinnverwandt (der Duden definiert das Wort selbst damit; unscharf ist nur „reden über“), und <b>herausstellen</b> erklärte die Bedeutung „hervorheben“, während Beispiel und Synonyme die reflexive Form zeigten. Bei <b>hinreichend</b> stand eine falsche Regel: Eine notwendige Bedingung reiche „allein nicht aus“ — sie kann sehr wohl zugleich hinreichend sein. <b>lapidar</b> schrieb dem Duden ein Zitat zu, das im DWDS steht. Und <b>scheinbar / anscheinend</b> nannte sich „das meistverwechselte Paar der deutschen Sprache“ — eine Rangordnung ohne Quelle, die jetzt einer Probe gewichen ist. Enger gefasst waren <b>vorwegnehmen</b> (nicht nur aussprechen, auch tun), <b>diffizil</b> (die Schwierigkeit liegt in der verlangten Sorgfalt) und <b>Reflexion</b> (prüfendes Nachdenken über etwas, nicht nur über die eigene Praxis). Bei den fünf Karten, deren Bedeutung sich geändert hat, kommt die Karte einmal auf Fach 1 zurück. <b>Dazu die Deklinationstabellen</b>: Fünf liefen bis dahin ohne Paradigma mit. Alle zehn sind jetzt gegen eine unabhängig aufgeschriebene Formentabelle geprüft — sie stimmten. In der Tabelle zur n-Deklination fehlte allerdings ein Sonderfall, den die Regel daneben längst nennt: <b>Herr</b> bekommt im Singular nur ein -n („dem Herrn Weber“), im Plural dann -en. <b>Zuletzt die 381 Erklärungen der Übungen</b>, jede gegen die Regel gelesen, in die sie verweist — zwanzig Prüfer, jede Meldung danach von einem Gegenprüfer angegriffen. Von 23 Meldungen hielten 18. Zwei Aufgaben hatten einen Ablenker, der nicht sicher falsch war: Bei <b>gewinkt / gewunken</b> führt der Duden beide Formen und das Institut für Deutsche Sprache stuft beide als standardsprachlich ein — die Frage nach „der standardsprachlichen Form“ hatte damit zwei richtige Antworten und fragt jetzt nach der Variante; und beim Erstkontakt mit einer Professorin gehört der Titel in die Anrede, ausgeschrieben und ohne den Doktortitel daneben (abgekürzt und gestapelt steht er im Anschriftenfeld). Beide Karten kommen einmal auf Fach 1 zurück. Der Rest waren Erklärungen, die absoluter klangen als die Regel, aus der sie stammen: „Füllwörter schwächen jede Aussage“ gegen die Ausnahme fürs Gespräch, „,wenn‘ passt nur bei Wiederholung“ gegen den irrealen Bedingungssatz („Wenn ich damals mehr trainiert hätte …“), „im Dativ Plural endet auch das Substantiv auf -n“ gegen die Plurale auf -s („den Trainings“), „lateinische Neutra auf -um bilden den Plural auf -a“ gegen die eigenen Beispiele <b>Zentren</b> und <b>Museen</b>. Die n-Deklination stand als Sache der Personenbezeichnungen da — <b>Automat</b>, <b>Planet</b> und <b>Satellit</b> gehen genauso. Die Verlängerungsprobe wurde für <i>seit/seid</i> angeboten, wo sie nicht trägt. Und beim vorangestellten Nebensatz stand, man höre „Komma, Verb, Verb“ — zu hören sind die beiden Verben, die am Komma aneinanderstoßen („… müde <b>war</b>, <b>bin</b> ich …“). <b>Dabei fielen zwei Muster auf, die keine Prüfung sah:</b> Ein Superlativ ohne Artikel („Häufigster Stolperstein“) behauptet dieselbe Rangordnung wie „der häufigste“, und eine mit Zahlwort gezählte Ausnahme („die drei Ausnahmen“, „Zwei Ausnahmen:“) ist dieselbe Absolutaussage wie „mit einer Ausnahme“ — an sieben Stellen, und bei zweien stimmte die Zahl schon nicht mehr. Beide Wächter erkennen das jetzt. <b>Zuletzt die 101 Prüfmuster des Textchecks</b>, jedes gegen die Regel gelesen, in die es führt — 21 Prüfer, jede Meldung von einem Gegenprüfer angegriffen. Von 88 Meldungen hielten 58; 43 der 101 Muster sind geändert. Der häufigste Befund: <b>Der Hinweis beschreibt einen Geltungsbereich, den das Muster gar nicht prüft.</b> „Solche Wörter bewerten die Person“ stand auch über „die Zeitmessung war unzuverlässig“; das Füllwort „halt“ traf auch das Substantiv („er verlor den Halt“); die Genitivkette meldete schon zwei Genitive, die ihre eigene Regel für lesbar erklärt; „Ich versuche“ galt auch im Sachstandsbericht als halbe Absage. Diese Hinweise nennen ihre Bedingung jetzt selbst. <b>Zwei Muster trafen ihr eigenes Beispiel nicht:</b> Die Nominalstil-Kette verlangt drei Substantive auf -ung und führte einen Satz mit zweien vor; das Komma-Muster für Infinitivgruppen fing „pünktlich zu sein“ nicht, weil „sein“ in seiner Verbliste fehlte. <b>Und einmal schnappte die Umlautfalle zu:</b> Weil ß für JavaScript kein Wortzeichen ist, markierte der Textcheck in „Alles fließt.“ die Zeichenfolge <b>Alles flie</b> als fehlende Großschreibung. Dazu vier Stellen, an denen der Hinweis absoluter war als seine Regel: „in Großbuchstaben steht ohnehin SS“, obwohl daneben ẞ zulässig ist; „klein bleibt nur früh“, obwohl „morgen Früh“ ebenfalls geht; die n-Deklination ohne die Ausnahmen <b>Herr</b> und <b>Bauer</b>, deren Wörter das Muster selbst anstreicht; und „während“ ohne die regionale Einordnung, die die drei Nachbarmuster tragen. Bei „in 2026“ steht die Herkunft jetzt als das da, was sie ist: die Einordnung des Dudens, der Sprachwissenschaftler widersprechen. Gleiche Sache, gleiche Stufe: „S.12“ stand auf „bitte prüfen“, „§5“ auf „klarer Fehler“, obwohl derselbe Satz derselben Regel dahintersteht — beides ist jetzt hart. Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
+      "<li><b>Stand der Prüfung:</b> Rund 70 Einzelaussagen sind gegen Duden, DWDS und DIN 5008 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht. Zuletzt die Zeichensetzung, Regel für Regel gegen Duden, GfdS und das Regelwerk 2024 gelesen: Das Komma bei erweiterten Infinitivgruppen ist seit 2024 Pflicht (§ 73), das schließende Komma nach mehrteiligen Datumsangaben ebenfalls — die App war an beiden Stellen auf dem Stand von 2006 und ist nachgezogen. Abgeschwächt wurden absolute Aussagen, wo Duden oder Regelwerk Freiräume lassen: kurze Formeln wie „wie besprochen“, das Komma in „vorausgesetzt(,) dass“, Kurzformeln als Zusatz, das Komma vor „und“ zwischen Hauptsätzen, das Adjektivkomma als Bedeutungsträger. Ergänzt: Nebensätze ohne Einleitewort, „denn“, mehrteilige Einleitungen („nur weil“), Komma vor „als“ mit zu-Infinitiv, gerade Zollzeichen sind keine englischen Anführungszeichen. Sechs Übungen hatten einen Ablenker, der laut Duden, Regelwerk oder Zitierkonvention ebenfalls richtig war (k18, p25, p11, p15, p18, p21) — behoben. Frage-, Ausrufezeichen, Klammern, Auslassungspunkte und Semikolon sind gegen den Regeltext geprüft; die Paragraphenzählung der Fassung 2024 ist dort nicht verifiziert, deshalb nennen die Regeln keine Nummern. Davor die festen Verbpräpositionen: „bestehen auf“ steht mit Dativ, der Akkusativ ist laut DWDS seltene Nebenform; die Aufteilung „leiden an“ für Krankheiten und „leiden unter“ für Umstände ist eine Faustregel, keine feste Grenze; „ich erinnere das Spiel“ ohne „mich an“ ist landschaftlich, besonders norddeutsch. <b>Im September 2026</b> ist der ganze Bestand noch einmal durchgegangen worden — Regeln, Übungen, Fall- und Wortkarten, Prüfmuster und dieser Spickzettel —, jede Meldung danach von zwei unabhängigen Gegenprüfern angegriffen. Von 49 Meldungen hielten 13 der Gegenprüfung stand und sind eingebaut; 36 fielen durch, meist weil die beanstandete Einschränkung schon woanders in derselben Regel stand. Herausgekommen sind unter anderem: der Apostroph bei Auslassungen ist freigestellt (<b>geht’s</b> wie <b>gehts</b>), „Themata“ führt der Duden weiterhin als Plural, „zumindest“ ist vor einer Zahl nicht falsch, und zum Perfekt mit „sein“ gehören auch <b>geschehen, passieren, gelingen, misslingen, begegnen, folgen</b>. <b>Danach zwei Durchgänge mit einer einzigen Frage:</b> Ist jede als falsch markierte Antwort auch <i>sicher</i> falsch? Erst über alle Übungen, dann über die Fallkarten. Zwei Aufgaben hatten zwei richtige Antworten (k29, m19) und fragen jetzt nach dem strittigen Punkt statt nach „der richtigen Variante“. Zehn Tippaufgaben prüften den Kasus, nahmen aber nur eine einzige Form — „innerhalb der Woche“ ist derselbe Genitiv wie „innerhalb einer Woche“ und wurde als Fehler gewertet. Drei Fallkarten hatten einen Ablenker, der in einer Lesart richtig war. Und wo eine Form regional oder umgangssprachlich gilt, sagt die App es jetzt überall gleich: der Dativ nach <b>trotz</b>, <b>während</b> und <b>statt</b>, „den Opfern gedenken“, „nach dem Bäcker“ — dazu <b>zwecks</b> und <b>seitens</b> als Amtsdeutsch. Bei der Uhrzeit stand die Zuordnung falsch herum: Punkt und Doppelpunkt lässt der Duden beide zu, festgelegt ist nur DIN 5008. Eine Einschränkung dazu, damit du sie einordnen kannst: Nachgeschlagen wurde über die Websuche, nicht auf den Seiten selbst — zitierte Wortlaute stammen aus Suchergebnissen. Wo die Belege dünn blieben, ist die Aussage abgeschwächt statt umgeschrieben. <b>Zuletzt der Spickzettel</b>, Zelle für Zelle gegen die Regeln gelesen, aus denen er abschreibt: „widerspiegeln“ stand dort als Beispiel für „wider = gegen“, obwohl dort „wider“ nicht „gegen“, sondern „zurück“ heißt; die ss/ß-Zeile nannte nur die Vokallänge, nicht das scharfe s und nicht die kurzen Wörter wie <b>das</b> und <b>bis</b>; vor -sch fehlte die zweite zulässige Form (<b>newtonsche</b>); und die Präpositionslisten führten <i>bis</i>, <i>entlang</i> und <i>ab</i> ohne ihre Sonderfälle. Dazu die Stilregeln daraufhin gelesen, ob sie Empfehlungen als Empfehlungen ausweisen — vier Stellen sagten „falsch“ oder „Regel“, wo es um Wirkung geht. Und zwei Satzbaukarten: „nicht“ rückt vor Ortsangabe, Adjektiv und Präpositionalobjekt nur, solange die im Mittelfeld stehen („Nach Köln fahre ich nicht“); bei <b>miss-</b> ist die Vorsilbe meist unbetont und verhält sich wie <i>ver-</i> (<b>zu missachten</b>) — nur wenn sie den Ton trägt, rutscht das „zu“ hinein (<b>misszuverstehen</b>). Belegt über den Duden-Sprachratgeber und die Gesellschaft für deutsche Sprache. <b>Zuletzt die 20 Grammatik- und Satzregeln</b>, die noch keine Quelle nannten — zehn Prüfer, je zwei Regeln, jede Meldung danach von einem Gegenprüfer angegriffen, der sie widerlegen sollte. Von zwölf Meldungen hielten vier. Drei davon zählten eine Ausnahme und zählten zu wenige: Nach einer Konjunktion steht das Verb am Ende — beim irrealen Vergleich mit bloßem „als“ aber direkt dahinter (<b>Er tut, als wäre er der Trainer</b>); ein vorangestellter Nebensatz füllt Position 1 — bei <b>je … desto</b> tun das aber „desto“ und der Komparativ; das Kasussignal steht einmal — bei mehreren Adjektiven ohne Artikel aber zweimal (<b>bei gutem, warmem Wetter</b>). Dazu die Kongruenz im Gleichsetzungssatz: <b>Das Problem waren die fehlenden Bälle</b> — steht der Gleichsetzungsnominativ im Plural, folgt das Verb meist ihm, nicht dem Subjektkern. Belegt über grammis (IDS), den Duden-Sprachratgeber und die Gesellschaft für deutsche Sprache. <b>Zuletzt die zwölf Fehlersuchtexte</b>, Markierung für Markierung: „Vorraus“ war in kt01 als Rechtschreibfehler eingeordnet und in kt03 als Frage des Tons, mit einem Verweis in eine Regel übers Danken — jetzt beide Male dieselbe Stelle, und die Regel sagt auch, warum „voraus“ nur ein r hat. In kt02 stand rechts vom Pfeil, wo die richtige Form hingehört, noch einmal die falsche: „selben → selben Verein (zusammen: demselben)“ statt <b>demselben</b>. Damit sind alle Komma- und Zeichenregeln belegt; bei den Paarformeln kam eine Gegenausnahme dazu: Steht <i>sowohl … als auch</i> selbst in einem Nebensatz, ist sie wieder eine gewöhnliche Aufzählung ohne Komma. <b>Zuletzt die 155 Wortkarten</b>, erstmals Feld für Feld gegen Duden und DWDS gelesen — zwölf Prüfer, jede Meldung danach von einem Gegenprüfer angegriffen. Von 28 Meldungen hielten acht. Zwei Karten widersprachen sich selbst: <b>erörtern</b> riet von „diskutieren“ ab und führte es zugleich als sinnverwandt (der Duden definiert das Wort selbst damit; unscharf ist nur „reden über“), und <b>herausstellen</b> erklärte die Bedeutung „hervorheben“, während Beispiel und Synonyme die reflexive Form zeigten. Bei <b>hinreichend</b> stand eine falsche Regel: Eine notwendige Bedingung reiche „allein nicht aus“ — sie kann sehr wohl zugleich hinreichend sein. <b>lapidar</b> schrieb dem Duden ein Zitat zu, das im DWDS steht. Und <b>scheinbar / anscheinend</b> nannte sich „das meistverwechselte Paar der deutschen Sprache“ — eine Rangordnung ohne Quelle, die jetzt einer Probe gewichen ist. Enger gefasst waren <b>vorwegnehmen</b> (nicht nur aussprechen, auch tun), <b>diffizil</b> (die Schwierigkeit liegt in der verlangten Sorgfalt) und <b>Reflexion</b> (prüfendes Nachdenken über etwas, nicht nur über die eigene Praxis). Bei den fünf Karten, deren Bedeutung sich geändert hat, kommt die Karte einmal auf Fach 1 zurück. <b>Dazu die Deklinationstabellen</b>: Fünf liefen bis dahin ohne Paradigma mit. Alle zehn sind jetzt gegen eine unabhängig aufgeschriebene Formentabelle geprüft — sie stimmten. In der Tabelle zur n-Deklination fehlte allerdings ein Sonderfall, den die Regel daneben längst nennt: <b>Herr</b> bekommt im Singular nur ein -n („dem Herrn Weber“), im Plural dann -en. <b>Zuletzt die 381 Erklärungen der Übungen</b>, jede gegen die Regel gelesen, in die sie verweist — zwanzig Prüfer, jede Meldung danach von einem Gegenprüfer angegriffen. Von 23 Meldungen hielten 18. Zwei Aufgaben hatten einen Ablenker, der nicht sicher falsch war: Bei <b>gewinkt / gewunken</b> führt der Duden beide Formen und das Institut für Deutsche Sprache stuft beide als standardsprachlich ein — die Frage nach „der standardsprachlichen Form“ hatte damit zwei richtige Antworten und fragt jetzt nach der Variante; und beim Erstkontakt mit einer Professorin gehört der Titel in die Anrede, ausgeschrieben und ohne den Doktortitel daneben (abgekürzt und gestapelt steht er im Anschriftenfeld). Beide Karten kommen einmal auf Fach 1 zurück. Der Rest waren Erklärungen, die absoluter klangen als die Regel, aus der sie stammen: „Füllwörter schwächen jede Aussage“ gegen die Ausnahme fürs Gespräch, „,wenn‘ passt nur bei Wiederholung“ gegen den irrealen Bedingungssatz („Wenn ich damals mehr trainiert hätte …“), „im Dativ Plural endet auch das Substantiv auf -n“ gegen die Plurale auf -s („den Trainings“), „lateinische Neutra auf -um bilden den Plural auf -a“ gegen die eigenen Beispiele <b>Zentren</b> und <b>Museen</b>. Die n-Deklination stand als Sache der Personenbezeichnungen da — <b>Automat</b>, <b>Planet</b> und <b>Satellit</b> gehen genauso. Die Verlängerungsprobe wurde für <i>seit/seid</i> angeboten, wo sie nicht trägt. Und beim vorangestellten Nebensatz stand, man höre „Komma, Verb, Verb“ — zu hören sind die beiden Verben, die am Komma aneinanderstoßen („… müde <b>war</b>, <b>bin</b> ich …“). <b>Dabei fielen zwei Muster auf, die keine Prüfung sah:</b> Ein Superlativ ohne Artikel („Häufigster Stolperstein“) behauptet dieselbe Rangordnung wie „der häufigste“, und eine mit Zahlwort gezählte Ausnahme („die drei Ausnahmen“, „Zwei Ausnahmen:“) ist dieselbe Absolutaussage wie „mit einer Ausnahme“ — an sieben Stellen, und bei zweien stimmte die Zahl schon nicht mehr. Beide Wächter erkennen das jetzt. <b>Zuletzt die 101 Prüfmuster des Textchecks</b>, jedes gegen die Regel gelesen, in die es führt — 21 Prüfer, jede Meldung von einem Gegenprüfer angegriffen. Von 88 Meldungen hielten 58; 43 der 101 Muster sind geändert. Der häufigste Befund: <b>Der Hinweis beschreibt einen Geltungsbereich, den das Muster gar nicht prüft.</b> „Solche Wörter bewerten die Person“ stand auch über „die Zeitmessung war unzuverlässig“; das Füllwort „halt“ traf auch das Substantiv („er verlor den Halt“); die Genitivkette meldete schon zwei Genitive, die ihre eigene Regel für lesbar erklärt; „Ich versuche“ galt auch im Sachstandsbericht als halbe Absage. Diese Hinweise nennen ihre Bedingung jetzt selbst. <b>Zwei Muster trafen ihr eigenes Beispiel nicht:</b> Die Nominalstil-Kette verlangt drei Substantive auf -ung und führte einen Satz mit zweien vor; das Komma-Muster für Infinitivgruppen fing „pünktlich zu sein“ nicht, weil „sein“ in seiner Verbliste fehlte. <b>Und einmal schnappte die Umlautfalle zu:</b> Weil ß für JavaScript kein Wortzeichen ist, markierte der Textcheck in „Alles fließt.“ die Zeichenfolge <b>Alles flie</b> als fehlende Großschreibung. Dazu vier Stellen, an denen der Hinweis absoluter war als seine Regel: „in Großbuchstaben steht ohnehin SS“, obwohl daneben ẞ zulässig ist; „klein bleibt nur früh“, obwohl „morgen Früh“ ebenfalls geht; die n-Deklination ohne die Ausnahmen <b>Herr</b> und <b>Bauer</b>, deren Wörter das Muster selbst anstreicht; und „während“ ohne die regionale Einordnung, die die drei Nachbarmuster tragen. Bei „in 2026“ steht die Herkunft jetzt als das da, was sie ist: die Einordnung des Dudens, der Sprachwissenschaftler widersprechen. Gleiche Sache, gleiche Stufe: „S.12“ stand auf „bitte prüfen“, „§5“ auf „klarer Fehler“, obwohl derselbe Satz derselben Regel dahintersteht — beides ist jetzt hart. <b>Zuletzt die Schreibwerkstatt</b>: 105 Schreibaufträge, Situationen, Vorher/Nachher-Paare und Bausteine, jeder gegen die Regeln gelesen, die er anwendet, jede Meldung von einem Gegenprüfer angegriffen. Von 106 Meldungen hielten 60. 22 davon waren Einträge, die sich selbst widersprachen — ein Merksatz, dem die eigenen Beispiele nicht folgten. Mehrere Zahlen stimmten nicht: „Aus 46 Wörtern werden 28“ zählte einen Text mit 38 und 26, „fünffach abgesichert“ hieß ein Satz mit vier Absicherungen (die Übung dazu kommt einmal auf Fach 1 zurück), und alle 13 Musterlösungen mit Wortvorgabe lagen darunter — die Vorgaben passen jetzt zu den Mustern, und eine Prüfung zählt nach. Die Musterzusammenfassung schrieb Dietrich Kurz einen Aufsatz „Erziehender Sportunterricht“ zu; so heißt ein Buch von Peter Neumann (2004), und das Ergebnis, das dort stand, war ausgedacht. Die Quelle ist jetzt erkennbar erfunden, auch im Fehlersuchtext, der denselben Text benutzt. Zwei Sätze der Vorher/Nachher-Paare hatten kein Komma vor „statt … zu“; der Textcheck fragt dort jetzt nach. Und eine Korrektur der Runde davor war selbst ungenau: Ausgeschrieben wird in der Anrede der Professorentitel, der Doktortitel bleibt abgekürzt (<b>Sehr geehrter Herr Dr. Lang</b>). Die übrigen Regeln beruhen auf allgemeinem Sprachwissen und haben strukturelle Prüfungen bestanden, sind aber nicht einzeln belegt. Wenn dir etwas seltsam vorkommt: nachschlagen lohnt sich.</li>"+
       "<li><b>Zahlen, Uhrzeit, Datum:</b> Hier stehen Duden und DIN 5008 nebeneinander, und die App hat mehrfach eine Konvention als Regel ausgegeben. Korrigiert: Die Uhrzeit mit Doppelpunkt (8:30) und die volle Stunde mit Nullen (8.00 Uhr) sind zulässige Schreibungen und standen als Fehler da; „1000“ stand als Beispiel unter dem Satz „ab fünf Stellen wird gegliedert“; „Telefonnummern werden nicht gegliedert“ ließ sich nicht belegen und ist gestrichen; „Mio. und Mrd. nur in Tabellen“ war eine Hausregel ohne Quelle. Eine Ziffer am Satzanfang ist nicht falsch, sondern holprig — die Aufgabe dazu fragt jetzt nach der Empfehlung. Das harte Muster gegen „in 2026“ meldete auch „in 2000 Metern Höhe“ und ist auf „bitte prüfen“ herabgestuft. Nicht abgeschlossen: Maßeinheiten, Abkürzungen und Quellenangaben sind gelesen, aber nicht fertig belegt.</li>"+
       "<li><b>Zusätzlich maschinell geprüft:</b> <b>alle zehn Tabellen</b> gegen ein hinterlegtes Paradigma — neun gegen ihr Kasusparadigma, die zehnte gegen die Konjunktiv-II-Formen. Die Paradigmen sind unabhängig aufgeschrieben, nicht aus der App abgelesen; inhaltlich stimmten alle. Dazu alle Fallkarten daraufhin, ob das Beispiel den angegebenen Fall auch zeigt, und der Textcheck gegen fehlerfreien Fließtext — dort ohne Fehlalarm. Ein eigener Wächter meldet, wenn eine neue Tabelle ohne Paradigma dazukommt.</li>"+
       "<li><b>Widersprüche:</b> Eine laufende Prüfung meldet, wenn dasselbe Beispiel an einer Stelle als Fehler und an anderer als regionale Variante geführt wird. Wo Duden und amtliches Regelwerk mehrere Formen zulassen, steht das ausdrücklich da — auch dann, wenn eine Form empfohlen ist.</li>"+
@@ -8074,8 +8079,8 @@ const CHECKS = [
    dem Wochentag, seit 2024 auch das schließende. */
 {id:"y14",sev:"pruef",re:/\b(?:Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonnabend|Sonntag)\s+(?:den|dem)\s+\d{1,2}\./g,
  t:"Komma in der Datumsangabe",k:"Bei einer mehrteiligen Datumsangabe steht ein Komma nach dem Wochentag: „am Dienstag<b>,</b> dem 12. Mai<b>,</b> …“. Das schließende Komma ist seit dem Regelwerk 2024 Pflicht, wenn der Satz weiterläuft.",r:"komma-brief"},
-{id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?\s)?(?:zu\s+(?:[a-zäöüß]+(?:en|eln|ern)|sein|tun)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])/g,
- t:"Komma vor „um … zu“?",k:"Leitet <b>um</b> eine Infinitivgruppe ein („um … zu“ + Verb), steht davor ein Komma: „Er trainiert<b>,</b> um sich zu verbessern.“ Dasselbe gilt für ohne, statt, anstatt, außer, als. Ist <b>um</b> dagegen Präposition („Es geht um Anmeldungen zu den Kursen“), steht dort kein Komma.",r:"komma-infinitiv"},
+{id:"y02",sev:"pruef",re:/\b(?!(?:statt|anstatt|sondern|und|oder|als|nicht|außer)\b)[a-zäöüß]+\s+um\s+(?:[^,.;!?]{1,50}?\s)?(?:zu\s+(?:[a-zäöüß]+(?:en|eln|ern)|sein|tun)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])|(?<![\wäöüßÄÖÜ])[A-Za-zÄÖÜäöüß]+\s+(?:statt|anstatt)\s+(?:[^,.;!?:—–()„“]{1,50}?\s)?(?:zu\s+(?:[a-zäöüß]+(?:en|eln|ern)|sein|tun)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])/g,
+ t:"Komma vor „um … zu“ oder „statt … zu“?",k:"Leitet <b>um</b> eine Infinitivgruppe ein („um … zu“ + Verb), steht davor ein Komma: „Er trainiert<b>,</b> um sich zu verbessern.“ Dasselbe gilt für ohne, statt, anstatt, außer, als. Ist <b>um</b> dagegen Präposition („Es geht um Anmeldungen zu den Kursen“), steht dort kein Komma.",r:"komma-infinitiv"},
 {id:"y11",sev:"pruef",re:/(?<![\wäöüßÄÖÜ])(versuch(?:t|te|en|st)|beschlossen|beschließt|vorgeschlagen|empfohlen|gebeten|bittet|vergessen|vergisst|angefangen|aufgehört|begonnen|geplant|plant|hofft|hoffe|hoffen|gelernt|vorgenommen|geschafft|erlaubt|verboten|gewagt|empfiehlt|vorgehabt|vorhat|vorhatte|vorhaben)\s+(?:(?!zu\s)[A-Za-zÄÖÜäöüß0-9\-]+\s+){1,7}(?:zu\s+(?:[a-zäöüß]+(?:en|eln|ern)|sein|tun)|[a-zäöüß]{2,}zu[a-zäöüß]+(?:en|eln|ern))(?![\wäöüßÄÖÜ])/g,
  t:"Komma vor der Infinitivgruppe?",k:"Eine <b>erweiterte</b> Infinitivgruppe — „zu“ + Verb und mindestens ein weiteres Wort — wird seit 2024 mit Komma abgetrennt: „Er hat versucht<b>,</b> pünktlich zu sein.“ Hier scheint keines zu stehen. Prüf zuerst, ob überhaupt eine Infinitivgruppe dasteht — „zu den Spielen“ ist keine. Kein Komma steht, wenn der Infinitiv mit <b>sein, haben, brauchen, pflegen, scheinen</b> oder übertragenem <b>drohen, versprechen</b> ein mehrteiliges Prädikat bildet.",r:"komma-infinitiv"},
 {id:"y03",sev:"pruef",re:/\bweil\s+(ich|du|er|sie|es|wir|ihr|man)\s+(bin|bist|ist|sind|seid|hab|habe|hast|hat|haben|habt|kann|kannst|will|willst|muss|musst|wird|werde|war|warst|waren|hatte|hattest|möchte|soll)\b(?![^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen|sehen|hören|helfen)\s*[,.!?;]|[^,.!?;]*\b(?:können|müssen|dürfen|sollen|wollen|mögen|lassen)\s*$)/g,
@@ -8701,7 +8706,7 @@ function cheatHTML(){
   '<tr><th>Grußformel</th><td>Beste Grüße / Viele Grüße = sicherer Mittelweg · Mit freundlichen Grüßen = förmlich · '+
   'Liebe Grüße = privat. Danach <b>kein</b> Satzzeichen.</td></tr>'+
   '<tr><th>Mailaufbau</th><td>Betreff = Thema + Kennzeichnung · erster Satz = Anliegen · dann Kontext · '+
-  'dann konkrete Bitte mit Datum · Schluss.</td></tr>'+
+  'dann konkrete Bitte mit Frist · Schluss.</td></tr>'+
   '<tr><th>Bitte</th><td>Echte Frageform + ein Satz Grund. Bei Gefallen eine Ausstiegstür anbieten.</td></tr>'+
   '<tr><th>Absage</th><td>Dank — klare Absage — <i>ein</i> Satz Begründung. Optional eine konkrete Alternative.</td></tr>'+
   '<tr><th>Nachhaken</th><td>Erstes Mal: Ausstiegstür („vermutlich untergegangen“). Zweites Mal: Konsequenz sachlich nennen.</td></tr>'+

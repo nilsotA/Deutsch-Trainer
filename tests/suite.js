@@ -392,7 +392,10 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      Quelle, die der Erkenner nicht sah, weil er nur eine feste Liste von Superlativen kannte.
      „die meisten“ bleibt getrennt behandelt; ausgenommen ist es über den Eintrag zu
      gross-subst, wo „das Meiste“ das Beispielwort der Regel ist. */
-  const RANG = /(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  /* Am 22.09.2026 kam „härteste“ dazu: Der Merksatz von w04 nannte die Bewegungsbeschreibung
+     „die härteste Schule für Sprachgenauigkeit“. Die feste Liste bleibt der Preis dafür, dass
+     „die nächste Stunde“ und „am Montag“ nicht anschlagen. */
+  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|wichtigste|beste|schwerste|härteste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
      „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
      häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
@@ -410,7 +413,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Übung m02":            "„die häufigsten“ meint die häufigsten Präpositionen, kein Fehlerranking",
     "Übung q25":            "Frage nach dem, was Leitfäden raten",
     "Schreibwerkstatt w05.tip":  "„die beste Übung gegen Wortballast“ ist ein Rat zur Übung, kein Befund über Fehler",
-    "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieser einen Mail, nicht eine Rangordnung",
+    "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieses einen Gesprächseinstiegs, nicht eine Rangordnung",
     "Schreibwerkstatt pr29.good": "„was ist der beste Weg, dich zu erreichen?“ ist wörtliche Rede in einer Musterformulierung",
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
     "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",
@@ -436,7 +439,8 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   sammle2("Übung", "probe-q01", "<p>Die Zeitungskonvention ist am verbreitetsten.</p>");
   /* Und die Fassung aus pr29 vom 21.09.2026: ein Zahlwort zwischen Artikel und Superlativ. */
   sammle2("Schreibwerkstatt", "probe-pr29", "<p>Das sind die zwei häufigsten Konfliktverstärker der deutschen Sprache.</p>");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 5, "Positivprobe blieb stumm");
+  sammle2("Schreibwerkstatt", "probe-w04", "Präzise Beschreibung ist die härteste Schule für Sprachgenauigkeit.");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 6, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -883,6 +887,11 @@ daten(w, "SCENES").forEach(sc => {
   if (sc.why) beide({ id: "sc:" + sc.id + " (Begründung)", t: strip(sc.why) });
 });
 PAIRS.forEach(pr => { if (pr.note) beide({ id: "pr:" + pr.id + " (Merksatz)", t: strip(pr.note) }); });
+/* Und die Begründung der Vorher/Nachher-Paare. Sie fehlte als einziges Werkstattfeld mit
+   eigenem Fließtext — und genau dort stand am 22.09.2026 „Bewertet die Aussage statt sie
+   zu prüfen“ ohne Komma (pr12). Aufgenommen, als y02 auch „statt … zu“ lernte; auf den
+   30 Feldern schlug danach kein Muster an. */
+PAIRS.forEach(pr => { if (pr.why) beide({ id: "pr:" + pr.id + " (Begründung)", t: strip(pr.why) }); });
 PHRASES.forEach(ph => { if (ph.tip) beide({ id: "ph:" + ph.id + " (Merksatz)", t: strip(ph.tip) }); });
 /* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
    Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
@@ -950,6 +959,106 @@ P.ok("Kein Prüfhinweis auf den Vorbildtexten (" + vorbild.length + ")", !vorbil
   vorbildFrage.slice(0, 5).join(" · ") + (vorbildFrage.length > 5 ? " …(" + vorbildFrage.length + ")" : ""));
 const vorbildProbe = daten(w, 'analyse("Er war scheinbar schon vor uns da.").finds.filter(f=>f.c.sev==="pruef").length');
 P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0, "Positivprobe blieb stumm");
+
+/* Fehlerklasse „das Beispiel erfüllt die eigene Vorgabe nicht“, in der Schreibwerkstatt
+   mit Zahlen. Am 22.09.2026 lagen alle 13 Musterlösungen mit Wortvorgabe darunter: w01
+   verlangte 200–280 Wörter und zeigte 153, w03 verlangte 120–180 und zeigte 90. In
+   denselben Mustertexten zählten sich zwei Anmerkungen selbst falsch — w06 „Aus 46 Wörtern
+   werden 28“ (es sind 38 und 26), w10 „Vorher (68 Wörter)“ über einem Absatz mit 53. Die
+   Vorgaben sind seitdem an die Muster angepasst; kürzer schreiben ist ohnehin, was die
+   Werkstatt übt. Gezählt wird wie im Schreibfeld der App: am Leerraum getrennt, ohne die
+   grauen Anmerkungen unter dem Muster. Bei „2 × a–b“ zählt jede Fassung für sich.
+   Zählungen in Fließtext („Drei Wörter“, „Vier Absicherungen“) sieht diese Prüfung nicht —
+   dort war es dieselbe Klasse, und dort bleibt nur das Nachzählen. */
+{
+  const ZAHLWORT = { ein: 1, eine: 1, zwei: 2, drei: 3, vier: 4, "fünf": 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10 };
+  const zahlwert = z => /^\d+$/.test(z) ? Number(z) : ZAHLWORT[z.toLowerCase()];
+  const ohneNotiz = h => String(h).replace(/<p class="tiny[^"]*"[^>]*>[\s\S]*?<\/p>/g, " ");
+  const zaehle = h => { const t = strip(h); return t ? t.split(/\s+/).length : 0; };
+  const ohneNr = h => strip(h).replace(/^\d+\.\s*/, "");
+  /* Abkürzungspunkte beenden keinen Satz: „Frau Dr. Weber“ ist ein Satzteil. */
+  const ABK = /(?<![\wäöüßÄÖÜ])(?:Dr|Prof|Nr|ca|bzw|vgl|usw|z\. ?B|d\. ?h|u\. ?a)\./g;
+  const saetze = h => strip(ohneNotiz(h)).replace(ABK, a => a.replace(/\./g, "․"))
+    .split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ„])/).filter(Boolean);
+  const gezaehlt = { bereich: 0, kopf: 0, prozent: 0, ausWerden: 0, selbstcheck: 0 };
+  const werkstattZahlen = (p, zaehler) => {
+    const f = [], m = String(p.model || "");
+    const abschnitte = [...m.matchAll(/<p>\s*<b>([^<]*)<\/b>\s*<br>([\s\S]*?)<\/p>/g)]
+      .map(a => ({ kopf: a[1], n: zaehle(a[2]) }));
+    const ber = String(p.words).match(/^(?:(\d+)\s*×\s*)?(\d+)–(\d+)$/);
+    if (ber) {
+      zaehler.bereich++;
+      const [, mal, lo, hi] = ber;
+      const ns = mal ? abschnitte.map(a => a.n) : [zaehle(ohneNotiz(m))];
+      if (mal && ns.length !== Number(mal)) f.push(p.id + ": " + mal + " Fassungen verlangt, " + ns.length + " im Muster");
+      ns.forEach(n => { if (n < +lo || n > +hi) f.push(p.id + ": Vorgabe " + p.words + ", Musterlösung " + n + " Wörter"); });
+    }
+    abschnitte.forEach(a => {
+      const z = a.kopf.match(/\((\d+) Wörter/);
+      if (!z) return;
+      zaehler.kopf++;
+      if (+z[1] !== a.n) f.push(p.id + ": „" + a.kopf + "“, gezählt " + a.n);
+    });
+    const vor = abschnitte.find(a => /^Vorher/.test(a.kopf));
+    const nach = abschnitte.find(a => /^Nachher/.test(a.kopf));
+    const proz = nach && nach.kopf.match(/−(\d+) %/);
+    if (vor && proz) {
+      zaehler.prozent++;
+      const soll = Math.round((1 - nach.n / vor.n) * 100);
+      if (soll !== +proz[1]) f.push(p.id + ": −" + proz[1] + " % angegeben, gerechnet −" + soll + " %");
+    }
+    /* „Aus N Wörtern werden M“: N aus den kursiven Sätzen der Aufgabe, M aus den
+       nummerierten Absätzen des Musters — die Nummern zählen beide Male nicht mit. */
+    const aus = strip(m).match(/Aus (\d+) Wörtern werden (\d+)/);
+    if (aus) {
+      zaehler.ausWerden++;
+      const n = [...String(p.p).matchAll(/<i>([\s\S]*?)<\/i>/g)].reduce((s, x) => s + zaehle(ohneNr(x[1])), 0);
+      const k = [...ohneNotiz(m).matchAll(/<p>([\s\S]*?)<\/p>/g)].reduce((s, x) => s + zaehle(ohneNr(x[1])), 0);
+      if (n !== +aus[1] || k !== +aus[2]) f.push(p.id + ": „Aus " + aus[1] + " Wörtern werden " + aus[2] + "“, gezählt " + n + " und " + k);
+    }
+    const s = saetze(m), l = s.map(x => x.split(/\s+/).length);
+    (p.crit || []).forEach(c => {
+      let z;
+      if ((z = c.match(/^Genau (\S+) Sätze$/))) {
+        zaehler.selbstcheck++;
+        if (s.length !== zahlwert(z[1])) f.push(p.id + ": „" + c + "“, das Muster hat " + s.length);
+      } else if ((z = c.match(/^Kein Satz länger als (\d+) Wörter$/))) {
+        zaehler.selbstcheck++;
+        if (Math.max(...l) > +z[1]) f.push(p.id + ": „" + c + "“, der längste Satz im Muster hat " + Math.max(...l));
+      } else if ((z = c.match(/^Sätze im Schnitt unter (\d+) Wörtern$/))) {
+        zaehler.selbstcheck++;
+        const schnitt = l.reduce((a, b) => a + b, 0) / l.length;
+        if (schnitt >= +z[1]) f.push(p.id + ": „" + c + "“, das Muster hat im Schnitt " + schnitt.toFixed(1));
+      }
+    });
+    return f;
+  };
+  const PROMPTS = daten(w, "PROMPTS");
+  const zahlSchief = PROMPTS.flatMap(p => werkstattZahlen(p, gezaehlt));
+  P.ok("Die Musterlösungen der Schreibwerkstatt erfüllen ihre eigenen Zahlen", !zahlSchief.length, zahlSchief.join(" · "));
+  /* Abdeckung: Ändert sich das Format einer Kopfzeile oder eines Selbstcheck-Punkts, liefe
+     die Prüfung sonst still ins Leere. */
+  const mitBereich = PROMPTS.filter(p => /\d/.test(p.words)).length;
+  P.ok("… und sieht alle Vorgaben (" + mitBereich + " Wortbereiche, " + gezaehlt.kopf + " Zählköpfe, " +
+    gezaehlt.selbstcheck + " zählbare Selbstcheck-Punkte)",
+    gezaehlt.bereich === mitBereich && gezaehlt.kopf >= 2 && gezaehlt.prozent >= 1 &&
+    gezaehlt.ausWerden >= 1 && gezaehlt.selbstcheck >= 3, JSON.stringify(gezaehlt));
+  /* Positivprobe: die Fassungen vor dem 22.09.2026, dazu ein sechster Satz in der
+     Fünf-Satz-Zusammenfassung und ein Satzlimit, das das Muster reißt. */
+  const hol = id => PROMPTS.find(p => p.id === id);
+  const leerer = { bereich: 0, kopf: 0, prozent: 0, ausWerden: 0, selbstcheck: 0 };
+  const proben = [
+    Object.assign({}, hol("w01"), { words: "200–280" }),
+    Object.assign({}, hol("w14"), { words: "2 × 80–110" }),
+    Object.assign({}, hol("w06"), { model: hol("w06").model.replace(/Aus \d+ Wörtern werden \d+/, "Aus 46 Wörtern werden 28") }),
+    Object.assign({}, hol("w10"), { model: hol("w10").model.replace(/Vorher \(\d+ Wörter\)/, "Vorher (68 Wörter)") }),
+    Object.assign({}, hol("w10"), { model: hol("w10").model.replace(/−\d+ %/, "−65 %") }),
+    Object.assign({}, hol("w05"), { model: hol("w05").model.replace("</p>", " Das ist ein sechster Satz.</p>") }),
+    Object.assign({}, hol("w01"), { crit: ["Kein Satz länger als 10 Wörter"] }),
+  ];
+  const stumm = proben.map((p, i) => werkstattZahlen(p, leerer).length ? null : i + 1).filter(Boolean);
+  P.ok("Die Zahlenprüfung schlägt bei jeder der " + proben.length + " Proben an", !stumm.length, "stumm bei Probe " + stumm.join(", "));
+}
 
 /* Vierter korrekter Bestand: der Spickzettel. CLAUDE.md nennt ihn selbst als Risiko — er
    „wiederholt Teile des Bestands teils handgeschrieben“ —, und bis hierher fasste ihn kein
