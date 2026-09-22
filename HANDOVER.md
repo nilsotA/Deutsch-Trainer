@@ -37,7 +37,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 101 |
-| Fehlersuchtexte | 12 mit 86 markierten Fehlern |
+| Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Dateigröße | ~765 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
@@ -57,6 +57,94 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Quer durch alles, mit Gegenprüfung (22.09.2026, sechsundzwanzigste Runde).**
+
+Ein Workflow mit 111 Agenten: 38 Prüfer lasen die Übungen (24 Pakete), die Einordnungen
+quer über alle Bestände (7 Pakete und ein Querleser) und die zwölf Fehlersuchtexte
+(6 Pakete); jede Meldung
+griff danach ein Gegenprüfer an, der sie widerlegen sollte. **Von 73 Meldungen hielten 58,
+15 fielen.** Die Websuche war erschöpft, Duden und DWDS sind aus der Umgebung nicht
+erreichbar. Nachgeschlagen wurde im Text des amtlichen Regelwerks in der Fassung von 2018
+(lokal als Index) und in der App selbst — viele Funde sind Widersprüche zwischen zwei
+Stellen des Bestands, die keine äußere Quelle brauchen. Wo sich nichts belegen ließ, ist
+die Frage enger gestellt statt die Aussage verschärft (m22 fragt nach der Hausarbeit, x12
+nach Deutschland, statt über die Schweiz etwas zu behaupten).
+
+**Regionale Standardformen als Ablenker.** m03 fragte „Welche Form ist richtig?“ und wertete
+„trotz dem schlechten Wetter“ als falsch; die Erklärung daneben nannte den Dativ in der
+Schweiz, in Österreich und Süddeutschland verbreitet, kt07 sogar eine Standardvariante.
+Die Linie jetzt: „richtig“ heißt überregional standardsprachlich; eine umgangssprachliche
+Form („wegen mir“) darf Ablenker sein, eine regionale Standardform nicht — dann nennt die
+Frage ihren Rahmen (m03, m22, x12, d03). Die Fallkarten während und trotz haben jetzt einen
+Akkusativ-Ablenker, die Karte statt einen Nominativ („der Vortrag“ — nach der Konjunktion
+„statt“ könnte ein Akkusativ richtig sein), wegen „das schlechte Wetter“.
+Bei statt ist dabei die richtige Option von „des Trainings“ zu „des Vortrags“ gewechselt —
+gelernt wird derselbe Genitiv, deshalb kein Eintrag in `NEU_GELERNT`. kt01, kt03 und kt07
+ordnen „wegen“ + Dativ gleich ein. Neue Prüfung: `tests/inhalt.js`, Abschnitt L.
+
+**Tippaufgaben.** Neun fragten nach einer Kategorie oder unscharf („Welcher Kasus?“,
+„Welche Zeitform passt?“) und wollten doch das Lückenwort — m18 lehnte „Plusquamperfekt“
+ab, das die eigene Erklärung nannte. Die Fragen sagen jetzt, welches Wort in die Lücke
+gehört. Die Listen von n01–n04, n06, n07, n15, n31–n33 und z22 nehmen jedes passende
+Artikelwort, die welch-Relativpronomen, bei n33 auch „an die“ und bei z22 „übersetzte“ an.
+Neue Prüfung: `KATEGORIE` in Abschnitt F, die Tabelle `TIPP` erweitert.
+
+**Erklärungen, die mehr sagten als ihre Regel.** „wievielmal“ und „der Wievielte“ (t03,
+v01, getrennt-praep, x30); die Ellipse „die erste ist leicht“ (v04, gross-subst); beim ß
+die Ausnahme „aus“, die das Regelwerk eigens nennt, und der Diphthong nur ohne weiteren
+Konsonanten (r14, recht-sz, kt04, kt07, kt09); der Dativ Plural bei Pluralen auf -s (d15);
+„sich beeilen“ bildet das Perfekt mit „haben“, weil das Reflexivpronomen im Akkusativ
+steht — ein „sich“ macht aus einem sein-Verb aber kein haben-Verb (z13, satz-perfekt,
+sa11); „in 2026“ als umstrittene Herkunft (q17, neuer Eintrag in Abschnitt G);
+„scheinbar“ für „anscheinend“ ist umgangssprachlich, kein Bedeutungsirrtum (r11,
+recht-verwechsel, kt10, Wortkarte; neuer Eintrag in Abschnitt G); „entlang“ in der
+Akkusativreihe von n02 ohne Vorbehalt (neue Prüfung im Spickzettel-Abschnitt K). z07 sagte
+„die Fassung oben“ über täglich gemischte Optionen — der Positionswächter kennt jetzt auch
+„oben/unten/obige“.
+
+**Doppelpunkt.** p05 hatte einen Ablenker, der ebenfalls richtig war: „Die Lage ist klar:
+Keine Chance.“ — ein kurzer Satz ohne Verb kann als eigener Satz gelten. Neues Beispiel
+(eine Aufzählung), `z-doppelpunkt` sagt jetzt „eigener Satz“ statt „vollständiger Satz“
+und nennt die Zusammenfassung, die klein bleibt. p05 steht in `NEU_GELERNT`.
+
+**Form und Ton.** f02: Antwortet die Dozentin mit „Hallo Herr Otten“, kannst du ihren Ton
+übernehmen; beim „Sehr geehrte“ zu bleiben ist nicht falsch, nur förmlicher als nötig. f11, f20/pr13, f25/pr04/f27 („kaum
+bestreiten“), f31/ph26/form-zusagen, m05 (indirekte Rede: „sie haben“ ist nicht falsch,
+nur zeigt allein „sie hätten“ die Wiedergabe am Verb). kt05 und kt11 erklären die
+Ausklammerung als gesprochen üblich statt als verrutschte Klammer. m24 steht mit neuem
+Beispiel in `NEU_GELERNT` („der Bericht von dem Trainer“ ist als Herkunftsangabe
+standardsprachlich).
+
+**Fehlersuche.** Eine Stelle kann jetzt aus mehreren Wörtern bestehen (`mit:[…]`):
+„vielleicht eventuell“ (kt04), die Füllwortkette und die Nominalkette in kt02. Gezählt wird
+je Stelle; ein Klick auf das zweite Wort ist kein Fehlalarm mehr und kein Eintrag
+„übersehen“ im Fehlerjournal. Geprüft in `tests/suite.js`, Abschnitt G, am gerenderten
+Ergebnis, mit Gegenprobe. Außerdem: kt02 zählte „vier Abschwächungen“ und „drei Substantive
+auf -ung“, beides stimmte nicht, und die Korrektur „Wir erhoben die Daten“ tauschte den
+Handelnden aus; der Relativsatz am Satzende verwies auf `komma-einschub`. kt06 trug die
+Floskel „stehe für Rückfragen zur Verfügung“ unmarkiert, die kt05 markiert — jetzt markiert,
+**87 statt 86 Stellen**. kt07 „dazu kamen“ → „dazukamen“; kt12 wechselte mitten im
+Protokoll ins Perfekt, gegen `gram-zeiten`. Dort steht außerdem „von denen“ statt „wovon“ —
+nicht weil „wovon“ falsch wäre (die Meldung fiel in der Gegenprüfung: partitiv ist es
+üblich), sondern damit der Text keinen strittigen Klick enthält.
+
+**Gefallen, zum Beispiel:** m01 („Welcher Kasus folgt auf wegen?“ ist als Rektionsfrage
+eindeutig), m16 („wegen mir“ ist dort schon selbst eingeordnet), s17 („optimal“ als
+Superlativ ist über die Herkunft vertretbar), kt05 „kleines“, das Muster x04 und die
+Fallkarte anrufen (die App trainiert die in Deutschland übliche Form, der Hinweis ordnet
+den Dativ ein).
+
+**Vorher in dieser Runde (Commit 7f8c101):** `tests/literale.js` zerlegt den Logikteil und
+sammelt die Oberflächentexte ein; sie stehen als Sorte „Oberfläche“ in `BESTAND`, und Rang-,
+Absolut- und Zählwächter lesen sie mit. Tippaufgaben werden über `norm()` ohne Groß- und
+Kleinschreibung verglichen; eine Prüfung verbietet deshalb Tippaufgaben zu Großschreibung,
+Komma und Zeichen.
+
+**Warum es jetzt 108 statt 104 gekoppelte Sätze sind:** Vier neue Fassungen stehen wörtlich
+an mehreren Stellen (zwei Sätze in getrennt-praep/t03/v01, dazu m13/q17 und ph09/f11), und
+der gekoppelte Satz in ph26/form-zusagen hat einen neuen Wortlaut. `tests/kopplungen.json`
+ist neu geschrieben.
 
 **Was unterwegs vorgelesen wird (22.09.2026, fünfundzwanzigste Runde).**
 

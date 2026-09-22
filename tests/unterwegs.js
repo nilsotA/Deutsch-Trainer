@@ -8,10 +8,18 @@ const w0 = boot(null);
 const K = schluessel(w0);
 const ALLE = [...K.aufgaben, ...K.woerter, ...K.faelle];
 
+/* Die Fixtures beschreiben Fälligkeiten, keine Regeländerungen. Ohne `neu` setzt
+   regelAenderungen() jede Karte aus NEU_GELERNT zurück, deren letzte Antwort vor dem
+   Eintrag liegt — dann hängt die Zusammensetzung der Runde davon ab, wie viele Einträge
+   gerade jünger sind als das Fixture. Am 22.09.2026 kippte so „Überfällige Wort- und
+   Fallkarten kommen zuerst“ bei zwei neuen Einträgen (p05, m24): fünf zurückgesetzte
+   Aufgaben lagen genau auf der Schwelle, sieben darüber. Am Kartenmix hatte sich nichts
+   geändert. */
+const NEU = daten(w0, "NEU_GELERNT");
 function stand(karteFuer) {
   const cards = {};
   ALLE.forEach((k, i) => { const c = karteFuer(k, i); if (c) cards[k] = c; });
-  return leererStand({ streak: 5, best: 5, last: tag(-1), cards, auto: false });
+  return leererStand({ streak: 5, best: 5, last: tag(-1), cards, auto: false, neu: NEU });
 }
 
 function runde(st, knopf = "#wkNew") {

@@ -320,18 +320,26 @@ P.titel("F · Tippaufgaben");
    Falsches. Umgekehrt darf die Liste nicht so weit werden, dass der falsche Kasus
    durchgeht — deshalb steht zu jeder Aufgabe beides: was durchgehen muss und was nicht.
    Die Tabelle ist die festgehaltene Durchsicht aller 44 Tippaufgaben vom 13.09.2026. */
+/* Am 22.09.2026 nachgezogen: Die Listen nahmen „meinem“ an, „seinem“ und „ihrem“ nicht,
+   „unseren“ bei n02, bei n03 nicht — jedes Artikelwort im geprüften Kasus gehört dazu. Dazu
+   die Relativpronomen mit welch- (n31–n33), die korrekt sind, nur schwerfälliger, und die
+   Präpositionalfassung „an die“ bei „schreiben“. */
 const TIPP = [
   { id: "m20", muss: ["einer", "der", "dieser"], nicht: ["die", "eine", "den"] },
-  { id: "n01", muss: ["dem", "meinem", "einem"], nicht: ["das", "den", "der"] },
-  { id: "n02", muss: ["den", "einen", "meinen"], nicht: ["dem", "der", "des"] },
-  { id: "n03", muss: ["den", "einen", "meinen"], nicht: ["dem", "der"] },
-  { id: "n04", muss: ["der", "einer", "meiner"], nicht: ["die", "eine", "den"] },
-  { id: "n06", muss: ["der", "einer"], nicht: ["die", "eine"] },
-  { id: "n07", muss: ["den", "einen", "unseren"], nicht: ["dem", "des"] },
+  { id: "n01", muss: ["dem", "meinem", "einem", "seinem", "unserem"], nicht: ["das", "den", "der", "seinen"] },
+  { id: "n02", muss: ["den", "einen", "meinen", "seinen", "ihren"], nicht: ["dem", "der", "des", "seinem"] },
+  { id: "n03", muss: ["den", "einen", "meinen", "seinen", "unseren"], nicht: ["dem", "der", "seinem"] },
+  { id: "n04", muss: ["der", "einer", "meiner", "seiner", "unserer"], nicht: ["die", "eine", "den", "seine"] },
+  { id: "n06", muss: ["der", "einer", "meiner"], nicht: ["die", "eine", "meine"] },
+  { id: "n07", muss: ["den", "einen", "unseren", "meinen", "seinen"], nicht: ["dem", "des", "seinem"] },
+  { id: "n31", muss: ["dem", "welchem"], nicht: ["den", "der", "welchen"] },
+  { id: "n32", muss: ["den", "welchen"], nicht: ["dem", "welchem"] },
+  { id: "n33", muss: ["denen", "welchen", "an die"], nicht: ["den", "die"] },
+  { id: "z22", muss: ["übersetze", "übersetzte"], nicht: ["setze über"] },
   { id: "n11", muss: ["dich", "ihn", "sie", "euch"], nicht: ["dir", "ihm", "ihnen"] },
   { id: "n12", muss: ["mir", "ihm", "ihr", "uns"], nicht: ["mich", "ihn", "dich"] },
   { id: "n14", muss: ["mich", "dich", "ihn", "uns"], nicht: ["mir", "dir", "ihm"] },
-  { id: "n15", muss: ["dem"], nicht: ["den", "der", "des"] },
+  { id: "n15", muss: ["dem", "einem", "meinem", "diesem"], nicht: ["den", "der", "des", "einen"] },
   { id: "n23", muss: ["mir"], nicht: ["mich", "dir"] },
   { id: "n25", muss: ["mir"], nicht: ["mich", "dir"] },
   { id: "r21", muss: ["darf"], nicht: ["dürfen", "darfst"] },
@@ -360,6 +368,18 @@ P.ok("und eine zu weite", nimmt(["den", "dem"], "dem"), "Positivprobe blieb stum
    erfüllt; n23 und n25 fragten nach einem Pronomen, ohne „Reflexiv“ zu nennen. Die
    geschärften Fassungen werden hier festgehalten, damit sie nicht zurückfallen. */
 const SCHARF = [
+  /* Am 22.09.2026: Fragen, die eine Kategorie nannten, während das Tippfeld das Lückenwort
+     wollte („Welcher Kasus?“ → „einer“, „Welche Zeitform passt?“ → „hatte“), oder die die
+     Wortart offenließen („Kannst du ___ kurz helfen?“ → auch „mal“). */
+  ["m14", /Präposition/],
+  ["m18", /Hilfsverb/],
+  ["m20", /Artikelwort/],
+  ["n11", /Personalpronomen/],
+  ["n12", /Personalpronomen/],
+  ["n14", /Personalpronomen/],
+  ["n18", /bestimmten Artikel/],
+  ["z05", /Leerzeichen/],
+  ["z20", /Person/],
   ["n15", /Dativ Singular/],
   ["n20", /bei einem Umstand/],
   ["n23", /Reflexivpronomen/],
@@ -371,12 +391,21 @@ const stumpf = SCHARF.filter(([id, re]) => {
   return !i || !re.test(String(i.q));
 }).map(([id]) => id);
 P.ok("Die geschärften Fragen sind geschärft geblieben", !stumpf.length, stumpf.join(","));
+/* Und die Klasse selbst: Eine Tippaufgabe darf nicht nach einer Kategorie fragen. Wer
+   „Welcher Kasus?“ wörtlich mit „Genitiv“ beantwortet, bekam „Richtig wäre: einer“. */
+const KATEGORIE = /^Welche[rs]?\s+(Kasus|Fall|Zeitform|Tempus|Modus|Wortart|Verb)\b/;
+const kategorie = ALL.filter(i => i.t === "fill" && KATEGORIE.test(String(i.q))).map(i => i.id);
+P.ok("Keine Tippaufgabe fragt nach einer Kategorie statt nach dem Lückenwort", !kategorie.length, kategorie.join(","));
+P.ok("… und die Prüfung erkennt die alten Fassungen von m20 und m18",
+  KATEGORIE.test("Welcher Kasus? „Innerhalb ___ Woche …“") && KATEGORIE.test("Welche Zeitform passt? „Nachdem …“"),
+  "Positivprobe blieb stumm");
 
 /* Die Rückmeldung zeigt bei einer Tippaufgabe „Richtig wäre: “ + accept[0]. Wer die Liste
    erweitert, darf die Musterantwort nicht ans Ende schieben — Nils läse sonst plötzlich
    „Richtig wäre: dieser“, wo er „einer“ gelernt hat. */
 const ERST = { m20: "einer", n01: "dem", n02: "den", n03: "den", n04: "der", n06: "der",
-  n07: "den", n11: "dich", n12: "mir", n14: "mich", n15: "dem", n23: "mir", n25: "mir" };
+  n07: "den", n11: "dich", n12: "mir", n14: "mich", n15: "dem", n23: "mir", n25: "mir",
+  n31: "dem", n32: "den", n33: "denen", z05: "stehe auf", z22: "übersetze" };
 const verrutscht = Object.keys(ERST).filter(id => {
   const i = ALL.find(x => x.id === id);
   return !i || !Array.isArray(i.a) || norm(i.a[0]) !== norm(ERST[id]);
@@ -415,7 +444,10 @@ const EINORDNUNG = [
      belegt. Das Prüfmuster x01 steht seitdem auf „pruef“ statt „hart“, wie x02. */
   { was: "wegen", muss: [/umgangssprachlich/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "n05"], ["Übung", "v03"], ["Übung", "m01"],
-              ["Prüfmuster", "x01"]] },
+              ["Prüfmuster", "x01"],
+              /* Seit dem 22.09.2026 auch die drei Fehlersuchstellen: Sie schrieben „„wegen“
+                 verlangt den Genitiv“ ohne Einordnung, als glatten Fehler. */
+              ["Fehlersuche", "kt01:dem"], ["Fehlersuche", "kt03:den"], ["Fehlersuche", "kt07:den"]] },
   /* gedenken → Duden-Zweifelsfälle: „standardsprachlich noch nicht anerkannt“, aber in
      Zeitungen verbreitet. zu (Richtung) → „nach Aldi“ ist Ruhrgebiet, nördliches
      Rheinland, Ostfriesland; Duden 2005: auf Norddeutschland beschränkt, nicht
@@ -472,6 +504,16 @@ const EINORDNUNG = [
      „wegen dem Wetter“ zwei Sätze davor. */
   { was: "wegen mir", muss: [/[Ww]egen mir“ ist umgangssprachlich/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "m16"], ["Prüfmuster", "a11"], ["Regel", "gram-genalltag"]] },
+  /* „in 1995“: Seit dem 21.09.2026 steht die Herkunft an drei Stellen als Einordnung des
+     Dudens, der Sprachwissenschaftler widersprechen. q17 sagte weiter glatt „ist eine
+     Übernahme aus dem Englischen“ — die Korrektur blieb auf einer Ebene liegen. */
+  /* „scheinbar“ für „anscheinend“: r11 sagte, „Sie war scheinbar krank“ hieße „Sie hat es nur
+     vorgetäuscht“ — die umgangssprachliche Bedeutung, in der jeder den Satz im Alltag
+     versteht, kam nicht vor. Seit dem 22.09.2026 überall als umgangssprachlich eingeordnet. */
+  { was: "scheinbar für anscheinend", muss: [/[Uu]mgangssprachlich/],
+    stellen: [["Übung", "r11"], ["Regel", "recht-verwechsel"], ["Fehlersuche", "kt10:scheinbar"]] },
+  { was: "in + Jahreszahl", muss: [/umstritten/],
+    stellen: [["Übung", "m13"], ["Übung", "q17"], ["Prüfmuster", "x24"], ["Regel", "stil-anglizismus"]] },
   { was: "Sinn machen", muss: [/umgangssprachlich/, /umstritten/],
     stellen: [["Übung", "s08"], ["Prüfmuster", "s06"], ["Fehlersuche", "macht"],
               ["Regel", "stil-anglizismus"]] },
@@ -595,6 +637,25 @@ const praepFehlt = [[/entlang des Flusses/, "entlang vorangestellt mit Genitiv"]
   .filter(([re]) => !re.test(praepAbschnitt)).map(([, was]) => was);
 P.ok("Die Sonderfälle der Präpositionslisten stehen im Spickzettel dabei",
   praepAbschnitt && !praepFehlt.length, praepFehlt.join(", "));
+/* Dieselbe Kurzfassung ohne Vorbehalt stand bis zum 22.09.2026 in der Erklärung von n02:
+   „Die Akkusativ-Präpositionen: durch, für, gegen, ohne, um, bis, entlang, wider“. Jede
+   Stelle, die „entlang“ in einer Reihe mit Akkusativ-Präpositionen nennt, trägt den
+   Vorbehalt mit — nicht nur der Spickzettel. */
+{
+  const text = h => String(h || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const REIHE = /(?:durch|für|gegen|ohne|um|bis)\s*[,·]\s*(?:[a-zäöü]+\s*[,·]\s*)*entlang|entlang\s*[,·]\s*(?:[a-zäöü]+\s*[,·]\s*)*(?:durch|für|gegen|ohne|um|wider)/;
+  const VORBEHALT = /entlang des|nachgestellt|den Fluss entlang/;
+  const ohne = t => REIHE.test(text(t)) && !VORBEHALT.test(text(t));
+  const entlangOhne = [];
+  ALL.forEach(i => { if (ohne(i.q) || ohne(i.e)) entlangOhne.push("Übung " + i.id); });
+  RULES_ALL.forEach(r => { if (ohne(r.b)) entlangOhne.push("Regel " + r.id); });
+  TABLES.forEach(t => { if (ohne(t.b)) entlangOhne.push("Tabelle " + t.id); });
+  P.ok("Keine Präpositionsreihe führt „entlang“ ohne seinen Vorbehalt", !entlangOhne.length,
+    entlangOhne.join(", "));
+  P.ok("… und die Prüfung erkennt die alte Erklärung von n02",
+    ohne("<b>für</b> verlangt den Akkusativ. Die Akkusativ-Präpositionen: <b>durch, für, gegen, ohne, um, bis, entlang, wider</b>.") &&
+    !ohne(RULES_ALL.find(r => r.id === "gram-praepakk").b), "Positivprobe blieb stumm oder die Regel selbst schlägt an");
+}
 
 /* Dritte Achse: Abschnitt 8 des Spickzettels ist keine Kurzfassung, sondern eine zweite
    Fassung derselben zwei Listen aus satz-sprechen (Karte sa18). Zwei Listen, die dasselbe
@@ -703,6 +764,57 @@ P.ok("Die Variantenprüfung erkennt einen erlaubten Ablenker",
 P.ok("und meldet ein echtes Falschpaar nicht",
   !variantenTreffer("Das ist Standard.", "Das ist Standart.").length,
   "Gegenprobe schlug an");
+
+/* Zweite Sorte derselben Klasse: die regionale Standardvariante. m03 fragte „Welche Form ist
+   richtig?“ und wertete „trotz dem schlechten Wetter“ als falsch — die Erklärung daneben
+   nannte selbst Schweiz, Österreich und Süddeutschland, und gram-genitiv sagt, man solle den
+   Dativ „bei keinem der vier als glatten Fehler abstempeln“. Dieselbe Form stand als
+   Ablenker in den Fallkarten trotz, während, statt und wegen, ganz ohne Frage darüber. Seit
+   dem 22.09.2026 gilt: Nennt eine Übung eine regionale Einordnung, fragt sie nach der
+   überregionalen, der geschriebenen oder der in Deutschland üblichen Form — oder sie steht
+   hier mit dem Grund, warum ihr Ablenker trotzdem sicher falsch ist. Für die Fallkarten, die
+   keine Frage tragen, dasselbe über ihren Hinweis. */
+{
+  const REGION = /Schweiz|schweizerisch|Österreich|österreichisch|Süddeutschland|süddeutsch|südwestdeutsch|Liechtenstein|Standardvariante/;
+  const RAHMEN = /überregional|in Deutschland|Hausarbeit|geschriebenen Text|standardsprachlich|sichere Form/i;
+  const OFFEN_ERLAUBT = {
+    g05: "fragt nach der Varianz selbst („Was gilt für … und …?“)",
+    g25: "die Region betrifft „heute Früh“, nicht den Ablenker „heute abend“",
+    t16: "die Region betrifft „nachhause“, nicht den Ablenker „nach hause“",
+    z14: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
+    x11: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
+    d17: "Ablenker „dem Regens“ ist in keiner Region richtig — Artikel und Endung passen nicht zusammen",
+    d18: "Ablenker „die Sitzung“ ist Akkusativ, den nirgends jemand nach „während“ setzt",
+  };
+  const FALL_ERLAUBT = {
+    "während": "Ablenker im Akkusativ („den Vortrag“), nicht der regionale Dativ",
+    "trotz": "Ablenker im Akkusativ („den Rückstand“), nicht der regionale Dativ",
+    "statt / anstatt": "Ablenker im Nominativ („der Vortrag“) — ein Akkusativ wäre nach der Konjunktion „statt“ womöglich richtig",
+    "anrufen": "Der Dativ ist südwestdeutsch umgangssprachlich und schweizerisch; die App trainiert die in Deutschland übliche Form, der Hinweis ordnet ein",
+    "nach (Richtung)": "die Region betrifft „nach dem Bäcker“, nicht den Ablenker „zu Italien“",
+    "auf (Richtung)": "die Region betrifft „auf die Post / zur Post“, nicht den Ablenker „dem Markt“",
+    "liegen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
+    "stehen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
+    "sitzen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
+    "hängen (hing) — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
+  };
+  const offen = i => i.t !== "fill" && REGION.test(nurText(i.e)) && !RAHMEN.test(nurText(i.q));
+  const offenUe = ALL.filter(offen).map(i => i.id);
+  const neuUe = offenUe.filter(id => !(id in OFFEN_ERLAUBT));
+  P.ok("Keine regionale Standardvariante als ungerahmter Ablenker (" + offenUe.length + " begründet)",
+    !neuUe.length, neuUe.join(", "));
+  const regFall = CASEREF.filter(e => e.s && REGION.test(e.n || "")).map(e => e.w);
+  const neuFall = regFall.filter(w => !(w in FALL_ERLAUBT));
+  P.ok("… und keine Fallkarte mit regionalem Hinweis ohne Begründung (" + regFall.length + ")",
+    !neuFall.length, neuFall.join(", "));
+  const tot = Object.keys(OFFEN_ERLAUBT).filter(id => !offenUe.includes(id))
+    .concat(Object.keys(FALL_ERLAUBT).filter(w => !regFall.includes(w)));
+  P.ok("… und keine Erlaubnis für eine Stelle, die es so nicht mehr gibt", !tot.length, tot.join(", "));
+  /* Positivprobe: m03 vor dem 22.09.2026 */
+  P.ok("… und die Prüfung erkennt die alte Fassung von m03",
+    offen({ q: "Welche Form ist richtig?", e: "trotz + Genitiv. In der Schweiz, in Österreich und teilweise in Süddeutschland ist der Dativ auch mit Artikel verbreitet." }),
+    "Positivprobe blieb stumm");
+}
 
 P.titel("M · Wortkarten, die sich selbst widersprechen");
 /* Elf Wortkarten bauen ihre Bedeutung nach dem Muster „… — statt: X, Y“: X und Y sind die

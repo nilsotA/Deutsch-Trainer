@@ -315,11 +315,25 @@
   ]
  },
  {
+  "satz": "der Wievielte, zum wievielten Mal, wievielmal (= wie oft).",
+  "stellen": [
+   "Übung t03",
+   "Übung v01"
+  ]
+ },
+ {
   "satz": "Die Frage in der Mitte ist entscheidend:",
   "stellen": [
    "Baustein ph42",
    "Regel form-eltern",
    "Übung f47"
+  ]
+ },
+ {
+  "satz": "die Herkunft ist umstritten, an der Empfehlung ändert das nichts.",
+  "stellen": [
+   "Übung m13",
+   "Übung q17"
   ]
  },
  {
@@ -373,13 +387,6 @@
   ]
  },
  {
-  "satz": "Eine Zusage enthält was und bis wann .",
-  "stellen": [
-   "Baustein ph26",
-   "Regel form-zusagen"
-  ]
- },
- {
   "satz": "Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich:",
   "stellen": [
    "Vorher/Nachher pr21",
@@ -399,7 +406,8 @@
   "stellen": [
    "Prüfmuster x01",
    "Prüfmuster x02",
-   "Übung d18"
+   "Übung d18",
+   "Übung m03"
   ]
  },
  {
@@ -459,6 +467,13 @@
    "Baustein ph08",
    "Regel form-feedback",
    "Übung f10"
+  ]
+ },
+ {
+  "satz": "Je förmlicher die Lage, desto eher gehört der Dank für die Anfrage davor;",
+  "stellen": [
+   "Baustein ph09",
+   "Übung f11"
   ]
  },
  {
@@ -703,6 +718,7 @@
   "satz": "Welche Fassung gehört in einen geschriebenen Text?",
   "stellen": [
    "Übung d25",
+   "Übung m24",
    "Übung z02"
   ]
  },
@@ -721,6 +737,13 @@
   "stellen": [
    "Baustein ph04",
    "Übung f40"
+  ]
+ },
+ {
+  "satz": "Wer eine Aufgabe übernimmt, nennt was und bis wann .",
+  "stellen": [
+   "Baustein ph26",
+   "Regel form-zusagen"
   ]
  },
  {
@@ -750,6 +773,14 @@
   "stellen": [
    "Übung g20",
    "Übung q15"
+  ]
+ },
+ {
+  "satz": "Zusammen schreibt man die daraus gebildeten Wörter:",
+  "stellen": [
+   "Regel getrennt-praep",
+   "Übung t03",
+   "Übung v01"
   ]
  },
  {

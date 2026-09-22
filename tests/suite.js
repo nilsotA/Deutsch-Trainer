@@ -233,6 +233,7 @@ P.ok("Antwortangaben gültig", schief === 0, schief);
 }
 
 let fehlmark = 0, dopmark = 0;
+const mitFehlt = [];
 KORREKTUR.forEach(t => {
   const tk = t.txt.split(/\s+/), belegt = {};
   t.errs.forEach(e => {
@@ -242,10 +243,20 @@ KORREKTUR.forEach(t => {
     if (idx < 0) fehlmark++;
     if (belegt[idx]) dopmark++;
     belegt[idx] = 1;
+    /* Die weiteren Wörter einer Stelle (mit) sucht korrErrIdx() ab dem Wort in w. Steht
+       eins nicht dahinter, ist es unanklickbar — und ein Klick darauf zählt als unnötig. */
+    if (idx >= 0) (e.mit || []).forEach(m => {
+      let j = -1;
+      for (let i = idx + 1; i < tk.length; i++) if (tk[i] === m && !belegt[i]) { j = i; break; }
+      if (j < 0) mitFehlt.push(t.id + ": „" + m + "“ nach „" + e.w + "“");
+      else belegt[j] = 1;
+    });
   });
 });
 P.ok("Korrekturmarkierungen auffindbar (" + KORREKTUR.reduce((a, t) => a + t.errs.length, 0) + ")",
   fehlmark === 0 && dopmark === 0, fehlmark + " nicht gefunden / " + dopmark + " doppelt");
+P.ok("Jedes weitere Wort einer mehrteiligen Stelle steht hinter ihrem ersten Wort",
+  !mitFehlt.length, mitFehlt.join(" · "));
 
 /* Jede Markierung ist antippbar und führt in die Regel. Zeigt ihr Verweis ins Leere,
    landet Nils nirgends — und eine Markierung, deren Kategorie nicht zur verwiesenen Regel
@@ -325,6 +336,15 @@ P.titel("B · Formulierung");
 const POS = /\b(Fassung [ABC]\b|Option [ABC]\b|die (erste|zweite|dritte) (Fassung|Variante|Version|Option|Antwort))/i;
 const posL = ALL.filter(i => POS.test(strip(i.q)) || POS.test(strip(i.e)));
 P.ok("Keine Positionsverweise", !posL.length, posL.map(i => i.id).join(","));
+/* Dieselbe Klasse in der Erklärung, mit anderem Wort: z07 schloss mit „Neutral ist die
+   Fassung oben“. exQuestion() mischt die Optionen täglich — an rund der Hälfte der Tage
+   zeigte „oben“ auf die markierte Stellung, und vorgelesen gibt es gar kein Oben. POS kannte
+   nur „Fassung A“ und „die erste Fassung“, SICHT las nur die Frage. */
+const OBEN = /\b(?:Fassung|Option|Antwort|Variante|Version|Satz)\s+(?:oben|unten)\b|\b(?:obere|untere|obige)n?\s+(?:Fassung|Option|Antwort|Variante|Version)\b/i;
+const obenL = ALL.filter(i => OBEN.test(strip(i.e)) || OBEN.test(strip(i.q)));
+P.ok("Keine Erklärung zeigt auf eine Position oben oder unten", !obenL.length, obenL.map(i => i.id).join(","));
+P.ok("… und die Prüfung erkennt die alte Fassung von z07",
+  OBEN.test("Die andere Reihenfolge ist nicht falsch, aber markiert. Neutral ist die Fassung oben."), "Positivprobe blieb stumm");
 
 const RUECK = /^(und |auch |noch )|^(hier|dasselbe|genauso)\b|\b(und hier|wie eben|wie oben|siehe oben|dieselbe regel|vorige aufgabe)\b/i;
 const rueckL = ALL.filter(i => RUECK.test(strip(i.q).trim()));
@@ -2172,6 +2192,39 @@ P.titel("G · Bedienung ohne Maus");
   woerter[1].dispatchEvent(taste("Enter"));
   P.ok("Enter nimmt die Markierung zurück",
     !woerter[1].classList.contains("sel") && woerter[1].getAttribute("aria-checked") === "false");
+
+  /* Fehlerklasse „eine Stelle aus mehreren Wörtern wird nur an einem erkannt“: In kt04
+     steht „vielleicht eventuell“, markiert war nur „vielleicht“. Wer „eventuell“ anklickte,
+     hatte die Doppelung erkannt, bekam aber „1 Markierung war unnötig“ und die Stelle als
+     übersehen ins Fehlerjournal. Geprüft am gerenderten Ergebnis, nicht an korrErrIdx(). */
+  {
+    const w4 = boot(null), d4 = w4.document;
+    const kt = daten(w4, 'KORREKTUR.find(x=>x.id==="kt04")');
+    w4.eval('go("schreiben"); WT.tab="korrektur"; renderSchreiben(); openKorr("kt04")');
+    const toks4 = [...d4.querySelectorAll("#ktText .tok")];
+    const ev = toks4.find(x => x.textContent === "eventuell");
+    P.ok("kt04 führt „eventuell“ als Teil der Stelle „vielleicht“",
+      !!ev && kt.errs.some(e => e.w === "vielleicht" && (e.mit || []).includes("eventuell")));
+    if (ev) ev.click();
+    d4.querySelector("#ktGo").click();
+    const kopf = d4.querySelector("#wSub h3");
+    P.ok("… und ein Klick auf „eventuell“ zählt als gefunden",
+      !!kopf && kopf.textContent.startsWith("1 von " + kt.errs.length), kopf && kopf.textContent);
+    P.ok("… nicht als unnötige Markierung",
+      ![...d4.querySelectorAll("#wSub p")].some(p => /unnötig/.test(p.textContent)) &&
+      !d4.querySelector("#ktText .tok.fp"));
+    P.ok("… und landet nicht als übersehen im Fehlerjournal",
+      !daten(w4, "(S.log||[]).map(x=>x.i)").includes("kt:kt04:vielleicht"),
+      daten(w4, "(S.log||[]).map(x=>x.i)").join(","));
+    /* Positivprobe: ein Klick daneben zählt weiter als unnötig. */
+    w4.eval('openKorr("kt04")');
+    const neben = [...d4.querySelectorAll("#ktText .tok")].find(x => x.textContent === "Klasse");
+    neben.click();
+    d4.querySelector("#ktGo").click();
+    P.ok("Ein Klick auf ein Wort außerhalb jeder Stelle zählt weiter als unnötig",
+      [...d4.querySelectorAll("#wSub p")].some(p => /1 Markierung war unnötig/.test(p.textContent)) &&
+      /^0 von/.test(d4.querySelector("#wSub h3").textContent), d4.querySelector("#wSub h3").textContent);
+  }
 
   /* Selbstcheck-Haken im Schreibimpuls */
   [...dd.querySelectorAll("#v-schreiben .sub")].find(b => /Schreibimpuls/.test(b.textContent)).click();
