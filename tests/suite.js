@@ -599,8 +599,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const ABS_ERLAUBT = {
     "Oberfläche und hast noch nie": "„… und hast noch nie gesichert“ beschreibt den Lernstand, keine Sprachregel",
     "Regel gram-kasus":  "„über beim Thema immer Akkusativ“ und „vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
-    "Regel gram-wechsel": "dieselbe Aussage über Themen mit „über“",
-    "Satzkarte sa16":     "Satzkarte zu gram-wechsel, trägt denselben Satz",
     "Regel satz-klammer": "„Nie trennbar: be-, ge-, er-, ver-, zer-, ent-, emp-, miss-“ — diese Vorsilben trennen sich nicht ab; der Sonderfall miss- steht im Satz danach",
     "Satzkarte sa08":     "Satzkarte zu satz-klammer, trägt denselben Satz",
     "Prüfmuster x22":     "„Mit dem Akkusativ liegst du immer richtig“ — der Akkusativ ist in beiden Lesarten zulässig, das ist keine verschwiegene Ausnahme",

@@ -59,6 +59,33 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Grammatik- und Satzregeln ohne Quelle gelesen (23.09.2026, zweiunddreißigste Runde).**
+
+Die 17 `gram-` und `satz-`Regeln ohne Quellenangabe, diesmal Satz für Satz selbst gelesen statt
+über Prüfer. Die Runde vom 16.09. hatte sie „gelesen und ohne Befund“ gemeldet; sechs Stellen
+hielten trotzdem nicht:
+
+- **Doppeltes „würde“ in `satz-sprechen` (sa18) und Spickzettel 8:** stand unter „Fällt auf“,
+  rot markiert neben echten Fehlern. grammis (IDS, „Würde-Formen“): Die würde-Form hält im
+  Gebrauch den ersten Platz, im irrealen Bedingungsgefüge gesprochen besonders. Jetzt unter
+  „unauffällig“ mit dem Rat fürs Schreiben. Grundsatz 3 in eigener Sache.
+- **Genitiv-Probe in `gram-kasusfinden`:** „Wessen Rad? → seines, ihres“ — die Antwort „Seines.“
+  ist ein Possessivpronomen im Nominativ, kein Genitiv. Jetzt „des Trainers, meiner Schwester“.
+- **Verwechslungspaare in `gram-akkverben`:** „gleiche Bedeutung“ über folgen/verfolgen und
+  glauben/glauben an. Jetzt „verwandte Verben“, mit den beiden Unterschieden.
+- **`gram-wechsel`:** „Bei Themen immer Akkusativ“ ohne „über“ davor — las sich wie eine Regel für
+  alle neun Präpositionen („Angst vor dem Spiel“ ist Dativ).
+- **Relatives „wo“ (`gram-relkasus`, n35, y10):** „Süddeutschland und Teile des Westens, sehr
+  üblich“. Belegt ist: alemannisch, schwäbisch, fränkisch, mittelhessisch, teils bairisch. Jetzt
+  „im Süden und in Teilen Hessens verbreitet“, an allen drei Stellen.
+- **`gram-genalltag`:** „Der Genitiv verschwindet“ → „ist seltener geworden“; der nachgestellte
+  Genitiv bei Eigennamen hieß „stilistisch schwächer und gehobener“ — jetzt nur „gehoben“.
+- **sa06:** „Zwei Substantive → Dativ zuerst“ → „in der Regel“.
+
+Keine richtige Antwort geändert, `NEU_GELERNT` unberührt. `tests/inhalt.js`, Abschnitt K prüft
+jetzt, dass das doppelte „würde“ in keiner der beiden „Fällt auf“-Listen steht; zwei Einträge der
+Absolutliste (`gram-wechsel`, sa16) meldete der Wächter als verwaist und sind entfernt.
+
 **Die Rechtschreibfallen gelesen (23.09.2026, einunddreißigste Runde).**
 
 Vier der fünf `recht-`Regeln nannten keine Quelle. Gelesen und über die Websuche nachgeschlagen:

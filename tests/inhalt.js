@@ -478,7 +478,7 @@ const EINORDNUNG = [
     stellen: [["Regel", "satz-perfekt"], ["Übung", "z14"], ["Übung", "x11"]] },
   /* „wo“ als Relativpronomen: Regel und Übung nannten die Landkarte, das Prüfmuster sagte
      nur „regional“. Seit dem 14.09.2026 steht die Einordnung auch dort. */
-  { was: "wo als Relativpronomen", muss: [/Süddeutschland/, /Westens/, /nicht/],
+  { was: "wo als Relativpronomen", muss: [/Süden/, /Hessens/, /nicht/],
     stellen: [["Übung", "n35"], ["Prüfmuster", "y10"], ["Regel", "gram-relkasus"]] },
   /* „anrufen“ mit Dativ: an sieben Stellen eingeordnet, nur in der Regel gram-akkverben
      stand bis zum 15.09.2026 ein nacktes „(nicht: dir)“ in der Klasse .nope — also optisch
@@ -676,10 +676,17 @@ const spickSpalten = (() => {
     .map(d => [...d.querySelectorAll("li")].map(li => li.textContent).join(" · "));
 })();
 /* Stichwörter je Spalte, in der Reihenfolge der Listen: erst unauffällig, dann fällt auf. */
+/* Das doppelte „würde“ stand bis zum 23.09.2026 unter „Fällt auf“. grammis (IDS) nennt die
+   würde-Form im irrealen Bedingungsgefüge gesprochen die vorherrschende — auffällig ist
+   dort eher die eigene Form. Sie steht jetzt in der ersten Liste, mit dem Rat fürs Schreiben. */
 const SPRECH_STICH = [
-  ["wegen dem Wetter", "Perfekt", "weil", "hab", "gestanden", "brauchen", "gehabt"],
-  ["rufe dir an", "größer wie", "mit was", "Kollege", "würde", "Relativpronomen", "Satzabbruch", "Satzklammer"],
+  ["wegen dem Wetter", "Perfekt", "weil", "hab", "gestanden", "brauchen", "gehabt", "würde"],
+  ["rufe dir an", "größer wie", "mit was", "Kollege", "Relativpronomen", "Satzabbruch", "Satzklammer"],
 ];
+/* Und es steht nicht in beiden: Die Stichwortprüfung sucht nur, ob etwas da ist. */
+const wuerdeDoppelt = [sprechListen[1], spickSpalten && spickSpalten[1]]
+  .filter(x => x && x.includes("würde"));
+P.ok("Das doppelte „würde“ steht nicht mehr unter „Fällt auf“", !wuerdeDoppelt.length, wuerdeDoppelt.join(" · "));
 const sprechSchief = [];
 if (!spickSpalten || spickSpalten.length !== 2 || sprechListen.length !== 2) {
   sprechSchief.push("Listen nicht gefunden: Regel " + sprechListen.length + ", Spickzettel " +
