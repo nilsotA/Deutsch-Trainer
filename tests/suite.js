@@ -541,6 +541,60 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   P.ok("… und schweigt bei einem Satz ohne Rangformel", leer.size === 0, "Gegenprobe schlug an");
 }
 
+/* Fehlerklasse „Die Liste passt nicht zu ihrer Überschrift“. Die Satzkarte sa14 führte unter
+   „Wörter auf -e für Personen und Tiere“ auch „Athlet“ — Nils lernt dort eine Endung als
+   Erkennungszeichen, und ein Wort ohne sie macht das Zeichen wertlos. Geprüft wird jede
+   Aufzählung hinter „auf -x …:“: Jedes einzelne Wort darin muss auf -x enden. Wortgruppen
+   („der Salat, des Salats“) und Klammern bleiben draußen. */
+{
+  const AUF = /auf\s+[„"]?-([a-zäöüß]+)[“"]?([^.:;]{0,60}):\s*([^.;:(—–]+)/g;
+  const unpassend = t => {
+    const raus = [];
+    for (const m of String(t).matchAll(AUF)) {
+      /* strip() macht aus dem Listenende nur ein Leerzeichen — die Liste endet deshalb am
+         ersten Eintrag, der kein einzelnes Wort ist („morgens Zusammen und groß“). */
+      for (const x of m[3].split(/,|·|\s+und\s+|\s+oder\s+/).map(x => x.trim())) {
+        if (!/^[A-Za-zÄÖÜäöüß]+$/.test(x)) break;
+        if (!x.toLowerCase().endsWith(m[1])) raus.push(x + " (unter -" + m[1] + ")");
+      }
+    }
+    return raus;
+  };
+  const listenSchief = [];
+  BESTAND.forEach(x => unpassend(x.t).forEach(f => listenSchief.push(x.sorte + " " + x.id + ": " + f)));
+  P.ok("Jede Liste unter „auf -x“ enthält nur Wörter auf -x", !listenSchief.length, listenSchief.join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Liste aus sa14",
+    unpassend("Wörter auf -e für Personen und Tiere: Kollege, Junge, Kunde, Zeuge, Experte, Athlet, Neffe, Löwe, Affe").join() === "Athlet (unter -e)",
+    "Positivprobe blieb stumm oder meldete zu viel");
+}
+
+/* Fehlerklasse „Die Tabelle kennt die Ausnahme nicht“, zum zweiten Mal. Erst fehlte in tb09
+   der Sonderfall Herr (dem Herrn), am 23.09.2026 dann Bauer: Regel gram-ndekl, Tabelle tb09
+   und Satzkarte sa14 führten „Bauer“ unter den Wörtern, die „-en“ bekommen — nur das
+   Prüfmuster x23 sagte, dass es überall „Bauern“ heißt. Wer die n-Deklination erklärt und
+   eines dieser Wörter nennt, zeigt auch seine Form. */
+{
+  /* „Herr<b>n</b>“ kommt aus strip() als „Herr n“ zurück — beides zählt. */
+  const SONDER = { Herr: /(?<![\wäöüßÄÖÜ])Herr ?n(?![\wäöüßÄÖÜ])/, Bauer: /(?<![\wäöüßÄÖÜ])Bauer ?n(?![\wäöüßÄÖÜ])/ };
+  const nDekl = t => /n-Deklination|schwache Maskulina/.test(t);
+  const ohneForm = t => Object.keys(SONDER).filter(wort =>
+    new RegExp("(?<![\\wäöüßÄÖÜ])" + wort + "(?![\\wäöüßÄÖÜ])").test(t) && !SONDER[wort].test(t));
+  /* Die Überschrift gehört zur Stelle: gram-ndekl und tb09 nennen die n-Deklination nur dort. */
+  const stellen = {};
+  BESTAND.forEach(x => { const id = x.sorte + " " + String(x.id).replace(/\.t$/, "");
+    stellen[id] = (stellen[id] || "") + " " + x.t; });
+  const sonderSchief = [];
+  /* Der Stand der Prüfung erzählt von den Funden und nennt die Wörter als Metasprache. */
+  delete stellen["Oberfläche Stand der Prüfung Rund"];
+  Object.entries(stellen).forEach(([id, t]) => { if (nDekl(t)) ohneForm(t).forEach(wort =>
+    sonderSchief.push(id + ": nennt " + wort + " ohne Sonderform")); });
+  P.ok("Wer die n-Deklination erklärt und Herr oder Bauer nennt, zeigt deren Form (" +
+    Object.keys(stellen).filter(id => nDekl(stellen[id])).length + " Stellen)", !sonderSchief.length, sonderSchief.join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Tabelle tb09",
+    ohneForm("n-Deklination Alles außer dem Nominativ Singular endet auf -en. Betroffen: Mensch, Herr, Bauer. Sonderfall: dem Herrn Weber.").join() === "Bauer",
+    "Positivprobe blieb stumm oder meldete zu viel");
+}
+
 /* Grundsatz 3: Stil ist keine Regel. Die Stilregeln stehen im Regelwerk neben den
    Kommaregeln und sehen genauso aus — wer dort „falsch“ liest, hält eine Empfehlung für
    einen Fehler. Am 15.09.2026 sagte stil-kollokation „Wer sie falsch kombiniert, klingt
@@ -697,7 +751,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      je … desto dazukam. Das Zwischenwort in (?:[\wäöüßÄÖÜ]+\s+)? fängt „die drei als Ausnahmen“.
      „eine Ausnahme“ allein bleibt draussen: „Eine Ausnahme ist X“ führt eine ein,
      statt den Vorrat zu beziffern. */
-  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+)?Ausnahmen)/gi;
+  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+)?(?:Ausnahmen|Sonderfälle|Sonderfällen))/gi;
   const ohneTags = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   const zaehlStellen = new Set();
   const zaehlSammle = (art, id, b) => {

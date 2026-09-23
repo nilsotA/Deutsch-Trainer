@@ -59,6 +59,30 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fallkarten und Tabellentexte gelesen (23.09.2026, dreiunddreißigste Runde).**
+
+Die 182 Fallkarten Feld für Feld und die Begleittexte der zehn Tabellen (die Formen selbst prüft
+das Paradigma, die Sätze darum herum niemand). Nachgeschlagen: „laut“ (Dativ gebräuchlicher,
+stimmt), „ab nächstem Montag“ (Dativ vom Duden empfohlen, stimmt), „weh tun“ (Duden-Variante
+neben „wehtun“ — der Kartenschlüssel „sich weh tun“ bleibt).
+
+- **Bauer in der n-Deklination:** `gram-ndekl`, `tb09` und sa14 sagten „-en“ und führten Bauer
+  in der Liste; es heißt überall „Bauern“ (nur -n). Nur x23 wusste es. Jetzt „-(e)n“ und Bauer
+  als Sonderfall an allen Stellen.
+- **„Zwei Sonderfälle:“** in `gram-ndekl`, `tb09`, n16 und x23 — gezählt und durch Bauer schon
+  überholt. Zählung raus; der Zählwächter kennt jetzt auch „Sonderfälle“.
+- **sa14:** „Athlet“ unter „Wörter auf -e“. Jetzt eigene Zeile mit Athlet und Bauer.
+- **m16:** „unsertwegen“ unter „auf -etwegen“ → „unseretwegen“ (beide korrekt, die Liste passt jetzt).
+- **tb06:** „ich“ und „du“ hießen die einzigen Zeilen, in denen man zwischen Akkusativ und Dativ
+  entscheiden muss — ihn/ihm, sie/ihr genauso; gleich sind nur uns und euch. Markiert bleiben
+  ich und du, jetzt mit dem richtigen Grund (dort wechselt auch das Reflexivpronomen).
+- **tb05:** Die Abweichung vom Artikel liegt nur im Genitiv Singular maskulin und neutral.
+- **Fallkarte gegenüber:** „bei Personen nachgestellt“ → bei Pronomen; bei Substantiven beides.
+
+Keine richtige Antwort geändert. **Zwei neue Prüfungen** in `tests/suite.js`: Eine Liste hinter
+„auf -x:“ enthält nur Wörter auf -x; wer die n-Deklination erklärt und Herr oder Bauer nennt,
+zeigt „Herrn“ bzw. „Bauern“. Gegen den alten Stand melden sie genau sa14, m16, gram-ndekl, tb09.
+
 **Die Grammatik- und Satzregeln ohne Quelle gelesen (23.09.2026, zweiunddreißigste Runde).**
 
 Die 17 `gram-` und `satz-`Regeln ohne Quellenangabe, diesmal Satz für Satz selbst gelesen statt
