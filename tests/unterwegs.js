@@ -303,6 +303,11 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     w.eval('go("heute")');
     d.querySelector("#startD").click();
     P.ok("Tagesaufgabe läuft in #dailyHost", daten(w, "Q.host.id") === "dailyHost");
+    /* Die Reihenfolge der Tagesaufgabe hängt am Datum. Am 30.09.2026 stand eine Tippaufgabe
+       vorn — ohne Antwortknöpfe und ohne ans —, und der Lauf brach bei DT_TAGE=7 ab, einen
+       Tag nachdem er grün war. Also zur ersten Auswahlfrage vorrücken, wie in Abschnitt G. */
+    w.eval('while(Q.i < Q.list.length - 1 && Q.list[Q.i].type === "fill") Q.i++; renderQ();');
+    P.ok("eine Auswahlfrage steht vorn", daten(w, "Q.list[Q.i].type") !== "fill", daten(w, "Q.list[Q.i].type"));
     P.ok("nur eine Frage steht auf dem Schirm", d.querySelectorAll(".qtext").length === 1,
       d.querySelectorAll(".qtext").length);
     /* Im Wirt der alten Runde darf keine Frage mit Antwortknöpfen stehen bleiben. Was
