@@ -115,21 +115,222 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
        600 ms später ungefragt übersprungen wurde. In einer Runde von zwanzig Karten
        kam so nur jede zweite dran, und das Rundenende meldete „10 von 20 richtig“,
        obwohl keine Antwort falsch war. */
-    const w = boot(leererStand({ auto: true, speak: true }));   // Vorlesen endet nicht von selbst
+    /* Beide Engines: WebKit (iPhone) meldet den Abbruch synchron als Fehler noch in
+       cancel(), Chromium später als Ende. Bis zum 23.09.2026 bildete der Stub nur Chromium
+       nach, und der Schutz in check() versagte auf dem iPhone unbemerkt. */
+    for (const [engine, opt] of [["WebKit", {}], ["Chromium", { abbruchAsynchron: true }]]) {
+      const w = boot(leererStand({ auto: true, speak: true }), opt);   // Vorlesen endet nicht von selbst
+      const d = w.document;
+      d.querySelector("#wkNew").click();
+      const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
+      tippe(w, d.querySelectorAll(".opt")[vor.ans]);
+      d.querySelector("#nextBtn").click();          // weitertippen, statt zuzuhören
+      await schlaf(60);                             // dem gemeldeten Satzende Zeit geben
+      P.ok(engine + ": Weitertippen armiert die Automatik nicht auf der neuen Frage",
+        !d.body.classList.contains("autolauf"));
+      const jetzt = daten(w, "Q.i");
+      await schlaf(900);                            // länger als die 600 ms der Automatik
+      P.ok(engine + ": die neue Frage wird nicht übersprungen", daten(w, "Q.i") === jetzt,
+        "aus Frage " + jetzt + " wurde " + daten(w, "Q.i"));
+      P.ok(engine + ": und sie ist noch unbeantwortet",
+        d.querySelectorAll(".opt.right,.opt.wrong").length === 0);
+    }
+  }
+  {
+    /* Fehlerklasse „ein Tipp hält die Automatik nicht an, solange vorgelesen wird“: Mit
+       Vorlesen entsteht der Timer erst am Satzende. Ein Tipp während der Erklärung fand
+       nichts zum Anhalten, der Horcher war danach verbraucht — und am Satzende ging es
+       trotzdem weiter. Die Zusage „Abbrechen per Tipp“ galt im Hauptfall nicht. */
+    const w = boot(leererStand({ auto: true, speak: true }));
     const d = w.document;
     d.querySelector("#wkNew").click();
     const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
     tippe(w, d.querySelectorAll(".opt")[vor.ans]);
-    d.querySelector("#nextBtn").click();          // weitertippen, statt zuzuhören
-    await schlaf(60);                             // dem gemeldeten Satzende Zeit geben
-    P.ok("Weitertippen armiert die Automatik nicht auf der neuen Frage",
-      !d.body.classList.contains("autolauf"));
-    const jetzt = daten(w, "Q.i");
-    await schlaf(900);                            // länger als die 600 ms der Automatik
-    P.ok("die neue Frage wird nicht übersprungen", daten(w, "Q.i") === jetzt,
-      "aus Frage " + jetzt + " wurde " + daten(w, "Q.i"));
-    P.ok("und sie ist noch unbeantwortet",
-      d.querySelectorAll(".opt.right,.opt.wrong").length === 0);
+    d.querySelector(".qtext").dispatchEvent(new w.Event("pointerdown", { bubbles: true }));
+    w.__sprichZuEnde();
+    await schlaf(900);
+    P.ok("ein Tipp während der Erklärung hält die Automatik an", daten(w, "Q.i") === vor.i &&
+      !d.body.classList.contains("autolauf"), daten(w, "Q.i"));
+    /* Gegenprobe: ohne Tipp geht es nach dem Satzende weiter. */
+    const w2 = boot(leererStand({ auto: true, speak: true }));
+    const d2 = w2.document;
+    d2.querySelector("#wkNew").click();
+    const vor2 = daten(w2, "({i:Q.i, ans:Q.list[Q.i].ans})");
+    tippe(w2, d2.querySelectorAll(".opt")[vor2.ans]);
+    w2.__sprichZuEnde();
+    await schlaf(900);
+    P.ok("… ohne Tipp geht es nach dem Satzende weiter", daten(w2, "Q.i") === vor2.i + 1, daten(w2, "Q.i"));
+  }
+  {
+    /* Noch einmal hören: unten im Daumenbereich, spricht die Erklärung, schaltet nicht weiter. */
+    const w = boot(leererStand({ auto: true, speak: true }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
+    tippe(w, d.querySelectorAll(".opt")[vor.ans]);
+    const nochmal = d.querySelector(".walkbar #sayAgain");
+    P.ok("mit Vorlesen steht „noch einmal hören“ in der Leiste unten", !!nochmal &&
+      /noch einmal/.test(nochmal.getAttribute("aria-label") || ""));
+    const vorher = w.__gesagt.length;
+    nochmal.dispatchEvent(new w.Event("pointerdown", { bubbles: true }));
+    nochmal.click();
+    P.ok("… und liest die Erklärung noch einmal vor", w.__gesagt.length === vorher + 1 &&
+      /^Richtig\./.test(w.__gesagt[w.__gesagt.length - 1]), w.__gesagt[w.__gesagt.length - 1]);
+    w.__sprichZuEnde();
+    await schlaf(900);
+    P.ok("… ohne danach weiterzuschalten", daten(w, "Q.i") === vor.i, daten(w, "Q.i"));
+    const w2 = boot(leererStand({ auto: false, speak: false }));
+    w2.document.querySelector("#wkNew").click();
+    const a2 = daten(w2, "Q.list[Q.i].ans");
+    tippe(w2, w2.document.querySelectorAll(".opt")[a2]);
+    const sa2 = () => w2.document.querySelector("#sayAgain");
+    P.ok("ohne Vorlesen ist der Knopf ausgeblendet", !sa2() || sa2().hidden);
+    /* Er folgt dem 🔊-Schalter oben: Vorher stand er nach dem Ausschalten weiter da und tat
+       nichts, und nach dem Einschalten fehlte er. */
+    w2.document.querySelector("#walkSpeak").click();
+    P.ok("… nach dem Einschalten von 🔊 erscheint er", !!sa2() && !sa2().hidden);
+    w2.document.querySelector("#walkSpeak").click();
+    P.ok("… nach dem Ausschalten verschwindet er wieder", !!sa2() && sa2().hidden);
+  }
+  {
+    /* Ein gesperrter Tipp auf „Weiter“ verbrauchte den Stopp-Horcher ({once:true}): Danach
+       hielt kein Tipp die Automatik mehr an. Und „Beenden“ ließ die Automatik-Uhr laufen,
+       die dann auf Q = null traf. */
+    for (const speak of [false, true]) {
+      const w = boot(leererStand({ auto: true, speak }), { sprichSofortZuEnde: true });
+      const d = w.document;
+      const fehler = []; w.addEventListener("error", e => fehler.push(e.message || String(e.error)));
+      d.querySelector("#wkNew").click();
+      const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
+      tippe(w, d.querySelectorAll(".opt")[vor.ans]);
+      w.eval("Q.weiterAb = Date.now() + 700");
+      const nb = d.querySelector("#nextBtn");
+      nb.dispatchEvent(new w.Event("pointerdown", { bubbles: true }));
+      nb.click();
+      P.ok((speak ? "mit" : "ohne") + " Vorlesen: der gesperrte Tipp auf „Weiter“ schaltet nicht weiter", daten(w, "Q.i") === vor.i);
+      d.querySelector("#fbHost").dispatchEvent(new w.Event("pointerdown", { bubbles: true }));
+      await schlaf(2600);
+      P.ok((speak ? "mit" : "ohne") + " Vorlesen: … und ein Tipp danach hält die Automatik trotzdem an", daten(w, "Q.i") === vor.i, daten(w, "Q.i"));
+      const w2 = boot(leererStand({ auto: true, speak }), { sprichSofortZuEnde: true });
+      const f2 = []; w2.addEventListener("error", e => f2.push(e.message || String(e.error)));
+      w2.document.querySelector("#wkNew").click();
+      const a2 = daten(w2, "Q.list[Q.i].ans");
+      tippe(w2, w2.document.querySelectorAll(".opt")[a2]);
+      w2.document.querySelector("#walkOut").click();
+      await schlaf(2600);
+      P.ok((speak ? "mit" : "ohne") + " Vorlesen: „Beenden“ nach richtiger Antwort hinterlässt keine laufende Automatik",
+        !f2.length && daten(w2, "Q === null"), f2.join(" | "));
+    }
+  }
+  {
+    /* Beenden während der vorgelesenen Erklärung: Unter WebKit meldet cancel() den Abbruch
+       synchron, der alte Rückruf armierte die Automatik, und 600 ms später lief next() auf
+       Q = null — TypeError. */
+    const w = boot(leererStand({ auto: true, speak: true }));
+    const d = w.document;
+    const fehler = [];
+    w.addEventListener("error", e => fehler.push(e.message));
+    d.querySelector("#wkNew").click();
+    const a = daten(w, "Q.list[Q.i].ans");
+    tippe(w, d.querySelectorAll(".opt")[a]);
+    d.querySelector("#walkOut").click();
+    await schlaf(900);
+    P.ok("Beenden während der Erklärung: kein Skriptfehler, die Runde ist zu",
+      !fehler.length && daten(w, "Q === null"), fehler.join(" | "));
+  }
+  {
+    /* Weiter-Sperre, solange die App nach der Antwort selbst scrollt. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const vor = daten(w, "({i:Q.i, ans:Q.list[Q.i].ans})");
+    tippe(w, d.querySelectorAll(".opt")[vor.ans === 0 ? 1 : 0]);
+    w.eval("Q.weiterAb = Date.now() + 700");
+    d.querySelector("#nextBtn").click();
+    P.ok("während des Bildlaufs zählt ein Tipp auf „Weiter“ nicht", daten(w, "Q.i") === vor.i);
+    w.eval("Q.weiterAb = 0");
+    d.querySelector("#nextBtn").click();
+    P.ok("… danach schon", daten(w, "Q.i") === vor.i + 1);
+    /* Die Sperre am Tor vorbei setzen und direkt weiterschalten: Erbt die neue Frage sie? */
+    w.eval("Q.weiterAb = Date.now() + 5000; next()");
+    P.ok("die neue Frage hat die Sperre nicht geerbt", daten(w, "Q.weiterAb") === 0, daten(w, "Q.weiterAb"));
+  }
+  {
+    /* Die Sperre über den echten Weg: jsdom rechnet kein Layout, zeigeRueckmeldung() hielt
+       die Rückmeldung deshalb für „schon im Bild“, und die Zeile, die die Sperre setzt, lief
+       in keinem Prüflauf. Hier liegt alles unter der Falzkante. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    w.eval('startQuiz([exQuestion(ALL.find(i => i.t !== "fill" && ruleById(i.r)))], $("#walkHost"), {walk:true})');
+    w.eval("window.__regel = 0; openRule = function(){ window.__regel++; }");
+    w.HTMLElement.prototype.getBoundingClientRect = () => ({ top: 900, bottom: 960, left: 0, right: 100, width: 100, height: 60 });
+    const ans = daten(w, "Q.list[Q.i].ans");
+    tippe(w, d.querySelectorAll(".opt")[ans === 0 ? 1 : 0]);
+    P.ok("liegt die Rückmeldung unter der Falzkante, setzt der Bildlauf die Sperre", daten(w, "Q.weiterAb > Date.now()"), daten(w, "Q.weiterAb"));
+    d.querySelector("#nextBtn").click();
+    const lnk = d.querySelector("#fbHost [data-rule]");
+    P.ok("(die Rückmeldung hat einen Regel-Link)", !!lnk);
+    /* Als Ereignis, nicht über click(): tests/setup.js ersetzt HTMLAnchorElement.click für
+       den Download-Anker durch eine leere Funktion — ein Link-Klick liefe ins Leere, und die
+       Zusicherung darunter wäre stumm grün. */
+    const linkTipp = () => lnk && lnk.dispatchEvent(new w.MouseEvent("click", { bubbles: true, cancelable: true }));
+    linkTipp();
+    P.ok("… ein sofortiger Tipp auf „Weiter“ zählt nicht", daten(w, "Q.i") === 0 && !daten(w, "!!Q.done"));
+    P.ok("… einer auf den Regel-Link auch nicht", daten(w, "__regel") === 0, daten(w, "__regel"));
+    await schlaf(750);
+    linkTipp();
+    P.ok("nach Ablauf öffnet der Regel-Link", daten(w, "__regel") === 1, daten(w, "__regel"));
+    /* Gegenprobe: Liegt alles im Bild, gibt es keine Sperre. */
+    const w2 = boot(leererStand({ auto: false }));
+    w2.eval('startQuiz([exQuestion(ALL.find(i => i.t !== "fill")), exQuestion(ALL.filter(i => i.t !== "fill")[1])], $("#walkHost"), {walk:true})');
+    const a2 = daten(w2, "Q.list[Q.i].ans");
+    tippe(w2, w2.document.querySelectorAll(".opt")[a2 === 0 ? 1 : 0]);
+    P.ok("steht die Rückmeldung im Bild, bleibt „Weiter“ frei", daten(w2, "Q.weiterAb") === 0);
+    w2.document.querySelector("#nextBtn").click();
+    P.ok("… und der Tipp zählt sofort", daten(w2, "Q.i") === 1);
+  }
+  {
+    /* Live-Region vor dem Inhalt; Fokus auf die neue Frage; Toast als Live-Region. */
+    const w = boot(leererStand({ auto: false, speak: false }));
+    const d = w.document;
+    d.querySelector("#wkNew").click();
+    const fb = d.querySelector("#fbHost");
+    P.ok("die Rückmeldung ist schon vor der Antwort eine Live-Region",
+      fb && fb.getAttribute("role") === "status" && fb.getAttribute("aria-live") === "polite" && fb.textContent === "",
+      fb && fb.outerHTML.slice(0, 80));
+    const a = daten(w, "Q.list[Q.i].ans");
+    tippe(w, d.querySelectorAll(".opt")[a]);
+    d.querySelector("#nextBtn").focus();
+    d.querySelector("#nextBtn").click();
+    P.ok("nach „Weiter“ steht der Fokus auf der neuen Frage",
+      d.activeElement && d.activeElement.classList.contains("qtext"),
+      d.activeElement && (d.activeElement.id || d.activeElement.className));
+    /* Die Ansage liegt in einer eigenen, dauerhaft vorhandenen Region: Die sichtbare Pille ist
+       im Ruhezustand visibility:hidden und damit nicht im Baum — eine Region, die erst mit
+       ihrem Text erscheint, sagt VoiceOver nicht verlässlich an. */
+    const t = d.querySelector("#toastSr");
+    P.ok("die Hinweiszeile hat eine Live-Region, die dauerhaft im Baum steht", !!t && t.getAttribute("role") === "status" &&
+      t.getAttribute("aria-live") === "polite" && w.getComputedStyle(t).visibility !== "hidden" && w.getComputedStyle(t).display !== "none");
+    P.ok("… die Pille selbst ist für Screenreader ausgeblendet", d.querySelector("#toast").getAttribute("aria-hidden") === "true");
+    w.eval('toast("Runde gemerkt")');
+    P.ok("… und toast() schreibt in die Region", t.textContent === "Runde gemerkt", t.textContent);
+    const ws = boot(leererStand({ auto: false, speak: true }));
+    ws.document.querySelector("#wkNew").click();
+    const live = () => ws.document.querySelector("#fbHost").getAttribute("aria-live");
+    P.ok("spricht die App selbst, bleibt die Region still", live() === "off");
+    ws.document.querySelector("#walkSpeak").click();
+    P.ok("… schaltet Nils 🔊 aus, meldet sie wieder", live() === "polite", live());
+    ws.document.querySelector("#walkSpeak").click();
+    P.ok("… und wieder an: still", live() === "off", live());
+    /* Außerhalb des Unterwegs-Modus liest die App keine Rückmeldung vor. Gesetzt wird die
+       Region zweimal — in renderQ() und in check() nach dem Einfügen —, geprüft beide. */
+    const wd = boot(leererStand({ auto: false, speak: true }));
+    wd.eval('go("heute"); startQuiz([exQuestion(ALL.find(i => i.t !== "fill"))], $("#dailyHost"), {title:"Probe"})');
+    P.ok("in einer Runde auf „Heute“ spricht die App nicht — dort meldet die Region trotz 🔊",
+      wd.document.querySelector("#fbHost").getAttribute("aria-live") === "polite");
+    tippe(wd, wd.document.querySelectorAll("#dailyHost .opt")[0]);
+    P.ok("… auch nach der Antwort", wd.document.querySelector("#fbHost").getAttribute("aria-live") === "polite" &&
+      wd.document.querySelector("#fbHost").textContent.length > 0, wd.document.querySelector("#fbHost").getAttribute("aria-live"));
   }
   {
     const w = boot(leererStand({ auto: false }));
@@ -168,9 +369,26 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("Fehler nach Regel gebündelt", zeilen.length > 0 && zeilen.length <= 4, zeilen.length);
     P.ok("jede Zeile mit Titel und Anzahl", zeilen.every(z => /\d+×/.test(z.textContent) && z.textContent.length > 4));
     if (zeilen.length) {
+      /* Seit dem 23.09.2026 klappt die Regel in der Auswertung auf, statt ins Regelwerk zu
+         springen. Der Sprung verwarf die Auswertung, und für die zweite und dritte Regel
+         gab es keinen Rückweg — in der Home-Bildschirm-App gibt es keinen Zurück-Knopf. */
+      const regel = daten(w, "ruleById(" + JSON.stringify(zeilen[0].dataset.rule) + ").t");
       zeilen[0].click();
-      P.ok("Antippen öffnet die Regel", !!d.querySelector(".acc.open"));
-      P.ok("Unterwegs-Modus danach beendet", !d.body.classList.contains("walk"));
+      const offen = zeilen[0].nextElementSibling;
+      P.ok("Antippen klappt die Regel in der Auswertung auf",
+        !!offen && offen.classList.contains("fehlerregel") && offen.textContent.length > 40, regel);
+      P.ok("… und sagt es an (aria-expanded)", zeilen[0].getAttribute("aria-expanded") === "true");
+      P.ok("die Auswertung bleibt stehen, der Unterwegs-Modus auch",
+        /richtig/.test(host.textContent) && d.body.classList.contains("walk") && !!d.querySelector("#wkAgain"));
+      if (zeilen[1]) {
+        zeilen[1].click();
+        P.ok("eine zweite Regel lässt sich daneben aufklappen",
+          d.querySelectorAll("#walkHost .fehlerregel").length === 2);
+      }
+      zeilen[0].click();
+      P.ok("ein zweiter Tipp klappt sie wieder zu",
+        !(zeilen[0].nextElementSibling && zeilen[0].nextElementSibling.classList.contains("fehlerregel")) &&
+        zeilen[0].getAttribute("aria-expanded") === "false");
     }
   }
   {

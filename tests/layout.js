@@ -173,6 +173,57 @@ function messen(W) {
     await ctx.close();
   }
 
+  P.titel("D · Querformat mit Notch");
+  {
+    /* viewport-fit=cover legt quer gehalten den Inhalt bis unter Notch oder Dynamic Island.
+       Vorher begannen Text und Knöpfe bei 852×393 rund 34 px vom Rand, der Einzug ist 59 px.
+       Chromium stellt die Einzüge über CDP nach; ohne diese Schnittstelle übersprungen. */
+    const E = 59;
+    const ctx = await b.newContext({ viewport: { width: 852, height: 393 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage();
+    const cdp = await ctx.newCDPSession(p);
+    let geht = true;
+    try { await cdp.send("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, left: E, bottom: 21, right: E } }); }
+    catch (e) { geht = false; }
+    if (!geht) P.info("Querformat übersprungen: Emulation.setSafeAreaInsetsOverride fehlt in diesem Chromium.");
+    else {
+      await p.goto(APP);
+      await p.waitForTimeout(200);
+      const rand = () => {
+        const W = innerWidth; let links = Infinity, rechts = Infinity, wer = "";
+        document.querySelectorAll("body *").forEach(el => {
+          const s = getComputedStyle(el);
+          if (s.display === "none" || s.visibility === "hidden" || s.position === "fixed") return;
+          const text = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
+          if (!text && !el.matches("button, .opt, input, textarea, select")) return;
+          const r = el.getBoundingClientRect();
+          if (r.width <= 0 || r.height <= 0 || r.bottom < 0 || r.top > innerHeight) return;
+          if (r.left < links) { links = r.left; wer = (el.id || el.className || el.tagName) + " links"; }
+          if (W - r.right < rechts) { rechts = W - r.right; if (rechts < links) wer = (el.id || el.className || el.tagName) + " rechts"; }
+        });
+        return { links: Math.round(links), rechts: Math.round(rechts), wer };
+      };
+      for (const v of ["heute", "karten", "regeln", "fortschritt"]) {
+        await p.evaluate(v => go(v), v);
+        await p.waitForTimeout(80);
+        const m = await p.evaluate(rand);
+        P.ok("852×393 quer · " + v + ": Text und Knöpfe halten den Einzug von " + E + " px", m.links >= E && m.rechts >= E,
+          "links " + m.links + ", rechts " + m.rechts + " (" + m.wer + ")");
+      }
+      await p.evaluate(() => { S.auto = false; document.querySelector("#wkNew").click(); });
+      await p.waitForTimeout(120);
+      const u = await p.evaluate(rand);
+      P.ok("852×393 quer · Unterwegs: ebenso", u.links >= E && u.rechts >= E, "links " + u.links + ", rechts " + u.rechts + " (" + u.wer + ")");
+      /* Positivprobe: mit den alten, festen 18 px muss die Prüfung anschlagen. */
+      await p.evaluate(() => { go("heute"); const s = document.createElement("style"); s.id = "alt";
+        s.textContent = ".wrap,.head-in,.tabs{padding-left:18px!important;padding-right:18px!important}"; document.head.appendChild(s); });
+      await p.waitForTimeout(80);
+      const alt = await p.evaluate(rand);
+      P.ok("… und die Prüfung erkennt den alten Abstand (Positivprobe)", alt.links < E, "links " + alt.links);
+    }
+    await ctx.close();
+  }
+
   await b.close();
   P.abschluss();
 })().catch(e => { console.error(e); process.exit(1); });

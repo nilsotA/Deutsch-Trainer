@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 121 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~790 KB, eine Datei, kein Build |
+| Dateigröße | ~815 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -46,8 +46,9 @@ druckbarer Spickzettel, Export/Import des Lernstands.
 
 ## Wie Nils die App benutzt
 
-**Beim Spazierengehen, einhändig, oft mit Vorlesen.** Das hat die letzten Runden
-bestimmt und sollte auch weiter der Maßstab sein:
+**Beim Spazierengehen, einhändig, oft mit Vorlesen** — und **vor allem als Web-App vom
+Home-Bildschirm des iPhones** (WebKit, Standalone-Fenster ohne Adressleiste). Das hat die
+letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 - Große Antwortflächen in Daumenreichweite, keine Tippaufgaben unterwegs
 - Vorlesen mit Hinweis, wenn Antworten gleich klingen („Weiteren groß“)
@@ -57,6 +58,77 @@ bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Die App als Web-App auf dem iPhone (23.09.2026, neunundzwanzigste Runde).**
+
+Nils nutzt die App vor allem vom Home-Bildschirm des iPhones. Ein Workflow hat die App mit
+diesem Blick durchsucht (sieben Themen, jede Meldung von einem Gegenprüfer angegriffen):
+35 von 42 Befunden hielten. Eingebaut in fünf Gruppen, jede mit Prüfung und Gegenprobe
+gegen den alten Stand.
+
+- **Vorlesen und Automatik.** WebKit meldet den Abbruch einer Äußerung synchron innerhalb
+  von `cancel()`; der Schutz in `check()` griff deshalb nur in Chromium, und ein Tipp auf
+  „Weiter“ während der Erklärung armierte die Automatik auf der nächsten Frage. Jetzt zählt
+  `sprechNr` mit. Ein Tipp während der Erklärung hält die Automatik an, 🔊 in der Leiste
+  wiederholt die Erklärung, „Weiter“ ist nach dem Bildlauf 700 ms gesperrt. VoiceOver:
+  Rückmeldung und Hinweiszeile sind Live-Regionen (aus, wenn die App selbst vorliest), der
+  Fokus geht nach „Weiter“ auf die neue Frage. „Bewegung reduzieren“ gilt auch für die
+  Bildläufe aus dem Skript. Am Rundenende klappt „Daran hakte es“ die Regel an Ort und
+  Stelle auf, statt die Auswertung zu verwerfen.
+- **Touch und Eingabe.** Alle `:hover`-Regeln nur noch bei Maus (der klebende Hover sah auf
+  der nächsten Karte aus wie „richtig“). Tippfeld ohne Autokorrektur, Suche öffnet die
+  Tastatur sofort, Wischen in den Treffern schließt sie, Langdruck in der Fehlersuche wählt
+  keinen Text mehr aus.
+- **Sicherung und Speicherort.** In der Home-Bildschirm-App über das Teilen-Menü statt über
+  einen Download ohne Rückweg; `lastExport` erst nach abgeschlossenem Teilen. Die App sagt
+  dort, dass sie einen eigenen Speicher hat, getrennt vom Browser, und bietet beim ersten
+  Start an, eine Sicherung zu laden. Der Text im Textcheck übersteht einen App-Wechsel
+  (eigener Schlüssel `deutschtrainer.v1.tc`, einen Tag lang, „Leeren“ und „Alles
+  zurücksetzen“ löschen ihn).
+- **Rückkehr aus dem Hintergrund.** iOS setzt die App am nächsten Morgen fort, statt sie
+  neu zu starten: Datum, „Erledigt ✓“ und Serie standen auf gestern. `tagesWechsel()` holt
+  den Tag nach, `darfFrischLaden()` lädt nach mindestens 30 Minuten Pause an einem neuen Tag
+  (oder 6 Stunden nach dem Laden) neu, damit Korrekturen ankommen — nur mit Service Worker
+  und nicht über Arbeit in der sichtbaren Ansicht hinweg; eine Runde in einer anderen
+  Ansicht wird vorher abgelegt und lässt sich fortsetzen.
+- **Darstellung.** Statusleiste folgt dem Hell/Dunkel-Schalter der App, quer Abstand zu
+  Notch und Dynamic Island, keine aufgeblähte Schrift im Querformat, Druckhinweis passt zum
+  iPhone, die Zusage „Der Bildschirm bleibt an“ ist ehrlich, ein weiterer Regelsprung
+  zeichnet ohne Filter nicht mehr 118 Regeln neu.
+
+**Neue Prüfungen:** `tests/lernen.js` K (Teilen-Menü, Speicherort, Umzugshinweis,
+Textcheck-Entwurf) und N (Tageswechsel mit vorgestellter Uhr, Neuladen), `tests/unterwegs.js`
+(Automatik unter WebKit und Chromium, 🔊, Sperre, Live-Regionen, Fokus), `tests/suite.js`
+(Hover, Autokorrektur, Themenfarbe, Einzüge, Textgröße, Regelsprung, Wachhalte-Satz,
+Druckhinweis), `tests/layout.js` D (quer mit simulierter Notch). `boot()` hat dafür den
+Eingriff `vorLaden(w)` bekommen — für Umgebungen, die jsdom nicht kennt.
+
+**Danach die Gegenprüfung des eigenen Diffs:** fünf Prüfer (Automatik, Sicherung, Rückkehr
+aus dem Hintergrund, CSS, Prüfungen und Texte), 21 Meldungen, 17 verschiedene, alle
+eingebaut. Verifiziert hat der Workflow nur die erste — die Gegenprüfer liefen einzeln
+nacheinander und hätten Stunden gebraucht. Die übrigen sind durch Nachstellen belegt: Jede
+Korrektur hat eine Prüfung, die am Stand davor fehlschlägt, und die Befunde zu stumm grünen
+Prüfungen brachten ihre Mutationsläufe mit. Die wichtigsten:
+- Ein gesperrter Tipp auf „Weiter“ verbrauchte den Stopp-Horcher (`{once:true}`): danach hielt
+  kein Tipp die Automatik mehr an, und „Beenden“ ließ die Automatik-Uhr auf `Q = null` laufen.
+  Die Uhr gehört jetzt zu genau einer Frage einer Runde.
+- „Sicherung laden“ im Umzugshinweis lief ins Leere, sobald der Fortschritt nicht auf
+  „Übersicht“ stand — die Dateiauswahl lag dort. Sie steht jetzt fest im Markup.
+- Das Neuladen nach langer Pause: sperrt die alte Seite, bis die neue da ist (sonst gingen
+  Tipps in den 2,5 s verloren), legt den Textcheck-Text frisch ab (nach mehr als einem Tag
+  war er sonst abgelaufen), und eine Runde in einer anderen Ansicht oder eine über den
+  Unterreiter verlassene Fehlersuche sperrt es nicht mehr auf Dauer.
+- „Die App hält den Bildschirm an“ hieß das Gegenteil des Gemeinten — jetzt „wach“.
+- Die Hinweiszeile sagt VoiceOver über eine dauerhaft vorhandene, unsichtbare Region an; die
+  sichtbare Pille erscheint erst mit ihrem Text und stand vorher nicht im Baum.
+- `tests/setup.js` legte `click()` auf **jedem** Link still, nicht nur auf dem Download-Anker.
+  Eine neue Prüfung auf den Regel-Link war dadurch stumm grün; aufgefallen ist es erst an
+  ihrer Positivprobe.
+
+**Nicht am Gerät geprüft** und deshalb beim nächsten Mal auf Nils' iPhone nachzusehen:
+Erscheint im Teilen-Menü „In Dateien sichern“, und lässt sich die Datei über „Sicherung
+laden“ wieder einlesen? Kommt die App nach einer Nacht im Hintergrund mit dem neuen Tag
+zurück? Bleibt der Bildschirm in der Unterwegs-Runde an?
 
 **Die App im echten Browser gemessen (23.09.2026, achtundzwanzigste Runde).**
 
@@ -1918,7 +1990,9 @@ Zwei Punkte bleiben bewusst offen:
   Liste steht, muss weiter nach oben wischen. Ein „nach oben“-Knopf wäre die kleinere
   Lösung — wenn es Nils stört.
 - Die App kann nicht wissen, ob ein **Download** angekommen ist. Die Meldung sagt das jetzt
-  ehrlich; dass `lastExport` die Mahnung 30 Tage stumm schaltet, bleibt.
+  ehrlich; dass `lastExport` die Mahnung 30 Tage stumm schaltet, bleibt — außer in der
+  Home-Bildschirm-App auf dem iPhone: Dort geht die Sicherung seit dem 23.09.2026 über das
+  Teilen-Menü, und `lastExport` steht erst, wenn das Teilen abgeschlossen ist.
 
 Und in `FUNDE-offen.md` liegen weiterhin drei inhaltliche Punkte, die eine Sitzung mit
 Web-Recherche brauchen.
@@ -1941,7 +2015,9 @@ Und eine Ehrlichkeitskorrektur, die schon im vorigen Schritt mitkam: „Sicherun
 heruntergeladen“ hieß es auch dann, wenn der Browser den Download abgebrochen hat. Die App
 kann das nicht wissen; die Meldung heißt jetzt „Sicherung erstellt — schau nach, ob die
 Datei angekommen ist“. Dass `lastExport` die Mahnung 30 Tage stumm schaltet, bleibt:
-zuverlässiger lässt es sich von der Seite aus nicht feststellen.
+zuverlässiger lässt es sich von der Seite aus nicht feststellen. (Für den Download gilt das
+weiter; die Home-Bildschirm-App auf dem iPhone sichert seit dem 23.09.2026 über das
+Teilen-Menü, dessen Versprechen erst nach abgeschlossenem Teilen erfüllt wird.)
 
 **Sechs Fehler an Ansichten und Bedienung (07.09.2026).**
 
@@ -2949,7 +3025,8 @@ Nach Nutzen sortiert, nichts davon ist angefangen:
 
 **Der Service Worker, zum ersten Mal von Ende zu Ende nachgemessen.** Mit einem kleinen
 Server im Kritzelordner, der auf Zuruf langsam wird oder schweigt (`srv.js`), und
-`swtest3.js`. Ergebnis: Er tut genau das, was in CLAUDE.md steht.
+`swtest3.js`. Ergebnis: Er tut, was in `sw.js` steht — Netz zuerst mit Frist. (CLAUDE.md
+beschrieb damals noch „aus dem Cache, Nachladen im Hintergrund“; am 23.09.2026 berichtigt.)
 
 | | |
 |---|---|

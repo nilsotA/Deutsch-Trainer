@@ -7,8 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Deutsch">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f7f5f1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#14171a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f5f1">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -42,6 +41,11 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+/* Auf dem iPhone vergrößert WebKit quer gehalten den Text in Blöcken, die breiter sind als
+   der Bildschirm hochkant. Das hängt am Gerät, nicht an der Fensterbreite — deshalb steht die
+   Regel nicht in der 600-px-Abfrage, sonst fiele sie genau beim Drehen weg. Nur die Fassung
+   mit Präfix: WebKit kennt keine andere, und in Chromium wäre die ohne Präfix neu. */
+html{-webkit-text-size-adjust:100%}
 body{
   background:var(--bg); color:var(--ink);
   font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -51,7 +55,11 @@ h1,h2,h3,h4{margin:0;line-height:1.25;font-weight:650;letter-spacing:-.01em}
 p{margin:0 0 .8em}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 input,textarea,select{font:inherit;color:inherit}
-.wrap{max-width:820px;margin:0 auto;padding:0 18px 80px}
+/* viewport-fit=cover legt quer gehalten den Inhalt bis unter Notch oder Dynamic Island.
+   Die seitlichen Abstände stehen deshalb mit max() in den Grundregeln — nicht als eigener
+   Block am Ende: Der überschriebe hochkant die schmaleren Abstände der Handy-Blöcke weiter
+   unten. Ein Browser ohne max() verwirft nur die zweite Hälfte und behält 18 px. */
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 80px;padding-left:max(18px, env(safe-area-inset-left));padding-right:max(18px, env(safe-area-inset-right))}
 
 /* ---------- Kopf ---------- */
 .head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
@@ -61,7 +69,7 @@ input,textarea,select{font:inherit;color:inherit}
    komma-nebensatz nach „→ Regel nachlesen“ 638 px oberhalb des Bildschirms. Die Kopfleiste
    ist je nach Umbruch 104 bis 119 px hoch; --kopf misst sie (siehe kopfMessen()). */
 .acc{scroll-margin-top:calc(var(--kopf, 124px) + 8px)}
-.head-in{max-width:820px;margin:0 auto;padding:14px 18px 0;display:flex;align-items:center;gap:14px}
+.head-in{max-width:820px;margin:0 auto;padding:14px 18px 0;padding-left:max(18px, env(safe-area-inset-left));padding-right:max(18px, env(safe-area-inset-right));display:flex;align-items:center;gap:14px}
 .brand{display:flex;align-items:baseline;gap:9px;margin-right:auto;min-width:0}
 .brand b{font-size:19px;font-weight:700;letter-spacing:-.02em}
 .brand span{font-size:12px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -72,13 +80,13 @@ input,textarea,select{font:inherit;color:inherit}
 .pill.xp{background:var(--acc-soft);border-color:transparent;color:var(--acc-ink)}
 .iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--card);
   display:grid;place-items:center;font-size:15px}
-.iconbtn:hover{border-color:var(--ink3)}
+@media(hover:hover) and (pointer:fine){.iconbtn:hover{border-color:var(--ink3)}}
 
-.tabs{max-width:820px;margin:0 auto;padding:10px 18px 0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs{max-width:820px;margin:0 auto;padding:10px 18px 0;padding-left:max(18px, env(safe-area-inset-left));padding-right:max(18px, env(safe-area-inset-right));display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{padding:9px 13px 11px;font-size:14.5px;font-weight:550;color:var(--ink2);border-bottom:2.5px solid transparent;
   white-space:nowrap;border-radius:8px 8px 0 0}
-.tab:hover{color:var(--ink);background:var(--line2)}
+@media(hover:hover) and (pointer:fine){.tab:hover{color:var(--ink);background:var(--line2)}}
 .tab.on{color:var(--acc-ink);border-bottom-color:var(--acc);background:none}
 
 /* ---------- Bausteine ---------- */
@@ -101,16 +109,16 @@ hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 
 .btn{padding:11px 20px;border-radius:11px;background:var(--acc);color:var(--acc-fg);font-weight:620;font-size:15px;
   transition:transform .08s,filter .15s}
-.btn:hover{filter:brightness(1.08)}
+@media(hover:hover) and (pointer:fine){.btn:hover{filter:brightness(1.08)}}
 .btn:active{transform:scale(.985)}
 .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--ink3);filter:none}
+@media(hover:hover) and (pointer:fine){.btn.ghost:hover{border-color:var(--ink3);filter:none}}
 .btn.sm{padding:7px 14px;font-size:13.5px;border-radius:9px}
 .btn:disabled{opacity:.45;cursor:default}
 
 .chip{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);
   font-size:13.5px;font-weight:550;color:var(--ink2)}
-.chip:hover{border-color:var(--ink3);color:var(--ink)}
+@media(hover:hover) and (pointer:fine){.chip:hover{border-color:var(--ink3);color:var(--ink)}}
 .chip.on{background:var(--acc);border-color:var(--acc);color:var(--acc-fg)}
 
 .bar{height:7px;border-radius:99px;background:var(--line2);overflow:hidden}
@@ -135,7 +143,14 @@ hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 .opts{display:flex;flex-direction:column;gap:9px}
 .opt{width:100%;text-align:left;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);
   background:var(--bg2);font-size:16px;line-height:1.45;transition:border-color .12s,background .12s;display:flex;gap:12px;align-items:flex-start}
-.opt:hover:not(:disabled){border-color:var(--acc);background:var(--acc-soft)}
+/* Hover nur mit echtem Zeiger. Auf dem iPhone setzt ein Tipp :hover und hält es fest, bis
+   etwas anderes angetippt wird — und der Hover der Option glich in Rand und Fläche genau
+   dem Zustand „richtig“. Nach einem verworfenen Prelltipp stand eine Option grün da, und
+   WebKit überträgt den Hover beim Neuzeichnen auf das Element, das danach an der
+   Tippstelle liegt: die Option der Folgekarte. Jede Hover-Regel ist deshalb an ihrer
+   Stelle umhüllt (nicht gesammelt — sonst kippt die Kaskade gegen .on, .sel, .done), und
+   die Option zeigt beim Überfahren nur einen neutralen Rand. */
+@media(hover:hover) and (pointer:fine){.opt:hover:not(:disabled){border-color:var(--ink3)}}
 .opt .k{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:var(--line2);color:var(--ink2);
   font-size:12px;font-weight:700;display:grid;place-items:center;margin-top:2px}
 .opt.right{border-color:var(--acc);background:var(--acc-soft)}
@@ -158,7 +173,7 @@ hr.sep{border:0;border-top:1px solid var(--line2);margin:18px 0}
 /* ---------- Regeln ---------- */
 .acc{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:9px;background:var(--card)}
 .acc>button{width:100%;text-align:left;padding:14px 17px;display:flex;align-items:center;gap:11px;font-weight:600;font-size:15.5px}
-.acc>button:hover{background:var(--line2)}
+@media(hover:hover) and (pointer:fine){.acc>button:hover{background:var(--line2)}}
 .acc>button .ar{margin-left:auto;color:var(--ink3);font-size:13px;transition:transform .18s}
 .acc.open>button .ar{transform:rotate(90deg)}
 .acc .body{display:none;padding:2px 17px 18px;font-size:14.5px;line-height:1.65;color:var(--ink2)}
@@ -200,21 +215,29 @@ textarea.write:focus{outline:none;border-color:var(--acc)}
 [data-theme="dark"] .dot.f1{background:#24382d}[data-theme="dark"] .dot.f2{background:#2f5342}
 [data-theme="dark"] .dot.f3{background:#3d7357}[data-theme="dark"] .dot.f4{background:#4f9772}
 
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);z-index:99;
+/* Zentriert über left/right/margin statt left:50% — mit left:50% blieb dem Toast nur die
+   halbe Breite, max-width:90vw griff nie, und kurze Meldungen brachen auf drei Zeilen um.
+   Ausgeblendet per visibility: Das feste Verschieben um 90 px reichte über dem
+   Home-Indikator nicht, ein Rest des Toasts blieb unten stehen und verdeckte „Weiter“. */
+.toast{position:fixed;left:0;right:0;margin:0 auto;width:max-content;bottom:26px;transform:translateY(90px);visibility:hidden;z-index:99;
   background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:11px;font-size:14.5px;font-weight:600;
-  box-shadow:0 8px 30px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.2,1.2,.4,1);pointer-events:none;max-width:90vw;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
+  box-shadow:0 8px 30px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.2,1.2,.4,1),visibility 0s linear .3s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{transform:translateY(0);visibility:visible;transition:transform .3s cubic-bezier(.2,1.2,.4,1)}
+
+/* Nur für Screenreader: im Baum, aber nicht zu sehen. Nicht über visibility oder display —
+   beides nimmt das Element aus dem Baum. */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ---------- Formulieren ---------- */
 .t-form{background:var(--acc-soft);color:var(--acc-ink)}
 .subnav{display:flex;gap:4px;background:var(--line2);padding:4px;border-radius:12px;margin-bottom:18px}
 .sub{flex:1;padding:9px 10px;border-radius:9px;font-size:14px;font-weight:600;color:var(--ink2);white-space:nowrap}
-.sub:hover{color:var(--ink)}
+@media(hover:hover) and (pointer:fine){.sub:hover{color:var(--ink)}}
 .sub.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(28,31,29,.09)}
 [data-theme="dark"] .sub.on{box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .reg{display:inline-flex;gap:3px;background:var(--line2);padding:3px;border-radius:9px;margin:4px 0 14px}
 .regbtn{padding:5px 13px;border-radius:7px;font-size:12.5px;font-weight:650;color:var(--ink3)}
-.regbtn:hover{color:var(--ink)}
+@media(hover:hover) and (pointer:fine){.regbtn:hover{color:var(--ink)}}
 .regbtn.on{background:var(--card);color:var(--acc-ink)}
 .phlist{display:flex;flex-direction:column;gap:8px}
 .phr{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:10px;
@@ -222,7 +245,7 @@ textarea.write:focus{outline:none;border-color:var(--acc)}
 .phr>span{flex:1}
 .cp{flex:0 0 auto;font-size:11.5px;font-weight:650;padding:4px 9px;border-radius:7px;
   border:1px solid var(--line);color:var(--ink3);background:var(--card);white-space:nowrap}
-.cp:hover{border-color:var(--acc);color:var(--acc-ink)}
+@media(hover:hover) and (pointer:fine){.cp:hover{border-color:var(--acc);color:var(--acc-ink)}}
 .cp.done{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-ink)}
 .nono{margin-top:16px;padding:14px 16px;border-radius:11px;background:var(--bad-soft);
   border-left:3px solid var(--bad);font-size:14px;line-height:1.6}
@@ -274,9 +297,12 @@ table.dt td.hl{background:var(--gold-soft);color:var(--gold);font-weight:650;bor
 
 /* ---------- Fehlersuche ---------- */
 .korrtext{margin-top:16px;padding:20px;border-radius:12px;background:var(--bg2);border:1px solid var(--line2);
-  font-family:Georgia,"Iowan Old Style",serif;font-size:17px;line-height:2.15;color:var(--ink)}
+  font-family:Georgia,"Iowan Old Style",serif;font-size:17px;line-height:2.15;color:var(--ink);
+  /* Ein etwas längerer Druck auf ein Wort wählte auf dem iPhone Text aus (samt Menü),
+     statt das Wort zu markieren. */
+  -webkit-user-select:none;user-select:none}
 .tok{padding:2px 3px;border-radius:5px;cursor:pointer;transition:background .1s,box-shadow .1s}
-.tok:hover{background:var(--line2)}
+@media(hover:hover) and (pointer:fine){.tok:hover{background:var(--line2)}}
 .tok.sel{background:var(--gold-soft);box-shadow:inset 0 -2px 0 var(--gold);color:var(--gold);font-weight:600}
 .tok.hit{background:var(--acc-soft);box-shadow:inset 0 -2px 0 var(--acc);color:var(--acc-ink);font-weight:600;cursor:default}
 .tok.miss{background:var(--bad-soft);box-shadow:inset 0 -2px 0 var(--bad);color:var(--bad);font-weight:600;cursor:default}
@@ -329,14 +355,24 @@ body.walk .tag{font-size:13px;padding:4px 11px}
 .walkbar{position:sticky;bottom:0;z-index:30;background:var(--bg);padding:12px 0 calc(12px + env(safe-area-inset-bottom));
   margin-top:14px;border-top:1px solid var(--line);display:flex;gap:10px}
 .walkbar .btn{flex:1}
+.walkbar #sayAgain{flex:0 0 64px;padding-left:0;padding-right:0}
+.walkbar #sayAgain[hidden]{display:none}
+/* Während des Neuladens nach langer Pause (frischLaden) nimmt die alte Seite keinen Tipp an. */
+body.laedt .head,body.laedt .wrap{pointer-events:none;opacity:.55}
+/* Die Frage bekommt nach „Weiter“ den Fokus (für VoiceOver), aber keinen Rahmen. */
+.qtext:focus,.qtext:focus-visible{outline:none}
 .fehlerliste{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.fehlerregel{text-align:left;margin:0}
 .fehlerzeile{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;width:100%}
 .fehlerzahl{font-variant-numeric:tabular-nums;font-weight:650;color:var(--ink3);flex:none}
 body.autolauf .walkbar #nextBtn{position:relative;overflow:hidden}
 body.autolauf .walkbar #nextBtn::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.28);
   transform-origin:left;transform:scaleX(0);animation:autolauf var(--dauer,2s) linear forwards}
 @keyframes autolauf{to{transform:scaleX(1)}}
-@media (prefers-reduced-motion: reduce){ body.autolauf .walkbar #nextBtn::after{animation:none} }
+/* Ohne Bewegung ein ruhender Streifen an der Unterkante statt gar keinem: Mit
+   animation:none allein blieb der Streifen bei scaleX(0) unsichtbar, und die Karte sprang
+   ohne jede Vorwarnung weiter. */
+@media (prefers-reduced-motion: reduce){ body.autolauf .walkbar #nextBtn::after{animation:none;transform:none;top:auto;height:6px} }
 .walktop{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 /* Die Grundregel muss vor die Medienabfrage: beide Selektoren sind gleich spezifisch, und
    die spätere gewann — die schmalere Polsterung auf kleinen Geräten war dadurch tot. */
@@ -406,12 +442,13 @@ mark.mk-form{background:var(--blue-soft);box-shadow:inset 0 -2px 0 var(--blue);c
 .srch-x{position:absolute;top:6px;right:6px;width:44px;height:44px;display:flex;align-items:center;
   justify-content:center;border:0;background:none;color:var(--ink2);font-size:19px;line-height:1;
   cursor:pointer;border-radius:11px}
-.srch-x:hover{background:var(--line2);color:var(--ink)}
+@media(hover:hover) and (pointer:fine){.srch-x:hover{background:var(--line2);color:var(--ink)}}
 .srch-out{max-height:56vh;overflow:auto;border-top:1px solid var(--line2)}
 .sres{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:11px 20px;
   border-bottom:1px solid var(--line2);font-size:14.5px}
 .sres:last-child{border-bottom:0}
-.sres:hover,.sres:focus{background:var(--acc-soft)}
+.sres:focus{background:var(--acc-soft)}
+@media(hover:hover) and (pointer:fine){.sres:hover{background:var(--acc-soft)}}
 .sres-k{flex:0 0 auto;width:96px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink3)}
 .sres-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
 .sres-s{flex:0 0 auto;font-size:12px;color:var(--ink3);max-width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -524,7 +561,6 @@ table.ch-t.sm td{padding-right:14px}
    SCHMALE BILDSCHIRME
    ============================================================ */
 @media(max-width:600px){
-  html{-webkit-text-size-adjust:100%}
   body{overflow-x:hidden}
   .wrap{padding:0 13px calc(70px + env(safe-area-inset-bottom))}
   .head-in{padding:11px 13px 0;gap:9px}
@@ -711,7 +747,15 @@ table.ch-t.sm td{padding-right:14px}
 
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" aria-hidden="true"></div>
+<!-- Die Ansage der Hinweiszeile: dauerhaft im Baum, nur unsichtbar. Screenreader melden
+     Änderungen in einer Region, die schon da ist; die Pille oben erscheint erst mit ihrem
+     Text (visibility) und wird deshalb nicht verlässlich angesagt. -->
+<div class="sr" id="toastSr" role="status" aria-live="polite" aria-atomic="true"></div>
+<!-- Die Dateiauswahl für „Sicherung laden“ liegt fest im Markup. Sie stand im Fortschritt
+     unter „Übersicht“ — auf einem anderen Unterreiter fehlte sie, und der Umzugshinweis auf
+     „Heute“ lief ins Leere. -->
+<input type="file" id="impFile" accept="application/json,.json" style="display:none">
 
 <script>
 /* ============================================================
@@ -5505,7 +5549,53 @@ function zeigeSpeicherwarnung(){
   const e = $("#warnExp");
   if(e) e.onclick = exportieren;
 }
+/* Home-Bildschirm-App auf iPhone oder iPad. navigator.standalone gibt es nur in Apples
+   WebKit: true in der App vom Home-Bildschirm, false im Browser-Tab, anderswo undefined.
+   maxTouchPoints schließt Web-Apps im Dock des Mac aus, die das Feld ebenfalls kennen.
+   Nicht über display-mode: Das träfe auch installierte Apps unter Android, und die teilen
+   ihren Speicher mit dem Browser. Laut Apple (WWDC23, „What's new in web apps“) haben
+   Home-Bildschirm-Apps dagegen „separate cookies and storage from the browser“. */
+function iosGeraet(){ try{ return (navigator.maxTouchPoints||0) > 0; }catch(e){ return false; } }
+function iosHomeApp(){ try{ return navigator.standalone === true && iosGeraet(); }catch(e){ return false; } }
+function iosBrowserTab(){ try{ return navigator.standalone === false && iosGeraet(); }catch(e){ return false; } }
+
 function exportieren(){
+  /* In der Home-Bildschirm-App übergibt ein Download mit a[download] an eine Vorschau, aus
+     der es keinen Weg zurück in die App gibt — mehrfach berichtet von iOS 13 bis 26. Dort
+     geht die Sicherung deshalb über das Teilen-Menü („In Dateien sichern“). WebKit erfüllt
+     das Versprechen erst, wenn eine Aktion abgeschlossen ist; deshalb steht lastExport erst
+     danach, und die Mahnung „Sicherung empfohlen“ schweigt nicht mehr für eine Datei, die nie
+     angekommen ist. Die Datei trägt trotzdem das heutige Datum (Kopie des Stands).
+     share() muss synchron im Klick laufen, sonst fehlt die Nutzergeste. */
+  if(iosHomeApp() && typeof File === "function" && navigator.share && navigator.canShare){
+    const heute = today();
+    let datei = null, teilbar = false;
+    try{
+      datei = new File([JSON.stringify(Object.assign({}, S, {lastExport: heute}))],
+        "deutsch-trainer-"+heute+".json", {type:"application/json"});
+      teilbar = navigator.canShare({files:[datei]});
+    }catch(e){ teilbar = false; }
+    if(teilbar){
+      let laeuft;
+      try{ laeuft = navigator.share({files:[datei]}); }
+      catch(e){ toast("Sicherung nicht übergeben — versuch es noch einmal"); return; }
+      Promise.resolve(laeuft).then(()=>{
+        S.lastExport = heute; save();
+        /* Nur die Mahnung entfernen, nicht den Fortschritt neu zeichnen — dort kann eine
+           Einstufung laufen. */
+        const m = $("#sicherMahnung"); if(m) m.remove();
+        toast("Sicherung übergeben");
+      }).catch(e=>{
+        /* Kein Download als Rückfall: Er ist genau der Weg, der hier festhängt. Ein zweiter
+           Tipp bei offenem Menü meldet InvalidStateError — das Menü ist dann ja noch da. */
+        const n = e && e.name;
+        if(n === "InvalidStateError") return;
+        toast(n === "AbortError" ? "Nicht gesichert — das Teilen wurde abgebrochen"
+                                 : "Sicherung nicht übergeben — versuch es noch einmal");
+      });
+      return;
+    }
+  }
   try{
     /* Das Datum muss vor dem Verpacken gesetzt sein, sonst trägt die Datei das Datum der
        vorigen Sicherung — und der Import-Dialog fragt später nach der falschen. */
@@ -5548,6 +5638,16 @@ function regelAenderungen(){
 }
 regelAenderungen();
 
+/* Bildlauf aus dem Skript: sanft, außer bei „Bewegung reduzieren“. Ein ausdrückliches
+   behavior „smooth“ überstimmt die CSS-Regel scroll-behavior:auto — auf dem iPhone glitt
+   die Seite deshalb nach jeder Antwort trotz der Einstellung. Bei jedem Aufruf neu
+   gefragt, weil sich die Einstellung bei offener App ändern kann; jsdom kennt matchMedia
+   nicht. */
+function sanft(){
+  try{ return (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) ? "auto" : "smooth"; }
+  catch(e){ return "smooth"; }
+}
+
 /* Höhe der festen Kopfleiste als CSS-Variable, für den Abstand beim Sprung in eine Regel.
    Sie hängt am Umbruch von Zähler und Reitern und ändert sich beim Drehen. */
 function kopfMessen(){
@@ -5586,9 +5686,16 @@ function norm(s){
 function deb(fn, ms){
   let t; return function(){ const a=arguments, c=this; clearTimeout(t); t=setTimeout(()=>fn.apply(c,a), ms||130); };
 }
+/* Die Meldung geht an zwei Stellen: in die sichtbare Pille und in #toastSr, die dauerhaft
+   vorhandene Live-Region (VoiceOver sagt „Runde gemerkt …“ an). Den Text erst nach dem
+   Ausblenden leeren: sonst schrumpft die Pille sichtbar zum leeren Kasten. */
 function toast(msg){
-  const t=$("#toast"); t.textContent=msg; t.classList.add("show");
-  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2400);
+  const t=$("#toast"), sr=$("#toastSr");
+  clearTimeout(t._h); clearTimeout(t._c);
+  t.textContent=msg; t.classList.add("show");
+  if(sr) sr.textContent=msg;
+  t._h=setTimeout(()=>{ t.classList.remove("show");
+    t._c=setTimeout(()=>{ t.textContent=""; if(sr) sr.textContent=""; }, 350); }, 2400);
 }
 function tag(cat){ const c=CATS[cat]||{n:cat,cls:"t-stil"}; return '<span class="tag '+c.cls+'">'+c.n+"</span>"; }
 const RULES_ALL = RULES.concat(RULES_FORM).concat(RULES_SATZ).concat(RULES_ZEICHEN);
@@ -5794,7 +5901,7 @@ function bildschirmWachhalten(an){
          release-Horcher blieb wakeSperre gesetzt, obwohl die Sperre weg war, und genau
          daran scheiterte jede Neuanforderung: die Bedingung oben verlangt !wakeSperre.
          Der Bildschirm ging danach für den Rest der Sitzung aus, obwohl die Kartenansicht
-         „Der Bildschirm bleibt während der Runde an“ verspricht. */
+         zusagt, dass die App ihn während der Runde wach hält. */
       navigator.wakeLock.request("screen").then(x=>{
         wakeSperre = x;
         try{ if(x && x.addEventListener) x.addEventListener("release", ()=>{ if(wakeSperre === x) wakeSperre = null; }); }catch(e){}
@@ -6037,13 +6144,22 @@ function sprechFrage(q){
   return strip(q.q) + ". " +
     o.map((x,k)=>String.fromCharCode(65+k) + ": " + strip(x) + hoerHinweis(x, o)).join(". ");
 }
+/* Jede Äußerung bekommt eine Nummer; ein Rückruf gilt nur, solange seine Nummer die
+   aktuelle ist. Abgebrochene Äußerungen (Weiter, Beenden, 🔊 aus, neues Vorlesen) lösen
+   so nichts mehr aus. Die Nummer muss VOR cancel() weiterzählen: WebKit — also das
+   iPhone — meldet den Abbruch synchron als error-Ereignis noch innerhalb von cancel().
+   Chromium meldet ihn später; deshalb griff der alte Schutz in check() (Q.i === beiFrage)
+   dort, auf dem iPhone aber nicht, und die nächste Frage wurde übersprungen. */
+let sprechNr = 0;
 function vorlesen(text, danach){
   if(!kannVorlesen() || !S.speak) return false;
   try{
+    const nr = ++sprechNr;
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(sprechbar(text));
     u.lang = "de-DE"; u.rate = 0.95;
-    if(danach){ let fertig = false; const einmal = ()=>{ if(!fertig){ fertig = true; danach(); } };
+    if(danach){ let fertig = false;
+                const einmal = ()=>{ if(!fertig && nr === sprechNr){ fertig = true; danach(); } };
                 u.onend = einmal; u.onerror = einmal; }
     speechSynthesis.speak(u);
     return true;
@@ -6062,9 +6178,17 @@ function autoAn(ms){
   if(!S.auto || !Q || !Q.walk) return;
   document.body.classList.add("autolauf");
   const b = qEl("#nextBtn"); if(b) b.style.setProperty("--dauer", ms + "ms");
-  autoUhr = setTimeout(()=>{ autoUhr = null; document.body.classList.remove("autolauf"); next(); }, ms);
+  /* Die Uhr gehört zu genau dieser Frage dieser Runde. Nach „Beenden“ lief sie sonst auf
+     Q = null, nach dem Fortsetzen übersprang sie eine unbeantwortete Frage. */
+  const runde = Q, frage = Q.i;
+  autoUhr = setTimeout(()=>{ autoUhr = null; document.body.classList.remove("autolauf");
+    if(Q === runde && Q.i === frage && !Q.done) next(); }, ms);
 }
-function vorlesenStoppen(){ try{ if(kannVorlesen()) speechSynthesis.cancel(); }catch(e){} }
+/* Spricht die App gerade selbst? Dann bleiben Live-Regionen still, sonst redeten
+   VoiceOver und die Sprachausgabe gleichzeitig. Außerhalb des Unterwegs-Modus liest die
+   App keine Rückmeldung vor — dort muss die Region auch mit 🔊 an sprechen. */
+function appSprichtSelbst(){ return !!(Q && Q.walk && S.speak && kannVorlesen()); }
+function vorlesenStoppen(){ sprechNr++; try{ if(kannVorlesen()) speechSynthesis.cancel(); }catch(e){} }
 
 function sitzungSichern(){
   if(!Q || Q.done){ S.session = null; save(); return; }
@@ -6100,6 +6224,7 @@ let Q = null;   // {list, i, correct, host, onDone, title, countsForDay}
 function startQuiz(list, host, opts){
   opts = opts || {};
   if(opts.walk) list = list.filter(q=>q.type !== "fill");   // Tippen geht unterwegs nicht
+  autoAus();
   if(!list.length){ host.innerHTML = '<div class="card center"><p class="muted">Nichts zu tun — komm später wieder.</p></div>'; return; }
   /* Startet eine Runde in einem anderen Wirt, muss die alte Karte weg — sie bliebe sonst
      samt Antwortknöpfen bedienbar stehen. */
@@ -6119,6 +6244,7 @@ function startQuiz(list, host, opts){
 function sitzungFortsetzen(host){
   const x = sitzungOffen();
   if(!x) return false;
+  autoAus();
   /* Die Einstufung gehört in den Fortschritt-Reiter — dort ist sie gestartet, dorthin
      führt ihre Auswertung. Sonst liefe sie im Karten-Reiter zu Ende und der Plan
      erschiene woanders. */
@@ -6154,12 +6280,14 @@ function zeigeRueckmeldung(){
   const unten = knopf.getBoundingClientRect().bottom;
   if(oben >= 0 && unten <= window.innerHeight) return;       // steht schon im Bild
   const ziel = Math.max(0, window.scrollY + oben - 70);       // die Frage bleibt angeschnitten
-  try{ window.scrollTo({top:ziel, behavior:"smooth"}); }catch(e){ window.scrollTo(0, ziel); }
+  if(Q) Q.weiterAb = Date.now() + 700;                         // siehe check(): Nachfassen sperren
+  try{ window.scrollTo({top:ziel, behavior:sanft()}); }catch(e){ window.scrollTo(0, ziel); }
   scrollBeiFrage = null;
 }
 function renderQ(){
   Q.beantwortet = false;
   Q.frageSeit = Date.now();
+  Q.weiterAb = 0;
   const q = Q.list[Q.i];
   const pct = Math.round(Q.i / Q.list.length * 100);
   let body = "";
@@ -6169,7 +6297,7 @@ function renderQ(){
       '<button class="opt" data-i="'+i+'"><span class="k">'+String.fromCharCode(65+i)+'</span><span>'+o+"</span></button>"
     ).join("") + "</div>";
   } else {
-    body = '<div class="fillbox"><input id="fillIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Antwort eintippen …">'+
+    body = '<div class="fillbox"><input id="fillIn" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="Antwort eintippen …">'+
            '<button class="btn" id="fillGo">Prüfen</button></div>';
   }
   const kopf = Q.walk
@@ -6189,18 +6317,26 @@ function renderQ(){
         '<button class="btn ghost sm" id="quizOut">‹ Beenden</button>'+
         '<span class="tiny muted">'+Q.title+" · Frage "+(Q.i+1)+" von "+Q.list.length+"</span>"+ tag(q.cat)+
       "</div>";
+  /* Nach „Weiter“ ersetzt der nächste Schritt den Kartenblock samt fokussiertem Knopf —
+     der Fokus fiel auf <body>, und VoiceOver erfuhr nicht, dass eine neue Frage da ist.
+     Den Fokus nur übernehmen, wenn er vorher im Kartenblock oder nirgends stand. */
+  const vorFokus = document.activeElement;
+  const fokusImKasten = !vorFokus || vorFokus === document.body || Q.host.contains(vorFokus);
   Q.host.innerHTML =
     '<div class="card">'+ kopf +
       '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
       (q._nochmal ? '<p class="tiny muted" style="margin:6px 0 0">Noch einmal — die hattest du eben nicht.</p>' : "")+
       '<div class="qtext'+(lang ? ' vorlang' : '')+'">'+q.q+"</div>"+
       body+
-      '<div id="fbHost"></div>'+   /* wird in check() zur Live-Region, siehe dort */
+      /* Die Live-Region muss leer im Baum stehen, BEVOR der Inhalt kommt — Screenreader
+         melden nur Änderungen in einer schon bestehenden Region. Vorher setzte check() die
+         Rolle erst nach dem Inhalt, und VoiceOver sagte „Richtig/Nicht ganz“ nie an. */
+      '<div id="fbHost" role="status" aria-live="'+(appSprichtSelbst()?"off":"polite")+'"></div>'+
     "</div>";
   scrollBeiFrage = window.scrollY;
   if(Q.walk){
     const out = $("#walkOut");
-    if(out) out.onclick = ()=>{ vorlesenStoppen(); bildschirmWachhalten(false);
+    if(out) out.onclick = ()=>{ autoAus(); vorlesenStoppen(); bildschirmWachhalten(false);
       document.body.classList.remove("walk"); sitzungSichern();
       const zurueck = Q.host && Q.host.id === "walkHost" ? "heute" : "karten";
       Q=null; go(zurueck);
@@ -6216,7 +6352,9 @@ function renderQ(){
       sp.classList.toggle("speakon", S.speak);
       sp.setAttribute("aria-pressed", S.speak ? "true" : "false");
       if(S.speak) vorlesen(sprechFrage(q));
-      else vorlesenStoppen(); };
+      else vorlesenStoppen();
+      const sa = qEl("#sayAgain"); if(sa) sa.hidden = !S.speak;
+      const fh = qEl("#fbHost"); if(fh) fh.setAttribute("aria-live", appSprichtSelbst() ? "off" : "polite"); };
     if(S.speak) vorlesen(sprechFrage(q));
   } else {
     /* Ohne diesen Knopf gab es aus einer Runde außerhalb des Unterwegs-Modus nur ein
@@ -6249,6 +6387,10 @@ function renderQ(){
     qEl("#fillGo").onclick = ()=>check(inp.value);
   } else {
     qAll(".opt").forEach(b => b.onclick = ()=>check(parseInt(b.dataset.i,10)));
+    if(fokusImKasten && !appSprichtSelbst()){
+      const qt = qEl(".qtext");
+      if(qt){ qt.setAttribute("tabindex", "-1"); try{ qt.focus({preventScroll:true}); }catch(e){} }
+    }
   }
 }
 
@@ -6305,19 +6447,38 @@ function check(input){
     '<div class="row" style="margin-top:16px"><button class="btn" id="nextBtn">'+
       (Q.i+1 < Q.list.length ? "Weiter" : "Abschließen")+"</button>"+
       '<span class="tiny muted kbd">Enter</span></div>';
+  /* Ein Tipp auf den Bildschirm hält die Automatik für diese Antwort an — auch während
+     die Erklärung noch vorgelesen wird. Vorher fand der Tipp dann keinen Timer (er
+     entsteht erst am Satzende), der Horcher war verbraucht, und am Satzende ging es
+     trotzdem weiter. Die Marke ist lokal: Sie gilt nur für diese eine Antwort. */
+  let angehalten = false;
+  const nochmalText = (ok?"Richtig. ":"Nicht ganz. ")+strip(q.exp);
   if(Q.walk){
     try{ if(navigator.vibrate) navigator.vibrate(ok ? 25 : [25,70,25]); }catch(e){}
     const b = qEl("#nextBtn");
     if(b){ const leiste = document.createElement("div"); leiste.className = "walkbar";
-      b.parentElement.replaceWith(leiste); leiste.appendChild(b); }
+      b.parentElement.replaceWith(leiste);
+      /* Noch einmal hören, unten im Daumenbereich. Vorher ging das nur über zweimal 🔊
+         ganz oben — und das Ausschalten löste nach einer richtigen Antwort die Automatik aus.
+         Der Knopf folgt dem 🔊-Schalter oben: Er stand sonst nach dem Ausschalten weiter da
+         und tat nichts, und nach dem Einschalten fehlte er. */
+      if(kannVorlesen()){
+        const nochmal = document.createElement("button");
+        nochmal.type = "button"; nochmal.className = "btn ghost"; nochmal.id = "sayAgain";
+        nochmal.setAttribute("aria-label", "Erklärung noch einmal hören");
+        nochmal.textContent = "🔊";
+        nochmal.hidden = !S.speak;
+        leiste.appendChild(nochmal);
+      }
+      leiste.appendChild(b); }
     /* Der Rückruf gehört zu genau dieser Frage. Tippt Nils auf „Weiter“, statt die
        Erklärung abzuwarten, bricht next() das Vorlesen ab — und der Abbruch meldet
        sich wie ein normales Satzende. Ohne diese Fessel armierte er die Automatik
        auf der nächsten, noch unbeantworteten Frage, die 600 ms später ungefragt
        übersprungen wurde. */
     const beiFrage = Q.i;
-    const spricht = vorlesen((ok?"Richtig. ":"Nicht ganz. ")+strip(q.exp),
-                             ok ? ()=>{ if(Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
+    const spricht = vorlesen(nochmalText,
+                             ok ? ()=>{ if(!angehalten && Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
   /* Ohne Live-Region sagt Vorlese-Software die Rückmeldung nie an: der Fokus fällt beim
@@ -6327,7 +6488,7 @@ function check(input){
   const fbh = qEl("#fbHost");
   if(fbh){
     fbh.setAttribute("role", "status");
-    fbh.setAttribute("aria-live", S.speak ? "off" : "polite");
+    fbh.setAttribute("aria-live", appSprichtSelbst() ? "off" : "polite");
   }
   zeigeRueckmeldung();
   /* Der Fokus gehört jetzt auf den Weiter-Knopf — er entsteht ohnehin an dieser Stelle,
@@ -6336,13 +6497,28 @@ function check(input){
   try{ const nb = qEl("#nextBtn"); if(nb) nb.focus({preventScroll:true}); }catch(e){}
   Q.beantwortet = true;
   sitzungSichern();
-  qEl("#nextBtn").onclick = next;
+  /* Kurz nach der Antwort scrollt zeigeRueckmeldung() die Rückmeldung ins Bild, und
+     „Weiter“ wandert dabei oft genau unter den Daumen, der eben geantwortet hat (in
+     Chromium auf 375×647: 29 von 70 falschen Antworten). Ein Nachfassen traf dann
+     „Weiter“, und die Erklärung war übersprungen. Q.weiterAb sperrt beide Tippziele der
+     Rückmeldung, solange die App selbst schiebt. */
+  const gesperrt = () => !!(Q && Date.now() < (Q.weiterAb||0));
+  qEl("#nextBtn").onclick = ()=>{ if(!gesperrt()) next(); };
+  const sa = qEl("#sayAgain");
+  if(sa) sa.onclick = ()=>{ autoAus(); vorlesen(nochmalText); };
   if(Q.walk && S.auto){
-    const stopp = e => { if(!e.target.closest || !e.target.closest("#nextBtn")) autoAus(); };
-    document.addEventListener("pointerdown", stopp, {once:true});
+    /* Nicht {once:true}: Ein gesperrter Tipp auf „Weiter“ hätte den Horcher verbraucht, und
+       danach hielt kein Tipp die Automatik mehr an. Er zählt deshalb nicht. */
+    const stopp = e => {
+      const weiter = !!(e.target.closest && e.target.closest("#nextBtn"));
+      if(weiter && gesperrt()) return;
+      document.removeEventListener("pointerdown", stopp);
+      if(!weiter){ angehalten = true; autoAus(); }
+    };
+    document.addEventListener("pointerdown", stopp);
   }
   const lnk = qEl("#fbHost [data-rule]");
-  if(lnk) lnk.onclick = e => { e.preventDefault(); openRule(lnk.dataset.rule); };
+  if(lnk) lnk.onclick = e => { e.preventDefault(); if(!gesperrt()) openRule(lnk.dataset.rule); };
   updHud();
 }
 
@@ -6454,7 +6630,7 @@ function unterwegsRunde(host){
        drillPool().map(F).sort(nachGesehen));
   list = shuffle(list, r);
   startQuiz(list, host, {title:"Unterwegs", walk:true});
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:sanft()});
 }
 
 /* Karten, die schon einmal danebengingen — die häufigsten Fehler zuerst */
@@ -6483,7 +6659,7 @@ function schwachRunde(host){
   const list = schwacheKarten(r);
   if(!list.length){ toast("Noch keine Fehler gesammelt — üb erst eine normale Runde."); return; }
   startQuiz(shuffle(list, r), host, {title:"Schwächen", walk:true});
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({top:0, behavior:sanft()});
 }
 
 /* Abschluss einer Unterwegs-Runde — groß, mit direktem Anschluss */
@@ -6509,7 +6685,7 @@ function finishWalk(){
   Q.host.innerHTML =
     '<div class="card center">'+
       '<div style="font-size:52px;line-height:1;margin-bottom:8px">'+(pct>=80?"◆":pct>=50?"◈":"◇")+"</div>"+
-      '<h2 style="font-size:28px">'+c+" von "+total+" richtig</h2>"+
+      '<h2 id="wkErgebnis" tabindex="-1" style="font-size:28px">'+c+" von "+total+" richtig</h2>"+
       '<p class="muted" style="margin-top:8px;font-size:17px">'+
         (n ? n+" Karten stehen noch an." : "Alles wiederholt — die nächste Runde nimmt neuen Stoff.")+"</p>"+
       rueckblick +
@@ -6518,12 +6694,23 @@ function finishWalk(){
         '<button class="btn ghost" id="wkStop">Fertig</button>'+
       "</div>"+
     "</div>";
-  $$("#" + Q.host.id + " .fehlerzeile").forEach(b => b.onclick = ()=>{
-    const zurueckAuf = Q.host;
-    bildschirmWachhalten(false);
-    document.body.classList.remove("walk");
-    Q = null;
-    openRule(b.dataset.rule);
+  /* Ohne eigene Sprachausgabe hört VoiceOver das Ergebnis über den Fokus. */
+  if(!S.speak){ const h = $("#wkErgebnis"); if(h) try{ h.focus({preventScroll:true}); }catch(e){} }
+  /* „Daran hakte es“: Die Regel klappt hier auf, statt ins Regelwerk zu springen. Der
+     Sprung verwarf die Auswertung, und für die zweite und dritte Regel gab es keinen Weg
+     zurück — in der Home-Bildschirm-App gibt es keinen Zurück-Knopf. */
+  $$("#" + Q.host.id + " .fehlerzeile").forEach(b => {
+    b.setAttribute("aria-expanded", "false");
+    b.onclick = ()=>{
+      const offen = b.nextElementSibling;
+      if(offen && offen.classList.contains("fehlerregel")){
+        offen.remove(); b.setAttribute("aria-expanded", "false"); return;
+      }
+      const rl = ruleById(b.dataset.rule);
+      if(!rl) return;
+      b.insertAdjacentHTML("afterend", '<div class="acc open fehlerregel"><div class="body">' + rl.b + "</div></div>");
+      b.setAttribute("aria-expanded", "true");
+    };
   });
   $("#wkAgain").onclick = ()=>unterwegsRunde(Q.host);
   const zurueck = Q.host && Q.host.id === "walkHost" ? "heute" : "karten";
@@ -6584,14 +6771,30 @@ function renderHeute(keepQuiz){
         (S.streak ? "Deine Serie liegt bei <b>"+S.streak+(S.streak===1?" Tag":" Tagen")+"</b>." : "Heute beginnt deine Serie.")+
         " Für die Serie zählen "+TAGESZIEL+" Karten am Tag — egal, ob hier oder unterwegs.</p>"+
         planLine()+
+        umzugHinweis()+
         '<div class="row" style="margin-top:16px"><button class="btn" id="startD">Loslegen</button></div>'+
       "</div>";
     $("#startD").onclick = ()=> startQuiz(qs, host, {title:"Tagesaufgabe", daily:true});
+    const um = $("#umzugLaden");
+    if(um) um.onclick = ()=>{ const f = $("#impFile"); if(f) f.click(); };
   }
   bindPlanLine();
   renderWalkCard(faellig);
   renderChips();
   renderExtras();
+}
+
+/* Erster Start in der Home-Bildschirm-App: Sie beginnt leer, auch wenn im Browser schon
+   geübt wurde, weil beide getrennte Speicher haben. Der Hinweis verschwindet mit der ersten
+   Antwort oder dem Laden einer Sicherung von selbst. #impFile liegt fest im Markup, gleich
+   welcher Unterreiter im Fortschritt gerade steht. */
+function umzugHinweis(){
+  if(!iosHomeApp()) return "";
+  if(Object.keys(S.cards||{}).length || Object.keys(S.days||{}).length) return "";
+  return '<div class="fb" id="umzug" style="margin-top:14px"><b class="hd">Schon im Browser geübt?</b>'+
+    "Diese App hat einen eigenen Speicher und beginnt deshalb leer. Sichere im Browser unter "+
+    "Fortschritt mit „Fortschritt sichern“ und lade die Datei hier."+
+    '<div class="row" style="margin-top:10px"><button class="btn ghost sm" id="umzugLaden">Sicherung laden</button></div></div>';
 }
 
 /* Einstieg für unterwegs — ein Tipp von der Startseite aus */
@@ -6641,7 +6844,7 @@ function renderChips(){
       ? shuffle(WORDS, r).slice(0,12).map(w=>wordQuestion(w,r))
       : shuffle(ALL.filter(i=>i.c===c), r).slice(0,12).map(exQuestion);
     startQuiz(list, $("#dailyHost"), {title:CATS[c].n});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   });
 }
 
@@ -6687,7 +6890,14 @@ function renderCards(){
         '<button class="btn ghost" id="startW">Nur Wortschatz</button>'+
       "</div>"+
       '<p class="tiny muted" style="margin-top:9px">„Unterwegs“ blendet alles aus, was ablenkt: große Schrift, Antworten in Daumenreichweite, keine Tippaufgaben'+
-      (kannVorlesen()?", auf Wunsch vorgelesen":"")+". Der Bildschirm bleibt während der Runde an.</p>"+
+      (kannVorlesen()?", auf Wunsch vorgelesen":"")+
+      /* Die Zusage stand ohne Bedingung da. Ohne navigator.wakeLock hält nichts den
+         Bildschirm wach, und in Home-Bildschirm-Apps älterer iOS-Fassungen wirkte die Sperre
+         Berichten nach nicht, obwohl es sie gab. Ob sie wirkt, meldet der Browser nicht
+         zuverlässig — deshalb sagt der Satz, was zu tun ist, wenn der Bildschirm ausgeht. */
+      (navigator.wakeLock
+        ? ". Die App hält den Bildschirm während der Runde wach, wo das Gerät es erlaubt — geht er trotzdem aus, stell die automatische Sperre in den Einstellungen länger."
+        : ". Wach hält dieses Gerät den Bildschirm nicht von selbst — stell dafür die automatische Sperre in den Einstellungen länger.")+"</p>"+
       '<hr class="sep">'+
       '<div class="eyebrow">Karten nach Sicherheit</div>'+
       '<div class="grid2" style="margin-top:8px">'+
@@ -6703,7 +6913,7 @@ function renderCards(){
     "</div>";
 
   const go1 = $("#goOn");
-  if(go1) go1.onclick = ()=>{ sitzungFortsetzen(host); window.scrollTo({top:0,behavior:"smooth"}); };
+  if(go1) go1.onclick = ()=>{ sitzungFortsetzen(host); window.scrollTo({top:0,behavior:sanft()}); };
   const dr = $("#dropOn");
   if(dr) dr.onclick = ()=>{ S.session=null; save(); renderCards(); };
   $("#startWalk").onclick = ()=>unterwegsRunde(host);
@@ -6721,12 +6931,12 @@ function renderCards(){
       list = shuffle(ALL.map(exQuestion).concat(WORDS.map(w=>wordQuestion(w,r))), r).slice(0,15);
     }
     startQuiz(list, host, {title:"Wiederholung", onDone:()=>{}});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   };
   $("#startW").onclick = ()=>{
     const r = rng(Date.now());
     startQuiz(shuffle(WORDS,r).slice(0,15).map(w=>wordQuestion(w,r)), host, {title:"Wortschatz"});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   };
   const si = $("#wSearch");
   si.addEventListener("input", deb(()=>listWords(si.value)));
@@ -6842,7 +7052,7 @@ function openPrompt(id){
     const m = $("#modelCard");
     m.classList.toggle("hidden");
     $("#showModel").textContent = m.classList.contains("hidden") ? "Musterlösung anzeigen" : "Musterlösung verbergen";
-    if(!m.classList.contains("hidden")) m.scrollIntoView({behavior:"smooth",block:"start"});
+    if(!m.classList.contains("hidden")) m.scrollIntoView({behavior:sanft(),block:"start"});
   };
   $("#clearW").onclick = ()=>{
     if(!confirm("Entwurf wirklich löschen?")) return;
@@ -6861,7 +7071,7 @@ function openPrompt(id){
     li.onclick = haken;
     li.onkeydown = e => { if(e.key === " " || e.key === "Enter"){ e.preventDefault(); haken(); } };
   });
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:sanft()});
 }
 
 /* ============================================================
@@ -6870,6 +7080,7 @@ function openPrompt(id){
 let ruleFilter = "";
 let ruleVar = false;
 let rulesReady = false;
+let rulesGefiltert = false;   // zeigt #ruleHost gerade eine gefilterte Liste? (siehe openRule)
 // Nennt die Regel selbst mehr als eine gültige Form?
 const VARIANTE=/beides ist zulässig|beides zulässig|auch zulässig|Duden lässt|Duden führt|Duden empfiehlt|schwank|regional|umgangssprachlich|fakultativ|freigestellt|DIN 5008|daneben auch|seltener|beide Formen|beide Schreibungen|beide Beugungen|kann gesetzt werden|darf gesetzt werden|ebenfalls zulässig|Randnotiz/i;
 function hatVarianten(r){ return VARIANTE.test(String(r.b).replace(/<[^>]*>/g," ")); }
@@ -6892,6 +7103,7 @@ function renderRules(){
 }
 function drawRules(){
   const q = norm($("#ruleSearch").value);
+  rulesGefiltert = !!(q || ruleFilter || ruleVar);
   const hits = RULES_ALL.filter(r =>
     (!ruleFilter || r.c === ruleFilter) &&
     (!ruleVar || hatVarianten(r)) &&
@@ -6929,9 +7141,15 @@ function openRule(id){
   go("regeln"); renderRegelnNav(); ensureRules();
   $("#ruleSearch").value = "";
   $$("#ruleChips .chip").forEach((x,i)=>x.classList.toggle("on", i===0));
-  if(!frischGezeichnet) drawRules();
+  /* Ohne Filter stünde nach dem Neuzeichnen dieselbe Liste da — 118 Regeln samt 156 KB
+     Regeltext, nur um offene Akkordeons zu schließen. Das geht direkt. Wer drawRules() um
+     einen Filter erweitert, nimmt ihn in rulesGefiltert auf, sonst fehlt hier die Zielregel. */
+  if(!frischGezeichnet){
+    if(rulesGefiltert) drawRules();
+    else $$("#ruleHost .acc.open").forEach(x=>x.classList.remove("open"));
+  }
   const el = $("#rule-"+id);
-  if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); }
+  if(el){ el.classList.add("open"); el.scrollIntoView({behavior:sanft(),block:"start"}); }
 }
 
 /* ============================================================
@@ -7022,21 +7240,26 @@ function renderStats(sel){
         " Situationen bearbeitet.</p>"+
       '<hr class="sep">'+
       '<div class="eyebrow">Daten</div>'+
-      '<p class="tiny muted" style="margin:8px 0 12px">Alles liegt nur in diesem Browser. Sicher dir den Fortschritt, bevor du den Verlauf löschst oder das Gerät wechselst.</p>'+
+      '<p class="tiny muted" id="datenOrt" style="margin:8px 0 12px">'+
+        (iosHomeApp()
+          ? "Alles liegt in dieser App auf diesem Gerät, getrennt vom Browser: Was du dort geübt hast, sieht die App nicht, und umgekehrt. Sichere den Fortschritt regelmäßig und vor einem Gerätewechsel."
+          : "Alles liegt nur in diesem Browser. Sicher dir den Fortschritt, bevor du den Verlauf löschst oder das Gerät wechselst."+
+            (iosBrowserTab() ? " Als App vom Home-Bildschirm hat der Trainer einen eigenen Speicher und beginnt dort leer. Zum Umziehen hier sichern und die Datei in der App über „Sicherung laden“ einlesen." : ""))+
+      "</p>"+
       (function(){
         const tage = Object.keys(S.days||{}).length;
         if(tage < 14) return "";
         const seit = S.lastExport ? daysBetween(S.lastExport, today()) : null;
         if(seit !== null && seit < 30) return "";
-        return '<div class="fb no" style="margin-bottom:12px"><b class="hd">Sicherung empfohlen</b>'+
+        return '<div class="fb no" id="sicherMahnung" style="margin-bottom:12px"><b class="hd">Sicherung empfohlen</b>'+
           "Du übst seit "+tage+" Tagen"+(seit===null?" und hast noch nie gesichert."
             :" und hast zuletzt vor "+seit+" Tagen gesichert.")+
-          " Ein gelöschter Browserverlauf würde alles davon mitnehmen.</div>";
+          (iosHomeApp() ? " Ohne Sicherung gibt es davon keine zweite Kopie."
+                        : " Ein gelöschter Browserverlauf würde alles davon mitnehmen.")+"</div>";
       })()+
       '<div class="row"><button class="btn ghost sm" id="exp">Fortschritt sichern</button>'+
       '<button class="btn ghost sm" id="imp">Sicherung laden</button>'+
       '<button class="btn ghost sm" id="rst">Alles zurücksetzen</button></div>'+
-      '<input type="file" id="impFile" accept="application/json" style="display:none">'+
     "</div>";
 
   const dr = $("#drill");
@@ -7051,55 +7274,13 @@ function renderStats(sel){
   };
   $("#exp").onclick = exportieren;
   $("#imp").onclick = ()=>$("#impFile").click();
-  $("#impFile").onchange = e=>{
-    const f = e.target.files[0]; if(!f) return;
-    const rd = new FileReader();
-    rd.onload = ()=>{
-      let neu;
-      try{ neu = JSON.parse(rd.result); }
-      catch(err){ toast("Das ist keine gültige Sicherungsdatei"); return; }
-      if(!neu || typeof neu !== "object" || Array.isArray(neu) ||
-         typeof neu.cards !== "object" || neu.cards === null ||
-         !("xp" in neu) || !("streak" in neu)){
-        toast("Die Datei stammt nicht aus diesem Trainer"); return;
-      }
-      const anz = Object.keys(neu.cards).length;
-      if(!confirm("Sicherung vom "+(neu.lastExport||neu.levelDate||"unbekannten Datum")+" laden?\n"+
-                  anz+" Lernkarten, Serie "+(neu.streak||0)+".\n\nDein aktueller Stand wird überschrieben."))
-        return;
-      /* Der bisherige Stand kommt zur Seite, bevor irgendetwas überschrieben wird —
-         sonst gäbe es bei einer halb passenden Datei keinen Weg zurück. */
-      let vorher = null;
-      try{ vorher = localStorage.getItem(KEY); }catch(e){}
-      S = Object.assign(load(), neu);
-      /* Der Merker für Regeländerungen muss aus der Datei kommen, nicht vom Gerät. Sonst
-         gilt für eine ältere Sicherung, was dieses Gerät längst abgearbeitet hat: die
-         betroffenen Karten blieben in ihrem alten Fach, und Nils bekäme die geänderte
-         Antwort erst in Wochen zu sehen. */
-      S.neu = neu.neu || {};
-      /* Auch die Anzeigeart steckt im Stand — ohne diese Zeile bliebe es hell, obwohl
-         „dunkel“ gesichert war. */
-      document.documentElement.setAttribute("data-theme", S.theme || "light");
-      try{
-        save(); regelAenderungen(); renderAll();
-        toast("Sicherung geladen");
-      }catch(err){
-        if(vorher !== null){
-          try{ localStorage.setItem(KEY, vorher); }catch(e){}
-          S = load();
-          document.documentElement.setAttribute("data-theme", S.theme || "light");
-          try{ renderAll(); }catch(e){}
-        }
-        toast("Die Datei ließ sich nicht laden — dein alter Stand ist zurück");
-      }
-    };
-    rd.readAsText(f);
-  };
   $("#rst").onclick = ()=>{
     if(!confirm("Wirklich alles zurücksetzen? Serie, Karten und Entwürfe gehen verloren.")) return;
     S = {xp:0,streak:0,best:0,last:null,cards:{},days:{},cat:{},writing:{},scenes:{},
          log:[],korr:{},level:null,levelDate:null,plan:null,lastExport:null,
          session:null,speak:S.speak,auto:S.auto,theme:S.theme,seenW:{}};
+    /* „Entwürfe gehen verloren“ gilt auch für den Text im Textcheck. */
+    TC = {text:"", res:null, filter:""}; tcVergessen();
     save(); renderAll(); toast("Zurückgesetzt");
   };
 }
@@ -7224,7 +7405,7 @@ function openPhraseAcc(id){
   if(!el) return;
   el.classList.add("open");
   fillAcc(el);
-  el.scrollIntoView({behavior:"smooth",block:"start"});
+  el.scrollIntoView({behavior:sanft(),block:"start"});
 }
 
 function fillPhrases(p, reg){
@@ -7339,9 +7520,9 @@ function openScene(id){
   $("#showS").onclick = ()=>{
     const m = $("#sModel"); m.classList.toggle("hidden");
     $("#showS").textContent = m.classList.contains("hidden") ? "Musterformulierung anzeigen" : "Musterformulierung verbergen";
-    if(!m.classList.contains("hidden")) m.scrollIntoView({behavior:"smooth",block:"start"});
+    if(!m.classList.contains("hidden")) m.scrollIntoView({behavior:sanft(),block:"start"});
   };
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:sanft()});
 }
 
 /* ---------- Baustein des Tages (für die Heute-Ansicht) ---------- */
@@ -7540,7 +7721,7 @@ function renderDrill(){
       '<div class="eyebrow">Hinweis</div>'+
       '<p class="small muted" style="margin-top:6px">Beide Drills zählen ganz normal in die Wiederholung ein: Was du verwechselst, taucht in den nächsten Tagen wieder auf.</p>'+
     "</div>";
-  const start = list => { startQuiz(list, $("#stHost"), {title:"Drill"}); window.scrollTo({top:0,behavior:"smooth"}); };
+  const start = list => { startQuiz(list, $("#stHost"), {title:"Drill"}); window.scrollTo({top:0,behavior:sanft()}); };
   $("#d20").onclick = ()=>start(caseDrillQuestions(20));
   $("#d40").onclick = ()=>start(caseDrillQuestions(40));
   $("#dS").onclick = ()=>{
@@ -7632,7 +7813,7 @@ function openKorr(id){
   const t = KORREKTUR.find(x=>x.id===id);
   KO = {t, marked:new Set(), done:false, map:korrErrIdx(t)};
   drawKorr();
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:sanft()});
 }
 
 function drawKorr(){
@@ -7871,7 +8052,7 @@ function renderJournal(){
     const list = shaky.slice(0,15).map(k=>frageZuSchluessel(k, r)).filter(Boolean);
     if(!list.length){ toast("Keine übbaren Karten gefunden"); return; }
     startQuiz(shuffle(list,r), $("#pSub"), {title:"Meine Fehler"});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   };
   const cl = $("#jClear");
   if(cl) cl.onclick = ()=>{
@@ -7884,7 +8065,7 @@ function renderJournal(){
     if(!items.length){ toast("Zu dieser Regel gibt es keine Aufgaben"); return; }
     const r = rng(Date.now());
     startQuiz(shuffle(items,r).map(exQuestion), $("#pSub"), {title:"Gezieltes Üben"});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   });
 }
 
@@ -7918,7 +8099,7 @@ function startTest(host){
   const before = JSON.parse(JSON.stringify(S.cat || {}));
   const qs = testQuestions();
   startQuiz(qs, host, {title:"Einstufung", art:"test", vorher:before, onDone:testAuswertung(before)});
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:sanft()});
 }
 
 /* ---------- Lernplan ---------- */
@@ -8017,7 +8198,7 @@ function renderPlan(){
     const foc = planFocus(); const r = rng(Date.now());
     const pool = foc ? ALL.filter(i=>i.c===foc) : ALL;
     startQuiz(shuffle(pool,r).slice(0,12).map(exQuestion), host, {title: foc?CATS[foc].n:"Gemischt"});
-    window.scrollTo({top:0,behavior:"smooth"});
+    window.scrollTo({top:0,behavior:sanft()});
   };
   const fw = $("#pFwd"); if(fw) fw.onclick = ()=>{ S.plan.shift=(S.plan.shift||0)+1; save(); renderPlan(); renderHeute(); };
   const bw = $("#pBack"); if(bw) bw.onclick = ()=>{ S.plan.shift=(S.plan.shift||0)-1; save(); renderPlan(); renderHeute(); };
@@ -8376,13 +8557,41 @@ function analyse(txt){
 const SEVN = {hart:"Klarer Fehler", pruef:"Bitte prüfen", stil:"Stil", form:"Wirkung und Ton"};
 let TC = {text:"", res:null, filter:""};
 
+/* Der Text im Textcheck übersteht einen App-Wechsel. Typischer Ablauf: Text aus Mail
+   kopieren, hier prüfen, zurück nach Mail. Verwirft iOS die Seite in der Zeit, startete
+   die App neu und der Text war weg — als einziges Eingabefeld ohne Entwurf. Eigener
+   Schlüssel neben KEY: nicht im Lernstand, nicht in der Sicherung, und der storage-Hörer
+   für ein zweites Fenster reagiert nur auf KEY. Gespeichert wird nur der Text; das
+   Ergebnis entsteht neu, weil seine Fundstellen auf die Prüfmuster selbst zeigen. */
+const TC_KEY = KEY + ".tc";
+const TC_DAUER = 24*3600*1000;
+function tcSichern(){
+  try{
+    if(!TC.text || !TC.text.trim()){ localStorage.removeItem(TC_KEY); return; }
+    localStorage.setItem(TC_KEY, JSON.stringify({text:TC.text,
+      geprueft: !!(TC.res && TC.res.text === TC.text), ts: Date.now()}));
+  }catch(e){}
+}
+function tcVergessen(){ try{ localStorage.removeItem(TC_KEY); }catch(e){} }
+function tcWiederholen(){
+  let x = null;
+  try{ x = JSON.parse(localStorage.getItem(TC_KEY) || "null"); }catch(e){ x = null; }
+  if(!x || typeof x.text !== "string" || !x.text.trim() || typeof x.ts !== "number" ||
+     Date.now() - x.ts > TC_DAUER || x.ts > Date.now() + 60000){ if(x) tcVergessen(); return; }
+  TC.text = x.text;
+  if(x.geprueft){ try{ TC.res = analyse(TC.text); TC.res.text = TC.text; }catch(e){ TC.res = null; } }
+  WT.tab = "check";
+}
+
 function renderCheck(){
   const host = $("#wSub");
   host.innerHTML =
     '<div class="card flat">'+
       '<div class="eyebrow">Textcheck</div>'+
       '<p class="small muted" style="margin-top:6px">Füg deinen Text ein — Mail, Hausarbeit, Nachricht. '+
-      "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen.</p>"+
+      "Die Prüfung läuft komplett in deinem Browser: nichts wird hochgeladen. "+
+      "Damit der Text einen Wechsel in eine andere App übersteht, bleibt er auf diesem Gerät zwischengespeichert; "+
+      "nach einem Tag verwirft die App ihn beim nächsten Start, „Leeren“ löscht ihn sofort.</p>"+
       '<p class="tiny muted" style="margin-top:8px"><b>Was sie kann und was nicht:</b> '+CHECKS_ALL.length+' Muster suchen nach bekannten Stolperstellen. An den eigenen Übungstexten dieser App erkennt sie <b>etwa vier Fünftel</b> der eingebauten Fehler. An fremden Texten ist es deutlich weniger: In 56 unabhängig geschriebenen Texten mit rund 300 typischen Fehlern fand sie <b>knapp 40 Prozent</b>; auf 56 fehlerfreien Texten meldete sie keinen einzigen Fehler. Sie sieht keine Bedeutung: Ob ein Relativpronomen im richtigen Fall steht, ob ein Komma vor einem falsch geschriebenen Wort fehlt oder ob dein Argument trägt, kann sie nicht beurteilen. Sie ersetzt kein Gegenlesen — sie fängt die Muster ab, die man selbst überliest.</p>'+
     "</div>"+
     '<div class="card">'+
@@ -8403,13 +8612,13 @@ function renderCheck(){
   const cnt = ()=>{ const n = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
     $("#tcw").textContent = n + (n===1?" Wort":" Wörter"); };
   cnt();
-  ta.addEventListener("input", ()=>{ cnt(); TC.text = ta.value; });
+  ta.addEventListener("input", ()=>{ cnt(); TC.text = ta.value; tcSichern(); });
   /* Der geprüfte Text gehört zum Ergebnis. Die Fundstellen sind Zeichenpositionen; wer
      nach dem Prüfen im Feld weiterschreibt, verschiebt sie — die Markierungen saßen dann
      auf den falschen Wörtern, weil drawCheck() aus dem inzwischen geänderten TC.text
      schnitt. */
-  $("#tcGo").onclick = ()=>{ TC.text = ta.value; TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; drawCheck(); };
-  $("#tcClear").onclick = ()=>{ ta.value=""; TC.text=""; TC.res=null; cnt(); $("#tcRes").innerHTML=""; };
+  $("#tcGo").onclick = ()=>{ TC.text = ta.value; TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; tcSichern(); drawCheck(); };
+  $("#tcClear").onclick = ()=>{ ta.value=""; TC.text=""; TC.res=null; tcVergessen(); cnt(); $("#tcRes").innerHTML=""; };
   $("#tcDemo").onclick = ()=>{
     ta.value = "Sehr geehrte Frau Weber, Vielen Dank für Ihre Nachricht. Ich wollte fragen ob ich die Arbeit "+
       "später abgeben darf. Wegen dem Zeitplan wäre mir das eigentlich sehr wichtig. Es gibt da nämlich eine "+
@@ -8417,7 +8626,7 @@ function renderCheck(){
       "Ich habe mit dem Kollege gesprochen und er meinte, das die Auswertung Ende August vorliegt. "+
       "Das würde bedeuten, dass ich schneller wie geplant arbeiten würde müssen. "+
       "Danke im Voraus für Ihre Mühe. Mit freundlichen Grüssen, Nils";
-    TC.text = ta.value; cnt(); TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; drawCheck();
+    TC.text = ta.value; cnt(); TC.res = analyse(ta.value); TC.res.text = ta.value; TC.filter=""; tcSichern(); drawCheck();
   };
   if(TC.res) drawCheck();
 }
@@ -8523,10 +8732,10 @@ function buildIndex(){
        im Filterfeld — vorher steht die gefilterte Liste noch gar nicht. */
     go:()=>{ ST.tab="faelle"; ST.typ=""; ST.kas=""; ST.nurFallen=false; go("saetze");
       const si=$("#crSearch"); if(si){ si.value=e.w; si.dispatchEvent(new Event("input")); }
-      setTimeout(()=>{ const l=$("#crHost"); if(l) l.scrollIntoView({behavior:"smooth",block:"start"}); }, 220); }}));
+      setTimeout(()=>{ const l=$("#crHost"); if(l) l.scrollIntoView({behavior:sanft(),block:"start"}); }, 220); }}));
   SATZ.forEach(x=>ix.push({k:"Satzbau", t:x.t, sub:x.short, s:strip(x.b), c:"satz",
     go:()=>{ ST.tab="bau"; go("saetze");
-      const el=$("#sa-"+x.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); } }}));
+      const el=$("#sa-"+x.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:sanft(),block:"start"}); } }}));
   TABLES.forEach(x=>ix.push({k:"Tabelle", t:x.t, s:strip(x.b), c:"gram",
     go:()=>{ ST.tab="tab"; go("saetze"); }}));
   PHRASES.forEach(p=>ix.push({k:"Baustein", t:p.f, sub:p.g, c:"form",
@@ -8535,7 +8744,7 @@ function buildIndex(){
       openPhraseAcc(p.id); }}));
   WORDS.forEach(w=>ix.push({k:"Wort", t:w.w, sub:w.p, s:w.d+" "+w.ex+" "+(w.s||""), c:"wort",
     go:()=>{ go("karten"); const si=$("#wSearch"); if(si){ si.value=w.w; si.dispatchEvent(new Event("input")); }
-      setTimeout(()=>{ const l=$("#wList"); if(l) l.scrollIntoView({behavior:"smooth",block:"start"}); }, 220); }}));
+      setTimeout(()=>{ const l=$("#wList"); if(l) l.scrollIntoView({behavior:sanft(),block:"start"}); }, 220); }}));
   ALL.forEach(i=>ix.push({k:"Übung", t:strip(i.q).slice(0,80), s:strip(i.e), c:i.c,
     go:()=>{ go("heute"); startQuiz([exQuestion(i)], $("#dailyHost"), {title:CATS[i.c].n}); }}));
   KORREKTUR.forEach(t=>ix.push({k:"Korrekturtext", t:t.t, sub:t.ctx, s:t.txt, c:"komma",
@@ -8563,7 +8772,7 @@ function openSearch(){
     box.innerHTML =
       '<div class="srch-bd" id="srchBd"></div>'+
       '<div class="srch">'+
-        '<input id="srchIn" placeholder="Alles durchsuchen — Regeln, Fälle, Bausteine, Wörter, Übungen …" autocomplete="off">'+
+        '<input id="srchIn" enterkeyhint="search" placeholder="Alles durchsuchen — Regeln, Fälle, Bausteine, Wörter, Übungen …" autocomplete="off">'+
         '<button class="srch-x" id="srchX" type="button" aria-label="Suche schließen" title="Suche schließen">✕</button>'+
         '<div id="srchOut" class="srch-out"></div>'+
         '<div class="srch-ft kbd">Enter öffnet den ersten Treffer · Esc schließt</div>'+
@@ -8576,6 +8785,12 @@ function openSearch(){
       if(e.key === "Escape") closeSearch();
       if(e.key === "Enter"){ const f = $("#srchOut .sres"); if(f) f.click(); }
     });
+    /* Die Tastatur verkleinert auf dem iPhone nur den sichtbaren Ausschnitt; das Ende der
+       Trefferliste lag dahinter. Wer in der Liste wischt, will lesen, nicht tippen. */
+    $("#srchOut").addEventListener("touchmove", ()=>{
+      const i = $("#srchIn");
+      if(document.activeElement === i) i.blur();
+    }, {passive:true});
   }
   /* Ohne Fessel wandert ein Shift+Tab aus dem Suchfenster in die Seite dahinter — der
      Fokus steht dann unsichtbar auf einem Knopf, den Enter auslöst, und plötzlich läuft
@@ -8587,7 +8802,10 @@ function openSearch(){
   box.classList.add("on");
   $("#srchIn").value = "";
   drawSearch();
-  setTimeout(()=>$("#srchIn").focus(), 30);
+  /* Synchron im Tipp: WebKit zeigt die Tastatur bei focus() nur, solange ein
+     Nutzerereignis verarbeitet wird. Mit dem alten 30-ms-Timer ging auf dem iPhone das
+     Suchfenster auf, aber keine Tastatur — jede Suche kostete einen zweiten Tipp. */
+  $("#srchIn").focus();
 }
 function closeSearch(){
   const b = $("#srchWrap"); if(b) b.classList.remove("on");
@@ -8674,7 +8892,7 @@ function renderExtras(){
     h.onkeydown = e => { if(e.key === " " || e.key === "Enter"){ e.preventDefault(); auf(); } };
   });
   $("#tb1go").onclick = e=>{ e.stopPropagation(); ST.tab="bau"; go("saetze");
-    const el=$("#sa-"+s.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); } };
+    const el=$("#sa-"+s.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:sanft(),block:"start"}); } };
   $("#tb1dr").onclick = e=>{ e.stopPropagation(); ST.tab="drill"; go("saetze");
     const b=$("#d20"); if(b) b.click(); };
   $("#tb2go").onclick = e=>{ e.stopPropagation(); FT.tab="bausteine"; FT.grp=p.g; FT.ctx=""; go("formulieren");
@@ -8867,7 +9085,8 @@ function renderRegelnNav(){
       '<div class="card noprint" style="margin-bottom:16px">'+
         '<div class="eyebrow">Spickzettel</div>'+
         '<p class="small muted" style="margin-top:6px">Alles Wichtige auf wenigen Seiten. '+
-        "Über „Drucken“ kannst du ihn auch als PDF sichern — im Druckdialog „Als PDF sichern“ wählen.</p>"+
+        "Über „Drucken“ kannst du ihn auch als PDF sichern: am Computer im Druckdialog PDF als Ziel wählen, "+
+        "auf dem iPhone die Vorschau im Druckdialog mit zwei Fingern aufziehen und über Teilen „In Dateien sichern“.</p>"+
         '<div class="row" style="margin-top:12px"><button class="btn" id="chPrint">Drucken / als PDF sichern</button></div>'+
       "</div>" + cheatHTML();
     $("#cheatHost").dataset.done = "1";
@@ -8909,6 +9128,54 @@ function updHud(){
   $("#hudStreak").textContent = "🔥 " + S.streak;
   $("#hudXp").textContent = S.xp + " XP";
 }
+/* Laden einer Sicherung — gebunden einmal beim Start an das feste #impFile. */
+function sicherungLaden(e){
+  const f = e.target.files[0]; if(!f) return;
+  /* Das Feld bleibt stehen; ohne Zurücksetzen löste dieselbe Datei kein zweites change aus. */
+  try{ e.target.value = ""; }catch(x){}
+  const rd = new FileReader();
+  rd.onload = ()=>{
+    let neu;
+    try{ neu = JSON.parse(rd.result); }
+    catch(err){ toast("Das ist keine gültige Sicherungsdatei"); return; }
+    if(!neu || typeof neu !== "object" || Array.isArray(neu) ||
+       typeof neu.cards !== "object" || neu.cards === null ||
+       !("xp" in neu) || !("streak" in neu)){
+      toast("Die Datei stammt nicht aus diesem Trainer"); return;
+    }
+    const anz = Object.keys(neu.cards).length;
+    if(!confirm("Sicherung vom "+(neu.lastExport||neu.levelDate||"unbekannten Datum")+" laden?\n"+
+                anz+" Lernkarten, Serie "+(neu.streak||0)+".\n\nDein aktueller Stand wird überschrieben."))
+      return;
+    /* Der bisherige Stand kommt zur Seite, bevor irgendetwas überschrieben wird —
+       sonst gäbe es bei einer halb passenden Datei keinen Weg zurück. */
+    let vorher = null;
+    try{ vorher = localStorage.getItem(KEY); }catch(e){}
+    S = Object.assign(load(), neu);
+    /* Der Merker für Regeländerungen muss aus der Datei kommen, nicht vom Gerät. Sonst
+       gilt für eine ältere Sicherung, was dieses Gerät längst abgearbeitet hat: die
+       betroffenen Karten blieben in ihrem alten Fach, und Nils bekäme die geänderte
+       Antwort erst in Wochen zu sehen. */
+    S.neu = neu.neu || {};
+    /* Auch die Anzeigeart steckt im Stand — ohne diese Zeile bliebe es hell, obwohl
+       „dunkel“ gesichert war. */
+    themaSetzen();
+    try{
+      save(); regelAenderungen(); renderAll();
+      toast("Sicherung geladen");
+    }catch(err){
+      if(vorher !== null){
+        try{ localStorage.setItem(KEY, vorher); }catch(e){}
+        S = load();
+        themaSetzen();
+        try{ renderAll(); }catch(e){}
+      }
+      toast("Die Datei ließ sich nicht laden — dein alter Stand ist zurück");
+    }
+  };
+  rd.readAsText(f);
+}
+
 /* renderFortschritt() gehört hier hinein: „Sicherung laden“ und „Alles zurücksetzen“
    sitzen selbst in dieser Ansicht, und ausgerechnet sie blieb als einzige stehen. Nach dem
    Laden einer Sicherung stand die Kopfzeile auf „🔥 21“, während zwei Zeilen darunter
@@ -8917,14 +9184,30 @@ function renderAll(){
   renderHeute(); renderSchreiben(); renderRegelnNav(); renderFortschritt(); updHud();
 }
 
+/* Die Statusleiste der Home-Bildschirm-App färbt iOS nach theme-color. Mit zwei Metas nach
+   prefers-color-scheme folgte sie dem System, die App aber ihrem eigenen Schalter: abends
+   stand über der hellen App eine dunkle Leiste. Jetzt setzt der Schalter beides. Die Farben
+   sind --bg der beiden Themes; tests/suite.js vergleicht sie. */
+const THEMA_FARBE = {light:"#f7f5f1", dark:"#14171a"};
+function themaSetzen(){
+  const t = S.theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", S.theme || "light");
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>{
+    m.removeAttribute("media"); m.setAttribute("content", THEMA_FARBE[t]);
+  });
+}
+
 /* Start */
-document.documentElement.setAttribute("data-theme", S.theme || "light");
+themaSetzen();
 $("#themeBtn").onclick = ()=>{
   S.theme = (S.theme === "dark") ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", S.theme);
+  themaSetzen();
   save();
 };
-$("#dateLbl").textContent = new Date().toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});
+function datumZeigen(){
+  $("#dateLbl").textContent = new Date().toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});
+}
+datumZeigen();
 $$(".tab").forEach(t => t.onclick = ()=>go(t.dataset.v));
 $("#searchBtn").onclick = openSearch;
 document.addEventListener("keydown", e=>{
@@ -8942,24 +9225,110 @@ document.addEventListener("keydown", e=>{
   const n = "1234".indexOf(e.key);
   if(n >= 0){ const b = qAll(".opt")[n]; if(b && !b.disabled) b.click(); }
 });
+$("#impFile").onchange = sicherungLaden;
+tcWiederholen();
 renderAll();
 if(standDefekt) zeigeLesewarnung();
+
+/* Serie zurücksetzen, wenn ein Tag ausgelassen wurde. Rechnen und Zeichnen sind getrennt,
+   weil tagesWechsel() dasselbe braucht, aber nicht jederzeit zeichnen darf. */
+function serieVerfallen(){
+  if(S.last && daysBetween(S.last, today()) > 1 && S.streak > 0){ S.streak = 0; save(); return true; }
+  return false;
+}
+
+/* Die Home-Bildschirm-App auf dem iPhone wird beim Verlassen eingefroren und beim Öffnen
+   fortgesetzt, ohne neu zu laden — auch am nächsten Morgen. Dann standen oben das Datum von
+   gestern, auf „Heute“ „Erledigt ✓“ ohne „Loslegen“, und die Serie war nicht zurückgesetzt.
+   Dasselbe gilt für jeden Tab, der über Nacht offen bleibt. tagesWechsel() vergleicht nur
+   ein Datum und darf deshalb bei jedem Ereignis laufen; an visibilityState hängt sie nicht,
+   weil iOS den Zustand in Home-Bildschirm-Apps nicht in jeder Fassung richtig meldet.
+   Gezeichnet wird nicht, solange auf „Heute“ eine Runde läuft oder der Unterwegs-Modus steht:
+   renderHeute() überschreibt #walkHost, und body.walk hält die Reiter verborgen — Nils säße
+   ohne Reiterleiste fest. Der Tag bleibt dann offen und wird beim nächsten Ereignis nachgeholt;
+   „Fertig“ führt ohnehin über go("heute"). Eine Runde in einer anderen Ansicht (Karten,
+   Einstufung) sperrt nicht — genau wie in go(). */
+let angezeigterTag = today();
+function rundeIn(ansicht){
+  return !!(Q && !Q.done && Q.host && Q.host.closest && Q.host.closest(".view") === ansicht);
+}
+function tagesWechsel(){
+  const t = today();
+  if(t === angezeigterTag) return;
+  datumZeigen(); serieVerfallen(); updHud();
+  if(document.body.classList.contains("walk") || rundeIn($("#v-heute"))) return;
+  angezeigterTag = t;
+  renderHeute();
+}
+
+/* Korrekturen erreichen die Home-Bildschirm-App sonst erst nach einem echten Neustart: sw.js
+   holt die Seite nur bei einer Navigation, und die App hat keinen Neuladen-Knopf. Wer eine
+   korrigierte Karte in der alten Fassung beantwortet, lernt die alte Antwort, und NEU_GELERNT
+   greift danach nicht mehr. Deshalb lädt die App nach einer langen Pause neu — aber nur, wenn
+   dabei nichts verloren geht:
+   - mit steuerndem Service Worker, sonst stünde offline eine Fehlerseite da (file:, erster Start);
+   - nach mindestens 30 Minuten im Hintergrund, und nur an einem neuen Tag oder nach 6 Stunden
+     seit dem Laden — ein kurzer Blick in eine andere App lädt nichts neu;
+   - nicht, wenn der Speicher streikt: dann liegt der Fortschritt nur im Arbeitsspeicher;
+   - nicht, solange die Warnung zum unlesbaren Stand steht: Sie verschwände ohne Zustimmung;
+   - nicht bei einer Runde in der sichtbaren Ansicht, offener Fehlersuche oder offenem
+     Schreibfeld (Entwürfe speichern mit kurzer Verzögerung). Eine Runde in einer anderen
+     Ansicht ist über sitzungSichern() abgelegt und lässt sich danach fortsetzen — sie
+     sperrte sonst das Neuladen, bis eine neue Runde sie ablöst. Der Text im Textcheck wird
+     vor dem Neuladen frisch abgelegt und übersteht es. */
+let GELADEN = {ms: Date.now(), tag: today()};
+let verstecktSeit = 0;
+function darfFrischLaden(pause){
+  let sw = null;
+  try{ sw = navigator.serviceWorker; }catch(e){ sw = null; }
+  if(!sw || !sw.controller) return false;
+  if(!(pause >= 30*60000)) return false;
+  if(today() === GELADEN.tag && Date.now() - GELADEN.ms < 6*3600000) return false;
+  if(speicherDefekt || standDefekt) return false;
+  if(rundeIn(document.querySelector(".view.on"))) return false;
+  if(KO && !KO.done && $("#ktText")) return false;   // über den Unterreiter verlassen: KO bleibt stehen
+  if($("#wArea") || $("#sArea")) return false;
+  return true;
+}
+/* Vor dem Neuladen den Textcheck-Text frisch ablegen: Ein Text, der noch im Feld steht, wäre
+   nach mehr als einem Tag im Hintergrund sonst beim Start als abgelaufen verworfen worden.
+   Und bis die neue Seite da ist, vergehen bis zu 2,5 s (GEDULD in sw.js) — so lange landete
+   ein Tipp noch in der alten Seite: Eine eben gestartete Runde verschwand, getippter Text
+   auch. Deshalb wird die alte Seite vorher gesperrt. */
+function frischLaden(){
+  tcSichern();
+  if(Q && !Q.done) sitzungSichern();
+  document.body.classList.add("laedt");
+  $$(".head, .wrap").forEach(e=>{ try{ e.inert = true; }catch(x){} });
+  toast("Wird aktualisiert …");
+  seiteNeuLaden();
+}
+function seiteNeuLaden(){ location.reload(); }   // eigene Funktion: jsdom kann nicht neu laden
+function zurueckAusDemHintergrund(){
+  const pause = verstecktSeit ? Date.now() - verstecktSeit : 0;
+  verstecktSeit = 0;
+  if(darfFrischLaden(pause)){ frischLaden(); return; }
+  tagesWechsel();
+}
 
 /* Kommt die App aus dem Hintergrund zurück und läuft noch eine Unterwegs-Runde, muss die
    Bildschirmsperre neu angefordert werden — der Browser hat sie beim Wegblenden freigegeben. */
 document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState === "hidden"){ verstecktSeit = Date.now(); return; }
   if(document.visibilityState === "visible" && Q && Q.walk && !Q.done) bildschirmWachhalten(true);
+  zurueckAusDemHintergrund();
 });
+/* iOS setzt teils über den Seitencache fort und meldet das mit pageshow, nicht mit
+   visibilitychange. focus fängt den Rest; am Desktop feuert es oft, ist dort aber ohne
+   Tageswechsel folgenlos. */
+window.addEventListener("pagehide", ()=>{ verstecktSeit = Date.now(); });
+window.addEventListener("pageshow", e=>{ if(e && e.persisted) zurueckAusDemHintergrund(); else tagesWechsel(); });
+window.addEventListener("focus", tagesWechsel);
 
 /* Eine unterbrochene Runde nicht verlieren */
 (function(){ if(sitzungOffen()){ go("karten"); } })();
 
-/* Serie zurücksetzen, wenn ein Tag ausgelassen wurde */
-(function(){
-  if(S.last && daysBetween(S.last, today()) > 1 && S.streak > 0){
-    S.streak = 0; save(); updHud(); renderHeute();
-  }
-})();
+(function(){ if(serieVerfallen()){ updHud(); renderHeute(); } })();
 
 /* Offline-Fähigkeit, wenn die App über einen Server läuft.
    Als lokale Datei (file:) gibt es keinen Service Worker — dort ist ohnehin alles da.

@@ -2042,6 +2042,164 @@ const daIst = n => fs.existsSync(path.join(wurzel, n));
     /\.acc\{scroll-margin-top:/.test(app), "Regel fehlt");
 }
 
+/* Fehlerklasse „Hover klebt auf dem iPhone“: Ein Tipp setzt :hover und hält es fest.
+   Der Hover der Antwortoption glich dem Zustand „richtig“, und WebKit überträgt ihn beim
+   Neuzeichnen auf das Element, das danach an der Tippstelle liegt. Jede Regel mit :hover
+   muss deshalb in @media(hover:hover …) stehen — an ihrer Stelle, damit die Kaskade gegen
+   .on/.sel/.done gleich bleibt. */
+{
+  const css = lies("Deutsch-Trainer.html").split("<style>")[1].split("</style>")[0].replace(/\/\*[\s\S]*?\*\//g, "");
+  const hoverOhneAbfrage = c => {
+    const out = []; const stapel = []; let sel = "";
+    for (let i = 0; i < c.length; i++) {
+      const z = c[i];
+      if (z === "{") { const kopf = sel.trim(); stapel.push(kopf);
+        if (!kopf.startsWith("@") && /:hover/.test(kopf) && !stapel.slice(0, -1).some(k => /^@media[^{]*hover\s*:\s*hover/.test(k))) out.push(kopf);
+        sel = ""; }
+      else if (z === "}") { stapel.pop(); sel = ""; }
+      else if (z === ";" && !stapel.length) sel = "";
+      else sel += z;
+    }
+    return out;
+  };
+  const frei = hoverOhneAbfrage(css);
+  P.ok("Jede :hover-Regel steht in @media(hover:hover)", !frei.length, frei.join(" · "));
+  P.ok("… und die Prüfung erkennt eine freie Regel (Positivprobe)",
+    hoverOhneAbfrage(".a{x:1}.opt:hover{y:2}@media(hover:hover){.b:hover{z:3}}").join() === ".opt:hover");
+  const koerper = sel => { const m = css.match(new RegExp(sel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\{([^}]*)\\}")); return m ? m[1].trim() : null; };
+  P.ok("Der Hover der Antwortoption sieht nicht aus wie „richtig“",
+    koerper(".opt:hover:not(:disabled)") !== null && koerper(".opt:hover:not(:disabled)") !== koerper(".opt.right"),
+    koerper(".opt:hover:not(:disabled)"));
+}
+/* Fehlerklasse „Bewegung reduzieren wird überstimmt“: Ein ausdrückliches behavior:"smooth"
+   im Skript geht der CSS-Regel scroll-behavior:auto vor. Alle Bildläufe gehen über sanft(). */
+{
+  const skript = lies("Deutsch-Trainer.html").split("<script>")[1].split("</" + "script>")[0];
+  const glatt = (skript.match(/behavior\s*:\s*["']smooth["']/g) || []).length;
+  P.ok("Kein Bildlauf im Skript erzwingt „smooth“ (alle über sanft())", glatt === 0, glatt + " Stellen");
+  P.ok("… sanft() gibt es und liefert ohne Einstellung „smooth“", daten(w, "typeof sanft === 'function' && sanft()") === "smooth");
+  /* Die eigentliche Fehlerklasse: mit „Bewegung reduzieren“ kein Gleiten. */
+  const ruhig = boot(null, { vorLaden(x) { x.matchMedia = q => ({ matches: /reduce/.test(q), media: q,
+    addListener() {}, removeListener() {}, addEventListener() {}, removeEventListener() {} }); } });
+  P.ok("… mit „Bewegung reduzieren“ liefert sanft() „auto“", daten(ruhig, "sanft()") === "auto", daten(ruhig, "sanft()"));
+  ruhig.eval("window.__sc = []; window.scrollTo = function(o){ window.__sc.push(o && o.behavior); }");
+  ruhig.document.querySelector("#catChips .chip").click();
+  P.ok("… und ein echter Bildlauf übergibt es", daten(ruhig, "__sc").includes("auto") && !daten(ruhig, "__sc").includes("smooth"),
+    daten(ruhig, "__sc"));
+}
+/* Fehlerklasse „das iPhone korrigiert die Antwort“: spellcheck="false" schaltet in WebKit
+   nur die Unterstreichung ab, nicht die Autokorrektur. Im Tippfeld der Rechtschreibaufgaben
+   hätte iOS aus „ausser“ still „außer“ gemacht. */
+{
+  const app = lies("Deutsch-Trainer.html");
+  const feld = (app.match(/<input id="fillIn"[^>]*>/) || [""])[0];
+  P.ok("Das Tippfeld hat die Autokorrektur aus", /autocorrect="off"/.test(feld), feld);
+}
+
+/* Fehlerklasse „der Ersatz legt mehr still als nötig“: tests/setup.js ersetzte click() auf
+   jedem Link, damit die Sicherung keinen Download anstößt. Ein Prüflauf, der einen Link
+   antippte, prüfte damit nichts. Jetzt ist nur der Download-Anker stillgelegt. */
+{
+  const w = boot(null);
+  w.eval("window.__a = 0; window.__dl = 0;" +
+    " const a = document.createElement('a'); a.href = '#'; a.onclick = e => { e.preventDefault(); window.__a++; }; document.body.appendChild(a); a.click();" +
+    " const b = document.createElement('a'); b.href = 'blob:x'; b.download = 'x.json'; b.onclick = e => { e.preventDefault(); window.__dl++; }; b.click();");
+  P.ok("Im Prüflauf löst click() auf einem Link seinen Handler aus", daten(w, "__a") === 1, daten(w, "__a"));
+  P.ok("… nur der Download-Anker bleibt still", daten(w, "__dl") === 0, daten(w, "__dl"));
+}
+
+/* CSS-Regeln samt der @-Blöcke, in denen sie stehen. */
+const cssRegeln = c => {
+  const out = []; const stapel = []; let sel = "", start = 0;
+  for (let i = 0; i < c.length; i++) {
+    const z = c[i];
+    if (z === "{") { stapel.push(sel.trim()); sel = ""; start = i + 1; }
+    else if (z === "}") {
+      const kopf = stapel.pop();
+      if (kopf !== undefined && !kopf.startsWith("@")) out.push({ kopf, koerper: c.slice(start, i), in: stapel.slice() });
+      sel = ""; start = i + 1;
+    }
+    else if (z === ";" && !stapel.length) sel = "";
+    else sel += z;
+  }
+  return out;
+};
+{
+  const css = lies("Deutsch-Trainer.html").split("<style>")[1].split("</style>")[0].replace(/\/\*[\s\S]*?\*\//g, "");
+  const regeln = cssRegeln(css);
+  const probe = cssRegeln("a{x:1}@media(m){b{y:2}}");
+  P.ok("Der CSS-Leser ordnet Regeln ihren Blöcken zu (Positivprobe)",
+    probe.length === 2 && probe[0].in.length === 0 && probe[1].in[0] === "@media(m)", JSON.stringify(probe));
+
+  /* Fehlerklasse „die Regel fällt beim Drehen weg“: -webkit-text-size-adjust stand in der
+     600-px-Abfrage. Quer gehalten ist jedes iPhone breiter — genau dann vergrößert WebKit
+     den Text, und genau dann galt die Regel nicht mehr. */
+  const tsa = regeln.filter(r => /-webkit-text-size-adjust/.test(r.koerper));
+  P.ok("-webkit-text-size-adjust steht außerhalb jeder Medienabfrage",
+    tsa.length > 0 && tsa.every(r => !r.in.length), tsa.map(r => r.in.join(" ") + " " + r.kopf).join(" · "));
+
+  /* Fehlerklasse „viewport-fit=cover ohne Seitenabstand“: Quer liegt der Inhalt sonst unter
+     Notch oder Dynamic Island. Die Abstände gehören in die Grundregeln — ein angehängter
+     Block überschriebe hochkant die schmaleren Abstände der Handy-Blöcke. */
+  for (const sel of [".wrap", ".head-in", ".tabs"]) {
+    const grund = regeln.find(r => r.kopf === sel && !r.in.length);
+    P.ok(sel + " hält quer Abstand zu Notch und Dynamic Island",
+      !!grund && /padding-left:max\(18px,\s*env\(safe-area-inset-left\)\)/.test(grund.koerper) &&
+        /padding-right:max\(18px,\s*env\(safe-area-inset-right\)\)/.test(grund.koerper), grund && grund.koerper);
+  }
+  const angehaengt = regeln.filter(r => r.in.length === 0 && /safe-area-inset-(left|right)/.test(r.koerper) &&
+    ![".wrap", ".head-in", ".tabs"].includes(r.kopf));
+  P.ok("… und nirgends als eigener Block, der die Handy-Abstände überschreibt", !angehaengt.length, angehaengt.map(r => r.kopf).join(", "));
+}
+
+/* Fehlerklasse „die Statusleiste folgt dem System, die App ihrem Schalter“: Zwei
+   theme-color-Metas nach prefers-color-scheme färbten die Leiste der Home-Bildschirm-App
+   abends dunkel über der hellen App. Der Schalter setzt jetzt beides. */
+{
+  const k = lies("Deutsch-Trainer.html").split("</head>")[0];
+  const metas = k.match(/<meta name="theme-color"[^>]*>/g) || [];
+  P.ok("Eine theme-color, ohne Medienabfrage", metas.length === 1 && !/media=/.test(metas[0]), metas.join(" "));
+  const w = boot(null);
+  const f = daten(w, "THEMA_FARBE");
+  P.ok("Die Farben der Statusleiste sind --bg der beiden Themes",
+    f.light === farben(":root")["--bg"] && f.dark === farben('[data-theme="dark"]')["--bg"],
+    JSON.stringify(f) + " gegen " + farben(":root")["--bg"] + " / " + farben('[data-theme="dark"]')["--bg"]);
+  const meta = () => w.document.querySelector('meta[name="theme-color"]').getAttribute("content");
+  P.ok("Beim Start hell: helle Leiste", meta() === f.light, meta());
+  w.document.querySelector("#themeBtn").click();
+  P.ok("Nach dem Umschalten dunkel: dunkle Leiste",
+    w.document.documentElement.getAttribute("data-theme") === "dark" && meta() === f.dark, meta());
+  w.document.querySelector("#themeBtn").click();
+  P.ok("… und zurück", meta() === f.light, meta());
+  const dunkel = boot({ xp: 0, streak: 0, cards: {}, days: {}, theme: "dark" });
+  P.ok("Ein dunkel gespeicherter Stand startet mit dunkler Leiste",
+    dunkel.document.querySelector('meta[name="theme-color"]').getAttribute("content") === f.dark);
+}
+
+/* Fehlerklasse „die Oberfläche verspricht, was das Gerät nicht hält“: „Der Bildschirm bleibt
+   während der Runde an“ stand auch da, wo es navigator.wakeLock gar nicht gibt. */
+{
+  const satz = w => { w.eval('go("karten")');
+    const p = [...w.document.querySelectorAll("#cardHost p.tiny")].find(x => /Unterwegs/.test(x.textContent));
+    return p ? p.textContent : ""; };
+  const mit = satz(boot(null));
+  const ohne = satz(boot(null, { vorLaden(w) { delete w.navigator.wakeLock; } }));
+  /* „anhalten“ heißt stoppen — die erste Fassung sagte „hält den Bildschirm … an“. */
+  const zusage = /hält den Bildschirm während der Runde wach|Bildschirm bleibt während der Runde an/;
+  P.ok("Mit Wake Lock sagt die Kartenansicht zu, den Bildschirm wach zu halten, und was zu tun ist, wenn er doch ausgeht",
+    zusage.test(mit) && /wo das Gerät es erlaubt/.test(mit) && /automatische Sperre/.test(mit) && !/Bildschirm[^.]* an,/.test(mit), mit);
+  P.ok("Ohne Wake Lock verspricht sie nichts", /nicht von selbst/.test(ohne) && !zusage.test(ohne), ohne);
+}
+
+/* Der Spickzettel nannte „Als PDF sichern“ — einen Eintrag, den es nur im Druckdialog des
+   Mac gibt. Auf dem iPhone führt der Weg über die Vorschau und Teilen. */
+{
+  const w = boot(null);
+  w.eval('RT.tab = "cheat"; go("regeln"); renderRegelnNav()');
+  const t = w.document.querySelector("#cheatHost .card p").textContent;
+  P.ok("Der Druckhinweis des Spickzettels passt auch zum iPhone", /iPhone/.test(t) && /In Dateien sichern/.test(t) && !/„Als PDF sichern“/.test(t), t);
+}
+
 const kopf = lies("Deutsch-Trainer.html").split("</head>")[0];
 const kopfzeilen = [
   ["viewport-fit=cover", /viewport-fit\s*=\s*cover/],
@@ -2233,11 +2391,10 @@ P.titel("F2 · Suche und Textcheck");
   w.eval("openSearch()");
   P.ok("die Seite hinter der Suche ist aus der Fokusreihenfolge",
     dd.querySelector(".wrap").inert === true, dd.querySelector(".wrap").inert);
-  /* Der Fokus muss erst wirklich weg sein, sonst prüft die Zeile darunter nichts —
-     openSearch() setzt ihn selbst erst nach 30 ms. */
-  dd.querySelector("#srchIn").focus();
-  P.ok("der Fokus liegt im Suchfeld", dd.activeElement && dd.activeElement.id === "srchIn",
-    dd.activeElement && dd.activeElement.id);
+  /* Fehlerklasse „Fokus außerhalb der Nutzergeste“: openSearch() fokussierte per 30-ms-Timer,
+     und WebKit öffnet dann keine Tastatur. Der Fokus muss direkt nach openSearch() liegen. */
+  P.ok("der Fokus liegt sofort im Suchfeld (keine Tastatur ohne Nutzergeste)",
+    dd.activeElement && dd.activeElement.id === "srchIn", dd.activeElement && dd.activeElement.id);
   w.eval("closeSearch()");
   P.ok("nach dem Schließen ist sie wieder bedienbar", dd.querySelector(".wrap").inert === false);
   P.ok("und der Fokus steht wieder, wo er herkam",
@@ -2258,8 +2415,29 @@ P.titel("F2 · Suche und Textcheck");
   w3.eval("window.__n = 0;");
   const zweiteId = daten(w3, "RULES_ALL[7].id");
   w3.eval("openRule(" + JSON.stringify(zweiteId) + ")");
-  P.ok("der zweite auch", daten(w3, "__n") === 1, daten(w3, "__n"));
+  /* Ab dem zweiten Sprung ersetzte openRule() die ganze Liste per innerHTML, obwohl ohne
+     Filter dieselbe dastand — nur um offene Akkordeons zu schließen. */
+  P.ok("der zweite zeichnet ohne Filter nicht neu", daten(w3, "__n") === 0, daten(w3, "__n"));
   P.ok("und auch diese Regel steht offen da", !!w3.document.querySelector("#rule-" + zweiteId + ".open"));
+  P.ok("… als einzige: die erste ist wieder zu",
+    w3.document.querySelectorAll("#ruleHost .acc.open").length === 1 && !w3.document.querySelector("#rule-" + ersteId + ".open"),
+    w3.document.querySelectorAll("#ruleHost .acc.open").length);
+  /* Mit aktivem Filter fehlt die Zielregel womöglich — dann muss neu gezeichnet werden. */
+  const kat = daten(w3, "RULES_ALL[7].c");
+  const fremd = daten(w3, "RULES_ALL.find(r => r.c !== " + JSON.stringify(kat) + ").id");
+  w3.document.querySelector('#ruleChips .chip[data-c="' + kat + '"]').click();
+  P.ok("(der Filter blendet die Zielregel aus)", !w3.document.querySelector("#rule-" + fremd));
+  w3.eval('go("heute"); window.__n = 0;');
+  w3.eval("openRule(" + JSON.stringify(fremd) + ")");
+  P.ok("mit aktivem Filter zeichnet der Sprung einmal neu", daten(w3, "__n") === 1, daten(w3, "__n"));
+  P.ok("… und alle Regeln sind wieder da, die Zielregel offen",
+    w3.document.querySelectorAll("#ruleHost .acc").length === daten(w3, "RULES_ALL.length") &&
+    !!w3.document.querySelector("#rule-" + fremd + ".open"),
+    w3.document.querySelectorAll("#ruleHost .acc").length);
+  w3.document.querySelector("#ruleSearch").value = "Komma";
+  w3.eval('drawRules(); go("heute"); window.__n = 0;');
+  w3.eval("openRule(" + JSON.stringify(fremd) + ")");
+  P.ok("mit Suchwort ebenso", daten(w3, "__n") === 1 && !!w3.document.querySelector("#rule-" + fremd + ".open"), daten(w3, "__n"));
 }
 
 /* ---------- G · Bedienung ohne Maus ---------- */

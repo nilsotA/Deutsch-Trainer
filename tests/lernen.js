@@ -726,8 +726,11 @@ P.titel("K · Sichern und Laden");
     const feld = d.querySelector("#impFile");
     const datei = new w.File([JSON.stringify(stand)], "sicherung.json", { type: "application/json" });
     Object.defineProperty(feld, "files", { value: [datei], configurable: true });
+    /* Auf das Ende des Imports warten, nicht fest 120 ms: Unter Last war der FileReader
+       danach noch nicht fertig, und unbeteiligte Zusicherungen wurden rot. */
+    const t = d.querySelector("#toast"); t.textContent = "";
     feld.dispatchEvent(new w.Event("change"));
-    await new Promise(r => setTimeout(r, 120));
+    for (let n = 0; n < 200 && !t.textContent; n++) await new Promise(r => setTimeout(r, 25));
   };
 
   {
@@ -738,6 +741,8 @@ P.titel("K · Sichern und Laden");
     P.ok("und die Anzeige ist dunkel",
       w.document.documentElement.getAttribute("data-theme") === "dark",
       w.document.documentElement.getAttribute("data-theme"));
+    P.ok("… samt der Statusleiste", w.document.querySelector('meta[name="theme-color"]').getAttribute("content") === daten(w, "THEMA_FARBE.dark"),
+      w.document.querySelector('meta[name="theme-color"]').getAttribute("content"));
   }
 
   {
@@ -792,6 +797,181 @@ P.titel("K · Sichern und Laden");
     w.eval("window.__hin = []; INDEX.find(e => e.k === 'Fall').go();");
     await new Promise(r => setTimeout(r, 400));
     P.ok("der Fall-Sprung auch", daten(w, "__hin").includes("crHost"), daten(w, "__hin"));
+  }
+
+  /* ---- Home-Bildschirm-App auf dem iPhone ----
+     jsdom kennt navigator.standalone nicht; ohne diese Umgebung liefen alle Zweige für
+     die installierte App ungeprüft durch. Gesetzt wird, was WebKit dort meldet. */
+  const umgebung = (standalone, touch = 5) => ({ vorLaden(w) {
+    if (standalone !== undefined) Object.defineProperty(w.navigator, "standalone", { value: standalone, configurable: true });
+    Object.defineProperty(w.navigator, "maxTouchPoints", { value: touch, configurable: true });
+    w.__anker = 0;
+    w.HTMLAnchorElement.prototype.click = function () { w.__anker++; };
+    w.__geteilt = [];
+    w.navigator.canShare = d => !!(d && d.files && d.files.length);
+    w.navigator.share = d => { w.__geteilt.push(d);
+      return new w.Promise((ja, nein) => { w.__teilenOk = ja; w.__teilenNein = nein; }); };
+  } });
+  const lesen = (w, datei) => new Promise(r => { const f = new w.FileReader(); f.onload = () => r(f.result); f.readAsText(datei); });
+  const toastText = w => w.document.querySelector("#toast").textContent;
+  const fehler = (w, name) => { const e = new w.Error("x"); e.name = name; return e; };
+
+  {
+    /* In der Home-Bildschirm-App öffnete a[download] eine Vorschau ohne Rückweg in die
+       App, und lastExport stand schon vor dem Klick — die Mahnung schwieg 30 Tage für eine
+       Datei, die es nicht gab. */
+    const w = boot(leererStand({ xp: 40, lastExport: "2026-01-01" }), umgebung(true));
+    const heute = daten(w, "today()");
+    w.eval("exportieren()");
+    P.ok("die Home-Bildschirm-App sichert über das Teilen-Menü", daten(w, "__geteilt.length") === 1, daten(w, "__geteilt.length"));
+    P.ok("… und nicht über einen Download", daten(w, "__anker") === 0, daten(w, "__anker"));
+    const datei = w.__geteilt[0].files[0];
+    P.ok("die geteilte Datei heißt nach dem heutigen Tag", datei.name === "deutsch-trainer-" + heute + ".json", datei.name);
+    const inhalt = JSON.parse(await lesen(w, datei));
+    P.ok("… und trägt das heutige Datum", inhalt.lastExport === heute, inhalt.lastExport);
+    P.ok("solange das Teilen offen ist, gilt nichts als gesichert", daten(w, "S.lastExport") === "2026-01-01", daten(w, "S.lastExport"));
+    w.__teilenOk();
+    await new Promise(r => setTimeout(r, 0));
+    P.ok("nach dem Teilen steht das Sicherungsdatum", daten(w, "S.lastExport") === heute, daten(w, "S.lastExport"));
+    P.ok("… auch im Speicher", JSON.parse(w.localStorage.getItem("deutschtrainer.v1")).lastExport === heute);
+    P.ok("… und die Meldung sagt es", /übergeben/.test(toastText(w)), toastText(w));
+  }
+  for (const [name, erwartet] of [["AbortError", /Nicht gesichert/], ["NotAllowedError", /versuch es noch einmal/]]) {
+    const w = boot(leererStand({ lastExport: "2026-01-01" }), umgebung(true));
+    w.eval("exportieren()");
+    w.__teilenNein(fehler(w, name));
+    await new Promise(r => setTimeout(r, 0));
+    P.ok(name + ": das Sicherungsdatum bleibt stehen", daten(w, "S.lastExport") === "2026-01-01", daten(w, "S.lastExport"));
+    P.ok(name + ": kein Download als Rückfall", daten(w, "__anker") === 0, daten(w, "__anker"));
+    P.ok(name + ": die Meldung sagt, was los ist", erwartet.test(toastText(w)), toastText(w));
+  }
+  {
+    /* Ein zweiter Tipp bei offenem Menü: WebKit meldet InvalidStateError. Das erste Menü
+       ist noch da — eine Fehlermeldung darüber wäre falsch. */
+    const w = boot(leererStand({ lastExport: "2026-01-01" }), umgebung(true));
+    w.eval("exportieren()");
+    w.__teilenNein(fehler(w, "InvalidStateError"));
+    await new Promise(r => setTimeout(r, 0));
+    P.ok("ein zweiter Tipp bei offenem Menü meldet keinen Fehler", !/nicht|Nicht/.test(toastText(w)), toastText(w));
+  }
+  {
+    /* Die Mahnung verschwindet nach dem Teilen, ohne dass der Fortschritt neu gezeichnet
+       wird — dort kann eine Einstufung laufen. */
+    const days = {}; for (let i = 1; i <= 20; i++) days[tag(-i)] = { a: 12, c: 10, done: true };
+    const w = boot(leererStand({ days }), umgebung(true));
+    w.eval('go("fortschritt")');
+    P.ok("nach 20 Tagen ohne Sicherung mahnt der Fortschritt", !!w.document.querySelector("#sicherMahnung"));
+    P.ok("… in der App ohne den Browserverlauf, der dort nicht der Ort ist",
+      /keine zweite Kopie/.test(w.document.querySelector("#sicherMahnung").textContent) &&
+      !/Browserverlauf/.test(w.document.querySelector("#sicherMahnung").textContent),
+      w.document.querySelector("#sicherMahnung").textContent);
+    w.document.querySelector("#exp").click();
+    w.__teilenOk();
+    await new Promise(r => setTimeout(r, 0));
+    P.ok("nach dem Teilen ist die Mahnung weg", !w.document.querySelector("#sicherMahnung"));
+  }
+  for (const [art, opt] of [["im Browser", umgebung(undefined, 0)], ["in einer Web-App am Mac", umgebung(true, 0)],
+                             ["im Safari-Tab", umgebung(false)]]) {
+    /* Außerhalb der Home-Bildschirm-App bleibt der Download, Byte für Byte wie vorher. */
+    const w = boot(leererStand({ lastExport: "2026-01-01" }), opt);
+    w.eval("exportieren()");
+    P.ok(art + ": Sicherung als Download", daten(w, "__anker") === 1 && daten(w, "__geteilt.length") === 0,
+      daten(w, "__anker") + " Downloads, " + daten(w, "__geteilt.length") + " geteilt");
+    P.ok(art + ": das Datum steht wie bisher sofort", daten(w, "S.lastExport") === daten(w, "today()"));
+  }
+  {
+    /* Kann das Gerät die Datei nicht teilen, bleibt der alte Weg — schlechter wird es nicht. */
+    const opt = umgebung(true);
+    const w = boot(leererStand({ lastExport: "2026-01-01" }), { vorLaden(w) { opt.vorLaden(w); w.navigator.canShare = () => false; } });
+    w.eval("exportieren()");
+    P.ok("ohne Teilen von Dateien fällt die App auf den Download zurück", daten(w, "__anker") === 1, daten(w, "__anker"));
+  }
+
+  {
+    /* Der Satz über den Speicherort nannte in der App „diesen Browser“ — dort ist es gerade
+       nicht der Browser: Home-Bildschirm-Apps haben einen eigenen Speicher. */
+    const ort = opt => { const w = boot(leererStand({}), opt); w.eval('go("fortschritt")');
+      return w.document.querySelector("#datenOrt").textContent; };
+    const browser = ort(umgebung(undefined, 0)), app = ort(umgebung(true)), tab = ort(umgebung(false));
+    P.ok("im Browser bleibt der Satz, wie er war",
+      browser === "Alles liegt nur in diesem Browser. Sicher dir den Fortschritt, bevor du den Verlauf löschst oder das Gerät wechselst.", browser);
+    P.ok("in der App nennt er den getrennten Speicher", /getrennt vom Browser/.test(app) && !/Verlauf/.test(app), app);
+    P.ok("im Safari-Tab sagt er, dass die App leer beginnt", /eigenen Speicher/.test(tab) && /beginnt dort leer/.test(tab), tab);
+  }
+  {
+    /* Erster Start in der App: Wer vorher im Browser geübt hat, sieht einen leeren Trainer. */
+    const w = boot(leererStand({ auto: false }), umgebung(true));
+    const d = w.document;
+    P.ok("die leere App fragt, ob schon im Browser geübt wurde", !!d.querySelector("#umzug"));
+    let gewaehlt = 0;
+    d.querySelector("#impFile").click = () => { gewaehlt++; };
+    d.querySelector("#umzugLaden").click();
+    P.ok("… und öffnet von dort die Dateiauswahl", gewaehlt === 1, gewaehlt);
+    /* Die Dateiauswahl stand im Fortschritt unter „Übersicht“. Nach einem Blick in die
+       Einstufung oder das Fehlerjournal fehlte sie, und der Knopf tat nichts. */
+    for (const reiter of ["plan", "journal"]) {
+      w.eval('PT.tab = "' + reiter + '"; go("fortschritt"); go("heute")');
+      const feld = d.querySelector("#impFile");
+      if (feld) feld.click = () => { gewaehlt++; };
+      const vorher = gewaehlt;
+      d.querySelector("#umzugLaden").click();
+      P.ok("… auch wenn der Fortschritt auf „" + reiter + "“ steht", gewaehlt === vorher + 1, gewaehlt - vorher);
+    }
+    /* Über die Unterwegs-Runde, nicht die Tagesaufgabe: Deren erste Karte kann je nach Datum
+       eine Tippaufgabe ohne Optionen sein (DT_TAGE=7), unterwegs gibt es keine. */
+    d.querySelector("#wkNew").click();
+    tippe(w, d.querySelector("#walkHost .opt"));
+    w.eval('go("heute")');
+    P.ok("nach der ersten Antwort ist der Hinweis weg", !d.querySelector("#umzug") && Object.keys(daten(w, "S.cards")).length === 1);
+    const voll = boot(leererStand({ cards: { k01: { b: 2, d: tag(1), s: 1, w: 0 } } }), umgebung(true));
+    P.ok("mit Lernstand erscheint er nicht", !voll.document.querySelector("#umzug"));
+    P.ok("im Browser erscheint er nicht", !boot(leererStand({}), umgebung(undefined, 0)).document.querySelector("#umzug"));
+    P.ok("im Safari-Tab auch nicht", !boot(leererStand({}), umgebung(false)).document.querySelector("#umzug"));
+  }
+
+  {
+    /* Der Text im Textcheck ging verloren, wenn iOS die App beim Wechsel nach Mail verwarf. */
+    const TC = "deutschtrainer.v1.tc";
+    const w = boot(leererStand({}));
+    w.eval('WT.tab = "check"; go("schreiben"); renderSchreiben()');
+    const ta = w.document.querySelector("#tcArea");
+    ta.value = "Ich wollte fragen ob ich die Arbeit später abgeben darf.";
+    ta.dispatchEvent(new w.Event("input"));
+    const roh = JSON.parse(w.localStorage.getItem(TC) || "null");
+    P.ok("der Textcheck legt den Text beim Tippen ab", roh && roh.text === ta.value && !roh.geprueft, roh);
+    w.document.querySelector("#tcGo").click();
+    P.ok("nach dem Prüfen gilt er als geprüft", JSON.parse(w.localStorage.getItem(TC)).geprueft === true);
+    P.ok("… und steht nicht im Lernstand", !/abgeben darf/.test(w.localStorage.getItem("deutschtrainer.v1") || ""));
+    const eintrag = w.localStorage.getItem(TC);
+
+    const neu = boot(leererStand({}), { vorLaden(x) { x.localStorage.setItem(TC, eintrag); } });
+    P.ok("nach einem Neustart ist der Text wieder da", daten(neu, "TC.text") === ta.value, daten(neu, "TC.text"));
+    P.ok("… mit Ergebnis", daten(neu, "!!(TC.res && TC.res.finds.length)"), daten(neu, "TC.res && TC.res.finds.length"));
+    P.ok("… und Schreiben öffnet den Textcheck", daten(neu, "WT.tab") === "check", daten(neu, "WT.tab"));
+    neu.eval('go("schreiben")');
+    P.ok("… mit dem Text im Feld", neu.document.querySelector("#tcArea").value === ta.value);
+    neu.document.querySelector("#tcClear").click();
+    P.ok("„Leeren“ löscht ihn", neu.localStorage.getItem(TC) === null, neu.localStorage.getItem(TC));
+
+    const alt = JSON.stringify(Object.assign(JSON.parse(eintrag), { ts: Date.now() - 25 * 3600 * 1000 }));
+    const spaeter = boot(leererStand({}), { vorLaden(x) { x.localStorage.setItem(TC, alt); } });
+    P.ok("nach einem Tag verwirft die App ihn", daten(spaeter, "TC.text") === "" && spaeter.localStorage.getItem(TC) === null,
+      daten(spaeter, "TC.text"));
+    P.ok("… und Schreiben beginnt wie gewohnt", daten(spaeter, "WT.tab") === "impulse", daten(spaeter, "WT.tab"));
+
+    const kaputt = boot(leererStand({}), { vorLaden(x) { x.localStorage.setItem(TC, "{kaputt"); } });
+    P.ok("ein kaputter Eintrag stört den Start nicht", daten(kaputt, "TC.text") === "" && !!kaputt.document.querySelector("#dailyHost .card"));
+
+    const rst = boot(leererStand({}), { vorLaden(x) { x.localStorage.setItem(TC, eintrag); } });
+    rst.eval('go("fortschritt")');
+    rst.document.querySelector("#rst").click();
+    P.ok("„Alles zurücksetzen“ nimmt ihn mit", rst.localStorage.getItem(TC) === null && daten(rst, "TC.text") === "",
+      rst.localStorage.getItem(TC));
+
+    /* Ein zweites Fenster, das im Textcheck tippt, ist kein fremder Lernstand. */
+    const zwei = boot(leererStand({}));
+    zwei.dispatchEvent(new zwei.StorageEvent("storage", { key: TC, newValue: eintrag }));
+    P.ok("ein Textcheck-Eintrag aus einem zweiten Fenster sperrt das Speichern nicht", daten(zwei, "fremdStand") === false);
   }
 
 /* ---------- L · Der lange Horizont ---------- */
@@ -899,6 +1079,180 @@ P.titel("M · Was die Oberfläche übers Zählen sagt");
   P.ok("eine Antwort im freien Üben zählt fürs Tagesziel", heute.a === 1, JSON.stringify(heute));
   P.ok("und legt eine Lernkarte an", Object.keys(daten(w, "S.cards")).length === 1);
   P.ok("die Startseite verspricht nichts anderes", !/[Oo]hne Wertung/.test(text) && /Tagesziel/.test(text), text.trim().slice(0, 120));
+}
+
+/* ---------- N · Rückkehr aus dem Hintergrund ---------- */
+P.titel("N · Rückkehr aus dem Hintergrund");
+{
+  /* Die Home-Bildschirm-App auf dem iPhone wird eingefroren und am nächsten Morgen
+     fortgesetzt, ohne neu zu laden. Nachgestellt, indem die Uhr im laufenden Fenster
+     vorgestellt und dann das Ereignis der Rückkehr ausgelöst wird. */
+  const uhrVor = (w, tage) => w.eval("(function(){ var E = Date, ms = " + (tage * 86400000) + ";" +
+    " function D(){ if(arguments.length) return new (Function.prototype.bind.apply(E, [null].concat([].slice.call(arguments))));" +
+    " return new E(E.now() + ms); }" +
+    " D.prototype = E.prototype; D.now = function(){ return E.now() + ms; };" +
+    " D.parse = E.parse; D.UTC = E.UTC; Date = D; })()");
+  const sichtbar = (w, zustand) => {
+    Object.defineProperty(w.document, "visibilityState", { get: () => zustand, configurable: true });
+    w.document.dispatchEvent(new w.Event("visibilitychange"));
+  };
+  const erledigt = () => { const days = {}; days[tag(0)] = { a: 12, c: 12, done: true };
+    return leererStand({ days, streak: 5, best: 5, last: tag(0), auto: false }); };
+
+  {
+    const w = boot(erledigt()), d = w.document;
+    const datum = d.querySelector("#dateLbl").textContent;
+    P.ok("am Abend steht die Tagesaufgabe auf erledigt", /Erledigt/.test(d.querySelector("#dailyHost h2").textContent));
+    d.querySelector("#dailyHost").insertAdjacentHTML("beforeend", '<i id="marke"></i>');
+    sichtbar(w, "visible");
+    P.ok("am selben Tag zeichnet die Rückkehr nichts neu", !!d.querySelector("#marke"));
+    uhrVor(w, 1);
+    sichtbar(w, "visible");
+    P.ok("am nächsten Morgen steht eine neue Tagesaufgabe da", !!d.querySelector("#startD") &&
+      !/Erledigt/.test(d.querySelector("#dailyHost h2").textContent), d.querySelector("#dailyHost h2").textContent);
+    P.ok("… und oben das neue Datum", d.querySelector("#dateLbl").textContent !== datum, d.querySelector("#dateLbl").textContent);
+    P.ok("nach einem Tag steht die Serie noch", d.querySelector("#hudStreak").textContent === "🔥 5", d.querySelector("#hudStreak").textContent);
+    P.ok("die Unterwegs-Karte meldet das Tagesziel nicht mehr als erreicht", !/Tagesziel erreicht/.test(d.querySelector("#walkHost").textContent));
+  }
+  {
+    const w = boot(erledigt()), d = w.document;
+    uhrVor(w, 2);
+    w.dispatchEvent(new w.Event("focus"));
+    P.ok("nach zwei Tagen ist die Serie gerissen — auch über focus erkannt",
+      d.querySelector("#hudStreak").textContent === "🔥 0" && daten(w, "S.streak") === 0, d.querySelector("#hudStreak").textContent);
+  }
+  {
+    /* Eine Runde, die über Mitternacht läuft, darf nicht weggezeichnet werden. */
+    const w = boot(erledigt()), d = w.document;
+    d.querySelector("#wkNew").click();
+    const frage = d.querySelector("#walkHost .qtext").textContent;
+    const datumVorher = d.querySelector("#dateLbl").textContent;
+    uhrVor(w, 1);
+    sichtbar(w, "visible");
+    P.ok("eine laufende Unterwegs-Runde bleibt stehen", d.querySelector("#walkHost .qtext") &&
+      d.querySelector("#walkHost .qtext").textContent === frage && d.body.classList.contains("walk"));
+    P.ok("… das Datum oben springt trotzdem", d.querySelector("#dateLbl").textContent !== datumVorher &&
+      daten(w, "angezeigterTag") !== daten(w, "today()"), d.querySelector("#dateLbl").textContent);
+    w.eval("Q.done = true");
+    sichtbar(w, "visible");
+    P.ok("auch der Rückblick einer Unterwegs-Runde bleibt stehen, solange der Modus läuft",
+      d.body.classList.contains("walk") && !d.querySelector("#walkHost .walkcard"));
+    w.eval('go("heute")');
+    sichtbar(w, "visible");
+    P.ok("danach holt die nächste Rückkehr den Tag nach", daten(w, "angezeigterTag") === daten(w, "today()") && !!d.querySelector("#startD"));
+  }
+  {
+    /* Eine Runde in einer anderen Ansicht (Karten) sperrte den Tageswechsel auf „Heute“ —
+       go() lässt nicht fertige Runden dort stehen. */
+    const w = boot(erledigt()), d = w.document;
+    w.eval('go("karten")');
+    d.querySelector("#startSrs").click();
+    P.ok("(in Karten läuft eine Runde)", daten(w, "!!(Q && !Q.done && Q.host.id === 'cardHost')"));
+    w.eval('go("heute")');
+    uhrVor(w, 1);
+    sichtbar(w, "visible");
+    P.ok("eine Runde in einer anderen Ansicht hält den neuen Tag auf „Heute“ nicht auf", !!d.querySelector("#startD"),
+      d.querySelector("#dailyHost h2") && d.querySelector("#dailyHost h2").textContent);
+  }
+  {
+    const w = boot(erledigt()), d = w.document;
+    uhrVor(w, 1);
+    const ev = new w.Event("pageshow"); Object.defineProperty(ev, "persisted", { value: true });
+    w.dispatchEvent(ev);
+    P.ok("eine Rückkehr aus dem Seitencache (pageshow) holt den Tag auch", !!d.querySelector("#startD"));
+  }
+
+  /* Neu laden nach langer Pause — damit Korrekturen ankommen. jsdom kann nicht neu laden;
+     frischLaden() wird ersetzt und gezählt. */
+  const mitWorker = { vorLaden(w) { Object.defineProperty(w.navigator, "serviceWorker", { value: { controller: {}, register: () => w.Promise.resolve({}) }, configurable: true }); } };
+  const lang = 31 * 60000;
+  {
+    const w = boot(leererStand({}));
+    w.eval('GELADEN.tag = "2000-01-01"');
+    P.ok("ohne Service Worker lädt die App nicht neu (offline stünde sonst eine Fehlerseite da)", w.eval("darfFrischLaden(" + lang + ")") === false);
+  }
+  {
+    const w = boot(leererStand({}), mitWorker);
+    const darf = p => w.eval("darfFrischLaden(" + p + ")");
+    P.ok("am selben Tag, frisch geladen: kein Neuladen", darf(lang) === false);
+    w.eval("GELADEN.ms = Date.now() - 7 * 3600000");
+    P.ok("nach 6 Stunden seit dem Laden und 30 Minuten Pause: neu laden", darf(lang) === true);
+    w.eval('GELADEN.ms = Date.now(); GELADEN.tag = "2000-01-01"');
+    P.ok("an einem neuen Tag nach 30 Minuten Pause: neu laden", darf(lang) === true);
+    P.ok("nach 10 Minuten Pause nicht", darf(10 * 60000) === false);
+    P.ok("ohne gemeldete Pause nicht", darf(0) === false);
+    w.eval("speicherDefekt = true");
+    P.ok("nicht, wenn der Speicher streikt — der Fortschritt läge nur im Arbeitsspeicher", darf(lang) === false);
+    w.eval("speicherDefekt = false");
+    w.document.querySelector("#wkNew").click();
+    P.ok("nicht während einer Runde", darf(lang) === false);
+    w.eval("Q.done = true");
+    P.ok("nach dem Ende der Runde schon", darf(lang) === true);
+    w.eval('go("karten"); document.querySelector("#startSrs").click(); go("heute")');
+    P.ok("eine Runde in einer anderen Ansicht sperrt nicht — sie ist abgelegt", darf(lang) === true &&
+      daten(w, "!!(S.session && S.session.list.length)"));
+    w.eval('go("schreiben"); WT.tab = "korrektur"; renderSchreiben(); openKorr(KORREKTUR[0].id)');
+    P.ok("nicht in einer offenen Fehlersuche", darf(lang) === false);
+    w.eval('WT.tab = "check"; renderSchreiben()');
+    P.ok("eine über den Unterreiter verlassene Fehlersuche sperrt nicht auf Dauer", daten(w, "!!(KO && !KO.done)") && darf(lang) === true);
+    w.eval('KO = null; WT.tab = "impulse"; renderSchreiben(); openPrompt(PROMPTS[0].id)');
+    P.ok("nicht bei offenem Schreibfeld", !!w.document.querySelector("#wArea") && darf(lang) === false);
+    w.eval('WT.tab = "check"; renderSchreiben(); standDefekt = true');
+    P.ok("nicht, solange die Warnung zum unlesbaren Stand steht", darf(lang) === false);
+    w.eval("standDefekt = false");
+  }
+  {
+    /* Der Weg über die Ereignisse: versteckt, lange Pause, sichtbar → genau ein Neuladen. */
+    const w = boot(leererStand({}), mitWorker);
+    w.eval('window.__neu = 0; seiteNeuLaden = function(){ window.__neu++; }; GELADEN.tag = "2000-01-01"');
+    sichtbar(w, "hidden");
+    w.eval("verstecktSeit -= " + lang);
+    sichtbar(w, "visible");
+    P.ok("nach langer Pause lädt die Rückkehr neu", daten(w, "__neu") === 1, daten(w, "__neu"));
+    P.ok("… und sperrt die alte Seite, bis die neue da ist — ein Tipp dort ginge verloren",
+      w.document.body.classList.contains("laedt") && w.document.querySelector(".wrap").inert === true &&
+      w.document.querySelector(".head").inert === true);
+    w.eval('document.body.classList.remove("laedt"); document.querySelectorAll(".head, .wrap").forEach(e => e.inert = false)');
+    sichtbar(w, "hidden");
+    sichtbar(w, "visible");
+    P.ok("nach kurzer Pause nicht", daten(w, "__neu") === 1, daten(w, "__neu"));
+    P.ok("die Pause zählt ab dem Verstecken, nicht ab dem ersten Verstecken des Tages", daten(w, "verstecktSeit") === 0);
+    w.dispatchEvent(new w.Event("focus"));
+    P.ok("ein focus ohne Pause lädt nicht neu", daten(w, "__neu") === 1, daten(w, "__neu"));
+    w.eval('document.body.classList.remove("laedt"); document.querySelectorAll(".head, .wrap").forEach(e => e.inert = false)');
+    /* iOS setzt teils über den Seitencache fort: pagehide beim Gehen, pageshow mit persisted
+       bei der Rückkehr — ohne visibilitychange. */
+    const seitenwechsel = persisted => { const ev = new w.Event("pageshow"); Object.defineProperty(ev, "persisted", { value: persisted }); return ev; };
+    w.dispatchEvent(new w.Event("pagehide"));
+    w.eval("verstecktSeit -= " + lang);
+    w.dispatchEvent(seitenwechsel(true));
+    P.ok("pagehide und pageshow aus dem Seitencache laden nach langer Pause auch neu", daten(w, "__neu") === 2, daten(w, "__neu"));
+    w.eval('document.body.classList.remove("laedt"); document.querySelectorAll(".head, .wrap").forEach(e => e.inert = false)');
+    w.dispatchEvent(new w.Event("pagehide"));
+    w.eval("verstecktSeit -= " + lang);
+    w.dispatchEvent(seitenwechsel(false));
+    P.ok("… ein pageshow ohne Seitencache (erster Aufbau) nicht", daten(w, "__neu") === 2, daten(w, "__neu"));
+  }
+  {
+    /* Ein Text, der noch im Textcheck steht, darf das Neuladen nach mehr als einem Tag nicht
+       kosten: Sein Eintrag war dann abgelaufen, und der Start verwarf ihn. */
+    const w = boot(leererStand({}), mitWorker);
+    w.eval('window.__neu = 0; seiteNeuLaden = function(){ window.__neu++; }; GELADEN.tag = "2000-01-01"');
+    w.eval('WT.tab = "check"; go("schreiben"); renderSchreiben()');
+    const ta = w.document.querySelector("#tcArea");
+    ta.value = "Ich wollte fragen ob ich die Arbeit später abgeben darf.";
+    ta.dispatchEvent(new w.Event("input"));
+    const TC = "deutschtrainer.v1.tc";
+    const alt = JSON.parse(w.localStorage.getItem(TC)); alt.ts -= 25 * 3600000;
+    w.localStorage.setItem(TC, JSON.stringify(alt));
+    w.eval('go("heute")');
+    sichtbar(w, "hidden");
+    w.eval("verstecktSeit -= " + lang);
+    sichtbar(w, "visible");
+    const danach = JSON.parse(w.localStorage.getItem(TC) || "null");
+    P.ok("vor dem Neuladen legt die App den Textcheck-Text frisch ab", daten(w, "__neu") === 1 &&
+      danach && danach.text === ta.value && Date.now() - danach.ts < 60000, danach && danach.ts);
+  }
 }
 
   P.abschluss();

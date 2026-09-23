@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~790 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~815 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
@@ -41,14 +41,24 @@ Stand; nach einer Korrektur braucht es die Produktions-URL des Projekts, nicht d
 
 **Als Web-App auf dem Handy.** Über den Server ist die App installierbar und offline nutzbar:
 `manifest.webmanifest` (Standalone-Fenster, Symbol), die `apple-mobile-web-app`-Kopfzeilen für
-iOS und `sw.js` als Service Worker. Der Worker liefert aus dem Cache aus und lädt im
-Hintergrund nach — eine neue Fassung ist also beim übernächsten Start da, nie auf Kosten des
-Startens. **Die Einzeldatei bleibt davon unberührt:** Unter `file:` registriert sich kein
+iOS und `sw.js` als Service Worker. Der Worker holt die Seite **zuerst aus dem Netz**, wartet
+aber höchstens `GEDULD` (2,5 s) auf den *ganzen* Rumpf; danach kommt die Kopie aus dem Cache,
+und der Nachschub läuft über `e.waitUntil` weiter in den Cache. Eine Korrektur ist also beim
+nächsten Start da, bei schwachem Empfang beim übernächsten. Der Preis: Bei schwachem Empfang
+kostet jeder Kaltstart bis zu 2,5 s. Ein **Fortsetzen** ist kein Start — iOS friert die
+Home-Bildschirm-App ein und setzt sie oft tagelang fort, ohne zu navigieren. Deshalb springt
+`tagesWechsel()` bei der Rückkehr auf den neuen Tag, und `darfFrischLaden()` lädt nach einer
+langen Pause neu, wenn dabei nichts verloren geht (Bedingungen im Kommentar dort). **Die
+Einzeldatei bleibt davon unberührt:** Unter `file:` registriert sich kein
 Worker, das Manifest läuft ins Leere, und die App funktioniert wie vorher. Wer die Datei
 weiterreicht, gibt weiterhin eine Datei weiter. Wichtig für
 Nils: Der Lernstand liegt in `localStorage` und hängt an der Herkunft. Eine gehostete
 Fassung startet mit leerem Fortschritt; wer wechselt, exportiert vorher im Fortschritt
-seine Sicherung und importiert sie in der neuen Fassung.
+seine Sicherung und importiert sie in der neuen Fassung. **Auf dem iPhone hat die App vom
+Home-Bildschirm einen eigenen Speicher, getrennt von Safari** (Apple, WWDC23: „separate
+cookies and storage from the browser“). Die App erkennt das an `navigator.standalone`
+(`iosHomeApp()`, `iosBrowserTab()`), sagt es unter Fortschritt und bietet beim ersten Start
+an, eine Sicherung aus dem Browser zu laden. Gesichert wird dort über das Teilen-Menü.
 
 ## 2 · Aufbau der App
 
@@ -213,7 +223,17 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
   vierten Antwort. `npm run layout` zeichnet jede der 657 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 25 auf 375×667, keine auf 390×844.
-- Rundenende zeigt die Fehler nach Regel gebündelt, antippbar ins Regelwerk.
+- **Das iPhone ist das Zielgerät.** WebKit meldet den Abbruch von `speechSynthesis.cancel()`
+  **synchron** als error-Ereignis, noch innerhalb von `cancel()` — Rückrufe einer alten
+  Äußerung laufen also, bevor die neue beginnt. `vorlesen()` zählt deshalb mit `sprechNr`
+  mit, und nur der Rückruf der jüngsten Äußerung darf etwas auslösen. Der Sprech-Ersatz in
+  `tests/setup.js` bildet WebKit nach; `abbruchAsynchron` stellt Chromium nach.
+- Ein Tipp während der vorgelesenen Erklärung hält die Automatik an; 🔊 in der Leiste liest
+  die Erklärung noch einmal vor, ohne weiterzuschalten. „Weiter“ ist nach dem Bildlauf zur
+  Rückmeldung 700 ms gesperrt (`Q.weiterAb`) — der Bildlauf schob den Knopf sonst genau unter
+  den Daumen, der gerade die Antwort getippt hatte.
+- Rundenende zeigt die Fehler nach Regel gebündelt; ein Tipp klappt die Regel an Ort und
+  Stelle auf, statt ins Regelwerk zu springen und die Auswertung zu verwerfen.
 - „Nur Fehler“-Runde über `schwachRunde()` aus `schwacheSchluessel()`.
 
 ## 3 · Inhaltliche Grundsätze
@@ -283,7 +303,7 @@ node tests/lernen.js      # Erststart, Einstufung, Lernplan, Langzeitverlauf
 node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
 npm run kalender          # dieselben Läufe über sechs Kalenderversätze (dauert Minuten)
-npm run layout            # Layout in Chromium bei Handygrößen (braucht playwright-core + Chromium)
+npm run layout            # Layout in Chromium bei Handygrößen, quer mit Notch (braucht playwright-core + Chromium)
 npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
@@ -383,6 +403,12 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Der Textcheck kannte nur die eigenen Texte | Alle Korpora, gegen die der Textcheck lief, stammten aus der App — und an den eigenen Fehlersuchtexten fand er 80 %. An 56 unabhängig geschriebenen Texten mit 300 Fehlern waren es 37 %: Die Wortlisten kannten „Kollege“, aber nicht „Kommilitone“, „hoffe das ich“, aber nicht das viel häufigere „hoffe, das ich“, und „Seid gestern“ fehlte in der Zeitliste. `tests/korpus/` hält seitdem zwei fremde Korpora: **entwicklung** (daran sind die Muster gebaut, 111 → 213 von 300) und **kontrolle** (nie zum Bauen benutzt, 71 → 117 von 304). Der Abstand zwischen beiden ist Überanpassung — **wer an einem Korpus Muster baut, misst an einem anderen.** `tests/suite.js` verlangt auf den 112 fehlerfreien Texten null harte Treffer und null Prüfhinweise, hält Untergrenzen der Quote und prüft, dass die Selbstauskunft des Textchecks zur Kontrollzahl passt. Nebenbei zweimal dieselbe Lehre: Ein neues Muster (x51) lief mit einer Rückschau über den ganzen Text quadratisch — 6,7 s, gefangen von der Laufzeitprobe —, und die Rekonstruktion der Fehlersuchtexte im Prüflauf ersetzte nach „das“ → „dass“ die zweite gleiche Markierung nicht mehr, weil sie im schon veränderten Text weiterzählte. |
 | jsdom rechnet kein Layout | Alle Prüfläufe liefen in jsdom, und dort sind Breiten, Höhen und Überdeckung null. Zwei Fehler im Hauptanwendungsfall blieben deshalb unsichtbar: Auf 375×667 brauchte **jede** der 155 Wortkarten im Unterwegs-Modus Scrollen, um die vierte Antwort zu sehen (203 von 657 Karten insgesamt, jetzt 21), und „→ Regel nachlesen“ landete bei langen Regeln in deren Mitte, weil `scrollIntoView` mit `block:"center"` bei einem Element, das höher als der Bildschirm ist, die Mitte zeigt. `tests/layout.js` (`npm run layout`) misst in Chromium. Zwei Fallen beim Messen selbst: Bei Handy-Emulation **wächst der Layout-Viewport mit zu breitem Inhalt mit** (ein 600 px breites Element machte `innerWidth` zu 611 — gemessen an 611 ragte nichts über den Rand, die Positivprobe blieb stumm); gemessen wird deshalb gegen die feste Gerätebreite. Und die feste Kopfleiste ist je nach Umbruch 104 bis 119 px hoch — eine feste Zahl im CSS reichte nicht, `kopfMessen()` legt sie in `--kopf`. |
 | Der Wächter hört nur die Hälfte | Die Prüfung auf unlesbare Zeichen im Sprechtext las Frage und Optionen der Übungen — nicht die Erklärung, die nach der Antwort vorgelesen wird, und keine Wort- oder Fallkarte. Dort lag alles, was falsch klang: das Warnzeichen vor 58 Wortkarten-Hinweisen, „12 GradC“, „km oder h“, „lapidar Adj.“, „Akk oder Dat“ und „sowohl und so weiter als auch“, weil `sprechbar()` Auslassungspunkte als „und so weiter“ las. Nebenbei: Eine Wortkarte trug `<b>` im Feld `t`, das die Ansicht escaped — Nils sah das Tag als Text. `tests/inhalt.js`, Abschnitt D schickt jetzt alle 1314 Sprechtexte durch dieselbe Kette wie die App und prüft, dass keine Wortkarte HTML trägt. **Wer an `sprechbar()` dreht, hört die Erklärungen mit.** |
+| Der Ersatz bildet den falschen Browser nach | Der Sprech-Ersatz in `tests/setup.js` meldete einen Abbruch später als Ende — so macht es Chromium. WebKit meldet ihn **synchron** als error-Ereignis, noch innerhalb von `cancel()`. Der Schutz in `check()`, der die Automatik nach einem Tipp auf „Weiter“ entschärfen sollte, griff deshalb in jedem Prüflauf und auf dem iPhone nie: Die abgebrochene Erklärung armierte die Automatik auf der nächsten, unbeantworteten Frage. Der Ersatz bildet jetzt WebKit nach, `abbruchAsynchron` Chromium, und die Prüfung läuft über beide. **Ein Ersatz im Prüflauf ist eine Behauptung über einen Browser** — über den, auf dem Nils übt. |
+| Hover klebt auf dem Touchscreen | Ein Tipp setzt auf dem iPhone `:hover` und hält es fest; nach dem Neuzeichnen überträgt WebKit es auf das Element, das danach an der Tippstelle liegt. Der Hover der Antwortoption hatte dieselbe Rahmenfarbe wie „richtig“ — auf der nächsten Karte sah eine Option vorab markiert aus. Alle `:hover`-Regeln stehen jetzt **an ihrer Stelle** in `@media(hover:hover) and (pointer:fine)` (ein angehängter Block änderte die Kaskade gegen `.on`/`.sel`), und `tests/suite.js` lässt keine freie mehr durch. |
+| Der Download ohne Rückweg | In der Home-Bildschirm-App übergibt `a[download]` die Datei an eine Vorschau ohne Zurück-Knopf — heraus kommt man nur, indem man die App beendet (mehrfach berichtet, iOS 13 bis 26; an Nils' Gerät nicht geprüft). Und `lastExport` stand vor dem Klick: Die Mahnung schwieg 30 Tage für eine Datei, die nie ankam. Dort geht die Sicherung jetzt über `navigator.share({files})`, `lastExport` erst nach erfülltem Versprechen, **kein Download als Rückfall** (er ist genau der Weg, der hängt). Die Weiche ist `navigator.standalone === true` mit Touch — nicht `display-mode`, das träfe installierte Apps unter Android, die ihren Speicher mit dem Browser teilen. `tests/lernen.js`, Abschnitt K setzt die Umgebung über den Eingriff `vorLaden` in `boot()`; ohne ihn liefen alle Zweige für die installierte App ungeprüft durch. |
+| Fortsetzen ist kein Start | iOS friert die Home-Bildschirm-App beim Verlassen ein und setzt sie fort, auch am nächsten Morgen. Die App baute „Heute“ nur beim Start: oben das Datum von gestern, „Erledigt ✓“ ohne „Loslegen“, die gerissene Serie nicht zurückgesetzt. Und eine Korrektur kam erst nach einem echten Neustart an — wer die Karte vorher in der alten Fassung beantwortete, hebelte `NEU_GELERNT` aus. `tagesWechsel()` holt den Tag bei jeder Rückkehr nach (nicht über eine laufende Runde auf „Heute“ oder den Unterwegs-Modus hinweg), `darfFrischLaden()` lädt nach langer Pause neu, wenn nichts verloren geht — und sperrt die alte Seite, bis die neue da ist, sonst landen Tipps in den bis zu 2,5 s noch dort. `tests/lernen.js`, Abschnitt N stellt die Uhr **im laufenden Fenster** vor — `DT_TAGE` verschiebt nur vor dem Start und sieht diese Klasse nicht. |
+| Die Statusleiste folgt dem System | Zwei `theme-color`-Metas nach `prefers-color-scheme` färbten die Leiste der Home-Bildschirm-App nach dem System, die App folgt aber ihrem eigenen Schalter — abends stand dann eine dunkle Leiste über der hellen App (so wertet WebKit die Metas aus; am Gerät nicht angesehen). Eine Meta, und `themaSetzen()` setzt Thema und Leiste zusammen, an allen vier Stellen (Start, Schalter, zweimal Import). Die Farben stehen zweimal da; `tests/suite.js` vergleicht sie mit `--bg`. |
+| Der Ersatz legt mehr still als nötig | `tests/setup.js` ersetzte `HTMLAnchorElement.prototype.click` durch eine leere Funktion, damit die Sicherung keinen Download anstößt — für **jeden** Link. Eine neue Prüfung „ein Tipp auf den Regel-Link zählt während der Sperre nicht“ war damit wahr, ohne dass ein Handler lief; erst ihre Positivprobe („danach öffnet er“) schlug fehl. Jetzt ist nur der Anker mit `download` stillgelegt, und `tests/suite.js` prüft beide Seiten. **Ein Ersatz im Prüflauf gehört so eng wie möglich um das, was er abschalten soll.** |
 
 ## 7 · Wenn Nils etwas ergänzt haben will
 

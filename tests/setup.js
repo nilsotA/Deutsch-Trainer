@@ -53,7 +53,14 @@ function boot(stand, optionen = {}) {
       w.print = () => {};
       w.confirm = () => true;
       w.HTMLElement.prototype.scrollIntoView = () => {};
-      w.HTMLAnchorElement.prototype.click = function () {};
+      /* Nur der Download-Anker der Sicherung wird stillgelegt. Bis zum 23.09.2026 traf das
+         jeden Link: Ein Prüflauf, der „→ Regel nachlesen“ per click() antippte, löste nichts
+         aus, und seine Zusicherung „der Tipp zählt nicht“ war stumm grün. */
+      const echterAnkerKlick = w.HTMLAnchorElement.prototype.click;
+      w.HTMLAnchorElement.prototype.click = function () {
+        if (this.hasAttribute("download")) return;
+        return echterAnkerKlick.call(this);
+      };
       w.URL.createObjectURL = () => "blob:x";
       w.URL.revokeObjectURL = () => {};
       w.navigator.vibrate = () => true;
@@ -83,24 +90,40 @@ function boot(stand, optionen = {}) {
       w.__wakeVerlieren = () => sperren.forEach(s => s.__freigeben());
       w.SpeechSynthesisUtterance = function (text) { this.text = text; };
       /* Wie im echten Browser: cancel() bricht die laufende Äußerung ab und meldet
-         das als Ende. Solange der Stub hier nichts tat, konnte der Prüflauf einen
-         ganzen Fehlerweg nicht sehen — den abgebrochenen Rückruf, der die Automatik
-         auf der nächsten, unbeantworteten Frage armiert. */
+         das. Solange der Stub hier nichts tat, konnte der Prüflauf einen ganzen
+         Fehlerweg nicht sehen — den abgebrochenen Rückruf, der die Automatik auf der
+         nächsten, unbeantworteten Frage armiert.
+         WebKit (iPhone, Nils' Gerät) meldet den Abbruch SYNCHRON als error-Ereignis,
+         noch innerhalb von cancel() (SpeechSynthesis::cancel ruft speakingErrorOccurred
+         direkt auf). Chromium meldet ihn später als Ende. Bis zum 23.09.2026 bildete der
+         Stub nur Chromium nach — der Schutz in check(), der dort griff, versagte auf dem
+         iPhone, und der Prüflauf blieb grün. Standard ist deshalb WebKit;
+         optionen.abbruchAsynchron stellt Chromium nach. */
       let laufend = null;
       w.speechSynthesis = {
         cancel() {
           const u = laufend; laufend = null;
-          if (u && u.onend) setTimeout(() => u.onend(), 0);
+          if (!u) return;
+          if (optionen.abbruchAsynchron) { if (u.onend) setTimeout(() => u.onend(), 0); return; }
+          if (u.onerror) u.onerror({ type: "error", error: "canceled" });
+          else if (u.onend) u.onend();
         },
         speak(u) {
           (w.__gesagt = w.__gesagt || []).push(u.text);
           laufend = u;
+          /* Natürliches Satzende von Hand auslösen — für Prüfungen, die zwischen Antwort
+             und Satzende etwas tun (antippen, 🔊, Beenden). */
+          w.__sprichZuEnde = () => { const x = laufend; laufend = null; if (x && x.onend) x.onend(); };
           // Vorlesen sofort beenden, damit Rückrufe wie das Auto-Weiter greifen
           if (optionen.sprichSofortZuEnde && u.onend) {
             setTimeout(() => { if (laufend === u) { laufend = null; u.onend(); } }, 5);
           }
         }
       };
+      /* Eingriff vor dem Start der App — für Umgebungen, die jsdom nicht hat (etwa
+         navigator.standalone der Home-Bildschirm-App auf dem iPhone), und für weitere
+         Einträge im localStorage neben dem Lernstand. */
+      if (optionen.vorLaden) optionen.vorLaden(w);
     }
   });
   return dom.window;
