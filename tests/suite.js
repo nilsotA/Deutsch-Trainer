@@ -595,6 +595,27 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Positivprobe blieb stumm oder meldete zu viel");
 }
 
+/* Fehlerklasse „Die Korrektur bleibt auf einer Ebene liegen“, beim Akkusativ für Themen.
+   „Bei Themen immer Akkusativ“ stand über allen neun Wechselpräpositionen, gilt aber für
+   „über“ („Angst vor dem Spiel“ ist Dativ). Am 23.09.2026 in gram-wechsel und sa16 korrigiert,
+   eine Runde später stand es noch im Spickzettel und in der Fallkarte „über“. Jeder Satz, der
+   Thema und Akkusativ verbindet, nennt deshalb „über“ selbst. */
+{
+  /* Je Satzteil, nicht je Satz: In der alten Zeile stand „über das Wochenende“ weiter hinten
+     und ließ die erste Fassung dieser Prüfung durch. */
+  const themaSaetze = t => String(t).split(/(?<=[.!?])\s+|\s·\s|,\s|;\s|\s—\s/)
+    .filter(z => /(?<![\wäöüßÄÖÜ])Them(?:a|en)(?![\wäöüßÄÖÜ])[^.]*Akkusativ|Akkusativ[^.]*(?<![\wäöüßÄÖÜ])Them(?:a|en)(?![\wäöüßÄÖÜ])/.test(z));
+  const ohneUeber = t => themaSaetze(t).filter(z => !/(?<![\wäöüßÄÖÜ])über(?![\wäöüßÄÖÜ])/.test(z));
+  const themaSchief = [];
+  BESTAND.filter(x => x.sorte !== "Oberfläche").forEach(x =>
+    ohneUeber(x.t).forEach(z => themaSchief.push(x.sorte + " " + x.id + ": „" + z.slice(0, 70) + "“")));
+  P.ok("Wer den Akkusativ bei Themen nennt, nennt „über“ dazu", !themaSchief.length, themaSchief.join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Zeile des Spickzettels",
+    ohneUeber("liegen, stehen, sitzen, hängen → Dativ. Themen immer Akkusativ, Zeitangaben meist Dativ — für einen Zeitraum aber Akkusativ: über das Wochenende.").length === 1 &&
+    !ohneUeber("über beim Thema Akkusativ („über den Trainer sprechen“), Zeitangaben meist Dativ.").length,
+    "Positiv- oder Gegenprobe schlug fehl");
+}
+
 /* Grundsatz 3: Stil ist keine Regel. Die Stilregeln stehen im Regelwerk neben den
    Kommaregeln und sehen genauso aus — wer dort „falsch“ liest, hält eine Empfehlung für
    einen Fehler. Am 15.09.2026 sagte stil-kollokation „Wer sie falsch kombiniert, klingt

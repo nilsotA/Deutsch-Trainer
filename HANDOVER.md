@@ -59,6 +59,22 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Spickzettel noch einmal ganz gelesen (23.09.2026, fünfunddreißigste Runde).**
+
+- **„Themen immer Akkusativ“** stand im Spickzettel und in der Fallkarte „über“ noch so, wie es
+  eine Runde vorher in `gram-wechsel` und sa16 korrigiert worden war. Der grep auf den Halbsatz
+  lief an `<b>Themen</b> immer` vorbei. Neue Prüfung in `tests/suite.js`: Jeder Satzteil, der
+  Thema und Akkusativ verbindet, nennt „über“. Die erste Fassung prüfte je Satz und blieb gegen
+  den alten Stand stumm (das „über das Wochenende“ weiter hinten ließ sie durch) — jetzt je Satzteil.
+- **Klein-Zeile:** „die meisten“, „etwas anderes“, „alles andere“ ohne den Vorbehalt aus
+  `gross-subst` (allein stehend groß zulässig, Duden empfiehlt klein). Ergänzt.
+- **Bis-Strich:** nur „ohne Leerzeichen“; `z-gedankenstrich` nennt DIN 5008 mit Leerzeichen, und
+  der Lesehinweis verspricht beide Konventionen. Ergänzt.
+- **Zählungen:** „1 · Komma — die sechs Fälle“ über einer Tabelle mit über zwanzig Fällen, „Drei aus
+  den Listen fallen aus der Reihe“. Beide Zahlen raus. Maschinell sieht das keine Prüfung.
+
+Sonst stimmt der Spickzettel mit den Regeln überein, einschließlich der Änderungen der Runden 30–34.
+
 **Die 24 Satzbaukarten gelesen (23.09.2026, vierunddreißigste Runde).**
 
 Satz für Satz selbst gelesen. Die meisten nennen schon eine Quelle und hielten; vier Stellen nicht:
