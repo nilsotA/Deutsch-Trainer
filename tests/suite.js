@@ -1221,6 +1221,29 @@ P.ok("Die Vorbildprüfung schlägt bei einem Prüfhinweis an", vorbildProbe > 0,
   const spickProbe = daten(w, 'analyse("Im großen und ganzen war das Standart.").finds.filter(f=>f.c.sev==="hart").length');
   P.ok("Die Spickzettelprüfung schlägt bei einem echten Fehler an", spickProbe >= 2, spickProbe);
 }
+/* Fehlerklasse „die App zeigt als richtig, was ihre eigene Norm ausschließt“: n-gliederung
+   gab „24 000 oder 24.000“ als gleichwertig aus, die Übung q05 „1.250.000 oder 1 250 000“
+   als richtige Antwort. Duden und DIN 5008 gliedern mit Leerzeichen; die DIN empfiehlt den
+   Punkt nur für Geldbeträge (nachgeschlagen am 23.09.2026). Der Wächter läuft über alles,
+   was die App als richtig zeigt: Antworten, Regelbeispiele, Werkstatt-Vorbilder,
+   korrigierte Fehlersuchtexte und den Spickzettel. Datum (05.05.2026) und Uhrzeit (8.30)
+   haben keine Dreiergruppe und bleiben außen vor. */
+{
+  const TAUSENDERPUNKT = /(?<![\d.,])\d{1,3}(?:\.\d{3})+(?![\d.,]*\d)(?!\s*(?:€|Euro|EUR|Dollar|\$|CHF|Franken))/;
+  const gezeigt = [];
+  korpus.forEach(t => gezeigt.push({ id: "Antwort/Beispiel", t: String(t || "") }));
+  daten(w, 'ALL.filter(i=>i.t==="fill").map(i=>({id:i.id,t:i.a.join(" | ")}))').forEach(x => gezeigt.push(x));
+  proben.forEach(x => gezeigt.push({ id: "Regel " + x.id, t: x.t }));
+  vorlagen.forEach(x => gezeigt.push(x));
+  gezeigt.push({ id: "Spickzettel", t: strip(daten(w, "cheatHTML()")) });
+  const punkt = gezeigt.filter(x => TAUSENDERPUNKT.test(x.t)).map(x => x.id + ": „" + (x.t.match(TAUSENDERPUNKT) || [""])[0] + "“");
+  P.ok("Nichts, was die App als richtig zeigt, gliedert eine Zahl mit Punkt (außer Geldbeträgen)", !punkt.length, punkt.slice(0, 5).join(" · "));
+  const soll = ["24.000 Zuschauer", "1.250.000"], nicht = ["1.250.000 €", "1.573,45 Euro", "am 05.05.2026", "um 8.30 Uhr", "S. 12", "24 000", "2.1.1 Stichprobe"];
+  P.ok("… und der Wächter erkennt den Punkt, ohne Geld, Datum, Uhrzeit oder Gliederungsnummern zu treffen (Positivprobe)",
+    soll.every(t => TAUSENDERPUNKT.test(t)) && nicht.every(t => !TAUSENDERPUNKT.test(t)),
+    soll.filter(t => !TAUSENDERPUNKT.test(t)).concat(nicht.filter(t => TAUSENDERPUNKT.test(t))).join(", "));
+}
+
 P.ok("Genug korrigierte Sätze aus den Fehlersuchtexten (" + korrSaetze + ")", korrSaetze >= 45, korrSaetze);
 if (korrOffen) P.info(korrOffen + " Markierungen ersetzen mehrteilig oder nennen nur eine Anweisung — die Sätze um sie herum bleiben außen vor");
 

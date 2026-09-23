@@ -59,6 +59,29 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Zahlenbereich belegt (23.09.2026, dreißigste Runde).**
+
+Der „Stand der Prüfung“ nannte Maßeinheiten, Abkürzungen und Quellenangaben „gelesen, aber
+nicht fertig belegt“, dazu hatten `n-ziffern`, `n-gliederung` und `n-abkuerzung` keine
+Quelle. Nachgeschlagen über die Websuche (duden.de, Wikipedia und die DIN-Seiten sperrt der
+Proxy; jede Aussage aus mindestens zwei unabhängigen Treffern):
+
+- **Ziffer oder Wort:** Die Regel „eins bis zwölf ausschreiben, ab 13 in Ziffern“ stand als
+  „klassische Zeitungsregel“ da, q01 lehrte sie als richtige Antwort. Der Duden-Sprachratgeber
+  („Schreibung von Zahlen bis 12“) führt diese Buchdruckerregel als überholt: Ein- und
+  zweisilbige Zahlwörter in Buchstaben, längere in Ziffern; kurze Zahlen neben langen und vor
+  Einheitenzeichen in Ziffern. Regel, q01 und Spickzettel umgeschrieben.
+- **Tausender:** „24 000 oder 24.000 — beides korrekt“. Duden und DIN 5008 gliedern mit
+  Leerzeichen; die DIN empfiehlt den Punkt nur für Geldbeträge, der Duden setzt auch dort
+  Leerzeichen. Regel, q05 (richtige Antwort war „1.250.000 oder 1 250 000“), q26 und
+  Spickzettel umgeschrieben. q01 und q05 stehen in `NEU_GELERNT`.
+- **Abkürzungen, Einheiten, Seitenangaben:** stimmen. „Die meisten Leitfäden raten“ ist jetzt
+  „viele“ (Regel und q25) — eine Mehrheit, die niemand gezählt hat.
+
+**Neue Prüfung:** `tests/suite.js` lässt in nichts, was die App als richtig zeigt, eine mit
+Punkt gegliederte Zahl durch (Geld, Datum, Uhrzeit und Gliederungsnummern ausgenommen, mit
+Positivprobe). Gegen den alten Stand schlägt sie an vier Stellen an.
+
 **Die App als Web-App auf dem iPhone (23.09.2026, neunundzwanzigste Runde).**
 
 Nils nutzt die App vor allem vom Home-Bildschirm des iPhones. Ein Workflow hat die App mit
@@ -2949,7 +2972,8 @@ Rund 70 Einzelaussagen sind gegen Duden, DWDS, das amtliche Regelwerk und DIN 50
 gegengeprüft — vor allem dort, wo etwas als ausnahmslos richtig oder falsch dasteht.
 Belegt und im Text kenntlich gemacht sind unter anderem:
 
-- „gewinkt/gewunken“ (DWDS: gewunken umgangssprachlich, zunehmend schriftlich)
+- „gewinkt/gewunken“ (Duden führt beide, grammis/IDS stuft beide als standardsprachlich ein;
+  bis zum 21.09.2026 stand hier die ältere Einordnung „umgangssprachlich“)
 - Perfekt von stehen/sitzen/liegen mit haben oder sein (regional, beides korrekt)
 - „anrufen“ + Dativ (südwestdeutsch und schweizerisch)
 - „brauchen“ ohne „zu“ (gesprochen verbreitet, geschrieben mit „zu“)
@@ -2961,6 +2985,9 @@ Belegt und im Text kenntlich gemacht sind unter anderem:
 - Partizipgruppen: Komma seit 1996 frei, 2024 beibehalten
 - Doppelpunkt: entbehrlich nach nämlich/zum Beispiel/und zwar; groß danach nur bei Ganzsatz
 - Bis-Strich: Duden ohne, DIN 5008 (auch 2020) mit Leerzeichen; nicht mit „von“ kombinieren
+- Ziffer oder Wort: Silbenregel des Dudens, die Zwölferregel ist nach Duden überholt
+- Tausender: Leerzeichen nach Duden und DIN 5008, Punkt nach DIN nur bei Geldbeträgen
+- Abkürzungspunkt, Prozent- und Gradzeichen, f./ff./§§ (23.09.2026 über die Websuche)
 
 Der übrige Bestand beruht auf allgemeinem Sprachwissen und hat die maschinellen
 Prüfungen bestanden, ist aber nicht einzeln belegt. Der Absatz „Stand der Prüfung“
