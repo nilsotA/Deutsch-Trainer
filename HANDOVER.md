@@ -36,9 +36,9 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 101 |
+| Prüfmuster im Textcheck | 121 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~765 KB, eine Datei, kein Build |
+| Dateigröße | ~790 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,

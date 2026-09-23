@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~765 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~790 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
@@ -67,7 +67,7 @@ also nicht umbenennen.
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, mit?, ok, k, r, c}]}` · `mit` = weitere Wörter derselben Stelle |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 101 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 121 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.

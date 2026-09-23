@@ -588,6 +588,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Prüfmuster x22":     "„Mit dem Akkusativ liegst du immer richtig“ — der Akkusativ ist in beiden Lesarten zulässig, das ist keine verschwiegene Ausnahme",
     "Prüfmuster f08":     "Das Muster handelt von den Wörtern „immer“ und „nie“ selbst; sie stehen dort im Zitat",
     "Prüfmuster t06":     "„nie gemischt“ — von-bis und Bis-Strich schließen einander aus; n-datum sagt denselben Satz",
+    "Prüfmuster x48":     "Das Muster handelt von der Wendung „immer wieder“ selbst; „immer“ steht dort im Zitat",
     "Schreibauftrag w11": "„Wörter, die er sonst nie benutzt“ — Aussage über den Schreibenden, nicht über die Sprache",
     "Baustein ph14":      "zitierte Falschform: „Immer weiter im gleichen Ton nachfassen“ steht in der Liste dessen, was nicht geht",
     "Baustein ph15":      "zitierte Falschform: „Immer muss ich hinterherlaufen“",
@@ -985,14 +986,24 @@ WORDS.forEach(x => { if (x.d) vorlagen.push({ id: "w:" + x.w + " (Erläuterung)"
    CLAUDE.md ihn aufzählte. Jetzt wird satzweise gerettet: einteilige Korrekturen einsetzen,
    dann nur die Sätze behalten, in denen keine unersetzte Markierung mehr steht. Das sind
    55 Sätze mit gut 600 Wörtern zusammenhängender, richtiger Prosa. */
-let korrOffen = 0, korrSaetze = 0;
+let korrOffen = 0, korrSaetze = 0, korrKt01 = [];
 KORREKTUR.forEach(t => {
   const toks = String(t.txt).split(/\s+/);
   const offen = new Set();
-  t.errs.forEach(e => {
+  /* Erst alle Stellen am unveränderten Text bestimmen, dann ersetzen. Wer beim Ersetzen
+     weiterzählt, findet nach „das“ → „dass“ kein zweites „das“ mehr: Die Markierung mit
+     nth:2 in kt01 fiel so still weg, und im „korrigierten“ Satz stand weiter „gesagt, das
+     die Auswertung“. Aufgefallen erst, als y09 auch die Fassung mit Komma kannte. */
+  const orig = toks.slice();
+  if (t.id === "kt01") korrKt01 = [];
+  const stellen = t.errs.map(e => {
     const nth = e.nth || 1;
-    let c = 0, idx = -1;
-    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === nth) { idx = i; break; }
+    let c = 0;
+    for (let i = 0; i < orig.length; i++) if (orig[i] === e.w && ++c === nth) return i;
+    return -1;
+  });
+  t.errs.forEach((e, n) => {
+    const idx = stellen[n];
     if (idx < 0) return;
     if (/\s/.test(String(e.ok))) offen.add(idx);
     else toks[idx] = e.ok;
@@ -1006,10 +1017,14 @@ KORREKTUR.forEach(t => {
     if (!belastet && satz.split(" ").length >= 4) {
       beide({ id: t.id + " korrigiert", t: satz });
       korrSaetze++;
+      if (t.id === "kt01") korrKt01.push(satz);
     }
     start = i + 1;
   });
 });
+P.ok("Die Rekonstruktion setzt auch die zweite gleiche Markierung ein (kt01: „gesagt, dass“)",
+  korrKt01.some(s => /gesagt, dass die/.test(s)) && !korrKt01.some(s => /gesagt, das die/.test(s)),
+  korrKt01.join(" | "));
 P.ok("Genug Musterformulierungen gefunden (" + vorlagen.length + ")", vorlagen.length >= 430, vorlagen.length);
 const vorbildSet = new Set(vorbild);
 const vorlagenAlarm = [];
@@ -1362,11 +1377,11 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   const falschalarm = daten(w, `(function(){
     const out = [];
     KORREKTUR.forEach(t => {
-      const toks = t.txt.split(/\\s+/);
+      const toks = t.txt.split(/\\s+/), orig = toks.slice();
       t.errs.forEach(e => {
         if (!e.ok || /^\\(|^…/.test(e.ok)) return;
         let n = e.nth || 1, c = 0;
-        for (let i = 0; i < toks.length; i++) { if (toks[i] === e.w && ++c === n) { toks[i] = e.ok; break; } }
+        for (let i = 0; i < orig.length; i++) { if (orig[i] === e.w && ++c === n) { toks[i] = e.ok; break; } }
       });
       const s = toks.join(" ");
       analyse(s).finds.forEach(f => {
@@ -1377,6 +1392,60 @@ P.ok("Jede Fehlermarkierung ist im Text auffindbar", !unauffindbar.length, unauf
   })()`);
   P.ok("Die Kommamuster melden nichts im korrigierten Text", !falschalarm.length, falschalarm.join(" · "));
 }
+
+/* Fehlerklasse „der Textcheck ist an seinem eigenen Bestand gewachsen“. Alle Korpora oben
+   stammen aus der App: Übungen, Regeln, Werkstatt, Fehlersuchtexte. Eine Quote von 80 % an
+   den eigenen Fehlersuchtexten sagte nichts über fremde Texte — gemessen waren es am
+   22.09.2026 37 %, weil die Wortlisten der Muster genau die Wörter der eigenen Texte kannten
+   („Kollege“, aber nicht „Kommilitone“; „hoffe das“, aber nicht „hoffe, das“).
+   tests/korpus/ hält zwei unabhängig geschriebene Korpora, je acht Textsorten aus dem
+   Alltag eines Lehramtsstudenten: fehlerfreie Texte und Texte mit markierten Fehlern. An
+   „entwicklung“ sind die Muster vom 23.09.2026 entwickelt; „kontrolle“ hat keins davon
+   gesehen, nur seine Zahl taugt als Messung. Die Fehlerlisten sind von den Schreibern,
+   nicht einzeln geprüft — eine Quote darauf ist eine Größenordnung, kein Urteil. */
+const KORPUS = {};
+["entwicklung", "kontrolle"].forEach(n => {
+  const f = require("path").join(__dirname, "korpus", n + ".json");
+  if (require("fs").existsSync(f)) KORPUS[n] = JSON.parse(require("fs").readFileSync(f, "utf8"));
+});
+const korpusMessung = k => {
+  let saubere = 0, fehler = 0, gefunden = 0;
+  const hart = [], pruef = [];
+  k.texte.forEach(s => {
+    s.sauber.forEach(x => {
+      saubere++;
+      daten(w, "analyse(" + JSON.stringify(x.text) + ").finds.map(f=>({id:f.c.id,sev:f.c.sev,txt:f.txt}))")
+        .forEach(f => {
+          if (f.sev === "hart") hart.push(f.id + ": „" + f.txt + "“ (" + x.titel + ")");
+          if (f.sev === "pruef") pruef.push(f.id + ": „" + f.txt + "“ (" + x.titel + ")");
+        });
+    });
+    s.fehlerhaft.forEach(x => {
+      const finds = daten(w, "analyse(" + JSON.stringify(x.text) + ").finds.filter(f=>f.c.sev===\"hart\"||f.c.sev===\"pruef\").map(f=>({s:f.s,e:f.e}))");
+      x.fehler.forEach(e => {
+        const a = x.text.indexOf(e.falsch);
+        if (a < 0) return;
+        fehler++;
+        const b = a + e.falsch.length;
+        if (finds.some(f => f.s < b + 1 && f.e > a - 1)) gefunden++;
+      });
+    });
+  });
+  return { saubere, fehler, gefunden, hart, pruef };
+};
+const KORPUS_UNTERGRENZE = { entwicklung: 185, kontrolle: 0 };
+const korpusIst = {};
+Object.keys(KORPUS).forEach(n => {
+  const m = korpusIst[n] = korpusMessung(KORPUS[n]);
+  P.info("Korpus „" + n + "“: " + m.gefunden + " von " + m.fehler + " Fehlern gefunden (" +
+    Math.round(m.gefunden / m.fehler * 100) + " %), auf " + m.saubere + " fehlerfreien Texten " +
+    m.hart.length + " harte und " + m.pruef.length + " Prüfhinweise");
+  P.ok("Kein harter Treffer auf fremdem, fehlerfreiem Text (" + n + ", " + m.saubere + " Texte)",
+    !m.hart.length, m.hart.join(" · "));
+  P.ok("Die Trefferquote im Korpus „" + n + "“ fällt nicht unter " + KORPUS_UNTERGRENZE[n],
+    m.gefunden >= KORPUS_UNTERGRENZE[n], m.gefunden + " von " + m.fehler);
+});
+P.ok("Beide Korpora liegen vor", !!KORPUS.entwicklung && !!KORPUS.kontrolle, Object.keys(KORPUS).join(", "));
 
 /* Fehlerklasse „nach oben offene Wiederholung über einer verneinten Zeichenklasse“:
    a04 suchte sehr lange Sätze mit /[A-ZÄÖÜ][^.!?]{230,}[.!?]/. Da im Deutschen fast jedes
@@ -1610,6 +1679,14 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
   const ms = w.eval("(function(){const t=window.__probe;const a=Date.now();analyse(t);return Date.now()-a;})()");
   P.info("Textcheck über 6000 Wörter ohne Satzzeichen: " + ms + " ms");
   P.ok("Der Textcheck friert bei Text ohne Satzzeichen nicht ein", ms < 250, ms + " ms");
+  /* Zweite Probe: eine förmliche Mail mit vielen Kandidaten. x51 fragte am 23.09.2026 mit
+     einer Rückschau über den ganzen Text nach der Anrede — an jeder Stelle, nicht nur an
+     Treffern. Die erste Probe fing das (6,7 s), weil jede Position zählte; diese hier hält
+     den Fall fest, in dem die Rückschau wirklich an vielen Treffern laufen muss. */
+  w.__probe2 = "Sehr geehrte Frau Weber,\n" + "danke für ihre Mühe, ich schicke ihnen montags die Liste zum laufen ".repeat(600);
+  const ms2 = w.eval("(function(){const t=window.__probe2;const a=Date.now();analyse(t);return Date.now()-a;})()");
+  P.info("Textcheck über eine förmliche Mail mit 3600 Kandidaten: " + ms2 + " ms");
+  P.ok("Der Textcheck bleibt auch mit vielen Treffern nach einer Anrede schnell", ms2 < 400, ms2 + " ms");
 }
 
 {
