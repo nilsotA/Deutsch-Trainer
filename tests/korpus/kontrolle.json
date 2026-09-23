@@ -1,0 +1,2142 @@
+{
+ "stand": "2026-09-23",
+ "herkunft": "Acht Schreiber, je eine Textsorte aus dem Alltag eines Lehramtsstudenten, ohne Zugriff auf die App und mit anderen Themen als das Entwicklungskorpus. An diesem Korpus ist kein Muster entwickelt worden. Die Fehlerlisten sind nicht einzeln geprüft.",
+ "texte": [
+  {
+   "sorte": "mail-dozent",
+   "sauber": [
+    {
+     "titel": "Anmeldung zur mündlichen Prüfung",
+     "text": "Sehr geehrte Frau Dr. Weber,\n\nich möchte mich zur mündlichen Prüfung im Modul „Trainingswissenschaft II“ anmelden. Im Online-Portal ist die Anmeldung bereits gesperrt, obwohl die Frist laut Aushang erst am Freitag, dem 2. Oktober 2026, um 12 Uhr endet. Deshalb wende ich mich direkt an Sie.\n\nMeine Matrikelnummer lautet 4471203, ich studiere im 5. Fachsemester Lehramt Sport und Mathematik. Als Prüfungstermin käme für mich jeder Tag in der Woche vom 9. bis 13. November infrage. Falls Sie für die Anmeldung ein Formular benötigen, schicke ich es Ihnen gern ausgefüllt zu.\n\nKönnten Sie mir kurz bestätigen, dass die Anmeldung auf diesem Weg gültig ist? Ich möchte vermeiden, dass mir wegen eines technischen Fehlers ein ganzes Semester verloren geht.\n\nVielen Dank im Voraus und freundliche Grüße\nNils Otten"
+    },
+    {
+     "titel": "Fehltermin wegen Wettkampf",
+     "text": "Sehr geehrter Herr Prof. Lindner,\n\nin Ihrem Seminar „Bewegungslernen im Schulsport“ gilt eine Anwesenheitspflicht von 80 Prozent. Am Donnerstag, dem 15. Oktober, kann ich leider nicht teilnehmen, weil ich an diesem Tag mit der Leichtathletik-Mannschaft der Hochschule zu einem Wettkampf nach Leipzig fahre. Die Abfahrt ist um 7:30 Uhr, zurück sind wir erst gegen 22 Uhr.\n\nDaher möchte ich fragen, ob ich die Sitzung auf andere Weise nachholen kann, z. B. durch ein kurzes Protokoll oder eine zusätzliche Literaturzusammenfassung. Eine Bescheinigung des Hochschulsports über die Teilnahme lege ich Ihnen gern vor.\n\nMir ist bewusst, dass sich eine Fehlzeit nicht beliebig ausgleichen lässt. Ich wollte Sie aber so früh wie möglich informieren, damit Sie besser planen können.\n\nMit freundlichen Grüßen\nNils Otten"
+    },
+    {
+     "titel": "Bitte um ein Gutachten",
+     "text": "Sehr geehrte Frau Prof. Dr. Brandt,\n\nich bewerbe mich zurzeit um ein Stipendium für ein Auslandssemester in Kopenhagen und bitte Sie hiermit um ein kurzes Gutachten. Sie haben mich im Sommersemester 2026 in der Übung „Sportdidaktik“ und in meinem Praxissemester an der Gesamtschule betreut, sodass Sie meine Arbeit aus zwei Blickwinkeln kennen.\n\nDas Gutachten sollte etwa eine Seite umfassen und muss bis zum 31. Oktober 2026 bei der Stiftung eingehen. Ich weiß, dass das eine knappe Frist ist, und würde mich deshalb umso mehr über eine Zusage freuen. Meinen Lebenslauf, das Motivationsschreiben und eine Übersicht meiner bisherigen Leistungen habe ich angehängt.\n\nFalls Sie Rückfragen haben oder lieber in Ihrer Sprechstunde darüber sprechen möchten, komme ich gern am Dienstag vorbei.\n\nMit freundlichen Grüßen\nNils Otten"
+    },
+    {
+     "titel": "Rückfrage zu einem Aufsatz",
+     "text": "Sehr geehrter Herr Dr. Hofmann,\n\nfür meine Hausarbeit über Motivation im Sportunterricht suche ich den Aufsatz, den Sie in der Sitzung am 16. September empfohlen haben. Nach meinen Notizen ist er in einem Sammelband von 2019 erschienen, im Katalog der Bibliothek finde ich ihn aber weder unter dem Titel noch unter dem Namen der Autorin.\n\nKönnten Sie mir die genaue Angabe schicken? Falls der Band nicht vorhanden ist, bestelle ich ihn per Fernleihe. Die Lieferzeit beträgt nach Auskunft der Bibliothek etwa zwei bis drei Wochen, was für meinen Zeitplan gerade noch passt: Abgabetermin ist der 30. November.\n\nAußerdem wollte ich fragen, ob auch englischsprachige Studien in die Arbeit einfließen dürfen. Mir sind zwei Untersuchungen mit jeweils über 300 Schülerinnen und Schülern aufgefallen, die gut zu meiner Fragestellung passen.\n\nVielen Dank und viele Grüße\nNils Otten"
+    },
+    {
+     "titel": "Terminverschiebung Sprechstunde",
+     "text": "Sehr geehrte Frau Dr. Weber,\n\nwir hatten für Mittwoch, den 30. September, um 14:15 Uhr ein Gespräch über meine Bachelorarbeit vereinbart. Leider muss ich Sie bitten, den Termin zu verschieben: Mein Praktikum an der Realschule wurde kurzfristig um eine Woche verlängert, und mittwochs unterrichte ich dort bis 15 Uhr.\n\nAls Ersatz schlage ich Freitag, den 2. Oktober, ab 10 Uhr vor; in der Woche darauf passt mir jeder Tag außer Mittwoch. Das Gespräch ist mir wichtig, weil ich die Gliederung vor der Anmeldung der Arbeit noch einmal mit Ihnen durchgehen möchte. Die überarbeitete Fassung schicke ich Ihnen bis Montag als PDF, damit Sie sie vorher ansehen können, falls Ihre Zeit es zulässt.\n\nEntschuldigen Sie bitte die Umstände.\n\nMit freundlichen Grüßen\nNils Otten"
+    },
+    {
+     "titel": "Dank nach der Betreuung",
+     "text": "Sehr geehrter Herr Prof. Lindner,\n\ngestern habe ich die Bewertung meiner Masterarbeit erhalten, und ich möchte mich auf diesem Weg herzlich bei Ihnen bedanken. Ohne Ihre Hinweise zur Methodik hätte ich die Befragung von 120 Sportlehrkräften kaum so sorgfältig auswerten können. Besonders geholfen hat mir Ihr Rat, die offenen Antworten zuerst zu kategorisieren und erst dann auszuzählen.\n\nAuch die Gespräche in Ihrer Sprechstunde haben mir viel gebracht. Dort habe ich gelernt, dass eine klare Fragestellung mehr wert ist als eine große Stichprobe. Das nehme ich auch in mein Referendariat mit, das im Februar an einer Gesamtschule in Düsseldorf beginnt.\n\nÜber die Note 1,7 freue ich mich sehr. Noch mehr freut mich aber, dass ich die Arbeit ohne Hektik und mit einem guten Gefühl abschließen konnte.\n\nFalls Sie Interesse an den Ergebnissen haben, schicke ich Ihnen gern ein gebundenes Exemplar.\n\nMit herzlichen Grüßen\nNils Otten"
+    },
+    {
+     "titel": "Anfrage ans Institut zur Schwimmprüfung",
+     "text": "Sehr geehrte Damen und Herren,\n\nim Wintersemester 2026/27 möchte ich die sportpraktische Prüfung im Schwimmen ablegen. Zur Anmeldung habe ich zwei Fragen.\n\nErstens: Reicht als Nachweis das Rettungsschwimmabzeichen in Silber, oder brauche ich zusätzlich eine Bescheinigung über einen Erste-Hilfe-Kurs? Das Abzeichen habe ich am 14. Juni 2025 in meinem Heimatverein erworben.\n\nZweitens: Im Aushang vor dem Sekretariat steht, dass für 100 m Brust eine Zeit unter zwei Minuten verlangt wird. In der Prüfungsordnung finde ich dazu aber keine Angabe. Welche Vorgabe gilt, und wird die Zeit bei einem zweiten Versuch neu gemessen?\n\nFür eine kurze Rückmeldung bis Mitte Oktober wäre ich Ihnen dankbar, da ich meine Trainingszeiten im Hallenbad danach planen möchte.\n\nMit freundlichen Grüßen\nNils Otten\nMatrikelnummer 4471203"
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Klausuranmeldung klappt nicht",
+     "text": "Sehr geehrte Frau Dr. Weber,\n\nich möchte mich hiermit für die Klausur im Modul „Sportpsychologie“ anmelden, die am 12.11.2026 stattfindet. Leider hat die Anmeldung über das Portal nicht funktioniert, dass System zeigt mir jedes Mal eine Fehlermeldung an. Ich habe es bereits drei mal versucht, zuletzt heute morgen um 8 Uhr. Für alle anderen Prüfungen in diesem Semester hat es ohne Probleme geklappt. Anbei schicke ich ihnen einen Screenshot der Meldung.\n\nKönnten Sie mich manuell in die Liste eintragen oder mir sagen an wen ich mich wenden soll? Meine Matrikelnummer ist 4471203. Außerdem wollte ich fragen ob die Klausur wie im letzten Jahr 90 Minuten dauert.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "dass System",
+       "richtig": "das System",
+       "art": "recht"
+      },
+      {
+       "falsch": "drei mal",
+       "richtig": "dreimal",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "heute morgen",
+       "richtig": "heute Morgen",
+       "art": "gross"
+      },
+      {
+       "falsch": "ihnen",
+       "richtig": "Ihnen",
+       "art": "gross"
+      },
+      {
+       "falsch": "sagen an",
+       "richtig": "sagen, an",
+       "art": "komma"
+      },
+      {
+       "falsch": "fragen ob",
+       "richtig": "fragen, ob",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Fehltermin wegen Verletzung",
+     "text": "Sehr geehrter Herr Prof. Lindner,\n\nleider kann ich am kommenden Dienstag nicht an Ihrem Seminar teilnehmen, da ich an diesem Tag einen Termin beim Artzt habe. Ich habe mir am Wochenende beim Basketballtraining das Sprunggelenk verletzt, und zwar beim landen nach einem Rebound.\n\nIch weiß, das ich damit schon zum zweiten Mal fehle. Wieviele Sitzungen darf ich in diesem Semester noch versäumen? Ein ärztliches Attest reiche ich selbstverständlich nach.\n\nDie Präsentation, die ich an diesem Tag halten sollte kann ich gerne verschieben oder mit einem Kommilitonen tauschen.\n\nFür Ihr Verständnis bedanke ich mich im voraus.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Artzt",
+       "richtig": "Arzt",
+       "art": "recht"
+      },
+      {
+       "falsch": "beim landen",
+       "richtig": "beim Landen",
+       "art": "gross"
+      },
+      {
+       "falsch": "das ich",
+       "richtig": "dass ich",
+       "art": "recht"
+      },
+      {
+       "falsch": "Wieviele",
+       "richtig": "Wie viele",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "sollte kann",
+       "richtig": "sollte, kann",
+       "art": "komma"
+      },
+      {
+       "falsch": "im voraus",
+       "richtig": "im Voraus",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Bitte um Empfehlungsschreiben",
+     "text": "Sehr geehrte Frau Prof. Dr. Brandt,\n\nich bewerbe mich für einen Masterstudiengang in Sportwissenschaft an der Universität Wien und brauche dafür zwei Empfehlungsschreiben. Da ich bei Ihnen sowohl die Vorlesung als auch das Vertiefungsseminar besucht habe, würde ich mich sehr freuen wenn Sie eines davon verfassen könnten. Die Bewerbungsfrist endet am 15ten Januar 2027.\n\nIm Seminar habe ich eine Hausarbeit über Belastungssteuerung im Nachwuchsleistungssport geschrieben, die sie mit 1,3 bewertet haben. Diese Arbeit war für mich einer der prägenden Erfahrungen im Studium.\n\nIm Anhang finden Sie meinen Lebenslauf sowie einen Entwurf des Motivationsschreibens. Ich weiß, dass Sie viele Anfragen dieser Art bekommen, und bin Ihnen deshalb umso dankbarer.\n\nVielen Dank schonmal für Ihre Mühe.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "freuen wenn",
+       "richtig": "freuen, wenn",
+       "art": "komma"
+      },
+      {
+       "falsch": "15ten",
+       "richtig": "15.",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "die sie",
+       "richtig": "die Sie",
+       "art": "gross"
+      },
+      {
+       "falsch": "einer der prägenden Erfahrungen",
+       "richtig": "eine der prägenden Erfahrungen",
+       "art": "gram"
+      },
+      {
+       "falsch": "schonmal",
+       "richtig": "schon mal",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Rückfrage zu einem Standardwerk",
+     "text": "Sehr geehrter Herr Dr. Hofmann,\n\nin der letzten Sitzung haben Sie das Buch „Leistungsdiagnostik im Schulsport“ von Weber und Otten empfohlen. Es gilt als Standartwerk, deshalb möchte ich es in meiner Hausarbeit auf jeden Fall verwenden. In der Bibliothek sind allerdings alle drei Exemplare ausgeliehen. Mir geht es vor allem um das dritte Kapitel da es genau mein Thema behandelt.\n\nIm Katalog habe ich noch die Ausgabe von 2015 gefunden. Ist diese im großen und ganzen noch aktuell, oder ist die neue Auflage deutlich umfangreicher wie die alte?\n\nSeit dem ich mit der Hausarbeit angefangen habe, frage ich mich auch, ob ich Internetquellen verwenden darf. Gibt es dafür Vorgaben?\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Standartwerk",
+       "richtig": "Standardwerk",
+       "art": "recht"
+      },
+      {
+       "falsch": "Kapitel da",
+       "richtig": "Kapitel, da",
+       "art": "komma"
+      },
+      {
+       "falsch": "im großen und ganzen",
+       "richtig": "im Großen und Ganzen",
+       "art": "gross"
+      },
+      {
+       "falsch": "umfangreicher wie",
+       "richtig": "umfangreicher als",
+       "art": "gram"
+      },
+      {
+       "falsch": "Seit dem ich",
+       "richtig": "Seitdem ich",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Termin verschieben wegen Sichtung",
+     "text": "Sehr geehrte Frau Dr. Weber,\n\nunseren Termin am Donnerstag den 8. Oktober um 11 Uhr muss ich leider absagen. An diesem Tag findet die Sichtung für die Hochschulauswahl im Volleyball statt, und der Trainer hat mich kurzfristig nachnominiert.\n\nWäre es möglich den Termin auf die darauffolgende Woche zu verlegen? Am besten passt mir der Dienstag, da ich Dienstags keine Veranstaltungen habe. Bis dahin werde ich das Kapitel zur Methodik fertig haben, sodass wir es gemeinsam durchgehen können.\n\nIch hoffe das Verschieben macht Ihnen keine all zu großen Umstände.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Donnerstag den 8. Oktober um",
+       "richtig": "Donnerstag, den 8. Oktober, um",
+       "art": "komma"
+      },
+      {
+       "falsch": "möglich den",
+       "richtig": "möglich, den",
+       "art": "komma"
+      },
+      {
+       "falsch": "ich Dienstags",
+       "richtig": "ich dienstags",
+       "art": "gross"
+      },
+      {
+       "falsch": "hoffe das",
+       "richtig": "hoffe, das",
+       "art": "komma"
+      },
+      {
+       "falsch": "all zu",
+       "richtig": "allzu",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Dank nach der Examensarbeit",
+     "text": "Sehr geehrter Herr Prof. Lindner,\n\ngestern habe ich meine Examensarbeit abgegeben und möchte mich noch einmal herzlich bei Ihnen bedanken. Ihre Anmerkungen zu meinem Entwurf waren sehr hilfreich, vorallem die zur Gliederung. Die Gespräche mit Ihnen als meinen Betreuer haben mir gezeigt, worauf es bei einer empirischen Arbeit ankommt.\n\nIch habe dabei viel neues über Interviews und ihre Auswertung gelernt. Am Ende ist die Arbeit 72 Seiten lang geworden, gut 20% mehr als geplant. Den Theorieteil habe ich, wie von Ihnen vorgeschlagen, deutlich gekürzt.\n\nFalls Sie Interesse haben schicke ich Ihnen gerne ein gebundenes Exemplar.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "vorallem",
+       "richtig": "vor allem",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "als meinen Betreuer",
+       "richtig": "als meinem Betreuer",
+       "art": "gram"
+      },
+      {
+       "falsch": "viel neues",
+       "richtig": "viel Neues",
+       "art": "gross"
+      },
+      {
+       "falsch": "20%",
+       "richtig": "20 %",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "haben schicke",
+       "richtig": "haben, schicke",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Anfrage ans Institut zur Anrechnung",
+     "text": "Sehr geehrte Damen und Herren,\n\nich studiere im 3 Semester Lehramt Sport und Deutsch und habe eine Frage zur Anrechnung eines Lehrgangs. Im August habe ich beim Fußballverband die C Lizenz erworben. Der Lehrgang umfasste 120 Lerneinheiten und endete am 28. August 2026 mit einer Prüfung. Bis letzte Woche wusste ich garnicht, dass so etwas angerechnet werden kann.\n\nIch habe bereits mit Ihrem Kollege, Herrn Dr. Hofmann, gesprochen. Er meinte die Anrechnung für das Modul „Sportspiele“ sei grundsätzlich möglich, entscheiden müsse aber das Institut. Die Bescheinigung des Verbands liegt dieser E-Mail als PDF bei.\n\nDas Modul steht in meinem Studienverlaufsplan vorraussichtlich im Sommersemester 2027 an. Ich würde mich freuen, wenn Sie mir kurz Bescheid geben könnten.\n\nMit freundlichen Grüßen\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "3 Semester",
+       "richtig": "3. Semester",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "C Lizenz",
+       "richtig": "C-Lizenz",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "garnicht",
+       "richtig": "gar nicht",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Ihrem Kollege",
+       "richtig": "Ihrem Kollegen",
+       "art": "gram"
+      },
+      {
+       "falsch": "meinte die",
+       "richtig": "meinte, die",
+       "art": "komma"
+      },
+      {
+       "falsch": "vorraussichtlich",
+       "richtig": "voraussichtlich",
+       "art": "recht"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "hausarbeit",
+   "sauber": [
+    {
+     "titel": "Variables Üben beim Freiwurf",
+     "text": "In der vorliegenden Untersuchung wurde geprüft, ob variables Üben den Lernerfolg beim Basketball-Freiwurf stärker fördert als konstantes Üben. Insgesamt nahmen 48 Studierende der Sporthochschule teil, die in zwei gleich große Gruppen aufgeteilt wurden. Die erste Gruppe warf ausschließlich von der Freiwurflinie, die zweite aus wechselnden Entfernungen zwischen 3,5 m und 5,5 m. Trainiert wurde sechs Wochen lang jeweils dienstags und donnerstags von 16:00 bis 16:45 Uhr. Wie Tabelle 2 zeigt, erzielte die variable Gruppe im Retentionstest am 14. Mai 2025 eine Trefferquote von 71 %, die konstante Gruppe dagegen nur 63 %. Dieses Ergebnis entspricht dem, was Weber (2019, S. 88) als „Kontext-Interferenz-Effekt“ beschreibt: Wer unter wechselnden Bedingungen übt, lernt anfangs langsamer, behält das Gelernte aber besser. Um diesen Befund abzusichern, wäre eine Folgestudie mit einer größeren Stichprobe sinnvoll."
+    },
+    {
+     "titel": "Handout zum Referat Wettkampfangst",
+     "text": "Sehr geehrte Frau Dr. Albers,\n\nanbei erhalten Sie das Handout zu meinem Referat „Wettkampfangst im Jugendleistungssport“, das ich am Donnerstag, dem 12. November, im Seminar halten werde. Im Mittelpunkt steht die Frage, ob sich somatische und kognitive Angst vor einem Wettkampf unterschiedlich entwickeln. Nach Kramer (2021) steigt die somatische Angst erst kurz vor dem Start deutlich an, während die kognitive Angst schon Tage vorher auf einem hohen Niveau liegt. In meiner kleinen Befragung von 23 Schwimmerinnen und Schwimmern im Alter von 14 bis 17 Jahren zeigte sich ein ähnliches Bild (vgl. Abb. 3). Ich weiß, dass eine so kleine Stichprobe keine allgemeinen Aussagen erlaubt. Deshalb verstehe ich die Ergebnisse als Anregung für die Diskussion, nicht als Beleg. Über eine kurze Rückmeldung bis Freitag würde ich mich freuen.\n\nMit freundlichen Grüßen\nNils Otten"
+    },
+    {
+     "titel": "Jahn und die Turnsperre",
+     "text": "Die Anfänge des Turnens in Deutschland werden meist mit Friedrich Ludwig Jahn verbunden, der 1811 in der Hasenheide bei Berlin den ersten öffentlichen Turnplatz eröffnete. Das Turnen verstand sich damals nicht als Sport im heutigen Sinn, sondern als Teil einer politischen Erziehung. Von 1820 bis 1842 war es in Preußen verboten; diese Zeit wird als Turnsperre bezeichnet. Erst danach fand das Turnen schrittweise Eingang in die Schulen, allerdings in einer stark reglementierten Form mit Befehlen und Aufstellungen in Reih und Glied. Schreiber (2016, S. 41) spricht deshalb von einem „Turnen im Gleichschritt“, das mit Jahns ursprünglicher Idee nur noch wenig gemein hatte. Für eine Hausarbeit ist es sinnvoll, diese beiden Phasen klar zu trennen, statt pauschal von dem Turnen des 19. Jahrhunderts zu sprechen. Tabelle 1 im Anhang fasst die wichtigsten Daten zusammen."
+    },
+    {
+     "titel": "Regeländerungen im inklusiven Unterricht",
+     "text": "Inklusiver Sportunterricht bedeutet mehr, als Schülerinnen und Schüler mit Behinderung lediglich mitturnen zu lassen. Im Schuljahr 2024/25 wurden an der untersuchten Gesamtschule 312 Schülerinnen und Schüler unterrichtet, davon 27 mit sonderpädagogischem Förderbedarf. In den Interviews gaben die Lehrkräfte an, dass sie sich vor allem bei Ballspielen unsicher fühlten. Eine Lehrerin sagte: „Ich weiß oft nicht, wie viel ich einem Kind zutrauen kann, ohne es zu überfordern.“ Hilfreich waren nach Aussage der Befragten vor allem einfache Regeländerungen, etwa ein größeres Tor, ein leichterer Ball oder eine Zone, in der nicht verteidigt werden darf. Solche Anpassungen kosten wenig Zeit und kommen häufig der ganzen Klasse zugute. Schwieriger war es, Kinder mit Sehbehinderung in Rückschlagspiele wie Badminton einzubeziehen (siehe Tab. 4)."
+    },
+    {
+     "titel": "Sprintdiagnostik über 30 m",
+     "text": "Für die Leistungsdiagnostik wurden die Sprintzeiten über 30 m mit Lichtschranken gemessen. Die Messungen fanden an zwei Terminen statt: am Montag, dem 3. März, und am Donnerstag, dem 6. März 2025, jeweils ab 9:30 Uhr. Vor jedem Lauf absolvierten die Teilnehmenden ein standardisiertes Aufwärmprogramm von 15 Minuten. Der Mittelwert lag bei 4,62 s (SD = 0,21 s), der schnellste Lauf bei 4,21 s. Auffällig ist, dass die Zeiten am zweiten Termin im Schnitt um 0,08 s besser waren als am ersten. Ob dieser Unterschied auf einen Lerneffekt oder auf die höhere Außentemperatur von 18 °C zurückgeht, lässt sich mit den vorliegenden Daten nicht klären. Alle Einzelwerte sind in Tabelle 5 aufgeführt; Ausreißer wurden nicht entfernt."
+    },
+    {
+     "titel": "Motivation im Verein",
+     "text": "Warum bleiben einige Jugendliche jahrelang im Verein, während andere schon nach wenigen Monaten aufhören? Dieser Frage geht die Selbstbestimmungstheorie nach, die zwischen innerer und äußerer Motivation unterscheidet. Wer Sport treibt, weil ihm die Bewegung Freude macht, ist intrinsisch motiviert. Wer dagegen vor allem für Urkunden oder Lob trainiert, ist extrinsisch motiviert. In unserer Befragung gaben 41 von 60 Jugendlichen an, das Training mache ihnen Spaß; das entspricht einem Anteil von rund 68 %. Viele nannten aber zugleich die Freundschaften in der Mannschaft als Grund dafür, im Verein zu bleiben. Das zeigt, dass sich die beiden Formen der Motivation im Alltag kaum sauber trennen lassen. Für den Sportunterricht folgt daraus, dass Lehrkräfte das Gemeinschaftserleben genauso ernst nehmen sollten wie die Freude an der Bewegung selbst."
+    },
+    {
+     "titel": "Referat Bewegungsförderung",
+     "text": "Im Folgenden stelle ich die wichtigsten Ergebnisse meiner Hausarbeit zum Thema „Bewegungsförderung in der Ganztagsschule“ vor. Ausgangspunkt war die Beobachtung, dass sich viele Grundschulkinder weniger bewegen, als es die Weltgesundheitsorganisation (WHO) empfiehlt. Die WHO rät Kindern und Jugendlichen zu durchschnittlich mindestens 60 Minuten moderater bis intensiver Bewegung pro Tag. In meiner Stichprobe erreichten nur 9 von 34 Kindern diesen Wert. Des Weiteren habe ich untersucht, ob Angebote wie die Kletter-AG oder das Fußballturnier in der Mittagspause daran etwas ändern. Das Ergebnis ist ernüchternd: Die Kinder, die ohnehin aktiv sind, nutzen die Angebote am meisten. Die Unterschiede werden also eher größer als kleiner. Frau Prof. Lindner (2020) kommt in ihrer Studie zu einem ähnlichen Schluss. Im Anschluss an das Referat freue ich mich auf Ihre Fragen."
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Plyometrisches Training im Handball",
+     "text": "In unserer Studie haben wir untersucht ob sich die Sprungkraft durch plyometrisches Training verbessern lässt. Insgesamt nahmen 36 Handballerinnen teil, die zweimal pro Woche trainierten. Nach acht Wochen sprang die Trainingsgruppe im Schnitt 4,3 cm höher wie die Kontrollgruppe. Dieses Ergebniss deckt sich mit den Befunden von Hartmann (2018), der einen ähnlichen Zuwachs beschreibt. Wie in Tabelle 3 zu sehen ist, profitierten vor allem die Spielerinnen, die vorher am schwächsten gesprungen waren. Trotz des geringen Umfangs von nur 20 Minuten pro Einheit war der Effekt deutlich. Warscheinlich spielte dabei auch die Motivation eine Rolle, da den meisten die Übungen viel Spaß machten. Im großen und ganzen bestätigen die Daten unsere Hypothese.",
+     "fehler": [
+      {
+       "falsch": "untersucht ob",
+       "richtig": "untersucht, ob",
+       "art": "komma"
+      },
+      {
+       "falsch": "höher wie",
+       "richtig": "höher als",
+       "art": "gram"
+      },
+      {
+       "falsch": "Ergebniss",
+       "richtig": "Ergebnis",
+       "art": "recht"
+      },
+      {
+       "falsch": "Warscheinlich",
+       "richtig": "Wahrscheinlich",
+       "art": "recht"
+      },
+      {
+       "falsch": "großen und ganzen",
+       "richtig": "Großen und Ganzen",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Prüfungsangst bei Praxisprüfungen",
+     "text": "Am 3.Mai 2024 haben wir 52 Studierende zu ihrem Umgang mit Prüfungsangst befragt. Die meisten gaben an, dass sie vor praktischen Prüfungen nervöser sind als vor Klausuren. Eine Teilnehmerin sagte: „Beim Turnen schaut jeder zu, dass macht es schlimmer.“ Nach Berger (2020) hängt die Angst weniger von der Aufgabe selbst ab, als von der erwarteten Bewertung durch andere. Viele Befragte nutzen bereits Atemübungen, um sich zu beruhigen, andere hören Musik oder versuchen, sich abzulenken. Aufgrund des hohen Zeitaufwand finden nur wenige Zeit für ein regelmäßiges Mental Training. Wir empfehlen deshalb, kurze Übungen fest in den Seminarplan einzubauen, z. B. zu Beginn jeder Praxisstunde.",
+     "fehler": [
+      {
+       "falsch": "3.Mai",
+       "richtig": "3. Mai",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "dass macht",
+       "richtig": "das macht",
+       "art": "recht"
+      },
+      {
+       "falsch": "ab, als",
+       "richtig": "ab als",
+       "art": "komma"
+      },
+      {
+       "falsch": "des hohen Zeitaufwand",
+       "richtig": "des hohen Zeitaufwands",
+       "art": "gram"
+      },
+      {
+       "falsch": "Mental Training",
+       "richtig": "Mentaltraining",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Frauen bei Olympischen Spielen",
+     "text": "Die Olympischen Spiele der Neuzeit fanden zum ersten mal 1896 in Athen statt. Frauen durften damals noch nicht teilnehmen, erst 1900 in Paris waren Sportlerinnen zugelassen. Pierre de Coubertin, der als Gründer der modernen Spiele gilt stand dem Frauensport lange ablehnend gegenüber. Trotz dieses Widerstand wuchs die Zahl der Teilnehmerinnen im 20 Jahrhundert stetig. Bei den Spielen 2012 in London trat erstmals jedes teilnehmende Land mit mindestens einer Frau an. Heute sind Frauen und Männer bei vielen Wettbewerben gleichberechtigt, doch die Medien berichten immernoch seltener über Sportlerinnen, als über Sportler. Diese Schieflage ist Thema des zweiten Kapitels.",
+     "fehler": [
+      {
+       "falsch": "zum ersten mal",
+       "richtig": "zum ersten Mal",
+       "art": "gross"
+      },
+      {
+       "falsch": "gilt stand",
+       "richtig": "gilt, stand",
+       "art": "komma"
+      },
+      {
+       "falsch": "dieses Widerstand",
+       "richtig": "dieses Widerstands",
+       "art": "gram"
+      },
+      {
+       "falsch": "20 Jahrhundert",
+       "richtig": "20. Jahrhundert",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "immernoch",
+       "richtig": "immer noch",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Sportlerinnen, als",
+       "richtig": "Sportlerinnen als",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Rollstuhlbasketball im Praktikum",
+     "text": "Im Rahmen meines Praktikums an einer Förderschule habe ich 4 mal beobachtet, wie Kinder mit und ohne Behinderung gemeinsam Rollstuhlbasketball spielen. Die Idee dahinter ist einfach: Alle spielen im Rollstuhl, sodass niemand einen Vorteil hat. Die Rollstühle stellt der örtliche Verein zur Verfügung. Am ersten Mittwoch Nachmittag waren die Kinder noch skeptisch, doch schon in der zweiten Stunde wollten sie garnicht mehr aufhören. Besonders beeindruckt hat mich ein Junge mit Spastik der beim Korbwurf genauso erfolgreich war wie seine Mitschüler. Die Lehrerin hält die Regeln bewusst einfach, damit jeder schnell mitspielen kann. Ich bin überzeugt, das diese Form des Unterrichts auch den Kindern ohne Behinderung nützt, weil sie dabei Rücksicht nehmen lernen.",
+     "fehler": [
+      {
+       "falsch": "4 mal",
+       "richtig": "4-mal",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Mittwoch Nachmittag",
+       "richtig": "Mittwochnachmittag",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "garnicht",
+       "richtig": "gar nicht",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Spastik der",
+       "richtig": "Spastik, der",
+       "art": "komma"
+      },
+      {
+       "falsch": "das diese",
+       "richtig": "dass diese",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Ausdauertraining auf dem Ergometer",
+     "text": "Die Versuchsgruppe trainierte acht Wochen lang dreimal wöchentlich auf dem Fahrradergometer. Eine Einheit dauerte 45 Minuten, die Belastung lag bei 70 bis 80 % der maximalen Herzfrequenz. Um die Ausdauer zu erfassen führten wir vor und nach der Intervention einen Stufentest durch. Die maximale Sauerstoffaufnahme stieg in der Versuchsgruppe um durchschnittlich 3,1 ml/kg/min, in der Kontrollgruppe nur um 0,4 ml/kg/min. Der Unterschied war signifikant (p < 0,05). Überaschend war, dass die älteren Teilnehmenden genauso stark profitierten wie die jüngeren. Im wesentlichen bestätigt das die Annahme, dass ein moderates Training ohne hohem Aufwand deutliche Effekte haben kann. Die Ergebnisse sind in Tabelle 4 zusammen gefasst.",
+     "fehler": [
+      {
+       "falsch": "erfassen führten",
+       "richtig": "erfassen, führten",
+       "art": "komma"
+      },
+      {
+       "falsch": "Überaschend",
+       "richtig": "Überraschend",
+       "art": "recht"
+      },
+      {
+       "falsch": "Im wesentlichen",
+       "richtig": "Im Wesentlichen",
+       "art": "gross"
+      },
+      {
+       "falsch": "ohne hohem Aufwand",
+       "richtig": "ohne hohen Aufwand",
+       "art": "gram"
+      },
+      {
+       "falsch": "zusammen gefasst",
+       "richtig": "zusammengefasst",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Mail zum Referat Selbstgespräche",
+     "text": "Sehr geehrter Herr Dr. Kessler,\n\nVielen Dank für Ihre schnelle Rückmeldung. Anbei sende ich Ihnen die überarbeitete Gliederung für mein Referat über Selbstgespräche im Wettkampf. Zuerst stelle ich die Studie von Brandt (2022) vor, in der 40 Tennisspielerinnen untersucht wurden. Das Ergebnis war eindeutig: Spielerinnen, die sich vor dem Aufschlag selbst Mut zusprachen, gewannen mehr Punkte, als die Spielerinnen der Kontrollgruppe. Im zweiten Teil möchte ich zeigen, wie man solche Techniken im Sportunterricht einsetzten kann. Ich würde mich freuen wenn Sie mir bis Freitag sagen könnten, ob der Aufbau so passt.\n\nMit freundlichen Grüßen,\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Vielen Dank",
+       "richtig": "vielen Dank",
+       "art": "gross"
+      },
+      {
+       "falsch": "Punkte, als",
+       "richtig": "Punkte als",
+       "art": "komma"
+      },
+      {
+       "falsch": "einsetzten",
+       "richtig": "einsetzen",
+       "art": "recht"
+      },
+      {
+       "falsch": "freuen wenn",
+       "richtig": "freuen, wenn",
+       "art": "komma"
+      },
+      {
+       "falsch": "Grüßen,",
+       "richtig": "Grüßen",
+       "art": "zeichen"
+      }
+     ]
+    },
+    {
+     "titel": "Anfänge der Paralympics",
+     "text": "Die Geschichte der Paralympics beginnt in England. Am 29. Juli 1948, dem Eröffnungstag der Olympischen Spiele in London, veranstaltete der Neurologe Ludwig Guttmann in Stoke Mandeville einen Wettkampf für Rollstuhlsportler. Guttmann, der 1939 aus Deutschland geflohen war sah im Sport einen Teil der Rehabilitation. Er wollte den Verletzten helfen, wieder in die Gesellschaft zurück zu finden. Die ersten paralympischen Spiele fanden 1960 in Rom statt. Damals nahmen rund 400 Athletinnen und Athleten aus 23 Länder teil, heute sind es mehr als 4000. Seid 1988 finden die Paralympics in derselben Stadt statt wie die Olympischen Spiele.",
+     "fehler": [
+      {
+       "falsch": "war sah",
+       "richtig": "war, sah",
+       "art": "komma"
+      },
+      {
+       "falsch": "zurück zu finden",
+       "richtig": "zurückzufinden",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "paralympischen Spiele",
+       "richtig": "Paralympischen Spiele",
+       "art": "gross"
+      },
+      {
+       "falsch": "23 Länder",
+       "richtig": "23 Ländern",
+       "art": "gram"
+      },
+      {
+       "falsch": "Seid",
+       "richtig": "Seit",
+       "art": "recht"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "praktikum",
+   "sauber": [
+    {
+     "titel": "Stundenentwurf Grundschule: Werfen und Fangen",
+     "text": "Stundenentwurf für den Sportunterricht in Klasse 3\n\nDatum: Donnerstag, 15. Oktober 2026, 9:45 bis 10:30 Uhr\nThema: Werfen und Fangen mit dem Softball\n\nDie Lerngruppe besteht aus 24 Kindern, die im Umgang mit Bällen sehr unterschiedliche Erfahrungen mitbringen. Einige spielen im Verein Handball, andere haben bisher kaum geworfen. Ziel der Stunde ist es, dass alle Kinder einen Ball aus 3 m Entfernung sicher fangen können.\n\nZum Einstieg laufen die Kinder zu Musik durch die Halle; stoppt die Musik, bilden sie Paare. Danach üben sie das Zuwerfen, zunächst im Stand, später in der Bewegung. Wer sicherer fängt als die Partnerin oder der Partner, vergrößert den Abstand um einen Schritt.\n\nZum Schluss sammeln wir im Sitzkreis, was beim Fangen geholfen hat. Ich rechne damit, dass die Kinder vor allem „die Hände nach vorn“ und „dem Ball entgegensehen“ nennen werden."
+    },
+    {
+     "titel": "Verlaufsplanung Gymnasium: Sprint",
+     "text": "Verlaufsplanung Leichtathletik, Jahrgangsstufe 8\n\nDie Doppelstunde am Montag beginnt um 8:00 Uhr auf dem Sportplatz. Nach einem kurzen Aufwärmprogramm von ca. 10 Minuten folgt das Lauf-ABC, das die Schülerinnen und Schüler aus der vorigen Stunde kennen.\n\nIm Hauptteil messen wir die Reaktionszeit beim Tiefstart. Dazu laufen jeweils vier Jugendliche über eine 30-m-Strecke, während zwei andere mit der Stoppuhr die Zeiten notieren. Wichtig ist, dass jede Gruppe mindestens drei Versuche erhält, um Zufallswerte auszugleichen.\n\nAnschließend vergleichen die Gruppen ihre Ergebnisse. Erfahrungsgemäß sind die Zeiten beim zweiten Versuch besser als beim ersten, weil die Startposition dann vertrauter ist.\n\nFür verletzte oder nicht teilnehmende Schüler gibt es Beobachtungsbögen, z. B. zur Armarbeit oder zur Schrittlänge. So bleiben auch sie aktiv am Unterricht beteiligt.\n\nDen Abschluss bildet ein Staffellauf über 4 × 50 m."
+    },
+    {
+     "titel": "Unterrichtsreflexion Gymnasium: Volleyball",
+     "text": "Reflexion der Unterrichtsstunde vom 22. September 2026\n\nDie Stunde zum oberen Zuspiel im Volleyball ist nur teilweise so verlaufen, wie ich sie geplant hatte. Die Aufwärmphase dauerte fast doppelt so lange wie vorgesehen, weil das Aufbauen der Netze mehr Zeit brauchte als erwartet. Dadurch fiel die geplante Spielform am Ende weg.\n\nPositiv war, dass die meisten Schülerinnen und Schüler die Hinweise zur Fingerhaltung schnell umsetzen konnten. Bei einigen blieb das Zuspiel allerdings unsauber, was ich im Lauf der Stunde nicht mehr aufgreifen konnte.\n\nFür die nächste Stunde nehme ich mir zwei Dinge vor: Erstens baue ich die Netze gemeinsam mit einer Gruppe schon in der Pause auf. Zweitens plane ich eine Station, an der die Jugendlichen das obere Zuspiel gegen die Wand üben, anstatt es nur im Paar zu wiederholen.\n\nInsgesamt habe ich den Eindruck, dass die Klasse motivierter war als in der Stunde davor."
+    },
+    {
+     "titel": "Hospitationsbericht Grundschule: Schwimmen",
+     "text": "Hospitationsbericht\n\nHospitation bei Frau Dr. Weber, Klasse 2, Schwimmunterricht im Hallenbad an der Parkstraße\nMittwoch, 30. September 2026, 10:15 bis 11:00 Uhr\n\nDie Stunde begann mit einem Ritual: Die Kinder stellten sich am Beckenrand auf und begrüßten die Lehrerin im Chor. Anschließend sollten sie im Nichtschwimmerbecken Gegenstände vom Boden holen. Auffällig war, wie ruhig die Gruppe blieb, obwohl die Halle gleichzeitig von einem Verein genutzt wurde.\n\nFrau Weber gab kurze, klare Anweisungen und wiederholte sie bei Bedarf mit Handzeichen. Kinder, die sich noch nicht trauten, den Kopf ins Wasser zu tauchen, bekamen eine Schwimmbrille und durften zunächst am Rand bleiben.\n\nBesonders gelungen fand ich den Abschluss. Jedes Kind durfte sich ein Spiel wünschen, und die Klasse stimmte per Handzeichen ab. Für meinen eigenen Unterricht nehme ich mit, dass feste Abläufe gerade im Schwimmbad Sicherheit geben."
+    },
+    {
+     "titel": "E-Mail an die Mentorin zum Stundenentwurf",
+     "text": "Liebe Frau Brandt,\n\nvielen Dank für Ihre Rückmeldung zu meinem Stundenentwurf. Ich habe die Hinweise eingearbeitet und schicke Ihnen die überarbeitete Fassung im Anhang.\n\nDie zentrale Änderung betrifft den Hauptteil: Statt drei Stationen plane ich jetzt vier, damit die Wartezeiten kürzer werden. Außerdem habe ich den Zeitplan angepasst: Die Reflexionsphase beginnt jetzt schon um 11:20 Uhr und dauert ca. zehn Minuten.\n\nIhre Frage nach der Differenzierung habe ich in Abschnitt 3.2 beantwortet. Leistungsstärkere Kinder springen dort über einen höheren Kasten, während die anderen an einem niedrigeren Aufbau üben.\n\nWäre es möglich, dass wir am Freitag vor der Stunde noch kurz sprechen? Ich bin ab 7:30 Uhr in der Schule.\n\nViele Grüße\nNils Otten"
+    },
+    {
+     "titel": "Hospitationsbericht Gymnasium: Handball im Leistungskurs",
+     "text": "Beobachtungen aus der Hospitation im Leistungskurs Sport (Q1)\n\nAm Dienstagmorgen habe ich den Leistungskurs von Herrn Kaya besucht. Thema der Stunde war die Kreuzung im Handball, ein Spielzug, den die meisten Kursmitglieder aus dem Verein kannten.\n\nHerr Kaya ließ den Spielzug zunächst in Dreiergruppen ohne Gegner üben. Erst als die Abläufe saßen, kam ein Verteidiger dazu. Mir fiel auf, dass er kaum korrigierte, sondern gezielt Fragen stellte, etwa: „Wo ist jetzt der freie Raum?“ Die Schülerinnen und Schüler mussten die Lösung also selbst finden.\n\nIm abschließenden Spiel drei gegen drei setzten fast alle Gruppen den Spielzug ein. Das spricht dafür, dass die Methode funktioniert hat, auch wenn sie mehr Zeit kostet als eine direkte Anweisung.\n\nIm Nachgespräch erklärte Herr Kaya, er plane für die kommenden zwei Wochen eine Einheit zur Schiedsrichterausbildung."
+    },
+    {
+     "titel": "Kurzentwurf Grundschule: Spiele im Freien",
+     "text": "Kurzentwurf – Spiele im Freien, Klasse 4\n\nDie Stunde findet bei gutem Wetter auf dem Schulhof statt, andernfalls in der kleinen Turnhalle. Die 9- bis 10-Jährigen kennen die meisten Spiele bereits aus dem dritten Schuljahr.\n\nGeplanter Ablauf:\n1. Begrüßung und Erklärung der Regeln (5 Minuten)\n2. Fangspiel „Kettenfangen“ auf einem 15 × 20 m großen Feld (10 Minuten)\n3. Staffelspiele mit Tennisbällen (15 Minuten)\n4. Abschlussrunde im Kreis (5 Minuten)\n\nBeim Kettenfangen kommt es darauf an, dass die Kette nicht reißt. Die Kinder sollen lernen, sich abzusprechen, statt einfach loszurennen. Gerade Kinder, die sonst eher am Rand stehen, übernehmen in diesem Spiel oft eine wichtige Rolle.\n\nMögliche Schwierigkeit: Auf dem Schulhof ist es lauter als in der Halle. Ich vereinbare deshalb vorher ein Pfeifsignal, bei dem alle sofort stehen bleiben."
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Stundenentwurf Grundschule: Balancieren",
+     "text": "Stundenentwurf Sport, Klasse 2\nThema: Balancieren auf verschiedenen Geräten\n\nDie Klasse besteht aus 22 Kindern, von denen drei noch große Probleme mit dem Gleichgewicht haben. Ziel ist es, das die Kinder sicher über eine umgedrehte Langbank balancieren. Zum Aufwärmen spielen wir ein Fangspiel bei dem die gefangenen Kinder auf einem Bein stehen bleiben müssen.\n\nIm Hauptteil werden vier Stationen aufgebaut: eine Langbank, ein Schwebebalken, ein Tau am Boden und ein Parcours aus Kästen. An jeder Station arbeiten Gruppen von fünf bis sechs Kinder. Wer sich sicher fühlt darf die Augen schließen oder ein Sandsäckchen auf dem Kopf tragen.\n\nAm Ende der Stunde treffen wir uns im Sitzkreis und besprechen, welche Station am schwersten war. Die Kinder sollen dabei erkennen, das langsames Gehen meistens sicherer ist, als schnelles Laufen.",
+     "fehler": [
+      {
+       "falsch": "es, das die",
+       "richtig": "es, dass die",
+       "art": "recht"
+      },
+      {
+       "falsch": "Fangspiel bei",
+       "richtig": "Fangspiel, bei",
+       "art": "komma"
+      },
+      {
+       "falsch": "sechs Kinder",
+       "richtig": "sechs Kindern",
+       "art": "gram"
+      },
+      {
+       "falsch": "fühlt darf",
+       "richtig": "fühlt, darf",
+       "art": "komma"
+      },
+      {
+       "falsch": "das langsames",
+       "richtig": "dass langsames",
+       "art": "recht"
+      },
+      {
+       "falsch": "ist, als",
+       "richtig": "ist als",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Verlaufsplanung Gymnasium: Zirkeltraining",
+     "text": "Verlaufsplanung für die Doppelstunde am Freitag den 16.10.2026\n\nKlasse 9, Sporthalle Nord, 7:50 bis 9:20 Uhr\n\nNach der Begrüßung wärmen sich die Schülerinnen und Schüler 10 min. lang mit Seilspringen auf. Danach erkläre ich den Ablauf des Zirkeltrainings, dass aus acht Stationen besteht. An jeder Station wird 45 sek. gearbeitet, danach folgen 15 Sekunden Pause für den Wechsel.\n\nDie Belastung wird im Laufe des Halbjahres langsam gesteigert. Heute absolvieren die Schülerinnen und Schüler zwei Durchgänge, in drei Wochen sind es drei. Damit die Pulswerte vergleichbar sind, messen alle nach jedem Durchgang ihren Puls und tragen ihn in den Trainingsbogen ein.\n\nZum Abschluß dehnen wir gemeinsam und besprechen, welche Übungen am anstrengensten waren.",
+     "fehler": [
+      {
+       "falsch": "Freitag den",
+       "richtig": "Freitag, den",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "10 min.",
+       "richtig": "10 min",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Zirkeltrainings, dass",
+       "richtig": "Zirkeltrainings, das",
+       "art": "recht"
+      },
+      {
+       "falsch": "45 sek.",
+       "richtig": "45 Sekunden",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Abschluß",
+       "richtig": "Abschluss",
+       "art": "recht"
+      },
+      {
+       "falsch": "anstrengensten",
+       "richtig": "anstrengendsten",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Unterrichtsreflexion: Handball",
+     "text": "Reflexion meiner Unterrichtsstunde im Fach Sport\n\nDie Stunde zum Thema Handball verlief insgesamt gut, allerdings gab es beim Aufwärmen einige Probleme. Viele Schüler hatten ihre Sportsachen vergessen und konnten deshalb nicht mitmachen. Im nachhinein hätte ich die Stunde anders beginnen sollen.\n\nBeim Passen in Dreiergruppen fiel mir auf, dass einige Schüler den Ball viel härter warfen wie nötig. Ich habe die Übung daraufhin kurz unterbrochen und auf das Fangen hingewiesen. Das hat Bestens funktioniert.\n\nIm Abschlussspiel haben sich die Mannschaften gut zusammen gerauft, obwohl sie neu gemischt waren. Für die nächste Stunde werde ich darauf achten, die Gruppen schon im voraus einzuteilen. Außerdem möchte ich mit der Klasse über das Thema Fairness sprechen, weil es im Spiel mehrmals zu Diskussionen kam.",
+     "fehler": [
+      {
+       "falsch": "Im nachhinein",
+       "richtig": "Im Nachhinein",
+       "art": "gross"
+      },
+      {
+       "falsch": "härter warfen wie nötig",
+       "richtig": "härter warfen als nötig",
+       "art": "gram"
+      },
+      {
+       "falsch": "Bestens",
+       "richtig": "bestens",
+       "art": "gross"
+      },
+      {
+       "falsch": "zusammen gerauft",
+       "richtig": "zusammengerauft",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "im voraus",
+       "richtig": "im Voraus",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Hospitationsbericht Grundschule: Bewegungslandschaft",
+     "text": "Hospitationsbericht vom 07. Oktober 2026\n\nHeute habe ich in der Klasse 1 von Frau Brandt hospitiert. Die Stunde fand in der Turnhalle statt und begann um 8:15 Uhr.\n\nFrau Brandt begrüßte die Kinder mit einem Lied, dass alle mitsingen konnten. Danach bauten die Kinder gemeinsam eine Bewegungslandschaft auf. Mich hat beeindruckt, wie selbstständig schon Erstklässler mit den schweren Matten umgehen. Aufgrund des Lärms in der Halle musste Frau Brandt mehrmals ein Signal geben.\n\nBei der Kletterstation half sie einen ängstlichen Jungen, auf den Kasten zu klettern. Später erzählte sie mir, das sie dem Junge in den letzten Wochen viel Zuwendung gegeben habe.\n\nIch habe mir vorgenommen die Idee mit dem Lied in meinem eigenen Unterricht aus zu probieren.",
+     "fehler": [
+      {
+       "falsch": "07. Oktober",
+       "richtig": "7. Oktober",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Lied, dass",
+       "richtig": "Lied, das",
+       "art": "recht"
+      },
+      {
+       "falsch": "einen ängstlichen Jungen",
+       "richtig": "einem ängstlichen Jungen",
+       "art": "gram"
+      },
+      {
+       "falsch": "das sie",
+       "richtig": "dass sie",
+       "art": "recht"
+      },
+      {
+       "falsch": "dem Junge",
+       "richtig": "dem Jungen",
+       "art": "gram"
+      },
+      {
+       "falsch": "vorgenommen die",
+       "richtig": "vorgenommen, die",
+       "art": "komma"
+      },
+      {
+       "falsch": "aus zu probieren",
+       "richtig": "auszuprobieren",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "E-Mail an den Mentor vor dem Unterrichtsbesuch",
+     "text": "Sehr geehrter Herr Kaya,\n\nVielen Dank für das Gespräch nach der Stunde gestern. Ihre Anmerkungen zum Stundenaufbau haben mir sehr geholfen.\n\nWie besprochen schicke ich Ihnen anbei den überarbeiteten Entwurf für die Unterrichtsbesuch am Donnerstag. Die Stunde beginnt um 9:50 Uhr, ich bin aber schon gegen halb Neun in der Schule, um die Halle vorzubereiten.\n\nIch habe den Einstieg gekürzt und die Erwärmung stärker an das Thema Basketball angepasst. Die Reflektionsphase habe ich ans Ende verschoben, weil die Schüler sonst zu wenig Zeit zum spielen haben.\n\nFalls Sie noch Fragen haben, können Sie mich gerne anrufen.\n\nMit freundlichen Grüßen,\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Vielen Dank",
+       "richtig": "vielen Dank",
+       "art": "gross"
+      },
+      {
+       "falsch": "die Unterrichtsbesuch",
+       "richtig": "den Unterrichtsbesuch",
+       "art": "gram"
+      },
+      {
+       "falsch": "halb Neun",
+       "richtig": "halb neun",
+       "art": "gross"
+      },
+      {
+       "falsch": "Reflektionsphase",
+       "richtig": "Reflexionsphase",
+       "art": "recht"
+      },
+      {
+       "falsch": "zum spielen",
+       "richtig": "zum Spielen",
+       "art": "gross"
+      },
+      {
+       "falsch": "Grüßen,",
+       "richtig": "Grüßen",
+       "art": "zeichen"
+      }
+     ]
+    },
+    {
+     "titel": "Stundenentwurf Gymnasium: Handstand",
+     "text": "Stundenentwurf Gerätturnen, Jahrgangsstufe 6\n\nDie Lerngruppe besteht aus 28 Schülerinnen und Schüler im Alter von 11 und 12 Jahren. Im letzten Halbjahr haben sie bereits die Rolle vorwärts und rückwärts geübt, einige schlagen auch schon ein Rad.\n\nZiel dieser Stunde ist der Handstand an der Wand. Zu Beginn wärmen sich alle mit einem 5 minütigen Lauf auf. Anschließend kräftigen wir in Partnerübungen die Schulter- und Rumpfmuskulatur.\n\nIm Hauptteil üben die Schülerinnen und Schüler in Kleingruppen. Eine Person turnt, zwei weitere sichern an den Oberschenkeln und eine gibt Rückmeldung. Besonders wichtig ist, dass die Arme gestreckt bleiben und der Blick zwischen die Hände geht.\n\nDie Schüler, die den Handstand noch nicht sicher beherschen üben zunächst den Aufschwung aus dem Stand. Zum Schluss führen freiwillige ihren Handstand vor der Gruppe vor.",
+     "fehler": [
+      {
+       "falsch": "Schülerinnen und Schüler im Alter",
+       "richtig": "Schülerinnen und Schülern im Alter",
+       "art": "gram"
+      },
+      {
+       "falsch": "5 minütigen",
+       "richtig": "5-minütigen",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "beherschen",
+       "richtig": "beherrschen",
+       "art": "recht"
+      },
+      {
+       "falsch": "beherschen üben",
+       "richtig": "beherrschen, üben",
+       "art": "komma"
+      },
+      {
+       "falsch": "freiwillige",
+       "richtig": "Freiwillige",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Unterrichtsreflexion Grundschule: Weitsprung",
+     "text": "Reflexion zur Sportstunde in der Klasse 3 am 12.10.2026\n\nDie Stunde begann mit zehn Minuten Verspätung, da die Klasse vorher einen Test geschrieben hatte. Dadurch musste ich den Ablauf spontan kürzen.\n\nBeim Aufwärmspiel „Feuer, Wasser, Blitz“ waren die Kinder sehr motiviert. Leider sind zwei Kinder beim wegrennen leicht zusammengestoßen, zum Glück ist aber nichts passiert. Ich werde das Spiel beim nächsten Mal auf einer größeren Fläche spielen lassen.\n\nDer Hauptteil zum Thema Weitsprung war zu kurz, um alle Kinder mehr als drei mal springen zu lassen. Die meisten sprangen zwischen 1,80m und 2,50 m. Einige Kinder haben sich seid der letzten Stunde aber deutlich verbessert, was mich sehr gefreut hat.\n\nNächste Woche möchte ich den Weitsprung wiederholen und die Anlaufstrecke mit Hütchen markieren, damit die Kinder ihren Absprung besser treffen, als heute.",
+     "fehler": [
+      {
+       "falsch": "beim wegrennen",
+       "richtig": "beim Wegrennen",
+       "art": "gross"
+      },
+      {
+       "falsch": "drei mal",
+       "richtig": "dreimal",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "1,80m",
+       "richtig": "1,80 m",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "seid",
+       "richtig": "seit",
+       "art": "recht"
+      },
+      {
+       "falsch": "treffen, als",
+       "richtig": "treffen als",
+       "art": "komma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "verein",
+   "sauber": [
+    {
+     "titel": "Ausschreibung Frühjahrsschwimmfest",
+     "text": "Ausschreibung: 12. Frühjahrsschwimmfest des SV Blau-Weiß Lindenau e. V.\n\nLiebe Trainerinnen und Trainer,\n\nwir laden eure Vereine herzlich zu unserem Frühjahrsschwimmfest ein. Es findet am 13. März 2027 im Hallenbad an der Parkstraße statt. Geschwommen wird im 25-m-Becken mit sechs Bahnen und elektronischer Zeitmessung. Einlass ist um 8:00 Uhr, das Einschwimmen beginnt um 8:15 Uhr und der erste Start erfolgt um 9:00 Uhr.\n\nStartberechtigt sind alle Schwimmerinnen und Schwimmer der Jahrgänge 2012 bis 2017, die einen gültigen Startpass besitzen. Das Meldegeld beträgt 4,50 € pro Einzelstart und 8,00 € pro Staffel. Bitte überweist den Gesamtbetrag bis zum 26. Februar 2027, damit wir die Meldungen rechtzeitig bearbeiten können.\n\nMeldungen schickt ihr bitte ausschließlich per E-Mail an meldung@sv-lindenau.de. Wer später meldet, kann nur noch berücksichtigt werden, wenn in den Läufen Plätze frei sind.\n\nFür Verpflegung ist gesorgt: Unser Förderverein betreibt eine Cafeteria mit belegten Brötchen, Obst und Kuchen.\n\nMit sportlichen Grüßen\nKatrin Hollmann\nWettkampfleitung"
+    },
+    {
+     "titel": "Protokoll Mitgliederversammlung Leichtathletik",
+     "text": "Protokoll der Mitgliederversammlung der Leichtathletikabteilung\nDatum: 18. September 2026, 19:30 bis 21:10 Uhr\nOrt: Vereinsheim, Am Sportpark 4\nAnwesend: 34 Mitglieder (siehe Anwesenheitsliste)\nProtokoll: Jonas Brenner\n\nTOP 1: Begrüßung\nDie Abteilungsleiterin Sabine Kurth begrüßt die Anwesenden und stellt fest, dass die Versammlung ordnungsgemäß einberufen wurde und beschlussfähig ist.\n\nTOP 2: Bericht des Vorstands\nFrau Kurth berichtet, dass die Abteilung derzeit 212 Mitglieder hat, 17 mehr als im Vorjahr. Der Zuwachs kommt vor allem aus der Kinderleichtathletik. Die neue Weitsprunggrube wurde im Juni fertiggestellt und kostete 3.480 €.\n\nTOP 3: Trainingszeiten im Winter\nNach kurzer Aussprache beschließt die Versammlung einstimmig, das Hallentraining ab dem 2. November dienstags und donnerstags von 17:00 bis 18:30 Uhr anzubieten.\n\nTOP 4: Verschiedenes\nHerr Nowak regt an, für den Stadtlauf im Mai ein gemeinsames Vereinstrikot zu bestellen. Der Vorstand prüft bis zur nächsten Sitzung, ob ein Zuschuss aus der Abteilungskasse möglich ist.\n\ngez. Jonas Brenner"
+    },
+    {
+     "titel": "Trainerinfo Hallensaison D-Jugend",
+     "text": "Liebe Eltern der D-Jugend,\n\ndie Hinrunde ist vorbei. Ich möchte mich bei Ihnen herzlich für die Fahrdienste, die Trikotwäsche und die lautstarke Unterstützung am Spielfeldrand bedanken. Sportlich lief es besser, als wir im Sommer erwartet hatten: Die Mannschaft steht nach neun Spielen auf dem dritten Platz.\n\nAb dem 11. Januar trainieren wir in der Halle der Gesamtschule, und zwar montags von 17:00 bis 18:30 Uhr. Bitte denken Sie an Hallenschuhe mit heller Sohle, da schwarze Sohlen Streifen auf dem Hallenboden hinterlassen. Wer nicht zum Training kommen kann, sagt bitte bis Sonntagabend ab, am besten über die Mannschaftsgruppe.\n\nAußerdem suchen wir noch zwei Mütter oder Väter, die beim Hallenturnier am 30. Januar die Kasse und den Kuchenverkauf übernehmen. Wer Zeit hat, meldet sich einfach bei mir oder spricht mich nach dem Training an.\n\nViele Grüße\nTobias Reuter\nTrainer der D-Jugend"
+    },
+    {
+     "titel": "Fahrgemeinschaft Auswärtsspiel",
+     "text": "Hallo zusammen,\n\nam Sonntag spielen unsere B-Juniorinnen auswärts beim FC Talheim. Anstoß ist um 11:00 Uhr, Treffpunkt ist um 9:45 Uhr auf dem Parkplatz am Sportplatz. Wir sind 14 Spielerinnen und brauchen deshalb vier Autos mit je vier freien Plätzen.\n\nBisher fahren Familie Kaya, Familie Lorenz und ich. Wer noch einen Wagen stellen kann, trägt sich bitte bis Freitag um 18:00 Uhr in die Liste im Mannschaftschat ein.\n\nZur Erinnerung: Wer mitfährt, gibt dem Fahrer oder der Fahrerin 5 Euro für das Benzin. Das ist weniger, als eine Zugfahrt kosten würde, und deckt ungefähr die Kosten für die 84 Kilometer hin und zurück.\n\nBitte packt die Schienbeinschoner ein, denn ohne sie darf niemand spielen. Außerdem sollte jede Spielerin eine volle Trinkflasche dabeihaben, weil es am Platz in Talheim keinen Kiosk gibt.\n\nVielen Dank und bis Sonntag\nMelanie Groß"
+    },
+    {
+     "titel": "Kassenbericht Schwimmabteilung 2025",
+     "text": "Kassenbericht der Schwimmabteilung für das Geschäftsjahr 2025\n\nDer Kassenstand betrug zum 1. Januar 2025 insgesamt 6.842,17 €. Im Laufe des Jahres nahm die Abteilung 18.930,00 € ein, davon 14.260,00 € aus Mitgliedsbeiträgen, 2.870,00 € aus Startgeldern und 1.800,00 € als Zuschuss der Stadt.\n\nDie Ausgaben beliefen sich auf 19.415,40 €. Den größten Posten bildete mit 9.600,00 € die Miete für die Wasserzeiten im Hallenbad. Hinzu kamen Übungsleiterpauschalen in Höhe von 5.340,00 €, Meldegelder für auswärtige Wettkämpfe sowie Ausgaben für Material wie Schwimmbretter und Flossen.\n\nZum 31. Dezember 2025 ergibt sich ein Kassenstand von 6.356,77 €. Die Ausgaben lagen damit um 485,40 € höher als die Einnahmen.\n\nDie Kassenprüfer Martin Stolz und Aylin Demir haben die Belege am 14. Februar 2026 geprüft und keine Beanstandungen festgestellt. Sie empfehlen der Versammlung, den Vorstand zu entlasten.\n\nUwe Fender, Kassenwart"
+    },
+    {
+     "titel": "Einladung Hallencup E-Junioren",
+     "text": "Einladung zum 8. Hallencup der E-Junioren\n\nSehr geehrte Damen und Herren,\n\nder TuS Eichenau 1921 e. V. lädt Ihre E-Junioren-Mannschaft herzlich zu seinem Hallencup ein. Das Turnier findet am 16. Januar 2027 in der Dreifachhalle am Schulzentrum statt und beginnt um 10:00 Uhr.\n\nGespielt wird mit vier Feldspielern und einem Torwart auf Handballtore. Die Spielzeit beträgt 1 × 10 Minuten. Es wird ohne Bande und mit einem sprungreduzierten Ball gespielt, den wir stellen.\n\nDas Startgeld von 25 € ist am Turniertag bei der Turnierleitung zu bezahlen. Jede Mannschaft erhält einen Pokal, die drei Erstplatzierten bekommen zusätzlich Medaillen.\n\nBitte bestätigen Sie Ihre Teilnahme bis zum 1. Dezember 2026 schriftlich. Da wir nur zwölf Plätze vergeben können, entscheidet die Reihenfolge der Anmeldungen.\n\nMit freundlichen Grüßen\nAndreas Wirtz\nJugendleiter"
+    },
+    {
+     "titel": "Trainerinfo Kreismeisterschaften",
+     "text": "Liebe Athletinnen und Athleten,\n\nam Samstag starten wir bei den Kreismeisterschaften im Stadion an der Weserstraße. Die Treffzeiten hängen von euren Disziplinen ab, deshalb hier ein kurzer Überblick:\n\n– 100-Meter-Lauf: Vorläufe ab 10:15 Uhr, Treffen zum Aufwärmen um 9:30 Uhr\n– Weitsprung: Beginn um 11:00 Uhr, Treffen um 10:15 Uhr\n– 800-Meter-Lauf: Start um 13:40 Uhr, Treffen um 12:50 Uhr\n\nDenkt daran, eure Startnummer gut sichtbar auf der Brust zu befestigen. Wer Spikes trägt, braucht Dornen mit höchstens 6 mm Länge; längere sind auf der Kunststoffbahn in diesem Stadion nicht erlaubt.\n\nNach dem Wettkampf essen wir gemeinsam im Vereinsheim. Das ist keine Pflicht, aber es wäre schön, wenn möglichst viele mitkommen. Gebt mir bitte bis Donnerstag Bescheid, damit ich besser planen kann.\n\nBis Samstag und viel Erfolg\nLena"
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Einladung Mitgliederversammlung Schwimmverein",
+     "text": "Liebe Mitglieder,\n\nhiermit laden wir euch herzlich zur jährlichen Mitgliederversammlung ein. Sie findet am Freitag den 6. November um 19:00 Uhr im Vereinsraum des Hallenbads statt. Auf der Tagesordnung stehen unter anderem die Wahl des Vorstands, der Kassenbericht und die neuen Trainingszeiten für die Wintersaison.\n\nWir hoffen das möglichst viele von euch kommen, denn wir brauchen dringend Unterstützung. Wer sich vorstellen kann ein Amt zu übernehmen, meldet sich bitte vorab bei Petra. Für das leibliche Wohl ist gesorgt, es gibt belegte Brötchen und Getränke.\n\nAnträge müssen bis zum 23.10 schriftlich beim Vorstand vorliegen. Wir freuen uns auf einen spannenden Abend und auf euer kommen.\n\nMit sportlichen Grüßen,\nEuer Vorstand",
+     "fehler": [
+      {
+       "falsch": "Freitag den",
+       "richtig": "Freitag, den",
+       "art": "komma"
+      },
+      {
+       "falsch": "hoffen das",
+       "richtig": "hoffen, dass",
+       "art": "recht"
+      },
+      {
+       "falsch": "kann ein",
+       "richtig": "kann, ein",
+       "art": "komma"
+      },
+      {
+       "falsch": "23.10",
+       "richtig": "23.10.",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "euer kommen",
+       "richtig": "euer Kommen",
+       "art": "gross"
+      },
+      {
+       "falsch": "Grüßen,",
+       "richtig": "Grüßen",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Protokoll Vorstandssitzung Fußball",
+     "text": "Protokoll der Vorstandssitzung vom 14.09.2026\n\nAnwesend: Herr Albers, Frau Yilmaz, Herr Petersen, Frau Kühn\n\n1. Platzbelegung\nHerr Albers berichtet, dass der Kunstrasenplatz ab Oktober Montags nicht mehr zur Verfügung steht, weil die Stadt ihn an einen anderen Verein vergeben hat. Die A-Jugend muss deshalb vorraussichtlich bis März auf den Rasenplatz ausweichen, der allerdings schlechter beleuchtet ist wie der Kunstrasen.\n\n2. Trikots\nFrau Yilmaz hat drei Angebote eingeholt. Das günstigste Angebot liegt bei 38 € pro Trikot inklusive Beflockung. Der Vorstand beschließt die Trikots bei diesem Anbieter zu bestellen.\n\n3. Sommerfest\nDas Sommerfest war trotz des schlechten Wetters ein Erfolg. Es wurden insgesamt 1.245€ eingenommen. Herr Petersen bedankt sich bei allen Helfern die beim Auf- und Abbau mitgeholfen haben.\n\nNächste Sitzung: 12.10.2026, 19:30 Uhr",
+     "fehler": [
+      {
+       "falsch": "Montags",
+       "richtig": "montags",
+       "art": "gross"
+      },
+      {
+       "falsch": "vorraussichtlich",
+       "richtig": "voraussichtlich",
+       "art": "recht"
+      },
+      {
+       "falsch": "schlechter beleuchtet ist wie",
+       "richtig": "schlechter beleuchtet ist als",
+       "art": "gram"
+      },
+      {
+       "falsch": "beschließt die",
+       "richtig": "beschließt, die",
+       "art": "komma"
+      },
+      {
+       "falsch": "1.245€",
+       "richtig": "1.245 €",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Helfern die",
+       "richtig": "Helfern, die",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Elternbrief Hallensportfest",
+     "text": "Liebe Eltern,\n\nam kommenden Samstag fahren wir mit 16 Kindern zum Hallensportfest nach Dortmund. Abfahrt ist um 7:30 Uhr am Vereinsheim, die Rückkehr planen wir gegen 18 Uhr. Die Kinder sollten ausreichend zu Essen und zu Trinken dabei haben, da es in der Halle nur einen kleinen Kiosk gibt.\n\nMein Kollege Herr Brandt begleitet die Gruppe, bitte gebt die Einverständniserklärungen deshalb bis Donnerstag entweder mir oder dem Kollege Brandt. Wer sein Kind lieber selbst fährt, sagt mir bitte kurz Bescheid.\n\nDie Startgebühr von 3.00 € pro Disziplin übernimmt der Verein. Ich freue mich auf einen schönen Tag und bin gespannt ob unsere Sprinter ihre Bestzeiten noch einmal verbessern können.\n\nViele Grüße\nLena Hoffmann",
+     "fehler": [
+      {
+       "falsch": "zu Essen und zu Trinken",
+       "richtig": "zu essen und zu trinken",
+       "art": "gross"
+      },
+      {
+       "falsch": "dabei haben",
+       "richtig": "dabeihaben",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "dem Kollege",
+       "richtig": "dem Kollegen",
+       "art": "gram"
+      },
+      {
+       "falsch": "3.00 €",
+       "richtig": "3,00 €",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "gespannt ob",
+       "richtig": "gespannt, ob",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Fahrgemeinschaft Auswärtsspiel Neustadt",
+     "text": "Hallo zusammen,\n\nfür das Auswärtsspiel am Sonntag in Neustadt brauchen wir noch zwei Fahrer. Treffpunkt ist um 8:30 Uhr auf dem Parkplatz hinter dem Vereinsheim. Da die Strecke über die Autobahn führt, rechnen wir mit ca 45 Minuten Fahrzeit.\n\nBisher haben sich Familie Schröder und Familie Aydin gemeldet, die jeweils drei Kinder mitnehmen können. Wer noch Platz im Auto hat soll sich bitte bis Freitag Abend bei mir melden. Denkt bitte auch an Sitzerhöhungen, für kleinere Kinder sind sie vorgeschrieben.\n\nWichtig ist, dass jedes Kind 4 € für die Fahrtkosten passend dabei hat. Das Geld bekommt dann der jeweilige Fahrer. Ich hoffe, das wir diesmal pünktlich loskommen, damit genug Zeit zum Aufwärmen bleibt.\n\nDanke und bis Sonntag\nSandra",
+     "fehler": [
+      {
+       "falsch": "ca 45",
+       "richtig": "ca. 45",
+       "art": "zeichen"
+      },
+      {
+       "falsch": "hat soll",
+       "richtig": "hat, soll",
+       "art": "komma"
+      },
+      {
+       "falsch": "Freitag Abend",
+       "richtig": "Freitagabend",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "dabei hat",
+       "richtig": "dabeihat",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "das wir",
+       "richtig": "dass wir",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Kassenbericht Leichtathletik 2025",
+     "text": "Kassenbericht 2025 der Leichtathletikabteilung\n\nZum 01.01.2025 betrug der Kassenstand 4.215,60 €. Im Laufe des Jahres haben wir Einnahmen in Höhe von 9.870,00 € erzielt, der größte Teil stammt aus Mitgliedsbeiträgen. Die Ausgaben lagen bei 10.340,25 €, sodass sich zum Jahresende ein Kassenstand von 3.745,35 € ergibt.\n\nDie höheren Ausgaben erklären sich vor allem durch eine neue Zeitmessanlage, die allein 2.400 € gekostet hat. Außerdem sind die Hallenmieten seid dem Frühjahr um 15% gestiegen. Ein besonderer Dank geht an unseren Hauptsponsor, dem Autohaus Kramer.\n\nDie Kassenprüfer haben keine Unstimmigkeiten festgestellt und beantragen die Entlastung des Kassenwarts.\n\nFür das kommende Jahr schlägt der Vorstand vor den Jahresbeitrag für Erwachsene von 84 € auf 96 € anzuheben. Im vergleich zu anderen Vereinen der Region liegen wir damit immer noch im unteren Bereich.\n\nHolger Brandes\nKassenwart",
+     "fehler": [
+      {
+       "falsch": "seid",
+       "richtig": "seit",
+       "art": "recht"
+      },
+      {
+       "falsch": "15%",
+       "richtig": "15 %",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "dem Autohaus",
+       "richtig": "das Autohaus",
+       "art": "gram"
+      },
+      {
+       "falsch": "vor den",
+       "richtig": "vor, den",
+       "art": "komma"
+      },
+      {
+       "falsch": "Im vergleich",
+       "richtig": "Im Vergleich",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Ausschreibung Herbstpokal Schwimmen",
+     "text": "Ausschreibung Herbstpokal 2026\n\nDer SC Delphin lädt alle Vereine des Bezirks herzlich zum Herbstpokal ein, der am 21.November im 50m-Becken des Sportbads stattfindet. Einlass ist ab 8 Uhr, die Wettkämpfe beginnen um 9:30 Uhr.\n\nGeschwommen werden die Strecken über 50 m und 100 m in allen Lagen sowie eine Lagenstaffel über 4 × 50 m. Startberechtigt sind alle Schwimmerinnen und Schwimmer ab Jahrgang 2015. Das Meldegeld beträgt 5 € pro Start und ist bis zum 7. November auf das Vereinskonto zu überweisen.\n\nWir bitten alle Trainer darauf zu achten, dass die Meldungen vollständig sind. Unvollständige Meldungen können wir leider nicht berücksichtigen. Die Siegerehrung findet direkt nach dem jeweiligen Wettkampf statt. Der Erlös der Cafeteria kommt unserem Nachwuchs zu Gute.\n\nMit Freundlichen Grüßen\nTanja Wendt",
+     "fehler": [
+      {
+       "falsch": "21.November",
+       "richtig": "21. November",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "50m-Becken",
+       "richtig": "50-m-Becken",
+       "art": "zeichen"
+      },
+      {
+       "falsch": "Trainer darauf",
+       "richtig": "Trainer, darauf",
+       "art": "komma"
+      },
+      {
+       "falsch": "zu Gute",
+       "richtig": "zugute",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Freundlichen",
+       "richtig": "freundlichen",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Trainerinfo Saisonstart Fußball",
+     "text": "Liebe Spieler, liebe Eltern,\n\ndie Sommerpause ist vorbei, ab nächster Woche geht es wieder los. Wir trainieren ab sofort Dienstags und freitags von 17:30 bis 19:00 Uhr auf dem Kunstrasenplatz. Das erste Training ist am Dienstag, den 6. Oktober.\n\nIn der letzten Saison haben wir so viele Tore geschossen wie noch nie, trotzdem hat es knapp nicht für den Aufstieg gereicht. Dieses Jahr wollen wir defensiv besser stehen wie letztes Jahr. Dafür brauchen wir jeden einzelnen.\n\nBitte kommt pünktlich und bringt immer Schienbeinschoner mit, ohne diese darf keiner mittrainieren. Wer verhindert ist sagt bitte rechtzeitig ab. Außerdem möchte ich euch bitten, eure Trikots nach dem Spiel wieder mit zu bringen, damit wir sie gesammelt waschen können.\n\nSportliche Grüße\nTrainer Marco",
+     "fehler": [
+      {
+       "falsch": "Dienstags",
+       "richtig": "dienstags",
+       "art": "gross"
+      },
+      {
+       "falsch": "besser stehen wie",
+       "richtig": "besser stehen als",
+       "art": "gram"
+      },
+      {
+       "falsch": "jeden einzelnen",
+       "richtig": "jeden Einzelnen",
+       "art": "gross"
+      },
+      {
+       "falsch": "ist sagt",
+       "richtig": "ist, sagt",
+       "art": "komma"
+      },
+      {
+       "falsch": "mit zu bringen",
+       "richtig": "mitzubringen",
+       "art": "getrennt"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "gruppe",
+   "sauber": [
+    {
+     "titel": "WG-Einkauf fürs Wochenende",
+     "text": "Hallo zusammen,\n\nich gehe morgen gegen 17:30 Uhr zum Supermarkt in der Lindenstraße und kann für die ganze WG einkaufen. Schreibt mir bis 16 Uhr, was ihr braucht. Auf dem Zettel am Kühlschrank stehen bisher Milch, Haferflocken, zwei Packungen Nudeln und Spülmittel. Tim, du hattest gesagt, dass wir auch Müllbeutel brauchen. Stimmt das noch? Die großen mit 60 Litern sind im Angebot, die kleinen passen aber besser in unseren Eimer. Für das Grillen am Samstagabend würde ich außerdem ca. 2 kg Kartoffeln und etwas Gemüse mitnehmen. Wer lieber Grillkäse als Würstchen möchte, sagt bitte kurz Bescheid. Das Geld lege ich wie immer aus; danach schicke ich euch ein Foto vom Kassenzettel, damit wir alles fair aufteilen können. Letztes Mal waren es 38,40 Euro, also knapp 10 Euro pro Person.\n\nLiebe Grüße\nJonas"
+    },
+    {
+     "titel": "Lerngruppe Trainingswissenschaft",
+     "text": "Hi Leute,\n\nfür unsere Lerngruppe zur Klausur in Trainingswissenschaft habe ich einen Raum reserviert: Wir treffen uns am Dienstag um 14:15 Uhr in Raum 2.05 im Hauptgebäude. Ich habe vor, zuerst die Folien zur Superkompensation durchzugehen, weil die meisten von uns dort noch Lücken haben. Danach könnten wir die Altklausur von 2023 gemeinsam lösen. Sarah hat angeboten, eine Zusammenfassung zu den Trainingsprinzipien mitzubringen. Wer die Aufgaben vorher schon bearbeiten möchte, findet sie im Ordner „Klausurvorbereitung“ auf der Lernplattform. Bitte bringt eure Mitschriften aus dem Seminar mit, denn im Skript fehlen einige Beispiele. Wir sollten spätestens um 17 Uhr Schluss machen, da der Raum danach belegt ist. Falls jemand nicht kann, gebt mir bis Montagabend Bescheid, dann verschiebe ich die Reservierung. Ich finde es sinnvoller, uns zweimal kurz zu treffen, als einmal den ganzen Tag zu lernen.\n\nBis Dienstag\nMara"
+    },
+    {
+     "titel": "Umzugshilfe gesucht",
+     "text": "Hallo ihr Lieben,\n\nam Samstag, dem 17. Oktober, ziehe ich endlich in die neue Wohnung in der Goethestraße 12. Ich brauche ein paar Leute, die beim Tragen helfen. Den Transporter hole ich um 8:30 Uhr ab, gegen 9 Uhr wäre ich dann bei der alten Wohnung. Es sind vor allem Kisten, ein Schreibtisch, das Bett und eine schwere Waschmaschine. Die neue Wohnung liegt im dritten Stock, und einen Aufzug gibt es leider nicht. Wer also sowieso gern Krafttraining macht, ist herzlich eingeladen. Ich rechne mit etwa vier Stunden, wenn wir zu fünft sind. Für Brötchen, Kaffee und Getränke ist gesorgt, und abends gebe ich Pizza aus. Bitte zieht feste Schuhe an und lasst die guten Sachen zu Hause. Könnt ihr mir bis Mittwoch schreiben, ob ihr dabei seid? Dann weiß ich, ob ich noch eine Sackkarre leihen muss.\n\nVielen Dank im Voraus\nFelix"
+    },
+    {
+     "titel": "Teamanmeldung Stadtlauf",
+     "text": "Hallo Laufgruppe,\n\ndie Anmeldung für den Stadtlauf am 25. Oktober ist seit heute offen. Wir haben ja überlegt, als Team beim 10-km-Lauf zu starten. Die Startgebühr beträgt 24 Euro pro Person, bei einer Teamanmeldung mit mindestens fünf Leuten sind es nur 19 Euro. Ich würde die Anmeldung gesammelt übernehmen, damit wir im selben Startblock landen. Dafür brauche ich von jedem den vollständigen Namen, das Geburtsjahr und eine realistische Zielzeit. Keine Sorge: Die Zielzeit dient nur zur Einteilung der Startblöcke, niemand wird daran gemessen. Wer lieber die 5 km läuft, kann das natürlich auch tun; die Anmeldung läuft über dasselbe Formular. Meldeschluss ist der 10. Oktober, ich brauche eure Daten also bis zum 8. Oktober. Unser Training am Donnerstag findet wie gewohnt um 18 Uhr am Stadion statt. Dort können wir auch über das Tempo sprechen, das wir als Gruppe laufen wollen.\n\nSportliche Grüße\nLena"
+    },
+    {
+     "titel": "Absprache zum Referat",
+     "text": "Hi Johanna,\n\ndanke für deine Nachricht von gestern Abend. Ich habe mir unsere Gliederung für das Referat noch einmal angeschaut und finde, dass der Teil zur Motivation im Schulsport noch zu lang ist. Wir haben insgesamt nur 20 Minuten, und die Diskussion soll ungefähr ein Viertel davon ausmachen. Mein Vorschlag wäre, die beiden Studien zusammenzufassen, statt sie einzeln vorzustellen. Die Grafik aus der zweiten Studie ist ohnehin anschaulicher als die Tabelle aus der ersten. Kannst du bis Freitag die Folien zu den Ergebnissen erstellen? Ich übernehme die Einleitung und das Fazit. Außerdem habe ich Frau Dr. Weber gefragt, ob wir ein kurzes Video zeigen dürfen, das höchstens zwei Minuten dauert. Sobald sie antwortet, melde ich mich. Wenn es dir recht ist, können wir uns am Montag um 10 Uhr in der Bibliothek treffen und den Vortrag einmal komplett durchsprechen.\n\nViele Grüße\nPaul"
+    },
+    {
+     "titel": "Nebenkostenabrechnung in der WG",
+     "text": "Hallo zusammen,\n\ndie Nebenkostenabrechnung für 2025 ist heute gekommen. Leider müssen wir 186 Euro nachzahlen, das sind 46,50 Euro pro Person. Ich habe die Abrechnung eingescannt und in unseren Gruppenordner gelegt, damit jeder sie selbst prüfen kann. Der größte Posten ist das Warmwasser: Wir haben deutlich mehr verbraucht als im Jahr davor. Das liegt vermutlich auch daran, dass wir nach dem Training alle zu Hause duschen. Ich schlage vor, dass wir den Betrag bis Ende des Monats auf das WG-Konto überweisen. Die IBAN steht wie immer im Chat oben angeheftet. Außerdem müssen wir die monatliche Vorauszahlung anpassen, sonst stehen wir nächstes Jahr wieder vor demselben Problem. Ich würde 15 Euro mehr pro Kopf und Monat vorschlagen. Falls jemand das anders sieht, lasst uns am Sonntagabend beim Essen darüber reden. Ich koche Linsensuppe, und für alle ist genug da.\n\nGruß\nBen"
+    },
+    {
+     "titel": "Fahrgemeinschaft zum Turnier",
+     "text": "Hallo Mia, hallo Tom,\n\nfür das Hochschulturnier in Münster am Sonntag habe ich das Auto meiner Eltern bekommen. Wir können also zu dritt fahren und müssen nicht den Zug um 6:12 Uhr nehmen. Ich würde euch um 7:15 Uhr am Hauptbahnhof abholen, direkt vor dem Eingang Breslauer Platz. Die Fahrt dauert ungefähr anderthalb Stunden, das Einspielen beginnt um 9:30 Uhr. Die Spritkosten teilen wir durch drei; es sind hin und zurück etwa 300 km, also rechne ich mit rund 15 Euro pro Person. Denkt bitte an eure Hallenschuhe, den Studierendenausweis und etwas zu essen. In der Halle gibt es zwar einen Kiosk, aber beim letzten Turnier war er schon mittags leer. Das Trikotset nehme ich mit, weil ich es nach dem Waschen noch bei mir habe. Falls sich an den Uhrzeiten etwas ändert, schreibe ich euch spätestens am Samstagabend eine Nachricht.\n\nBis Sonntag\nJannik"
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Einkauf erledigt",
+     "text": "Hallo zusammen,\n\nich war gerade einkaufen und habe leider vergessen, Toilettenpapier mitzunehmen. Kann das morgen jemand von euch besorgen? Der Kassenzettel liegt auf dem Küchentisch, insgesamt waren es 42.80 Euro. Ich habe diesmal mehr Obst gekauft wie sonst, weil wir am Wochenende Besuch bekommen. Ausserdem war der Käse im Angebot, deshalb liegen jetzt drei Packungen im Kühlschrank. Überweist mir euren Anteil bitte bis Freitag. Und noch etwas: Wer hat gestern abend die Pfanne in der Spüle stehen lassen? Sie steht immer noch da, und ich glaube dass sie langsam zu riechen anfängt.\n\nViele Grüße\nLisa",
+     "fehler": [
+      {
+       "falsch": "42.80 Euro",
+       "richtig": "42,80 Euro",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "mehr Obst gekauft wie sonst",
+       "richtig": "mehr Obst gekauft als sonst",
+       "art": "gram"
+      },
+      {
+       "falsch": "Ausserdem",
+       "richtig": "Außerdem",
+       "art": "recht"
+      },
+      {
+       "falsch": "gestern abend",
+       "richtig": "gestern Abend",
+       "art": "gross"
+      },
+      {
+       "falsch": "glaube dass",
+       "richtig": "glaube, dass",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Lerngruppe vor der Klausur",
+     "text": "Hallo zusammen,\n\nwegen der Klausur in Sportpsychologie am 12.11 wollte ich fragen, ob wir uns noch einmal als Lerngruppe treffen wollen. Letztes mal war es wirklich hilfreich, auch wenn wir nicht alles geschafft haben. Ich hätte Mittwoch oder Donnerstag Zeit, jeweils ab 14 Uhr. Wir könnten uns in der Bibliothek treffen oder bei mir, da ist es ruhiger. Das Kapitel über Motivation und Volition habe ich schon zusammen gefasst, dass kann ich euch vorher schicken. Wer von euch hat die Mitschrift von der Vorlesung am Dienstag? Die Folien allein reichen meiner Meinung nach nicht, weil der Professor vieles nur mündlich erklärt hat. Sagt mir bis morgen bescheid, dann buche ich einen Raum.\n\nLiebe Grüße\nAnna",
+     "fehler": [
+      {
+       "falsch": "am 12.11",
+       "richtig": "am 12.11.",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Letztes mal",
+       "richtig": "Letztes Mal",
+       "art": "gross"
+      },
+      {
+       "falsch": "zusammen gefasst",
+       "richtig": "zusammengefasst",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "dass kann ich",
+       "richtig": "das kann ich",
+       "art": "recht"
+      },
+      {
+       "falsch": "bescheid",
+       "richtig": "Bescheid",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Auszug aus der WG",
+     "text": "Hallo ihr Lieben,\n\nwie ihr wisst ziehe ich Anfang Oktober aus der WG aus. Mein neues Zimmer liegt in der Nähe der Sporthochschule, sodass ich endlich mit dem Fahrrad zur Uni fahren kann. Für den Umzug brauche ich am Samstag noch zwei, drei Leute die beim Tragen helfen. Die meisten Möbel lasse ich hier, nur das Regal und den Schreibtisch nehme ich mit. Der Transporter ist ab 9 Uhr reserviert, ich bin also gegen halb zehn bei euch. Zum Mittagessen gibt es Pizza, und für die Getränke sorge ich auch. Wer Zeit hat, schreibt mir bitte bis Donnerstag. Ich freue mich schon auf das neue Zimmer, obwohl es etwas kleiner ist als mein jetziges. Die Kaution für mein altes Zimmer, würde ich gern bis Ende des Monats zurück bekommen.\n\nDanke im vorraus\nTobias",
+     "fehler": [
+      {
+       "falsch": "wisst ziehe",
+       "richtig": "wisst, ziehe",
+       "art": "komma"
+      },
+      {
+       "falsch": "Leute die",
+       "richtig": "Leute, die",
+       "art": "komma"
+      },
+      {
+       "falsch": "Zimmer, würde",
+       "richtig": "Zimmer würde",
+       "art": "komma"
+      },
+      {
+       "falsch": "zurück bekommen",
+       "richtig": "zurückbekommen",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "im vorraus",
+       "richtig": "im Voraus",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Anmeldung Halbmarathon",
+     "text": "Hallo Laufgruppe,\n\nich habe uns gestern als Team für den Halbmarathon am 18. Oktober angemeldet. Die Startgebühr beträgt 35€ pro Person, bitte überweist mir das Geld bis Ende der Woche. Wer noch keine Startnummer hat, kann sie am Vortag im Messezelt abholen. Die Strecke ist dieses Jahr etwas flacher als letztes Jahr, deshalb sind gute Zeiten möglich. Wir treffen uns am Renntag um 8:15 Uhr am Eingang des Stadion, damit wir uns gemeinsam aufwärmen können. Bringt eure Zeitmesschips mit, ohne die gibt es keine offizielle Zeit. Nach dem Lauf wollen wir noch zusammen Essen gehen, ich reserviere einen Tisch für zehn Personen. Wer nicht mit kommt, sagt mir bitte vorher Bescheid. Ich hoffe, das wir alle gesund an den Start gehen.\n\nSportliche Grüße\nKai",
+     "fehler": [
+      {
+       "falsch": "35€",
+       "richtig": "35 €",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "des Stadion",
+       "richtig": "des Stadions",
+       "art": "gram"
+      },
+      {
+       "falsch": "Essen gehen",
+       "richtig": "essen gehen",
+       "art": "gross"
+      },
+      {
+       "falsch": "mit kommt",
+       "richtig": "mitkommt",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "das wir",
+       "richtig": "dass wir",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Referat verschoben",
+     "text": "Hi Sophie,\n\nich habe heute nach dem Seminar mit Herr Schmidt gesprochen. Unser Referat über Bewegungslernen ist jetzt für den 15.10 eingeplant, also haben wir noch gut drei Wochen. Er meinte, dass wir uns mehr auf die Praxis im Sportunterricht konzentrieren sollen und weniger auf die Theorie. Ich finde das gut, weil wir dann die Beispiele aus unserem Praktikum nutzen können. Kannst du bis nächsten Montag eine grobe Gliederung erstellen? Ich kümmere mich um die Literatur und schreibe die Einleitung. Wir sollten uns auf jeden Fall vorher noch einmal treffen um alles abzusprechen. Am Besten wäre Mittwoch Nachmittag, weil ich da keine Vorlesung habe.\n\nLiebe Grüße\nJana",
+     "fehler": [
+      {
+       "falsch": "mit Herr Schmidt",
+       "richtig": "mit Herrn Schmidt",
+       "art": "gram"
+      },
+      {
+       "falsch": "den 15.10",
+       "richtig": "den 15.10.",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "treffen um",
+       "richtig": "treffen, um",
+       "art": "komma"
+      },
+      {
+       "falsch": "Am Besten",
+       "richtig": "Am besten",
+       "art": "gross"
+      },
+      {
+       "falsch": "Mittwoch Nachmittag",
+       "richtig": "Mittwochnachmittag",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Putzplan in der WG",
+     "text": "Hallo zusammen,\n\nmir ist aufgefallen, dass der Putzplan seid zwei Wochen nicht mehr eingehalten wird. Das Bad hat seitdem keiner richtig geputzt, und der Müll stand gestern schon wieder im Flur. Ich bin nicht die Einzige, die das stört. Ich schlage vor, das wir uns am Sonntag um 19 Uhr kurz zusammensetzen und den Plan anpassen. Das ist der einzigste Abend, an dem alle zu hause sind. Vielleicht wäre es besser wenn jeder einen festen Bereich übernimmt, statt jede Woche zu wechseln. Bis zur Zimmerübergabe am 30.09. muss außerdem die Küche gründlich sauber sein. Ich besorge dafür neue Schwämme und einen Entkalker, das Geld nehme ich aus der WG-Kasse.\n\nLiebe Grüße\nMira",
+     "fehler": [
+      {
+       "falsch": "seid zwei Wochen",
+       "richtig": "seit zwei Wochen",
+       "art": "recht"
+      },
+      {
+       "falsch": "das wir",
+       "richtig": "dass wir",
+       "art": "recht"
+      },
+      {
+       "falsch": "einzigste",
+       "richtig": "einzige",
+       "art": "gram"
+      },
+      {
+       "falsch": "zu hause",
+       "richtig": "zu Hause",
+       "art": "gross"
+      },
+      {
+       "falsch": "besser wenn",
+       "richtig": "besser, wenn",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Neuer Trainingsplan Laufgruppe",
+     "text": "Hallo Laufgruppe,\n\nab nächster Woche trainieren wir wieder Dienstags und donnerstags, jeweils um 18:30 Uhr am Stadion. Dienstags stehen Intervalle auf dem Plan, donnerstags ein lockerer Dauerlauf über 8 bis 10 km. Einige von euch sind im Sommer genauso schnell geworden als die Gruppe von Stefan, deshalb teile ich die Tempogruppen neu ein. Die Einteilung ist aber noch nicht entgültig. Wer beim Crosslauf am 7.November mitlaufen will muss sich bis Ende Oktober selbst anmelden. Die Anmeldung kostet 12 Euro und geht nur online, den Link findet ihr in unserer Gruppe. Denkt bitte daran, dass es abends schon früh dunkel wird: Bringt ab jetzt eine Stirnlampe oder eine Warnweste mit.\n\nBis Dienstag\nChris",
+     "fehler": [
+      {
+       "falsch": "wieder Dienstags",
+       "richtig": "wieder dienstags",
+       "art": "gross"
+      },
+      {
+       "falsch": "genauso schnell geworden als",
+       "richtig": "genauso schnell geworden wie",
+       "art": "gram"
+      },
+      {
+       "falsch": "entgültig",
+       "richtig": "endgültig",
+       "art": "recht"
+      },
+      {
+       "falsch": "7.November",
+       "richtig": "7. November",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "will muss",
+       "richtig": "will, muss",
+       "art": "komma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "formal",
+   "sauber": [
+    {
+     "titel": "Widerspruch gegen Ablehnung eines Zuschusses",
+     "text": "Widerspruch gegen den Bescheid vom 4. August 2026, Aktenzeichen 32-417/26\n\nSehr geehrte Damen und Herren,\n\nhiermit lege ich Widerspruch gegen den oben genannten Bescheid ein, mit dem Sie meinen Antrag auf einen Zuschuss für die Übungsleiterausbildung abgelehnt haben. Zur Begründung führen Sie an, dass die Ausbildung nicht von einem anerkannten Träger angeboten werde. Das trifft nicht zu: Der Lehrgang des Kreissportbundes ist seit 2019 anerkannt, wie die beigefügte Bescheinigung belegt.\n\nAußerdem habe ich den Antrag fristgerecht am 12. Juni 2026 gestellt, also mehr als sechs Wochen vor Beginn des Lehrgangs. Ich bitte Sie daher, den Bescheid aufzuheben und über meinen Antrag erneut zu entscheiden.\n\nTelefonisch erreichen Sie mich werktags ab 16:00 Uhr unter 0221 4987-310.\n\nMit freundlichen Grüßen\n\nNils Otten\n\nAnlage: Bescheinigung des Kreissportbundes"
+    },
+    {
+     "titel": "Anfrage nach Hallenzeiten beim Sportamt",
+     "text": "Betreff: Anfrage nach Hallenzeiten in der Dreifachsporthalle Ehrenfeld\n\nSehr geehrte Frau Dr. Weber,\n\nich leite beim TuS Köln-Nippes 1912 e. V. eine Leichtathletikgruppe für Kinder zwischen acht und zwölf Jahren. Seit dem Umbau unserer bisherigen Halle trainieren wir im Freien, was ab Oktober kaum noch möglich sein wird.\n\nDeshalb möchte ich anfragen, ob in der Dreifachsporthalle Ehrenfeld ein Hallendrittel frei ist, und zwar dienstags oder donnerstags von 17:00 bis 18:30 Uhr. Die Gruppe umfasst derzeit 18 Kinder und zwei Betreuerinnen. Wir benötigen lediglich Matten, einen Kasten und eine 30-m-Laufstrecke.\n\nKönnen Sie mir mitteilen, bis wann ein Antrag für die Wintersaison eingehen muss und welche Unterlagen Sie dafür brauchen? Gern komme ich auch persönlich vorbei, um die Einzelheiten zu besprechen.\n\nMit freundlichen Grüßen\n\nNils Otten\nÜbungsleiter Leichtathletik"
+    },
+    {
+     "titel": "Bewerbung als Übungsleiter Schwimmen",
+     "text": "Bewerbung als Übungsleiter für die Schwimmabteilung\n\nSehr geehrter Herr Brandt,\n\nauf Ihrer Website habe ich gelesen, dass Sie für die Schwimmabteilung ab dem 1. November einen Übungsleiter suchen. Ich studiere im fünften Semester Lehramt Sport an der Deutschen Sporthochschule Köln und bringe die Erfahrung mit, die Sie in Ihrer Ausschreibung nennen.\n\nSeit drei Jahren trainiere ich beim SV Rheinland eine Gruppe von Jugendlichen, die sich auf Wettkämpfe über 100 und 200 Meter vorbereiten. Außerdem besitze ich das Deutsche Rettungsschwimmabzeichen in Silber und die Übungsleiter-C-Lizenz. Mir ist wichtig, dass sich jedes Kind im Wasser sicher fühlt, bevor es um Technik und Zeiten geht.\n\nDa meine Seminare meist bis 15:30 Uhr dauern, kann ich montags, mittwochs und freitags ab 16:30 Uhr in der Halle sein. Über eine Einladung zu einem persönlichen Gespräch freue ich mich sehr.\n\nMit freundlichen Grüßen\n\nNils Otten"
+    },
+    {
+     "titel": "Anmeldung zu einem Rückenkurs",
+     "text": "Anmeldung zum Kurs „Rückenfit im Alltag“ (Kursnummer 26-114)\n\nSehr geehrte Damen und Herren,\n\nhiermit melde ich mich verbindlich für den oben genannten Kurs an, der vom 5. Oktober bis zum 14. Dezember 2026 jeweils montags von 19:15 bis 20:30 Uhr in der Turnhalle der Gesamtschule Mülheim stattfindet.\n\nDie Kursgebühr von 64,50 € überweise ich bis zum 25. September auf das in der Ausschreibung angegebene Konto. Als Verwendungszweck gebe ich meinen Namen und die Kursnummer an.\n\nEine Frage habe ich noch: Muss ich eine eigene Gymnastikmatte mitbringen, oder stellen Sie Matten zur Verfügung? Ich hatte im Frühjahr einen Bandscheibenvorfall und möchte außerdem wissen, ob die Kursleiterin darüber vorab informiert werden sollte.\n\nBitte bestätigen Sie mir die Anmeldung kurz per E-Mail.\n\nMit freundlichen Grüßen\n\nNils Otten"
+    },
+    {
+     "titel": "Reklamation von Laufschuhen",
+     "text": "Reklamation: Laufschuhe, Bestellnummer 4481-2207\n\nSehr geehrte Damen und Herren,\n\nam 2. September 2026 habe ich in Ihrem Onlineshop ein Paar Laufschuhe in Größe 44 zum Preis von 129,90 € bestellt. Nach knapp drei Wochen und etwa 60 km hat sich an beiden Schuhen die Sohle im Vorfußbereich gelöst. Die Schuhe habe ich ausschließlich auf asphaltierten Wegen getragen und nach jedem Lauf an der Luft trocknen lassen.\n\nDa es sich um einen Mangel handelt, der offensichtlich schon bei der Lieferung angelegt war, bitte ich Sie um einen Ersatz in derselben Größe. Sollte das Modell nicht mehr lieferbar sein, erwarte ich die Erstattung des Kaufpreises.\n\nFotos der beschädigten Stellen und die Rechnung habe ich angehängt. Bitte teilen Sie mir bis zum 7. Oktober mit, wie ich die Schuhe an Sie zurückschicken soll.\n\nMit freundlichen Grüßen\n\nNils Otten"
+    },
+    {
+     "titel": "Widerspruch gegen einen Gebührenbescheid",
+     "text": "Widerspruch gegen den Gebührenbescheid Nr. 2026/0815 vom 9. September 2026\n\nSehr geehrte Damen und Herren,\n\ngegen den oben genannten Bescheid, der mir am 11. September zugegangen ist, lege ich fristgerecht Widerspruch ein.\n\nDarin berechnen Sie 24 Nutzungsstunden für die Sporthalle Am Stadtgarten zu je 18,00 €, insgesamt also 432,00 €. Laut Belegungsplan hat unsere Gruppe die Halle im August jedoch nur an vier Terminen zu je zwei Stunden genutzt, weil sie vom 10. bis zum 23. August wegen Reinigungsarbeiten gesperrt war. Abzurechnen sind daher 8 Stunden, also 144,00 €.\n\nIch bitte Sie, den Bescheid entsprechend zu ändern. Bis zur Entscheidung über den Widerspruch beantrage ich, die Zahlung auszusetzen.\n\nEine Kopie des Belegungsplans und die Mitteilung über die Sperrung lege ich bei.\n\nMit freundlichen Grüßen\n\nNils Otten\nAbteilungsleiter Turnen, TuS Köln-Nippes 1912 e. V."
+    },
+    {
+     "titel": "Anfrage zur Abnahme des Sportabzeichens",
+     "text": "Anfrage: Abnahme des Deutschen Sportabzeichens für eine 9. Klasse\n\nSehr geehrter Herr Yilmaz,\n\nim Rahmen meines Praxissemesters an der Realschule Kalk betreue ich eine 9. Klasse mit 26 Schülerinnen und Schülern. Zum Abschluss der Leichtathletikeinheit möchten wir gern das Deutsche Sportabzeichen ablegen, und die Schulleitung hat bereits zugestimmt.\n\nDeshalb frage ich an, ob wir an einem Ihrer Abnahmetage im Stadion Höhenberg teilnehmen können. Gut passen würde uns der 14. oder der 21. Oktober, jeweils zwischen 8:00 und 11:30 Uhr. Die Disziplinen Sprint, Weitsprung und 3000-m-Lauf haben wir im Unterricht geübt; die Schwimmfähigkeit weisen die meisten bereits über ein Schwimmabzeichen nach.\n\nWäre es möglich, dass Ihre Prüferinnen und Prüfer die Ergebnisse direkt in die Wertungskarten eintragen? Das würde uns viel Zeit sparen.\n\nFür eine kurze Rückmeldung bis Ende September wäre ich Ihnen dankbar.\n\nMit freundlichen Grüßen\n\nNils Otten"
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Widerspruch gegen abgelehnte Förderung",
+     "text": "Sehr geehrte Damen und Herren,\n\nhiermit lege ich Wiederspruch gegen ihren Bescheid vom 3. August 2026 ein. Sie haben meinen Antrag auf Förderung abgelehnt, weil die Unterlagen angeblich unvollständig waren. Das trifft nicht zu, denn ich habe alle Nachweise am 15ten Juli per Einschreiben geschickt. Den Einlieferungsbeleg lege ich bei.\n\nIch bitte Sie deshalb, den Bescheid aufzuheben und meinen Antrag noch einmal zu prüfen. Der Zuschuss ist für unseren Verein wichtiger wie jede andere Förderung, denn wir brauchen ihn um neue Turnmatten anzuschaffen. Die alten Matten sind über zwanzig Jahre alt und an vielen Stellen eingerissen.\n\nMit freundlichen Grüßen,\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Wiederspruch",
+       "richtig": "Widerspruch",
+       "art": "recht"
+      },
+      {
+       "falsch": "ihren Bescheid",
+       "richtig": "Ihren Bescheid",
+       "art": "gross"
+      },
+      {
+       "falsch": "15ten Juli",
+       "richtig": "15. Juli",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "wichtiger wie",
+       "richtig": "wichtiger als",
+       "art": "gram"
+      },
+      {
+       "falsch": "ihn um",
+       "richtig": "ihn, um",
+       "art": "komma"
+      },
+      {
+       "falsch": "Grüßen,",
+       "richtig": "Grüßen",
+       "art": "zeichen"
+      }
+     ]
+    },
+    {
+     "titel": "Anfrage nach einem Kunstrasenplatz",
+     "text": "Sehr geehrte Frau Krämer,\n\nunser Verein plant im Frühjahr ein Fußballturnier für Grundschulkinder. Dafür möchten wir den Kunstrasenplatz an der Merheimer Straße nutzen, am besten am 17. April 2027 zwischen 9 und 16 Uhr. Die Siegerehrung wäre dann am Samstag Nachmittag.\n\nKönnen Sie mir sagen ob der Platz an diesem Tag noch frei ist? Wir rechnen mit etwa 120 Kinder und genauso vielen Eltern. Deshalb wäre es gut, wenn auch die Umkleiden und die Toiletten geöffnet werden könnten.\n\nAußerdem wüsste ich gern, wieviel die Nutzung für gemeinnützige Vereine kostet und bis wann wir den Antrag stellen müssen. Das Formular auf ihrer Internetseite lässt sich leider nicht öffnen.\n\nVielen Dank im voraus und freundliche Grüße\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Samstag Nachmittag",
+       "richtig": "Samstagnachmittag",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "sagen ob",
+       "richtig": "sagen, ob",
+       "art": "komma"
+      },
+      {
+       "falsch": "120 Kinder",
+       "richtig": "120 Kindern",
+       "art": "gram"
+      },
+      {
+       "falsch": "wieviel",
+       "richtig": "wie viel",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "ihrer Internetseite",
+       "richtig": "Ihrer Internetseite",
+       "art": "gross"
+      },
+      {
+       "falsch": "im voraus",
+       "richtig": "im Voraus",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Bewerbung für das Kinderturnen",
+     "text": "Sehr geehrter Herr Brandt,\n\nmit großem Interesse habe ich ihre Anzeige gelesen, in der Sie einen Übungsleiter für das Kinderturnen suchen. Ich studiere Lehramt Sport und habe bereits zwei Jahre lang eine Turngruppe in meinem Heimatverein geleitet. Dabei habe ich gelernt, wie man Kinder für Bewegung begeistert und gleichzeitig auf ihre Sicherheit achtet.\n\nBesonders gut gefällt mir, das Ihr Verein auch Eltern-Kind-Turnen anbietet. Hier könnte ich meine Erfahrung gut einbringen, da ich seit 2023 die Übungsleiter C-Lizenz besitze. Zeitlich bin ich Dienstags und Donnerstags ab 16 Uhr flexibel.\n\nÜber die Möglichkeit mich in einem persönlichen Gespräch vorzustellen würde ich mich sehr freuen.\n\nMit freundlichen Grüßen\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "ihre Anzeige",
+       "richtig": "Ihre Anzeige",
+       "art": "gross"
+      },
+      {
+       "falsch": "mir, das Ihr",
+       "richtig": "mir, dass Ihr",
+       "art": "recht"
+      },
+      {
+       "falsch": "Übungsleiter C-Lizenz",
+       "richtig": "Übungsleiter-C-Lizenz",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Dienstags",
+       "richtig": "dienstags",
+       "art": "gross"
+      },
+      {
+       "falsch": "Donnerstags",
+       "richtig": "donnerstags",
+       "art": "gross"
+      },
+      {
+       "falsch": "Möglichkeit mich",
+       "richtig": "Möglichkeit, mich",
+       "art": "komma"
+      },
+      {
+       "falsch": "vorzustellen würde",
+       "richtig": "vorzustellen, würde",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Anmeldung zum Erste-Hilfe-Kurs",
+     "text": "Sehr geehrte Damen und Herren,\n\nhiermit möchte ich mich für den Erste Hilfe Kurs am 10.10.2026 anmelden. Den Kurs brauche ich für meine Übungsleiterlizenz, die ich bis Ende des Jahres verlängern muss.\n\nLaut ihrer Homepage findet der Kurs von 9:00 bis 16:30 Uhr in den Räumen des Roten Kreuzes statt. Die Gebühr von 45 Euro überweise ich diese Woche. Ist es richtig, dass ich meinen eigenen Mittagessen mitbringen muss, oder gibt es vor Ort eine Kantine?\n\nDa ich mit dem Fahrrad komme wüsste ich außerdem gern, ob es bei Ihnen einen Stellplatz gibt. Bitte schicken sie mir eine kurze Bestätigung der Anmeldung.\n\nVielen Dank und freundliche Grüße\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Erste Hilfe Kurs",
+       "richtig": "Erste-Hilfe-Kurs",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "ihrer Homepage",
+       "richtig": "Ihrer Homepage",
+       "art": "gross"
+      },
+      {
+       "falsch": "meinen eigenen Mittagessen",
+       "richtig": "mein eigenes Mittagessen",
+       "art": "gram"
+      },
+      {
+       "falsch": "komme wüsste",
+       "richtig": "komme, wüsste",
+       "art": "komma"
+      },
+      {
+       "falsch": "schicken sie",
+       "richtig": "schicken Sie",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Reklamation eines Fitnesstrackers",
+     "text": "Sehr geehrte Damen und Herren,\n\nam 28. August 2026 habe ich bei Ihnen einen Fitnesstracker bestellt, der schon nach zehn Tagen den Dienst eingestellt hat. Das Display bleibt schwarz, obwohl ich das Gerät über Nacht geladen habe. Auch ein zurücksetzen auf die Werkseinstellungen hat nicht geholfen.\n\nIch bitte sie deshalb, mir ein neues Gerät zu schicken oder den Kaufpreis von 89,99€ zu erstatten. Die Rechnung und ein Foto des Displays habe ich angehängt. Ich finde es ärgerlich, das ein Gerät in dieser Preisklasse so schnell ausfällt, zumal ich es nur beim Laufen und Rad fahren getragen habe.\n\nBitte melden Sie sich bis zum 2. Oktober bei mir.\n\nMit freundlichen Grüßen\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "ein zurücksetzen",
+       "richtig": "ein Zurücksetzen",
+       "art": "gross"
+      },
+      {
+       "falsch": "bitte sie",
+       "richtig": "bitte Sie",
+       "art": "gross"
+      },
+      {
+       "falsch": "89,99€",
+       "richtig": "89,99 €",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "ärgerlich, das",
+       "richtig": "ärgerlich, dass",
+       "art": "recht"
+      },
+      {
+       "falsch": "Rad fahren",
+       "richtig": "Radfahren",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Widerspruch gegen einen BAföG-Bescheid",
+     "text": "Sehr geehrte Damen und Herren,\n\ngegen den BAföG-Bescheid vom 12. August 2026 lege ich hiermit Widerspruch ein. Bei der Berechnung haben Sie das Einkommen meines Vater's aus dem Jahr 2024 zugrunde gelegt. Seid dem 1. März 2026 ist er jedoch arbeitslos, und sein Einkommen ist um mehr wie die Hälfte gesunken.\n\nDeshalb habe ich bereits im Juni einen Antrag auf Aktualisierung gestellt, der in ihrem Bescheid aber nicht berücksichtigt wurde. Den Bescheid der Agentur für Arbeit füge ich erneut bei.\n\nIch bitte Sie, meinen Antrag unter Berücksichtigung des aktuellen Einkommens noch einmal zu prüfen. Da ich mein Studium sonst kaum finanzieren kann bin ich auf eine schnelle Entscheidung angewiesen.\n\nMit freundlichen Grüßen\n\nNils Otten",
+     "fehler": [
+      {
+       "falsch": "Vater's",
+       "richtig": "Vaters",
+       "art": "zeichen"
+      },
+      {
+       "falsch": "Seid",
+       "richtig": "Seit",
+       "art": "recht"
+      },
+      {
+       "falsch": "mehr wie",
+       "richtig": "mehr als",
+       "art": "gram"
+      },
+      {
+       "falsch": "ihrem Bescheid",
+       "richtig": "Ihrem Bescheid",
+       "art": "gross"
+      },
+      {
+       "falsch": "kann bin",
+       "richtig": "kann, bin",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Reklamation einer Trikotlieferung",
+     "text": "Sehr geehrter Herr Lange,\n\nam 1. September haben wir bei Ihnen 25 Trikots für unsere B Jugend bestellt. Die Lieferung ist gestern eingetroffen, allerdings gibt es mehrere Probleme.\n\nStatt der bestellten Größen S und M haben wir überwiegend Größe XL erhalten. Außerdem ist der Aufdruck des Vereinslogo auf 8 Trikots schief, und bei 3 Trikots fehlen die Rückennummern komplett. Das Blau ist deutlich heller als auf dem Muster, dass Sie uns im Juli geschickt haben.\n\nDa unsere Saison am 3. Oktober beginnt brauchen wir die richtigen Trikots dringend. Bitte teilen Sie mir mit, bis wann Sie uns Ersatz liefern können. Die Falschen Trikots schicken wir Ihnen gern zurück, sobald wir einen Rücksendeschein erhalten haben.\n\nMit sportlichen Grüßen\n\nNils Otten\nJugendtrainer",
+     "fehler": [
+      {
+       "falsch": "B Jugend",
+       "richtig": "B-Jugend",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "des Vereinslogo",
+       "richtig": "des Vereinslogos",
+       "art": "gram"
+      },
+      {
+       "falsch": "Muster, dass",
+       "richtig": "Muster, das",
+       "art": "recht"
+      },
+      {
+       "falsch": "beginnt brauchen",
+       "richtig": "beginnt, brauchen",
+       "art": "komma"
+      },
+      {
+       "falsch": "Falschen Trikots",
+       "richtig": "falschen Trikots",
+       "art": "gross"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "erklaer",
+   "sauber": [
+    {
+     "titel": "Das Prinzip der progressiven Belastungssteigerung",
+     "text": "Wer seine Leistung verbessern will, muss den Körper immer wieder vor neue Aufgaben stellen. Bleibt die Belastung über Wochen gleich, gewöhnt sich der Organismus daran, und die Fortschritte bleiben aus. Deshalb erhöht man die Anforderungen schrittweise: zuerst den Umfang, danach die Intensität. Ein Beispiel: Eine Läuferin, die im März dreimal pro Woche 5 km läuft, kann die Strecke im April auf 6 km verlängern, bevor sie das Tempo anzieht. Wichtig ist, dass die Steigerung nicht zu groß ausfällt. Als Faustregel gilt, den Wochenumfang um höchstens 10 % zu erhöhen. Ebenso wichtig sind die Pausen, denn die Anpassung findet nicht während des Trainings statt, sondern in der Erholung danach. Wer das beachtet, trainiert auf Dauer erfolgreicher als jemand, der jede Einheit bis zur Erschöpfung durchzieht."
+    },
+    {
+     "titel": "Ernährung vor dem Herbstmeeting",
+     "text": "Liebe Schwimmerinnen und Schwimmer,\n\nam Samstag, dem 17. Oktober, findet in Bonn das Herbstmeeting statt. Damit ihr dort gut in Form seid, haben wir ein paar Hinweise zur Ernährung zusammengestellt.\n\nAm Vortag solltet ihr kohlenhydratreich essen, zum Beispiel Nudeln, Reis oder Kartoffeln. Verzichtet auf fettige Speisen und ungewohnte Gerichte, denn der Magen reagiert vor einem Wettkampf oft empfindlich. Die letzte größere Mahlzeit sollte etwa drei Stunden vor dem ersten Start liegen. Wer um 10:15 Uhr schwimmt, frühstückt also spätestens um 7:15 Uhr. Gut geeignet sind Haferflocken mit Banane oder ein Brötchen mit Honig.\n\nTrinkt über den Tag verteilt genug Wasser, aber nicht mehr als einen halben Liter auf einmal. Probiert am Wettkampftag nichts Neues aus, was ihr nicht schon im Training getestet habt.\n\nViele Grüße\nEuer Trainerteam"
+    },
+    {
+     "titel": "Regeln für den Schwimmunterricht",
+     "text": "Damit der Unterricht sicher abläuft, gelten im Hallenbad am Südpark folgende Regeln:\n\n– Vor dem Betreten der Schwimmhalle duschen alle gründlich.\n– Die Halle wird erst betreten, wenn die Lehrkraft das Zeichen gibt.\n– Am Beckenrand wird nicht gerannt. Die Fliesen sind nass und rutschig.\n– Wer nicht sicher schwimmen kann, bleibt im Nichtschwimmerbereich, der durch eine Leine abgetrennt ist.\n– Springen ist nur vom Startblock und nur nach Aufforderung erlaubt.\n– Schmuck, Uhren und Haarspangen bleiben im Spind.\n– Kaugummikauen ist im Wasser verboten, da man sich daran verschlucken kann.\n\nWer sich während der Stunde unwohl fühlt, meldet sich sofort. Das gilt auch dann, wenn es sich nur um leichte Kopfschmerzen handelt. Beim Pfiff unterbrechen alle, was sie gerade tun, und schauen zur Lehrkraft.\n\nDer Unterricht beginnt dienstags um 8:00 Uhr; der Bus fährt um 7:40 Uhr an der Schule ab. Bitte seid pünktlich."
+    },
+    {
+     "titel": "Spielform: Parteiball mit Zonen",
+     "text": "Ziel: Die Schülerinnen und Schüler üben das Freilaufen und das Zuspiel unter Druck.\n\nMaterial: ein Handball, zwei Sätze Leibchen, acht Hütchen\n\nAblauf: Zwei Teams mit je fünf Spielern spielen in einem Feld von etwa 20 × 15 m. Das ballbesitzende Team versucht, sich den Ball möglichst oft zuzuspielen, ohne dass die Gegner ihn abfangen. Jeder gelungene Pass zählt einen Punkt. Wer den Ball hat, darf höchstens drei Schritte gehen und muss ihn nach spätestens drei Sekunden abspielen. Ein direktes Zurückspielen zum Passgeber ist nicht erlaubt. Fällt der Ball auf den Boden oder wird er abgefangen, wechselt der Ballbesitz.\n\nVariation: In zwei gegenüberliegenden Ecken wird mit je vier Hütchen ein Quadrat markiert. Ein Pass zu einem Mitspieler, der in einem Quadrat steht, zählt doppelt. So lernen die Spielenden, freie Räume zu erkennen und gezielt anzulaufen.\n\nTipp: Unterbrechen Sie nach etwa fünf Minuten kurz und fragen Sie: „Was hat euch geholfen, frei zu werden?“"
+    },
+    {
+     "titel": "Materialliste für das Sportfest",
+     "text": "Liebe Kolleginnen und Kollegen,\n\nfür das Sportfest der Jahrgänge 5 bis 7 am kommenden Freitag brauchen wir an den Stationen folgendes Material:\n\nStation 1 (Weitsprung): zwei Rechen, ein 30-m-Maßband, die Startnummernliste\nStation 2 (Sprint): vier Startblöcke, zwei Stoppuhren, eine Startklappe\nStation 3 (Ballwurf): 20 Schlagbälle, drei Markierungsfähnchen\nStation 4 (Staffel): 16 Staffelstäbe, Leibchen in vier Farben\n\nDie Geräte liegen ab Donnerstagnachmittag im Geräteraum der Dreifachhalle bereit. Bitte holt das Material für eure Station bis 8:15 Uhr ab und bringt es nach dem letzten Lauf vollständig zurück. Fehlt etwas oder ist ein Gerät defekt, gebt bitte Frau Keller Bescheid, damit wir es bis zum nächsten Jahr ersetzen können. Wer zusätzlich eine eigene Stoppuhr besitzt, darf sie gern mitbringen. Die Ergebnislisten drucke ich am Mittwoch aus.\n\nDanke für eure Unterstützung.\n\nViele Grüße\nJonas Brandt"
+    },
+    {
+     "titel": "Was ist Intervalltraining?",
+     "text": "Beim Intervalltraining wechseln sich Belastungs- und Erholungsphasen in einem festen Rhythmus ab. Die Pausen sind dabei so kurz, dass sich der Körper nicht vollständig erholt. Man spricht deshalb von „lohnenden Pausen“. Ein typisches Programm für Läuferinnen und Läufer sieht so aus: 6 × 400 m in zügigem Tempo, dazwischen jeweils 90 Sekunden Trabpause.\n\nIm Vergleich zum Dauerlauf ist die Belastung höher, dafür ist die Einheit kürzer. Das macht die Methode attraktiv für alle, die wenig Zeit haben. Sie verbessert vor allem die Fähigkeit, auch bei hohem Tempo lange durchzuhalten.\n\nAllerdings sollte man nicht öfter als zweimal pro Woche intensive Intervalle einplanen. Zwischen zwei solchen Einheiten sollten etwa 48 Stunden liegen, damit sich der Körper erholen kann. Anfängerinnen und Anfänger beginnen am besten mit kürzeren Strecken, etwa 200 m, und steigern sich langsam."
+    },
+    {
+     "titel": "Essen nach dem Training",
+     "text": "Nach einer harten Einheit sind die Kohlenhydratspeicher der Muskeln weitgehend leer. Damit sie sich schnell wieder füllen, lohnt es sich, innerhalb von etwa zwei Stunden eine Mahlzeit einzuplanen. Gut geeignet sind z. B. Reis mit Gemüse und Hähnchen, ein Vollkornbrot mit Quark oder ein großes Glas Milch mit einer Banane. Wichtig ist, dass neben Kohlenhydraten auch Eiweiß dabei ist, denn es unterstützt die Regeneration der Muskulatur.\n\nViele greifen direkt nach dem Training zu Süßigkeiten. Das ist nicht verboten, ersetzt aber keine richtige Mahlzeit. Wer abends trainiert, sollte außerdem nicht zu fettreich essen, da das den Schlaf stören kann. Bei Magen-Darm-Beschwerden sind leichte Speisen wie Zwieback oder Haferbrei die bessere Wahl.\n\nEin verbreiteter Irrtum lautet: „Wer abnehmen will, lässt das Essen nach dem Sport einfach weg.“ Das führt eher dazu, dass man sich schlechter erholt und später umso mehr isst.\n\nFragen beantwortet unsere Ernährungsberaterin gern per E-Mail über die Geschäftsstelle."
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Das Prinzip der Superkompensation",
+     "text": "Nach einer Trainingsbelastung ist der Körper zunächst ermüdet, und seine Leistungsfähigkeit sinkt. In der anschließenden Erholungsphase baut er seine Energiespeicher nicht nur wieder auf, sondern legt sogar etwas mehr an als vorher. Diesen Zustand, den Fachleute Superkompensation nennen nutzt man im Training gezielt. Wichtig ist, das die nächste Einheit genau in diese Phase fällt. Trainiert man zu früh, ist der Körper noch nicht erholt, und die Leistung wird schlechter wie vorher. Trainiert man zu spät, ist der Effekt schon wieder verpufft. Bei Anfängern dauert die Erholung länger als bei Fortgeschrittenen, deshalb sollten sie anfangs nicht öfter als drei mal pro Woche trainieren. Im allgemeinen gilt: Wer seinem Körper genug Ruhe gönnt, wird langfristig stärker. Das Modell ist allerdings eine Vereinfachung, weil sich nicht jedes Organsystem gleich schnell erholt.",
+     "fehler": [
+      {
+       "falsch": "nennen nutzt",
+       "richtig": "nennen, nutzt",
+       "art": "komma"
+      },
+      {
+       "falsch": "das die",
+       "richtig": "dass die",
+       "art": "recht"
+      },
+      {
+       "falsch": "schlechter wie",
+       "richtig": "schlechter als",
+       "art": "gram"
+      },
+      {
+       "falsch": "drei mal",
+       "richtig": "dreimal",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Im allgemeinen",
+       "richtig": "Im Allgemeinen",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Elternbrief zum Hallenturnier",
+     "text": "Liebe Eltern,\n\nam Sonntag den 8. November findet unser Hallenturnier in der Sporthalle Nord statt. Damit die Kinder fit sind, bitten wir Sie, auf folgendes zu achten: Am Morgen sollte es ein leichtes Frühstück geben, z.B. Müsli oder einen Toast mit Marmelade. Fettiges Essen, wie Pommes oder Würstchen liegt schwer im Magen. Geben Sie den Kindern ausserdem eine Trinkflasche mit Wasser oder Saftschorle mit. Für die Pausen eignen sich Bananen, Reiswaffeln oder ein paar Müsliriegel. Treffpunkt ist um 9.00 Uhr am Eingang, das erste Spiel beginnt um 9.45 Uhr.\n\nVielen Dank für ihre Unterstützung.\n\nSportliche Grüße\nDas Trainerteam der E-Jugend",
+     "fehler": [
+      {
+       "falsch": "Sonntag den 8. November findet",
+       "richtig": "Sonntag, den 8. November, findet",
+       "art": "komma"
+      },
+      {
+       "falsch": "auf folgendes",
+       "richtig": "auf Folgendes",
+       "art": "gross"
+      },
+      {
+       "falsch": "z.B.",
+       "richtig": "z. B.",
+       "art": "zeichen"
+      },
+      {
+       "falsch": "Essen, wie Pommes oder Würstchen liegt",
+       "richtig": "Essen wie Pommes oder Würstchen liegt",
+       "art": "komma"
+      },
+      {
+       "falsch": "ausserdem",
+       "richtig": "außerdem",
+       "art": "recht"
+      },
+      {
+       "falsch": "ihre Unterstützung",
+       "richtig": "Ihre Unterstützung",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Baderegeln für das Trainingslager",
+     "text": "Für die Zeit im Freibad gelten folgende Regeln. Niemand geht allein ins Wasser, es wird immer zu zweit geschwommen. Vor dem Sprung ins Becken prüft jeder ob das Wasser tief genug ist. Am Beckenrand wird nicht gerannt, weil die Fliesen nass und rutschig sind. Wer einen Sonnenbrand vermeiden möchte cremt sich spätestens alle zwei Stunden neu ein. Beim Pfiff des Bademeister verlassen alle sofort das Becken. Getränke in Glasflaschen sind am Beckenrand verboten, dass gilt auch für kleine Saftflaschen. Die Schwimmzeit endet um 17 Uhr, danach treffen wir uns am Eingang und gehen zusammen zum Abendessen. Wer zu spät kommt, übernimmt am nächsten Tag den Tischdienst. Handys und Wertsachen bleiben in der Hütte, da wir für verlorene Dinge nicht haften. Kopfsprünge sind nur im Springerbecken erlaubt, im Nichtschwimmerbecken ist das springen ganz verboten.",
+     "fehler": [
+      {
+       "falsch": "jeder ob",
+       "richtig": "jeder, ob",
+       "art": "komma"
+      },
+      {
+       "falsch": "möchte cremt",
+       "richtig": "möchte, cremt",
+       "art": "komma"
+      },
+      {
+       "falsch": "des Bademeister",
+       "richtig": "des Bademeisters",
+       "art": "gram"
+      },
+      {
+       "falsch": "dass gilt",
+       "richtig": "das gilt",
+       "art": "recht"
+      },
+      {
+       "falsch": "das springen",
+       "richtig": "das Springen",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Spielanleitung: Brennball",
+     "text": "Es spielen zwei Mannschaften gegeneinander, eine Läufer- und eine Feldmannschaft. Der erste Läufer wirft den Ball ins Feld und läuft dann so schnell wie möglich um die Matten herum. Die Kinder, die gerade nicht an der Reihe sind warten hinter der Linie. Die Feldspieler versuchen, den Ball zu fangen und ihn in den Brennkasten zu legen. Wenn ein Läufer in diesem Moment nicht auf einer Matte steht, ist er „verbrannt“ und muss zurück an das Ende der Schlange. Auf jeder Matte dürfen höchstens drei Kinder gleichzeitig stehen. Für einen kompletten Lauf ohne Stop gibt es zwei Punkte, sonst einen. Nach fünf Minuten wechseln die Mannschaften. Am Ende werden die Punkte zusammen gezählt, und gewonnen hat die Mannschaft die mehr Punkte hat. Beim nächsten mal kann man die Spielzeit auf acht Minuten verlängern. Man braucht nur einen Softball, vier Matten und einen kleinen Kasten.",
+     "fehler": [
+      {
+       "falsch": "sind warten",
+       "richtig": "sind, warten",
+       "art": "komma"
+      },
+      {
+       "falsch": "ohne Stop",
+       "richtig": "ohne Stopp",
+       "art": "recht"
+      },
+      {
+       "falsch": "zusammen gezählt",
+       "richtig": "zusammengezählt",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Mannschaft die",
+       "richtig": "Mannschaft, die",
+       "art": "komma"
+      },
+      {
+       "falsch": "nächsten mal",
+       "richtig": "nächsten Mal",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Packliste für die Kanutour",
+     "text": "Liebe Eltern, liebe Schülerinnen und Schüler,\n\nfür die Kanutour vom 14.-16. Mai braucht jedes Kind folgende Sachen:\n\n– Badesachen und ein Handtuch\n– zwei Paar Schuhe, die nass werden dürfen\n– eine Regenjacke und einen warmen Pullover\n– Sonnencreme und eine Kappe\n– einen Schlafsack und eine Isomatte\n– eine Trinkflasche (mind. 1 Liter)\n\nWertsachen sollten zu Hause bleiben. Handys dürfen mitgenommen werden, werden aber Abends eingesammelt. Alle Kleidungsstücke sollten in einem wasserdichten Beutel verpackt sein, da das Gepäck im Boot mitfährt. Die Abfahrt ist am Freitag um 8 Uhr am Schulparkplatz. Bitte seit pünktlich, denn der Bus wartet nicht. Die Kosten von 85,-€ überweisen Sie bitte bis zum 30. April auf das Klassenkonto.\n\nVielen Dank im vorraus und viele Grüße\nSabine Lorenz",
+     "fehler": [
+      {
+       "falsch": "vom 14.-16. Mai",
+       "richtig": "vom 14. bis 16. Mai",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Abends",
+       "richtig": "abends",
+       "art": "gross"
+      },
+      {
+       "falsch": "seit pünktlich",
+       "richtig": "seid pünktlich",
+       "art": "recht"
+      },
+      {
+       "falsch": "85,-€",
+       "richtig": "85 €",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "im vorraus",
+       "richtig": "im Voraus",
+       "art": "recht"
+      }
+     ]
+    },
+    {
+     "titel": "Warum wir uns aufwärmen",
+     "text": "Viele Schüler finden das Aufwärmen lästig und wollen am liebsten sofort los spielen. Doch ein gutes Aufwärmprogramm bereitet den Körper auf die Belastung vor. Die Temperatur in der Muskulatur steigt, die Muskeln werden besser durchblutet und die Gelenke beweglicher. Außerdem sinkt das Risiko sich zu verletzen. Das Aufwärmen sollte zwischen 10 und 15 Minuten dauern und langsam intensiver werden. Wir beginnen deshalb mit lockerem Laufen, danach folgen Übungen für die Beweglichkeit und am Schluss ein paar kurze Sprints. Wichtig ist, dass man sich nicht schon beim Aufwärmen völlig verausgabt. Bei kaltem Wetter dauert es natürlich länger bis der Körper richtig warm ist. Wer sich gut aufwärmt, ist konzentrierter und hat meißtens auch mehr Spaß am Spiel, als jemand der kalt anfängt.",
+     "fehler": [
+      {
+       "falsch": "los spielen",
+       "richtig": "losspielen",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "Risiko sich",
+       "richtig": "Risiko, sich",
+       "art": "komma"
+      },
+      {
+       "falsch": "länger bis",
+       "richtig": "länger, bis",
+       "art": "komma"
+      },
+      {
+       "falsch": "meißtens",
+       "richtig": "meistens",
+       "art": "recht"
+      },
+      {
+       "falsch": "Spiel, als",
+       "richtig": "Spiel als",
+       "art": "komma"
+      },
+      {
+       "falsch": "jemand der",
+       "richtig": "jemand, der",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Tipps für den Wettkampftag",
+     "text": "Am Wettkampftag sollte man nichts neues ausprobieren. Das Frühstück sollte etwa drei Stunden vor dem Start liegen und vor allem aus Kohlenhydraten bestehen. Ein Vollkornbrötchen mit Honig ist besser als ein Croissant, weil es länger satt macht. Auch Bananen sind gut geeignet, da sie schnell Energie liefern und leicht verdaulich sind. Kaffee in Massen ist erlaubt, zu viel davon kann aber die Nervosität verstärken. Über den Tag verteilt solltest du zwischen 1,5-2 Liter trinken, aber nicht alles auf einmal. Bei den ersten Anzeichen von Hunger, hilft ein kleiner Snack wie Trockenobst oder ein Müsliriegel. Nach dem Wettkampf sollte man innerhalb einer Stunde etwas essen, damit sich die Muskeln schneller erholen. Manche Sportler essen nach dem Rennen garnichts mehr, weil sie keinen Appetit haben. Dann hilft oft ein Glas Kakao.",
+     "fehler": [
+      {
+       "falsch": "nichts neues",
+       "richtig": "nichts Neues",
+       "art": "gross"
+      },
+      {
+       "falsch": "in Massen",
+       "richtig": "in Maßen",
+       "art": "recht"
+      },
+      {
+       "falsch": "zwischen 1,5-2 Liter",
+       "richtig": "zwischen 1,5 und 2 Litern",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Hunger, hilft",
+       "richtig": "Hunger hilft",
+       "art": "komma"
+      },
+      {
+       "falsch": "garnichts",
+       "richtig": "gar nichts",
+       "art": "getrennt"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sorte": "mischung",
+   "sauber": [
+    {
+     "titel": "Blog: Mein erster Halbmarathon",
+     "text": "Am Sonntag, dem 13. September, bin ich meinen ersten Halbmarathon gelaufen. Der Start war um 9:30 Uhr am Rheinufer, und schon eine halbe Stunde vorher standen rund 3000 Läuferinnen und Läufer in den Startblöcken. Mein Ziel war eine Zeit unter zwei Stunden. Das klingt bescheiden, aber wer vor einem Jahr noch keine 5 km ohne Pause geschafft hat, weiß, dass das keine Kleinigkeit ist.\n\nDie ersten zehn Kilometer liefen besser als erwartet. Ich hielt mich an meinen Plan, gleichmäßig zu laufen, und nahm an jeder Verpflegungsstation einen Becher Wasser. Ab Kilometer 16 wurden die Beine schwer. Eine Zuschauerin rief mir „Weiter so, gleich hast du es!“ zu, und das half mehr, als ich gedacht hätte.\n\nIm Ziel zeigte meine Uhr 1:57:42. Ich bin stolz darauf, und im nächsten Jahr laufe ich wieder mit."
+    },
+    {
+     "titel": "Kommentar: Hallenzeiten im Hochschulsport",
+     "text": "Hallenzeiten sind knapp – das weiß jeder, der hier studiert. Trotzdem ist die neue Regelung des Hochschulsports ein Schritt in die falsche Richtung. Seit dem Wintersemester dürfen studentische Gruppen die Halle 3 nur noch dienstags und donnerstags zwischen 20 und 22 Uhr nutzen. Wer tagsüber Seminare hat und abends arbeitet, kommt damit kaum noch zum Training.\n\nDie Begründung, man wolle die Belegung „gerechter verteilen“, überzeugt mich nicht. Gerechter wäre es, die Anfragen offenzulegen und die Zeiten danach zu vergeben, wie viele Leute tatsächlich kommen. Bisher weiß niemand, nach welchen Kriterien entschieden wird.\n\nIch schlage deshalb Folgendes vor: Der Hochschulsport veröffentlicht einmal im Semester eine Übersicht aller Anfragen, und die Vergabe wird in einer offenen Sitzung mit dem Studierendenparlament besprochen. Das kostet einen Nachmittag, schafft aber Vertrauen. Genau daran fehlt es im Moment."
+    },
+    {
+     "titel": "Erfahrungsbericht: Auslandssemester in Göteborg",
+     "text": "Von Februar bis Juni 2026 habe ich ein Auslandssemester an der Universität in Göteborg verbracht. Ich hatte mich über das Erasmus-Programm beworben, und die Zusage kam schneller als erwartet.\n\nDie ersten Wochen waren anstrengend. Die Wohnungssuche dauerte länger, als mir lieb war, und bis Mitte März wohnte ich in einem Zimmer, das 25 Minuten mit der Straßenbahn vom Campus entfernt lag. Die Kurse fanden überwiegend auf Englisch statt, was mir anfangs mehr Mühe machte, als ich zugeben wollte.\n\nBesonders beeindruckt hat mich, wie selbstverständlich Bewegung dort zum Alltag gehört. Viele Studierende fahren das ganze Jahr über Rad, auch bei minus 10 Grad. Im Seminar „Outdoor Education“ waren wir jede Woche einen halben Tag draußen, bei jedem Wetter.\n\nMein Fazit: Wer die Möglichkeit hat, sollte sie nutzen. Ich habe dort mehr über Sportdidaktik gelernt als in manchem Semester zu Hause."
+    },
+    {
+     "titel": "Einladung zur Abschlussfeier",
+     "text": "Liebe Absolventinnen und Absolventen,\n\nnach sechs Semestern ist es so weit: Wir feiern euren Abschluss. Die Fachschaft Sport lädt euch herzlich zur Abschlussfeier am Freitag, dem 16. Juli 2027, ein. Wir beginnen um 18 Uhr im Hörsaal 1; ab 20 Uhr geht es im Foyer mit Essen und Musik weiter.\n\nBitte meldet euch bis zum 2. Juli über das Formular auf unserer Website an und gebt an, wie viele Gäste ihr mitbringt. Jede Absolventin und jeder Absolvent kann bis zu zwei Gäste mitbringen. Der Eintritt ist frei; für das Essen sammeln wir einen Beitrag von 10 Euro pro Person.\n\nWer eine kurze Rede halten oder ein paar Fotos aus dem Studium zeigen möchte, schreibt uns bitte eine E-Mail an fachschaft-sport@example.de. Wir freuen uns auf einen schönen Abend mit euch und euren Familien.\n\nHerzliche Grüße\n\nEure Fachschaft Sport"
+    },
+    {
+     "titel": "Nachruf auf Heinz Albers",
+     "text": "Wir trauern um Heinz Albers, der am 2. September im Alter von 81 Jahren gestorben ist. Heinz war mehr als fünfzig Jahre Mitglied unseres Vereins und hat ihn geprägt wie kaum ein anderer.\n\n1968 übernahm er die erste Jugendmannschaft, später leitete er zwölf Jahre lang die Leichtathletikabteilung. Unzählige Kinder haben bei ihm laufen, springen und werfen gelernt, und manche von ihnen kamen Jahrzehnte später mit den eigenen Kindern wieder auf den Sportplatz. Wer ihn kannte, weiß, dass er nie viel Aufhebens um sich gemacht hat. Wichtiger war ihm, dass nach dem Training alle Hürden wieder im Geräteraum standen.\n\nNoch im vergangenen Frühjahr kam er jeden Mittwoch zum Seniorensport. Sein trockener Humor wird uns fehlen.\n\nUnser Mitgefühl gilt seiner Frau Ursula, seinen beiden Töchtern und seinen Enkelkindern. Die Trauerfeier findet am Freitag, dem 18. September, um 14 Uhr in der Friedhofskapelle am Eichenweg statt.\n\nDer Vorstand des TuS Eichenfeld 1921 e. V."
+    },
+    {
+     "titel": "Blog: Zwölf Wochen Vorbereitung",
+     "text": "Viele haben mich gefragt, wie ich mich auf den Halbmarathon vorbereitet habe. Hier also ein kurzer Überblick über meine zwölf Wochen Training.\n\nIch bin viermal pro Woche gelaufen: zwei lockere Einheiten, ein Intervalltraining und am Wochenende ein langer Lauf. Der lange Lauf wuchs von 12 auf 19 Kilometer, wobei ich den Wochenumfang nie um mehr als zehn Prozent gesteigert habe. Für die Intervalle bin ich dienstags auf die Bahn gegangen, meistens 6-mal 800 Meter mit drei Minuten Trabpause dazwischen.\n\nDas Wichtigste war aber die Regeneration. In der zehnten Woche hatte ich Schmerzen an der Achillessehne und habe fünf Tage komplett pausiert. Im Nachhinein war das die richtige Entscheidung.\n\nWer selbst einen Halbmarathon plant, sollte sich einen Plan suchen, der zum eigenen Alltag passt, statt einen Profiplan eins zu eins zu übernehmen. Ein Trainingsplan, den man nach drei Wochen abbricht, bringt weniger als ein einfacher, den man durchhält."
+    },
+    {
+     "titel": "Kommentar: Schwimmen lernen braucht Wasserzeit",
+     "text": "Im Praxissemester habe ich an einer Grundschule unterrichtet. In meiner vierten Klasse konnten nur neun von 26 Kindern sicher schwimmen, obwohl die meisten schon ein Jahr Schwimmunterricht hinter sich hatten.\n\nAm fehlenden Einsatz der Lehrkräfte liegt das nicht. Pro Woche standen der Klasse 90 Minuten für das Schwimmen zur Verfügung, von denen allein 50 Minuten auf die Busfahrt und das Umziehen entfielen. Im Wasser blieben also 40 Minuten. Wer unter solchen Bedingungen arbeitet, kann kaum mehr tun, als die Kinder ans Wasser zu gewöhnen.\n\nIch wünsche mir deshalb zweierlei: mehr Wasserzeiten für Schulen in den städtischen Bädern und Busse, die die Klassen zuverlässig hin- und zurückbringen. Beides kostet Geld. Aber ein Kind, das nicht schwimmen kann, ist im Wasser in Gefahr – und das sollte uns mehr wert sein als ein paar neue Tablets."
+    }
+   ],
+   "fehlerhaft": [
+    {
+     "titel": "Blog: Halbmarathon mit Hindernissen",
+     "text": "Letzten Sonntag war es endlich soweit: mein erster Halbmarathon. Ich war schon um 7 Uhr wach obwohl der Start erst um halb zehn war. Die ersten 10km liefen gut, ich war sogar schneller wie geplant. Ab Kilometer 15 wurde es dann hart, und ich musste kurz gehen. Ein Zuschauer rief mir zu, das ich es gleich geschafft habe. Das hat mir sehr geholfen. Am Ende stand eine Zeit von 2:04:37 auf der Uhr. Nicht ganz das Ziel, aber ich bin trotzdem stolz. Beim nächsten mal will ich unter zwei Stunden bleiben, deshalb fange ich im Januar wieder an zu trainieren. Wer mitlaufen will, meldet sich einfach bei mir.",
+     "fehler": [
+      {
+       "falsch": "soweit",
+       "richtig": "so weit",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "wach obwohl",
+       "richtig": "wach, obwohl",
+       "art": "komma"
+      },
+      {
+       "falsch": "10km",
+       "richtig": "10 km",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "schneller wie geplant",
+       "richtig": "schneller als geplant",
+       "art": "gram"
+      },
+      {
+       "falsch": "das ich",
+       "richtig": "dass ich",
+       "art": "recht"
+      },
+      {
+       "falsch": "nächsten mal",
+       "richtig": "nächsten Mal",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Kommentar: Die Platzregel in der Bibliothek",
+     "text": "Seit Beginn des Semesters gilt in der Bibliothek eine neue Regel: Arbeitsplätze dürfen nur noch für 30 Minuten reserviert werden. Wer länger weg ist verliert seinen Platz. Ich halte das grundsätzlich für richtig, denn in der Prüfungsphase lagen auf vielen Tischen stundenlang Jacken und Taschen während ihre Besitzer in der Mensa saßen. Trotzdem hat die Regel einen Hacken: Niemand kontrolliert sie. Die Aufsicht ist Abends nur mit einer Person besetzt, und die ist mit der Ausleihe beschäftigt. Wenn die Hochschule es ernst meint, muss sie mehr Personal einstellen oder ein Buchungssystem einführen, wie es an anderen Hochschulen gang und gebe ist. Sonst bleibt die Regel ein Stück Papier, das niemanden interessiert. Das kann nicht im sinne der Bibliothek sein.",
+     "fehler": [
+      {
+       "falsch": "ist verliert",
+       "richtig": "ist, verliert",
+       "art": "komma"
+      },
+      {
+       "falsch": "Taschen während",
+       "richtig": "Taschen, während",
+       "art": "komma"
+      },
+      {
+       "falsch": "Hacken",
+       "richtig": "Haken",
+       "art": "recht"
+      },
+      {
+       "falsch": "Abends",
+       "richtig": "abends",
+       "art": "gross"
+      },
+      {
+       "falsch": "gang und gebe",
+       "richtig": "gang und gäbe",
+       "art": "recht"
+      },
+      {
+       "falsch": "im sinne",
+       "richtig": "im Sinne",
+       "art": "gross"
+      }
+     ]
+    },
+    {
+     "titel": "Erfahrungsbericht: Ein Semester in Valencia",
+     "text": "Mein Auslandssemester in Valencia war eine gute Entscheidung. Am Anfang war allerdings vieles chaotisch. Die Einschreibung musste man persönlich im Sekretariat erledigen, das nur Vormittags geöffnet hatte. Nach zwei Wochen hatte ich mich aber eingelebt. Ich wohnte mit drei Spaniern und einer Französin zusammen und habe dadurch schneller Spanisch gelernt als wie in jedem Kurs. Besonders gefallen hat mir das Sportangebot der Universität: Es gab Kurse in Beachvolleyball, Segeln und Klettern, die man kostenlos besuchen konnte. Das Sportzentrum stammt zwar aus den 70igern, hat aber einen hohen Standart. Ich kann jedem nur empfehlen ein Semester im Ausland zu verbringen. Die Bewerbung ist aufwendig, aber es lohnt sich. Ich will auf jeden Fall irgend wann zurück.",
+     "fehler": [
+      {
+       "falsch": "Vormittags",
+       "richtig": "vormittags",
+       "art": "gross"
+      },
+      {
+       "falsch": "als wie",
+       "richtig": "als",
+       "art": "gram"
+      },
+      {
+       "falsch": "70igern",
+       "richtig": "70ern",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Standart",
+       "richtig": "Standard",
+       "art": "recht"
+      },
+      {
+       "falsch": "empfehlen ein",
+       "richtig": "empfehlen, ein",
+       "art": "komma"
+      },
+      {
+       "falsch": "irgend wann",
+       "richtig": "irgendwann",
+       "art": "getrennt"
+      }
+     ]
+    },
+    {
+     "titel": "Einladung zur Abschlussfeier",
+     "text": "Liebe Kommilitoninnen und Kommilitonen,\n\nWir haben es geschafft! Nach sechs Semestern halten wir endlich unser Bachelorzeugnis in den Händen, und das wollen wir gebührend feiern. Deshalb laden wir euch herzlich zu unserer Abschlussfeier am Samstag den 17. Juli 2027 ein. Los geht es um 19 Uhr im Vereinsheim des ASV, Einlass ist ab 18:30 Uhr. Für Essen und Getränke ist gesorgt; wer möchte, kann gern einen Salat oder einen Nachtisch mitbringen. Bitte gebt uns bis zum 30. Juni bescheid, ob ihr kommt und mit wievielen Personen. Wir freuen uns auf einem schönen Abend mit euch allen.\n\nViele Grüße,\nLena und Jonas\nfür das Organisationsteam",
+     "fehler": [
+      {
+       "falsch": "Wir haben",
+       "richtig": "wir haben",
+       "art": "gross"
+      },
+      {
+       "falsch": "Samstag den",
+       "richtig": "Samstag, den",
+       "art": "komma"
+      },
+      {
+       "falsch": "bescheid",
+       "richtig": "Bescheid",
+       "art": "gross"
+      },
+      {
+       "falsch": "wievielen",
+       "richtig": "wie vielen",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "auf einem",
+       "richtig": "auf einen",
+       "art": "gram"
+      },
+      {
+       "falsch": "Grüße,",
+       "richtig": "Grüße",
+       "art": "zeichen"
+      }
+     ]
+    },
+    {
+     "titel": "Nachruf auf Gerda Möller",
+     "text": "Mit großer Trauer haben wir erfahren, dass unser langjähriges Mitglied Gerda Möller am 4.August im Alter von 76 Jahren verstorben ist. Ihr plötzlicher Tot hat uns alle erschüttert. Gerda trat 1974 in unseren Verein ein und war über 40 Jahre lang als Übungsleiterin im Kinderturnen aktiv. Generationen von Kindern haben bei ihr die erste Rolle Vorwärts gelernt. Seit dem sie im Ruhestand war, verbrachte sie fast jeden Nachmittag in der Halle. Sie war eine der engagiertesten Mitglieder, die unser Verein je hatte, und niemand, der sie kannte wird ihr Lachen vergessen. Unser Mitgefühl gilt ihrer Familie. Die Trauerfeier findet am Freitag, dem 14. August, um 11 Uhr in der Friedhofskapelle statt.\n\nDer Vorstand",
+     "fehler": [
+      {
+       "falsch": "4.August",
+       "richtig": "4. August",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Tot",
+       "richtig": "Tod",
+       "art": "recht"
+      },
+      {
+       "falsch": "Vorwärts",
+       "richtig": "vorwärts",
+       "art": "gross"
+      },
+      {
+       "falsch": "Seit dem",
+       "richtig": "Seitdem",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "eine der engagiertesten Mitglieder",
+       "richtig": "eines der engagiertesten Mitglieder",
+       "art": "gram"
+      },
+      {
+       "falsch": "kannte wird",
+       "richtig": "kannte, wird",
+       "art": "komma"
+      }
+     ]
+    },
+    {
+     "titel": "Blog: So habe ich trainiert",
+     "text": "Viele Fragen mich, wie ich mich auf meinen ersten Halbmarathon vorbereitet habe. Hier ein kurzer Überblick. Ich bin 3 mal pro Woche gelaufen: einmal locker, einmal Intervalle und am Wochenende ein langer Lauf. Bei den Intervallen habe ich meistens sechs Widerholungen über 800 Meter gemacht. Zusätzlich bin ich zweimal in der Woche zur Hochschule Fahrradgefahren. Den Umfang habe ich langsam gesteigert sodass ich die ganze Vorbereitung ohne Verletzung überstanden habe. Mein wichtigster Tipp: lieber zu langsam als zu schnell. Das hat mir ein älterer Läufer aus meinem Verein geraten. Der Rat eines erfahrenen Läufer ist oft mehr wert als jeder Trainingsplan aus dem Internet.",
+     "fehler": [
+      {
+       "falsch": "Fragen",
+       "richtig": "fragen",
+       "art": "gross"
+      },
+      {
+       "falsch": "3 mal",
+       "richtig": "dreimal",
+       "art": "zahlen"
+      },
+      {
+       "falsch": "Widerholungen",
+       "richtig": "Wiederholungen",
+       "art": "recht"
+      },
+      {
+       "falsch": "Fahrradgefahren",
+       "richtig": "Fahrrad gefahren",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "gesteigert sodass",
+       "richtig": "gesteigert, sodass",
+       "art": "komma"
+      },
+      {
+       "falsch": "erfahrenen Läufer ist",
+       "richtig": "erfahrenen Läufers ist",
+       "art": "gram"
+      }
+     ]
+    },
+    {
+     "titel": "Kommentar: Die Sporthalle verfällt",
+     "text": "Seid Jahren ist die Sporthalle auf dem Campus in einem schlechten Zustand. Die Duschen im Untergeschoss sind seit Dezember gesperrt, und in den Umkleiden tropft es von der Decke. Entgegen des Versprechens aus dem letzten Semester ist bis heute nichts passiert. Statt dessen hat die Hochschulleitung eine Arbeitsgruppe gegründet, die bis März einen Bericht vorlegen soll. Die Sanierung würde laut einer ersten Schätzung ca 2,5 Millionen Euro kosten. Das ist viel Geld, aber eine Halle, in der man nicht duschen kann ist für ein Sportstudium nicht zumutbar. Für die Lehrenden gilt übrigens das gleiche. Wir brauchen keinen weiteren Bericht, sondern einen Termin für den Baubeginn.",
+     "fehler": [
+      {
+       "falsch": "Seid",
+       "richtig": "Seit",
+       "art": "recht"
+      },
+      {
+       "falsch": "Entgegen des Versprechens",
+       "richtig": "Entgegen dem Versprechen",
+       "art": "gram"
+      },
+      {
+       "falsch": "Statt dessen",
+       "richtig": "Stattdessen",
+       "art": "getrennt"
+      },
+      {
+       "falsch": "ca 2,5",
+       "richtig": "ca. 2,5",
+       "art": "zeichen"
+      },
+      {
+       "falsch": "kann ist",
+       "richtig": "kann, ist",
+       "art": "komma"
+      },
+      {
+       "falsch": "das gleiche",
+       "richtig": "das Gleiche",
+       "art": "gross"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

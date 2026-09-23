@@ -1433,7 +1433,10 @@ const korpusMessung = k => {
   });
   return { saubere, fehler, gefunden, hart, pruef };
 };
-const KORPUS_UNTERGRENZE = { entwicklung: 185, kontrolle: 0 };
+/* Gemessen am 23.09.2026: vor dieser Runde 111 von 300 (entwicklung) und 71 von 304
+   (kontrolle), danach 213 und 117. Der Abstand zwischen beiden ist die Überanpassung an
+   das Entwicklungskorpus — genau deshalb nennt die App nur die Kontrollzahl. */
+const KORPUS_UNTERGRENZE = { entwicklung: 210, kontrolle: 115 };
 const korpusIst = {};
 Object.keys(KORPUS).forEach(n => {
   const m = korpusIst[n] = korpusMessung(KORPUS[n]);
@@ -1442,10 +1445,31 @@ Object.keys(KORPUS).forEach(n => {
     m.hart.length + " harte und " + m.pruef.length + " Prüfhinweise");
   P.ok("Kein harter Treffer auf fremdem, fehlerfreiem Text (" + n + ", " + m.saubere + " Texte)",
     !m.hart.length, m.hart.join(" · "));
+  /* Auch kein Prüfhinweis: Die drei am Kontrollkorpus gefundenen (ein Aktenzeichen und eine
+     Telefonnummer als Zahlenbereich, „war das die richtige Entscheidung“ als das/dass) sind
+     behoben. Ein neues Muster der Stufe „prüfen“ muss sich hier bewähren. */
+  P.ok("Kein Prüfhinweis auf fremdem, fehlerfreiem Text (" + n + ")", !m.pruef.length, m.pruef.join(" · "));
   P.ok("Die Trefferquote im Korpus „" + n + "“ fällt nicht unter " + KORPUS_UNTERGRENZE[n],
     m.gefunden >= KORPUS_UNTERGRENZE[n], m.gefunden + " von " + m.fehler);
 });
 P.ok("Beide Korpora liegen vor", !!KORPUS.entwicklung && !!KORPUS.kontrolle, Object.keys(KORPUS).join(", "));
+/* Die Selbstauskunft des Textchecks nennt die Kontrollzahl; sie muss zur Messung passen. */
+{
+  const auskunft = String(daten(w, `(function(){
+    const host = document.querySelector("#wSub");
+    const vorher = host.innerHTML;
+    renderCheck();
+    const t = host.textContent;
+    host.innerHTML = vorher;
+    return t;
+  })()`));
+  const genannt = auskunft.match(/fremden Texten[^.]*?(\d+) Prozent/);
+  const k = korpusIst.kontrolle;
+  const ist = k ? Math.round(k.gefunden / k.fehler * 100) : null;
+  P.ok("Der Textcheck nennt seine Quote an fremden Texten, und sie passt zur Kontrollmessung (±5)",
+    !!genannt && ist !== null && Math.abs(+genannt[1] - ist) <= 5,
+    (genannt ? genannt[1] : "keine Angabe") + " gegen gemessen " + ist);
+}
 
 /* Fehlerklasse „nach oben offene Wiederholung über einer verneinten Zeichenklasse“:
    a04 suchte sehr lange Sätze mit /[A-ZÄÖÜ][^.!?]{230,}[.!?]/. Da im Deutschen fast jedes

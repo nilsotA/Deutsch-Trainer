@@ -58,6 +58,46 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Textcheck an fremden Texten (23.09.2026, siebenundzwanzigste Runde).**
+
+Bisher lief der Textcheck nur gegen Texte aus der App, und dort fand er 80 % der
+eingebauten Fehler. Zwei Workflows mit je acht Schreibern haben je 56 fehlerfreie und
+56 fehlerhafte Texte aus Nils' Alltag geschrieben (Mails an Dozentinnen, Hausarbeit,
+Praktikum, Verein, Gruppe, formelle Schreiben, Sachtexte, Gemischtes), ohne die App zu
+kennen. Beide liegen jetzt in `tests/korpus/`.
+
+| | vorher | nachher |
+|---|---|---|
+| entwicklung (daran gebaut) | 111 von 300 | 213 von 300 |
+| kontrolle (nie zum Bauen benutzt) | 71 von 304 (23 %) | 117 von 304 (38 %) |
+| Fehlalarme auf 112 fehlerfreien Texten | 0 hart, 6 prüfen | 0 hart, 0 prüfen |
+
+**Die ehrliche Zahl ist die zweite Zeile.** Der Abstand zur ersten ist Überanpassung. Die
+App nennt deshalb nur sie („knapp 40 Prozent“), und `tests/suite.js` prüft, dass die
+Angabe zur Messung passt.
+
+**Was gefehlt hat:** vor allem Wortlisten. y09 (das/dass) kannte „hoffe das ich“, nicht
+„hoffe, das ich“; x23 (n-Deklination) kannte „Kollege“, nicht „Kommilitone“, „Dozent“ und
+keine Possessivpronomen; x17 kannte „Seid gestern“ nicht. Neu sind 20 Muster, jedes
+gestützt auf einen Satz, der schon in einer Regel steht (drei Regeln haben diesen Satz
+bekommen: `recht-sz` zur alten ß-Schreibung, `getrennt-konj` zu „seitdem“, `n-datum` zum
+Leerzeichen nach dem Tagespunkt; `gross-subst` nennt jetzt „beim Aufwärmen“ als Beispiel).
+
+**Was schiefging und gefangen wurde:** x51 (Höflichkeitsform) suchte die Anrede mit einer
+Rückschau über den ganzen Text und lief quadratisch — 6,7 s statt 40 ms, gefangen von der
+Laufzeitprobe; jetzt läuft die Rückschau nur an Treffern, und eine zweite Probe hält den
+ungünstigsten Fall fest. Die Rekonstruktion der Fehlersuchtexte im Prüflauf verlor die
+zweite gleiche Markierung (kt01, „das“ nth:2). Und `tests/unterwegs.js`, Abschnitt E
+verglich Fragetexte statt Kartenschlüssel — rot, sobald zwei Karten „Was ist richtig?“
+fragen. Im Commit davor stand deshalb fälschlich „alle übrigen Prüfungen grün“; der
+Folgecommit sagt das.
+
+**Was der Textcheck weiter nicht kann:** die meisten fehlenden Kommas (51 der 187 verfehlten
+Kontrollfehler), vor allem vor Relativsätzen und zwischen Hauptsätzen, zusammengesetzte Substantive mit Leerzeichen
+(„Kraft Training“), das/dass nach sächlichem Substantiv („das Thema, dass mich
+interessiert“). Das sind keine Wortlisten-Lücken, sondern Fälle, die ein Muster ohne
+Grammatik nicht sicher entscheidet.
+
 **Quer durch alles, mit Gegenprüfung (22.09.2026, sechsundzwanzigste Runde).**
 
 Ein Workflow mit 111 Agenten: 38 Prüfer lasen die Übungen (24 Pakete), die Einordnungen

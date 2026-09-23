@@ -25,7 +25,8 @@ icon-180/192/512.png      Symbol für den Home-Bildschirm
 tests/                    Prüfläufe (Node + jsdom); tests/formen.js ist die geteilte
                           Formentabelle, unabhängig von der App aufgestellt;
                           tests/kopplungen.json hält fest, welcher Satz an welchen
-                          Stellen steht (siehe tests/kopplung.js)
+                          Stellen steht (siehe tests/kopplung.js); tests/korpus/ hält
+                          zwei fremde Textkorpora für den Textcheck
 package.json              npm-Skripte für die Prüfläufe
 ```
 
@@ -281,7 +282,7 @@ npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
 **Wer einen gekoppelten Satz umschreibt, ruft `npm run kopplungen`** und legt die neue
-Fassung in denselben Commit. 108 Sätze stehen wörtlich an zwei oder mehr Stellen in
+Fassung in denselben Commit. 109 Sätze stehen wörtlich an zwei oder mehr Stellen in
 voneinander unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
 Vorher/Nachher-Paar. Der Wächter in `tests/suite.js` meldet genau den Fall, in dem ein
 solcher Satz an manchen seiner Stellen noch steht und an anderen nicht mehr: Dann hat
@@ -373,6 +374,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 | Die Frage will eine Kategorie, das Feld das Lückenwort | Tippaufgaben stellten ein Themenetikett vor den Lückensatz: m20 „Welcher Kasus?“ erwartete „einer“, m18 „Welche Zeitform passt?“ erwartete „hatte“ und lehnte „Plusquamperfekt“ ab — die Erklärung daneben nannte genau das. Dazu lehnten Akzeptanzlisten richtige Alternativen ab: n01 nahm „meinem“, aber nicht „seinem“ oder „deinem“. Die Frage sagt jetzt, **welches Wort** in die Lücke gehört („Ergänze das Artikelwort“), und jedes Artikelwort im geprüften Fall steht in der Liste. `tests/inhalt.js`, Abschnitt F hält beides: keine Tippaufgabe beginnt mit einer Kategoriefrage wie „Welcher Kasus?“, und zu jeder Liste steht, was durchgehen muss und was nicht. |
 | Der Positionsverweis mit anderem Wort | z07 schloss mit „Neutral ist die Fassung oben“. Die Optionen werden täglich gemischt, an rund der Hälfte der Tage zeigte „oben“ daneben, und vorgelesen gibt es kein Oben. Der Positionswächter kannte nur „Option A“ und „die zweite Fassung“. `tests/suite.js`, Abschnitt B prüft jetzt auch „Fassung oben“, „obige Antwort“ und Verwandte — in Frage **und** Erklärung. |
 | Eine Stelle aus mehreren Wörtern | Die Fehlersuche erkannte jede Stelle an genau einem Wort. In kt04 stand „vielleicht eventuell“, markiert war nur „vielleicht“: Wer das zweite Wort anklickte, hatte die Doppelung erkannt und bekam „1 Markierung war unnötig“ plus einen Eintrag „übersehen“ im Fehlerjournal. Dieselbe Lücke bei der Füllwortkette und der Nominalkette in kt02. Eine Stelle trägt jetzt optional `mit:[…]`, gezählt wird je Stelle. Daneben standen Fehler **unmarkiert** im Text, und ein Klick darauf galt als Fehlalarm: die Floskel „stehe für Rückfragen zur Verfügung“ (in kt05 markiert, in kt06 nicht), „dazu kamen“ in kt07, ein Tempuswechsel mitten im Protokoll kt12, gegen die eigene Regel `gram-zeiten`. Wer einen Fehlersuchtext schreibt, liest ihn danach noch einmal mit den Regeln der App gegen — jeder Satz, der dort nicht markiert ist, muss richtig sein. |
+| Der Textcheck kannte nur die eigenen Texte | Alle Korpora, gegen die der Textcheck lief, stammten aus der App — und an den eigenen Fehlersuchtexten fand er 80 %. An 56 unabhängig geschriebenen Texten mit 300 Fehlern waren es 37 %: Die Wortlisten kannten „Kollege“, aber nicht „Kommilitone“, „hoffe das ich“, aber nicht das viel häufigere „hoffe, das ich“, und „Seid gestern“ fehlte in der Zeitliste. `tests/korpus/` hält seitdem zwei fremde Korpora: **entwicklung** (daran sind die Muster gebaut, 111 → 213 von 300) und **kontrolle** (nie zum Bauen benutzt, 71 → 117 von 304). Der Abstand zwischen beiden ist Überanpassung — **wer an einem Korpus Muster baut, misst an einem anderen.** `tests/suite.js` verlangt auf den 112 fehlerfreien Texten null harte Treffer und null Prüfhinweise, hält Untergrenzen der Quote und prüft, dass die Selbstauskunft des Textchecks zur Kontrollzahl passt. Nebenbei zweimal dieselbe Lehre: Ein neues Muster (x51) lief mit einer Rückschau über den ganzen Text quadratisch — 6,7 s, gefangen von der Laufzeitprobe —, und die Rekonstruktion der Fehlersuchtexte im Prüflauf ersetzte nach „das“ → „dass“ die zweite gleiche Markierung nicht mehr, weil sie im schon veränderten Text weiterzählte. |
 | Der Wächter hört nur die Hälfte | Die Prüfung auf unlesbare Zeichen im Sprechtext las Frage und Optionen der Übungen — nicht die Erklärung, die nach der Antwort vorgelesen wird, und keine Wort- oder Fallkarte. Dort lag alles, was falsch klang: das Warnzeichen vor 58 Wortkarten-Hinweisen, „12 GradC“, „km oder h“, „lapidar Adj.“, „Akk oder Dat“ und „sowohl und so weiter als auch“, weil `sprechbar()` Auslassungspunkte als „und so weiter“ las. Nebenbei: Eine Wortkarte trug `<b>` im Feld `t`, das die Ansicht escaped — Nils sah das Tag als Text. `tests/inhalt.js`, Abschnitt D schickt jetzt alle 1314 Sprechtexte durch dieselbe Kette wie die App und prüft, dass keine Wortkarte HTML trägt. **Wer an `sprechbar()` dreht, hört die Erklärungen mit.** |
 
 ## 7 · Wenn Nils etwas ergänzt haben will

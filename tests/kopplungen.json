@@ -791,6 +791,13 @@
   ]
  },
  {
+  "satz": "Zwischen Zahl und Einheit steht ein Leerzeichen :",
+  "stellen": [
+   "Prüfmuster t15",
+   "Regel n-einheiten"
+  ]
+ },
+ {
   "satz": "Zwischen Zahl und Zeichen steht ein Leerzeichen .",
   "stellen": [
    "Prüfmuster t03",
