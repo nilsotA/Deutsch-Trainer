@@ -59,6 +59,30 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die 24 Satzbaukarten gelesen (23.09.2026, vierunddreißigste Runde).**
+
+Satz für Satz selbst gelesen. Die meisten nennen schon eine Quelle und hielten; vier Stellen nicht:
+
+- **sa07, nicht oder kein:** „Die Ausnahme: Bei festen Verbindungen … steht ‚nicht‘“ und „‚Ich spiele
+  keinen Fußball‘ heißt, dass du diesen Ball nicht spielst“. grammis: Beide Verneinungen sind
+  möglich, je nachdem ob die Fügung als komplexes Verb oder als Substantiv-Objekt gelesen wird.
+  Jetzt „kann ‚nicht‘ stehen“, und „kein“ ebenfalls richtig. Eine Übung dazu gibt es nicht.
+- **sa10, Ersatzinfinitiv:** „Bei lassen gilt dasselbe“ (also Pflicht) und zwei Sätze später
+  „Pflicht nur bei den Modalverben und bei brauchen“. Die Duden-Grammatik lässt bei lassen auch
+  das Partizip zu; grammis bestätigt die Pflicht bei brauchen. Jetzt „die übliche Form“.
+- **sa12 / tb10:** „ein Dutzend Formen“ über vierzehn Verben, „diese vierzehn Formen“ über
+  fünfzehn Formen (bräuchte/brauchte). Die Zahl ist raus.
+- **sa14:** Die Endungsliste (-ant, -ent, -at …) ohne „Personenbezeichnungen“ — der Salat und der
+  Moment sind stark. Ergänzt.
+- **sa01 (satz-v2):** Der Selbsttest „nur ein Satzglied vor dem Verb“ sagt jetzt, dass und, aber,
+  oder, denn, sondern nicht mitzählen.
+
+**Keine neue Prüfung** in dieser Runde: Die Fehler waren eine falsche Sachaussage, ein
+Widerspruch innerhalb einer Karte und zwei Zahlen im Fließtext — die sieht keine Prüfung
+(siehe CLAUDE.md, „Die Musterlösung verfehlt ihre Vorgabe“). Gegengelesen, nicht maschinell.
+Der rote Satz in sa03 (grammatisch richtig, nur schwer zu folgen) bleibt: `nope` markiert in
+9 von 17 Stilregeln die nicht empfohlene Fassung, nicht nur Fehler.
+
 **Fallkarten und Tabellentexte gelesen (23.09.2026, dreiunddreißigste Runde).**
 
 Die 182 Fallkarten Feld für Feld und die Begleittexte der zehn Tabellen (die Formen selbst prüft
