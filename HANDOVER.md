@@ -59,6 +59,23 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die 155 Wortkarten selbst gelesen (23.09.2026, sechsunddreißigste Runde).**
+
+Feld für Feld. Fast alles hält; zwei Bedeutungsfelder (`d` = richtige Antwort) nicht:
+
+- **`w:nachdem / nachdem (kausal)`:** „die kausale Verwendung ist süddeutsch-umgangssprachlich“.
+  Die Variantengrammatik des Standarddeutschen (IDS, Korpus aus 68 Zeitungen) führt kausales
+  „nachdem“ als im Südosten und Südwesten Deutschlands und in Österreich verbreitet — also regionale
+  Standardsprache, nicht Umgangssprache. Grundsatz 4. Jetzt „in Süddeutschland und Österreich
+  verbreitet, auch in Zeitungen“.
+- **`w:anhand / anhand von`:** „‚anhand von‘ nur, wenn der Genitiv nicht erkennbar ist“. Der
+  Duden-Sprachratgeber gibt bei erkennbarem Genitiv beide Formen („anhand etlicher Einsprüche /
+  anhand von etlichen Einsprüchen“). Das „nur“ ist raus.
+- Kleinigkeit: `eruieren` riet „in deutschen Texten“ zu „ermitteln“ — als wäre eruieren kein deutsches Wort.
+
+Beide Karten stehen in `NEU_GELERNT`, `npm run kalender` ist gelaufen. Keine neue Prüfung: Eine
+falsche Registerangabe lässt sich nicht maschinell erkennen, nur nachschlagen.
+
 **Der Spickzettel noch einmal ganz gelesen (23.09.2026, fünfunddreißigste Runde).**
 
 - **„Themen immer Akkusativ“** stand im Spickzettel und in der Fallkarte „über“ noch so, wie es
