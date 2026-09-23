@@ -244,8 +244,13 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("die Startseite bietet das Fortsetzen an", !!d2.querySelector("#wkOn"));
     d2.querySelector("#wkOn").click();
     P.ok("es geht hinter der beantworteten Frage weiter", daten(w2, "Q.i") === 1, daten(w2, "Q.i"));
-    P.ok("nicht dieselbe Frage noch einmal",
-      daten(w2, "Q.list[Q.i].q") !== erste.frage, daten(w2, "Q.list[Q.i].q"));
+    /* Verglichen wird der Kartenschlüssel, nicht der Fragetext: Viele Übungen teilen sich
+       „Was ist richtig?“. Lagen zwei davon vorn in der Runde, wurde der Lauf am 23.09.2026
+       rot, obwohl eine andere Karte kam — einmal in sechs Läufen. */
+    P.ok("nicht dieselbe Karte noch einmal",
+      daten(w2, "Q.list[Q.i].key") !== erste.key, daten(w2, "Q.list[Q.i].key"));
+    P.ok("… und beide Schlüssel sind gesetzt, sonst wäre der Vergleich immer wahr",
+      !!erste.key && !!daten(w2, "Q.list[Q.i].key"), erste.key);
 
     /* Die eigentliche Folge: die Karte darf nicht durch die aufgedeckte Lösung aufsteigen. */
     const wahl2 = daten(w2, "Q.list[Q.i].ans");
