@@ -2029,6 +2029,19 @@ const wurzel = path.join(__dirname, "..");
 const lies = n => fs.readFileSync(path.join(wurzel, n), "utf8");
 const daIst = n => fs.existsSync(path.join(wurzel, n));
 
+/* Fehlerklasse „Sprung landet in der Mitte“: scrollIntoView mit block:"center" zeigt bei
+   einem Element, das höher als der Bildschirm ist, dessen Mitte — die Überschrift liegt
+   dann oberhalb. So landete „→ Regel nachlesen“ auf dem Handy mitten in langen Regeln.
+   Gemessen wird das in tests/layout.js (Chromium); hier nur die Bauform im Quelltext, damit
+   sie auch ohne Browser nicht zurückkommt. */
+{
+  const app = lies("Deutsch-Trainer.html");
+  const mitte = (app.match(/scrollIntoView\(\{[^}]*block:\s*["']center["']/g) || []).length;
+  P.ok("Kein Sprung zentriert sein Ziel (block:\"center\")", mitte === 0, mitte + " Stellen");
+  P.ok("… und Akkordeons halten Abstand zur festen Kopfleiste (scroll-margin-top)",
+    /\.acc\{scroll-margin-top:/.test(app), "Regel fehlt");
+}
+
 const kopf = lies("Deutsch-Trainer.html").split("</head>")[0];
 const kopfzeilen = [
   ["viewport-fit=cover", /viewport-fit\s*=\s*cover/],

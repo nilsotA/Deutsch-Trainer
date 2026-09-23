@@ -55,6 +55,12 @@ input,textarea,select{font:inherit;color:inherit}
 
 /* ---------- Kopf ---------- */
 .head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+/* Ein geöffnetes Akkordeon (Regel, Baustein, Satzbaukarte) wird an seinem Anfang gezeigt,
+   unterhalb der festen Kopfleiste. Vorher stand dort block:"center": Ist die Regel höher
+   als der Bildschirm, zentriert der Browser ihre Mitte — auf 375×667 begann
+   komma-nebensatz nach „→ Regel nachlesen“ 638 px oberhalb des Bildschirms. Die Kopfleiste
+   ist je nach Umbruch 104 bis 119 px hoch; --kopf misst sie (siehe kopfMessen()). */
+.acc{scroll-margin-top:calc(var(--kopf, 124px) + 8px)}
 .head-in{max-width:820px;margin:0 auto;padding:14px 18px 0;display:flex;align-items:center;gap:14px}
 .brand{display:flex;align-items:baseline;gap:9px;margin-right:auto;min-width:0}
 .brand b{font-size:19px;font-weight:700;letter-spacing:-.02em}
@@ -348,6 +354,17 @@ body.autolauf .walkbar #nextBtn::after{content:"";position:absolute;inset:0;back
 .walkzahl{font-size:15px;font-weight:650;color:var(--ink3);white-space:nowrap}
 .walkcard{border-left:3px solid var(--acc)}
 body.walk .walkbar .btn{font-size:19px;padding:20px 24px}
+/* Die Kopfzeile der Runde erbte die große Polsterung von „body.walk .btn“ — der Selektor
+   ist spezifischer als „.walktop .btn“, also gewann er, und „‹ Beenden“ war 67 px hoch. */
+body.walk .walktop .btn{padding:10px 14px;font-size:16px}
+/* Lange Antworten, kompakter gesetzt. Gemessen am 23.09.2026 in Chromium, jede der 657
+   Karten, die unterwegs vorkommen, einzeln gezeichnet: Auf 375×667 (iPhone SE) brauchte
+   jede der 155 Wortkarten Scrollen, um die vierte Antwort zu sehen — 203 Karten insgesamt.
+   Mit dieser Stufe sind es 21, auf 390×844 keine mehr. Greift nur, wenn eine Antwort länger
+   als 40 Zeichen ist; die Schrift bleibt größer als außerhalb des Unterwegs-Modus. */
+body.walk .opts.lang{gap:8px}
+body.walk .opts.lang .opt{padding:11px 14px;font-size:17px;line-height:1.32;min-height:56px}
+body.walk .qtext.vorlang{margin:10px 0 14px}
 .speakon{background:var(--acc)!important;color:var(--acc-fg)!important;border-color:var(--acc)!important}
 .savewarn{background:var(--bad-soft);border:1px solid var(--bad);border-radius:12px;padding:15px 17px;
   margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--ink)}
@@ -5531,6 +5548,16 @@ function regelAenderungen(){
 }
 regelAenderungen();
 
+/* Höhe der festen Kopfleiste als CSS-Variable, für den Abstand beim Sprung in eine Regel.
+   Sie hängt am Umbruch von Zähler und Reitern und ändert sich beim Drehen. */
+function kopfMessen(){
+  const h = document.querySelector(".head");
+  if(h) document.documentElement.style.setProperty("--kopf", Math.ceil(h.getBoundingClientRect().height) + "px");
+}
+kopfMessen();
+if(typeof ResizeObserver === "function" && document.querySelector(".head"))
+  new ResizeObserver(kopfMessen).observe(document.querySelector(".head"));
+
 /* ---------- Hilfsfunktionen ---------- */
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
@@ -6136,8 +6163,9 @@ function renderQ(){
   const q = Q.list[Q.i];
   const pct = Math.round(Q.i / Q.list.length * 100);
   let body = "";
+  const lang = q.type === "mc" && q.opts.some(o => String(o).replace(/<[^>]+>/g, "").length > 40);
   if(q.type === "mc"){
-    body = '<div class="opts">' + q.opts.map((o,i)=>
+    body = '<div class="opts' + (lang ? ' lang' : '') + '">' + q.opts.map((o,i)=>
       '<button class="opt" data-i="'+i+'"><span class="k">'+String.fromCharCode(65+i)+'</span><span>'+o+"</span></button>"
     ).join("") + "</div>";
   } else {
@@ -6165,7 +6193,7 @@ function renderQ(){
     '<div class="card">'+ kopf +
       '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
       (q._nochmal ? '<p class="tiny muted" style="margin:6px 0 0">Noch einmal — die hattest du eben nicht.</p>' : "")+
-      '<div class="qtext">'+q.q+"</div>"+
+      '<div class="qtext'+(lang ? ' vorlang' : '')+'">'+q.q+"</div>"+
       body+
       '<div id="fbHost"></div>'+   /* wird in check() zur Live-Region, siehe dort */
     "</div>";
@@ -6903,7 +6931,7 @@ function openRule(id){
   $$("#ruleChips .chip").forEach((x,i)=>x.classList.toggle("on", i===0));
   if(!frischGezeichnet) drawRules();
   const el = $("#rule-"+id);
-  if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); }
+  if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); }
 }
 
 /* ============================================================
@@ -7196,7 +7224,7 @@ function openPhraseAcc(id){
   if(!el) return;
   el.classList.add("open");
   fillAcc(el);
-  el.scrollIntoView({behavior:"smooth",block:"center"});
+  el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function fillPhrases(p, reg){
@@ -8498,7 +8526,7 @@ function buildIndex(){
       setTimeout(()=>{ const l=$("#crHost"); if(l) l.scrollIntoView({behavior:"smooth",block:"start"}); }, 220); }}));
   SATZ.forEach(x=>ix.push({k:"Satzbau", t:x.t, sub:x.short, s:strip(x.b), c:"satz",
     go:()=>{ ST.tab="bau"; go("saetze");
-      const el=$("#sa-"+x.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); } }}));
+      const el=$("#sa-"+x.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); } }}));
   TABLES.forEach(x=>ix.push({k:"Tabelle", t:x.t, s:strip(x.b), c:"gram",
     go:()=>{ ST.tab="tab"; go("saetze"); }}));
   PHRASES.forEach(p=>ix.push({k:"Baustein", t:p.f, sub:p.g, c:"form",
@@ -8646,7 +8674,7 @@ function renderExtras(){
     h.onkeydown = e => { if(e.key === " " || e.key === "Enter"){ e.preventDefault(); auf(); } };
   });
   $("#tb1go").onclick = e=>{ e.stopPropagation(); ST.tab="bau"; go("saetze");
-    const el=$("#sa-"+s.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"center"}); } };
+    const el=$("#sa-"+s.id); if(el){ el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"}); } };
   $("#tb1dr").onclick = e=>{ e.stopPropagation(); ST.tab="drill"; go("saetze");
     const b=$("#d20"); if(b) b.click(); };
   $("#tb2go").onclick = e=>{ e.stopPropagation(); FT.tab="bausteine"; FT.grp=p.g; FT.ctx=""; go("formulieren");

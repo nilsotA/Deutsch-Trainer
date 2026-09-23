@@ -58,6 +58,38 @@ bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die App im echten Browser gemessen (23.09.2026, achtundzwanzigste Runde).**
+
+Alle Prüfläufe laufen in jsdom, und das rechnet kein Layout. Diese Runde hat die App in
+Chromium bei Handygrößen geöffnet (320×568, 360×740, 375×667, 390×844, 768×1024, quer) und
+gemessen, was jsdom nicht sieht: Überlauf, verdeckte Tippflächen, Lage der Antworten.
+
+**Sauber waren:** alle sieben Ansichten und ihre Unterreiter — nichts ragt über den Rand,
+nichts ist verdeckt, keine Skriptfehler. Nach einer Antwort scrollt die App selbst zur
+Rückmeldung, „Weiter“ liegt im Bild.
+
+**Zwei Befunde im Hauptanwendungsfall:**
+
+- **Antworten unter dem Bildschirmrand.** Jede der 657 Unterwegs-Karten einzeln gezeichnet:
+  Auf 375×667 (iPhone SE) brauchten 203 Karten Scrollen, um die letzte Antwort zu sehen —
+  darunter **alle 155 Wortkarten**, weil ihre Antworten ganze Definitionen sind und der
+  Unterwegs-Modus sie mit 20 px und 22 px Polsterung setzt. Dazu erbte „‹ Beenden“ die große
+  Polsterung aller Unterwegs-Knöpfe (spezifischerer Selektor) und war 67 px hoch. Jetzt:
+  Antworten über 40 Zeichen kompakter (17 px), Kopfzeile 48 px. **Ergebnis: 21 Karten auf
+  375×667, 0 auf 390×844** (vorher 51). Auf 320×568 bleiben es 256 — bei so einem Schirm und
+  großer Schrift nicht ganz zu vermeiden.
+- **„→ Regel nachlesen“ landete mitten in der Regel.** `scrollIntoView({block:"center"})`
+  zentriert bei einem Element, das höher als der Bildschirm ist, dessen Mitte; bei
+  komma-nebensatz stand die Überschrift 638 px über dem Bildschirm. Vier Stellen (Regel,
+  Baustein, zweimal Satzbaukarte) springen jetzt an den Anfang, mit Abstand zur Kopfleiste,
+  deren Höhe `kopfMessen()` misst (104–119 px, je nach Umbruch).
+
+**Neue Prüfläufe:** `tests/layout.js` (`npm run layout`, braucht `playwright-core` — jetzt
+in den devDependencies — und Chromium; ohne beides überspringt er sich). Dazu in
+`tests/suite.js` eine Quelltextprüfung gegen `block:"center"`, die ohne Browser läuft.
+Die erste Fassung der Überlaufprüfung war blind (siehe CLAUDE.md, „jsdom rechnet kein
+Layout“) — die Positivprobe hat es gezeigt.
+
 **Der Textcheck an fremden Texten (23.09.2026, siebenundzwanzigste Runde).**
 
 Bisher lief der Textcheck nur gegen Texte aus der App, und dort fand er 80 % der

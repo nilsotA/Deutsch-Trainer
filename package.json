@@ -13,9 +13,11 @@
     "oeffnen": "open Deutsch-Trainer.html || xdg-open Deutsch-Trainer.html",
     "test:fallform": "node tests/fallform.js",
     "kalender": "node tests/kalender.js",
-    "kopplungen": "node tests/kopplungen-schreiben.js"
+    "kopplungen": "node tests/kopplungen-schreiben.js",
+    "layout": "node tests/layout.js"
   },
   "devDependencies": {
-    "jsdom": "^24.0.0"
+    "jsdom": "^24.0.0",
+    "playwright-core": "^1.56.1"
   }
 }
