@@ -59,6 +59,29 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Die Rechtschreibfallen gelesen (23.09.2026, einunddreißigste Runde).**
+
+Vier der fünf `recht-`Regeln nannten keine Quelle. Gelesen und über die Websuche nachgeschlagen:
+
+- **Verlängerungsprobe in `recht-klassiker`:** „Rad/Rat → Räder vs. Ratschlag“. In „Ratschlag“
+  steht das t weiter am Silbenende und klingt wie in „Radschlag“ — die Probe zeigt nichts. Jetzt
+  „des Rates“, dazu „der tote Winkel“ statt „er ist tot“ (auch dort kein Vokal dahinter) und ein
+  Satz, wie die Probe funktioniert. Quelle: Duden Institute für Lerntherapie.
+- **„das gleiche“ in `recht-verwechsel`:** allein stehend substantiviert, also **das Gleiche**;
+  klein nur vor einem Substantiv. Ausgerechnet in einer Rechtschreibregel. Dazu der Vorbehalt aus
+  `gram-derselbe` und der Wortkarte: Im Alltag verschwimmt die Grenze.
+- **Überschriften:** „Die häufigsten Rechtschreibfallen“ → „Typische Rechtschreibfallen“,
+  „Wörter, die ständig verwechselt werden“ → „leicht verwechselt“.
+
+Keine richtige Antwort hat sich geändert, `NEU_GELERNT` bleibt unberührt.
+
+**Neue Prüfung:** `BESTAND` in `tests/suite.js` liest jetzt auch Regel-, Satzkarten- und
+Tabellenüberschriften, die Beispiele und Synonyme der Wortkarten, die Beispiele der Fallkarten,
+die Titel der Prüfmuster, die richtigen Antworten der Übungen und die ok-Felder der Fehlersuche.
+Gegen den alten Stand meldet der Rangwächter genau `recht-klassiker.t` (dazu zwei Beispielsätze,
+begründet erlaubt). Die Ausnahmeliste des Rangwächters meldet jetzt verwaiste Einträge — zwei
+standen noch da (`n-abkuerzung`, q25), seit die Stellen in der Runde davor umgeschrieben wurden.
+
 **Der Zahlenbereich belegt (23.09.2026, dreißigste Runde).**
 
 Der „Stand der Prüfung“ nannte Maßeinheiten, Abkürzungen und Quellenangaben „gelesen, aber

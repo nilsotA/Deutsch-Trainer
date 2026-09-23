@@ -43,6 +43,19 @@ daten(w, "PHRASES").forEach(x => {
   (x.no || []).forEach((n, i) => nimmAuf("Schreibwerkstatt", x.id + ".no" + i, n));
 });
 nimmAuf("Spickzettel", "cheat", daten(w, "cheatHTML()"));
+/* Die Überschriften, Beispiele und richtigen Antworten. Bis zum 23.09.2026 las kein Wächter
+   sie: Die Regel recht-klassiker hieß „Die häufigsten Rechtschreibfallen“ — eine Rangordnung
+   ohne Quelle, in der Zeile, die Nils in der Regelliste zuerst sieht. Die Ablenker der Übungen
+   bleiben draußen, sie sind absichtlich falsch. */
+RA.forEach(r => nimmAuf("Regel", r.id + ".t", r.t));
+SATZ.forEach(x => { nimmAuf("Satzkarte", x.id + ".t", x.t); nimmAuf("Satzkarte", x.id + ".short", x.short); });
+daten(w, "TABLES").forEach(t => nimmAuf("Tabelle", t.id + ".t", t.t));
+WORDS.forEach(x => { nimmAuf("Wortkarte", x.w + ".ex", x.ex); nimmAuf("Wortkarte", x.w + ".s", x.s); });
+CASEREF.forEach(e => nimmAuf("Fallkarte", e.w + ".ex", e.ex));
+daten(w, "CHECKS_ALL.map(c=>({id:c.id,t:c.t||''}))").forEach(c => nimmAuf("Prüfmuster", c.id + ".t", c.t));
+ALL.forEach(i => { if (i.t === "fill") nimmAuf("Übung", i.id + ".a", i.a.join(" | ")); else nimmAuf("Übung", i.id + ".a", i.o[i.a]); });
+KORREKTUR.forEach(t => t.errs.forEach(e => nimmAuf("Fehlersuche", t.id + ":" + e.w + ".ok", e.ok)));
+
 /* Die Oberflächentexte: Hilfen, Legenden, Planansicht, Startseite. Sie stehen im Logikteil
    und im Markup, in keinem Datenbestand — am 22.09.2026 versprachen drei von ihnen ein
    Verhalten, das der Code nie hatte, und die Tabellenansicht behauptete, wo „die meisten
@@ -473,10 +486,10 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
     "Regel form-anrede":    "Ratgebertext: „Die wichtigste Regel: spiegeln“ ist ein Rat, kein Befund",
     "Regel form-eltern":    "Ratgebertext: „Die beste Investition“ ist ein Rat, kein Befund",
-    "Regel n-abkuerzung":   "„raten die meisten Leitfäden“ — Aussage über Leitfäden, mit „raten“ abgeschwächt",
     "Übung g07":            "„die meisten wissen das“ ist der Beispielsatz der Aufgabe",
+    "Übung g07.a":          "„die meisten Teilnehmenden“ ist die richtige Schreibung, nach der die Aufgabe fragt",
+    "Wortkarte resümieren.ex": "„die drei wichtigsten Korrekturen“ ist ein Beispielsatz aus einer Trainingsstunde, keine Aussage über Sprache",
     "Übung m02":            "„die häufigsten“ meint die häufigsten Präpositionen, kein Fehlerranking",
-    "Übung q25":            "Frage nach dem, was Leitfäden raten",
     "Schreibwerkstatt w05.tip":  "„die beste Übung gegen Wortballast“ ist ein Rat zur Übung, kein Befund über Fehler",
     "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieses einen Gesprächseinstiegs, nicht eine Rangordnung",
     "Schreibwerkstatt pr29.good": "„was ist der beste Weg, dich zu erreichen?“ ist wörtliche Rede in einer Musterformulierung",
@@ -496,6 +509,11 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const neu = [...rangStellen].filter(x => !(x in ERLAUBT));
   P.ok("Keine ungelistete Rangbehauptung (" + rangStellen.size + " Stellen, " +
     Object.keys(ERLAUBT).length + " begründet erlaubt)", !neu.length, neu.join(" · "));
+  /* Ein Eintrag, dessen Stelle keine Rangformel mehr trägt, ist eine offene Tür: Kommt dort
+     wieder eine hinein, bleibt der Lauf still. So stand n-abkuerzung noch auf der Liste, als
+     „die meisten Leitfäden“ am 23.09.2026 längst „viele“ hieß. */
+  const verwaist = Object.keys(ERLAUBT).filter(x => !rangStellen.has(x));
+  P.ok("… und jeder Eintrag der Liste trifft noch eine Stelle", !verwaist.length, verwaist.join(" · "));
   /* Positivprobe: Der Erkenner muss anschlagen, sonst ist die Liste eine leere Zusage. */
   const probe = new Set();
   const sammle2 = (art, id, t) => { if (t && rang(t)) probe.add(art + " " + id); };
