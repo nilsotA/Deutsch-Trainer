@@ -36,7 +36,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 124 |
+| Prüfmuster im Textcheck | 125 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
 | Dateigröße | ~860 KB, eine Datei, kein Build |
 
@@ -88,7 +88,20 @@ galt, wenn ihn mindestens zwei nicht widerlegten.
 *Textcheck gegen richtige Sätze* — 122 Fälle gemeldet, in denen ein hartes oder ein Prüfmuster einen
 richtigen Satz anstreicht oder der Hinweis etwas Falsches sagt. 78 davon sind dreifach bestätigt. Die
 übrigen habe ich selbst am Textcheck nachgeprüft, weil der Lauf auf vier Kernen nur zwei Prüfer
-gleichzeitig startet; die später eingetroffenen Urteile stimmen mit meinen überein.
+gleichzeitig startet.
+
+*Regressionsprüfung der Ausnahmen* — Ein zweiter Prüflauf hat jede neue Ausnahme angegriffen und nach
+echten Fehlern gesucht, die sie mit durchlässt: 80 Meldungen, davon 19 in der ersten Korrektur
+(12c4b05) behoben, der Rest danach. Die Klassen: Die Ausnahme prüfte die Form nicht, nur die
+Umgebung („die letztes mal gefehlt haben“ — hinter „die“ wäre „letzte“ gebeugt, „die“ ist hier
+Relativpronomen; x45 nahm
+jedes Wort auf -ten als Partizip, auch „im dritten Semester“; t09 hielt jede Jahresspanne „2019-2021“
+für eine ISSN). Ein Satzanfang wurde an jedem Punkt erkannt, auch an „3.11.“ und „z. B.“ (y01). Ein
+Zeilenumbruch galt pauschal als Überschrift (x16, x43). Ein Einschub nach dem Verb galt als Satzende
+(y03: „weil wir haben, wie besprochen, keine Halle“). Wo beide Lesarten möglich sind, steht die Stelle
+jetzt auf „Bitte prüfen“ und der Hinweis nennt beide (`WEICH` für x16, x36, x50). Neu: t20 („20%-ige“
+→ 20%ig, Regel `recht-bindestrich`). Gemischte Anführungszeichen („…") schließen jetzt ein Zitat.
+Bewusst offen: „Wir trainieren⏎Abends im Park“ — ein Zeilenanfang ist oft Listenanfang (x44).
 
 - **Zentral:** `zitatStufe()` stuft einen harten Treffer auf „Bitte prüfen“ herab, wenn die Form in
   Anführungszeichen nur angeführt wird („Das Wort ‚einzigste‘ gibt es nicht“). Dasselbe gilt für eine
@@ -103,9 +116,9 @@ gleichzeitig startet; die später eingetroffenen Urteile stimmen mit meinen übe
   Meter“). Dazu Punktlinien, Formeln und Nummern (t06, t08–t10, t14). Weitere Fälle: x01, x02, x04, x05,
   x08, x18, x25, x26, x28, x36–x38, x40, x41, x47, x50, x53, x54, y01, y08, y10, y11, y14, t01, t03,
   t12, t15–t17, a01, a08–a11.
-- **Neue Muster (121 → 124):** x55 (idealste, maximalste als Stilhinweis — der Duden nennt die Steigerung
+- **Neue Muster (121 → 125):** x55 (idealste, maximalste als Stilhinweis — der Duden nennt die Steigerung
   dort unüblich, falsch nur bei „optimal“ und „einzig“), x56 („dieses mal“ getrennt auf „prüfen“, weil
-  „Schau dir dieses mal an“ richtig ist), x57 („seit dem“ nach Komma und Substantiv auf „prüfen“).
+  „Schau dir dieses mal an“ richtig ist), x57 („seit dem“ nach Komma und Substantiv auf „prüfen“), t20 („20%-ige“).
 - **Hinweise:** „Ich rufe dir an“ gehörte mit „falsch ist er nicht“ zu großzügig eingeordnet. Der Duden
   ordnet den Dativ der regionalen Umgangssprache zu (x20, `gram-akkverben`). Bauer: im Genitiv selten
   auch „des Bauers“, Bauer ist deshalb aus der harten Liste von x23 raus. Doppelpunkt vor einer
