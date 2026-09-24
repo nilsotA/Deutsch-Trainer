@@ -203,7 +203,11 @@ P.ok("… und die Prüfung erkennt die alte Fassung von „kompliziert / komplex
    Hören nur durch ein Satzzeichen, muss der Hörhinweis genau dieses Zeichen beim Namen
    nennen. Bei p03 nannte er nur die Kommas — der Hörer hätte sie zählen müssen, um die
    Fassung mit Semikolons zu erkennen. */
-const ZEICHEN = { ";": "Semikolon", ":": "Doppelpunkt", "?": "Fragezeichen", "!": "Ausrufezeichen" };
+/* Striche seit dem 24.09.2026: „von 9–11 Uhr“ hieß im Hinweis „ohne Bindestrich,
+   zusammengeschrieben“ — der Strich, nach dem q14 fragt, kam nicht vor. */
+const ZEICHEN = { ";": "Semikolon", ":": "Doppelpunkt", "?": "Fragezeichen", "!": "Ausrufezeichen",
+  "–": /Bis-Strich|Gedankenstrich/, "-": "Bindestrich" };
+const nennt = (h, n) => n instanceof RegExp ? n.test(h) : h.includes(n);
 const flach = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 const stummeZeichen = [];
 let zeichenPaare = 0;
@@ -215,13 +219,15 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
       zeichenPaare++;
       const mit = a.includes(z) ? a : b;
       const hinweis = w.eval("hoerHinweis(" + JSON.stringify(mit) + "," + JSON.stringify(i.o) + ")");
-      if (!hinweis.includes(ZEICHEN[z])) stummeZeichen.push(i.id + " (" + ZEICHEN[z] + ")");
+      if (!nennt(hinweis, ZEICHEN[z])) stummeZeichen.push(i.id + " (" + ZEICHEN[z] + ")");
     });
   }));
 });
 /* Die Prüfung sieht sich nur wenige Paare an. Fällt der Filter auf null, wäre sie stumm
    grün — deshalb die Untergrenze und die sichtbare Zahl. */
 P.ok("Die Zeichenprüfung findet überhaupt Paare (" + zeichenPaare + ")", zeichenPaare >= 1, "kein Paar geprüft");
+P.ok("… und erkennt den alten Hinweis zu „von 9–11 Uhr“", !nennt(" ohne Bindestrich, zusammengeschrieben.", ZEICHEN["–"]),
+  "Positivprobe blieb stumm");
 P.ok("Der Hörhinweis nennt das unterscheidende Zeichen", !stummeZeichen.length, stummeZeichen.join(", "));
 
 /* Fehlerklasse „gleich klingende Wörter ohne Hinweis“: „Seid ihr bereit?“ und „Seit ihr
@@ -276,6 +282,96 @@ ALL.filter(i => i.t !== "fill").forEach(i => {
 });
 P.ok("Ziffer und ausgeschriebene Zahl klingen nicht gleich", !zifferStumm.length,
   zifferStumm.join(" · "));
+
+/* Fehlerklasse „der Hörhinweis hängt von der Reihenfolge ab“: Die Optionen werden täglich
+   neu gemischt. hoerHinweis() hatte einen Notnagel, der alle Satzzeichen aufzählte — aber
+   nur, solange noch kein anderer Hinweis gesammelt war. In q24 bekam so je nach Tag die
+   falsche Fassung „Punkt nach 2“ und die richtige nichts, oder beide denselben Hinweis;
+   in q15 fehlte an drei von sechs Tagen der Punkt nach der Tageszahl, um den es ging. Die
+   Prüfung darüber rief hoerHinweis() nur in der Datenreihenfolge auf und sah es nicht.
+   Jetzt über alle Reihenfolgen: (a) keine zwei Fassungen klingen samt Hinweis gleich —
+   „gleich“ nach lesarten() aus der App, die „1990–1995“ auch als „1990 bis 1995“ und
+   „8.00 Uhr“ als „8 Uhr“ liest —, und (b) jede Fassung bekommt in jeder Reihenfolge
+   dieselben Hinweisteile. */
+w.eval(`window.__reihenPruefen = function(fragen, hin){
+  const perms = a => a.length <= 1 ? [a] : a.flatMap((x, i) => perms(a.slice(0, i).concat(a.slice(i + 1))).map(p => [x].concat(p)));
+  const gleich = [], wechselnd = [];
+  fragen.forEach(f => {
+    const teile = new Map();
+    let klang = false;
+    perms(f.o.slice()).forEach(p => {
+      const lese = p.map(x => lesarten(strip(x) + hin(x, p)));
+      if (!klang && lese.some((l, i) => lese.some((m, k) => k > i && [...l].some(x => m.has(x))))) { klang = true; gleich.push(f.id); }
+      p.forEach(x => {
+        const t = hin(x, p).replace(/^ /, "").replace(/\\.$/, "").split(", ").filter(Boolean).sort().join(", ");
+        if (!teile.has(x)) teile.set(x, new Set());
+        teile.get(x).add(t);
+      });
+    });
+    if ([...teile.values()].some(v => v.size > 1)) wechselnd.push(f.id);
+  });
+  return { gleich, wechselnd };
+};
+window.__alleFragen = (function(){
+  const r = rng(1), out = [];
+  ALL.filter(i => i.t !== "fill").forEach(i => { const q = exQuestion(i); out.push({ id: i.id, o: q.opts, a: q.ans }); });
+  WORDS.forEach(x => { const q = wordQuestion(x, r); out.push({ id: "w:" + x.w, o: q.opts, a: q.ans }); });
+  drillPool().forEach(x => { const q = caseQuestion(x); out.push({ id: "c:" + x.w, o: q.opts, a: q.ans }); });
+  return out;
+})();`);
+const reihen = w.eval("__reihenPruefen(__alleFragen, hoerHinweis)");
+const fragenZahl = w.eval("__alleFragen.length");
+P.ok("Über alle Reihenfolgen klingen keine zwei Antworten gleich (" + fragenZahl + " Fragen)",
+  !reihen.gleich.length, reihen.gleich.join(", "));
+P.ok("Der Hörhinweis einer Antwort ist in jeder Reihenfolge derselbe", !reihen.wechselnd.length,
+  reihen.wechselnd.join(", "));
+/* Positivproben: Ohne Hinweis klingen q15, q13, p08 und q14 gleich, und ein Hinweis, der
+   am Platz der Option hängt — so wirkte der alte Notnagel —, wechselt mit der Reihenfolge. */
+const probeFragen = "__alleFragen.filter(f => ['q15', 'q13', 'p08', 'q14', 'q24'].includes(f.id))";
+const ohneHinweis = w.eval("__reihenPruefen(" + probeFragen + ", () => '')");
+P.ok("… und die Prüfung erkennt gleich klingende Antworten ohne Hinweis",
+  ["q15", "q13", "p08", "q14", "q24"].every(id => ohneHinweis.gleich.includes(id)), ohneHinweis.gleich.join(","));
+const amPlatz = w.eval("__reihenPruefen(" + probeFragen + ", (x, p) => p[0] === x ? ' Punkt nach 2.' : '')");
+P.ok("… und einen Hinweis, der von der Reihenfolge abhängt",
+  amPlatz.wechselnd.length === 5, amPlatz.wechselnd.join(","));
+
+/* Fehlerklasse „der Apostroph ist stumm“: sprechbar() liest ihn nicht mit. In p22 trugen
+   alle drei Fassungen einen („Andreas’ Buch“, „Peter’s Auto“, „Foto’s“), vorgelesen hieß
+   es „Andreas Buch, Peters Auto, Fotos“ — die Frage nach dem richtigen Apostroph war
+   unterwegs nicht zu beantworten, obwohl die Wörter verschieden klangen. Die Prüfung oben
+   sieht das nicht, weil die Fassungen eben nicht gleich klingen. */
+const APO = /['’]/;
+const apostrophStumm = (fragen, hin) => fragen.filter(f => f.o.filter(o => APO.test(o)).length >= 2)
+  .filter(f => f.o.some(o => APO.test(o) && !/Apostroph/.test(hin(o, f.o)))).map(f => f.id);
+const fragenListe = w.eval("__alleFragen");
+const hoer = (o, alle) => w.eval("hoerHinweis(" + JSON.stringify(o) + "," + JSON.stringify(alle) + ")");
+const apoStumm = apostrophStumm(fragenListe, hoer);
+const apoZahl = fragenListe.filter(f => f.o.filter(o => APO.test(o)).length >= 2).length;
+P.ok("Mehrere Fassungen mit Apostroph: jede nennt ihn (" + apoZahl + " Fragen)", apoZahl >= 2 && !apoStumm.length,
+  apoStumm.join(", ") || "keine Frage gefunden");
+P.ok("… und die Prüfung erkennt die alte Fassung von p22",
+  apostrophStumm([{ id: "p22", o: ["Andreas’ Buch", "Peter’s Auto", "Foto’s"] }], () => "").length === 1, "Positivprobe blieb stumm");
+
+/* Fehlerklasse „der fehlende Hinweis verrät die Antwort“: Klingt die richtige Antwort ohne
+   Hinweis wie ein Ablenker, der einen trägt, erkennt man sie nur daran, dass sie keinen hat.
+   So stand p08 da: „von 1990 bis 1995“ ohne Hinweis, „von 1990–1995“, das die Stimme auch
+   als „1990 bis 1995“ lesen kann, mit „ohne Bindestrich, zusammengeschrieben“. Dass bei
+   „Beides ist zulässig“ nur die beiden „Nur: …“-Fassungen einen Hinweis tragen, gehört
+   nicht dazu — die klingen schon im Wortlaut anders. */
+const verraet = (fragen, hin) => fragen.filter(f => typeof f.a === "number" && f.o.length >= 2)
+  .filter(f => {
+    const richtig = f.o[f.a];
+    if (hin(richtig, f.o).trim()) return false;
+    const lr = w.eval("[...lesarten(" + JSON.stringify(w.eval("strip(" + JSON.stringify(richtig) + ")")) + ")]");
+    return f.o.some((o, k) => k !== f.a && hin(o, f.o).trim()
+      && w.eval("[...lesarten(strip(" + JSON.stringify(o) + "))]").some(l => lr.includes(l)));
+  }).map(f => f.id);
+const verraten = verraet(fragenListe, hoer);
+P.ok("Die richtige Antwort erkennt man nicht am fehlenden Hörhinweis", !verraten.length, verraten.join(", "));
+P.ok("… und die Prüfung erkennt die alte Fassung von p08",
+  verraet([{ id: "p08", a: 0, o: ["von 1990 bis 1995", "von 1990–1995", "von 1990 - 1995"] }],
+    o => ({ "von 1990–1995": " ohne Bindestrich, zusammengeschrieben.", "von 1990 - 1995": " mit Bindestrich, getrennt geschrieben." })[o] || "").length === 1,
+  "Positivprobe blieb stumm");
 
 /* ---------- E · Sammelantworten ---------- */
 P.titel("E · Sammelantworten");
@@ -344,6 +440,17 @@ const TIPP = [
   { id: "n25", muss: ["mir"], nicht: ["mich", "dir"] },
   { id: "r21", muss: ["darf"], nicht: ["dürfen", "darfst"] },
   { id: "n20", muss: ["unter"], nicht: ["auf", "über"] },
+  /* Am 24.09.2026 aus dem Prüflauf über alle Übungen: Fragen, deren wörtliche Antwort
+     („haben“, „kein“, „wo“) abgelehnt wurde, und Lücken mit zweiter richtiger Füllung
+     („über die Schweiz“ als Überflug, „vor diesem Jahr“). */
+  { id: "n03", muss: ["den", "einen", "meinen"], nicht: ["dem", "wohin"] },
+  { id: "n04", muss: ["der", "einer", "meiner"], nicht: ["die", "wo"] },
+  { id: "n08", muss: ["einem"], nicht: ["ein", "einen", "eines"] },
+  { id: "n10", muss: ["in"], nicht: ["nach", "über"] },
+  { id: "n19", muss: ["auf"], nicht: ["über", "für"] },
+  { id: "z12", muss: ["bin"], nicht: ["habe", "hab", "sein", "haben"] },
+  { id: "z13", muss: ["habe", "hab"], nicht: ["bin", "sein", "haben"] },
+  { id: "z17", muss: ["keine"], nicht: ["nicht", "kein"] },
 ];
 const norm = t => String(t).toLowerCase().trim()
   .replace(/[„“”"'‚‘’]/g, "").replace(/[.,;:!?]+$/, "").replace(/\s+/g, " ");
@@ -385,6 +492,19 @@ const SCHARF = [
   ["n23", /Reflexivpronomen/],
   ["n25", /Reflexivpronomen/],
   ["r21", /von „dürfen“/],
+  /* Am 24.09.2026: Entweder-oder-Fragen („Wohin oder wo?“, „haben oder sein?“, „nicht oder
+     kein?“, „Trennbar oder nicht?“), dazu Lücken, die eine zweite richtige Füllung hatten,
+     und die regionale Standardschreibung „ausser“. */
+  ["n03", /Artikelwort/],
+  ["n04", /Artikelwort/],
+  ["z12", /Hilfsverb/],
+  ["z13", /Hilfsverb/],
+  ["z17", /Form von „kein“/],
+  ["z22", /passende Form von „übersetzen“/],
+  ["n08", /unbestimmten Artikel/],
+  ["n10", /Reiseziel/],
+  ["n19", /erst Dienstag/],
+  ["r14", /in Deutschland/],
 ];
 const stumpf = SCHARF.filter(([id, re]) => {
   const i = ALL.find(x => x.id === id);
@@ -399,6 +519,19 @@ P.ok("Keine Tippaufgabe fragt nach einer Kategorie statt nach dem Lückenwort", 
 P.ok("… und die Prüfung erkennt die alten Fassungen von m20 und m18",
   KATEGORIE.test("Welcher Kasus? „Innerhalb ___ Woche …“") && KATEGORIE.test("Welche Zeitform passt? „Nachdem …“"),
   "Positivprobe blieb stumm");
+/* Dieselbe Klasse als Entweder-oder-Frage, gefunden am 24.09.2026: „Wohin oder wo?“,
+   „haben oder sein?“, „nicht oder kein?“, „Trennbar oder nicht?“ — wer wörtlich „sein“
+   antwortete, bekam „Richtig wäre: bin“. Gemeldet wird eine Frage, die mit „X oder Y?“
+   beginnt und direkt danach den Lückensatz bringt, ohne Anweisung dazwischen. */
+const ENTWEDER = /^[^„“:]{1,40}\s+oder\s+[^„“:]{1,40}\?\s*„/;
+const entweder = ALL.filter(i => i.t === "fill" && ENTWEDER.test(String(i.q))).map(i => i.id);
+P.ok("Keine Tippaufgabe beginnt mit einer Entweder-oder-Frage vor der Lücke", !entweder.length, entweder.join(","));
+P.ok("… und die Prüfung erkennt die alten Fassungen von n03, z12 und z22, nicht aber r14",
+  ENTWEDER.test("Wohin oder wo? „Ich stelle die Tasche auf ___ Tisch.“") &&
+  ENTWEDER.test("haben oder sein? „Ich ___ nach Köln gefahren.“") &&
+  ENTWEDER.test("Trennbar oder nicht? „Ich ___ den Text.“ (übersetzen)") &&
+  !ENTWEDER.test("ss oder ß? Schreib das Wort so, wie man es in Deutschland schreibt: „au___er“"),
+  "Positiv- oder Gegenprobe schlug fehl");
 
 /* Die Rückmeldung zeigt bei einer Tippaufgabe „Richtig wäre: “ + accept[0]. Wer die Liste
    erweitert, darf die Musterantwort nicht ans Ende schieben — Nils läse sonst plötzlich
@@ -792,6 +925,7 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     x11: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
     d17: "Ablenker „dem Regens“ ist in keiner Region richtig — Artikel und Endung passen nicht zusammen",
     d18: "Ablenker „die Sitzung“ ist Akkusativ, den nirgends jemand nach „während“ setzt",
+    n10: "„die Schweiz“ ist das Reiseziel im Satz, keine regionale Einordnung",
   };
   const FALL_ERLAUBT = {
     "während": "Ablenker im Akkusativ („den Vortrag“), nicht der regionale Dativ",
@@ -804,8 +938,11 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     "stehen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "sitzen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "hängen (hing) — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
+    "entlang": "Ablenker im Nominativ („der Fluss“), nicht der schweizerische, seltene Dativ",
   };
-  const offen = i => i.t !== "fill" && REGION.test(nurText(i.e)) && !RAHMEN.test(nurText(i.q));
+  /* Bis zum 24.09.2026 blieben Tippaufgaben außen vor. r14 lehnte „ausser“ ab — in der
+     Schweiz die Standardschreibung —, und den Rahmen nannte erst die Erklärung. */
+  const offen = i => REGION.test(nurText(i.e)) && !RAHMEN.test(nurText(i.q));
   const offenUe = ALL.filter(offen).map(i => i.id);
   const neuUe = offenUe.filter(id => !(id in OFFEN_ERLAUBT));
   P.ok("Keine regionale Standardvariante als ungerahmter Ablenker (" + offenUe.length + " begründet)",
@@ -818,6 +955,9 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     .concat(Object.keys(FALL_ERLAUBT).filter(w => !regFall.includes(w)));
   P.ok("… und keine Erlaubnis für eine Stelle, die es so nicht mehr gibt", !tot.length, tot.join(", "));
   /* Positivprobe: m03 vor dem 22.09.2026 */
+  P.ok("… und die Prüfung erkennt die alte Fassung von r14 (Tippaufgabe)",
+    offen({ t: "fill", q: "ss oder ß? Schreib das Wort vollständig: „Nach dem Rennen war er au___er Atem.“",
+      e: "(In der Schweiz und in Liechtenstein gilt durchgängig ss.)" }), "Positivprobe blieb stumm");
   P.ok("… und die Prüfung erkennt die alte Fassung von m03",
     offen({ q: "Welche Form ist richtig?", e: "trotz + Genitiv. In der Schweiz, in Österreich und teilweise in Süddeutschland ist der Dativ auch mit Artikel verbreitet." }),
     "Positivprobe blieb stumm");

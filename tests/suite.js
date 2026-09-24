@@ -362,6 +362,16 @@ P.ok("… und die Prüfung erkennt die alte Fassung von z07",
 const RUECK = /^(und |auch |noch )|^(hier|dasselbe|genauso)\b|\b(und hier|wie eben|wie oben|siehe oben|dieselbe regel|vorige aufgabe)\b/i;
 const rueckL = ALL.filter(i => RUECK.test(strip(i.q).trim()));
 P.ok("Keine Rückverweise auf die vorige Aufgabe", !rueckL.length, rueckL.map(i => i.id).join(","));
+/* Dieselbe Klasse in der Erklärung: g21 begann mit „Auch hier ist ‚Anfang‘ ein Substantiv“ —
+   gemeint war die Nachbaraufgabe mit „Ende Mai“, die in einer gemischten Runde nicht davor
+   steht. In Erklärungen verallgemeinert ein „Auch“ am Satzanfang oft zu Recht („Auch vor
+   Zahlen …“); gemeldet werden deshalb nur die hinweisenden Formeln. */
+const RUECK_E = /(?:^|[.!?:]\s+)(?:auch|und) hier\b|\b(wie eben|wie oben|siehe oben|vorige aufgabe|vorigen aufgabe)\b/i;
+const rueckE = ALL.filter(i => RUECK_E.test(strip(i.e || "").trim()));
+P.ok("Keine Erklärung verweist auf eine andere Aufgabe", !rueckE.length, rueckE.map(i => i.id).join(","));
+P.ok("… und die Prüfung erkennt die alte Erklärung von g21",
+  RUECK_E.test("Auch hier ist „Anfang“ ein Substantiv. Klein bliebe nur das Adverb „anfangs“.") &&
+  !RUECK_E.test("Auch vor Zahlen steht kein Komma."), "Positiv- oder Gegenprobe schlug fehl");
 
 const SICHT = /\b(oben|unten|links|rechts|folgend|obige|untenstehend|siehe)\b/i;
 const sichtL = ALL.filter(i => SICHT.test(strip(i.q)));
@@ -676,7 +686,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Regel gram-kasus":  "„über beim Thema immer Akkusativ“ und „vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
     "Regel satz-klammer": "„Nie trennbar: be-, ge-, er-, ver-, zer-, ent-, emp-, miss-“ — diese Vorsilben trennen sich nicht ab; der Sonderfall miss- steht im Satz danach",
     "Satzkarte sa08":     "Satzkarte zu satz-klammer, trägt denselben Satz",
-    "Prüfmuster x22":     "„Mit dem Akkusativ liegst du immer richtig“ — der Akkusativ ist in beiden Lesarten zulässig, das ist keine verschwiegene Ausnahme",
     "Prüfmuster f08":     "Das Muster handelt von den Wörtern „immer“ und „nie“ selbst; sie stehen dort im Zitat",
     "Prüfmuster t06":     "„nie gemischt“ — von-bis und Bis-Strich schließen einander aus; n-datum sagt denselben Satz",
     "Prüfmuster x48":     "Das Muster handelt von der Wendung „immer wieder“ selbst; „immer“ steht dort im Zitat",
@@ -772,7 +781,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      je … desto dazukam. Das Zwischenwort in (?:[\wäöüßÄÖÜ]+\s+)? fängt „die drei als Ausnahmen“.
      „eine Ausnahme“ allein bleibt draussen: „Eine Ausnahme ist X“ führt eine ein,
      statt den Vorrat zu beziffern. */
-  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+)?(?:Ausnahmen|Sonderfälle|Sonderfällen))/gi;
+  const GEZAEHLT = /(?<![\wäöüßÄÖÜ])(und nur diese|mit (?:einer|genau einer) Ausnahme|(?:die )?einzige Ausnahme|genau einmal|nur eine Ausnahme|nur diese eine|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+)?(?:Ausnahmen|Sonderfälle|Sonderfällen)|(?:der )?einzige Fall|(?:zwei|drei|vier|fünf|sechs|sieben|beiden)\s+(?:[\wäöüßÄÖÜ]+\s+){0,3}fallen\s+aus\s+der\s+Reihe)/gi;
   const ohneTags = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   const zaehlStellen = new Set();
   const zaehlSammle = (art, id, b) => {
@@ -804,6 +813,15 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     zaehlProbe("<p>„widerspiegeln“ gehört zu den drei Ausnahmen, in denen „wider“ „zurück“ heißt.</p>") &&
     zaehlProbe("<p>… trotzdem ohne e. Merk dir die drei als Ausnahmen.</p>") &&
     zaehlProbe("<p><b>Zwei Ausnahmen:</b> am + Superlativ bleibt klein …</p>"),
+    "Positivprobe blieb stumm");
+  /* Und die Fassungen vom 23. und 24.09.2026: „Zwei Sonderfälle:“ (n-Deklination, Bauer fehlte),
+     „der einzige Fall, in dem das Komma noch frei ist“ (j04) und „Zwei fallen aus der Reihe“
+     (gram-praepdat), dazu „Drei aus den Listen fallen aus der Reihe“ im Spickzettel. */
+  P.ok("… und bei anderen Wörtern für dieselbe Zählung",
+    zaehlProbe("<p>Zwei Sonderfälle: Bei Nachbar …</p>") &&
+    zaehlProbe("<p>Ein bloßer Infinitiv ist der einzige Fall, in dem das Komma noch frei ist.</p>") &&
+    zaehlProbe("<p><b>Zwei fallen aus der Reihe:</b> zufolge …</p>") &&
+    zaehlProbe("<p><b>Drei aus den Listen fallen aus der Reihe:</b> bis …</p>"),
     "Positivprobe blieb stumm");
   /* Gegenprobe: eine einzelne eingeführte Ausnahme beziffert den Vorrat nicht. */
   P.ok("… und schweigt bei der eingeführten einzelnen Ausnahme",
@@ -1604,16 +1622,44 @@ P.ok("Beide Korpora liegen vor", !!KORPUS.entwicklung && !!KORPUS.kontrolle, Obj
      mit der auch die Fallkarten geprüft werden. Wer ein Muster baut, das den Akkusativ
      verlangt, darf darin keine Form aufzählen, die selbst Akkusativ sein kann. */
   const { FORM } = require("./formen");
-  const akkMuster = muster.filter(c => c.r === "gram-akkverben");
-  const durchlaessig = [];
-  akkMuster.forEach(c => {
-    (String(c.re).match(/[a-zäöüßA-ZÄÖÜ]+/g) || []).forEach(wort => {
-      const faelle = FORM[wort.toLowerCase()];
-      if (faelle && faelle.includes("A")) durchlaessig.push(c.id + ": „" + wort + "“");
+  /* Wörter in einer verneinten Vorschau oder Rückschau zählt die Prüfung nicht: Dort
+     stehen Ausnahmen, keine Formen, die das Muster meldet. x20 schließt „an“ als
+     Präposition aus („Ruf mir bitte an der Tür an“) und nennt dafür die Artikelwörter. */
+  const ohneVerneinung = src => {
+    let out = "", i = 0;
+    while (i < src.length) {
+      const neg = src.startsWith("(?!", i) ? 3 : src.startsWith("(?<!", i) ? 4 : 0;
+      if (!neg) { out += src[i++]; continue; }
+      let tiefe = 0, klasse = false;
+      for (; i < src.length; i++) {
+        const ch = src[i];
+        if (ch === "\\") { i++; continue; }
+        if (klasse) { if (ch === "]") klasse = false; continue; }
+        if (ch === "[") { klasse = true; continue; }
+        if (ch === "(") tiefe++;
+        else if (ch === ")" && --tiefe === 0) { i++; break; }
+      }
+    }
+    return out;
+  };
+  const durchlaessigIn = liste => {
+    const raus = [];
+    liste.forEach(c => {
+      (ohneVerneinung(String(c.re)).match(/[a-zäöüßA-ZÄÖÜ]+/g) || []).forEach(wort => {
+        const faelle = FORM[wort.toLowerCase()];
+        if (faelle && faelle.includes("A")) raus.push(c.id + ": „" + wort + "“");
+      });
     });
-  });
+    return raus;
+  };
+  const akkMuster = muster.filter(c => c.r === "gram-akkverben");
+  const durchlaessig = durchlaessigIn(akkMuster);
   P.ok("Kein Akkusativmuster zählt eine Form auf, die selbst Akkusativ sein kann (" +
     akkMuster.length + " Muster)", !durchlaessig.length, [...new Set(durchlaessig)].join(" · "));
+  P.ok("… die Prüfung meldet „uns“ in der Aufzählung und übergeht eine Ausnahme in (?!…)",
+    durchlaessigIn([{ id: "probe", re: /interessiert\s+(?:mir|uns)\b/ }]).length === 1 &&
+    durchlaessigIn([{ id: "probe", re: /ruf\s+mir(?=[^.]*\ban\b(?!\s+(?:die|das)\b))/ }]).length === 0,
+    "Positivprobe blieb stumm oder meldet zu viel");
 }
 
 {
@@ -1642,7 +1688,7 @@ P.ok("Beide Korpora liegen vor", !!KORPUS.entwicklung && !!KORPUS.kontrolle, Obj
   };
   const AUSNAHMEN = {
     "x06": "hart auf stil-absolut: „einzigste“ führt der Duden unter den häufigen Fehlern, nicht als Stilfrage",
-    "x07": "hart auf stil-absolut: dieselbe Begründung für optimalste, maximalste, idealste",
+    "x07": "hart auf stil-absolut: der Duden schreibt „die optimale, nicht optimalste Lösung“ — maximalste, idealste und totalste gelten nur als unüblich und stehen deshalb in x55 auf stil",
     "y06": "stil auf satz-konjunktiv: das doppelte „würde“ nennt CLAUDE.md ausdrücklich als Stilfrage",
     "y12": "stil auf gross-subst: „vor Kurzem/vor kurzem“ sind beide zulässig — der Hinweis mahnt nur Einheitlichkeit an",
     "s07": "stil auf form-verbindlich: „man“ statt Zuständigkeit ist eine Formulierungsfrage",
@@ -1999,13 +2045,20 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
              "Voriges mal hat es geregnet.", "Beim nächsten mal klappt es.", "Bis nächstes mal."],
       still: ["Nächstes Mal bringe ich die Pfeife mit.", "Das Gleiche mal zwei ergibt das Doppelte.",
               "Zwei mal drei ist sechs.", "Komm mal her.", "Beim nächsten Mal klappt es."] },
+    /* Getrennt und klein ist „dieses mal“ auch richtig: „Ich habe dir zwei Videos geschickt.
+       Kannst du dir dieses mal ansehen?“ — Pronomen plus Partikel. Hart bleibt deshalb nur,
+       was diese Lesart ausschließt (zusammengeschrieben, vor Komma oder „wenn“); der Rest
+       steht in x56 auf „prüfen“ und nennt beide Lesarten. */
     { id: "x38",
-      ziel: ["Jedes mal, wenn ich ins Training komme, fehlt ein Ball.",
-             "Hat es dieses mal geklappt?", "Ich habe jedesmal nachgefragt.",
-             "Manches mal fehlt mir die Ruhe."],
+      ziel: ["Jedes mal, wenn ich ins Training komme, fehlt ein Ball.", "Ich habe jedesmal nachgefragt.",
+             "Dieses mal als ich kam, war keiner da."],
       still: ["Jedes Mal, wenn ich ins Training komme, fehlt ein Ball.",
               "Manches Mal fehlt mir die Ruhe.", "Das ist die jedesmalige Prüfung.",
-              "Diesmal klappt es."] },
+              "Diesmal klappt es.", "Ich habe dir zwei Videos geschickt. Kannst du dir dieses mal ansehen?"] },
+    { id: "x56",
+      ziel: ["Hat es dieses mal geklappt?", "Manches mal fehlt mir die Ruhe.",
+             "Ich habe dir zwei Videos geschickt. Kannst du dir dieses mal ansehen?"],
+      still: ["Hat es dieses Mal geklappt?", "Jedes mal, wenn ich komme, fehlt ein Ball.", "Diesmal klappt es."] },
     { id: "x32",
       ziel: ["Auf gut deutsch: das reicht nicht.", "Auf deutsch heißt das Abseits.",
              "In deutsch war ich nie gut.", "Ich schreibe die Mail in deutsch."],
@@ -2029,6 +2082,435 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
     daten(w, 'analyse("Das Ergebnis hat sich darin widergespiegelt.").finds.some(f=>f.c.id==="x15")') === false &&
     daten(w, 'analyse("Das Ergebnis hat sich darin wiederspiegelt.").finds.some(f=>f.c.id==="x15")') === true,
     "Positivprobe blieb stumm");
+  /* GEGEN-ANFANG — Gegenbeispiele vom 24.09.2026. Ein Prüflauf hat für jedes harte und
+     jedes Prüfmuster richtige Sätze gesucht, die es fälschlich auslösen, und jeden Fund
+     dreifach gegenprüfen lassen: Relativsätze („der Termin, den Herr Otten vorgeschlagen
+     hat“), Postpositionen („ihm zufolge“), Überschriften ohne Punkt, Adressen („fussball.de“),
+     Zitate aus Texten vor 1996. Jede Zeile hält beide Richtungen fest: Der richtige Satz
+     bleibt still, der echte Fehler daneben wird weiter gefunden. */
+  const GEGEN = [
+    { id: "a01",
+      ziel: ["Hallo zusammen,\nVielen Dank für eure Nachricht.",
+             "Sehr geehrte Frau Weber,\nIch schreibe Ihnen wegen der Hausarbeit."],
+      still: ["Hallo zusammen,\nZurückgabe der Klausuren ist am Donnerstag um 10 Uhr in Raum 12.",
+              "Hallo zusammen,\nÜbermorgen fällt das Training aus."] },
+    { id: "a08",
+      ziel: ["Mit was hast du das gemacht?",
+             "Um was geht es?"],
+      still: ["Ihr wollt am Samstag in die Halle, um was genau zu machen?"] },
+    { id: "a09",
+      ziel: ["Du brauchst nicht kommen.",
+             "Brauchst du nicht mitbringen."],
+      still: ["Für die Anmeldung brauchst du kein Schreiben vom Prüfungsamt.",
+              "Am Rad brauchst du nichts machen zu lassen, die Bremsen sind neu."] },
+    { id: "a10",
+      ziel: ["Ich habe das schon gemacht gehabt.",
+             "Das hatte ich schon gegessen gehabt."],
+      still: ["Die Mannschaft hat im letzten Spiel nichts mehr zu gewinnen gehabt.",
+              "Einen Raum für die Besprechung? Wir haben keinen geeigneten gehabt."] },
+    { id: "a11",
+      ziel: ["Das Training fällt wegen mir aus.",
+             "Wegen dir kommen wir zu spät."],
+      still: ["Die Schulleitung hat der Hitze wegen uns früher nach Hause geschickt."] },
+    { id: "t01",
+      ziel: ["Er sagte \"Hallo\" zu mir."],
+      still: ["Das Mountainbike gibt es mit 27,5\" und 29\" Laufrädern."] },
+    { id: "t03",
+      ziel: ["Die Quote liegt bei 20%.",
+             "Es sind 95% der Befragten."],
+      still: ["Das 95%-Konfidenzintervall liegt zwischen 12 und 18.",
+              "Die Folien liegen unter https://ilias.dshs-koeln.de/goto.php?target=file_3%20Sitzung.pdf bereit."] },
+    { id: "t06",
+      ziel: ["Die Sprechstunde ist von 9–11 Uhr.",
+             "Er studierte von 1990 - 1995 in Köln."],
+      still: ["Die Klasse arbeitet in Gruppen von 3–4 Kindern.",
+              "Die Messwerte von 2026-03-12 fehlen noch im Protokoll.",
+              "Die Differenz von 10 - 4 ergibt 6."] },
+    { id: "t08",
+      ziel: ["Und dann... war es vorbei."],
+      still: ["Name: .................... Klasse: ........"] },
+    { id: "t09",
+      ziel: ["Das Training ist von 8-10 Uhr.",
+             "Wir treffen uns 8 - 10 Uhr."],
+      still: ["Die ISSN lautet 0342-2380.",
+              "Rechnungsnummer: 2026-0815",
+              "Kundennummer: 4711-12",
+              "Der Kurs findet in Raum 2-104 statt.",
+              "HFmax = 220 - Lebensalter; bei 25 Jahren also 220 - 25 = 195 Schläge pro Minute."] },
+    { id: "t10",
+      ziel: ["Der Plan - so gut er war - scheiterte."],
+      still: ["Die Trainingsherzfrequenz nach Karvonen: THF = HFruhe + (HFmax - HFruhe) · 0,6."] },
+    { id: "t12",
+      ziel: ["Er fragte, wann wir kommen?"],
+      still: ["Ein Schüler fragte: „Weißt du, was wir heute machen?“",
+              "Eine Schülerin fragte: „Müssen wir, wie letzte Woche, erst laufen?“"] },
+    { id: "t14",
+      ziel: ["Und dann war es vorbei....",
+             "Und dann war es vorbei… ."],
+      still: ["Name: .................... Klasse: ........",
+              "Ergänze: Der Spieler .......... den Ball zum Mitspieler.",
+              "1 Einleitung .................... 3"] },
+    { id: "t15",
+      ziel: ["Wir laufen 5km.",
+             "Das kostet 20Euro."],
+      still: ["Im Anhang findest du das Video Sprint_100m.mp4.",
+              "Die Ergebnisse stehen in der Datei Ergebnisse_5km.xlsx."] },
+    { id: "t16",
+      ziel: ["Wir treffen uns am 3.Juni."],
+      still: ["Im Anhang: Protokoll_3.Juni.pdf"] },
+    { id: "t17",
+      ziel: ["Wir gehen in's Kino.",
+             "Das ist für's Training.",
+             "Wir laufen um's Haus.",
+             "Wir freuen uns auf's erste Turnier."],
+      still: ["Um's kurz zu machen: Das Training fällt aus."] },
+    { id: "x01",
+      ziel: ["Wegen dem Regen fällt das Training aus.",
+             "Das Training fällt wegen dem Regen aus.",
+             "Ich komme wegen einem Termin später.",
+             "Hallo,\nWegen dem Termin melde ich mich noch."],
+      still: ["Wir sind auf schmalen Wegen den Berg hinaufgelaufen.",
+              "Beim Orientierungslauf liefen die Gruppen auf verschiedenen Wegen dem Ziel entgegen.",
+              "Auf den Fußwegen dem Verkehr ausweichen."] },
+    { id: "x02",
+      ziel: ["Trotz dem Regen haben wir gespielt.",
+             "Wir haben trotz dem Regen gespielt.",
+             "- Trotz dem Regen draußen"],
+      still: ["Er blieb aus reinem Trotz den ganzen Tag im Zimmer.",
+              "Ein Schüler hat aus Trotz den Ball weggeworfen.",
+              "Allen Widrigkeiten zum Trotz den Titel geholt."] },
+    { id: "x04",
+      ziel: ["Er ist größer wie ich.",
+             "Er ist größer und schneller wie ich.",
+             "Er ist älter und erfahrener wie ich.",
+             "Es kamen mehr wie zehn Leute.",
+             "Das dauert länger wie gedacht.",
+             "Das dauert immer länger wie gedacht."],
+      still: ["Die Teilnehmenden der Gruppe A waren im Schnitt älter und ähnlich fit wie die der Gruppe B.",
+              "Er ist älter und genauso groß wie ich.",
+              "Er ist jünger und so schnell wie sein Bruder.",
+              "Die Übung ist schwieriger und so aufgebaut wie im Lehrplan beschrieben.",
+              "Heute trainiert keiner mehr wie früher.",
+              "Es gibt keinen Spieler mehr wie ihn.",
+              "Heute spielt niemand mehr wie Beckenbauer.",
+              "Die Mannschaft spielt schon länger wie ausgewechselt.",
+              "Er bewegt sich immer mehr wie ein Profi.",
+              "Er spielt mehr und mehr wie ein Profi.",
+              "Die Kinder spielten mehr oder weniger wie in der letzten Stunde."] },
+    { id: "x05",
+      ziel: ["Er ist größer als wie ich.",
+             "Das ging besser als wie erwartet.",
+             "Er läuft schneller als wie ich dachte.",
+             "Sie ist besser als wie er es selbst glaubt.",
+             "Er ist größer als wie mein Bruder."],
+      still: ["In der Befragung gaben die Schüler an, als wie anstrengend sie den Lauf empfanden.",
+              "Als wie sicher gilt die Methode in der Literatur?",
+              "Das Training wirkte eher wie ein Spiel als wie eine Prüfung.",
+              "Die Übung wirkt weniger wie ein Test als wie ein Spiel."] },
+    { id: "x07",
+      ziel: ["Das ist die optimalste Lösung."],
+      still: ["Für Anfänger ist der Hallenboden die idealste Unterlage."] },
+    { id: "x08",
+      ziel: ["Das ist der Standart.",
+             "Der Qualitätsstandart ist hoch.",
+             "Der Mindeststandart fehlt.",
+             "Der Alarmstandart gilt.",
+             "Der Armstandart fehlt."],
+      still: ["Jede Handstandart wird zuerst an der Wand geübt.",
+              "Die Kopfstandart hängt vom Leistungsstand ab."] },
+    { id: "x16",
+      ziel: ["Wir haben wieder Erwarten gewonnen.",
+             "Wieder Erwarten hat es geklappt.",
+             "Wir haben wieder Erwarten gewonnen."],
+      still: ["Endlich wieder\nErwarten durften die Kinder nach der Hallensperre vor allem eines: Bewegung."] },
+    { id: "x18",
+      ziel: ["Seit ihr bereit?",
+             "Ihr seit klasse!",
+             "Ihr seit dabei.",
+             "Ihr seit echt gut.",
+             "Seit so gut und schickt mir die Liste.",
+             "Seit so gut wie möglich vorbereitet."],
+      still: ["Seit so gut wie zwei Jahren bin ich im Verein.",
+              "Sie ist ihr seit Klasse 5 eine gute Freundin.",
+              "Ich gebe ihr seit Klasse 8 Nachhilfe."] },
+    { id: "x20",
+      ziel: ["Ruf mir bitte morgen an.",
+             "Ich rufe dir nachher an.",
+             "Rufst du mir morgen an?",
+             "Sie hat mir angerufen.",
+             "Ruf mir nach dem Training an.",
+             "Ruf mir bitte an der Tür an."],
+      still: ["Frau Weber hat gestern bei mir angerufen.",
+              "Hat jemand bei Ihnen angerufen?",
+              "Frau Weber rief ihm zufolge gestern alle Eltern an.",
+              "Er rief mir zuliebe noch einmal beim Prüfungsamt an.",
+              "Das rief mir meine ersten Stunden an der Schule in Erinnerung."] },
+    { id: "x21",
+      ziel: ["Das interessiert mir nicht.",
+             "Das Thema interessiert ihm sehr.",
+             "Das interessiert Ihnen bestimmt."],
+      still: ["Das Angebot interessiert ihm zufolge vor allem die jüngeren Mitglieder.",
+              "Die Klasse probierte interessiert ihnen bisher unbekannte Spiele aus.",
+              "Die Kinder betrachteten interessiert ihnen unbekannte Sportgeräte."] },
+    { id: "x22",
+      ziel: ["Das kostet mir viel Zeit.",
+             "Der Fehler kostete ihm den Sieg.",
+             "Kostet dir das zu viel?"],
+      still: ["Die Reparatur der Halle kostet ihm zufolge rund 200 000 Euro.",
+              "Die Kinder kosteten ihnen unbekannte Obstsorten."] },
+    { id: "x23",
+      ziel: ["Ich habe mit dem Kollege gesprochen.",
+             "Wir fragen den Praktikant.",
+             "Das Gespräch mit Herr Weber war gut.",
+             "Der Termin den Herr Otten vorgeschlagen hat, passt."],
+      still: ["Der Wellensittich sitzt in seinem Bauer."] },
+    { id: "x25",
+      ziel: ["Mit freundlichen Grüßen,\nNils Otten",
+             "Viele Grüße, Nils",
+             "Beste Grüße, Ihr Nils Otten",
+             "Mit freundlichen Grüßen, Dr. Nils Otten",
+             "Danke im Voraus und viele Grüße,\nNils",
+             "Bis morgen. Viele Grüße, Nils",
+             "Sportliche Grüße,\nNils",
+             "Gruß, Tim"],
+      still: ["Vielen Dank für die Grüße, Frau Weber.",
+              "Danke für deine Grüße, Lena.",
+              "Danke für deine Grüße, Lena",
+              "Vielen Dank für die netten Grüße, Frau Dr. Weber.",
+              "Stundenbeginn: Aufstellen, Grüßen, Aufwärmen",
+              "Ablauf: Sitzkreis, Gruß, Erwärmung",
+              "Ich soll dir von allen herzliche Grüße,\nauch von Frau Weber, ausrichten.",
+              "Mit freundlichen Grüßen\nNils Otten",
+              "Liebe Grüße, Frau Weber"] },
+    { id: "x26",
+      ziel: ["Ich weiss nicht.",
+             "Viele Grüsse, Nils",
+             "Wir spielen Fussball.",
+             "Das ist gross.",
+             "Das Jugend-Fussballturnier fällt aus.",
+             "Die Schweizerische Fussballer spielen."],
+      still: ["Die Ergebnisse stehen auf fussball.de.",
+              "Den Spielplan findest du unter www.fussball.de/verein.",
+              "Schreib an info@fussballschule-koeln.de.",
+              "Bitte schreib an m.weiss@dshs-koeln.de.",
+              "Herr Groß hat die Adresse t.gross@dshs-koeln.de.",
+              "Der Blog heißt fussballtraining.com.",
+              "Die Kinder zeigten Defizite in den gross motor skills.",
+              "Relationship between gross and fine motor skills",
+              "Der Schweizerische Fussballverband hat die Regel geändert."] },
+    { id: "x28",
+      ziel: ["Es tut mir Leid.",
+             "Das tut mir wirklich sehr Leid, sorry.",
+             "Es tut mir Leid an dieser Stelle, dass es so kam."],
+      still: ["Er tut ihr Leid an, ohne es zu merken.",
+              "Sie tut ihm Leid an, indem sie ihn ausgrenzt.",
+              "Er tut ihr Leid an und merkt es nicht."] },
+    { id: "x34",
+      ziel: ["Ich muss das leider widerholen.",
+             "Widerholt habe ich darauf hingewiesen.",
+             "Die Widerholung fällt aus."],
+      still: ["Die Halle liegt in der Widerholtstraße in Kirchheim."] },
+    { id: "x36",
+      ziel: ["Im großen und ganzen war es gut.",
+             "Das war im großen und Ganzen gut.",
+             "Im großen und ganzen, das Training war gut."],
+      still: ["Im großen und ganzen Stadion war kein Platz mehr frei.",
+              "Im Großen und Ganzen war es gut."] },
+    { id: "x37",
+      ziel: ["Nächstes mal bringe ich die Pfeife mit.",
+             "Beim nächsten mal klappt es.",
+             "Das erste mal war es schwer."],
+      still: ["Ich habe dir zwei Stundenentwürfe geschickt. Kannst du dir den letzten mal anschauen?",
+              "Lies dir die letzte mal durch.",
+              "Kannst du die nächsten mal gegenlesen?",
+              "Schick mir den vorigen mal zurück."] },
+    { id: "x40",
+      ziel: ["Der Rythmus stimmt nicht.",
+             "Das Herzrytmus-Training beginnt.",
+             "Er hat Herzrythmusstörungen."],
+      still: ["An der Waldorfschule hatte die Klasse zweimal pro Woche Eurythmie statt Sport.",
+              "Die Heileurythmie wird an Waldorfschulen angeboten.",
+              "Wir machten eurythmische Übungen."] },
+    { id: "x41",
+      ziel: ["Danke für den Tip!",
+             "Hast du noch Tips für mich?",
+             "Hier ein paar Tips & Tricks zum Aufwärmen."],
+      still: ["Smith, J. (2019): Coaching Tips for Youth Basketball. Champaign: Human Kinetics."] },
+    { id: "x42",
+      ziel: ["Ich weiß, daß du kommst.",
+             "Das war ein Kuß.",
+             "Er hatte Streß.",
+             "Die Frau muß gehen.",
+             "Ob die Frau Streß hat?"],
+      still: ["Das Seminar fand im Raum von Frau Nuß statt."] },
+    { id: "x43",
+      ziel: ["Wir trainieren am Montag Abend.",
+             "Am Freitag morgen fällt die Stunde aus.",
+             "Bis Sonntag Nacht bleibt die Halle offen.",
+             "Am Montag Abend ist Training."],
+      still: ["Ich treffe Herrn Freitag morgen nach dem Seminar.",
+              "Kannst du Frau Sonntag morgen die Liste geben?",
+              "Exkursionsplan\nMontag\nVormittag: Theorie im Hörsaal",
+              "Ab Montag Abend- und Wochenendkurse im Hochschulsport"] },
+    { id: "x44",
+      ziel: ["Wir trainieren immer Abends.",
+             "Die Halle ist Sonntags geschlossen.",
+             "Wir treffen uns,\nMontags und freitags."],
+      still: ["Der Höhepunkt unseres Abends war das Elfmeterschießen.",
+              "Tag 3 im Praktikum\nMorgens habe ich die erste Stunde hospitiert.",
+              "Wochenplan\nMontags: Krafttraining\nMittwochs: Lauf",
+              "Eines sehr kalten Morgens stand die ganze Klasse vor der verschlossenen Halle.",
+              "Die Stimmung eines schönen, warmen Abends lässt sich schwer beschreiben."] },
+    { id: "x45",
+      ziel: ["Seit dem ich trainiere, schlafe ich besser.",
+             "Mir geht es besser, seit dem ich trainiere.",
+             "Und seit dem ich in Köln wohne, fahre ich Rad.",
+             "Seit dem sie letzten Sommer umgezogen ist, trainiert sie allein."],
+      still: ["Das war der Unfall, seit dem ich nicht mehr richtig sprinten kann.",
+              "Das ist das Spiel, seit dem wir ungeschlagen sind.",
+              "Seit dem sie betreffenden Beschluss darf sie nicht mehr mitspielen.",
+              "Seit dem ihr zugeteilten Praktikum ist sie viel sicherer vor der Klasse."] },
+    { id: "x46",
+      ziel: ["Ich war zehn mal dort.",
+             "Wir haben drei mal gewonnen.",
+             "Ich habe ein paar mal nachgefragt."],
+      still: ["Die Spielzeit beträgt zwei mal 30 Minuten.",
+              "Wir laufen vier mal 100 Meter.",
+              "Das Spielfeld ist zwanzig mal vierzig Meter groß.",
+              "Ein Volleyballfeld misst neun mal achtzehn Meter.",
+              "Die Spielzeit beträgt zwei mal dreißig Minuten."] },
+    { id: "x49",
+      ziel: ["Ich weis es nicht.",
+             "Er weis Bescheid.",
+             "Weis ich nicht.",
+             "Weis sie das schon?",
+             "Die Frau weis nicht, wo die Halle ist."],
+      still: ["Weis sie bitte darauf hin, dass die Halle morgen zu ist.",
+              "Weis sie an, sich in Zweiergruppen aufzustellen.",
+              "Weis es nach, bevor du es behauptest.",
+              "Bitte weis sie darauf hin, dass die Halle zu ist.",
+              "Leider konnte Frau Weis nicht kommen.",
+              "Ich habe Herrn Weis nicht erreicht."] },
+    { id: "x50",
+      ziel: ["Am morgen hatten wir Training.",
+             "Vielen dank für die Rückmeldung.",
+             "Vielen dank euch.",
+             "Habt ihr etwas zu Essen dabei?",
+             "Gib mir bitte bescheid."],
+      still: ["Wer am morgen zu schreibenden Test nicht teilnehmen kann, meldet sich bei mir.",
+              "Ich kann am morgen um zehn Uhr beginnenden Seminar nicht teilnehmen.",
+              "Ich kann am morgen geplanten Treffen leider nicht teilnehmen.",
+              "Im Skript steht nur wenig zu Essen und Trinken vor dem Wettkampf.",
+              "Es gelang vielen dank intensiver Vorbereitung, die Prüfung zu bestehen."] },
+    { id: "x53",
+      ziel: ["Das dauerte länger wie geplant.",
+             "Es lief besser wie erwartet."],
+      still: ["Die Stunde verlief mehr oder weniger wie geplant."] },
+    { id: "x54",
+      ziel: ["Beim aufwärmen hat er sich verletzt.",
+             "Wir kommen ins schwitzen und machen Pause."],
+      still: ["Beim ersten Versuch hat es nicht geklappt, beim zweiten hat es funktioniert.",
+              "Beim ruhigen, konzentrierten Arbeiten merkt man den Fortschritt."] },
+    { id: "x55",
+      ziel: ["Für Anfänger ist der Hallenboden die idealste Unterlage.",
+             "Die neuen Schuhe versprechen minimalsten Verschleiß."],
+      still: ["Das ist die optimale Lösung."] },
+    { id: "x57",
+      ziel: ["Das war der Unfall, seit dem ich nicht mehr richtig sprinten kann.",
+             "Ich spiele Fußball, seit dem ich fünf bin."],
+      still: ["Seit dem ich trainiere, schlafe ich besser."] },
+    { id: "y01",
+      ziel: ["Ich wollte fragen ob du kommst.",
+             "Ich weiß genau dass es klappt.",
+             "Sie weiß vermutlich dass es klappt.",
+             "Hallo Frau Weber, danke dass Sie geantwortet haben."],
+      still: ["Er fehlte, vermutlich weil er krank war.",
+              "Man kann die Motivation steigern, etwa indem man kleine Wettkämpfe einbaut.",
+              "Ich wollte laufen gehen, doch weil es regnete, blieb ich zu Hause.",
+              "Die Beteiligung war gering, teils weil es regnete, teils weil Ferien waren.",
+              "Das klappt, zum Beispiel indem wir früher anfangen.",
+              "Vermutlich weil er krank war, fehlte er."] },
+    { id: "y03",
+      ziel: ["Ich komme nicht, weil ich habe keine Zeit.",
+             "Er fehlt, weil er hat den Bus verpasst."],
+      still: ["Ich trainiere nicht, weil ich muss, sondern weil ich will.",
+              "Ich gehe, weil ich muss.",
+              "Sie spielt mit, weil sie möchte."] },
+    { id: "y08",
+      ziel: ["Ich wünsche dir alles gute.",
+             "Das ist nichts neues."],
+      still: ["Ich schicke Ihnen alles heute noch zu.",
+              "Das mache ich alles gerne."] },
+    { id: "y10",
+      ziel: ["Der Mann, wo das gesagt hat, ist weg.",
+             "Die Kinder, wo hier spielen, sind laut."],
+      still: ["Die Kinder, wo auch immer sie herkommen, sind in der AG willkommen."] },
+    { id: "y11",
+      ziel: ["Er hat versucht pünktlich zu sein.",
+             "Wir haben beschlossen morgen früher anzufangen.",
+             "Sie versucht es zu reparieren."],
+      still: ["Morgen versuchen wir zu gewinnen.",
+              "Nächste Woche plant er umzuziehen.",
+              "Ich hoffe sehr zu gewinnen."] },
+    { id: "y13",
+      ziel: ["Wenn ihr Fragen habt meldet euch.",
+             "Falls es regnet findet die Einheit in Halle 3 statt.",
+             "Wenn die Einheit am 12. Mai ausfällt holen wir sie nach.",
+             "Hallo Tim. Wenn du Zeit hast komm vorbei.",
+             "Falls die Halle ca. um acht frei ist fangen wir an.",
+             "Wenn wir z. B. Bälle brauchen sag Bescheid."],
+      still: ["Wenn die Einheit am 12. Mai ausfällt, holen wir sie nach.",
+              "Plan B\nFalls es regnet\nDie Einheit findet in Halle 3 statt.",
+              "Falls die Halle ca. um acht frei ist, fangen wir an.",
+              "Wenn wir z. B. Bälle brauchen, sag Bescheid."] },
+    { id: "y14",
+      ziel: ["Wir treffen uns am Mittwoch den 10. Mai.",
+             "Am Montag den 12. treffen wir uns."],
+      still: ["Wir haben am Sonntag den 2. Platz belegt.",
+              "Ich habe am Montag dem 1. Vorsitzenden geschrieben."] },
+  ];
+  const gegenVerpasst = [], gegenFalsch = [];
+  GEGEN.forEach(z => {
+    const trifft = s => daten(w, "analyse(" + JSON.stringify(s) + ").finds.some(f=>f.c.id===" + JSON.stringify(z.id) + ")");
+    z.ziel.forEach(s => { if (!trifft(s)) gegenVerpasst.push(z.id + ": „" + s + "“"); });
+    z.still.forEach(s => { if (trifft(s)) gegenFalsch.push(z.id + ": „" + s + "“"); });
+  });
+  const gegenZahl = GEGEN.reduce((n, z) => n + z.ziel.length + z.still.length, 0);
+  P.ok("Gegenbeispiele: kein Muster meldet die richtigen Sätze (" + gegenZahl + " Sätze, " + GEGEN.length + " Muster)",
+    !gegenFalsch.length, gegenFalsch.join(" · "));
+  P.ok("… und jedes fängt weiter seine echten Fehler", !gegenVerpasst.length, gegenVerpasst.join(" · "));
+  /* Zitat und Erwähnung: Der Treffer bleibt, wird aber zu „Bitte prüfen“ — außerhalb von
+     Anführungszeichen und Literaturangaben bleibt er hart. */
+  const STUFE = [
+    ["x06", "Das Wort „einzigste“ gibt es standardsprachlich nicht.", "pruef"],
+    ["x06", "Das war die „einzigste“ Chance.", "pruef"],
+    ["x06", "Das war die einzigste Chance.", "hart"],
+    ["x06", "„Das war die einzigste Chance“, sagte er.", "hart"],
+    ["x29", "Weber (1984, S. 12) schreibt: „Die Frage stellt sich in bezug auf den Schulsport neu.“", "pruef"],
+    ["x29", "Die Frage stellt sich in bezug auf den Schulsport neu.", "hart"],
+    ["x30", "Otten (1988, S. 40) fragt: „Wieviel Bewegung braucht das Kind?“", "pruef"],
+    ["x30", "Er fragte: „Ist irgend wo noch ein Ball?“", "hart"],
+    ["x12", "Im Original von 1988 heißt es: „Die Übungen sind fortlaufend numeriert.“", "pruef"],
+    ["x42", "Schon Weber (1987, S. 12) hielt fest: „Der Sportunterricht muß mehr sein als bloße Bewegung.“", "pruef"],
+    ["x42", "Weber, H. (1985): Daß Kinder sich bewegen wollen. Schorndorf.", "pruef"],
+    ["x42", "Ich weiß, daß du kommst.", "hart"],
+    ["x42", "Weber, Tina, ich weiß, daß du kommst.", "hart"],
+    ["x41", "Smith, J. (2019): Coaching Tips for Youth Basketball. Champaign: Human Kinetics.", ""],
+    ["x41", "Smith, J. (2019): Tips und Tricks im Training. Aachen: Meyer.", "pruef"],
+    ["x23", "Der Termin, den Herr Otten vorgeschlagen hat, passt mir gut.", "pruef"],
+    ["x23", "Der Antrag, den Kollege Meier eingebracht hat, wird angenommen.", "pruef"],
+    ["x23", "Der Lebensraum, den Mensch und Tier teilen, schrumpft.", "pruef"],
+    ["x23", "Das Konzept, dem Präsident und Vorstand zugestimmt haben, gilt ab Montag.", "pruef"],
+    ["x23", "Der Antrag, dem Herr Weber widersprochen hat, wird vertagt.", "pruef"],
+    ["x23", "Das Gespräch, mit dem Kollege Meier geführt, war gut.", "pruef"],
+    ["x23", "Ich habe mit dem Kollege gesprochen.", "hart"],
+  ];
+  const stufeFalsch = STUFE.filter(([id, satz, sev]) =>
+    daten(w, "analyse(" + JSON.stringify(satz) + ").finds.filter(f=>f.c.id===" + JSON.stringify(id) + ").map(f=>f.c.sev).join()") !== sev)
+    .map(([id, satz, sev]) => id + " soll " + sev + ": „" + satz + "“");
+  P.ok("Zitate und erwähnte Formen stehen unter „Bitte prüfen“, eigener Text bleibt hart (" + STUFE.length + " Sätze)",
+    !stufeFalsch.length, stufeFalsch.join(" · "));
+  /* GEGEN-ENDE */
 }
 
 /* ---------- E · Ansichten ---------- */

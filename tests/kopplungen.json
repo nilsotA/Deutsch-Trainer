@@ -51,7 +51,7 @@
   ]
  },
  {
-  "satz": "„einzig“ ist ein Absolutadjektiv und lässt sich nicht steigern.",
+  "satz": "„einzigste“ führt der Duden unter den häufigen Fehlern.",
   "stellen": [
    "Prüfmuster x06",
    "Übung r05"
@@ -358,6 +358,13 @@
   ]
  },
  {
+  "satz": "Ein einzelnes Substantiv im Singular ohne Artikel und ohne Adjektiv bleibt oft ohne Endung:",
+  "stellen": [
+   "Fallkarte wegen",
+   "Übung m01"
+  ]
+ },
+ {
   "satz": "Ein Gespräch, das vertagt wird, endet ohne Kränkung;",
   "stellen": [
    "Baustein ph32",
@@ -373,10 +380,10 @@
   ]
  },
  {
-  "satz": "Ein Punkt statt eines „aber“ ändert die Wirkung erheblich.",
+  "satz": "Eine lange Rechtfertigung wirkt dagegen wie eine Bitte um Erlaubnis .",
   "stellen": [
-   "Baustein ph20",
-   "Übung f24"
+   "Baustein ph09",
+   "Übung f11"
   ]
  },
  {
@@ -387,7 +394,14 @@
   ]
  },
  {
-  "satz": "Ersetz es durch „ich“ oder „wir“, und der Satz wird verbindlich:",
+  "satz": "Ergänze das Hilfsverb fürs Perfekt, „haben“ oder „sein“:",
+  "stellen": [
+   "Übung z12",
+   "Übung z13"
+  ]
+ },
+ {
+  "satz": "Ersetz es durch „ich“ oder „wir“ und sag dazu, was bis wann passiert:",
   "stellen": [
    "Vorher/Nachher pr21",
    "Übung f41"
@@ -452,6 +466,18 @@
    "Regel satz-wennals",
    "Satzkarte sa23",
    "Übung x08"
+  ]
+ },
+ {
+  "satz": "In einem wörtlichen Zitat aus einem älteren Text bleibt die Schreibung des Originals stehen.",
+  "stellen": [
+   "Prüfmuster x12",
+   "Prüfmuster x29",
+   "Prüfmuster x30",
+   "Prüfmuster x36",
+   "Prüfmuster x38",
+   "Prüfmuster x41",
+   "Prüfmuster x42"
   ]
  },
  {
@@ -630,6 +656,13 @@
   ]
  },
  {
+  "satz": "Steht die Zustimmung in einem eigenen Satz, bekommt sie mehr eigenes Gewicht.",
+  "stellen": [
+   "Baustein ph20",
+   "Übung f24"
+  ]
+ },
+ {
   "satz": "Thema nennen und den Zeitpunkt zur Wahl stellen.",
   "stellen": [
    "Fehlersuche kt9",
@@ -766,6 +799,13 @@
   "stellen": [
    "Regel form-widerspruch",
    "Vorher/Nachher pr12"
+  ]
+ },
+ {
+  "satz": "Wie ein Verhalten auf dich wirkt, weißt du aus erster Hand, deshalb kann dein Gegenüber es kaum bestreiten — genauso wenig wie eine zählbare Beobachtung.",
+  "stellen": [
+   "Baustein ph23",
+   "Regel form-kritik"
   ]
  },
  {

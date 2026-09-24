@@ -36,9 +36,9 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 164 in Satzform (173 Fassungen) |
 | Satzbaukarten | 24 |
-| Prüfmuster im Textcheck | 121 |
+| Prüfmuster im Textcheck | 124 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~815 KB, eine Datei, kein Build |
+| Dateigröße | ~860 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,73 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Übungen, Fallkarten und Textcheck mit dreifacher Gegenprüfung (24.09.2026, siebenunddreißigste Runde).**
+
+Zwei Prüfläufe. Jeder Fund ging an drei unabhängige Gegenprüfer (Beleg, Bestand, Gegenbeleg) und
+galt, wenn ihn mindestens zwei nicht widerlegten.
+
+*Übungen und Fallkarten* — 68 gehaltene Funde, alle eingearbeitet:
+
+- **Komma:** Verschränkte Infinitivgruppen bekommen kein Komma („Wir werden das Problem zu verstehen
+  versuchen“, GfdS). Das fehlte in `komma-infinitiv`, k01 und im Spickzettel. Bei der Partizipgruppe
+  stand die Pflicht zu weit (`komma-partizip`, k29).
+- **Schreibung:** „wieder“ heißt auch „zurück“ (wiedergeben, wiederbekommen). Die Merkhilfe für „wider“
+  hängt jetzt an Licht und Schall (`recht-wider`, r17, Spickzettel, x15, x34). r14 fragt nach der
+  Schreibung in Deutschland und Österreich, weil „ausser“ Schweizer Standard ist. Knowhow, Countdown und
+  Comeback folgen jetzt dem Duden.
+- **Grammatik:** entlang (Fallkarte, `gram-praepakk`), die Ausnahmen bei wegen und außer, „in die
+  Schweiz“, doppelte Perfektformen, „vgl.“ je nach Zitierstil. Dazu die Stil- und Formübungen samt ihren
+  Bausteinen, deren Merksätze ihre Bedingung nicht nannten.
+- **Tippaufgaben:** Sechs Fragen begannen mit „Wohin oder wo?“, „haben oder sein?“ oder „nicht oder
+  kein?“ und werteten die wörtliche Antwort als Fehler. Neue Prüfung dazu in `tests/inhalt.js`,
+  Abschnitt F. Die Regionalprüfung (Abschnitt L) liest jetzt auch Tippaufgaben.
+- **Hörhinweise:** `hoerHinweis()` vergleicht jedes Antwortpaar über die sortierte Liste. Vorher hing
+  ein Notnagel an der Tagesmischung, und in q24 bekam an manchen Tagen die falsche Fassung „Punkt nach 2“.
+  Neu dazu: Bis-Strich („mit Bis-Strich“ / „bis ausgeschrieben“), volle Stunde („mit Punkt und zwei
+  Nullen“) und die Stelle des Apostrophs (p22). `lesarten()` hält fest, was eine Stimme aus einer Fassung
+  machen kann. `tests/inhalt.js`, Abschnitt D prüft jetzt über alle Reihenfolgen aller 657 Fragen.
+
+*Textcheck gegen richtige Sätze* — 122 Fälle gemeldet, in denen ein hartes oder ein Prüfmuster einen
+richtigen Satz anstreicht oder der Hinweis etwas Falsches sagt. 78 davon sind dreifach bestätigt. Die
+übrigen habe ich selbst am Textcheck nachgeprüft, weil der Lauf auf vier Kernen nur zwei Prüfer
+gleichzeitig startet; die später eingetroffenen Urteile stimmen mit meinen überein.
+
+- **Zentral:** `zitatStufe()` stuft einen harten Treffer auf „Bitte prüfen“ herab, wenn die Form in
+  Anführungszeichen nur angeführt wird („Das Wort ‚einzigste‘ gibt es nicht“). Dasselbe gilt für eine
+  alte Schreibung (`ALTSCHREIBUNG`) in einem Zitat oder in einer Literaturzeile („Weber, H. (1985): Daß
+  …“). `WEICH` stuft die Relativlesart von x23 herab („der Termin, den Herr Otten vorgeschlagen
+  hat“) — ausgelassen hätte sie auch „Das Gespräch, mit dem Kollege Meier geführt, war gut“. `ADRESSE`
+  lässt Web- und Mailadressen und Dateinamen aus (fussball.de, m.weiss@…, Sprint_100m.mp4).
+- **Je Muster:** Relativpronomen statt Artikel (x45/x57: „der Unfall, seit dem ich …“). Nachgestellte Präpositionen (x20–x22: „ihm zufolge“). Attributive Adjektive
+  („interessiert ihnen unbekannte Spiele“). Das Verb steht schon am Ende (y03: „weil ich muss“).
+  Überschriften ohne Punkt (x16, x43, x44, y13). Eigennamen (Frau Nuß, Herr Freitag, Frau Weis,
+  Widerholtstraße). Befehlsform (x49: „Weis sie darauf hin“). Rechnen und Maße (x46: „zwanzig mal vierzig
+  Meter“). Dazu Punktlinien, Formeln und Nummern (t06, t08–t10, t14). Weitere Fälle: x01, x02, x04, x05,
+  x08, x18, x25, x26, x28, x36–x38, x40, x41, x47, x50, x53, x54, y01, y08, y10, y11, y14, t01, t03,
+  t12, t15–t17, a01, a08–a11.
+- **Neue Muster (121 → 124):** x55 (idealste, maximalste als Stilhinweis — der Duden nennt die Steigerung
+  dort unüblich, falsch nur bei „optimal“ und „einzig“), x56 („dieses mal“ getrennt auf „prüfen“, weil
+  „Schau dir dieses mal an“ richtig ist), x57 („seit dem“ nach Komma und Substantiv auf „prüfen“).
+- **Hinweise:** „Ich rufe dir an“ gehörte mit „falsch ist er nicht“ zu großzügig eingeordnet. Der Duden
+  ordnet den Dativ der regionalen Umgangssprache zu (x20, `gram-akkverben`). Bauer: im Genitiv selten
+  auch „des Bauers“, Bauer ist deshalb aus der harten Liste von x23 raus. Doppelpunkt vor einer
+  Zusammenfassung klein (Regelwerk § 81(3), x52). Bis-Strich nach Duden ohne, nach DIN 5008 mit
+  Leerzeichen (t09, t10, `z-gedankenstrich`). „das, was, bis“ behalten ihr einfaches s (x42).
+- **Absicherung:** `tests/suite.js`, Block `GEGEN`, hält jedes Gegenbeispiel mit dem echten Fehler
+  daneben. `STUFE` prüft, dass Zitate auf „prüfen“ stehen und eigener Text hart bleibt. Die Korpora
+  bleiben unverändert (entwicklung 213/300, kontrolle 117/304, null Treffer auf den fehlerfreien Texten).
+  Ein Vergleich alter gegen neuer Textcheck über 638 Falschformen der App (Ablenker, `nope`-Beispiele,
+  Fehlersuchtexte) ergab keinen verlorenen Treffer.
+- **Selbst eingebauter Fehler, gefunden vom Gegenprüfer:** Der Namensschutz vor „Frau Nuß“ stand vor der
+  ganzen Wortliste von x42 und ließ damit auch „Die Frau muß gehen“ durch. Er steht jetzt nur vor den
+  Substantiven, die als Familienname vorkommen.
+
+**Offen:** x15 meldet „das Wiederstehen“ (erneut stehen, nach einer Verletzung) weiter hart. Der
+Hinweis nennt jetzt die Bedingung, eine eigene Prüfstufe lohnte bei der Seltenheit nicht. Fremdsprachige
+Zitate prüft der Textcheck wie deutschen Text (x13: schwedisch „intresse“). Ob die iPhone-Stimme
+„1990–1995“ als „bis“ und „8.00 Uhr“ als „acht Uhr“ liest, ist nicht am Gerät nachgehört; die Hinweise
+decken beide Lesarten ab.
 
 **Die 155 Wortkarten selbst gelesen (23.09.2026, sechsunddreißigste Runde).**
 
