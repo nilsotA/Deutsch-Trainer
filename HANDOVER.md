@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 125 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~860 KB, eine Datei, kein Build |
+| Dateigröße | ~880 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -102,7 +102,7 @@ Zeilenumbruch galt pauschal als Überschrift (x16, x43). Ein Einschub nach dem V
 jetzt auf „Bitte prüfen“ und der Hinweis nennt beide (`WEICH` für x16, x36, x50). Neu: t20 („20%-ige“
 → 20%ig, Regel `recht-bindestrich`). Gemischte Anführungszeichen („…") schließen jetzt ein Zitat.
 Bewusst offen: „Wir trainieren⏎Abends im Park“ — ein Zeilenanfang ist oft Listenanfang (x44).
-Danach hat ein dritter Lauf die Korrekturen selbst angegriffen: 32 Funde, 30 bestätigt, alle behoben. Die Klassen wiederholten sich: Der Namensschutz fiel nach jedem Artikel weg („die Familie Nuß“), der Datumspunkt in „am 12. März, seit dem …“ galt als Satzende, ein gerades Zeichen im Zitat („Der Begriff "Belastung" muß …“) beendete das äußere Zitat, jede vierstellige Spanne galt als Jahresspanne. Jetzt hebt nur ein Possessiv den Namensschutz auf, und `WEICH` kennt zusätzlich x41, x43 und t06. Ein vierter Lauf auf diese Nachbesserung fand 14 weitere Stellen, alle behoben: „am morgen nach dem harten Training“ war nur noch „Bitte prüfen“, „vielen dank Ihrem Team für …“ ging still durch, „der Kapitän wegen mir“ galt als Genitiv, „aus der 8 c. Ich …“ als Abkürzung.
+Danach hat ein dritter Lauf die Korrekturen selbst angegriffen: 32 Funde, 30 bestätigt, alle behoben. Die Klassen wiederholten sich: Der Namensschutz fiel nach jedem Artikel weg („die Familie Nuß“), der Datumspunkt in „am 12. März, seit dem …“ galt als Satzende, ein gerades Zeichen im Zitat („Der Begriff "Belastung" muß …“) beendete das äußere Zitat, jede vierstellige Spanne galt als Jahresspanne. Jetzt hebt nur ein Possessiv den Namensschutz auf, und `WEICH` kennt zusätzlich x41, x43 und t06. Ein vierter Lauf auf diese Nachbesserung fand 14 weitere Stellen, alle behoben: „am morgen nach dem harten Training“ war nur noch „Bitte prüfen“, „vielen dank Ihrem Team für …“ ging still durch, „der Kapitän wegen mir“ galt als Genitiv, „aus der 8 c. Ich …“ als Abkürzung. Ein fünfter Lauf fand 16 weitere, davon 9 bei „weis“ (x49): Jede stille Ausnahme für die Befehlsform („Weis sie darauf hin“) ließ echte „weiß“-Fehler durch, jede engere Sperre strich richtige Befehle an. x49 kennt jetzt keine stille Ausnahme mehr: Wo ein Befehl stehen kann und eine Verbpartikel folgt, steht „Bitte prüfen“ mit beiden Lesarten (`WEICH`), sonst bleibt der Treffer hart. Ebenso x37 („Schau dir das erste mal an“) und t17 („Rund um's Rad“, „An's Referat“). Der große Gegenbeispiel-Lauf der Runde ist inzwischen ganz durch (101 gehaltene Funde); abgeglichen, was noch offen war: x34 lässt „Konrad Widerholt“ stehen, t12 läuft nicht mehr in wörtliche Rede („… sagte: „Wann denn?““), r17 fragt nach der festen Wendung statt „Was stimmt?“ — „wieder Erwarten“ ist als Wortfolge nicht immer falsch („Im Stadion kam wieder Erwarten auf“).
 
 - **Zentral:** `zitatStufe()` stuft einen harten Treffer auf „Bitte prüfen“ herab, wenn die Form in
   Anführungszeichen nur angeführt wird („Das Wort ‚einzigste‘ gibt es nicht“). Dasselbe gilt für eine
@@ -136,7 +136,8 @@ Danach hat ein dritter Lauf die Korrekturen selbst angegriffen: 32 Funde, 30 bes
 
 **Offen:** x15 meldet „das Wiederstehen“ (erneut stehen, nach einer Verletzung) weiter hart. Der
 Hinweis nennt jetzt die Bedingung, eine eigene Prüfstufe lohnte bei der Seltenheit nicht. Fremdsprachige
-Zitate prüft der Textcheck wie deutschen Text (x13: schwedisch „intresse“). Ob die iPhone-Stimme
+Zitate prüft der Textcheck wie deutschen Text (x13: schwedisch „intresse“). „Ich habe im Netz nichts zu Essen
+gefunden, nur zu Bochum“ (die Stadt) bleibt bei x50 hart; der Hinweis nennt die Stadt, eine eigene Stufe lohnte nicht. Ob die iPhone-Stimme
 „1990–1995“ als „bis“ und „8.00 Uhr“ als „acht Uhr“ liest, ist nicht am Gerät nachgehört; die Hinweise
 decken beide Lesarten ab.
 
