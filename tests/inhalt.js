@@ -425,14 +425,15 @@ const TIPP = [
   { id: "n01", muss: ["dem", "meinem", "einem", "seinem", "unserem"], nicht: ["das", "den", "der", "seinen"] },
   { id: "n02", muss: ["den", "einen", "meinen", "seinen", "ihren"], nicht: ["dem", "der", "des", "seinem"] },
   { id: "n03", muss: ["den", "einen", "meinen", "seinen", "unseren"], nicht: ["dem", "der", "seinem"] },
-  { id: "n04", muss: ["der", "einer", "meiner", "seiner", "unserer"], nicht: ["die", "eine", "den", "seine"] },
+  { id: "n04", muss: ["der", "einer", "meiner", "seiner", "unserer", "keiner", "jener"], nicht: ["die", "eine", "den", "seine"] },
   { id: "n06", muss: ["der", "einer", "meiner"], nicht: ["die", "eine", "meine"] },
   { id: "n07", muss: ["den", "einen", "unseren", "meinen", "seinen"], nicht: ["dem", "des", "seinem"] },
   { id: "n31", muss: ["dem", "welchem"], nicht: ["den", "der", "welchen"] },
   { id: "n32", muss: ["den", "welchen"], nicht: ["dem", "welchem"] },
   { id: "n33", muss: ["denen", "welchen", "an die"], nicht: ["den", "die"] },
   { id: "z22", muss: ["übersetze", "übersetzte"], nicht: ["setze über"] },
-  { id: "n11", muss: ["dich", "ihn", "sie", "euch"], nicht: ["dir", "ihm", "ihnen"] },
+  { id: "n11", muss: ["dich", "ihn", "sie", "euch", "es"], nicht: ["dir", "ihm", "ihnen"] },
+  { id: "r02", muss: ["das das", "das welches"], nicht: ["dass das", "das dass"] },
   { id: "n12", muss: ["mir", "ihm", "ihr", "uns"], nicht: ["mich", "ihn", "dich"] },
   { id: "n14", muss: ["mich", "dich", "ihn", "uns"], nicht: ["mir", "dir", "ihm"] },
   { id: "n15", muss: ["dem", "einem", "meinem", "diesem"], nicht: ["den", "der", "des", "einen"] },
@@ -635,7 +636,9 @@ const EINORDNUNG = [
      umgangssprachlich. Seit dem 22.09.2026 an allen vier Stellen gleich; geprüft wird der
      Satz selbst, nicht das Wort irgendwo im Text, sonst genügte die Einordnung von
      „wegen dem Wetter“ zwei Sätze davor. */
-  { was: "wegen mir", muss: [/[Ww]egen mir“ ist umgangssprachlich/],
+  /* Seit dem 24.09.2026 mit der Einordnung des Dudens UND dem Befund der Variantengrammatik
+     (IDS): in Zeitungstexten im ganzen Sprachraum belegt. m16 fragt deshalb nach der Hausarbeit. */
+  { was: "wegen mir", muss: [/[Ww]egen mir“ führt der Duden als umgangssprachlich/, /Zeitungstexten/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "m16"], ["Prüfmuster", "a11"], ["Regel", "gram-genalltag"]] },
   /* „in 1995“: Seit dem 21.09.2026 steht die Herkunft an drei Stellen als Einordnung des
      Dudens, der Sprachwissenschaftler widersprechen. q17 sagte weiter glatt „ist eine
@@ -996,5 +999,43 @@ P.ok("Die Widerspruchsprüfung erkennt die alte Fassung von erörtern",
 P.ok("… und schweigt bei zwei verschiedenen Wörtern",
   !doppelt({ d: "etwas sichtbar machen — statt: zeigen", s: "verdeutlichen, illustrieren" }).length,
   "Gegenprobe schlug an");
+
+/* Kein Ablenker darf richtig sein — auch nicht bei den Wortkarten. Deren Ablenker sind die
+   Bedeutungen anderer Karten. Eine Stichprobe am 24.09.2026 fand zehn Paare, bei denen die
+   fremde Bedeutung ebenfalls eine richtige Antwort war: „einräumen, zugestehen“ (konzedieren)
+   auf „Was bedeutet einräumen?“, „vorwegnehmen, gedanklich vorausgreifen“ (antizipieren) auf
+   „Was bedeutet vorwegnehmen?“. Die Paare stehen hier unabhängig von der App noch einmal, dazu
+   jede Verbindung über das Feld „Sinnverwandt“. Gezogen wird mit 40 Tagesseeds je Karte. */
+const NAH_GEPRUEFT = [
+  ["einräumen", "konzedieren"], ["antizipieren", "vorwegnehmen"], ["tendenziös", "tendenziell / tendenziös"],
+  ["exemplifizieren", "veranschaulichen"], ["herausstellen", "akzentuieren"], ["lapidar", "prägnant"],
+  ["das Korrelat", "das Pendant"], ["prononciert", "dezidiert"], ["unterlaufen", "konterkarieren"],
+  ["stringent", "triftig"], ["evident", "eklatant"], ["das Postulat", "die Prämisse"], ["suggerieren", "nahelegen"],
+  ["reziprok", "die Reziprozität"], ["nuanciert", "die Nuance"], ["postulieren", "das Postulat"],
+  ["suggestiv", "suggerieren"], ["der Zwiespalt", "ambivalent"], ["konziliant", "verbindlich"],
+  ["aufschlussreich", "ergiebig"], ["maßgeblich", "eminent"], ["implizieren", "bewirken"], ["elaboriert", "akribisch"],
+];
+const nurWort = x => x.replace(/^(?:der|die|das)\s+/i, "").toLowerCase();
+const sinnPaar = (a, b) => synListe(a.s).some(y => wortStaemmeT(b.w).includes(y)) || synListe(b.s).some(y => wortStaemmeT(a.w).includes(y));
+const wortStaemmeT = x => x.split(/\s*\/\s*/).map(nurWort);
+const verboten = (a, b) => NAH_GEPRUEFT.some(([x, y]) => (x === a.w && y === b.w) || (x === b.w && y === a.w)) || sinnPaar(a, b);
+const nahAblenker = (w0, opts, frage) => opts.filter((o, i) => i !== frage.ans)
+  .map(o => WORDS.find(b => b.d === o || b.d.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") === o))
+  .filter(b => b && verboten(w0, b)).map(b => w0.w + " ← " + b.w);
+const nahFunde = new Set();
+WORDS.forEach(x => {
+  for (let i = 0; i < 40; i++) {
+    const q = daten(w, "wordQuestion(WORDS.find(y=>y.w===" + JSON.stringify(x.w) + "), rng(" + (i * 7919 + 13) + "))");
+    nahAblenker(x, q.opts, q).forEach(f => nahFunde.add(f));
+  }
+});
+P.ok("Keine Wortkarte bekommt die Bedeutung eines sinnverwandten Wortes als Ablenker (" + NAH_GEPRUEFT.length + " geprüfte Paare, dazu alle Sinnverwandt-Verbindungen)",
+  !nahFunde.size, [...nahFunde].slice(0, 6).join(" · "));
+/* Positivprobe: Die Prüfung erkennt ein solches Paar, wenn es als Ablenker käme. */
+const probeA = WORDS.find(x => x.w === "einräumen"), probeB = WORDS.find(x => x.w === "konzedieren");
+P.ok("Die Ablenkerprüfung erkennt „konzedieren“ als Ablenker zu „einräumen“",
+  nahAblenker(probeA, [probeA.d, probeB.d], { ans: 0 }).length === 1, "Positivprobe blieb stumm");
+P.ok("… und jede Wortkarte behält genug Ablenker", daten(w, "WORDS.every(a=>WORDS.filter(b=>b.w!==a.w&&!wortNah(a,b)).length>=3)"),
+  "eine Karte hat weniger als drei Ablenker");
 
 P.abschluss();

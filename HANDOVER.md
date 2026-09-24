@@ -59,6 +59,33 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zufallsstichprobe: Wie oft lernt Nils etwas Falsches? (24.09.2026, achtunddreißigste Runde).**
+
+Gefragt, ob er sich auf die App verlassen kann, haben wir gemessen statt geschätzt: 60 Übungen, 25
+Wortkarten, 25 Fallkarten und 10 Regeln, zufällig gezogen (Seed fest, `scratchpad/stich/ziehen.js`),
+jede Karte von einem Prüfer gelesen, jeder Fund von einem Gegenprüfer angegriffen. Dazu die ganze
+Wortliste auf eine Frage hin: Kann eine falsche Option in Wahrheit richtig sein?
+
+- **Falsch gelernt:** 1 von 60 Übungen (m16 wertete „wegen mir“ ohne Rahmen als falsch — die
+  Variantengrammatik des IDS belegt es in Zeitungstexten im ganzen Sprachraum, der Duden nennt es
+  umgangssprachlich; jetzt „in einer Hausarbeit die sichere Wahl“, überall gleich eingeordnet),
+  1 von 10 Regeln (`gram-konjunktiv` zeigte das doppelte „würde“ rot wie einen Fehler). 0 von 25
+  Fall- und Wortkarten inhaltlich.
+- **Strukturell, nicht nur in der Stichprobe:** Die Ablenker einer Wortkarte sind Bedeutungen anderer
+  Karten, und die App schloss Sinnverwandte nicht aus. Bei zehn Paaren war die „falsche“ Option
+  richtig („einräumen, zugestehen“ auf „Was bedeutet einräumen?“), bei 29 weiteren teilweise.
+  `wordQuestion()` schließt jetzt verbundene Karten aus (`wortNah`, `WORT_NAH`); `tests/inhalt.js`,
+  Abschnitt M zieht jede Karte mit 40 Seeds und prüft es.
+- **Ungenau (Kern stimmt):** drei Tippaufgaben lehnten richtige Eingaben ab (n04 „keiner“, n11 „es“,
+  r02 „das welches“), `sa21` ohne „Das frage ich mich“, `sa06` sagte „Pronomen“, wo nur
+  Personalpronomen gemeint sind („Ich zeige dir das“), „dank“ mit Dativ als Hauptfall, „sich trauen“
+  fehlte, drei Wortkarten mit schiefem Beispiel oder fehlender Nebenbedeutung (reziprok, Postulat,
+  mindestens). Alles behoben; keine richtige Antwort geändert, kein Eintrag in `NEU_GELERNT`.
+- **Layouttest:** Er zog alle Karten mit `rng(1)`, alle Wortkarten bekamen dieselben drei Ablenker.
+  Mit Seed je Karte: 44 statt 22 Karten brauchen auf 375×667 Scrollen (nach dieser Änderung 45),
+  auf 390×844 weiter keine. Grenze auf 50 gesetzt.
+
+
 **Übungen, Fallkarten und Textcheck mit dreifacher Gegenprüfung (24.09.2026, siebenunddreißigste Runde).**
 
 Zwei Prüfläufe. Jeder Fund ging an drei unabhängige Gegenprüfer (Beleg, Bestand, Gegenbeleg) und
