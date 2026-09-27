@@ -584,12 +584,16 @@ P.titel("G · Regionale Varianten");
    Die Tabelle hält fest, was an welcher Stelle stehen muss. Sie ist der festgehaltene
    Quellenstand vom 13.09.2026, je mit zwei verschieden formulierten Suchen belegt:
    trotz → Schweiz, Österreich, teilweise Süddeutschland (IDS-Variantengrammatik)
+   — am 27.09.2026 an der Originalseite korrigiert: Mit Artikel kommt der Dativ nur in der
+   Schweiz, in Liechtenstein und in Westösterreich vor. „D-süd und A“ nennt die Seite als
+   Angabe der Fachliteratur, die sie ausdrücklich nicht bestätigen kann.
    während → Schweiz und Westösterreich, in Zeitungstexten (IDS); sonst umgangssprachlich
    statt → Österreich und Schweiz (IDS); Dativ auch ohne erkennbare Genitivform
    wegen → überall umgangssprachlich, keine regionale Standardvariante
    Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
 const EINORDNUNG = [
-  { was: "trotz", muss: [/Schweiz/, /Österreich/, /[Ss]üddeutschland|Süden Deutschlands/],
+  { was: "trotz", muss: [/Schweiz/, /Liechtenstein/, /Westösterreich/],
+    nicht: [/[Ss]üddeutschland|Süden Deutschlands|[Ii]n Österreich/],
     stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"],
               ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
   { was: "während", muss: [/umgangssprachlich/, /Schweiz/, /Westösterreich|Österreich/],
@@ -611,10 +615,14 @@ const EINORDNUNG = [
   /* gedenken → Duden-Zweifelsfälle: „standardsprachlich noch nicht anerkannt“, aber in
      Zeitungen verbreitet. zu (Richtung) → „nach Aldi“ ist Ruhrgebiet, nördliches
      Rheinland, Ostfriesland; Duden 2005: auf Norddeutschland beschränkt, nicht
-     standardsprachlich. Beides am 13.09.2026 mit je zwei Suchen belegt. */
+     standardsprachlich. Beides am 13.09.2026 mit je zwei Suchen belegt. Am 27.09.2026 an
+     der Wörterbuchseite nachgelesen: Dort steht „nach“ = „zu … hin“ als „landschaftlich“
+     („nach (zur) Oma gehen“), weder „norddeutsch“ noch „nicht standardsprachlich“ — die
+     App zitiert seitdem die Seite, die man aufschlagen kann, und die Fragen setzen den
+     Rahmen „überregional“. */
   { was: "gedenken", muss: [/nicht anerkannt|nicht standardsprachlich/, /Zeitungen|Presse/],
     stellen: [["Fallkarte", "gedenken"]] },
-  { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /nicht standardsprachlich|norddeutsch/],
+  { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /landschaftlich/],
     stellen: [["Fallkarte", "zu (Richtung)"], ["Übung", "n09"], ["Regel", "gram-richtung"]] },
   /* „Sinn machen“ ist keine regionale, sondern eine strittige Einordnung — dieselbe
      Fehlerklasse auf einer anderen Achse. Die App sagte an drei Stellen glatt
@@ -648,8 +656,11 @@ const EINORDNUNG = [
      beide beim IDS-Artikel „ab + Dativ/Akkusativ bei Datums- und Zeitangaben“. */
   /* „auf die Post“ gegen „zur Post“: beides Standard, die Verteilung regional. Der IDS
      führt dafür einen eigenen Artikel („Auf die / zur Post“). Am 15.09.2026 mit zwei
-     Suchen belegt. Die Regel gab bis dahin nur „auf“ an — für Köln die seltenere Form. */
-  { was: "auf die / zur Post", muss: [/[Ss]üden/, /Norden/, /Standard/],
+     Suchen belegt. Die Regel gab bis dahin nur „auf“ an — für Köln die seltenere Form.
+     Am 27.09.2026 an der Originalseite korrigiert: „zur Post“ ist überall mehrheitlich,
+     „auf die Post“ vor allem in der Schweiz gebräuchlich, seltener in A-südost, A-west, D-süd.
+     Die App sagte „im Süden und in Österreich verbreitet, zur Post in der Mitte und im Norden“. */
+  { was: "auf die / zur Post", muss: [/Schweiz/, /überall/, /Standard/],
     stellen: [["Regel", "gram-richtung"], ["Fallkarte", "auf (Richtung)"]] },
   { was: "ab ohne Artikel", muss: [/[Oo]hne Artikel/, /Akkusativ/, /Dativ/],
     stellen: [["Regel", "gram-praepdat"], ["Fallkarte", "ab"]] },
@@ -704,6 +715,8 @@ EINORDNUNG.forEach(e => e.stellen.forEach(([art, id]) => {
   if (t === null) { fehltG.push(art + " " + id); return; }
   const fehlend = e.muss.filter(re => !re.test(t));
   if (fehlend.length) schiefG.push(e.was + " · " + art + " " + id + ": fehlt " + fehlend.map(String).join(", "));
+  const zuviel = (e.nicht || []).filter(re => re.test(t));
+  if (zuviel.length) schiefG.push(e.was + " · " + art + " " + id + ": überholt " + zuviel.map(String).join(", "));
 }));
 P.ok("Alle eingeordneten Stellen gibt es noch", !fehltG.length, fehltG.join(", "));
 P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schiefG.join(" · "));
@@ -711,7 +724,8 @@ P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schie
    sonst misst sie nichts. Die alte Fassung der Fallkarte trotz nannte nur Österreich. */
 const alteFassung = "Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus. In Österreich ist „trotz dem“ verbreitet.";
 P.ok("Die Einordnungsprüfung erkennt eine unvollständige Landkarte",
-  EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length === 2,
+  EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length >= 2
+    && EINORDNUNG[0].nicht.some(re => re.test(alteFassung)),
   "Positivprobe blieb stumm");
 const alteWegen = "„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.";
 P.ok("… und ein „nicht“, wo woanders „umgangssprachlich“ steht",
@@ -968,6 +982,7 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     "sitzen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "hängen (hing) — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "entlang": "Ablenker im Nominativ („der Fluss“), nicht der schweizerische, seltene Dativ",
+    "zufolge": "Ablenker im Akkusativ („Den Bericht zufolge“); die Region betrifft den vorangestellten Genitiv, nicht den Kasus der Satzform (seit 27.09.2026)",
     "gedenken": "Ablenker im Akkusativ („die Opfer“), nicht der schweizerisch-umgangssprachliche Dativ (seit 27.09.2026)",
     "kosten": "der Lückensatz setzt den Rahmen („Überregional heißt es: …“); der Dativ ist in Österreich, Südtirol und Südostdeutschland gebräuchlich (Variantengrammatik)",
     "sich vergewissern / sich annehmen": "Ablenker im Akkusativ („die Sache“); die Region betrifft „sich um etwas annehmen“, nicht den Kasus",

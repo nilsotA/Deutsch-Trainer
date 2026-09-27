@@ -23,13 +23,6 @@
   ]
  },
  {
-  "satz": "„auf die Post“ ist im Süden und in Österreich verbreitet, „zur Post“ in der Mitte und im Norden.",
-  "stellen": [
-   "Fallkarte auf (Richtung)",
-   "Regel gram-richtung"
-  ]
- },
- {
   "satz": "„Bezug“ ist ein Substantiv und bleibt groß:",
   "stellen": [
    "Prüfmuster x29",
@@ -169,6 +162,13 @@
   ]
  },
  {
+  "satz": "„zur Post“ ist überall die übliche Form, „auf die Post“ ist vor allem in der Schweiz gebräuchlich, seltener auch in Süddeutschland und Teilen Österreichs.",
+  "stellen": [
+   "Fallkarte auf (Richtung)",
+   "Regel gram-richtung"
+  ]
+ },
+ {
   "satz": "Alles, was nach 22 Uhr getippt wird und länger als drei Zeilen ist, wird am nächsten Morgen kürzer und besser.",
   "stellen": [
    "Regel form-konflikt",
@@ -217,14 +217,6 @@
   ]
  },
  {
-  "satz": "Bis 1998 stand „gewunken“ im Duden noch als landschaftlich — daher hält sich der Ruf, es sei ein Fehler.",
-  "stellen": [
-   "Regel gram-verbformen",
-   "Satzkarte sa24",
-   "Übung x05"
-  ]
- },
- {
   "satz": "Dann entscheidet meist sie — außer bei fest ans Verb gebundenen Präpositionen:",
   "stellen": [
    "Regel gram-kasusfinden",
@@ -243,6 +235,14 @@
   "stellen": [
    "Baustein ph47",
    "Übung f21"
+  ]
+ },
+ {
+  "satz": "Das Duden-Wörterbuch nennt sie „besonders umgangssprachlich“, die Gesellschaft für deutsche Sprache nicht standardsprachlich;",
+  "stellen": [
+   "Regel satz-konjunktiv",
+   "Satzkarte sa12",
+   "Tabelle tb10"
   ]
  },
  {
@@ -295,14 +295,6 @@
   ]
  },
  {
-  "satz": "der Duden führt sie als standardsprachlich, andere Sprachpflegestellen sehen das enger.",
-  "stellen": [
-   "Regel satz-konjunktiv",
-   "Satzkarte sa12",
-   "Übung z16"
-  ]
- },
- {
   "satz": "Der Fragebogen wurde von den Teilnehmenden ausgefüllt.",
   "stellen": [
    "Regel stil-passiv",
@@ -336,6 +328,14 @@
   "stellen": [
    "Übung t03",
    "Übung v01"
+  ]
+ },
+ {
+  "satz": "Die Duden-Grammatik von 1998 nannte „gewunken“ noch „hochsprachlich nicht korrekt“, seit 2005 steht es dort ohne Kommentar neben „gewinkt“ — daher hält sich der Ruf, es sei ein Fehler.",
+  "stellen": [
+   "Regel gram-verbformen",
+   "Satzkarte sa24",
+   "Übung x05"
   ]
  },
  {
@@ -375,7 +375,7 @@
   ]
  },
  {
-  "satz": "Ein einzelnes Substantiv im Singular ohne Artikel und ohne Adjektiv bleibt oft ohne Endung:",
+  "satz": "Ein einzelnes Substantiv im Singular ohne Artikel und ohne Adjektiv bleibt manchmal ohne Endung:",
   "stellen": [
    "Fallkarte wegen",
    "Übung m01"
@@ -615,7 +615,7 @@
   ]
  },
  {
-  "satz": "Regelgerecht wäre brauchte — „brauchen“ ist ein schwaches Verb.",
+  "satz": "Regelgerecht ist brauchte — „brauchen“ ist ein schwaches Verb.",
   "stellen": [
    "Regel satz-konjunktiv",
    "Satzkarte sa12",
@@ -781,7 +781,6 @@
  {
   "satz": "Welche Fassung gehört in einen geschriebenen Text?",
   "stellen": [
-   "Übung d25",
    "Übung m24",
    "Übung z02"
   ]

@@ -59,6 +59,36 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Grammatik- und Satzbauregeln am Original (27.09.2026, sechsundvierzigste Runde).**
+
+Die 24 `gram-` und 13 `satz-`Regeln samt Übungen und Prüfmustern (Auszüge über `scratchpad/q/dump.js`, vier Teile)
+von vier Prüfern gegen grammis, Duden, Variantengrammatik und DWDS gelesen; sie haben nur gemeldet, jeder Fund ist
+von mir an der Originalseite nachgelesen (Rohtext per curl, Hilfsskript `scratchpad/r46/ex.py`). Gehalten:
+- **trotz + Dativ mit Artikel:** VarGra „Trotz“ nennt CH, LIE, A-west; die Angabe „D-süd und A“ aus der Fachliteratur
+  „kann durch die Variantengrammatik nicht bestätigt werden“. Sechs Stellen (m03, d17, x02, kt07, Fallkarte, Regel)
+  angeglichen; `EINORDNUNG` in `tests/inhalt.js` hat dafür ein neues Feld `nicht` (überholte Landkarte meldet rot).
+- **bräuchte:** „der Duden führt sie als standardsprachlich“ war falsch — Duden-Wörterbuch „besonders umgangssprachlich“,
+  GfdS (Sprachdienst 5/2011) „nicht als standardsprachlich“. Regel, Tabelle, z16 (Musterantwort jetzt „brauchte“).
+- **gewinkt/gewunken (x05):** „gewinkt die unauffälligere“ gestrichen, grammis fragen/76: gewunken seit 1980 häufiger,
+  kein Stilunterschied; „Bis 1998 im Duden landschaftlich“ war die Duden-Grammatik 1998 („hochsprachlich nicht
+  korrekt“). Richtige Antwort geändert → `NEU_GELERNT` x05 auf den 27.09.2026.
+- **wegen:** n05 fragte ohne Rahmen („Welche Variante ist standardsprachlich?“) — jetzt Hausarbeit. m16: „wegen mir“
+  heißt laut Duden umgangssprachlich auch „von mir aus“; nur im Standard (VarGra) ist das „meinetwegen“ vorbehalten.
+  x01 Regionenliste an VarGra, „bleibt oft ohne Endung“ → „manchmal“ (Duden).
+- **nach dem Arzt:** Duden-Wörterbuch „landschaftlich“, nicht „norddeutsch und nicht standardsprachlich“; n09 und die
+  Fallkarte „zu (Richtung)“ setzen den Rahmen „überregional“.
+- **auf die / zur Post:** VarGra: zur Post überall mehrheitlich, auf die Post vor allem CH, seltener A-südost, A-west, D-süd.
+- **Doppelter Infinitiv:** nur „haben“ rückt verlässlich vor; bei „werden“ überwiegt in den meisten Regionen die
+  Nachstellung (VarGra „Wortstellung im Verbalkomplex“). satz-nebensatz, satz-modal, z11.
+- **d25 brauchen ohne zu:** VarGra: in Zeitungen aus A, D-süd, D-mittelost, D-nordost gebräuchlich → Rahmen Hausarbeit.
+- Kleineres: Wechselflexion (grammis 44: heute etwa gleich häufig, die Einheits-Regel stammt aus dem Duden 1935),
+  Level/Levels in Duden-Reihenfolge, erinnern transitiv „umgangssprachlich, besonders norddeutsch“, zufolge vorangestellt
+  „schweizerisch und Rechtssprache“, selben nach Demonstrativpronomen, Bauer selten stark, Imperativ-e „laut Duden
+  verbindlich“ (grammis: „meist“), Perfekt mit sein: D-süd bei stehen mehrheitlich haben (VarGra), am-Progressiv mit
+  Objekt nach grammis nicht zulässig (die Regionalangabe war unbelegt).
+- Nicht übernommen: „ab nächsten Montag … fast im ganzen Sprachraum“ — VarGra sagt wörtlich „fast überall“.
+  Unverändert, weil nicht nachprüfbar: gedenken „Duden-Zweifelsfälle: nicht anerkannt“ (Buch, nicht online).
+
 **Fallkarten und Wortkarten am Original (27.09.2026, fünfundvierzigste Runde).**
 
 - **52 Präpositionskarten** maschinell gegen die Grammatikzeile der Duden-Einträge (Skript `scratchpad/q/praep.py`).
