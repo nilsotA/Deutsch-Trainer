@@ -191,10 +191,13 @@
   ]
  },
  {
-  "satz": "bei brüten und sitzen bleibt der Dativ:",
+  "satz": "Bei „brüten“ und „sitzen“ bleibt der Dativ:",
   "stellen": [
    "Fallkarte über",
-   "Regel gram-kasus"
+   "Regel gram-kasus",
+   "Regel gram-wechsel",
+   "Satzkarte sa16",
+   "Übung n07"
   ]
  },
  {
@@ -379,7 +382,7 @@
   ]
  },
  {
-  "satz": "Ein Gespräch, das vertagt wird, endet ohne Kränkung;",
+  "satz": "Ein Gespräch, das vertagt wird, endet leichter ohne Kränkung als eines, das abbricht.",
   "stellen": [
    "Baustein ph32",
    "Übung f38"
@@ -472,6 +475,13 @@
   "stellen": [
    "Fallkarte zu (Richtung)",
    "Übung n09"
+  ]
+ },
+ {
+  "satz": "im Schriftverkehr lässt DIN 5008 sie zu, wenn der ganze Text bei einer Art bleibt.",
+  "stellen": [
+   "Übung p11",
+   "Übung v05"
   ]
  },
  {

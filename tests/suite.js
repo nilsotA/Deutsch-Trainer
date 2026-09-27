@@ -509,7 +509,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      zu machen, ph33 nannte die Zusammenfassung „die stärkste Nachfrage“. Dazu „am seltensten“,
      dieselbe Rangordnung von unten: „Genau derjenige, der Hilfe braucht, fragt am seltensten
      danach“ stand in form-mitgefuehl, f46 und pr17. */
-  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|schlechteste|wichtigste|beste|schwerste|härteste|schnellste|stärkste|typischste|verbreitetste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|seltensten|verbreitetsten|meisten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|schlechteste|wichtigste|beste|schwerste|härteste|schnellste|stärkste|typischste|verbreitetste|wirksamste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|seltensten|verbreitetsten|meisten|wirksamsten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
      „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
      häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
@@ -534,6 +534,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
     "Oberfläche Stand der Prüfung Rund": "„Der häufigste Befund“ ist gezählt: 31 von 58 gehaltenen Meldungen der Prüfmusterrunde",
     "Satzkarte sa20":        "„der schnellste Läufer“ ist das Beispiel für den Superlativ, keine Aussage über Sprache",
+    "Übung f08":             "„Wie formulierst du eine Frist am wirksamsten?“ fragt nach der besten der drei Optionen, keine Rangbehauptung über Sprache",
   };
   const rangStellen = new Set();
   const rang = t => { const s = String(t).replace(/<[^>]+>/g, " ");
@@ -721,7 +722,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Baustein ph15":      "zitierte Falschform: „Immer muss ich hinterherlaufen“",
     "Baustein ph22":      "zitierte Falschform: „Du bist immer unpünktlich“ — und der Satz daneben sagt selbst, „immer“ sei fast nie wahr",
     "Baustein ph25":      "zitierte Falschform: „Das habe ich nie gesagt“",
-    "Baustein ph32":      "Ratgebersatz („Beim Beenden immer einen Anschluss nennen“), kein Befund über die Sprache",
     "Baustein ph39":      "Ratgebersatz („Nenn immer das Thema“), kein Befund über die Sprache",
     "Baustein ph48":      "Ratgebersatz („beim Ausstieg immer einen Grund nennen“), kein Befund über die Sprache",
     "Vorher/Nachher pr03": "zitierte Falschform: „Bereits mehrfach“ und „noch immer“ sind der Gegenstand des Eintrags",

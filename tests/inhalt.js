@@ -471,6 +471,28 @@ P.ok("Die Tippprüfung erkennt eine zu enge Liste",
   !nimmt(["einer"], "der") && nimmt(["einer", "der"], "der"), "Positivprobe blieb stumm");
 P.ok("und eine zu weite", nimmt(["den", "dem"], "dem"), "Positivprobe blieb stumm");
 
+/* Fehlerklasse „die Liste kennt nur einen Teil der Artikelwörter“, zum dritten Mal: n01 nahm
+   „meinem“, aber nicht „seinem“ (22.09.), n15 nicht „keinem“ (24.09.), und am 27.09. fehlten
+   in n01–n07 und n15 noch jen-, jed-, irgendein- und die Kurzformen von unser und euer. Nimmt
+   eine Liste ein Possessiv an (mein-), soll sie jedes Artikelwort desselben Falls annehmen.
+   Die Formen nach Duden: unserem/unserm/unsrem, eu[e]rem; „euern“ und „unsern“ führt er als
+   umgangssprachlich bzw. nicht gesichert — die stehen deshalb nicht in der Pflichtliste. */
+const ARTIKEL_FAMILIE = {
+  em: ["keinem", "jenem", "jedem", "irgendeinem", "unserm", "unsrem", "euerem"],
+  en: ["keinen", "jenen", "jeden", "irgendeinen", "unsren", "eueren"],
+  er: ["keiner", "jener", "jeder", "irgendeiner", "unsrer", "euerer"],
+};
+const familieFehlt = liste => {
+  const m = liste.find(x => /^mein(em|en|er)$/.test(x));
+  return m ? ARTIKEL_FAMILIE[m.slice(4)].filter(x => !nimmt(liste, x)) : [];
+};
+const familieL = ALL.filter(i => i.t === "fill").map(i => [i.id, familieFehlt(i.a)]).filter(([, f]) => f.length)
+  .map(([id, f]) => id + ": " + f.join(", "));
+P.ok("Jede Liste mit Possessiv nimmt alle Artikelwörter desselben Falls an", !familieL.length, familieL.join(" · "));
+P.ok("… und die Prüfung erkennt die Liste von n15 vom 24.09.2026",
+  familieFehlt(["dem","einem","meinem","deinem","seinem","ihrem","unserem","eurem","diesem","jedem"]).includes("keinem") &&
+  !familieFehlt(["der","einer"]).length, "Positivprobe blieb stumm");
+
 /* Die Frage einer Tippaufgabe darf keine zweite Lesart offenlassen, die eine andere Form
    verlangt: n15 sagte nur „(maskulin, Dativ)“, was auch der Dativ Plural „den Kollegen“
    erfüllt; n23 und n25 fragten nach einem Pronomen, ohne „Reflexiv“ zu nennen. Die
@@ -1015,6 +1037,10 @@ const NAH_GEPRUEFT = [
   ["reziprok", "die Reziprozität"], ["nuanciert", "die Nuance"], ["postulieren", "das Postulat"],
   ["suggestiv", "suggerieren"], ["der Zwiespalt", "ambivalent"], ["konziliant", "verbindlich"],
   ["aufschlussreich", "ergiebig"], ["maßgeblich", "eminent"], ["implizieren", "bewirken"], ["elaboriert", "akribisch"],
+  /* Seit „plausibel“ am 27.09.2026 nur noch „einleuchtend, glaubhaft“ heißt, fehlt das Merkmal
+     „nicht bewiesen“, das es von evident und triftig abhob — der Duden führt die Wörter
+     gegenseitig als sinnverwandt. */
+  ["plausibel", "evident"], ["plausibel", "triftig"], ["plausibel", "stringent"],
 ];
 const nurWort = x => x.replace(/^(?:der|die|das)\s+/i, "").toLowerCase();
 const sinnPaar = (a, b) => synListe(a.s).some(y => wortStaemmeT(b.w).includes(y)) || synListe(b.s).some(y => wortStaemmeT(a.w).includes(y));
