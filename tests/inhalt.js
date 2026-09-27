@@ -968,6 +968,9 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     "sitzen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "hängen (hing) — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "entlang": "Ablenker im Nominativ („der Fluss“), nicht der schweizerische, seltene Dativ",
+    "gedenken": "Ablenker im Akkusativ („die Opfer“), nicht der schweizerisch-umgangssprachliche Dativ (seit 27.09.2026)",
+    "kosten": "der Lückensatz setzt den Rahmen („Überregional heißt es: …“); der Dativ ist in Österreich, Südtirol und Südostdeutschland gebräuchlich (Variantengrammatik)",
+    "sich vergewissern / sich annehmen": "Ablenker im Akkusativ („die Sache“); die Region betrifft „sich um etwas annehmen“, nicht den Kasus",
   };
   /* Bis zum 24.09.2026 blieben Tippaufgaben außen vor. r14 lehnte „ausser“ ab — in der
      Schweiz die Standardschreibung —, und den Rahmen nannte erst die Erklärung. */

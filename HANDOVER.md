@@ -59,6 +59,25 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fallkarten und Wortkarten am Original (27.09.2026, fünfundvierzigste Runde).**
+
+- **52 Präpositionskarten** maschinell gegen die Grammatikzeile der Duden-Einträge (Skript `scratchpad/q/praep.py`).
+  Alle Satzform-Ablenker bleiben sicher falsch. Sechs Anmerkungen ergänzt, wo der Duden eine Nebenform führt: nahe
+  (+Genitiv), samt (Plural oft Genitiv), entgegen (Plural Genitiv), gemäß und mitsamt (selten Genitiv), außer
+  (+Akkusativ bei Bewegungsverben).
+- **119 Verbkarten** gegen Duden, grammis E-VALBU und Variantengrammatik (ein Prüfer, jeder Fund von mir nachgelesen).
+  gedenken: der Dativ-Ablenker ist laut Duden-Wörterbuch „besonders schweizerisch und umgangssprachlich“ — Ablenker
+  jetzt „die Opfer“. kosten: „kostet mir“ ist laut Variantengrammatik in A, Südtirol und Südostdeutschland
+  gebräuchlich — der Lückensatz setzt jetzt den Rahmen („Überregional heißt es: …“). Anmerkungen angeglichen bei
+  anrufen (Duden: umgangssprachlich), lehren/beibringen (Duden: veraltend; VarGra: in allen drei Ländern belegt),
+  leiden unter Migräne, sich annehmen (+Dativ, österr. „um“). Drei neue Einträge in `FALL_ERLAUBT`.
+- **155 Wortkarten** gegen die Duden-Originalseiten (zwei Prüfer). Geänderte Bedeutung, deshalb in `NEU_GELERNT`:
+  tendenziös, der Duktus, einräumen, nahelegen, insofern / insoweit. Nur Hinweise oder Quellenangaben: maßgeblich
+  („nur maßgeblich … beteiligt“ war falsch — der Duden-Sprachratgeber unterscheidet „maßgeblich beteiligt“ und
+  „maßgebend beteiligt“), durchwegs (nicht süddeutsch), eklektisch (auch neutral), rekurrieren, nivellieren,
+  idiosynkratisch (Duden nur Medizin/Psychologie), sensitiv, per se, prinzipiell, physisch, entkräften.
+- `npm run layout` gelaufen und grün; `npm run kalender` wegen `NEU_GELERNT`.
+
 **Quellen am Original: Regelwerk 2024, Duden, grammis, Variantengrammatik (27.09.2026, vierundvierzigste Runde).**
 
 Erstmals sind alle Primärquellen direkt lesbar. Das Amtliche Regelwerk 2024 liegt als PDF auf rechtschreibrat.com
