@@ -68,6 +68,24 @@ Deklination von Adjektiven beeinflussen“, „Deklination von ‚manch‘ und f
 lieben Fußball oder Wir Deutsche …“ (fragen/3167), Variantengrammatik „beide“, „solche“, „sämtliche“. Beide Runden
 stützen sich bisher nur auf Suchauszüge.
 
+**Subjekt-Verb-Kongruenz ausgebaut (27.09.2026, dreiundvierzigste Runde).**
+
+Duden, grammis, DWDS und LEO waren weiter gesperrt (403 am Proxy), der offene Punkt oben bleibt offen. Nächste Lücke:
+`gram-kongruenz` kannte nur Subjektkern, Gleichsetzungssatz und „eine Reihe von“ — für Hausarbeiten fehlten
+„30 Prozent der Befragten gaben an“, „und“, sowohl/weder/entweder und Subjekte in verschiedenen Personen. Dabei
+ein Fund im Bestand: Die Regel führte „Eine Gruppe von Studierenden haben teilgenommen“ rot als falsch („Dort steht
+nur der Singular“). Der Duden empfiehlt den Singular, GfdS und grammis nennen den Plural nach dem Sinn aber
+standardsprachlich — jetzt „empfiehlt der Duden den Singular, der Plural ist seltener“. Neu: Absätze zu Prozent- und
+Bruchzahlen (Zahl > 1 → standardsprachlich Plural), „und“ (in der Regel Plural, Singular bei derselben Person),
+sowohl/weder (beides, Duden empfiehlt bei sowohl den Singular, mit Pluralteil nach dem näheren), entweder/oder (in der
+Regel Singular), Personen („du und Lea übernehmt“; „übernehmen“ nach Duden nicht standardsprachlich). Übungen u01–u04
+(neues Präfix u). Ein Gegenprüfer fand nichts falsch Gelerntes, drei Präzisierungen sind eingebaut. Alle Belege
+stammen aus Suchauszügen (Duden-Sprachratgeber „Subjekt im Singular, Verb im Plural?“, „‚und‘, … ‚sowohl – als auch‘“,
+Duden „Richtiges und gutes Deutsch“ s. v. Prozent, grammis fragen/3150, GfdS „Mehr als die Hälfte hat oder haben“,
+LEO/Dr. Bopp) — **beim nächsten Zugang mit am Original gegenlesen**, besonders „30 Prozent ist / sind ein gutes
+Ergebnis“ (belegt nur am Beispiel „0,5 Prozent ist/sind kein gutes Resultat“). Nicht gemacht: ein Textcheck-Muster
+(etwa „Du und … übernehmen“, „30 Prozent … gab“) — vorher an beiden Korpora messen. Layout: 47 von 671.
+
 **Adjektivendung nach alle, viele, beide, manche, wir (27.09.2026, zweiundvierzigste Runde).**
 
 Nächste Lücke aus dem Abgleich mit typischen Zweifelsfällen: Nach Wörtern, die mal wie ein Artikel, mal wie ein
