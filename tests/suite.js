@@ -2140,8 +2140,10 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
     /* x58 (27.09.2026): Ohne „ich“ ist „Gebe Ihnen morgen Bescheid“ ein Aussagesatz, kein Imperativ —
        deshalb kennt das Muster nur die e-losen Formen ohne Endung. */
     { id: "x58",
-      ziel: ["Geb mir bitte bis Freitag Bescheid.", "Danke vorab. Nehm einfach den Ball mit.", "Les die Aufgabe vorher durch."],
-      still: ["Gebe Ihnen morgen Bescheid.", "Lese gerade das Kapitel.", "Les Misérables lief gestern im Kino.", "Gib mir bitte Bescheid.", "Nimm einfach den Ball mit."] },
+      ziel: ["Geb mir bitte bis Freitag Bescheid.", "Danke vorab. Nehm einfach den Ball mit.", "Les die Aufgabe vorher durch.",
+             "Bitte geb mir Bescheid.", "Geb Bescheid, wenn du kommst.", "Nehm dir Zeit.", "Seh dir das Video an."],
+      still: ["Gebe Ihnen morgen Bescheid.", "Lese gerade das Kapitel.", "Les Misérables lief gestern im Kino.", "Gib mir bitte Bescheid.", "Nimm einfach den Ball mit.",
+              "Bitte gib mir Bescheid.", "Sieh dir das Video an.", "Wir geben dir Bescheid.", "Ich nehme dich mit."] },
     { id: "a01",
       ziel: ["Hallo zusammen,\nVielen Dank für eure Nachricht.",
              "Sehr geehrte Frau Weber,\nIch schreibe Ihnen wegen der Hausarbeit."],

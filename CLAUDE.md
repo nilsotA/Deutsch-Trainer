@@ -228,7 +228,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - **Alle Antworten ohne Scrollen sichtbar.** Ist eine Antwort länger als 40 Zeichen, setzt
   `renderQ()` die Klasse `lang` und der Unterwegs-Modus eine kompaktere Fassung (17 statt
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
-  vierten Antwort. `npm run layout` zeichnet jede der 656 Unterwegs-Karten einzeln in Chromium
+  vierten Antwort. `npm run layout` zeichnet jede der 662 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 50 auf 375×667 (gemessen 47), keine auf 390×844. Jede Karte
   bekommt dabei ihren eigenen Seed — mit einem gemeinsamen bekamen alle Wortkarten dieselben drei
   Ablenker, und die Messung zeigte 22 statt 44.
@@ -317,7 +317,7 @@ npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
 **Wer einen gekoppelten Satz umschreibt, ruft `npm run kopplungen`** und legt die neue
-Fassung in denselben Commit. 119 Sätze stehen wörtlich an zwei oder mehr Stellen in
+Fassung in denselben Commit. 118 Sätze stehen wörtlich an zwei oder mehr Stellen in
 voneinander unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
 Vorher/Nachher-Paar. Der Wächter in `tests/suite.js` meldet genau den Fall, in dem ein
 solcher Satz an manchen seiner Stellen noch steht und an anderen nicht mehr: Dann hat

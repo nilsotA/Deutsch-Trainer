@@ -59,6 +59,19 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zwei Lücken gefüllt: Imperativ und Verlaufsform (27.09.2026, einundvierzigste Runde).**
+
+Nach der zweiten Stichprobe war der Bestand sauber; der nächste Hebel waren Themen, die ganz fehlten. Neu:
+`gram-imperativ` (gib, nimm, lies; Ausnahme werde; siehe als Verweisform; Endungs-e freigestellt, Pflicht
+nach -d/-t und bei atmen/rechnen/öffnen, aber nicht nach l, r, m, n, h vor dem m/n — Duden-Sprachratgeber
+„Bildung des Imperativs“) und `gram-verlauf` („am Trainieren“: Duden-Wörterbuch umgangssprachlich, neuere
+Grammatiken teilweise standardsprachlich gesprochen, mit Objekt stärker regional, Großschreibung nach „am“).
+Übungen b01–b07 (neues Präfix b), Prüfmuster x58 (pruef; „Geb/Nehm/Les … mir/Bescheid“, der Hinweis nennt die
+Ich-Ellipse „Geb mir Mühe“), zwei Spickzettel-Zeilen. Alles vor der Auslieferung von einem unabhängigen Prüfer
+angegriffen: 7 Funde, einer „falsch gelernt“ — meine erste Fassung machte das -e nach Konsonant + m/n
+ausnahmslos zur Pflicht und hätte „Lern die Vokabeln“ zum Fehler erklärt. Dazu zwei Altstellen, die der neuen
+Regel widersprachen: „Werd zählbar“ im Hinweis zu f08, „Meld dich einfach“ im Baustein ph03.
+
 **Zweite Zufallsstichprobe: Was ist nach allen Korrekturen übrig? (27.09.2026, vierzigste Runde).**
 
 Gleich gezogen wie die erste (60 Übungen, 25 Wort-, 25 Fallkarten, 10 Regeln; Seed 20260927,
