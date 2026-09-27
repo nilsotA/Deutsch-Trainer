@@ -2027,6 +2027,24 @@ sich freuen <b>auf</b> (Zukunft) / <b>über</b> (schon da) · halten <b>von</b> 
 <p><b>wie</b> beim Vergleich <b>gleicher</b> Größen: „so schnell <b>wie</b> ich“, „genauso gut <b>wie</b> gestern“</p>
 <p>„größer wie“ ist regional verbreitet, gilt aber als nicht standardsprachlich.</p>`},
 
+{id:"gram-imperativ",c:"gram",t:"Imperativ: gib, nimm, lies",b:`
+<p>Verben, die in der 2. und 3. Person von <b>e</b> zu <b>i</b> oder <b>ie</b> wechseln (du gibst, sie liest), bilden auch den Imperativ mit i oder ie — und <b>ohne</b> Endungs-e:</p>
+<div class="ex">geben → <b>gib</b> · nehmen → <b>nimm</b> · lesen → <b>lies</b> · essen → <b>iss</b> · helfen → <b>hilf</b> · sprechen → <b>sprich</b> · vergessen → <b>vergiss</b> · werfen → <b>wirf</b> · sehen → <b>sieh</b></div>
+<div class="ex"><span class="ok">Gib ab, Lena ist frei.</span> · <span class="nope">Geb ab, Lena ist frei.</span><br>
+<span class="ok">Lies die Aufgabe vorher ganz durch.</span> · <span class="nope">Les die Aufgabe vorher ganz durch.</span></div>
+<p>Gesprochen hört man oft „geb“, „nehm“, „les“ oder „gebe“ — standardsprachlich sind diese Formen nicht, geschrieben fallen sie auf.</p>
+<p>Eine Ausnahme ist <b>werden</b>: Es wechselt zwar zu i (du wirst), der Imperativ heißt aber <b>werde</b> — „Werde nicht nervös“.</p>
+<p><b>Bei den übrigen Verben</b> ist das Endungs-e freigestellt: „Komm her“ und „Komme her“, „Geh schon vor“ und „Gehe schon vor“. Im Alltag steht es meist nicht, gehobene Texte setzen es eher. Pflicht ist es nach -d und -t und nach Konsonant plus m oder n: „Warte kurz“, „Atme ruhig“, „Rechne nach“.</p>
+<p class="tiny muted">Quelle: Duden-Sprachratgeber „Bildung des Imperativs“.</p>`},
+
+{id:"gram-verlauf",c:"gram",t:"„Ich bin am Trainieren“ — die Verlaufsform",b:`
+<p>„Ich bin am Trainieren“ sagt, dass etwas gerade läuft. Gesprochen ist die Form weit verbreitet, besonders im Rheinland und in Westfalen, aber längst nicht nur dort. Das Duden-Wörterbuch markiert sie als umgangssprachlich; neuere Grammatiken lassen sie für die gesprochene Standardsprache teilweise gelten.</p>
+<p><b>Im Gespräch unauffällig.</b> Geschrieben — in Hausarbeit, Bericht oder Mail an die Dozentin — ist die sichere Wahl eine andere Fassung:</p>
+<div class="ex"><span class="ok">Ich trainiere gerade.</span> · <span class="ok">Wir sind dabei, den Plan zu überarbeiten.</span></div>
+<p><b>Mit Objekt</b> („Ich bin den Plan am Überarbeiten“) ist die Form deutlich stärker regional gebunden und fällt auch gesprochen außerhalb des Westens auf.</p>
+<p><b>Schreibung:</b> Das Verb ist nach „am“ (= an dem) substantiviert und steht groß — „am Trainieren“, genauso wie „beim Aufwärmen“.</p>
+<p class="tiny muted">Quellen: Duden-Wörterbuch; grammis (IDS), „Darf man Ich bin am Schreiben schreiben?“; Atlas zur deutschen Alltagssprache zur Verbreitung.</p>`},
+
 /* ---------- STIL ---------- */
 {id:"stil-nominal",c:"stil",t:"Nominalstil auflösen",b:`
 <p>Deutsche Fachtexte neigen dazu, Handlungen in Substantive zu verwandeln. Das Ergebnis ist grammatisch korrekt und schwer lesbar.</p>
@@ -5399,7 +5417,34 @@ const EX_E = [
 
 {id:"q26",c:"zahlen",q:"Welche Fassung liest sich im Fließtext am leichtesten?",o:[
  "1,5 Millionen","1500000","1 500 000"],a:0,
- e:"Ziffer plus ausgeschriebenes Zahlwort. <b>1 500 000</b> ist korrekt gegliedert, nur sperriger; <b>1500000</b> gehört gegliedert. Das ist eine Empfehlung zur Lesbarkeit, keine Rechtschreibregel.",r:"n-gliederung"}
+ e:"Ziffer plus ausgeschriebenes Zahlwort. <b>1 500 000</b> ist korrekt gegliedert, nur sperriger; <b>1500000</b> gehört gegliedert. Das ist eine Empfehlung zur Lesbarkeit, keine Rechtschreibregel.",r:"n-gliederung"},
+
+{id:"b01",c:"gram",q:"Welche Form ist standardsprachlich?",o:[
+ "Gib mir bitte den Ball.","Geb mir bitte den Ball.","Gebe mir bitte den Ball."],a:0,
+ e:"„geben“ wechselt von e zu i (du gibst) — dann bildet es auch den Imperativ mit i und ohne Endungs-e: <b>gib</b>. „Geb“ und „gebe“ hört man gesprochen, standardsprachlich sind sie nicht.",r:"gram-imperativ"},
+
+{id:"b02",c:"gram",q:"Ergänze den Imperativ von „lesen“: „___ die Aufgabe vorher ganz durch.“",t:"fill",a:["lies"],
+ e:"„lesen“ wechselt zu ie (du liest), also <b>lies</b> — ohne Endungs-e. „Les“ und „lese“ sind als Imperativ nicht standardsprachlich.",r:"gram-imperativ"},
+
+{id:"b03",c:"gram",q:"Welche Aufforderung ist standardsprachlich?",o:[
+ "Nimm den Ball mit der Brust an.","Nehm den Ball mit der Brust an.","Nehme den Ball mit der Brust an."],a:0,
+ e:"„nehmen“ wechselt zu i (du nimmst), also <b>nimm</b>. Dasselbe Muster: hilf, sprich, wirf, iss, vergiss.",r:"gram-imperativ"},
+
+{id:"b04",c:"gram",q:"Welche Form ist richtig?",o:[
+ "Werde nicht nervös, es ist nur ein Test.","Wird nicht nervös, es ist nur ein Test."],a:0,
+ e:"<b>werden</b> ist eine Ausnahme: Es wechselt zwar zu i (du wirst), der Imperativ heißt aber <b>werde</b>.",r:"gram-imperativ"},
+
+{id:"b05",c:"gram",q:"Was gilt für „Komm her“ und „Komme her“?",o:[
+ "Beide sind richtig","Nur „Komme her“ ist richtig","Nur „Komm her“ ist richtig"],a:0,
+ e:"Bei Verben ohne e/i-Wechsel ist das Endungs-e freigestellt; im Alltag steht es meist nicht. Pflicht ist es nach -d und -t und nach Konsonant plus m oder n: „Warte kurz“, „Atme ruhig“.",r:"gram-imperativ"},
+
+{id:"b06",c:"gross",q:"Wie schreibt man es?",o:[
+ "Ich bin gerade am Trainieren.","Ich bin gerade am trainieren."],a:0,
+ e:"Nach „am“ (= an dem) ist das Verb substantiviert und steht groß, genauso wie „beim Aufwärmen“. Die Verlaufsform selbst ist gesprochen verbreitet; geschrieben ist „Ich trainiere gerade“ die sichere Wahl.",r:"gram-verlauf"},
+
+{id:"b07",c:"gram",q:"Welche Formulierung ist im Methodenteil einer Hausarbeit die sichere Wahl?",o:[
+ "Während der Messung trainierten die Teilnehmenden weiter.","Während der Messung waren die Teilnehmenden am Weitertrainieren."],a:0,
+ e:"Die Verlaufsform mit „am“ ist gesprochen verbreitet, das Duden-Wörterbuch markiert sie aber als umgangssprachlich. Geschrieben ist die einfache Verbform die sichere Wahl.",r:"gram-verlauf"},
 
 ];
 
@@ -5918,7 +5963,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 700 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 707 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -6890,7 +6935,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 700 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 707 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();
@@ -7292,7 +7337,7 @@ function bindAcc(sel){
 function openRule(id){
   /* Die Filter zurücksetzen, bevor irgendetwas zeichnet: go("regeln") ruft selbst
      ensureRules(), und das zeichnet beim ersten Mal die ganze Liste. Danach zeichnete
-     openRule() sie ein zweites Mal — 118 Regeln, zweimal, beim ersten Regelsprung. */
+     openRule() sie ein zweites Mal — 120 Regeln, zweimal, beim ersten Regelsprung. */
   RT.tab = "regeln";
   ruleFilter = ""; ruleVar = false;
   const frischGezeichnet = !rulesReady;
@@ -8574,6 +8619,8 @@ const CHECKS = [
  k:"Zeitadverbien auf -s schreibt man klein: <b>montags</b>, <b>abends</b>, <b>nachmittags</b>. Groß bleibt der Genitiv mit Begleiter: „eines Abends“, „unseres Abends“, „des Nachts“.",r:"gross-zeit"},
 {id:"x45",sev:"hart",re:/(?<!(?<!(?:^|[.!?:;\n])[^\S\n]*(?:Hallo|Hi|Hey|Moin|Servus|Liebe[rs]?|Sehr[^\S\n]+geehrte[rs]?|Guten[^\S\n]+(?:Tag|Morgen|Abend))[^\S\n]+(?:(?:Frau|Herrn?)[^\S\n]+)?(?:(?:Dr\.|Prof\.)[^\S\n]*)*)(?<!(?:^|[.!?:;\n])[^\S\n]*(?:Frau|Herrn?)[^\S\n]+(?:(?:Dr\.|Prof\.)[^\S\n]*)*)(?<![\wäöüßÄÖÜ-])(?!(?<=(?:^|[.!?:;\n])[^\S\n]*)(?:Ja|Nein|Also|Na|Naja|Tja|Okay|Ok|Gut|Klar|Übrigens|Ehrlich|Leute|Jungs|Mädels|Team|Hallo|Hi|Hey|Moin|Servus|Stimmt|Genau|Sorry|Danke|Richtig|Echt|Ach|Oh|Doch|Nee|Achso)(?![\wäöüßÄÖÜ]))[A-ZÄÖÜ0-9][\wäöüßÄÖÜ-]*,(?:[^\S\n]*|[^\S\n]*\n\s*(?<!(?:^|\n)[^\S\n]*(?:Hallo|Hi|Hey|Moin|Servus|Liebe[rs]?|Sehr[^\S\n]+geehrte[rs]?|Guten[^\S\n]+(?:Tag|Morgen|Abend))[^\n]*,[^\S\n]*\n\s*)))(?<![\wäöüßÄÖÜ])[Ss]eit\s+dem\s+(?:ich|du|er|sie|es|wir|ihr|man)(?![\wäöüßÄÖÜ])(?!(?<=(?:sie|es|ihr))\s+(?:(?!(?:am|im|an|in|auf|bei|beim|vom|zum|zur|nach|vor|seit|der|die|das|den|dem|des|ein|eine|einen|einem|einer|kein|keine)\s)[a-zäöüß]+\s+)?(?!(?:einen|meinen|deinen|seinen|keinen|jeden|diesen|jenen|letzten|ersten|nächsten|vorigen)\s)[a-zäöüß]+(?:nden|ten|enen)\s+[A-ZÄÖÜ])/g,t:"seitdem zusammen",
  k:"Als Konjunktion zusammen: <b>Seitdem ich trainiere</b> — oder kurz: <b>Seit ich trainiere</b>. Getrennt steht „seit dem“, wenn „dem“ zu einem Substantiv gehört („seit dem Training“) oder sich als Relativpronomen auf eines bezieht („das Spiel, seit dem wir ungeschlagen sind“).",r:"getrennt-konj"},
+{id:"x58",sev:"pruef",re:/(?<=(?:^|[.!?:\n])[^\S\n]*)(?:Geb|Nehm|Les|Helf|Sprech|Vergess|Werf|Ess)(?=[^\S\n]+(?:mir|mich|uns|ihm|ihr|bitte|mal|doch|einfach|kurz|den|die|das|dem|der|einen|eine|ein)(?![\wäöüßÄÖÜ]))/g,t:"Imperativ",
+ k:"Verben mit e/i-Wechsel bilden den Imperativ mit i oder ie und ohne Endungs-e: <b>gib</b>, <b>nimm</b>, <b>lies</b>, <b>hilf</b>, <b>sprich</b>, <b>vergiss</b>, <b>wirf</b>, <b>iss</b>. „Geb mir Bescheid“ ist gesprochen verbreitet, geschrieben fällt es auf: „Gib mir Bescheid.“",r:"gram-imperativ"},
 {id:"x57",sev:"pruef",re:/(?<=(?<!(?:^|[.!?:;\n])[^\S\n]*(?:Hallo|Hi|Hey|Moin|Servus|Liebe[rs]?|Sehr[^\S\n]+geehrte[rs]?|Guten[^\S\n]+(?:Tag|Morgen|Abend))[^\S\n]+(?:(?:Frau|Herrn?)[^\S\n]+)?(?:(?:Dr\.|Prof\.)[^\S\n]*)*)(?<!(?:^|[.!?:;\n])[^\S\n]*(?:Frau|Herrn?)[^\S\n]+(?:(?:Dr\.|Prof\.)[^\S\n]*)*)(?<![\wäöüßÄÖÜ-])(?!(?<=(?:^|[.!?:;\n])[^\S\n]*)(?:Ja|Nein|Also|Na|Naja|Tja|Okay|Ok|Gut|Klar|Übrigens|Ehrlich|Leute|Jungs|Mädels|Team|Hallo|Hi|Hey|Moin|Servus|Stimmt|Genau|Sorry|Danke|Richtig|Echt|Ach|Oh|Doch|Nee|Achso)(?![\wäöüßÄÖÜ]))[A-ZÄÖÜ0-9][\wäöüßÄÖÜ-]*,(?:[^\S\n]*|[^\S\n]*\n\s*(?<!(?:^|\n)[^\S\n]*(?:Hallo|Hi|Hey|Moin|Servus|Liebe[rs]?|Sehr[^\S\n]+geehrte[rs]?|Guten[^\S\n]+(?:Tag|Morgen|Abend))[^\n]*,[^\S\n]*\n\s*)))[Ss]eit\s+dem\s+(?:ich|du|er|sie|es|wir|ihr|man)(?![\wäöüßÄÖÜ])(?!(?<=(?:sie|es|ihr))\s+(?:(?!(?:am|im|an|in|auf|bei|beim|vom|zum|zur|nach|vor|seit|der|die|das|den|dem|des|ein|eine|einen|einem|einer|kein|keine)\s)[a-zäöüß]+\s+)?(?!(?:einen|meinen|deinen|seinen|keinen|jeden|diesen|jenen|letzten|ersten|nächsten|vorigen)\s)[a-zäöüß]+(?:nden|ten|enen)\s+[A-ZÄÖÜ])/g,t:"seit dem oder seitdem?",
  k:"Bezieht sich „dem“ auf das Substantiv vor dem Komma, ist es ein Relativsatz, und <b>seit dem</b> bleibt getrennt: „Das war der Unfall, seit dem ich nicht mehr sprinten kann.“ Heißt es dagegen „seit der Zeit, als“, schreibst du zusammen: „Ich spiele Fußball, <b>seitdem</b> ich fünf bin.“",r:"getrennt-konj"},
 {id:"x46",sev:"pruef",re:/(?<![\wäöüßÄÖÜ])(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|hundert|tausend|paar)\s+mal(?![\wäöüßÄÖÜ])(?!\s+(?:\d+(?:[.,]\d+)?|(?:eins|ein(?=und)|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig|hundert|tausend|(?:drei|vier|fünf|sech|sieb|acht|neun)zehn)(?:und[a-zäöüß]+)?)(?![\wäöüßÄÖÜ]))/g,t:"zehnmal zusammen?",
@@ -9273,7 +9320,7 @@ function cheatHTML(){
   '<tr><th>Groß</th><td>nach Artikel oder Präposition + Artikel: des Weiteren, im Folgenden, im Allgemeinen, im Übrigen, '+
   'im Wesentlichen, im Voraus, im Nachhinein, im Klaren, auf dem Laufenden, im Großen und Ganzen, des Öfteren · '+
   'nach <i>alles, etwas, nichts, viel, wenig</i>: etwas Neues, nichts Besonderes, alles Gute · '+
-  'Tageszeiten: heute Morgen, gestern Abend · feste Wendungen: außer Acht lassen, in Kauf nehmen, in Bezug auf, nach Hause · Sprachen als Substantiv: auf Deutsch, Deutsch können</td></tr>'+
+  'Tageszeiten: heute Morgen, gestern Abend · feste Wendungen: außer Acht lassen, in Kauf nehmen, in Bezug auf, nach Hause · Sprachen als Substantiv: auf Deutsch, Deutsch können · Verben nach am, beim, zum: beim Aufwärmen, am Trainieren</td></tr>'+
   '<tr><th>Klein</th><td>zum einen … zum anderen · ein bisschen · die meisten · am besten · etwas anderes, alles andere (allein stehend auch groß zulässig, der Duden empfiehlt klein) · Es tut mir leid · Mir ist angst · montags, abends</td></tr>'+
   '<tr><th>Beides</th><td>recht/Recht haben · vor Kurzem/kurzem · seit Langem/langem · ohne Weiteres/weiteres · morgen früh/Früh (Duden: früh) · zu Hause/zuhause · zurate/zu Rate ziehen · sie spricht deutsch/Deutsch (wie? / was?)</td></tr>'+
   '<tr><th>Mal / mal</th><td><b>groß</b> als Substantiv, erkennbar an Artikel oder Adjektiv davor: das erste Mal, beim nächsten Mal, jedes Mal, dieses Mal · '+
@@ -9290,6 +9337,7 @@ function cheatHTML(){
   '<tr><th>Apostroph</th><td>Genitiv-s ohne Apostroph: Peters Auto. Apostroph bei Namen auf s-Laut (s, ss, ß, tz, z, x, ce): Andreas’ Buch, Alice’ Idee — und bei Auslassungen freigestellt: geht’s oder gehts. Nie im Plural: Fotos, DVDs. Zulässig in Ladennamen (Andrea’s Blumenladen) und vor -sch (Newton’sche Gesetze — ebenso richtig: newtonsche).</td></tr>'+
   '<tr><th>als / wie</th><td>ungleich → <b>als</b> („größer als“) · gleich → <b>wie</b> („so groß wie“).</td></tr>'+
   '<tr><th>scheinbar / anscheinend</th><td><b>scheinbar</b> = in Wirklichkeit nicht · <b>anscheinend</b> = wahrscheinlich.</td></tr>'+
+  '<tr><th>Imperativ</th><td>Mit e/i-Wechsel: <b>gib, nimm, lies, hilf, sprich, iss</b> — ohne Endungs-e, nicht „geb, nehm, les“. Eine Ausnahme ist <b>werde</b>. Sonst ist das -e freigestellt: komm/komme.</td></tr>'+
   '</tbody></table></section>'+
 
   '<section class="ch-sec ch-break"><h2>8 · Was beim Sprechen wirklich auffällt</h2>'+

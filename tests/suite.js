@@ -2137,6 +2137,11 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
      Zitate aus Texten vor 1996. Jede Zeile hält beide Richtungen fest: Der richtige Satz
      bleibt still, der echte Fehler daneben wird weiter gefunden. */
   const GEGEN = [
+    /* x58 (27.09.2026): Ohne „ich“ ist „Gebe Ihnen morgen Bescheid“ ein Aussagesatz, kein Imperativ —
+       deshalb kennt das Muster nur die e-losen Formen ohne Endung. */
+    { id: "x58",
+      ziel: ["Geb mir bitte bis Freitag Bescheid.", "Danke vorab. Nehm einfach den Ball mit.", "Les die Aufgabe vorher durch."],
+      still: ["Gebe Ihnen morgen Bescheid.", "Lese gerade das Kapitel.", "Les Misérables lief gestern im Kino.", "Gib mir bitte Bescheid.", "Nimm einfach den Ball mit."] },
     { id: "a01",
       ziel: ["Hallo zusammen,\nVielen Dank für eure Nachricht.",
              "Sehr geehrte Frau Weber,\nIch schreibe Ihnen wegen der Hausarbeit."],

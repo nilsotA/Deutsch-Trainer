@@ -13,7 +13,7 @@ nie raten.
 ## 1 · Was hier liegt
 
 ```
-Deutsch-Trainer.html      die komplette App (~880 KB, eine Datei, kein Build)
+Deutsch-Trainer.html      die komplette App (~900 KB, eine Datei, kein Build)
 CLAUDE.md                 diese Datei
 HANDOVER.md               Stand der Arbeit, offene Punkte, Ideenliste
 FUNDE-offen.md            gemeldete, noch nicht geprüfte Widersprüche im Bestand
@@ -71,19 +71,19 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 381 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 388 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
-| `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 118 Regeln | `{id, c, t, b}` — `b` ist HTML |
+| `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 120 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
 | `CASEREF` | 182 Fallkarten | `{w, t, k, ex, n?, fall?, s?}` · `t`: praep/wechsel/verb/verb2/verbpraep · `s` = Satzform |
 | `TABLES` | 10 Tabellen | `{id, t, b}` |
 | `KORREKTUR` | 12 Fehlersuchtexte / 87 Fehler | `{txt, errs:[{w, nth?, mit?, ok, k, r, c}]}` · `mit` = weitere Wörter derselben Stelle |
-| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 125 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
+| `CHECKS`, `CHECKS_Z`, `CHECKS_N` → `CHECKS_ALL` | 126 Prüfmuster für den Textcheck | `{id, sev, re, t, k, r}` · `sev`: hart/pruef/stil/form |
 | `PROMPTS`, `PHRASES`, `PAIRS`, `SCENES` | Schreibwerkstatt, Bausteine, Situationen | |
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
 
-**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d, j (j = Infinitivgruppen nach dem Regelwerk 2024).
+**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d, j, b (j = Infinitivgruppen nach dem Regelwerk 2024, b = Imperativ und Verlaufsform).
 Neue Blöcke bekommen ein neues Präfix. IDs sind Kartenschlüssel im Lernstand —
 **niemals vergeben, umbenennen oder wiederverwenden**, sonst verliert Nils Fortschritt.
 
@@ -178,7 +178,7 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (700 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (707 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -317,7 +317,7 @@ npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
 **Wer einen gekoppelten Satz umschreibt, ruft `npm run kopplungen`** und legt die neue
-Fassung in denselben Commit. 118 Sätze stehen wörtlich an zwei oder mehr Stellen in
+Fassung in denselben Commit. 119 Sätze stehen wörtlich an zwei oder mehr Stellen in
 voneinander unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
 Vorher/Nachher-Paar. Der Wächter in `tests/suite.js` meldet genau den Fall, in dem ein
 solcher Satz an manchen seiner Stellen noch steht und an anderen nicht mehr: Dann hat
