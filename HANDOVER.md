@@ -59,6 +59,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Offen, sobald Duden und IDS erreichbar sind (Stand 27.09.2026).** Bisher sperrte die Netzwerkregel der
+Cloud-Umgebung duden.de, grammis.ids-mannheim.de und mediawiki.ids-mannheim.de; Nils hat sie freigegeben, in der
+laufenden Sitzung griff das noch nicht. Erste Aufgabe der nächsten Sitzung: Probeabruf
+(`curl -sS -o /dev/null -w "%{http_code}" https://www.duden.de/`), dann die Belege der Runden 41 und 42 am
+Originaltext gegenlesen — Duden-Sprachratgeber „Bildung des Imperativs“, „Stark oder schwach? Wie manche Wörter die
+Deklination von Adjektiven beeinflussen“, „Deklination von ‚manch‘ und folgendem Adjektiv“, grammis „Wir Deutschen
+lieben Fußball oder Wir Deutsche …“ (fragen/3167), Variantengrammatik „beide“, „solche“, „sämtliche“. Beide Runden
+stützen sich bisher nur auf Suchauszüge.
+
 **Adjektivendung nach alle, viele, beide, manche, wir (27.09.2026, zweiundvierzigste Runde).**
 
 Nächste Lücke aus dem Abgleich mit typischen Zweifelsfällen: Nach Wörtern, die mal wie ein Artikel, mal wie ein
