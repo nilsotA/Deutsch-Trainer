@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 393 |
+| Übungen | 394 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -59,14 +59,22 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
-**Offen, sobald Duden und IDS erreichbar sind (Stand 27.09.2026).** Bisher sperrte die Netzwerkregel der
-Cloud-Umgebung duden.de, grammis.ids-mannheim.de und mediawiki.ids-mannheim.de; Nils hat sie freigegeben, in der
-laufenden Sitzung griff das noch nicht. Erste Aufgabe der nächsten Sitzung: Probeabruf
-(`curl -sS -o /dev/null -w "%{http_code}" https://www.duden.de/`), dann die Belege der Runden 41 und 42 am
-Originaltext gegenlesen — Duden-Sprachratgeber „Bildung des Imperativs“, „Stark oder schwach? Wie manche Wörter die
-Deklination von Adjektiven beeinflussen“, „Deklination von ‚manch‘ und folgendem Adjektiv“, grammis „Wir Deutschen
-lieben Fußball oder Wir Deutsche …“ (fragen/3167), Variantengrammatik „beide“, „solche“, „sämtliche“. Beide Runden
-stützen sich bisher nur auf Suchauszüge.
+**Belege der Runden 41 und 42 am Originaltext gegengelesen (27.09.2026, dreiundvierzigste Runde).**
+
+duden.de, grammis und dwds.de sind jetzt erreichbar (mediawiki.ids-mannheim.de, also die Variantengrammatik,
+weiter 403). Gelesen: Duden-Sprachratgeber „Bildung des Imperativs“, „Stark oder schwach? …“, „manch“, grammis
+„Wir Deutschen lieben Fußball …“ (fragen/3167), dazu die Leseprobe des Duden-Ratgebers „Stolpersteine der
+Grammatik“ (Abschnitt Imperativ, als PDF von shop.duden.de). Ergebnis:
+- **Runde 42 hält.** Alle, sämtliche, mehrere, einige, manche, Genitiv Plural stimmen mit dem Ratgeber überein;
+  „viele gute“ bestätigt Dr. Bopp (LEO, 02.07.2026). Einzige Schärfung: grammis zählt im Referenzkorpus
+  „wir Deutschen“ gut doppelt so oft wie „wir Deutsche“ — h03 und sa13 sagten nur „verbreitet ist auch“, jetzt
+  „häufiger“. Richtige Antwort unverändert, deshalb kein `NEU_GELERNT`.
+- **Runde 41 hält**, die Ausnahme l/r/m/n/h vor m/n steht wörtlich in den „Stolpersteinen“ („Kämm[e] dich!;
+  Qualm[e] nicht so!“). **Lücke:** Bei Verben auf -eln/-ern ist das Endungs-e verbindlich, „handel!, förder!“
+  sind umgangssprachlich. Neu: Absatz in `gram-imperativ` (dazu: kein Apostroph bei fehlendem -e), Übung b08
+  („Sammle“ gegen „Sammel“), Spickzettelzeile ergänzt.
+- Offen bleibt nur die Variantengrammatik (beide, solche, sämtliche); dort stützt sich die App weiter auf
+  Suchauszüge.
 
 **Adjektivendung nach alle, viele, beide, manche, wir (27.09.2026, zweiundvierzigste Runde).**
 
