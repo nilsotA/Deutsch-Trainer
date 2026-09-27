@@ -417,10 +417,12 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      5. August stand einmal als Dienstag, dreimal als Mittwoch; n-datum zeigte „05.05.2026“
      und daneben „Montag, dem 5. Mai“ — der 5. Mai 2026 ist ein Dienstag. Wer eine Regel über
      genaue Termine lehrt, darf keinen falschen Termin als Vorbild zeigen. Ohne Jahreszahl gilt
-     2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel. */
+     2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel.
+     Am 27.09.2026 nachgeschärft: Der Spickzettel schrieb „am Montag, dem/den 5. Mai,“ — die
+     Schreibung mit Schrägstrich sah das Muster nicht, und der falsche Wochentag stand weiter da. */
   const TAGE = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
   const MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:den\\s+|dem\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
+  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:(?:den|dem)(?:\\s*\\/\\s*(?:den|dem))?\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
   const schief = t => [...String(t).matchAll(WD)].filter(m => {
     const d = new Date(Date.UTC(+(m[4] || 2026), MONATE.indexOf(m[3]), +m[2]));
     return TAGE[d.getUTCDay()] !== m[1];
@@ -429,7 +431,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const wdSchief = [...new Set(schief(html))];
   P.ok("Jeder Wochentag passt zu seinem Datum (ohne Jahr: 2026)", !wdSchief.length, wdSchief.join(" · "));
   P.ok("… und die Prüfung erkennt „Montag, dem 5. Mai“ und „Dienstag, den 5. August“",
-    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025").length === 2,
+    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025 · am Montag, dem/den 5. Mai,").length === 3,
     "Positivprobe blieb stumm");
 }
 

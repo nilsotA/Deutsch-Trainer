@@ -59,6 +59,28 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Spickzettel und Stil-/Formregeln am Original (27.09.2026, siebenundvierzigste Runde).**
+
+Zwei Prüfer (nur Meldung), jeder Fund von mir am Regelwerk 2024 (`scratchpad/q/rw2024.txt`) oder an der Duden-Seite
+nachgelesen. Keine richtige Antwort geändert, kein `NEU_GELERNT`.
+- **Spickzettel:** 5. Mai 2026 als Montag (ist Dienstag) — der Wochentagswächter in `tests/suite.js` kannte „dem/den“
+  nicht, jetzt schon (Positivprobe erweitert). Kann-Komma nach versuchen/wagen nur, solange beim Verb nichts steht
+  (§ 73 E4: „Sie hat nicht gewagt, ihren Chef zu fragen“ → Komma), auch in `komma-infinitiv`. Partizipgruppe mit den
+  Pflichtfällen (Duden-Ratgeber „Komma bei Partizipien“ stützt die App-Regel), nachgestellte Erläuterung als verkürztes
+  Satzglied (§ 72 E4), Apostroph nur ohne Artikel (§ 80), Auslassung nur formelhaft freigestellt, morgen früh/Früh mit
+  Region, nach Hause/nachhause unter „Beides“, dank (+Dativ) und nahe (+Genitiv), „man“ nur in Absprachen,
+  „zur Anwendung kommen → angewendet werden“, Satzanfang „ausschreiben oder umstellen“, sa24.short auf hängen/erschrecken
+  beschränkt (ohne gewunken-Zusatz, siehe Druckhöhe). Fallkarte kosten: „der Duden führt nur den Akkusativ“ war falsch (Verlust: „dich/dir die Stellung“).
+  sa24 zeigte „winken → hat gewinkt“ als Leitform — jetzt beide Partizipien.
+- **Stil/Form:** form-anrede „nur der höchste Titel“ stand als Duden-Regel da, der Ratgeber sagt nur „Professorentitel
+  ausschreiben“; Komma nach „Hallo“ (Duden: streng genommen Pflicht, Regelwerk § 77: Konvention); Grußformeln nach dem
+  Duden-Ratgeber (Beste Grüße „lockerere Variante“, Liebe Grüße privat) in Regel, f03 und Baustein ph01;
+  „Grundvoraussetzung“ ist kein Pleonasmus (Duden: eigene Bedeutung); „leer“ steht im Duden unter den nicht steigerbaren.
+- Druckhöhe nachgemessen (`scratchpad/r47/druck.js`: Chromium, Druckmedium, 642 px Breite = A4 mit 20 mm Rand, gegen
+  972 px Seitenhöhe): Abschnitt 1 von 607 auf 736 px, Abschnitt 5 bei 947 px wie auf `main`. Eine erste Fassung von
+  sa24.short brachte Abschnitt 5 auf 1003 px — über die Seite; gekürzt. Diese Messart ergibt für Abschnitt 5 947 statt
+  der früher notierten 835 px, die Luft ist also kleiner als gedacht: **wer eine `short`-Zeile verlängert, misst nach.**
+
 **Grammatik- und Satzbauregeln am Original (27.09.2026, sechsundvierzigste Runde).**
 
 Die 24 `gram-` und 13 `satz-`Regeln samt Übungen und Prüfmustern (Auszüge über `scratchpad/q/dump.js`, vier Teile)
