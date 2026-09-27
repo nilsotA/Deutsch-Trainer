@@ -71,7 +71,7 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 393 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 397 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 120 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
@@ -83,7 +83,7 @@ also nicht umbenennen.
 
 **Kategorien (`c`)**: komma, gross, getrennt, recht, gram, stil, form, satz, zeichen, zahlen.
 
-**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d, j, b, h (j = Infinitivgruppen nach dem Regelwerk 2024, b = Imperativ und Verlaufsform, h = Adjektiv nach alle, viele, beide, wir).
+**ID-Präfixe der Übungen**: k, g, t, r, m, s, f, n, z, p, q, v, x, d, j, b, h, u (j = Infinitivgruppen nach dem Regelwerk 2024, b = Imperativ und Verlaufsform, h = Adjektiv nach alle, viele, beide, wir, u = Subjekt-Verb-Kongruenz).
 Neue Blöcke bekommen ein neues Präfix. IDs sind Kartenschlüssel im Lernstand —
 **niemals vergeben, umbenennen oder wiederverwenden**, sonst verliert Nils Fortschritt.
 
@@ -178,7 +178,7 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (712 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (716 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -228,7 +228,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - **Alle Antworten ohne Scrollen sichtbar.** Ist eine Antwort länger als 40 Zeichen, setzt
   `renderQ()` die Klasse `lang` und der Unterwegs-Modus eine kompaktere Fassung (17 statt
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
-  vierten Antwort. `npm run layout` zeichnet jede der 667 Unterwegs-Karten einzeln in Chromium
+  vierten Antwort. `npm run layout` zeichnet jede der 671 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 50 auf 375×667 (gemessen 47), keine auf 390×844. Jede Karte
   bekommt dabei ihren eigenen Seed — mit einem gemeinsamen bekamen alle Wortkarten dieselben drei
   Ablenker, und die Messung zeigte 22 statt 44.
