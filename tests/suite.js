@@ -413,6 +413,32 @@ const streit = Object.keys(H).filter(z => WCH[z] &&
 P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, streit.join(" · "));
 
 {
+  /* Fehlerklasse „Stil in der Fehlerauszeichnung“. Das doppelte „würde“ stand zweimal rot
+     als Falschform (gram-konjunktiv, dann sa12), und direkt dahinter sagte derselbe Text,
+     grammatisch falsch sei es nicht. Rot heißt in der App „falsch“ — ein Satz, den der Text
+     danach freispricht, gehört ohne class="nope" daneben („Länger: …“). Gefunden bei der
+     Vollprüfung am 24.09.2026, dazu sa03 mit einem grammatisch einwandfreien Schachtelsatz. */
+  const FREI = /grammatisch (korrekt|richtig|einwandfrei)|grammatisch falsch ist (es|das|er|sie) nicht|ist (es|das) nicht falsch/i;
+  const rotFrei = b => {
+    const funde = [];
+    const re = /<span class="nope">([\s\S]*?)<\/span>/g;
+    let m;
+    while ((m = re.exec(b))) {
+      const danach = strip(b.slice(m.index + m[0].length, m.index + m[0].length + 400));
+      if (FREI.test(danach)) funde.push(strip(m[1]).slice(0, 50));
+    }
+    return funde;
+  };
+  const rotFreiL = [];
+  RA.concat(SATZ).forEach(r => rotFrei(r.b).forEach(f => rotFreiL.push(r.id + ": " + f)));
+  P.ok("Kein rot markierter Satz, den der Text dahinter freispricht", !rotFreiL.length, rotFreiL.join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Fassung von sa12",
+    rotFrei('<span class="nope">Wenn ich Zeit haben würde, würde ich kommen.</span></div><p><b>Zweimal „würde“ in einem Satzgefüge</b> gilt als unschön — grammatisch falsch ist es nicht.</p>').length === 1 &&
+    !rotFrei('Länger: Wenn ich Zeit haben würde, würde ich kommen.</div><p>grammatisch falsch ist es nicht.</p>').length,
+    "Positivprobe blieb stumm");
+}
+
+{
   /* Fehlerklasse „die Markierung geht beim Strippen verloren“. In den Regelkörpern trägt
      die Bedeutung nicht der Text, sondern die Klasse: <span class="nope">,</span> zeigt ein
      Komma, das gerade NICHT stehen soll, class="ok" die richtige Form. Wer solchen Text
@@ -683,7 +709,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const FEST = /^(immer\s+wenn|immer\s+noch)/i;
   const ABS_ERLAUBT = {
     "Oberfläche und hast noch nie": "„… und hast noch nie gesichert“ beschreibt den Lernstand, keine Sprachregel",
-    "Regel gram-kasus":  "„über beim Thema immer Akkusativ“ und „vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
+    "Regel gram-kasus":  "„vor bei der Zeit immer Dativ“ — feste Rektion, keine Ausnahme bekannt",
     "Regel satz-klammer": "„Nie trennbar: be-, ge-, er-, ver-, zer-, ent-, emp-, miss-“ — diese Vorsilben trennen sich nicht ab; der Sonderfall miss- steht im Satz danach",
     "Satzkarte sa08":     "Satzkarte zu satz-klammer, trägt denselben Satz",
     "Prüfmuster f08":     "Das Muster handelt von den Wörtern „immer“ und „nie“ selbst; sie stehen dort im Zitat",

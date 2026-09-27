@@ -225,6 +225,20 @@ P.ok("Nur die bekannten Karten ohne Satzform (" + OHNE.length + ")", !unerwartet
 const verschwunden = ETIKETT.filter(x => !OHNE.some(e => e.w === x));
 P.ok("Die Ausnahmenliste ist aktuell", !verschwunden.length, verschwunden.join(", "));
 
+/* Fehlerklasse „die Variante als Ablenker“: Bei „pro“ lässt der Duden Akkusativ und Dativ
+   zu, die Karte fragte aber „pro angefangene / angefangener Stunde“ ab und wertete den Dativ
+   als falsch (Vollprüfung, 24.09.2026). Nennt die Fallangabe eine Variante („auch Dativ“),
+   gibt es weder in der Satzform noch in der Etikettfrage eine sicher falsche Antwort — die
+   Karte darf dann nicht abgefragt werden. drillCase() leistet das, solange zwei Fälle im
+   Feld k stehen; die Prüfung hält fest, dass es so bleibt. */
+const AUCH = /\bauch\s+(Akkusativ|Dativ|Genitiv|Nominativ)/;
+const alleFaelle = daten(w, 'CASEREF.map(e=>({w:e.w,k:e.k,s:!!e.s,frage:!!drillCase(e)}))');
+const auchAbgefragt = alleFaelle.filter(e => AUCH.test(e.k) && (e.frage || e.s));
+P.ok("Keine Fallkarte mit Variante im Fall wird abgefragt", !auchAbgefragt.length,
+  auchAbgefragt.map(e => e.w).join(", "));
+P.ok("… und die Prüfung erkennt die Karte „pro“", alleFaelle.some(e => e.w === "pro" && AUCH.test(e.k)) &&
+  AUCH.test("Akkusativ, auch Dativ") && !AUCH.test("Akkusativ"), "Positivprobe blieb stumm");
+
 const ALLQ = new Set(daten(w, 'ALL.map(i=>i.q)').map(norm));
 const doppelUeb = ALLE.filter(x => ALLQ.has(norm(x.satz)));
 P.ok("Keine Satzform doppelt eine Übung", !doppelUeb.length,

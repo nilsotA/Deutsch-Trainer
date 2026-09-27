@@ -421,7 +421,7 @@ P.titel("F · Tippaufgaben");
    die Relativpronomen mit welch- (n31–n33), die korrekt sind, nur schwerfälliger, und die
    Präpositionalfassung „an die“ bei „schreiben“. */
 const TIPP = [
-  { id: "m20", muss: ["einer", "der", "dieser"], nicht: ["die", "eine", "den"] },
+  { id: "m20", muss: ["einer", "der", "dieser", "derselben"], nicht: ["die", "eine", "den"] },
   { id: "n01", muss: ["dem", "meinem", "einem", "seinem", "unserem"], nicht: ["das", "den", "der", "seinen"] },
   { id: "n02", muss: ["den", "einen", "meinen", "seinen", "ihren"], nicht: ["dem", "der", "des", "seinem"] },
   { id: "n03", muss: ["den", "einen", "meinen", "seinen", "unseren"], nicht: ["dem", "der", "seinem"] },
@@ -436,7 +436,7 @@ const TIPP = [
   { id: "r02", muss: ["das das", "das welches"], nicht: ["dass das", "das dass"] },
   { id: "n12", muss: ["mir", "ihm", "ihr", "uns"], nicht: ["mich", "ihn", "dich"] },
   { id: "n14", muss: ["mich", "dich", "ihn", "uns"], nicht: ["mir", "dir", "ihm"] },
-  { id: "n15", muss: ["dem", "einem", "meinem", "diesem"], nicht: ["den", "der", "des", "einen"] },
+  { id: "n15", muss: ["dem", "einem", "meinem", "diesem", "keinem"], nicht: ["den", "der", "des", "einen"] },
   { id: "n23", muss: ["mir"], nicht: ["mich", "dir"] },
   { id: "n25", muss: ["mir"], nicht: ["mich", "dir"] },
   { id: "r21", muss: ["darf"], nicht: ["dürfen", "darfst"] },
@@ -933,6 +933,7 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   const FALL_ERLAUBT = {
     "während": "Ablenker im Akkusativ („den Vortrag“), nicht der regionale Dativ",
     "trotz": "Ablenker im Akkusativ („den Rückstand“), nicht der regionale Dativ",
+    "wegen": "Ablenker im Akkusativ („das schlechte Wetter“), nicht der landschaftliche Dativ",
     "statt / anstatt": "Ablenker im Nominativ („der Vortrag“) — ein Akkusativ wäre nach der Konjunktion „statt“ womöglich richtig",
     "anrufen": "Der Dativ ist südwestdeutsch umgangssprachlich und schweizerisch; die App trainiert die in Deutschland übliche Form, der Hinweis ordnet ein",
     "nach (Richtung)": "die Region betrifft „nach dem Bäcker“, nicht den Ablenker „zu Italien“",

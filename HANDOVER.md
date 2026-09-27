@@ -59,6 +59,43 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vollprüfung des restlichen Bestands (24.–27.09.2026, neununddreißigste Runde).**
+
+Nach der Stichprobe alle übrigen 700 Einträge auf dieselbe Weise: 321 Übungen, 130 Wortkarten,
+140 Fallkarten, 109 Regeln (58 Gruppen, je ein Prüfer und ein Gegenprüfer, der widerlegen sollte;
+Ergebnis in `scratchpad/stich/voll-ergebnis.json`, Funde in `funde-voll.json`). Der erste Anlauf ging
+bei einem Neustart des Containers verloren und lief neu. Die Prüfer meldeten 65 Einträge, 41 hielten der
+Gegenprüfung stand, einer als „falsch gelernt“. Zwei Belege habe ich selbst nachgeschlagen, bevor
+ich änderte, und beide trugen weiter, als die Gegenprüfer sich getraut hatten:
+
+- **`gram-kongruenz` lehrte Falsches:** „eine Gruppe von“ stand unter „beides zulässig“. Der
+  Duden-Sprachratgeber („Subjekt im Singular, Verb im Plural?“) nennt Gruppe ausdrücklich als
+  Ausnahme, nur mit Singular. Der Gegenprüfer hatte den Punkt nicht halten können, weil duden.de
+  gesperrt war; die Websuche gibt das Zitat wieder. Dazu widersprach der Gleichsetzungssatz seiner
+  eigenen Probe: „Die fehlenden Bälle gelten als das Problem“ macht den Plural zum Subjekt.
+- **`c:pro` wertete eine zulässige Form als falsch:** Der Duden lässt Akkusativ und Dativ zu („pro
+  gefahrenen/gefahrenem Kilometer“). Weder Satzform noch Etikettfrage hat dann eine sicher falsche
+  Antwort; die Karte wird nicht mehr abgefragt (Gesamtbestand 701 → 700, 657 → 656 Unterwegs-Karten).
+- **Rot, aber nicht falsch:** sa12 zeigte das doppelte „würde“ weiter rot (in `gram-konjunktiv` war es
+  schon korrigiert, die Satzkarte speist aber `satz-konjunktiv`), sa03 einen grammatisch einwandfreien
+  Schachtelsatz. Neuer Wächter in `tests/suite.js`: kein `nope`-Satz, den der Text dahinter freispricht.
+- **Zu absolut, führt zu falscher Anwendung:** „für jung und alt“ (Paarformeln für Personen stehen groß),
+  „Der Verein ist Pleite gegangen“ (pleitegehen, kopfstehen), „deutsche Meisterin“ als Titel,
+  „brustschwimmen“ als falsch (das Regelwerk lässt es zu), „Atlasse“ unterschlagen, Präteritum bei
+  sein/haben/Modalverben in Perfekt-Texten als Tempuswechsel, „über einer Aufgabe brüten“ gegen
+  „über beim Thema immer Akkusativ“, das Nachfeld im Nebensatz, Ja/Nein und Linksversetzung vor dem
+  Vorfeld, „als“ im Präsens der Inhaltsangabe, „sich erschrecken“ mit beiden Formen, „ihm ihn“ als
+  bloß auffällig, gerade Anführungszeichen nach DIN 5008 im Schriftverkehr zulässig.
+- **Beispiel gegen die eigene Regel:** stil-schachtel verlor beim Entwirren den Trainer, form-schlechtenachricht
+  nannte keinen Grund, form-anrede strich den Professorentitel, f35/form-danken dankte ohne Gegenstand,
+  n-uhrzeit ließ die Uhrzeit weg.
+- **Wortkarten:** plausibel („aber nicht bewiesen“ gehört nicht zur Bedeutung), Kontroverse (nicht
+  zwingend öffentlich), Kohäsion (allgemein „Zusammenhalt“) — alle drei in `NEU_GELERNT`. effektiv
+  heißt auch „tatsächlich“; grundsätzlich hat die Lesart „aus Prinzip“.
+- **Tippaufgaben:** m20 nimmt „derselben“, n15 „keinem“ und „jenem“ an.
+- Nicht übernommen: „nachhause“ überall zulässig (nur Sekundärquellen), „mit was“ in die andere Liste
+  von sa18 (Wertung, kein Beleg), k20 (widerlegt).
+
 **Zufallsstichprobe: Wie oft lernt Nils etwas Falsches? (24.09.2026, achtunddreißigste Runde).**
 
 Gefragt, ob er sich auf die App verlassen kann, haben wir gemessen statt geschätzt: 60 Übungen, 25

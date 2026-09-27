@@ -102,7 +102,7 @@ Kartensorte (ist zweimal passiert).
 
 Fallkarten fragen nach der **Form im Satz**, nicht nach dem Namen des Falls:
 „Ich helfe ___ beim Aufbau“ statt „Welchen Fall verlangt helfen?“. Das ist näher am
-Sprechen und der Regelfall — 164 der 165 abfragbaren Karten.
+Sprechen und der Regelfall — 163 der 164 abfragbaren Karten.
 
 Das Feld `s` trägt die Aufgabe: `s:[Satz mit genau einer Lücke, richtige Form, falsche Form …]`.
 Die **erste Option ist die richtige**; `caseQuestion()` mischt mit Tagesseed, damit sie nicht
@@ -117,6 +117,13 @@ leitet den erwarteten Fall daraus ab und prüft ihn — wer die Reihenfolge dreh
 Ohne Satzform bleibt nur noch **`lehren`** (der Dativ der Person „kommt vor, gilt aber als
 schwächer“ — kein sicher falscher Ablenker möglich). Die Ausnahmenliste steht auch in
 `tests/fallform.js`; wächst sie, muss sie dort mitwachsen.
+
+**Gar nicht abgefragt** wird **`pro`**: Der Duden lässt Akkusativ und Dativ zu („pro
+angefangene/angefangener Stunde“), also ist weder in der Satzform noch in der Etikettfrage
+eine Antwort sicher falsch. Die Fallangabe nennt die Variante („Akkusativ, auch Dativ“), und
+`drillCase()` lässt jede Karte mit zwei Fällen im Feld `k` aus. `tests/fallform.js` prüft, dass
+keine Karte mit „auch Dativ“ o. Ä. abgefragt wird. Bis zum 27.09.2026 wertete die Karte den
+Dativ als falsch.
 
 **Beim Schreiben neuer Satzformen** ist die eine teure Frage: Ist der Ablenker *sicher*
 falsch? Der Prüflauf hält mit `tests/formen.js` dagegen — einer unabhängig aufgestellten
@@ -135,7 +142,7 @@ Die Tabelle kennt Artikel, Pronomen in Objektform, Verschmelzungen (im, ans) und
 artikellosen Adjektivformen der Karten in starker Beugung. Trägt die Option ein Substantiv
 („des Vortrags“ gegen „dem Vortrag“), greift der **Stammvergleich**: gleiche Wortzahl, je
 ein Träger, und die übrigen Wörter mit demselben Stamm — dann ist der Fall des Ablenkers
-bestimmbar. Das entscheidet 149 der 173 Fassungen; ohne ihn waren es 123, weil 31 Karten
+bestimmbar. Das entscheidet 148 der 172 Fassungen; ohne ihn waren es 123, weil 31 Karten
 ein Substantiv in der richtigen Option tragen. Der Vergleich sagt nur, welchen **Fall** der
 Ablenker hat — nicht, ob dieser Fall irgendwo als Variante gilt. Persönliche Pronomen, die auch
 Subjekt sein können (er, sie, es, wir, ihr), stehen in der zweiten Tabelle `PRONOMEN`, die
@@ -171,7 +178,7 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
 - Deterministischer Zufall: `hash()` + `rng()` für alles, was tagesstabil sein soll.
   Antwortoptionen werden in `exQuestion()` gemischt (`hash(id + "|" + today())`).
-- `alleSchluessel()` liefert den Gesamtbestand (701 Karten: Aufgaben, Wörter, Fälle).
+- `alleSchluessel()` liefert den Gesamtbestand (700 Karten: Aufgaben, Wörter, Fälle).
   **Jede Stelle, die eine Gesamtzahl nennt, muss darüber gehen**, sonst nennen zwei
   Ansichten verschiedene Zahlen.
 
@@ -221,7 +228,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - **Alle Antworten ohne Scrollen sichtbar.** Ist eine Antwort länger als 40 Zeichen, setzt
   `renderQ()` die Klasse `lang` und der Unterwegs-Modus eine kompaktere Fassung (17 statt
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
-  vierten Antwort. `npm run layout` zeichnet jede der 657 Unterwegs-Karten einzeln in Chromium
+  vierten Antwort. `npm run layout` zeichnet jede der 656 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 50 auf 375×667 (gemessen 45), keine auf 390×844. Jede Karte
   bekommt dabei ihren eigenen Seed — mit einem gemeinsamen bekamen alle Wortkarten dieselben drei
   Ablenker, und die Messung zeigte 22 statt 44.
@@ -310,7 +317,7 @@ npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
 **Wer einen gekoppelten Satz umschreibt, ruft `npm run kopplungen`** und legt die neue
-Fassung in denselben Commit. 114 Sätze stehen wörtlich an zwei oder mehr Stellen in
+Fassung in denselben Commit. 117 Sätze stehen wörtlich an zwei oder mehr Stellen in
 voneinander unabhängigen Beständen — eine Regel und eine Übung, ein Prüfmuster und ein
 Vorher/Nachher-Paar. Der Wächter in `tests/suite.js` meldet genau den Fall, in dem ein
 solcher Satz an manchen seiner Stellen noch steht und an anderen nicht mehr: Dann hat
