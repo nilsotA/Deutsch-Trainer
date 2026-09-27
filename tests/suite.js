@@ -840,7 +840,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   BESTAND.forEach(x => zaehlSammle(x.sorte, x.id, x.t));
   /* Was zählen darf, steht hier mit Grund. */
   const ZAEHL_ERLAUBT = {
-    "Übung p22": "„Einzige Ausnahme sind Laden- und Firmennamen“ — die Zählung gilt dem Genitiv-s, und dort stimmt sie; der Apostroph vor -sch ist keine Genitivform",
     "Oberfläche Stand der Prüfung Rund": "zitiert „die drei Ausnahmen“ und „Zwei Ausnahmen:“ als Beispiel für den behobenen Fehler — Metasprache, keine Zählung",
   };
   const zaehlNeu = [...zaehlStellen].filter(x => !(x in ZAEHL_ERLAUBT));
@@ -1971,12 +1970,20 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       ziel: ["Sie geht früher um pünktlich zu sein.", "Wir treffen uns um den Plan durchzugehen.",
              "Er spart um sich ein Rad zu kaufen.", "Sie kommt vorbei um das Trikot abzuholen."],
       still: ["Sie geht früher, um pünktlich zu sein.", "Um fit zu bleiben, geht er joggen.",
-              "Er bittet um Erlaubnis.", "Wir kümmern uns um den Aufbau, um Zeit zu sparen."] },
+              "Er bittet um Erlaubnis.", "Wir kümmern uns um den Aufbau, um Zeit zu sparen.",
+              /* Regelwerk 2024, § 73 E5 (2) und (3): Das Komma steht vor dem Wort, das zur
+                 Infinitivgruppe gehört. Beide Sätze stehen dort wörtlich. */
+              "Man braucht ein Ingenieursstudium, nur um das Gerät zusammenbauen zu können.",
+              "Sie lernte, auch um die Prüfung zu bestehen."] },
     { id: "y11",
-      ziel: ["Er hat versucht den Ball zu treffen.", "Sie hat beschlossen das Training zu verschieben.",
+      ziel: ["Er hat sich bemüht den Ball zu treffen.", "Sie hat beschlossen das Training zu verschieben.",
              "Er hat angefangen für die Klausur zu lernen.", "Sie plant im Sommer umzuziehen.",
              "Er hat vergessen Milch zu kaufen.", "Sie hat gelernt mit dem Rad zu fahren."],
-      still: ["Er hat versucht, den Ball zu treffen.", "Er hofft zu gewinnen.",
+      still: ["Er hat sich bemüht, den Ball zu treffen.", "Er hofft zu gewinnen.",
+              /* Regelwerk 2024, Abschnitt 2.5.5: nach versuchen, erlauben, wagen … ist das
+                 Komma freigestellt. Der erste Satz steht dort wörtlich. */
+              "Der Minister versuchte das Kabinett zu überzeugen.",
+              "Die Eltern haben ihm erlaubt ein Bier zu trinken.", "Sie hat gewagt den Trainer zu fragen.",
               "Du brauchst nicht zu kommen.", "Sie scheint das Spiel zu gewinnen.",
               "Er hat noch zu arbeiten.", "Das Wetter droht schlecht zu werden.",
               "Er hat es versucht. Den Ball zu treffen ist schwer.",
@@ -2575,7 +2582,10 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
               "Tag 3 im Praktikum\nMorgens habe ich die erste Stunde hospitiert.",
               "Wochenplan\nMontags: Krafttraining\nMittwochs: Lauf",
               "Eines sehr kalten Morgens stand die ganze Klasse vor der verschlossenen Halle.",
-              "Die Stimmung eines schönen, warmen Abends lässt sich schwer beschreiben."] },
+              "Die Stimmung eines schönen, warmen Abends lässt sich schwer beschreiben.",
+              /* Regelwerk 2024, § 55(4): „letzten Endes, guten Mutes“ — Genitiv mit bloßem Adjektiv */
+              "Die Wahlen vergangenen Sonntags brachten eine Überraschung.",
+              "Das Spiel letzten Samstags war hart."] },
     { id: "x44",
       ziel: ["Manches mache ich lieber Abends.",
              "Des weiteren trainiere ich Abends."],
@@ -2758,9 +2768,9 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       ziel: [],
       still: ["Wir fördern die Kinder, wo immer möglich."] },
     { id: "y11",
-      ziel: ["Er hat versucht pünktlich zu sein.",
+      ziel: ["Er hat sich bemüht pünktlich zu sein.",
              "Wir haben beschlossen morgen früher anzufangen.",
-             "Sie versucht es zu reparieren."],
+             "Sie bemüht sich es zu reparieren."],
       still: ["Morgen versuchen wir zu gewinnen.",
               "Nächste Woche plant er umzuziehen.",
               "Ich hoffe sehr zu gewinnen."] },
@@ -2862,7 +2872,12 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
     ["x28", "Hallo Frau Weber,\n\nJa, Sie haben recht. Seit 2024 bin ich jedesmal zu spät gekommen. Es tut mir Leid.\n\nViele Grüße\nNils", "hart"],
     ["x43", "Protokoll vom Training am Montag\nMorgen besprechen wir die Ergebnisse.", "pruef"],
     ["x43", "Am Montag Morgen-Workout, am Dienstag Pause.", "pruef"],
-    ["x43", "Ich besuche meine Familie Sonntag Abend und komme dann zurück.", "hart"],
+    /* Ohne Begleiter ist getrennt zulässig („wir treffen uns Dienstag [am] Abend“, Wörterverzeichnis
+       des Regelwerks 2024) — deshalb nur noch „Bitte prüfen“, mit Begleiter bleibt es hart. */
+    ["x43", "Ich besuche meine Familie Sonntag Abend und komme dann zurück.", "pruef"],
+    ["x43", "Wir treffen uns Dienstag Abend.", "pruef"],
+    ["x43", "Wir sehen uns am Dienstag Abend.", "hart"],
+    ["x43", "Am ersten Mittwoch Nachmittag waren die Kinder skeptisch.", "hart"],
     ["x56", "Zwei Protokolle liegen im Ordner. Dieses mal ändern, das andere passt.", "pruef"],
     ["x56", "Aufgaben für Freitag:\nDieses mal ausfüllen\nDas andere Formular abheften", "pruef"],
     ["x50", "Am morgen in der Sporthalle stattfindenden Turnier nehmen zwölf Teams teil.", "pruef"],

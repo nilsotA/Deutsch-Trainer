@@ -59,6 +59,62 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Quellen am Original: Regelwerk 2024, Duden, grammis, Variantengrammatik (27.09.2026, vierundvierzigste Runde).**
+
+Erstmals sind alle Primärquellen direkt lesbar. Das Amtliche Regelwerk 2024 liegt als PDF auf rechtschreibrat.com
+(`/DOX/RfdR_Amtliches-Regelwerk_2024.pdf`, Text mit PyMuPDF: `pip install pymupdf`), dazu die Fassung 2016/2018 zum
+Vergleich. Die Variantengrammatik antwortet auf Unterseiten (`mediawiki.ids-mannheim.de/VarGra/index.php/<Titel>`),
+nur die Startseite gibt 403. Vorgehen: Kapitel B, C, D und E des Regelwerks je als Textdatei, die App-Regeln samt
+Übungen und Prüfmustern je Kapitel als Textdatei (Skript `scratchpad/q/dump.js`), vier Prüfer lesen gegeneinander und
+melden nur; jeden Fund habe ich selbst am Regelwerk oder an der Duden-Seite nachgelesen, bevor ich geändert habe.
+Parallel die 39 Regeln mit Quellenangabe gegen die zitierte Seite.
+
+Falsch gelernt hätte man (alle behoben, keine richtige Antwort geändert, kein `NEU_GELERNT`):
+- **Doppelpunkt:** Zusammenfassender Satz klein („…: alles ist verloren“) — das stand 2006/2018 im Regelwerk, 2024 steht
+  es groß (§ 75 E2/E3, § 54). Fünf Stellen inkl. p04, x52, Spickzettel.
+- **Eckige Klammern im Zitat:** „Das Regelwerk verlangt nur die Punkte“ — § 78 E3 und § 76 E3 verlangen eckige Klammern.
+- **Komma vor „und“ + Satzgefüge** („weiter, und als es dunkel wurde, …“): seit 2024 Pflicht (Abschnitt 2.4.3), die App
+  zeigte es freigestellt.
+- **Infinitiv nach versuchen, erlauben, wagen, probieren, beabsichtigen, versprechen, gestatten:** Komma freigestellt
+  (2.5.5; Duden „Kein Komma bei Infinitivgruppen“). k20 benutzte „Er hat versucht(,) pünktlich zu sein“ als Pflichtfall;
+  jetzt „sich bemühen“ (Duden: Komma Pflicht). Derselbe Mustersatz in komma-infinitiv, komma-hauptsatz, y11 und dem
+  Spickzettel getauscht; y11 meldet die Kann-Verben nicht mehr.
+- **nachhause:** als österreichisch-schweizerisch eingeordnet; WV § 39 E3 ohne Einschränkung (siehe FUNDE-offen).
+- **besser gehen / bessergehen:** beides (WV); **Comeback, Countdown** nur zusammen, **Kick-off/Kickoff, Start-up/Startup**
+  beides (§ 45 E2).
+- **„Wir treffen uns Dienstag Abend“:** ohne Begleiter zulässig (WV „Dienstag“, Duden „Dienstagabend“). x43 bleibt hart
+  mit Begleiter („am Dienstag Abend“), ohne stuft `WEICH` auf „Bitte prüfen“ herab. Drei Korpusstellen („bis Freitag
+  Abend“, „von Donnerstag Abend“, „Am Besten wäre Mittwoch Nachmittag“) sind im Korpus als Fehler annotiert; nach dem
+  Regelwerk sind sie zulässig. Der Textcheck findet sie weiter, jetzt als Prüfhinweis — die Quote bleibt.
+- **getrennt-verb:** „Getrennt nur, wenn das Adverb betont ist“ — § 34 E1: bei der Wortgruppe kann es unbetont sein.
+  Das Beispiel „zusammen arbeiten (= gemeinsam)“ widersprach der Duden-Bedeutung von „zusammenarbeiten“; ersetzt
+  durch das Regelwerkbeispiel „nach der Operation wieder sehen“ und die Vorfeldprobe.
+
+Ungenau (behoben): Semikolon nur zwischen gleichartigen Sätzen (§ 74 E3); Apostroph nach Buchstaben s, ss, ß, x, z, ce,
+auch stumm (§ 80, „Dumas’“), Auslassungs-Apostroph nur bei formelhaften Formen frei; Schrägstrich-Leerzeichen regelt
+§ 83, nicht erst die DIN; „nämlich:“ hieß „Häufiger Fehler“ (Rangformel), jetzt „Überflüssig“; z-frage zitierte
+Beispiele der Fassung 2018; wissen/verstehen zu als mehrteiliges Prädikat; „nur um“/„auch um“ (y02 schweigt, wenn
+davor ein Komma steht); enge Apposition mit Artikel; Fragewort allein („Keiner ahnt(,) warum“); Nebensatz + Wortgruppe
+(2.4.2, y13); Farben nach Präposition groß (§ 58 E2); „aufs Beste angewiesen“ nur groß; „völlig recht haben“ nur klein;
+„es ist seine Schuld“; x44 übersah „vergangenen Sonntags“; Bindestrich-Pflicht bei Ziffern und gleichrangigen
+Adjektiven; ß-Ersatz ohne verfügbares ß; „das gleiche“ bei mitgedachtem Substantiv; x19 und p22 zum Ladennamen;
+x15 erklärte „das Wiederstehen“ für richtig und strich es hart an.
+
+Aus den eigenen Quellenabgleichen: `stil-absolut`, s17 und x07 schrieben dem Duden „die optimale, nicht optimalste
+Lösung“ zu — steht so nirgends; der Duden führt „optimal“ ohne Steigerungsformen und nennt es im Sprachratgeber
+„einzigste“ nicht steigerbar. sa08: „misszuleiten“ nach Sprachratgeber, aber das Wörterbuch betont miss**lei**ten und
+führt „zu missleiten“, „missleitet, auch missgeleitet“ — Beispiel gestrichen, Schwankung benannt. sa04: grammis nennt
+nach „ob … oder nicht“, „egal ob“, „wie … auch“ die Außenstellung obligatorisch — die App sagte, Verb direkt dahinter
+„kommt ebenfalls vor“; nur bei „auch wenn/selbst wenn“ geht beides. gram-plural: „die gebräuchlichere zuerst“ war eine
+Häufigkeitsordnung ohne Quelle, jetzt Duden-Reihenfolge (Schemen, Schemata, Schemas). „ab nächsten Montag“: laut
+Variantengrammatik bei Wochentagen fast überall üblich, nicht nur „in Deutschland verbreitet“. Belegt und unverändert:
+gram-kongruenz (Gruppe nur Singular), gram-konjunktiv, sa02, sa10 (grammis: Ersatzinfinitiv Pflicht bei Modalverben und
+brauchen), sa11, n-ziffern, n-gliederung, gram-derselbe, Runde 42 vollständig (auch solche, sämtliche).
+
+Nicht geprüft in dieser Runde: Kapitel A des Regelwerks (Laut-Buchstaben) über die Rechtschreibfallen hinaus, die
+Stil- und Formregeln (keine Quelle zu prüfen), die Wortkarten. `npm run layout` nicht gelaufen (k20 und b08 haben
+kurze Optionen).
+
 **Belege der Runden 41 und 42 am Originaltext gegengelesen (27.09.2026, dreiundvierzigste Runde).**
 
 duden.de, grammis und dwds.de sind jetzt erreichbar (mediawiki.ids-mannheim.de, also die Variantengrammatik,

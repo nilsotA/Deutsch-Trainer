@@ -949,7 +949,6 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   const OFFEN_ERLAUBT = {
     g05: "fragt nach der Varianz selbst („Was gilt für … und …?“)",
     g25: "die Region betrifft „heute Früh“, nicht den Ablenker „heute abend“",
-    t16: "die Region betrifft „nachhause“, nicht den Ablenker „nach hause“",
     z14: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
     x11: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
     d17: "Ablenker „dem Regens“ ist in keiner Region richtig — Artikel und Endung passen nicht zusammen",
