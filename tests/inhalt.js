@@ -489,6 +489,10 @@ const familieFehlt = liste => {
 const familieL = ALL.filter(i => i.t === "fill").map(i => [i.id, familieFehlt(i.a)]).filter(([, f]) => f.length)
   .map(([id, f]) => id + ": " + f.join(", "));
 P.ok("Jede Liste mit Possessiv nimmt alle Artikelwörter desselben Falls an", !familieL.length, familieL.join(" · "));
+/* Dieselbe Klasse beim Personalpronomen: n14 („Das interessiert ___ sehr.“) nahm ihn und sie,
+   aber nicht „es“ (zweite Stichprobe, 27.09.2026). Wer die dritte Person annimmt, nimmt alle drei. */
+const esFehlt = ALL.filter(i => i.t === "fill" && nimmt(i.a, "ihn") && nimmt(i.a, "sie") && !nimmt(i.a, "es")).map(i => i.id);
+P.ok("Jede Liste mit „ihn“ und „sie“ nimmt auch „es“ an", !esFehlt.length, esFehlt.join(", "));
 P.ok("… und die Prüfung erkennt die Liste von n15 vom 24.09.2026",
   familieFehlt(["dem","einem","meinem","deinem","seinem","ihrem","unserem","eurem","diesem","jedem"]).includes("keinem") &&
   !familieFehlt(["der","einer"]).length, "Positivprobe blieb stumm");

@@ -413,6 +413,27 @@ const streit = Object.keys(H).filter(z => WCH[z] &&
 P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, streit.join(" · "));
 
 {
+  /* Fehlerklasse „Wochentag passt nicht zum Datum“ (zweite Stichprobe, 27.09.2026): Der
+     5. August stand einmal als Dienstag, dreimal als Mittwoch; n-datum zeigte „05.05.2026“
+     und daneben „Montag, dem 5. Mai“ — der 5. Mai 2026 ist ein Dienstag. Wer eine Regel über
+     genaue Termine lehrt, darf keinen falschen Termin als Vorbild zeigen. Ohne Jahreszahl gilt
+     2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel. */
+  const TAGE = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+  const MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:den\\s+|dem\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
+  const schief = t => [...String(t).matchAll(WD)].filter(m => {
+    const d = new Date(Date.UTC(+(m[4] || 2026), MONATE.indexOf(m[3]), +m[2]));
+    return TAGE[d.getUTCDay()] !== m[1];
+  }).map(m => m[0]);
+  const html = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
+  const wdSchief = [...new Set(schief(html))];
+  P.ok("Jeder Wochentag passt zu seinem Datum (ohne Jahr: 2026)", !wdSchief.length, wdSchief.join(" · "));
+  P.ok("… und die Prüfung erkennt „Montag, dem 5. Mai“ und „Dienstag, den 5. August“",
+    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025").length === 2,
+    "Positivprobe blieb stumm");
+}
+
+{
   /* Fehlerklasse „Stil in der Fehlerauszeichnung“. Das doppelte „würde“ stand zweimal rot
      als Falschform (gram-konjunktiv, dann sa12), und direkt dahinter sagte derselbe Text,
      grammatisch falsch sei es nicht. Rot heißt in der App „falsch“ — ein Satz, den der Text
@@ -527,7 +548,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Wortkarte resümieren.ex": "„die drei wichtigsten Korrekturen“ ist ein Beispielsatz aus einer Trainingsstunde, keine Aussage über Sprache",
     "Übung m02":            "„die häufigsten“ meint die häufigsten Präpositionen, kein Fehlerranking",
     "Schreibwerkstatt w05.tip":  "„die beste Übung gegen Wortballast“ ist ein Rat zur Übung, kein Befund über Fehler",
-    "Schreibwerkstatt sc04.why": "„der wichtigste“ meint den wichtigsten Satz dieses einen Gesprächseinstiegs, nicht eine Rangordnung",
     "Schreibwerkstatt pr29.good": "„was ist der beste Weg, dich zu erreichen?“ ist wörtliche Rede in einer Musterformulierung",
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
     "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",

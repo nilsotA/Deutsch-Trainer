@@ -59,6 +59,27 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zweite Zufallsstichprobe: Was ist nach allen Korrekturen übrig? (27.09.2026, vierzigste Runde).**
+
+Gleich gezogen wie die erste (60 Übungen, 25 Wort-, 25 Fallkarten, 10 Regeln; Seed 20260927,
+`scratchpad/stich/ziehen2.js`, 18 von 120 Einträgen auch in der ersten). Vier Prüfer, jeder sollte seine
+Funde selbst zu widerlegen versuchen; jeden Fund habe ich danach selbst gelesen. **0 falsch gelernt**
+(erste Stichprobe: 1 von 60 Übungen, 1 von 10 Regeln), **8 ungenau**:
+- n14 lehnte „es“ ab („Das interessiert es sehr“) — neue Prüfung in `tests/inhalt.js`, Abschnitt F.
+- Wochentag passte nicht zum Datum: „Dienstag, den 5. August“ in einem Baustein, dreimal sonst Mittwoch;
+  n-datum zeigte „05.05.2026“ neben „Montag, dem 5. Mai“ (Dienstag), k25 „Montag, dem 12. Mai“ neben
+  „Köln, den 12. Mai 2026“, der Spickzettel „Montag, dem 3. Juni“. Neue Prüfung in `tests/suite.js`: jeder
+  Wochentag passt zu seinem Datum, ohne Jahr gilt 2026.
+- s13 erklärte „effektiv“ mit „das richtige Ziel“ (Managementformel, nicht die Wortbedeutung) — wie die
+  Wortkarte jetzt „wirksam“, dazu „tatsächlich“.
+- n21 schrieb „(Akkusativ)“ hinter „Ich halte das für richtig“, wo nach „für“ kein Akkusativ zu sehen ist.
+- marginal: Beispiel „statistisch marginal“ lag neben dem Fachausdruck „marginal signifikant“.
+- form-eltern und sc04: „Es ist nichts Schlimmes passiert“ ohne die Bedingung, dass wirklich nichts passiert ist.
+- z-schraeg und p21: Die DIN 5008 lässt Leerzeichen um den Schrägstrich bei Wortgruppen zu, schreibt sie
+  aber nicht vor.
+- z-anfuehrung: Die geraden Anführungszeichen standen rot, der gerade Apostroph in z-schraeg heißt
+  „Schönheitsfehler, kein Rechtschreibfehler“ — jetzt beide gleich eingeordnet.
+
 **Vollprüfung des restlichen Bestands (24.–27.09.2026, neununddreißigste Runde).**
 
 Nach der Stichprobe der übrige Lernbestand auf dieselbe Weise: 321 Übungen, 130 Wortkarten,
