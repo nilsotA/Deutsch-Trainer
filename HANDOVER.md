@@ -61,8 +61,8 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 **Vollprüfung des restlichen Bestands (24.–27.09.2026, neununddreißigste Runde).**
 
-Nach der Stichprobe alle übrigen 700 Einträge auf dieselbe Weise: 321 Übungen, 130 Wortkarten,
-140 Fallkarten, 109 Regeln (58 Gruppen, je ein Prüfer und ein Gegenprüfer, der widerlegen sollte;
+Nach der Stichprobe der übrige Lernbestand auf dieselbe Weise: 321 Übungen, 130 Wortkarten,
+die 140 übrigen abgefragten Fallkarten, 108 Regeln (58 Gruppen, 700 Prüfeinträge, darunter elf doppelt; je ein Prüfer und ein Gegenprüfer, der widerlegen sollte;
 Ergebnis in `scratchpad/stich/voll-ergebnis.json`, Funde in `funde-voll.json`). Der erste Anlauf ging
 bei einem Neustart des Containers verloren und lief neu. Die Prüfer meldeten 65 Einträge, 41 hielten der
 Gegenprüfung stand, einer als „falsch gelernt“. Zwei Belege habe ich selbst nachgeschlagen, bevor
@@ -80,7 +80,7 @@ ich änderte, und beide trugen weiter, als die Gegenprüfer sich getraut hatten:
   schon korrigiert, die Satzkarte speist aber `satz-konjunktiv`), sa03 einen grammatisch einwandfreien
   Schachtelsatz. Neuer Wächter in `tests/suite.js`: kein `nope`-Satz, den der Text dahinter freispricht.
 - **Zu absolut, führt zu falscher Anwendung:** „für jung und alt“ (Paarformeln für Personen stehen groß),
-  „Der Verein ist Pleite gegangen“ (pleitegehen, kopfstehen), „deutsche Meisterin“ als Titel,
+  „Der Verein ist Pleite gegangen“ (pleitegehen, kopfstehen), „Deutsche Meisterin“ als Titel (siehe unten: meine erste Fassung war falsch),
   „brustschwimmen“ als falsch (das Regelwerk lässt es zu), „Atlasse“ unterschlagen, Präteritum bei
   sein/haben/Modalverben in Perfekt-Texten als Tempuswechsel, „über einer Aufgabe brüten“ gegen
   „über beim Thema immer Akkusativ“, das Nachfeld im Nebensatz, Ja/Nein und Linksversetzung vor dem
@@ -95,6 +95,42 @@ ich änderte, und beide trugen weiter, als die Gegenprüfer sich getraut hatten:
 - **Tippaufgaben:** m20 nimmt „derselben“, n15 „keinem“ und „jenem“ an.
 - Nicht übernommen: „nachhause“ überall zulässig (nur Sekundärquellen), „mit was“ in die andere Liste
   von sa18 (Wertung, kein Beleg), k20 (widerlegt).
+
+**Danach die eigenen Korrekturen angegriffen (27.09.2026).** Acht Prüfer auf die Diff-Stücke, einer auf den
+ganzen Bestand mit der Frage, wo noch die alte Aussage steht; jeder Fund gegengeprüft (`scratchpad/stich/
+review-ergebnis.json`). 53 Meldungen, 46 hielten. Einer war „falsch gelernt“, und den hatte ich selbst
+eingebaut: „Sie wurde **Deutsche** Meisterin im Sprint“ als Beispiel für die Großschreibung. Der Duden schreibt
+es im Satz klein, groß nur als Titel neben dem Namen („Anita G., Deutsche Meisterin“). Der ursprüngliche
+Fund stützte sich auf einen Gegenprüfer, der aus dem Gedächtnis urteilte; „ein deutscher Meister“ unter
+„klein“ war richtig und steht wieder da. Neue Falle in CLAUDE.md: „Die Korrektur bringt den Fehler mit“.
+- **wegen + Dativ:** Die App nannte ihn an fünf Stellen „umgangssprachlich und landschaftlich“ — so stand es
+  in älteren Duden-Texten. Heute: „mündlich standardsprachlich und schriftlich umgangssprachlich“
+  (Duden-Wörterbuch; Sprachratgeber „Die Präposition wegen“: „in der gesprochenen Standardsprache“, beides
+  über die Websuche). v03 („Was ist standardsprachlich?“ mit „Beides ist standardsprachlich“ als Ablenker)
+  und m01 nennen jetzt den Rahmen „geschrieben“; Fallkarte, gram-genitiv, sa17, x01 und drei
+  Fehlersuche-Hinweise angeglichen. Die ältere Notiz weiter unten („Wörterbuchurteil umgangssprachlich und
+  landschaftlich“) ist damit überholt.
+- **Die Korrektur blieb auf einer Ebene liegen**, an vielen Stellen: brüten/sitzen fehlte in sa16 (speist
+  gram-wechsel) und n07; „Kein Problem … entwertet den Dank“ stand noch in f32, f02, ph28, pr07; „Vielen Dank!“
+  in pr14, „Vielen Dank vorab“ in ph03; die alte schlechte Nachricht in ph35; „immer mit Anschluss“ in ph32
+  und f38; die Priorisierungsfrage ohne Geltungsbereich (und mit Superlativ „die wirksamste“) in ph30; die
+  geraden Anführungszeichen in p11 und t01; Te-Ka-Mo-Lo als „neutrale Grundstellung“ in z06; der
+  Tempuswechsel im Präteritum-Bericht kt07.
+- **Neue Absolutaussagen in meinen Sätzen:** „Fest am Ende steht die Richtung“, „beim schwachen es geht die
+  Umkehrung gar nicht“, „Beide kennen zwei Lesarten“, „darf nur noch Nachgestelltes kommen … oder ein
+  Relativsatz“ (vergaß den dass-Satz), „auch eine belegte Erklärung ist plausibel“. Alle abgeschwächt.
+- **Wortkarten-Ablenker:** Ohne „aber nicht bewiesen“ war „einleuchtend, glaubhaft“ bei evident und triftig
+  nicht mehr sicher falsch — `WORT_NAH` und `NAH_GEPRUEFT` kennen die Paare jetzt. Wer das Feld `d` einer
+  Karte ändert, prüft die Nachbarkarten mit.
+- **Tippaufgaben als Klasse:** `ARTIKEL_FAMILIE` in `tests/inhalt.js`, Abschnitt F. n01–n07 und n15 nehmen
+  jetzt kein-, jen-, jed-, irgendein- und unsrem/unserm/euerem an; „euern“ und „unsern“ nicht (Duden:
+  umgangssprachlich bzw. nicht gesichert).
+- **Rangwächter** kennt „wirksamste“; f08 („am wirksamsten“ als Frage nach den Optionen) steht begründet in
+  `ERLAUBT`.
+- **Abdeckungslücke:** Die 18 Fallkarten, die nicht abgefragt werden, hatte keine Runde gelesen (`drillPool()`
+  in `voll.js`). Nachgeholt: 8 Meldungen, 5 hielten, alle ungenau — laut (Plural „laut Berichten“),
+  anklagen auch mit „wegen“, lehren mit Dativ der Person in beibringen und sa15, sich bewerben auch „auf“,
+  „sich putzen“ als schiefes Beispiel durch „sich abtrocknen“ ersetzt.
 
 **Zufallsstichprobe: Wie oft lernt Nils etwas Falsches? (24.09.2026, achtunddreißigste Runde).**
 
