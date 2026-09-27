@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 388 |
+| Übungen | 393 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,23 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Adjektivendung nach alle, viele, beide, manche, wir (27.09.2026, zweiundvierzigste Runde).**
+
+Nächste Lücke aus dem Abgleich mit typischen Zweifelsfällen: Nach Wörtern, die mal wie ein Artikel, mal wie ein
+Adjektiv wirken, schwankt die Endung. Vorher geprüft, ob die App dort schon etwas Falsches lehrt: 77 Probesätze
+(beide Endungen nach 15 Wörtern, Genitiv, wir/ihr/uns, vieles/vielem, manch/solch) durch den Textcheck — kein
+Treffer außer dem Stilhinweis s08 zu „einige/mehrere“; keine Übung, Fallkarte oder Fehlersuche wertet eine Variante
+als Fehler. Neu: ein Absatz in sa13 (speist `gram-adjektiv`), Übungen h01–h05 (neues Präfix h), eine Spickzettel-Zeile.
+Linie: im Plural, Nominativ und Akkusativ nach alle/sämtliche/beide üblich -en, nach viele/einige/mehrere/wenige
+die volle Endung, nach manche beides gleich häufig, nach solche meist -en (-e vor allem Schweiz/Westösterreich),
+nach wir/ihr beides; Genitiv Plural schwankt stärker (Duden: „trotz mehrerer verpatzter/verpatzten Vorstellungen“).
+Die Übungen fragen nach der **üblichen** Form oder danach, was gilt — keine erklärt eine belegte Variante zum Fehler.
+Ein Gegenprüfer fand in meiner ersten Fassung drei Ungenauigkeiten: „Nach alle nennt der Duden nur -en“ (zu absolut,
+die starke Form ist selten, nicht ausgeschlossen), der fehlende Genitiv-Vorbehalt (das Beispiel „aller guten Dinge“
+legte die Regel auch dort nahe) und „solche“ gleichrangig neben „manche“. Alles vor der Auslieferung behoben.
+Duden, grammis und Variantengrammatik waren per Abruf gesperrt; alle Belege stammen aus Suchauszügen, jeder von zwei
+Seiten (meine Suche, die des Prüfers) gestützt. Layout: 47 von 667 Unterwegs-Karten brauchen auf 375×667 Scrollen.
 
 **Zwei Lücken gefüllt: Imperativ und Verlaufsform (27.09.2026, einundvierzigste Runde).**
 
