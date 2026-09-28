@@ -217,6 +217,23 @@ P.ok("… und die Prüfung erkennt die alte Fassung",
   !String(w.eval("sprechbar(" + JSON.stringify(altStrip("der gut<b>e</b> Trainer")) + ")")).includes("gute"),
   "Positivprobe blieb stumm");
 
+/* Fehlerklasse „der Hinweis klebt an der Antwort“ (28.09.2026): Endete eine Option ohne
+   Satzzeichen, hängte sprechFrage() den Hörhinweis direkt an — „im Nachhinein Nachhinein
+   groß“. Zwischen Option und Hinweis muss eine Pause stehen. */
+const ohnePause = w.eval(`(function(){
+  const out = [];
+  ALL.filter(i => i.t !== "fill").forEach(i => {
+    const q = exQuestion(i), s = sprechFrage(q);
+    q.opts.forEach(x => { const h = hoerHinweis(x, q.opts), t = strip(x);
+      if (h && !/[.!?…:,;]\\s*$/.test(t) && s.includes(t + h)) out.push(i.id); });
+  });
+  return out; })()`);
+P.ok("Zwischen Antwort und Hörhinweis steht eine Pause", !ohnePause.length, ohnePause.slice(0, 8).join(" · "));
+P.ok("… und die Prüfung erkennt die alte Fassung",
+  w.eval(`(function(){ const i = ALL.find(x => x.id === "g15"), q = exQuestion(i), x = q.opts[0];
+    const alt = strip(q.q) + ". " + q.opts.map((y,k) => String.fromCharCode(65+k) + ": " + strip(y) + hoerHinweis(y, q.opts)).join(". ");
+    return !!hoerHinweis(x, q.opts) && alt.includes(strip(x) + hoerHinweis(x, q.opts)); })()`), "Positivprobe blieb stumm");
+
 const WORD_ESC = ["w", "p", "d", "ex", "s", "t"];
 const htmlInWort = WORDS.filter(x => WORD_ESC.some(k => /<[a-z\/]|&[a-z#0-9]+;/i.test(String(x[k] || "")))).map(x => x.w);
 P.ok("Keine Wortkarte trägt HTML — die Ansicht escaped jedes Feld", !htmlInWort.length, htmlInWort.join(" · "));
