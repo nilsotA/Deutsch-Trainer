@@ -97,6 +97,11 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   „Wörter auf -ung/-heit/-keit“ und zählte auch -nis und -ion. Beides behoben, Prüfung mit Gegenprobe in
   `tests/suite.js`, F2. Fehlersuche und Textcheck auf 375×667 sonst ohne Befund (eine korrekte Mail ergab nur den
   berechtigten Prüfhinweis zu „Mittwoch Nachmittag“).
+- **Einstufung wiederholte sich:** `testQuestions()` nahm immer dieselben 30 Aufgaben (pool[0], pool[step],
+  pool[2·step]). Nach der ersten Einstufung stehen die im Lernstand; „Neu einstufen“ maß dann das Gedächtnis für
+  genau diese Karten. Jetzt je Bereich zuerst Ungesehenes, dann das am längsten nicht Beantwortete, möglichst drei
+  verschiedene Regeln, am selben Tag stabil (Tagesseed). Drei Prüfungen in `tests/lernen.js`, A (alter Code: alle 30
+  wiederholt).
 - **Schreibwerkstatt gegengelesen** (ein Prüfer, nur Meldung; jeder Fund von mir nachgelesen, § 54 am Regelwerk 2024):
   ph06 Satz nach Doppelpunkt groß („Das macht sie nachvollziehbar“); ph19 „beendet das Gespräch, statt es zu führen“;
   ph44 „Eine Massenmail, erkennbar am …“; ph20 Tipp verlangte einen eigenen Satz, zwei Vorbilder setzen die Zustimmung
