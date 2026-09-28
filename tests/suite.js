@@ -3443,6 +3443,19 @@ P.titel("F2 · Suche und Textcheck");
       P.ok("die Suche „" + s + "“ führt zuerst zur Regel", erwartet.test(e), e.slice(0, 60));
     }
     w.eval("closeSearch()");
+
+    /* Dieselbe Klasse in den Suchfeldern der Ansichten: Sie filtern mit passtSuche(). */
+    w.eval('go("regeln")');
+    const ersteRegel = s => { dd.querySelector("#ruleSearch").value = s; w.eval("drawRules()");
+      const a = dd.querySelector("#ruleHost .acc"); return a ? a.id : "(keine)"; };
+    for (const [s, id] of [["seit seid", "rule-recht-seit"], ["dass das", "rule-recht-dass"], ["wider wieder", "rule-recht-wider"]])
+      P.ok("das Regelfeld „" + s + "“ zeigt zuerst " + id, ersteRegel(s) === id, ersteRegel(s));
+    P.ok("… und „Komma“ findet weiter Regeln (die Titelsortierung verliert keine)",
+      ersteRegel("komma") !== "(keine)" && dd.querySelectorAll("#ruleHost .acc").length > 10);
+    dd.querySelector("#ruleSearch").value = ""; w.eval("drawRules()");
+    P.ok("passtSuche verlangt jedes Wort (Positivprobe)",
+      w.eval('passtSuche("seit oder seid", "seit seid") && !passtSuche("seit oder seid", "seit dass")'));
+    w.eval('go("karten")');
   }
 
   /* Fehlerklasse „Überlagerung ohne Fessel“: Ein Shift+Tab im Suchfenster landete

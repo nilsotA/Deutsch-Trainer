@@ -64,6 +64,10 @@ Zeichenkette vorkommen: „seit seid“ fand nichts, obwohl die Regel beide Wör
 „dass das“ standen Übungen vor der Regel. `drawSearch()` wertet jetzt auch Treffer, in denen alle Wörter
 vorkommen (Titel vor Untertitel vor Text), und gibt Regeln einen Vorsprung. `tests/suite.js`, F2: „seit seid“,
 „dass das“ und „wider wieder“ müssen die Regel zuerst zeigen; mit dem alten Code schlagen alle drei fehl.
+Dieselbe Lücke hatten die vier Suchfelder der Ansichten (Regeln, Wortschatz, Formulierungen, Fälle): Sie
+filtern jetzt über `passtSuche()` — am Stück oder jedes Wort irgendwo —, das Regelfeld zeigt Treffer im Titel
+zuerst und liest den Regeltext über `strip()`, damit ein hervorgehobener Wortteil das Wort nicht zerteilt.
+Geprüft im selben Abschnitt; mit dem alten Code fanden „seit seid“ und „wider wieder“ unter Regeln nichts.
 
 **Unterwegs-Modus im Browser angesehen (28.09.2026, neunundvierzigste Runde).**
 

@@ -5816,6 +5816,14 @@ function norm(s){
   return String(s).toLowerCase().trim()
     .replace(/[„“”"'‚‘’]/g,"").replace(/[.,;:!?]+$/,"").replace(/\s+/g," ");
 }
+/* Die Suchfelder der Ansichten filtern: Ein Eintrag passt, wenn er die Eingabe am Stück
+   enthält oder jedes ihrer Wörter irgendwo. Bis zum 28.09.2026 galt nur das Stück —
+   „seit seid“ fand unter Regeln nichts, weil die Regel „seit oder seid?“ heißt. */
+function passtSuche(text, q){
+  if(text.includes(q)) return true;
+  const woerter = q.split(" ").filter(w=>w.length >= 2);
+  return woerter.length > 1 && woerter.every(w=>text.includes(w));
+}
 function deb(fn, ms){
   let t; return function(){ const a=arguments, c=this; clearTimeout(t); t=setTimeout(()=>fn.apply(c,a), ms||130); };
 }
@@ -7233,7 +7241,7 @@ function renderCards(){
 
 function listWords(f){
   const q = norm(f);
-  const hits = WORDS.filter(w => !q || norm(w.w).includes(q) || norm(w.d).includes(q) || norm(w.s||"").includes(q));
+  const hits = WORDS.filter(w => !q || passtSuche(norm(w.w+" "+w.d+" "+(w.s||"")), q));
   $("#wList").innerHTML = hits.slice(0,60).map(w=>{
     const c = S.cards["w:"+w.w];
     return '<div class="acc"><button><span>'+esc(w.w)+'</span>'+
@@ -7395,7 +7403,10 @@ function drawRules(){
   const hits = RULES_ALL.filter(r =>
     (!ruleFilter || r.c === ruleFilter) &&
     (!ruleVar || hatVarianten(r)) &&
-    (!q || norm(r.t).includes(q) || norm(r.b.replace(/<[^>]+>/g," ")).includes(q)));
+    (!q || passtSuche(norm(r.t+" "+strip(r.b)), q)))
+    /* Treffer im Titel zuerst: Bei „dass das“ passen viele Regeln, gemeint ist eine. */
+    .map((r,i)=>({r, i, t: q && passtSuche(norm(r.t), q) ? 0 : 1}))
+    .sort((a,b)=>a.t-b.t || a.i-b.i).map(x=>x.r);
   const hinweis =
     '<div class="lesehinweis"><b>Wie diese Regeln zu lesen sind</b>'+
     "<ul>"+
@@ -7642,7 +7653,7 @@ function drawPhrases(f){
     if(FT.grp && p.g !== FT.grp) return false;
     if(!q) return true;
     const hay = norm(p.f+" "+p.g+" "+p.tip+" "+["f","n","l"].map(k=>p.lv[k].join(" ")).join(" ")+" "+(p.no||[]).join(" "));
-    return hay.includes(q);
+    return passtSuche(hay, q);
   });
   // Nur die Kopfzeilen aufbauen — der Inhalt entsteht beim Aufklappen
   $("#phHost").innerHTML = hits.length ? hits.map(p=>
@@ -7938,7 +7949,7 @@ function drawCases(f){
     if(ST.kas && !e.k.includes(ST.kas.slice(0,3))) return false;
     if(ST.nurFallen && !e.fall) return false;
     if(!q) return true;
-    return norm(e.w+" "+e.k+" "+e.ex+" "+(e.n||"")).includes(q);
+    return passtSuche(norm(e.w+" "+e.k+" "+e.ex+" "+(e.n||"")), q);
   });
   const badge = k =>
     /Gen/.test(k) && !/Akk|Dat/.test(k) ? "kb-gen" :
