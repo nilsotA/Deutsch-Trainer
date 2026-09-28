@@ -59,6 +59,26 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Zahlenregeln und Fehlersuchtexte am Original (28.09.2026, achtundvierzigste Runde).**
+
+Selbst gelesen, ohne Prüfagenten: die sieben `n-`Regeln samt Übungen und Prüfmustern (Auszug `scratchpad/r48/app-zahlen.txt`)
+gegen die Duden-Rechtschreibregeln „Zahlen und Ziffern“, „Datum“ (D 32), „Punkt“, „Abkürzungen“, die Sprachratgeber
+„Uhrzeitangaben“, „Schreibung von Zahlen bis 12“, „Kommasetzung in mehrteiligen Angaben“, die Wörterbucheinträge „Grad“
+und „Prozent“ und das Regelwerk 2024 (§ 77 E5: schließendes Komma nach dem Datum jetzt Pflicht, 2018 noch freigestellt —
+die App stimmt). Keine richtige Antwort geändert, kein `NEU_GELERNT`.
+- **dem/den 5. Mai:** „dem … üblicher“ in n-datum und q16 ohne Beleg; Duden D 32 und der Ratgeber setzen „dem/den“
+  gleichrangig. Gestrichen.
+- **Gradzeichen:** „Der Duden lässt daneben auch ‚20° C‘ zu“ (n-einheiten, z-schraeg, t05) steht im Duden nicht;
+  der Eintrag „Grad“ führt „3 Grad C oder 3 °C“. Korrigiert.
+- **Geldbeträge:** „Der Duden gliedert auch Geldbeträge mit Leerzeichen“ — so ausdrücklich steht es nirgends; die Regel
+  nimmt sie nur nicht aus. Entsprechend formuliert.
+- Bestätigt: Silbenregel und überholte Buchdruckerregel, Gliederung ab fünf Stellen, Uhrzeit mit Punkt oder Doppelpunkt
+  (DIN zweistellig, volle Stunde einstellig), Abkürzungspunkt als Schlusspunkt, Einheiten ohne Punkt.
+- **Fehlersuchtexte:** alle zwölf Satz für Satz gegen die App-Regeln gelesen (`scratchpad/r48/korrektur.txt`); kein
+  unmarkierter Fehler, keine falsche Markierung. Einzige Rückfrage: „übel nehmen“ in kt08 — Regelwerk 2024 § 34 E5 lässt
+  beide Schreibungen zu.
+- Nicht nachprüfbar, unverändert: DIN 5008 (Punkt nur bei Geldbeträgen), „von 9–11 Uhr“ als Mischform (Duden-Buch).
+
 **Spickzettel und Stil-/Formregeln am Original (27.09.2026, siebenundvierzigste Runde).**
 
 Zwei Prüfer (nur Meldung), jeder Fund von mir am Regelwerk 2024 (`scratchpad/q/rw2024.txt`) oder an der Duden-Seite
