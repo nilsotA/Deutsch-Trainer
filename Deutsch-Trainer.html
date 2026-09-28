@@ -345,7 +345,7 @@ body.walk .card{padding:20px 16px;border-radius:14px}
 body.walk .qtext{font-size:26px;line-height:1.45;font-weight:550;margin:16px 0 22px}
 body.walk .opt{padding:22px 18px;font-size:20px;line-height:1.4;border-width:2px;border-radius:14px;min-height:76px;align-items:center}
 body.walk .opt .k{width:30px;height:30px;font-size:14px;margin-top:0}
-body.walk .opts{gap:12px}
+body.walk .opts{gap:10px}
 body.walk .fb{font-size:16.5px;line-height:1.65;padding:18px 20px}
 body.walk .btn{padding:18px 26px;font-size:18px;border-radius:14px}
 body.walk .kbd{display:none}
@@ -6523,14 +6523,22 @@ let scrollBeiFrage = null;
    Fällen im Bild. Genau dann braucht Nils ihn — einhändig, beim Gehen.
 
    Gescrollt wird nur, wenn nötig, und nur, wenn er seit dem Rendern der Frage nicht selbst
-   gescrollt hat; sonst würde ihn die App zurückholen. */
+   gescrollt hat; sonst würde ihn die App zurückholen.
+
+   „Im Bild“ heißt auch: nicht unter der Leiste. Unterwegs klebt die .walkbar mit dem
+   Weiter-Knopf am Schirmende, sobald die Rückmeldung darunter hinausragt — dann ist der
+   Knopf immer im Bild, und eine Rückmeldung, deren Oberkante gerade noch zu sehen war,
+   galt als sichtbar, obwohl die Leiste sie verdeckte. Gemessen am 28.09.2026 auf 375x667:
+   nach 19 von 135 falschen Antworten waren von der Erklärung weniger als 60 px zu sehen. */
 function zeigeRueckmeldung(){
   if(scrollBeiFrage === null || Math.abs(window.scrollY - scrollBeiFrage) > 8) return;
   const fb = qEl(".fb"), knopf = qEl("#nextBtn");
   if(!fb || !knopf) return;
-  const oben = fb.getBoundingClientRect().top;
+  const r = fb.getBoundingClientRect(), oben = r.top;
   const unten = knopf.getBoundingClientRect().bottom;
-  if(oben >= 0 && unten <= window.innerHeight) return;       // steht schon im Bild
+  const leiste = knopf.closest(".walkbar");
+  const rand = leiste ? leiste.getBoundingClientRect().top : window.innerHeight;
+  if(oben >= 0 && unten <= window.innerHeight && r.bottom <= rand + 1) return;   // steht schon im Bild
   const ziel = Math.max(0, window.scrollY + oben - 70);       // die Frage bleibt angeschnitten
   if(Q) Q.weiterAb = Date.now() + 700;                         // siehe check(): Nachfassen sperren
   try{ window.scrollTo({top:ziel, behavior:sanft()}); }catch(e){ window.scrollTo(0, ziel); }

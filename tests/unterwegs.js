@@ -675,6 +675,40 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     try { w2.eval("zeigeRueckmeldung()"); } catch (e) { /* siehe oben */ }
     P.ok("wer selbst gescrollt hat, wird nicht zurückgeholt",
       daten(w2, "__gescrollt.length") === 0, daten(w2, "__gescrollt"));
+
+    /* Dritter Fall (28.09.2026): Die Leiste klebt am Schirmende und liegt über der
+       Erklärung. Knopf und Oberkante der Rückmeldung sind im Bild — die Erklärung nicht.
+       Bis dahin hielt zeigeRueckmeldung() das für „schon im Bild“; im Browser gemessen
+       betraf das 19 von 135 falschen Antworten auf 375x667. Gegenprobe: Endet die
+       Rückmeldung über der Leiste, bleibt alles stehen. */
+    const verdeckt = fbUnten => {
+      const w3 = boot(leererStand({ auto: false }));
+      const d3 = w3.document;
+      d3.querySelector("#wkNew").click();
+      const a3 = daten(w3, "Q.list[0].ans");
+      tippe(w3, [...d3.querySelectorAll("#walkHost .opt")][a3 === 0 ? 1 : 0]);
+      Object.defineProperty(w3, "innerHeight", { value: 667, configurable: true });
+      w3.eval(`
+        window.__gescrollt = [];
+        window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
+        Element.prototype.getBoundingClientRect = function(){
+          const r = (t, b) => ({top:t, bottom:b, left:0, right:0, width:0, height:b-t, x:0, y:t});
+          if(this.classList.contains("fb")) return r(500, ${fbUnten});
+          if(this.classList.contains("walkbar")) return r(580, 667);
+          if(this.id === "nextBtn") return r(592, 655);
+          return r(0, 0);
+        };
+        scrollBeiFrage = window.scrollY;
+      `);
+      P.ok("(die Leiste ist die .walkbar um den Weiter-Knopf)",
+        daten(w3, "!!document.querySelector('#nextBtn').closest('.walkbar')"));
+      w3.eval("zeigeRueckmeldung()");
+      return daten(w3, "__gescrollt");
+    };
+    const s3 = verdeckt(800);
+    P.ok("liegt die Leiste über der Erklärung, wird gescrollt", s3.length === 1 && s3[0] === 430, s3);
+    const s4 = verdeckt(570);
+    P.ok("endet die Erklärung über der Leiste, bleibt alles stehen", s4.length === 0, s4);
   }
 
   /* ---------- I · Prelltipp, Enter und Bildschirmsperre ---------- */

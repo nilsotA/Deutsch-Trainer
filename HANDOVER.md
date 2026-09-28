@@ -59,6 +59,21 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Unterwegs-Modus im Browser angesehen (28.09.2026, neunundvierzigste Runde).**
+
+Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`, `tage.js`, `px.js`).
+- **Erklärung unter der Leiste:** Nach einer falschen Antwort lag die Erklärung oft unter der klebenden Leiste
+  mit „Weiter“; zu sehen war nur ihr oberer Rand. `zeigeRueckmeldung()` hielt das für „im Bild“, weil der
+  klebende Knopf immer im Bild ist und die Oberkante der Rückmeldung auch. Jetzt zählt die Oberkante der
+  `.walkbar` als Rand. Gemessen an jeder fünften Karte: auf 375×667 von 19 auf 0 von 135, auf 390×844 von 5 auf 0.
+  Neue Prüfung mit Gegenprobe in `tests/unterwegs.js`, Abschnitt H; Falle in CLAUDE.md, Abschnitt 6.
+- **`npm run layout` war rot**, schon auf dem Stand vor Runde 46: 51 statt höchstens 50 Karten brauchten auf 375×667
+  Scrollen bis zur letzten Antwort, über 14 Kalendertage konstant (also kein Tagesseed). Am knappsten lagen z03
+  (2 px) und f07 (3 px) — kurze Antworten ohne die kompakte Fassung, eine kürzere Frage änderte nichts. Der Abstand
+  zwischen kurzen Antworten ist jetzt 10 statt 12 px (Tippflächen unverändert 76 px hoch): 49 Karten.
+- Kein Befund: das blasse Rechteck am rechten Rand der Screenshots ist Chromiums Scrollbalken; 3 XP für eine falsche
+  Antwort sind gewollt (`S.xp += ok ? 10 : 3`).
+
 **Zahlenregeln und Fehlersuchtexte am Original (28.09.2026, achtundvierzigste Runde).**
 
 Selbst gelesen, ohne Prüfagenten: die sieben `n-`Regeln samt Übungen und Prüfmustern (Auszug `scratchpad/r48/app-zahlen.txt`)
