@@ -76,6 +76,14 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   fällig“, und der zweite Halbsatz folgt `unterwegsRunde()`: neuer Stoff, solange Ungesehenes da ist, sonst „die
   Karten, die am längsten nicht dran waren“. Die Wiederholungskarte sagt „Heute nichts fällig“ statt „Alles
   wiederholt“. Zwei Prüfungen in `tests/unterwegs.js`, Abschnitt C, am gerenderten Text.
+- **Vorlesen zerlegte Wörter:** `strip()` und `sprechbar()` setzten für jedes Tag ein Leerzeichen — „der gut e
+  Trainer“, „mit dem Kolleg en“, „über SETZ en“ (19 Stellen in vorgelesenen Übungstexten, dazu der Suchindex).
+  Inline-Tags fallen jetzt spurlos weg; eine Klammer um Wörter wird eine Pause (vorher lief „bildet („Das Wetter
+  droht …“)“ ohne Absatz weiter); ein freistehender Schrägstrich heißt „oder“. Prüfung mit Positivprobe in
+  `tests/inhalt.js`, Abschnitt D; Falle in CLAUDE.md.
+- Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
+  nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
+  an Groß-/Kleinschreibung).
 - Kein Befund: das blasse Rechteck am rechten Rand der Screenshots ist Chromiums Scrollbalken; 3 XP für eine falsche
   Antwort sind gewollt (`S.xp += ok ? 10 : 3`).
 

@@ -193,6 +193,30 @@ const probeAlt = ["Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "so
 P.ok("… und die Prüfung erkennt die alten Fassungen",
   probeAlt.every(t => KLINGT_FALSCH.some(([re]) => re.test(t))), "Positivprobe blieb stumm");
 P.ok("… während die neuen sauber sind", probeSprech.every(t => !KLINGT_FALSCH.some(([re]) => re.test(t))), probeSprech.join(" | "));
+/* Fehlerklasse „das Wort zerfällt beim Vorlesen“ (28.09.2026): strip() und sprechbar()
+   setzten für jedes Tag ein Leerzeichen, auch für Hervorhebungen mitten im Wort. Die Stimme
+   las „gut e Trainer“, „dem Kolleg en“, „über SETZ en“ — genau dort, wo es um die Endung
+   geht. Hier muss jedes Wort mit einer Hervorhebung im Inneren am Stück ankommen. */
+const INNEN = /(\p{L}*)<(b|i|em|strong|u|span|code)\b[^>]*>([\p{L}]+)<\/\2>(\p{L}*)/gu;
+const quellen = w.eval(`[].concat(...ALL.map(i => [i.q, i.e].concat(i.o || [])))`).filter(t => typeof t === "string");
+const zerfallen = [];
+let innenZahl = 0;
+quellen.forEach(t => {
+  for (const m of t.matchAll(INNEN)) {
+    if (!m[1] && !m[4]) continue;                // ganzes Wort hervorgehoben, nichts zu verbinden
+    innenZahl++;
+    const wort = m[1] + m[3] + m[4];
+    const gehoert = String(w.eval("sprechbar(strip(" + JSON.stringify(t) + "))"));
+    if (!gehoert.includes(wort)) zerfallen.push(wort);
+  }
+});
+P.ok("Wörter mit Hervorhebung im Inneren kommen beim Vorlesen am Stück an (" + innenZahl + " Stellen)",
+  innenZahl > 10 && !zerfallen.length, zerfallen.slice(0, 8).join(" · "));
+const altStrip = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+P.ok("… und die Prüfung erkennt die alte Fassung",
+  !String(w.eval("sprechbar(" + JSON.stringify(altStrip("der gut<b>e</b> Trainer")) + ")")).includes("gute"),
+  "Positivprobe blieb stumm");
+
 const WORD_ESC = ["w", "p", "d", "ex", "s", "t"];
 const htmlInWort = WORDS.filter(x => WORD_ESC.some(k => /<[a-z\/]|&[a-z#0-9]+;/i.test(String(x[k] || "")))).map(x => x.w);
 P.ok("Keine Wortkarte trägt HTML — die Ansicht escaped jedes Feld", !htmlInWort.length, htmlInWort.join(" · "));

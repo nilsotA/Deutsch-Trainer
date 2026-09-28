@@ -6071,6 +6071,11 @@ function kannVorlesen(){
 }
 function sprechbar(t){
   return String(t)
+    /* Hervorhebungen stehen oft mitten im Wort: „gut<b>e</b>“, „dem Kolleg<b>en</b>“,
+       „<b>w</b>egen“, „über<b>SETZ</b>en“. Mit einem Leerzeichen an ihrer Stelle hörte man
+       „gut e“ und „Kolleg en“ — genau dort, wo es um die Endung geht. Sie fallen deshalb
+       spurlos weg; Blockgrenzen (br, p, li, td …) bleiben ein Leerzeichen. */
+    .replace(/<\/?(?:b|i|em|strong|u|span|code|mark|small|sup|sub)\b[^>]*>/gi,"")
     .replace(/<[^>]*>/g," ")
     .replace(/\u00AD/g,"")          // weiches Trennzeichen („gewisser­maßen“)
     .replace(/[„“”‚‘’"»«›‹]/g,"")    // Anführungszeichen nicht mitlesen, auch Guillemets
@@ -6083,6 +6088,11 @@ function sprechbar(t){
        „sowohl und so weiter als auch“. */
     .replace(/\.\.\.|…/g,", ")
     .replace(/[→⇒]/g,", ")           // Pfeil als Pause
+    /* Eine Klammer um Wörter ist eine Pause, sonst lief das Beispiel ohne Absatz in den Satz
+       („… ein mehrteiliges Prädikat bildet Das Wetter droht …“). Mitten im Wort („Freund(in)“,
+       „lachend(,)“) bleibt sie ein Leerzeichen. */
+    .replace(/(^|\s)[(\[]/g,"$1, ")
+    .replace(/[)\]](?=\s|$|[.,;:!?])/g,", ")
     .replace(/[\[\]()]/g," ")
     .replace(/_{2,}/g," Lücke ")
     .replace(/(\d)\s*%/g,"$1 Prozent")
@@ -6096,6 +6106,7 @@ function sprechbar(t){
     .replace(/(?<![\p{L}])Akk(?![\p{L}])/gu,"Akkusativ").replace(/(?<![\p{L}])Dat(?![\p{L}])/gu,"Dativ")
     .replace(/km\s*\/\s*h/g,"Kilometer pro Stunde")   // ein Schrägstrich, der kein „oder“ ist
     .replace(/(\p{L})\s*\/\s*(\p{L})/gu,"$1 oder $2")
+    .replace(/,?\s+\/\s+/g," oder ")                  // „raten (Dat) / beraten (Akk)“
     .replace(/(,\s*){2,}/g,", ")     // doppelte Pausen zusammenfassen
     .replace(/\s+/g," ").trim();
 }
@@ -9126,7 +9137,13 @@ function drawCheck(){
 
 /* ---------- Suchindex ---------- */
 let INDEX = null;
-function strip(h){ return String(h).replace(/<[^>]+>/g," ").replace(/\s+/g," "); }
+/* Hervorhebungen mitten im Wort („gut<b>e</b>“, „über<b>SETZ</b>en“) fallen spurlos weg,
+   sonst hörte die Sprachausgabe „gut e“ und die Suche fand „gute“ nicht. Blockgrenzen
+   (br, p, li, td …) bleiben ein Leerzeichen. Siehe auch sprechbar(). */
+function strip(h){
+  return String(h).replace(/<\/?(?:b|i|em|strong|u|span|code|mark|small|sup|sub)\b[^>]*>/gi,"")
+    .replace(/<[^>]+>/g," ").replace(/\s+/g," ");
+}
 
 function buildIndex(){
   const ix = [];
