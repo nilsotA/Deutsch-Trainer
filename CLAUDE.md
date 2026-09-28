@@ -96,7 +96,7 @@ Drei Sorten, überall einheitlich:
 
 `frageZuSchluessel(k, r)` löst jeden Schlüssel in eine Frage auf. **Jede neue Stelle,
 die aus Schlüsseln Fragen macht, muss darüber gehen** — sonst verschwindet wieder eine
-Kartensorte (ist zweimal passiert).
+Kartensorte (ist dreimal passiert, zuletzt am 28.09.2026 in zwei freien Runden).
 
 ### Fallkarten in Satzform
 
