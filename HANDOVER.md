@@ -97,6 +97,14 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   „Wörter auf -ung/-heit/-keit“ und zählte auch -nis und -ion. Beides behoben, Prüfung mit Gegenprobe in
   `tests/suite.js`, F2. Fehlersuche und Textcheck auf 375×667 sonst ohne Befund (eine korrekte Mail ergab nur den
   berechtigten Prüfhinweis zu „Mittwoch Nachmittag“).
+- **Schreibwerkstatt gegengelesen** (ein Prüfer, nur Meldung; jeder Fund von mir nachgelesen, § 54 am Regelwerk 2024):
+  ph06 Satz nach Doppelpunkt groß („Das macht sie nachvollziehbar“); ph19 „beendet das Gespräch, statt es zu führen“;
+  ph44 „Eine Massenmail, erkennbar am …“; ph20 Tipp verlangte einen eigenen Satz, zwei Vorbilder setzen die Zustimmung
+  mit Gedankenstrich ab — Tipp nennt jetzt beides; ph26 Tipp „was und bis wann“ auf übernommene Aufgaben begrenzt
+  („Bin dabei“ ist eine Zusage zum Mitmachen); w03 schloss mit „Vielen Dank für Ihre Rückmeldung“ vor jeder
+  Rückmeldung, gegen pr14 und ph03 — jetzt „Ich freue mich auf Ihre Rückmeldung“. Nicht übernommen: ph37 (Tipp ist eine
+  Empfehlung, keine Behauptung über die Vorbilder), „die beste Übung/Investition“ (steht mit Grund auf der Ausnahmeliste
+  des Rangwächters). Neu im Vorbildkorpus von `tests/suite.js`: die Erklärtexte der Negativbeispiele (Teil nach „—“).
 - Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
   nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
   an Groß-/Kleinschreibung).

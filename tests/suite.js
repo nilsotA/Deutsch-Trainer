@@ -1127,6 +1127,15 @@ PAIRS.forEach(pr => { if (pr.note) beide({ id: "pr:" + pr.id + " (Merksatz)", t:
    30 Feldern schlug danach kein Muster an. */
 PAIRS.forEach(pr => { if (pr.why) beide({ id: "pr:" + pr.id + " (Begründung)", t: strip(pr.why) }); });
 PHRASES.forEach(ph => { if (ph.tip) beide({ id: "ph:" + ph.id + " (Merksatz)", t: strip(ph.tip) }); });
+/* Die Negativbeispiele der Bausteine tragen hinter dem Gedankenstrich eine Erklärung in
+   eigenem Fließtext: „„Das ist doch Quatsch.“ — beendet das Gespräch statt es zu führen.“
+   Das Beispiel davor ist absichtlich schlecht, die Erklärung nicht. Am 28.09.2026 standen
+   dort zwei Kommafehler (ph19, ph44), die kein Wächter sah, weil das ganze Feld draußen
+   blieb. Geprüft wird jetzt nur der Teil nach dem ersten „ — “. */
+PHRASES.forEach(ph => (ph.no || []).forEach(t => {
+  const teil = strip(t).split(" — ").slice(1).join(" — ");
+  if (teil.trim()) beide({ id: "ph:" + ph.id + " (Erklärung zum Negativbeispiel)", t: teil });
+}));
 /* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
    Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
    korrektes Deutsch vorgesetzt bekommt. */
