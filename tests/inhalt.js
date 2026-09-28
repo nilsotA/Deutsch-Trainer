@@ -1127,4 +1127,26 @@ P.ok("Die Ablenkerprüfung erkennt „konzedieren“ als Ablenker zu „einräum
 P.ok("… und jede Wortkarte behält genug Ablenker", daten(w, "WORDS.every(a=>WORDS.filter(b=>b.w!==a.w&&!wortNah(a,b)).length>=3)"),
   "eine Karte hat weniger als drei Ablenker");
 
+/* Fehlerklasse „die Form verrät die Antwort“ (28.09.2026): 35 Paarkarten erklären zwei Wörter
+   („implizit = mitgemeint …, explizit = …“), die übrigen eins. Die Ablenker kamen aus beiden
+   Sorten, und auf „Was bedeutet prägnant?“ war jede Paarerklärung falsch, ohne dass man das
+   Wort kennen musste. Einzelkarten ziehen jetzt nur Einzelerklärungen. Paarkarten bleiben
+   gemischt: Ihre richtige Antwort nennt beide Wörter und ist ohnehin erkennbar. */
+const karteZu = o => WORDS.find(b => b.d === o || b.d.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") === o);
+const istPaar = x => x.p === "Paar";
+const paarAblenker = (w0, opts, frage) => opts.filter((o, i) => i !== frage.ans).map(karteZu)
+  .filter(b => b && istPaar(b)).map(b => w0.w + " ← " + b.w);
+const sortenFunde = new Set();
+WORDS.filter(x => !istPaar(x)).forEach(x => {
+  for (let i = 0; i < 10; i++) {
+    const q = daten(w, "wordQuestion(WORDS.find(y=>y.w===" + JSON.stringify(x.w) + "), rng(" + (i * 104729 + 7) + "))");
+    paarAblenker(x, q.opts, q).forEach(f => sortenFunde.add(f));
+  }
+});
+P.ok("Einzelwortkarten bekommen keine Paarerklärung als Ablenker (" + WORDS.filter(istPaar).length + " Paarkarten)",
+  !sortenFunde.size, [...sortenFunde].slice(0, 6).join(" · "));
+const probeP = WORDS.find(x => x.w === "prägnant"), probeQ = WORDS.find(istPaar);
+P.ok("… und die Prüfung erkennt eine Paarerklärung als Ablenker einer Einzelkarte (Positivprobe)",
+  paarAblenker(probeP, [probeP.d, probeQ.d], { ans: 0 }).length === 1, "Positivprobe blieb stumm");
+
 P.abschluss();

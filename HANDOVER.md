@@ -59,6 +59,17 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Wortkarten unterwegs (28.09.2026, zweiundfünfzigste Runde).** Alle 712 Sprechtexte der Unterwegs-Karten
+gelesen (Skript `scratchpad/r52/sprech.js`).
+- **Die Form verriet die Antwort:** Einzelwortkarten bekamen Paarerklärungen („implizit = …, explizit = …“)
+  als Ablenker — auf „Was bedeutet prägnant?“ sichtbar falsch, ohne das Wort zu kennen. `wordQuestion()` zieht
+  für Einzelkarten jetzt nur Einzelerklärungen. `tests/inhalt.js`, Abschnitt M, mit Positivprobe.
+- **Dichtere Fassung für sehr lange Antworten:** Übersteigen die vier Antworten zusammen `SEHR_LANG` (320)
+  Zeichen, setzt `renderQ()` unterwegs zusätzlich `sehrlang` (weniger Polsterung, Schrift weiter 16 px).
+  Auf 375×667 brauchen 5 statt 14 Karten Scrollen; `npm run layout` erlaubt jetzt höchstens 8.
+- `sprechFrage()` setzt nach einer Frage, die schon mit Satzzeichen endet, keinen zweiten Punkt mehr.
+- **Nicht geändert:** „+“ in 45 Sprechtexten („an + Dativ“) liest die Stimme als „plus“ — verständlich, bleibt.
+
 **Suche (28.09.2026, einundfünfzigste Runde).** Mehrere Wörter mussten bisher als zusammenhängende
 Zeichenkette vorkommen: „seit seid“ fand nichts, obwohl die Regel beide Wörter im Titel trägt, und bei
 „dass das“ standen Übungen vor der Regel. `drawSearch()` wertet jetzt auch Treffer, in denen alle Wörter
@@ -3598,6 +3609,12 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
+0. **Paarkarten aufteilen (notiert 28.09.2026).** Die richtige Antwort einer Paarkarte nennt beide
+   Wörter („implizit = … · explizit = …“) und ist daran zu erkennen, ohne die Bedeutung zu kennen. Besser
+   wäre, eine Seite abzufragen („Was bedeutet explizit?“) mit der Bedeutung des Partners als Ablenker. Das
+   geht nur Paar für Paar nach Duden: Der Partner muss **sicher falsch** sein, und das ist er nicht überall —
+   der Duden erklärt „mindestens“ auch mit „wenigstens, zumindest“, rational/rationell und sensibel/sensitiv
+   überschneiden sich. Sieben Paarkarten haben ohnehin keine Form „X = … · Y = …“.
 1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
    Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.
    Offen sind die 23 Grammatikregeln (`gram-*`), die 14 Satzbauregeln (`satz-*`), die

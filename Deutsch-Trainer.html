@@ -406,6 +406,11 @@ body.walk .walktop .btn{padding:10px 14px;font-size:16px}
 body.walk .opts.lang{gap:8px}
 body.walk .opts.lang .opt{padding:11px 14px;font-size:17px;line-height:1.32;min-height:56px}
 body.walk .qtext.vorlang{margin:10px 0 14px}
+/* Zweite Stufe für Karten, deren vier Antworten zusammen sehr lang sind — fast nur
+   Paarkarten („implizit = …, explizit = …“). Gemessen am 28.09.2026 auf 375×667: 5 statt 14
+   Karten brauchen Scrollen. Die Schrift bleibt bei 16 px, so groß wie außerhalb. */
+body.walk .opts.sehrlang{gap:6px}
+body.walk .opts.sehrlang .opt{padding:8px 12px;font-size:16px;line-height:1.28;min-height:48px}
 .speakon{background:var(--acc)!important;color:var(--acc-fg)!important;border-color:var(--acc)!important}
 .savewarn{background:var(--bad-soft);border:1px solid var(--bad);border-radius:12px;padding:15px 17px;
   margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--ink)}
@@ -5953,7 +5958,15 @@ function wortNah(a, b){
   return enthaelt(b.d, sa) || enthaelt(a.d, sb) || enthaelt(b.s, sa) || enthaelt(a.s, sb);
 }
 function wordQuestion(w, r){
-  const others = shuffle(WORDS.filter(x=>x.w!==w.w && !wortNah(w, x)), r).slice(0,3).map(x=>x.d);
+  /* Eine Einzelkarte bekommt keine Paarerklärung als Ablenker. Paarkarten erklären zwei Wörter
+     („implizit = …, explizit = …“); auf „Was bedeutet prägnant?“ war jede solche Option sichtbar
+     falsch, ohne dass man das Wort kennen musste. Paarkarten selbst ziehen weiter aus allen
+     Karten — ihre richtige Antwort nennt beide Wörter und ist ohnehin erkennbar (siehe
+     HANDOVER, Ideenliste). Reichen die Einzelkarten nicht, füllen Paarkarten auf. */
+  const paar = x => x.p === "Paar";
+  const pool = shuffle(WORDS.filter(x=>x.w!==w.w && !wortNah(w, x)), r);
+  const others = (paar(w) ? pool : pool.filter(x=>!paar(x)).concat(pool.filter(paar)))
+    .slice(0,3).map(x=>x.d);
   const opts = shuffle([w.d].concat(others), r);
   const exp = "<b>"+esc(w.w)+"</b> ("+esc(w.p)+") — "+esc(w.d)+
     '<br><span style="opacity:.8">Beispiel: '+esc(w.ex)+"</span>"+
@@ -6426,7 +6439,8 @@ function sprechFrage(q){
     const h = hoerHinweis(x, o), t = strip(x);
     return h && !/[.!?…:,;]\s*$/.test(t) ? t + "," + h : t + h;
   };
-  return strip(q.q) + ". " +
+  const frage = strip(q.q).trim();
+  return frage + (/[.!?…:]$/.test(frage) ? " " : ". ") +
     o.map((x,k)=>String.fromCharCode(65+k) + ": " + mitHinweis(x)).join(". ");
 }
 /* Jede Äußerung bekommt eine Nummer; ein Rückruf gilt nur, solange seine Nummer die
@@ -6577,6 +6591,7 @@ function zeigeRueckmeldung(){
   try{ window.scrollTo({top:ziel, behavior:sanft()}); }catch(e){ window.scrollTo(0, ziel); }
   scrollBeiFrage = null;
 }
+const SEHR_LANG = 320;   // Zeichen aller Antworten zusammen, ab denen unterwegs die dichteste Fassung greift
 function renderQ(){
   Q.beantwortet = false;
   Q.frageSeit = Date.now();
@@ -6585,8 +6600,9 @@ function renderQ(){
   const pct = Math.round(Q.i / Q.list.length * 100);
   let body = "";
   const lang = q.type === "mc" && q.opts.some(o => String(o).replace(/<[^>]+>/g, "").length > 40);
+  const sehrLang = lang && q.opts.reduce((n, o) => n + String(o).replace(/<[^>]+>/g, "").length, 0) > SEHR_LANG;
   if(q.type === "mc"){
-    body = '<div class="opts' + (lang ? ' lang' : '') + '">' + q.opts.map((o,i)=>
+    body = '<div class="opts' + (lang ? ' lang' : '') + (sehrLang ? ' sehrlang' : '') + '">' + q.opts.map((o,i)=>
       '<button class="opt" data-i="'+i+'"><span class="k">'+String.fromCharCode(65+i)+'</span><span>'+o+"</span></button>"
     ).join("") + "</div>";
   } else {
