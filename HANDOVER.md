@@ -59,6 +59,12 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Suche (28.09.2026, einundfünfzigste Runde).** Mehrere Wörter mussten bisher als zusammenhängende
+Zeichenkette vorkommen: „seit seid“ fand nichts, obwohl die Regel beide Wörter im Titel trägt, und bei
+„dass das“ standen Übungen vor der Regel. `drawSearch()` wertet jetzt auch Treffer, in denen alle Wörter
+vorkommen (Titel vor Untertitel vor Text), und gibt Regeln einen Vorsprung. `tests/suite.js`, F2: „seit seid“,
+„dass das“ und „wider wieder“ müssen die Regel zuerst zeigen; mit dem alten Code schlagen alle drei fehl.
+
 **Unterwegs-Modus im Browser angesehen (28.09.2026, neunundvierzigste Runde).**
 
 Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`, `tage.js`, `px.js`).

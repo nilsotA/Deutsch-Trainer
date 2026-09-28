@@ -3429,6 +3429,22 @@ P.titel("F2 · Suche und Textcheck");
     kennzahlen.length >= 5 && kennzahlen.some(t => /\d,\d/.test(t)) && !kennzahlen.some(t => /\d\.\d/.test(t)),
     kennzahlen.join(" · "));
 
+  /* Fehlerklasse „die Suche kennt nur die ganze Zeichenkette“ (28.09.2026): „seit seid“
+     fand nichts, weil die Regel „seit oder seid?“ heißt, und bei „dass das“ standen zwei
+     Übungsfragen vor der Regel „das oder dass?“. Mehrere Wörter zählen jetzt auch einzeln,
+     und eine Regel liegt bei gleicher Trefferart vorn. */
+  {
+    w.eval("openSearch()");
+    const erster = s => { dd.querySelector("#srchIn").value = s; w.eval("drawSearch()");
+      const b = dd.querySelector("#srchOut .sres"); return b ? b.textContent.replace(/\s+/g, " ").trim() : ""; };
+    for (const [s, erwartet] of [["seit seid", /^Regel\s*seit oder seid/], ["dass das", /^Regel\s*das oder dass/],
+                                 ["wider wieder", /^Regel\s*wider oder wieder/]]) {
+      const e = erster(s);
+      P.ok("die Suche „" + s + "“ führt zuerst zur Regel", erwartet.test(e), e.slice(0, 60));
+    }
+    w.eval("closeSearch()");
+  }
+
   /* Fehlerklasse „Überlagerung ohne Fessel“: Ein Shift+Tab im Suchfenster landete
      unsichtbar auf der Seite dahinter — und Enter startete dort eine Runde. */
   const vorherFokussiert = dd.querySelector("#searchBtn");

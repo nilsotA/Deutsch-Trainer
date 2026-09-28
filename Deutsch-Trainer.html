@@ -9290,14 +9290,24 @@ function drawSearch(){
       INDEX.length+" Einträge aus allen Bereichen.</div>";
     return;
   }
+  /* Mehrere Wörter müssen nicht am Stück stehen: „seit seid“ fand bis zum 28.09.2026 nichts,
+     weil die Regel „seit oder seid?“ heißt. Und eine Regel liegt bei gleicher Trefferart vor
+     Übungen — bei „dass das“ standen zwei Übungsfragen, die die Wortfolge zufällig enthalten,
+     vor der Regel „das oder dass?“. Wer sucht, will meist nachschlagen. */
+  const woerter = q.split(" ").filter(w=>w.length >= 2);
+  const alle = t => woerter.length > 1 && woerter.every(w=>t.includes(w));
   const scored = [];
   INDEX.forEach(e=>{
     let sc = 0;
     if(e.tn === q) sc = 100;
     else if(e.tn.startsWith(q)) sc = 80;
     else if(e.tn.includes(q)) sc = 60;
+    else if(alle(e.tn)) sc = 50;
     else if(e.subn.includes(q)) sc = 40;
+    else if(alle(e.tn+" "+e.subn)) sc = 30;
     else if(e.sn.includes(q)) sc = 20;
+    else if(alle(e.tn+" "+e.subn+" "+e.sn)) sc = 10;
+    if(sc && e.k === "Regel") sc += 12;
     if(sc) scored.push({e, sc});
   });
   scored.sort((a,b)=>b.sc-a.sc);
