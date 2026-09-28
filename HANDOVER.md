@@ -85,6 +85,10 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   momentan)“, „f. = die folgende Seite“); die Stimme las „gleich“. `sprechbar()` liest jetzt „heißt“, und „=“ steht
   in der Zeichenliste des Hörbarkeitswächters (Positivprobe erweitert). Endet eine Option ohne Satzzeichen, lief der
   Hörhinweis ohne Pause an („im Nachhinein Nachhinein groß“); `sprechFrage()` setzt dort ein Komma.
+- **Kartensorte verschwindet, zum dritten Mal:** Die freie Runde der Kartenansicht zog nur Übungen und Wortkarten,
+  die Zusatzrunde nach der Tagesaufgabe nur Übungen — Fallkarten nie. Neue Hilfsfunktion `freieMischung(n, r)` über
+  `alleSchluessel()` und `frageZuSchluessel()`; zwei Prüfungen in `tests/unterwegs.js` (alter Code: 0 Fallkarten in
+  75 bzw. 70 Karten). Dazu zwei Oberflächentexte: „Fach 1 · alle 1 Tage“ → „jeden Tag“, „1 Antworten“ → „1 Antwort“.
 - Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
   nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
   an Groß-/Kleinschreibung).

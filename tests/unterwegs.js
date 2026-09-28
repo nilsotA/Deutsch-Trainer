@@ -648,6 +648,43 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("an derselben Stelle", daten(w, "(Q && Q.i)") === stand, daten(w, "(Q && Q.i)"));
   }
 
+  {
+    /* Fehlerklasse „Kartensorte verschwindet“, zum dritten Mal (28.09.2026): Die freie Runde
+       der Kartenansicht baute ihre Liste aus ALL und WORDS selbst, statt über
+       frageZuSchluessel() zu gehen — Fallkarten kamen dort nie vor. Fünf Runden à 15 Karten
+       aus 713: Fehlt eine Sorte in allen fünf, ist das kein Zufall mehr. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    const gesehen = { Aufgabe: 0, Wort: 0, Fall: 0 };
+    for (let n = 0; n < 5; n++) {
+      w.eval('go("karten")');
+      d.querySelector("#startSrs").click();
+      const s = sorten(daten(w, "Q.list.map(x=>({k:x.key}))"));
+      Object.keys(s).forEach(k => gesehen[k] += s[k]);
+      w.eval("Q = null");
+    }
+    P.ok("die freie Runde der Kartenansicht zieht alle drei Sorten",
+      gesehen.Aufgabe > 0 && gesehen.Wort > 0 && gesehen.Fall > 0, JSON.stringify(gesehen));
+
+    /* Dieselbe Lücke in der Zusatzrunde nach erledigter Tagesaufgabe: nur Übungen. */
+    const st = leererStand({ auto: false });
+    st.days = { [tag(0)]: { a: 12, c: 10, done: true } };
+    const w2 = boot(st);
+    const d2 = w2.document;
+    const zusatz = { Aufgabe: 0, Wort: 0, Fall: 0 };
+    for (let n = 0; n < 7; n++) {
+      w2.eval('go("heute"); renderHeute()');
+      const knopf = d2.querySelector("#extra");
+      if (!knopf) break;
+      knopf.click();
+      const s = sorten(daten(w2, "Q.list.map(x=>({k:x.key}))"));
+      Object.keys(s).forEach(k => zusatz[k] += s[k]);
+      w2.eval("Q = null");
+    }
+    P.ok("die Zusatzrunde nach der Tagesaufgabe zieht alle drei Sorten",
+      zusatz.Aufgabe > 0 && zusatz.Wort > 0 && zusatz.Fall > 0, JSON.stringify(zusatz));
+  }
+
   /* ---------- H · Rückmeldung im Bild ---------- */
   P.titel("H · Rückmeldung im Bild");
   {

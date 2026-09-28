@@ -370,7 +370,7 @@ bleibt. So sind die vorhandenen Prüfläufe entstanden.
 |---|---|
 | Antwort immer an Position A | 99 % der richtigen Antworten standen vorn. Seitdem wird gemischt — aber Aufgaben dürfen **nicht** auf Positionen verweisen („die zweite Fassung“). |
 | Rückbezug auf die vorige Aufgabe | „Und hier?“ ergibt in gemischten Runden keinen Sinn. |
-| Kartensorte verschwindet | Fallkarten wurden bewertet, aber nie wieder gezeigt; später fiel der Mix in Randfällen auf 100 % Aufgaben zurück. |
+| Kartensorte verschwindet | Fallkarten wurden bewertet, aber nie wieder gezeigt; später fiel der Mix in Randfällen auf 100 % Aufgaben zurück. Am 28.09.2026 zum dritten Mal: Die freie Runde der Kartenansicht baute ihre Liste aus `ALL` und `WORDS` selbst, die Zusatzrunde nach der Tagesaufgabe nur aus `ALL` — Fallkarten kamen in beiden nie vor. Beide gehen jetzt über `freieMischung()`; `tests/unterwegs.js` zählt die Sorten. Ein Themenfilter („Gezielt trainieren“, Kategorie) ist dagegen eine gewollte Auswahl. |
 | Beim Hören identisch | 39 Aufgaben klangen gleich. `hoerHinweis()` löst das — bei neuen Aufgaben mitprüfen. |
 | Stiller Speicherfehler | Fortschritt weg ohne Meldung. Jetzt Warnbanner. |
 | Test misst das Falsche | Ein Test suchte „Speicher“ und fand das Wort woanders auf der Seite — grün, obwohl kaputt. Immer am konkreten Element prüfen, nicht an `body.textContent`. |

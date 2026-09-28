@@ -7035,7 +7035,7 @@ function renderHeute(keepQuiz){
       "</div>";
     $("#extra").onclick = ()=>{
       const r = rng(Date.now());
-      startQuiz(shuffle(ALL,r).slice(0,10).map(exQuestion), host, {title:"Zusatzrunde"});
+      startQuiz(freieMischung(10, r), host, {title:"Zusatzrunde"});
     };
     const tc = $("#toCards"); if(tc) tc.onclick = ()=>{ go("karten"); renderCards(); };
   } else {
@@ -7184,7 +7184,7 @@ function renderCards(){
       '<hr class="sep">'+
       '<div class="eyebrow">Karten nach Sicherheit</div>'+
       '<div class="grid2" style="margin-top:8px">'+
-        boxes.map((v,i)=>'<div class="stat"><b>'+v+"</b><span>Fach "+(i+1)+" · alle "+BOXES[i]+" Tage</span></div>").join("")+
+        boxes.map((v,i)=>'<div class="stat"><b>'+v+"</b><span>Fach "+(i+1)+" · "+(BOXES[i]===1 ? "jeden Tag" : "alle "+BOXES[i]+" Tage")+"</span></div>").join("")+
       "</div>"+
       '<p class="tiny muted" style="margin-top:10px">'+known+" Karten sitzen (Fach 4–5) · "+
       Object.keys(S.cards).length+" von "+alleSchluessel().length+" Karten überhaupt schon gesehen.</p>"+
@@ -7211,7 +7211,7 @@ function renderCards(){
         .sort((a,b)=>cardOf(a.k).d.localeCompare(cardOf(b.k).d));
       list = alle.slice(0, SRS_RUNDE).map(x=>x.q());
     } else {
-      list = shuffle(ALL.map(exQuestion).concat(WORDS.map(w=>wordQuestion(w,r))), r).slice(0,15);
+      list = freieMischung(15, r);
     }
     startQuiz(list, host, {title:"Wiederholung", onDone:()=>{}});
     window.scrollTo({top:0,behavior:sanft()});
@@ -7460,7 +7460,7 @@ function renderStats(sel){
     const t = s.c+s.w;
     const p = t ? Math.round(s.c/t*100) : 0;
     return '<div class="catrow"><div class="spread"><span>'+CATS[k].n+"</span>"+
-      '<span class="tiny muted">'+(t ? p+" % · "+t+" Antworten" : "noch nichts")+"</span></div>"+
+      '<span class="tiny muted">'+(t ? p+" % · "+t+(t===1 ? " Antwort" : " Antworten") : "noch nichts")+"</span></div>"+
       '<div class="bar"><i style="width:'+p+'%;background:'+(t? (p>=80?"var(--acc)":p>=60?"var(--gold)":"var(--warn)") :"var(--line2)")+'"></i></div></div>';
   }).join("");
 
@@ -8237,6 +8237,19 @@ function logError(id, cat, rule, label){
 
 /* Schlüssel → Frage. Eine Stelle für alle Kartenarten, damit beim Auflösen
    nichts mehr verloren geht. */
+/* n zufällige Karten aus dem ganzen Bestand, alle drei Sorten. Über alleSchluessel() und
+   frageZuSchluessel(), wie jede Stelle, die aus dem Bestand Fragen macht: Bis zum 28.09.2026
+   zogen die freie Runde der Kartenansicht nur Übungen und Wortkarten und die Zusatzrunde nur
+   Übungen — Fallkarten kamen dort nie vor. */
+function freieMischung(n, r){
+  const list = [];
+  for(const k of shuffle(alleSchluessel(), r)){
+    const q = frageZuSchluessel(k, r);
+    if(q) list.push(q);
+    if(list.length >= n) break;
+  }
+  return list;
+}
 function frageZuSchluessel(k, r){
   r = r || rng(Date.now());
   if(k.startsWith("w:")){ const wd = WORDS.find(x=>"w:"+x.w===k); return wd ? wordQuestion(wd,r) : null; }
