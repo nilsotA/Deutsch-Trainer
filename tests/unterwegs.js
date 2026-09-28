@@ -365,6 +365,29 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     }
     const host = d.querySelector("#walkHost");
     P.ok("Abschluss erscheint", /richtig/.test(host.textContent));
+    /* Der Satz unter dem Ergebnis verspricht, was die nächste Runde nimmt. Bis zum 28.09.2026
+       hieß es „Alles wiederholt — die nächste Runde nimmt neuen Stoff“ auch nach einer
+       ersten Runde aus lauter neuen Karten, und „neuen Stoff“ auch dann, wenn es keinen mehr
+       gab. unterwegsRunde() nimmt dann die Karten, die am längsten nicht dran waren. */
+    if (daten(w, "countDue()") === 0)
+      P.ok("… nichts fällig, noch Ungesehenes: „neuen Stoff“",
+        /nichts mehr fällig.*neuen Stoff/.test(host.textContent) && !/Alles wiederholt/.test(host.textContent),
+        host.textContent.slice(0, 160));
+    {
+      const wa = boot(stand(() => ({ b: 3, d: tag(5), s: 3, w: 0, l: tag(-2) })));
+      const da = wa.document;
+      da.querySelector("#wkNew").click();
+      let m = 0;
+      while (daten(wa, "!!(Q && !Q.done)") && m < 40) {
+        tippe(wa, da.querySelectorAll(".opt")[daten(wa, "Q.list[Q.i].ans")]);
+        const nb = da.querySelector("#nextBtn"); if (!nb) break;
+        wa.eval("Q.weiterAb = 0"); nb.click(); m++;
+      }
+      const txt = da.querySelector("#walkHost").textContent;
+      P.ok("… alles gesehen, nichts fällig: kein „neuer Stoff“, sondern die ältesten Karten",
+        daten(wa, "countDue()") === 0 && /am längsten nicht dran/.test(txt) && !/neuen Stoff/.test(txt),
+        txt.slice(0, 160));
+    }
     const zeilen = [...d.querySelectorAll(".fehlerzeile")];
     P.ok("Fehler nach Regel gebündelt", zeilen.length > 0 && zeilen.length <= 4, zeilen.length);
     P.ok("jede Zeile mit Titel und Anzahl", zeilen.every(z => /\d+×/.test(z.textContent) && z.textContent.length > 4));

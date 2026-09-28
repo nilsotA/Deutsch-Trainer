@@ -6947,7 +6947,10 @@ function finishWalk(){
       '<div style="font-size:52px;line-height:1;margin-bottom:8px">'+(pct>=80?"◆":pct>=50?"◈":"◇")+"</div>"+
       '<h2 id="wkErgebnis" tabindex="-1" style="font-size:28px">'+c+" von "+total+" richtig</h2>"+
       '<p class="muted" style="margin-top:8px;font-size:17px">'+
-        (n ? n+" Karten stehen noch an." : "Alles wiederholt — die nächste Runde nimmt neuen Stoff.")+"</p>"+
+        (n ? n+" Karten stehen noch an." :
+          "Heute ist nichts mehr fällig — die nächste Runde nimmt "+
+          (ALL.some(i=>i.t!=="fill" && !S.cards[i.id]) || WORDS.some(w=>!S.cards["w:"+w.w]) ||
+           drillPool().some(e=>!S.cards["c:"+e.w]) ? "neuen Stoff." : "die Karten, die am längsten nicht dran waren."))+"</p>"+
       rueckblick +
       '<div class="walkbar" style="margin-top:20px">'+
         '<button class="btn" id="wkAgain">Nächste Runde</button>'+
@@ -7131,7 +7134,7 @@ function renderCards(){
   host.innerHTML =
     '<div class="card">'+
       '<div class="eyebrow">Wiederholung</div>'+
-      "<h2>"+(n ? n+" Karten sind heute fällig" : "Alles wiederholt")+"</h2>"+
+      "<h2>"+(n ? n+" Karten sind heute fällig" : "Heute nichts fällig")+"</h2>"+
       '<p class="muted" style="margin-top:8px">'+
         (n ? "Nach dem Leitner-System: Was du kannst, kommt seltener. Was du verwechselst, kommt morgen wieder."+
              (n>SRS_RUNDE ? " Eine Runde umfasst "+SRS_RUNDE+" Karten — die am längsten überfälligen zuerst." : "")

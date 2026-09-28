@@ -71,6 +71,11 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   Scrollen bis zur letzten Antwort, über 14 Kalendertage konstant (also kein Tagesseed). Am knappsten lagen z03
   (2 px) und f07 (3 px) — kurze Antworten ohne die kompakte Fassung, eine kürzere Frage änderte nichts. Der Abstand
   zwischen kurzen Antworten ist jetzt 10 statt 12 px (Tippflächen unverändert 76 px hoch): 49 Karten.
+- **Rundenende versprach zu viel:** „Alles wiederholt — die nächste Runde nimmt neuen Stoff“ stand auch nach einer
+  ersten Runde aus lauter neuen Karten, und „neuen Stoff“ auch, wenn es keinen mehr gab. Jetzt „Heute ist nichts mehr
+  fällig“, und der zweite Halbsatz folgt `unterwegsRunde()`: neuer Stoff, solange Ungesehenes da ist, sonst „die
+  Karten, die am längsten nicht dran waren“. Die Wiederholungskarte sagt „Heute nichts fällig“ statt „Alles
+  wiederholt“. Zwei Prüfungen in `tests/unterwegs.js`, Abschnitt C, am gerenderten Text.
 - Kein Befund: das blasse Rechteck am rechten Rand der Screenshots ist Chromiums Scrollbalken; 3 XP für eine falsche
   Antwort sind gewollt (`S.xp += ok ? 10 : 3`).
 
