@@ -1149,4 +1149,62 @@ const probeP = WORDS.find(x => x.w === "prägnant"), probeQ = WORDS.find(istPaar
 P.ok("… und die Prüfung erkennt eine Paarerklärung als Ablenker einer Einzelkarte (Positivprobe)",
   paarAblenker(probeP, [probeP.d, probeQ.d], { ans: 0 }).length === 1, "Positivprobe blieb stumm");
 
+/* Geteilte Paarkarten (28.09.2026): Für die Paare in PAAR_GETEILT fragt die Karte nach einer
+   Seite, und die Bedeutung des Partners ist Ablenker. Jedes Paar dort ist gegen Duden und DWDS
+   geprüft (HANDOVER, 53. Runde). Hier steht, was die Mechanik halten muss: Die richtige Antwort
+   ist die Bedeutung der gefragten Seite, der Partner steht unter den Optionen, die übrigen zwei
+   sind freie Einzelkarten, und über verschiedene Tage kommen beide Seiten dran. */
+const GETEILT = daten(w, "PAAR_GETEILT");
+P.ok("PAAR_GETEILT nennt nur Paarkarten der Form „X = … · Y = …“ (" + GETEILT.length + ")",
+  GETEILT.length > 0 && GETEILT.every(k => daten(w, "(function(){const x=WORDS.find(y=>y.w===" + JSON.stringify(k) +
+    ");return !!x && x.p===\"Paar\" && !!paarHaelften(x)})()")), GETEILT.join(", "));
+const teilFunde = [];
+GETEILT.forEach(k => {
+  const seiten = new Set();
+  for (let i = 0; i < 24; i++) {
+    const q = daten(w, "(function(){const x=WORDS.find(y=>y.w===" + JSON.stringify(k) + ");const q=wordQuestion(x,rng(" + (i * 7717 + 3) +
+      "));return {q:q.q,opts:q.opts,ans:q.ans,h:paarHaelften(x).map(z=>({wort:esc(z.wort),bed:esc(z.bed)})),frei:WORDS.filter(y=>y.p!==\"Paar\"&&!wortNah(x,y)).map(y=>esc(y.d))}})()");
+    const s = q.h.findIndex(z => q.q.includes("<em>" + z.wort + "</em>"));
+    if (s < 0) { teilFunde.push(k + ": Frage nennt keine Seite"); continue; }
+    seiten.add(s);
+    if (q.opts[q.ans] !== q.h[s].bed) teilFunde.push(k + ": richtig ist nicht die Bedeutung der gefragten Seite");
+    if (!q.opts.includes(q.h[1 - s].bed)) teilFunde.push(k + ": der Partner fehlt unter den Optionen");
+    const rest = q.opts.filter(o => o !== q.h[0].bed && o !== q.h[1].bed);
+    if (rest.length !== 2 || !rest.every(o => q.frei.includes(o))) teilFunde.push(k + ": die übrigen Ablenker sind keine freien Einzelkarten");
+    if (new Set(q.opts).size !== 4) teilFunde.push(k + ": doppelte Option");
+  }
+  if (seiten.size !== 2) teilFunde.push(k + ": nur eine Seite kommt dran");
+});
+P.ok("Geteilte Paarkarten fragen eine Seite, der Partner ist Ablenker, beide Seiten kommen dran",
+  !teilFunde.length, [...new Set(teilFunde)].slice(0, 5).join(" · "));
+/* Die übrigen zwei Ablenker einer geteilten Paarkarte dürfen keine Einzelkarte sein, deren
+   Bedeutung auf die gefragte Seite ebenfalls passt. Die Liste unten hat ein Prüfer je Paar über
+   alle 120 Einzelkarten gezogen (28.09.2026) — unabhängig von PAAR_NAH in der App aufgeschrieben,
+   damit ein gestrichener Eintrag dort hier auffällt. */
+const PAAR_NAH_GEPRUEFT = {
+  "tendenziell / tendenziös": ["tendenziös", "suggestiv", "suggerieren", "sukzessive", "mutmaßlich"],
+  "scheuen / scheuern": ["ausklammern", "unterlaufen", "tangieren"],
+  "gewiss / gewisser\u00ADmaßen": ["mutmaßlich", "affirmativ", "evident", "konzedieren", "einräumen", "dezidiert", "plausibel", "rudimentär"],
+  "normativ / deskriptiv": ["verbindlich", "maßgeblich", "tendenziös", "die Maxime", "postulieren", "das Postulat", "das Desiderat", "das Paradigma", "gewichten", "nahelegen", "legitimieren", "dezidiert", "apodiktisch", "konstatieren", "explizieren", "die Empirie", "der Sachverhalt", "veranschaulichen", "exemplifizieren"],
+  "implizit / explizit": ["implizieren", "immanent", "latent", "die Konnotation", "das Konstrukt", "suggerieren", "suggestiv", "nahelegen", "explizieren", "beipflichten", "nuanciert", "elaboriert", "prononciert", "dezidiert", "evident", "eklatant"],
+  "induktiv / deduktiv": ["stringent", "extrapolieren", "subsumieren", "die Empirie", "exemplifizieren", "veranschaulichen", "die Prämisse", "implizieren"],
+  "intrinsisch / extrinsisch": ["immanent", "substanziell", "eklektisch", "marginal"],
+  "Rezeption / Reflexion": ["hinterfragen", "abwägen", "revidieren", "erörtern", "resümieren", "rekurrieren"],
+  "abschließend / anschließend": ["resümieren", "dezidiert", "herausstellen", "verbindlich", "sukzessive"],
+  "verifizieren / falsifizieren": ["affirmativ", "untermauern", "entkräften", "konterkarieren", "hinterfragen", "revidieren"]
+};
+const nahGeteilt = [];
+Object.entries(PAAR_NAH_GEPRUEFT).forEach(([k, verboten]) => {
+  if (!GETEILT.includes(k)) { nahGeteilt.push(k + ": steht nicht in PAAR_GETEILT"); return; }
+  const dVerboten = daten(w, "[" + verboten.map(v => "esc((WORDS.find(y=>y.w===" + JSON.stringify(v) + ")||{d:'?'}).d)").join(",") + "]");
+  for (let i = 0; i < 40; i++) {
+    const q = daten(w, "wordQuestion(WORDS.find(y=>y.w===" + JSON.stringify(k) + "), rng(" + (i * 3301 + 11) + "))");
+    q.opts.forEach(o => { const j = dVerboten.indexOf(o); if (j >= 0) nahGeteilt.push(k + " ← " + verboten[j]); });
+  }
+});
+P.ok("Geteilte Paarkarten ziehen keine nahe Einzelkarte als Ablenker (" + Object.values(PAAR_NAH_GEPRUEFT).flat().length + " geprüfte Paare)",
+  !nahGeteilt.length, [...new Set(nahGeteilt)].slice(0, 6).join(" · "));
+P.ok("… ungeteilte Paarkarten fragen weiter nach beiden Wörtern (Positivprobe)",
+  daten(w, "(function(){const x=WORDS.find(y=>y.p===\"Paar\"&&!PAAR_GETEILT.includes(y.w));const q=wordQuestion(x,rng(5));return q.opts[q.ans]===esc(x.d)})()"));
+
 P.abschluss();

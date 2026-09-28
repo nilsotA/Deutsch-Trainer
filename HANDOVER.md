@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~920 KB, eine Datei, kein Build |
+| Dateigröße | ~940 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,36 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Paarkarten geteilt (28.09.2026, dreiundfünfzigste Runde).** Die richtige Antwort einer Paarkarte nennt beide
+Wörter („implizit = … · explizit = …“) und war daran zu erkennen, ohne die Bedeutung zu kennen. Für zehn Paare
+fragt die Karte jetzt nach einer Seite („Was bedeutet explizit?“); die Bedeutung des Partners ist Ablenker, die
+übrigen zwei kommen aus freien Einzelkarten. Welche Seite drankommt, entscheidet der Seed der Runde. Der Schlüssel
+`w:<Paar>` bleibt, der Lernstand auch — die alte Antwort ist nicht falsch geworden, deshalb kein `NEU_GELERNT`.
+- **Geprüft:** Duden- und DWDS-Einträge aller 56 Wörter abgerufen (`scratchpad/r53/holen.py`, mit dem Kasten
+  „Wussten Sie schon?“), dann ein Workflow mit 59 Agenten: je Paar ein Prüfer (vier Aussagen mit wörtlichem Beleg:
+  beide Bedeutungsangaben richtig, beide Partner sicher falsch), bei Bestehen zwei Gegenprüfer (Wörterbuch;
+  Gebrauch und Sprachratgeber), danach ein Prüfer über alle 120 Einzelkarten für Ablenker, die ebenfalls passen.
+  Die Wörterbuchstellen der zehn haltenden Paare habe ich selbst gelesen.
+- **Geteilt (`PAAR_GETEILT`):** tendenziell/tendenziös, scheuen/scheuern, gewiss/gewissermaßen,
+  normativ/deskriptiv, implizit/explizit, induktiv/deduktiv, intrinsisch/extrinsisch, Rezeption/Reflexion,
+  verifizieren/falsifizieren, abschließend/anschließend. `PAAR_NAH` schließt 77 nahe Einzelkarten als Ablenker aus
+  (streng gezogen, z. B. „untermauern“ bei verifizieren, „immanent“ bei intrinsisch); `wortNah()` liest sie mit.
+- **Nicht geteilt, weil der Partner laut Wörterbuch nicht sicher falsch ist:** scheinbar/anscheinend (Duden:
+  „scheinbar“ Adverb, umgangssprachlich = anscheinend; DWDS: „anscheinend“ selten ugs. = scheinbar),
+  effektiv/effizient, kompliziert/komplex, das Gleiche/dasselbe (beide Wörterbücher: umgangssprachlich synonym),
+  zumindest/mindestens (Duden: mindestens auch „wenigstens, zumindest“), scheinheilig/scheinbar („geheuchelt“),
+  valide/reliabel (Duden: valid „verlässlich“), Ursache/Anlass (DWDS: Anlass „Beweggrund, Ursache“),
+  formal/formell (Duden, „Wussten Sie schon?“: beides, wenn etwas nur der Form nach besteht), rational/rationell,
+  original/originell (Duden: original auch „in seiner Art eigenständig und schöpferisch“), kindlich/kindisch,
+  physisch/physikalisch, psychisch/psychologisch, verständlich/verständig, ideal/ideell (Duden: ideal auch im Sinn
+  von ideell, ohne Markierung), sensibel/sensitiv, geistig/geistlich (IDS-Paronymwörterbuch: „geistiges Oberhaupt“
+  auch religiös). trivial/banal und sechs Karten ohne die Form „X = … · Y = …“ waren gar nicht im Lauf.
+- `tests/inhalt.js`, Abschnitt M: Mechanik (gefragte Seite richtig, Partner unter den Optionen, beide Seiten
+  kommen dran) und die nahen Einzelkarten, als eigene Liste `PAAR_NAH_GEPRUEFT` — beide mit Positivprobe.
+- Nebenbei: `sensibel / sensitiv` führt „fachsprachlich: fein reagierend“ bei sensitiv. Duden und DWDS haben das
+  nicht; der Duden nennt für fein reagierende Instrumente „sensibel“. Die Karte sagt das in ihrem Feld `t` selbst,
+  Openthesaurus führt „Sensitivität“ unter Mathematik als „Trefferquote“. Bleibt so.
 
 **Wortkarten unterwegs (28.09.2026, zweiundfünfzigste Runde).** Alle 712 Sprechtexte der Unterwegs-Karten
 gelesen (Skript `scratchpad/r52/sprech.js`).
@@ -3609,12 +3639,13 @@ weiter belegst.
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
 
-0. **Paarkarten aufteilen (notiert 28.09.2026).** Die richtige Antwort einer Paarkarte nennt beide
-   Wörter („implizit = … · explizit = …“) und ist daran zu erkennen, ohne die Bedeutung zu kennen. Besser
-   wäre, eine Seite abzufragen („Was bedeutet explizit?“) mit der Bedeutung des Partners als Ablenker. Das
-   geht nur Paar für Paar nach Duden: Der Partner muss **sicher falsch** sein, und das ist er nicht überall —
-   der Duden erklärt „mindestens“ auch mit „wenigstens, zumindest“, rational/rationell und sensibel/sensitiv
-   überschneiden sich. Sieben Paarkarten haben ohnehin keine Form „X = … · Y = …“.
+0. **Ungeteilte Paarkarten: Überschneidung nennen (notiert 28.09.2026).** Zehn Paare sind geteilt (siehe
+   „Zuletzt geändert“, 53. Runde). Bei den übrigen verzeichnet der Duden die angeblich getrennten Bedeutungen oft
+   auch für das andere Wort — ideal auch im Sinn von ideell, original auch „eigenständig und schöpferisch“,
+   formal/formell „nur der Form nach“ beides. Die Karten sind nicht falsch (die genannte Bedeutung ist jeweils
+   die erste), verschweigen aber die Überschneidung. Kandidat für einen Satz im Feld `t` je Karte, jeweils mit
+   der Duden-Stelle; die Belege aus dem Lauf stehen in der Liste oben.
+
 1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
    Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.
    Offen sind die 23 Grammatikregeln (`gram-*`), die 14 Satzbauregeln (`satz-*`), die

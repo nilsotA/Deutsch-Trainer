@@ -5951,20 +5951,65 @@ function wortStaemme(w){
 }
 function wortNah(a, b){
   if(WORT_NAH.some(([x, y]) => (x === a.w && y === b.w) || (x === b.w && y === a.w))) return true;
+  if((PAAR_NAH[a.w] || []).includes(b.w) || (PAAR_NAH[b.w] || []).includes(a.w)) return true;
   const sa = wortStaemme(a.w), sb = wortStaemme(b.w);
   const vorn = (x, n) => x.slice(0, Math.min(n, x.length));
   if(sa.some(x => sb.some(y => x.length >= 5 && y.length >= 5 && vorn(x, 5) === vorn(y, 5)))) return true;
   const enthaelt = (text, st) => st.some(x => String(text || "").toLowerCase().includes(vorn(x, 6)));
   return enthaelt(b.d, sa) || enthaelt(a.d, sb) || enthaelt(b.s, sa) || enthaelt(a.s, sb);
 }
+/* Geteilte Paarkarten (28.09.2026). Die richtige Antwort einer Paarkarte nennt beide Wörter
+   („implizit = … · explizit = …“) und war daran zu erkennen, ohne die Bedeutung zu kennen. Für
+   die Paare hier fragt die Karte nach EINER Seite („Was bedeutet explizit?“), und die Bedeutung
+   des Partners ist einer der Ablenker — genau die Verwechslung, um die es geht. Das geht nur,
+   wo der Partner SICHER falsch ist: Jedes Paar ist gegen Duden und DWDS geprüft und von zwei
+   Gegenprüfern angegriffen worden. Nicht hier stehen Paare, deren Wörter sich laut Duden
+   überschneiden (etwa „mindestens“ auch im Sinn von „wenigstens, zumindest“). Welche Seite
+   drankommt, entscheidet der Seed der Runde; der Schlüssel bleibt „w:<Paar>“. */
+const PAAR_GETEILT = [
+  "tendenziell / tendenziös", "scheuen / scheuern", "gewiss / gewisser\u00ADmaßen", "normativ / deskriptiv",
+  "implizit / explizit", "induktiv / deduktiv", "intrinsisch / extrinsisch", "Rezeption / Reflexion",
+  "verifizieren / falsifizieren", "abschließend / anschließend"
+];
+/* Einzelkarten, deren Bedeutung auf die Frage nach einer Seite eines geteilten Paares ebenfalls
+   passen würde oder ihr nahekommt — sie kommen dort nicht als Ablenker. Streng gezogen (lieber eine
+   zu viel), von einem Prüfer je Paar über alle 120 Einzelkarten; was wortNah() schon ausschließt
+   (gleicher Stamm), steht hier nicht. */
+const PAAR_NAH = {
+  "tendenziell / tendenziös": ["suggestiv", "suggerieren", "sukzessive", "mutmaßlich"],
+  "scheuen / scheuern": ["ausklammern", "unterlaufen", "tangieren"],
+  "gewiss / gewisser\u00ADmaßen": ["mutmaßlich", "affirmativ", "evident", "konzedieren", "einräumen", "dezidiert", "plausibel", "rudimentär"],
+  "normativ / deskriptiv": ["verbindlich", "maßgeblich", "tendenziös", "die Maxime", "postulieren", "das Postulat", "das Desiderat", "das Paradigma", "gewichten", "nahelegen", "legitimieren", "dezidiert", "apodiktisch", "konstatieren", "explizieren", "die Empirie", "der Sachverhalt", "veranschaulichen", "exemplifizieren"],
+  "implizit / explizit": ["immanent", "latent", "die Konnotation", "das Konstrukt", "suggerieren", "suggestiv", "nahelegen", "beipflichten", "nuanciert", "elaboriert", "prononciert", "dezidiert", "evident", "eklatant"],
+  "induktiv / deduktiv": ["stringent", "extrapolieren", "subsumieren", "die Empirie", "exemplifizieren", "veranschaulichen", "die Prämisse", "implizieren"],
+  "intrinsisch / extrinsisch": ["immanent", "substanziell", "eklektisch", "marginal"],
+  "Rezeption / Reflexion": ["hinterfragen", "abwägen", "revidieren", "erörtern", "resümieren", "rekurrieren"],
+  "abschließend / anschließend": ["resümieren", "dezidiert", "herausstellen", "verbindlich", "sukzessive"],
+  "verifizieren / falsifizieren": ["affirmativ", "untermauern", "entkräften", "konterkarieren", "hinterfragen", "revidieren"]
+};
+function paarHaelften(w){
+  const t = String(w.d).split(" · ");
+  if(t.length !== 2) return null;
+  const h = t.map(x => x.match(/^([^=]+?) = (.+)$/));
+  return h.every(Boolean) ? h.map(m => ({wort: m[1], bed: m[2]})) : null;
+}
 function wordQuestion(w, r){
   /* Eine Einzelkarte bekommt keine Paarerklärung als Ablenker. Paarkarten erklären zwei Wörter
      („implizit = …, explizit = …“); auf „Was bedeutet prägnant?“ war jede solche Option sichtbar
-     falsch, ohne dass man das Wort kennen musste. Paarkarten selbst ziehen weiter aus allen
-     Karten — ihre richtige Antwort nennt beide Wörter und ist ohnehin erkennbar (siehe
-     HANDOVER, Ideenliste). Reichen die Einzelkarten nicht, füllen Paarkarten auf. */
+     falsch, ohne dass man das Wort kennen musste. Ungeteilte Paarkarten ziehen weiter aus allen
+     Karten — ihre richtige Antwort nennt beide Wörter und ist ohnehin erkennbar. Reichen die
+     Einzelkarten nicht, füllen Paarkarten auf. */
   const paar = x => x.p === "Paar";
   const pool = shuffle(WORDS.filter(x=>x.w!==w.w && !wortNah(w, x)), r);
+  const h = PAAR_GETEILT.includes(w.w) ? paarHaelften(w) : null;
+  if(h){
+    const s = r() < 0.5 ? 0 : 1, g = h[s], p = h[1 - s];
+    const opts = shuffle([g.bed, p.bed].concat(pool.filter(x=>!paar(x)).slice(0,2).map(x=>x.d)), r);
+    return {key:"w:"+w.w, cat:"wort", type:"mc",
+            q:"Was bedeutet <em>"+esc(g.wort)+"</em>?", opts:opts.map(esc), ans:opts.indexOf(g.bed),
+            exp:"<b>"+esc(g.wort)+"</b> — "+esc(g.bed)+"<br><b>"+esc(p.wort)+"</b> — "+esc(p.bed)+
+              '<br><span style="opacity:.8">Beispiel: '+esc(w.ex)+"</span>"};
+  }
   const others = (paar(w) ? pool : pool.filter(x=>!paar(x)).concat(pool.filter(paar)))
     .slice(0,3).map(x=>x.d);
   const opts = shuffle([w.d].concat(others), r);
