@@ -97,6 +97,11 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   „Wörter auf -ung/-heit/-keit“ und zählte auch -nis und -ion. Beides behoben, Prüfung mit Gegenprobe in
   `tests/suite.js`, F2. Fehlersuche und Textcheck auf 375×667 sonst ohne Befund (eine korrekte Mail ergab nur den
   berechtigten Prüfhinweis zu „Mittwoch Nachmittag“).
+- **Offline-Betrieb im Browser geprüft:** `sw.js` wurde bisher nur als Text gelesen. Neuer Lauf `npm run offline`
+  (`tests/offline.js`, eigener Node-Server, liefert „/“ wie Vercel): Start ohne Netz mit Lernstand und laufender
+  Runde, neue Fassung beim nächsten Start, bei einem Server, der die Seite in ~8 s tröpfelt, Start nach ~2,6 s aus
+  dem Cache. Zwei Positivproben (ohne Worker, Worker ohne Frist). Kein Befund in der App. Chromiums Netzdrosselung
+  greift für Anfragen des Workers nicht — deshalb drosselt der Server selbst.
 - **Einstufung wiederholte sich:** `testQuestions()` nahm immer dieselben 30 Aufgaben (pool[0], pool[step],
   pool[2·step]). Nach der ersten Einstufung stehen die im Lernstand; „Neu einstufen“ maß dann das Gedächtnis für
   genau diese Karten. Jetzt je Bereich zuerst Ungesehenes, dann das am längsten nicht Beantwortete, möglichst drei

@@ -14,7 +14,8 @@
     "test:fallform": "node tests/fallform.js",
     "kalender": "node tests/kalender.js",
     "kopplungen": "node tests/kopplungen-schreiben.js",
-    "layout": "node tests/layout.js"
+    "layout": "node tests/layout.js",
+    "offline": "node tests/offline.js"
   },
   "devDependencies": {
     "jsdom": "^24.0.0",

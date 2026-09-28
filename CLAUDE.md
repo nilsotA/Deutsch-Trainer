@@ -45,7 +45,7 @@ iOS und `sw.js` als Service Worker. Der Worker holt die Seite **zuerst aus dem N
 aber höchstens `GEDULD` (2,5 s) auf den *ganzen* Rumpf; danach kommt die Kopie aus dem Cache,
 und der Nachschub läuft über `e.waitUntil` weiter in den Cache. Eine Korrektur ist also beim
 nächsten Start da, bei schwachem Empfang beim übernächsten. Der Preis: Bei schwachem Empfang
-kostet jeder Kaltstart bis zu 2,5 s. Ein **Fortsetzen** ist kein Start — iOS friert die
+kostet jeder Kaltstart bis zu 2,5 s. `npm run offline` stellt alle drei Zusagen in Chromium nach (Start ohne Netz, neue Fassung beim nächsten Start, Kopie aus dem Cache nach der Frist). Ein **Fortsetzen** ist kein Start — iOS friert die
 Home-Bildschirm-App ein und setzt sie oft tagelang fort, ohne zu navigieren. Deshalb springt
 `tagesWechsel()` bei der Rückkehr auf den neuen Tag, und `darfFrischLaden()` lädt nach einer
 langen Pause neu, wenn dabei nichts verloren geht (Bedingungen im Kommentar dort). **Die
@@ -314,6 +314,7 @@ node tests/inhalt.js      # Fallbeispiele, doppelte Optionen, Hörbarkeit
 node tests/fallform.js    # Satzform der Fallkarten: Fall, Ablenker, Hörbarkeit, Abdeckung
 npm run kalender          # dieselben Läufe über sechs Kalenderversätze (dauert Minuten)
 npm run layout            # Layout in Chromium bei Handygrößen, quer mit Notch (braucht playwright-core + Chromium)
+npm run offline           # Service Worker in Chromium: Start ohne Netz, neue Fassung, Frist bei langsamem Netz
 npm run kopplungen        # schreibt tests/kopplungen.json neu
 ```
 
