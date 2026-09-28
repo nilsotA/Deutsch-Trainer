@@ -9135,8 +9135,9 @@ function drawCheck(){
         '<div class="stat"><b>'+m.words+"</b><span>Wörter, "+m.sents+" Sätze</span></div>"+
         '<div class="stat"><b>'+m.avg+"</b><span>Wörter je Satz</span></div>"+
         '<div class="stat"><b>'+m.lang+"</b><span>Sätze über 25 Wörter</span></div>"+
-        '<div class="stat"><b>'+m.fuellQ+" %</b><span>Füllwörter</span></div>"+
-        '<div class="stat"><b>'+m.nomQ+" %</b><span>Wörter auf -ung/-heit/-keit</span></div>"+
+        /* Dezimalkomma: „2.7 %“ stand hier in der App, die in q07 lehrt, dass der Punkt englisch ist. */
+        '<div class="stat"><b>'+String(m.fuellQ).replace(".", ",")+" %</b><span>Füllwörter</span></div>"+
+        '<div class="stat"><b>'+String(m.nomQ).replace(".", ",")+" %</b><span>Wörter auf -ung, -heit, -keit, -nis, -ion</span></div>"+
         '<div class="stat"><b>'+m.pasQ+" %</b><span>Sätze im Passiv</span></div>"+
       "</div>"+
       '<p class="tiny muted" style="margin-top:10px">Orientierung: Ø-Satzlänge 12–18 Wörter · Füllwörter unter 1,5 % · Passiv unter 25 %. '+

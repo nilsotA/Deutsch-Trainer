@@ -3409,6 +3409,17 @@ P.titel("F2 · Suche und Textcheck");
     JSON.stringify(markiert) === JSON.stringify(danach),
     markiert.join("|") + "  →  " + danach.join("|"));
 
+  /* Fehlerklasse „die App schreibt, was sie verbietet“ (28.09.2026): Die Kennzahlen des
+     Textchecks kamen roh aus JavaScript — „2.7 %“ mit Dezimalpunkt, in der App, die in q07
+     und n-gliederung lehrt, dass der Punkt englisch ist. Der Text ist so gewählt, dass die
+     Quoten nicht ganzzahlig sind. */
+  feld.value = "Die Durchführung der Messung war eigentlich gut. Wir haben die Leistung verglichen und sind zufrieden.";
+  dd.querySelector("#tcGo").click();
+  const kennzahlen = [...dd.querySelectorAll("#tcRes .stat b, #wSub .stat b")].map(b => b.textContent);
+  P.ok("die Kennzahlen des Textchecks tragen ein Dezimalkomma, keinen Punkt",
+    kennzahlen.length >= 5 && kennzahlen.some(t => /\d,\d/.test(t)) && !kennzahlen.some(t => /\d\.\d/.test(t)),
+    kennzahlen.join(" · "));
+
   /* Fehlerklasse „Überlagerung ohne Fessel“: Ein Shift+Tab im Suchfenster landete
      unsichtbar auf der Seite dahinter — und Enter startete dort eine Runde. */
   const vorherFokussiert = dd.querySelector("#searchBtn");

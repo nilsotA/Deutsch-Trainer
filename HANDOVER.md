@@ -93,6 +93,10 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   rund 55 px. Jetzt `body.walk .head{display:none}`, die `.wrap` übernimmt den Notch-Abstand; `go()` verlässt den
   Modus bei jedem Ansichtswechsel, dann ist die Kopfzeile zurück. Karten mit Scrollen bis zur letzten Antwort auf
   375×667: 49 → 14; die Grenze in `tests/layout.js` steht jetzt bei 20.
+- **Textcheck-Kennzahlen:** „2.7 %“ mit Dezimalpunkt, in der App, die den Punkt als englisch lehrt; die Kachel hieß
+  „Wörter auf -ung/-heit/-keit“ und zählte auch -nis und -ion. Beides behoben, Prüfung mit Gegenprobe in
+  `tests/suite.js`, F2. Fehlersuche und Textcheck auf 375×667 sonst ohne Befund (eine korrekte Mail ergab nur den
+  berechtigten Prüfhinweis zu „Mittwoch Nachmittag“).
 - Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
   nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
   an Groß-/Kleinschreibung).
