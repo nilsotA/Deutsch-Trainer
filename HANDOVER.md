@@ -81,6 +81,10 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   Inline-Tags fallen jetzt spurlos weg; eine Klammer um Wörter wird eine Pause (vorher lief „bildet („Das Wetter
   droht …“)“ ohne Absatz weiter); ein freistehender Schrägstrich heißt „oder“. Prüfung mit Positivprobe in
   `tests/inhalt.js`, Abschnitt D; Falle in CLAUDE.md.
+- **Gleichheitszeichen und Hörhinweis:** „=“ steht in 144 Sprechtexten und meint überall „heißt“ („zurzeit (=
+  momentan)“, „f. = die folgende Seite“); die Stimme las „gleich“. `sprechbar()` liest jetzt „heißt“, und „=“ steht
+  in der Zeichenliste des Hörbarkeitswächters (Positivprobe erweitert). Endet eine Option ohne Satzzeichen, lief der
+  Hörhinweis ohne Pause an („im Nachhinein Nachhinein groß“); `sprechFrage()` setzt dort ein Komma.
 - Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
   nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
   an Groß-/Kleinschreibung).

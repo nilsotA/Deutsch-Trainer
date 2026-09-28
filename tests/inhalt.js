@@ -176,7 +176,7 @@ const gesprochen = w.eval(`(function(){
   drillPool().forEach(x => nimm("c:" + x.w, caseQuestion(x)));
   return out; })()`);
 const KLINGT_FALSCH = [
-  [/[_§°%→<>&\\\[\]{}⚠\u00AD]/u, "Sonderzeichen"],
+  [/[_§°%→<>&\\\[\]{}⚠\u00AD=]/u, "Sonderzeichen"],
   [/(?<![\d\s])\s*\/|\/\s*(?!\d)/, "Schrägstrich außerhalb einer Zahl"],
   [/Grad[A-Z]/, "Einheit klebt am Grad"],
   [/und so weiter (als|desto|noch|oder)\b/, "Auslassung als „und so weiter“ gelesen"],
@@ -187,9 +187,9 @@ gesprochen.forEach(x => KLINGT_FALSCH.forEach(([re, was]) => { if (re.test(x.t))
 P.ok("Auch Erklärungen, Wort- und Fallkarten klingen richtig (" + gesprochen.length + " Sprechtexte)",
   !klingtFalsch.length, klingtFalsch.slice(0, 8).join(" · ") + (klingtFalsch.length > 8 ? " …(" + klingtFalsch.length + ")" : ""));
 /* Positivprobe mit den Fassungen vom 22.09.2026 */
-const probeSprech = ["Sinnverwandt: knapp ⚠ Der Duden …", "Empfohlen ist 12 °C", "Bei einzelnen Wörtern: km/h",
+const probeSprech = ["zurzeit (= momentan)", "Sinnverwandt: knapp ⚠ Der Duden …", "Empfohlen ist 12 °C", "Bei einzelnen Wörtern: km/h",
   "„sowohl … als auch“"].map(t => String(w.eval("sprechbar(" + JSON.stringify(t) + ")")));
-const probeAlt = ["Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "sowohl und so weiter als auch", "lapidar Adj. , kurz"];
+const probeAlt = ["zurzeit , = momentan", "Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "sowohl und so weiter als auch", "lapidar Adj. , kurz"];
 P.ok("… und die Prüfung erkennt die alten Fassungen",
   probeAlt.every(t => KLINGT_FALSCH.some(([re]) => re.test(t))), "Positivprobe blieb stumm");
 P.ok("… während die neuen sauber sind", probeSprech.every(t => !KLINGT_FALSCH.some(([re]) => re.test(t))), probeSprech.join(" | "));

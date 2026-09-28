@@ -6094,6 +6094,9 @@ function sprechbar(t){
     .replace(/(^|\s)[(\[]/g,"$1, ")
     .replace(/[)\]](?=\s|$|[.,;:!?])/g,", ")
     .replace(/[\[\]()]/g," ")
+    /* „zurzeit (= momentan)“, „f. = die folgende Seite“: Gleichheitszeichen heißt hier immer
+       „heißt“ — eine Stimme liest „gleich“. Zwischen Zahlen kommt es im Bestand nicht vor. */
+    .replace(/\s*=\s*/g," heißt ")
     .replace(/_{2,}/g," Lücke ")
     .replace(/(\d)\s*%/g,"$1 Prozent")
     .replace(/(\d)\s*°\s*C(?![\p{L}])/gu,"$1 Grad Celsius")   // sonst „12 GradC“
@@ -6404,8 +6407,14 @@ function hoerHinweis(opt, alle){
 /* Frage samt Antworten in einem Stück, wie sie unterwegs gehört wird */
 function sprechFrage(q){
   const o = q.opts || [];
+  /* Endet die Option ohne Satzzeichen, lief der Hinweis ohne Pause an: „im Nachhinein
+     Nachhinein groß“, „Standard standard mit d“ — man hörte nicht, wo die Antwort aufhört. */
+  const mitHinweis = x => {
+    const h = hoerHinweis(x, o), t = strip(x);
+    return h && !/[.!?…:,;]\s*$/.test(t) ? t + "," + h : t + h;
+  };
   return strip(q.q) + ". " +
-    o.map((x,k)=>String.fromCharCode(65+k) + ": " + strip(x) + hoerHinweis(x, o)).join(". ");
+    o.map((x,k)=>String.fromCharCode(65+k) + ": " + mitHinweis(x)).join(". ");
 }
 /* Jede Äußerung bekommt eine Nummer; ein Rückruf gilt nur, solange seine Nummer die
    aktuelle ist. Abgebrochene Äußerungen (Weiter, Beenden, 🔊 aus, neues Vorlesen) lösen
