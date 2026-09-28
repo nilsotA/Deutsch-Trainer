@@ -89,6 +89,10 @@ Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`
   die Zusatzrunde nach der Tagesaufgabe nur Übungen — Fallkarten nie. Neue Hilfsfunktion `freieMischung(n, r)` über
   `alleSchluessel()` und `frageZuSchluessel()`; zwei Prüfungen in `tests/unterwegs.js` (alter Code: 0 Fallkarten in
   75 bzw. 70 Karten). Dazu zwei Oberflächentexte: „Fach 1 · alle 1 Tage“ → „jeden Tag“, „1 Antworten“ → „1 Antwort“.
+- **Kopfzeile unterwegs ausgeblendet:** Titel, Serie, XP, Suche und Themenschalter nahmen im Unterwegs-Modus
+  rund 55 px. Jetzt `body.walk .head{display:none}`, die `.wrap` übernimmt den Notch-Abstand; `go()` verlässt den
+  Modus bei jedem Ansichtswechsel, dann ist die Kopfzeile zurück. Karten mit Scrollen bis zur letzten Antwort auf
+  375×667: 49 → 14; die Grenze in `tests/layout.js` steht jetzt bei 20.
 - Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
   nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
   an Groß-/Kleinschreibung).
