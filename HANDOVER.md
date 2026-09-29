@@ -59,6 +59,37 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Fehlerquote gemessen (29.09.2026, vierundfünfzigste Runde).** Nils fragte, ob er mit der App falsche Regeln lernt.
+Statt einer Schätzung eine Messung: 112 Elemente mit festem Seed gezogen (`scratchpad/r54/stichprobe.js`,
+`hash("stichprobe|2026-09-29")`): 60 Übungen anteilig je Kategorie, 20 Wortkarten, 20 Fallkarten, 12 Regeln. Ein
+Workflow mit 163 Agenten: je Gruppe ein Prüfer gegen Regelwerk 2024 (als Text in `scratchpad/r54/regelwerk2024.txt`),
+Duden, DWDS, grammis und Variantengrammatik — nur mit wörtlichem Beleg —, danach jeder Fund von zwei Gegenprüfern
+angegriffen (Quelle am Original; Kontext in der App). 63 Funde, 51 hielten, 5 strittig, 7 fielen.
+- **Ergebnis je Element:** 72 ohne haltenden Fund (64 %), **1 lehrte Falsches** (k03: „Verbinden sie ganze
+  Nebensätze, sind die Kommas Pflicht“ — nach Duden nur, wenn die Paarformel zum übergeordneten Satz gehört; direkt vor
+  dem Einleitewort, „sowohl dass … als auch dass …“, steht keins), 33 ungenau (29 %), 6 kosmetisch. Von den 12 Regeln
+  hatten 10 eine Ungenauigkeit — sie tragen den meisten Text. Die Quote „lehrt Falsches“ liegt mit 1 von 112 bei rund
+  1 %, bei dieser Stichprobengröße statistisch sicher unter 5 %.
+- **Was „ungenau“ meist war:** eine fehlende Variante (Apposition mit Artikelwort, „grübeln über“ mit beiden Fällen,
+  runde Klammern in runden Klammern, „zum Mindesten“, „innerhalb von“), eine zu feste Formulierung („es darf nur ein
+  Satzglied vor dem Verb stehen“, „der Rest ist selten“ über bis), eine falsche Zuschreibung (morgen früh als
+  „Duden-Empfehlung“ — die Duden-Seite empfiehlt nichts; „ideal“ und „minimal“ als unüblich steigerbar — DWDS führt
+  beide ohne Einschränkung, selten ist die Steigerung nur bei maximal, total und optimal), ein Pleonasmus, der keiner
+  ist („kleines Detail“, „neu renoviert“ — ersetzt durch Duden-Beispiele).
+- **Alle 51 haltenden Funde eingearbeitet**, von den strittigen v03, f43, c:zufolge; f05 und f29 bleiben (je ein
+  Gegenprüfer „kein Fund“, Rest kosmetisch). Jede Quellenaussage selbst an der Seite nachgelesen. `NEU_GELERNT`: g05,
+  f45, w:scheuen / scheuern. „durchwegs“: Die Korrektur aus Runde 45 („nicht süddeutsch“) ging zu weit, das DWDS
+  belegt die Form im Südosten Deutschlands.
+- **Drei Fehlerklassen mit Prüfung:** (1) Der Wochentagswächter übersah „am Montag<span class="ok">,</span> dem 5. Mai“
+  (Tag mitten im Muster) und „Am Montag, ___ 5. Mai“ (Lücke statt Artikel) — dritter Anlauf, jetzt auch ohne
+  Inline-Tags und mit Lücke; er fand danach eine dritte Stelle („Montag, dem 12. Mai“). (2) Die Wortart verriet die
+  Antwort: Ablenker kommen jetzt aus derselben Wortart (`wortart()`, `paarWortart()`), und weil Sinnverwandte dadurch
+  häufiger aufeinandertreffen, haben zwei Prüfer je Wortart alle Paare gesucht (paarweise gelesen und über die
+  Synonymlisten von Duden und DWDS) — 166 Paare in `WORT_NAH_ART`, unabhängige Kopie in `tests/nahe-wortpaare.json`.
+  (3) `g05` stand zweimal in `NEU_GELERNT`, der spätere Eintrag hätte das neue Datum still überschrieben;
+  `tests/lernen.js`, Abschnitt F liest jetzt den Quelltext auf doppelte Schlüssel.
+- Die Messung steht auch im Absatz „Stand der Prüfung“ im Regelwerk der App.
+
 **Paarkarten geteilt (28.09.2026, dreiundfünfzigste Runde).** Die richtige Antwort einer Paarkarte nennt beide
 Wörter („implizit = … · explizit = …“) und war daran zu erkennen, ohne die Bedeutung zu kennen. Für zehn Paare
 fragt die Karte jetzt nach einer Seite („Was bedeutet explizit?“); die Bedeutung des Partners ist Ablenker, die

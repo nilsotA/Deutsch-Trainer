@@ -169,6 +169,13 @@
   ]
  },
  {
+  "satz": "08:00 (nach DIN 5008 nur so) oder, nach Duden, auch 08.00.",
+  "stellen": [
+   "Regel n-uhrzeit",
+   "Übung q13"
+  ]
+ },
+ {
   "satz": "Alles, was nach 22 Uhr getippt wird und länger als drei Zeilen ist, wird am nächsten Morgen kürzer und besser.",
   "stellen": [
    "Regel form-konflikt",
@@ -331,7 +338,7 @@
   ]
  },
  {
-  "satz": "Die Duden-Grammatik von 1998 nannte „gewunken“ noch „hochsprachlich nicht korrekt“, seit 2005 steht es dort ohne Kommentar neben „gewinkt“ — daher hält sich der Ruf, es sei ein Fehler.",
+  "satz": "Die Duden-Grammatik von 1998 schrieb noch, „gewunken“ gelte „hochsprachlich nicht als korrekt“, seit 2005 steht es dort ohne Kommentar neben „gewinkt“ — daher hält sich der Ruf, es sei ein Fehler.",
   "stellen": [
    "Regel gram-verbformen",
    "Satzkarte sa24",
@@ -471,7 +478,7 @@
   ]
  },
  {
-  "satz": "Im Ruhrgebiet, im nördlichen Rheinland und in Ostfriesland ist „nach dem Bäcker“, „nach Aldi“ die verbreitete Form.",
+  "satz": "Im Ruhrgebiet, im nördlichen Rheinland, im Westmünsterland und in Ostfriesland geht man oft auch „nach Aldi“ (Atlas zur deutschen Alltagssprache).",
   "stellen": [
    "Fallkarte zu (Richtung)",
    "Übung n09"
@@ -539,6 +546,13 @@
   "stellen": [
    "Vorher/Nachher pr17",
    "Übung f46"
+  ]
+ },
+ {
+  "satz": "laut Duden schweizerisch und rechtssprachlich, laut DWDS veraltend).",
+  "stellen": [
+   "Fallkarte zufolge",
+   "Regel gram-praepdat"
   ]
  },
  {

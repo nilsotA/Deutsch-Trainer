@@ -419,19 +419,26 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      genaue Termine lehrt, darf keinen falschen Termin als Vorbild zeigen. Ohne Jahreszahl gilt
      2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel.
      Am 27.09.2026 nachgeschärft: Der Spickzettel schrieb „am Montag, dem/den 5. Mai,“ — die
-     Schreibung mit Schrägstrich sah das Muster nicht, und der falsche Wochentag stand weiter da. */
+     Schreibung mit Schrägstrich sah das Muster nicht, und der falsche Wochentag stand weiter da.
+     Am 29.09.2026 zum dritten Mal (Stichprobe am Original): „am Montag<span class="ok">,</span>
+     dem 5. Mai“ in komma-einschub — das Tag zwischen Wochentag und Komma — und „Am Montag, ___
+     5. Mai“ in q16 — die Lücke statt des Artikels. Gelesen wird jetzt auch der Text ohne
+     Inline-Tags, und eine Lücke zählt als Artikel. */
   const TAGE = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
   const MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:(?:den|dem)(?:\\s*\\/\\s*(?:den|dem))?\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
+  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:(?:den|dem|_{2,})(?:\\s*\\/\\s*(?:den|dem))?\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
   const schief = t => [...String(t).matchAll(WD)].filter(m => {
     const d = new Date(Date.UTC(+(m[4] || 2026), MONATE.indexOf(m[3]), +m[2]));
     return TAGE[d.getUTCDay()] !== m[1];
   }).map(m => m[0]);
   const html = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
-  const wdSchief = [...new Set(schief(html))];
+  const ohneTags = html.replace(/<\/?(?:b|i|em|strong|u|span|code|mark|small)\b[^>]*>/gi, "");
+  const wdSchief = [...new Set(schief(html).concat(schief(ohneTags)))];
   P.ok("Jeder Wochentag passt zu seinem Datum (ohne Jahr: 2026)", !wdSchief.length, wdSchief.join(" · "));
   P.ok("… und die Prüfung erkennt „Montag, dem 5. Mai“ und „Dienstag, den 5. August“",
-    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025 · am Montag, dem/den 5. Mai,").length === 3,
+    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025 · am Montag, dem/den 5. Mai,").length === 3 &&
+    schief("Am Montag, ___ 5. Mai, beginnt der Kurs.").length === 1 &&
+    schief('am Montag<span class="ok">,</span> dem 5. Mai'.replace(/<\/?span\b[^>]*>/g, "")).length === 1,
     "Positivprobe blieb stumm");
 }
 
@@ -542,6 +549,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const RANG_OHNE_ARTIKEL = /(?:^|[^\wäöüßÄÖÜ])(?:Häufigst|Größt|Schlimmst|Wichtigst|Verbreitetst|Typischst)(?:er|e|es)\s+[A-ZÄÖÜ][a-zäöüß]/;
   const ERLAUBT = {
     "Regel gross-subst":    "„das Beste“ und „die meisten“ sind dort die Beispielwörter der Regel",
+    "Regel komma-einschub": "„Die schnellste Läuferin im Kader, Lea Otten,“ ist das Beispiel für die spezifische Charakterisierung nach § 72 E2 — dessen eigene Beispiele sind alle Superlative",
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
     "Regel form-anrede":    "Ratgebertext: „Die wichtigste Regel: spiegeln“ ist ein Rat, kein Befund",
     "Regel form-eltern":    "Ratgebertext: „Die beste Investition“ ist ein Rat, kein Befund",
@@ -554,7 +562,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Schreibwerkstatt ph43.tip": "„die beste Investition“ — derselbe Rat wie in form-eltern, dort schon begründet",
     "Schreibwerkstatt pr26.good": "„was dich daran am meisten beschäftigt“ ist wörtliche Rede in einer Musterformulierung, keine Aussage über Sprache",
     "Spickzettel cheat":     "„Das Wichtigste aus dem Trainer auf einen Blick“ ist die Auswahlansage des Spickzettels",
-    "Oberfläche Stand der Prüfung Rund": "„Der häufigste Befund“ ist gezählt: 31 von 58 gehaltenen Meldungen der Prüfmusterrunde",
+    "Oberfläche Stand der Prüfung Gemessen": "„Der häufigste Befund“ ist gezählt: 31 von 58 gehaltenen Meldungen der Prüfmusterrunde",
     "Satzkarte sa20":        "„der schnellste Läufer“ ist das Beispiel für den Superlativ, keine Aussage über Sprache",
     "Übung f08":             "„Wie formulierst du eine Frist am wirksamsten?“ fragt nach der besten der drei Optionen, keine Rangbehauptung über Sprache",
   };
@@ -644,7 +652,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     stellen[id] = (stellen[id] || "") + " " + x.t; });
   const sonderSchief = [];
   /* Der Stand der Prüfung erzählt von den Funden und nennt die Wörter als Metasprache. */
-  delete stellen["Oberfläche Stand der Prüfung Rund"];
+  delete stellen["Oberfläche Stand der Prüfung Gemessen"];
   Object.entries(stellen).forEach(([id, t]) => { if (nDekl(t)) ohneForm(t).forEach(wort =>
     sonderSchief.push(id + ": nennt " + wort + " ohne Sonderform")); });
   P.ok("Wer die n-Deklination erklärt und Herr oder Bauer nennt, zeigt deren Form (" +
@@ -842,7 +850,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   BESTAND.forEach(x => zaehlSammle(x.sorte, x.id, x.t));
   /* Was zählen darf, steht hier mit Grund. */
   const ZAEHL_ERLAUBT = {
-    "Oberfläche Stand der Prüfung Rund": "zitiert „die drei Ausnahmen“ und „Zwei Ausnahmen:“ als Beispiel für den behobenen Fehler — Metasprache, keine Zählung",
+    "Oberfläche Stand der Prüfung Gemessen": "zitiert „die drei Ausnahmen“ und „Zwei Ausnahmen:“ als Beispiel für den behobenen Fehler — Metasprache, keine Zählung",
   };
   const zaehlNeu = [...zaehlStellen].filter(x => !(x in ZAEHL_ERLAUBT));
   P.ok("Keine ungelistete gezählte Ausnahme (" + zaehlStellen.size + " Stellen, " +
@@ -1745,7 +1753,7 @@ P.ok("Beide Korpora liegen vor", !!KORPUS.entwicklung && !!KORPUS.kontrolle, Obj
   };
   const AUSNAHMEN = {
     "x06": "hart auf stil-absolut: „einzigste“ führt der Duden unter den häufigen Fehlern, nicht als Stilfrage",
-    "x07": "hart auf stil-absolut: der Duden schreibt „die optimale, nicht optimalste Lösung“ — maximalste, idealste und totalste gelten nur als unüblich und stehen deshalb in x55 auf stil",
+    "x07": "hart auf stil-absolut: der Duden führt „optimal“ ohne Steigerungsformen — maximalste und totalste sind nur selten (DWDS) und stehen deshalb in x55 auf stil; idealste und minimalste führt das DWDS ohne Einschränkung",
     "y06": "stil auf satz-konjunktiv: das doppelte „würde“ nennt CLAUDE.md ausdrücklich als Stilfrage",
     "y12": "stil auf gross-subst: „vor Kurzem/vor kurzem“ sind beide zulässig — der Hinweis mahnt nur Einheitlichkeit an",
     "s07": "stil auf form-verbindlich: „man“ statt Zuständigkeit ist eine Formulierungsfrage",
@@ -2719,9 +2727,11 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       still: ["Ich war zum ersten und einzigen Mal in dieser Halle.",
               "Das war zum ersten, aber sicher nicht zum letzten Mal."] },
     { id: "x55",
-      ziel: ["Für Anfänger ist der Hallenboden die idealste Unterlage.",
-             "Die neuen Schuhe versprechen minimalsten Verschleiß."],
-      still: ["Das ist die optimale Lösung."] },
+      ziel: ["Das war die maximalste Belastung der Saison.",
+             "Nach dem Lauf herrschte die totalste Erschöpfung."],
+      still: ["Das ist die optimale Lösung.",
+              "Für Anfänger ist der Hallenboden die idealste Unterlage.",
+              "Die neuen Schuhe versprechen minimalsten Verschleiß."] },
     { id: "x57",
       ziel: ["Das war der Unfall, seit dem ich nicht mehr richtig sprinten kann.",
              "Ich spiele Fußball, seit dem ich fünf bin."],
