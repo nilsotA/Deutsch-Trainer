@@ -1204,6 +1204,53 @@ Object.entries(PAAR_NAH_GEPRUEFT).forEach(([k, verboten]) => {
 });
 P.ok("Geteilte Paarkarten ziehen keine nahe Einzelkarte als Ablenker (" + Object.values(PAAR_NAH_GEPRUEFT).flat().length + " geprüfte Paare)",
   !nahGeteilt.length, [...new Set(nahGeteilt)].slice(0, 6).join(" · "));
+/* Fehlerklasse „die Wortart verrät die Antwort“ (Stichprobe am Original, 29.09.2026): Auf
+   „Was bedeutet hinterfragen?“ war nur eine Option als Verbbedeutung gebaut. Ablenker kommen
+   jetzt aus derselben Wortart (Adverbien mit den Adjektiven); bei geteilten Paarkarten gilt die
+   Wortart der gefragten Seite. Die Seiten der geteilten Paare stehen hier ausdrücklich, damit
+   ein neues Paar mit falsch erkannter Wortart auffällt. */
+const WORTART_SEITE = {
+  tendenziell: "Adj.", "tendenziös": "Adj.", scheuen: "Verb", scheuern: "Verb", gewiss: "Adj.", "gewissermaßen": "Adj.",
+  normativ: "Adj.", deskriptiv: "Adj.", implizit: "Adj.", explizit: "Adj.", induktiv: "Adj.", deduktiv: "Adj.",
+  intrinsisch: "Adj.", extrinsisch: "Adj.", Rezeption: "Subst.", Reflexion: "Subst.", verifizieren: "Verb",
+  falsifizieren: "Verb", "abschließend": "Adj.", "anschließend": "Adj.",
+};
+const seiten = daten(w, "PAAR_GETEILT.flatMap(k=>paarHaelften(WORDS.find(y=>y.w===k)).map(h=>[h.wort, paarWortart(h.wort)]))");
+const seitenFalsch = seiten.filter(([x, a]) => WORTART_SEITE[x] !== a).map(([x, a]) => x + " → " + a + " (erwartet " + (WORTART_SEITE[x] || "kein Eintrag") + ")");
+P.ok("Die Seiten der geteilten Paare bekommen die richtige Wortart (" + seiten.length + " Seiten)", !seitenFalsch.length, seitenFalsch.join(" · "));
+const artFunde = daten(w, `(function(){
+  const out = [], art = x => wortart(x.p), einzeln = WORDS.filter(x => x.p !== "Paar");
+  const karteZu = o => WORDS.find(b => esc(b.d) === o);
+  einzeln.forEach(x => {
+    const frei = einzeln.filter(y => y.w !== x.w && art(y) === art(x) && !wortNah(x, y)).length;
+    if (frei < 3) return;
+    for (let i = 0; i < 12; i++) { const q = wordQuestion(x, rng(i * 6007 + 5));
+      q.opts.forEach((o, j) => { if (j === q.ans) return; const b = karteZu(o); if (b && art(b) !== art(x)) out.push(x.w + " ← " + b.w); }); }
+  });
+  PAAR_GETEILT.forEach(k => { const x = WORDS.find(y => y.w === k), h = paarHaelften(x);
+    for (let i = 0; i < 12; i++) { const q = wordQuestion(x, rng(i * 6007 + 5));
+      const g = h.find(z => q.q.includes("<em>" + esc(z.wort) + "</em>")); if (!g) continue;
+      q.opts.forEach(o => { const b = karteZu(o); if (b && art(b) !== paarWortart(g.wort)) out.push(g.wort + " ← " + b.w); }); }
+  });
+  return [...new Set(out)]; })()`);
+P.ok("Ablenker einer Wortkarte haben dieselbe Wortart wie das gefragte Wort", !artFunde.length, artFunde.slice(0, 6).join(" · "));
+/* Seit die Ablenker aus derselben Wortart kommen, treffen Sinnverwandte häufiger aufeinander.
+   tests/nahe-wortpaare.json hält die 166 Paare fest, die zwei Prüfer je Wortart gefunden haben
+   (paarweise gelesen und über die Synonymlisten von Duden und DWDS). Keines darf als Frage und
+   Ablenker zusammenkommen — geprüft über viele Ziehungen, nicht über die Liste in der App. */
+const NAHE_PAARE = JSON.parse(require("fs").readFileSync(require("path").join(__dirname, "nahe-wortpaare.json"), "utf8"));
+const naheTreffer = daten(w, `(function(paare){
+  const out = [], hat = (a, b) => paare.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+  const karteZu = o => WORDS.find(b => esc(b.d) === o);
+  WORDS.filter(x => x.p !== "Paar").forEach(x => {
+    for (let i = 0; i < 20; i++) { const q = wordQuestion(x, rng(i * 4099 + 17));
+      q.opts.forEach((o, j) => { if (j === q.ans) return; const b = karteZu(o); if (b && hat(x.w, b.w)) out.push(x.w + " ← " + b.w); }); }
+  });
+  return [...new Set(out)]; })(${JSON.stringify(NAHE_PAARE)})`);
+P.ok("Kein nahes Paar derselben Wortart kommt als Frage und Ablenker zusammen (" + NAHE_PAARE.length + " Paare)",
+  NAHE_PAARE.length > 100 && !naheTreffer.length, naheTreffer.slice(0, 6).join(" · "));
+P.ok("… und die Prüfung erkennt eine Verbbedeutung unter Adjektivbedeutungen (Positivprobe)",
+  daten(w, "(function(){const v=WORDS.find(x=>x.p==='Verb'),a=WORDS.find(x=>x.p==='Adj.');return wortart(v.p)!==wortart(a.p)&&wortart('Adv.')===wortart('Adj.')})()"));
 P.ok("… ungeteilte Paarkarten fragen weiter nach beiden Wörtern (Positivprobe)",
   daten(w, "(function(){const x=WORDS.find(y=>y.p===\"Paar\"&&!PAAR_GETEILT.includes(y.w));const q=wordQuestion(x,rng(5));return q.opts[q.ans]===esc(x.d)})()"));
 

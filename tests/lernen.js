@@ -416,6 +416,20 @@ P.titel("E · Anzeige");
 
 /* ---------- F · Geänderte Antwort ---------- */
 P.titel("F · Regeländerung");
+/* Fehlerklasse „der zweite Eintrag gewinnt still“ (29.09.2026): g05 stand zweimal in
+   NEU_GELERNT — mit dem 05.09. und neu mit dem 29.09. In einem Objektliteral gewinnt der
+   spätere Schlüssel, ohne dass die Syntax bricht; hier stand der alte Eintrag weiter unten
+   und hätte das neue Datum überschrieben. Geprüft wird deshalb der Quelltext, nicht das Objekt. */
+{
+  const quelle = require("fs").readFileSync(require("path").join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
+  const block = (quelle.match(/const NEU_GELERNT = \{([\s\S]*?)\n\};/) || [])[1] || "";
+  const doppelteSchluessel = t => { const k = [...t.matchAll(/^\s*(["']?)([\w:.-]+)\1\s*:/gm)].map(m => m[2]);
+    return k.filter((x, i) => k.indexOf(x) !== i); };
+  P.ok("Kein Schlüssel steht zweimal in NEU_GELERNT", block.length > 100 && !doppelteSchluessel(block).length,
+    doppelteSchluessel(block).join(", ") || "Block nicht gefunden");
+  P.ok("… und die Prüfung erkennt einen doppelten Eintrag (Positivprobe)",
+    doppelteSchluessel('  g05: "2026-09-29",\n  k20: "2026-09-04",\n  g05: "2026-09-05",').join() === "g05");
+}
 /* Fehlerklasse „alte Antwort sitzt“: Ändert sich die richtige Antwort einer Karte,
    hat Nils sie mit der alten Antwort gelernt. Sie muss einmal zurück auf Fach 1. */
 {
