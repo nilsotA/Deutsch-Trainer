@@ -110,7 +110,7 @@ function messen(W) {
   /* Bis zum 24.09.2026 zog die Messung jede Karte mit rng(1). Damit bekam jede Wortkarte
      dieselben drei Ablenker, und die Zahl hing an drei zufälligen Bedeutungen: 22 Karten, mit
      Ablenkern wie im Gebrauch aber 44. Seitdem bekommt jede Karte ihren eigenen Seed. */
-  for (const [w, h, erlaubt] of [[375, 667, 50], [390, 844, 0]]) {
+  for (const [w, h, erlaubt] of [[375, 667, 8], [390, 844, 0]]) {
     const { ctx, p } = await seite(w, h);
     await p.evaluate(() => { S.auto = false; });
     await p.click("#wkNew");

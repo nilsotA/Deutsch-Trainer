@@ -365,6 +365,29 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     }
     const host = d.querySelector("#walkHost");
     P.ok("Abschluss erscheint", /richtig/.test(host.textContent));
+    /* Der Satz unter dem Ergebnis verspricht, was die nächste Runde nimmt. Bis zum 28.09.2026
+       hieß es „Alles wiederholt — die nächste Runde nimmt neuen Stoff“ auch nach einer
+       ersten Runde aus lauter neuen Karten, und „neuen Stoff“ auch dann, wenn es keinen mehr
+       gab. unterwegsRunde() nimmt dann die Karten, die am längsten nicht dran waren. */
+    if (daten(w, "countDue()") === 0)
+      P.ok("… nichts fällig, noch Ungesehenes: „neuen Stoff“",
+        /nichts mehr fällig.*neuen Stoff/.test(host.textContent) && !/Alles wiederholt/.test(host.textContent),
+        host.textContent.slice(0, 160));
+    {
+      const wa = boot(stand(() => ({ b: 3, d: tag(5), s: 3, w: 0, l: tag(-2) })));
+      const da = wa.document;
+      da.querySelector("#wkNew").click();
+      let m = 0;
+      while (daten(wa, "!!(Q && !Q.done)") && m < 40) {
+        tippe(wa, da.querySelectorAll(".opt")[daten(wa, "Q.list[Q.i].ans")]);
+        const nb = da.querySelector("#nextBtn"); if (!nb) break;
+        wa.eval("Q.weiterAb = 0"); nb.click(); m++;
+      }
+      const txt = da.querySelector("#walkHost").textContent;
+      P.ok("… alles gesehen, nichts fällig: kein „neuer Stoff“, sondern die ältesten Karten",
+        daten(wa, "countDue()") === 0 && /am längsten nicht dran/.test(txt) && !/neuen Stoff/.test(txt),
+        txt.slice(0, 160));
+    }
     const zeilen = [...d.querySelectorAll(".fehlerzeile")];
     P.ok("Fehler nach Regel gebündelt", zeilen.length > 0 && zeilen.length <= 4, zeilen.length);
     P.ok("jede Zeile mit Titel und Anzahl", zeilen.every(z => /\d+×/.test(z.textContent) && z.textContent.length > 4));
@@ -625,6 +648,43 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     P.ok("an derselben Stelle", daten(w, "(Q && Q.i)") === stand, daten(w, "(Q && Q.i)"));
   }
 
+  {
+    /* Fehlerklasse „Kartensorte verschwindet“, zum dritten Mal (28.09.2026): Die freie Runde
+       der Kartenansicht baute ihre Liste aus ALL und WORDS selbst, statt über
+       frageZuSchluessel() zu gehen — Fallkarten kamen dort nie vor. Fünf Runden à 15 Karten
+       aus 713: Fehlt eine Sorte in allen fünf, ist das kein Zufall mehr. */
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    const gesehen = { Aufgabe: 0, Wort: 0, Fall: 0 };
+    for (let n = 0; n < 5; n++) {
+      w.eval('go("karten")');
+      d.querySelector("#startSrs").click();
+      const s = sorten(daten(w, "Q.list.map(x=>({k:x.key}))"));
+      Object.keys(s).forEach(k => gesehen[k] += s[k]);
+      w.eval("Q = null");
+    }
+    P.ok("die freie Runde der Kartenansicht zieht alle drei Sorten",
+      gesehen.Aufgabe > 0 && gesehen.Wort > 0 && gesehen.Fall > 0, JSON.stringify(gesehen));
+
+    /* Dieselbe Lücke in der Zusatzrunde nach erledigter Tagesaufgabe: nur Übungen. */
+    const st = leererStand({ auto: false });
+    st.days = { [tag(0)]: { a: 12, c: 10, done: true } };
+    const w2 = boot(st);
+    const d2 = w2.document;
+    const zusatz = { Aufgabe: 0, Wort: 0, Fall: 0 };
+    for (let n = 0; n < 7; n++) {
+      w2.eval('go("heute"); renderHeute()');
+      const knopf = d2.querySelector("#extra");
+      if (!knopf) break;
+      knopf.click();
+      const s = sorten(daten(w2, "Q.list.map(x=>({k:x.key}))"));
+      Object.keys(s).forEach(k => zusatz[k] += s[k]);
+      w2.eval("Q = null");
+    }
+    P.ok("die Zusatzrunde nach der Tagesaufgabe zieht alle drei Sorten",
+      zusatz.Aufgabe > 0 && zusatz.Wort > 0 && zusatz.Fall > 0, JSON.stringify(zusatz));
+  }
+
   /* ---------- H · Rückmeldung im Bild ---------- */
   P.titel("H · Rückmeldung im Bild");
   {
@@ -675,6 +735,40 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     try { w2.eval("zeigeRueckmeldung()"); } catch (e) { /* siehe oben */ }
     P.ok("wer selbst gescrollt hat, wird nicht zurückgeholt",
       daten(w2, "__gescrollt.length") === 0, daten(w2, "__gescrollt"));
+
+    /* Dritter Fall (28.09.2026): Die Leiste klebt am Schirmende und liegt über der
+       Erklärung. Knopf und Oberkante der Rückmeldung sind im Bild — die Erklärung nicht.
+       Bis dahin hielt zeigeRueckmeldung() das für „schon im Bild“; im Browser gemessen
+       betraf das 19 von 135 falschen Antworten auf 375x667. Gegenprobe: Endet die
+       Rückmeldung über der Leiste, bleibt alles stehen. */
+    const verdeckt = fbUnten => {
+      const w3 = boot(leererStand({ auto: false }));
+      const d3 = w3.document;
+      d3.querySelector("#wkNew").click();
+      const a3 = daten(w3, "Q.list[0].ans");
+      tippe(w3, [...d3.querySelectorAll("#walkHost .opt")][a3 === 0 ? 1 : 0]);
+      Object.defineProperty(w3, "innerHeight", { value: 667, configurable: true });
+      w3.eval(`
+        window.__gescrollt = [];
+        window.scrollTo = (a, b) => window.__gescrollt.push(a && typeof a === "object" ? a.top : b);
+        Element.prototype.getBoundingClientRect = function(){
+          const r = (t, b) => ({top:t, bottom:b, left:0, right:0, width:0, height:b-t, x:0, y:t});
+          if(this.classList.contains("fb")) return r(500, ${fbUnten});
+          if(this.classList.contains("walkbar")) return r(580, 667);
+          if(this.id === "nextBtn") return r(592, 655);
+          return r(0, 0);
+        };
+        scrollBeiFrage = window.scrollY;
+      `);
+      P.ok("(die Leiste ist die .walkbar um den Weiter-Knopf)",
+        daten(w3, "!!document.querySelector('#nextBtn').closest('.walkbar')"));
+      w3.eval("zeigeRueckmeldung()");
+      return daten(w3, "__gescrollt");
+    };
+    const s3 = verdeckt(800);
+    P.ok("liegt die Leiste über der Erklärung, wird gescrollt", s3.length === 1 && s3[0] === 430, s3);
+    const s4 = verdeckt(570);
+    P.ok("endet die Erklärung über der Leiste, bleibt alles stehen", s4.length === 0, s4);
   }
 
   /* ---------- I · Prelltipp, Enter und Bildschirmsperre ---------- */

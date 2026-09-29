@@ -176,7 +176,7 @@ const gesprochen = w.eval(`(function(){
   drillPool().forEach(x => nimm("c:" + x.w, caseQuestion(x)));
   return out; })()`);
 const KLINGT_FALSCH = [
-  [/[_§°%→<>&\\\[\]{}⚠\u00AD]/u, "Sonderzeichen"],
+  [/[_§°%→<>&\\\[\]{}⚠\u00AD=]/u, "Sonderzeichen"],
   [/(?<![\d\s])\s*\/|\/\s*(?!\d)/, "Schrägstrich außerhalb einer Zahl"],
   [/Grad[A-Z]/, "Einheit klebt am Grad"],
   [/und so weiter (als|desto|noch|oder)\b/, "Auslassung als „und so weiter“ gelesen"],
@@ -187,12 +187,53 @@ gesprochen.forEach(x => KLINGT_FALSCH.forEach(([re, was]) => { if (re.test(x.t))
 P.ok("Auch Erklärungen, Wort- und Fallkarten klingen richtig (" + gesprochen.length + " Sprechtexte)",
   !klingtFalsch.length, klingtFalsch.slice(0, 8).join(" · ") + (klingtFalsch.length > 8 ? " …(" + klingtFalsch.length + ")" : ""));
 /* Positivprobe mit den Fassungen vom 22.09.2026 */
-const probeSprech = ["Sinnverwandt: knapp ⚠ Der Duden …", "Empfohlen ist 12 °C", "Bei einzelnen Wörtern: km/h",
+const probeSprech = ["zurzeit (= momentan)", "Sinnverwandt: knapp ⚠ Der Duden …", "Empfohlen ist 12 °C", "Bei einzelnen Wörtern: km/h",
   "„sowohl … als auch“"].map(t => String(w.eval("sprechbar(" + JSON.stringify(t) + ")")));
-const probeAlt = ["Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "sowohl und so weiter als auch", "lapidar Adj. , kurz"];
+const probeAlt = ["zurzeit , = momentan", "Sinnverwandt: knapp ⚠ Der Duden", "12 GradC", "km / h", "sowohl und so weiter als auch", "lapidar Adj. , kurz"];
 P.ok("… und die Prüfung erkennt die alten Fassungen",
   probeAlt.every(t => KLINGT_FALSCH.some(([re]) => re.test(t))), "Positivprobe blieb stumm");
 P.ok("… während die neuen sauber sind", probeSprech.every(t => !KLINGT_FALSCH.some(([re]) => re.test(t))), probeSprech.join(" | "));
+/* Fehlerklasse „das Wort zerfällt beim Vorlesen“ (28.09.2026): strip() und sprechbar()
+   setzten für jedes Tag ein Leerzeichen, auch für Hervorhebungen mitten im Wort. Die Stimme
+   las „gut e Trainer“, „dem Kolleg en“, „über SETZ en“ — genau dort, wo es um die Endung
+   geht. Hier muss jedes Wort mit einer Hervorhebung im Inneren am Stück ankommen. */
+const INNEN = /(\p{L}*)<(b|i|em|strong|u|span|code)\b[^>]*>([\p{L}]+)<\/\2>(\p{L}*)/gu;
+const quellen = w.eval(`[].concat(...ALL.map(i => [i.q, i.e].concat(i.o || [])))`).filter(t => typeof t === "string");
+const zerfallen = [];
+let innenZahl = 0;
+quellen.forEach(t => {
+  for (const m of t.matchAll(INNEN)) {
+    if (!m[1] && !m[4]) continue;                // ganzes Wort hervorgehoben, nichts zu verbinden
+    innenZahl++;
+    const wort = m[1] + m[3] + m[4];
+    const gehoert = String(w.eval("sprechbar(strip(" + JSON.stringify(t) + "))"));
+    if (!gehoert.includes(wort)) zerfallen.push(wort);
+  }
+});
+P.ok("Wörter mit Hervorhebung im Inneren kommen beim Vorlesen am Stück an (" + innenZahl + " Stellen)",
+  innenZahl > 10 && !zerfallen.length, zerfallen.slice(0, 8).join(" · "));
+const altStrip = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+P.ok("… und die Prüfung erkennt die alte Fassung",
+  !String(w.eval("sprechbar(" + JSON.stringify(altStrip("der gut<b>e</b> Trainer")) + ")")).includes("gute"),
+  "Positivprobe blieb stumm");
+
+/* Fehlerklasse „der Hinweis klebt an der Antwort“ (28.09.2026): Endete eine Option ohne
+   Satzzeichen, hängte sprechFrage() den Hörhinweis direkt an — „im Nachhinein Nachhinein
+   groß“. Zwischen Option und Hinweis muss eine Pause stehen. */
+const ohnePause = w.eval(`(function(){
+  const out = [];
+  ALL.filter(i => i.t !== "fill").forEach(i => {
+    const q = exQuestion(i), s = sprechFrage(q);
+    q.opts.forEach(x => { const h = hoerHinweis(x, q.opts), t = strip(x);
+      if (h && !/[.!?…:,;]\\s*$/.test(t) && s.includes(t + h)) out.push(i.id); });
+  });
+  return out; })()`);
+P.ok("Zwischen Antwort und Hörhinweis steht eine Pause", !ohnePause.length, ohnePause.slice(0, 8).join(" · "));
+P.ok("… und die Prüfung erkennt die alte Fassung",
+  w.eval(`(function(){ const i = ALL.find(x => x.id === "g15"), q = exQuestion(i), x = q.opts[0];
+    const alt = strip(q.q) + ". " + q.opts.map((y,k) => String.fromCharCode(65+k) + ": " + strip(y) + hoerHinweis(y, q.opts)).join(". ");
+    return !!hoerHinweis(x, q.opts) && alt.includes(strip(x) + hoerHinweis(x, q.opts)); })()`), "Positivprobe blieb stumm");
+
 const WORD_ESC = ["w", "p", "d", "ex", "s", "t"];
 const htmlInWort = WORDS.filter(x => WORD_ESC.some(k => /<[a-z\/]|&[a-z#0-9]+;/i.test(String(x[k] || "")))).map(x => x.w);
 P.ok("Keine Wortkarte trägt HTML — die Ansicht escaped jedes Feld", !htmlInWort.length, htmlInWort.join(" · "));
@@ -584,12 +625,16 @@ P.titel("G · Regionale Varianten");
    Die Tabelle hält fest, was an welcher Stelle stehen muss. Sie ist der festgehaltene
    Quellenstand vom 13.09.2026, je mit zwei verschieden formulierten Suchen belegt:
    trotz → Schweiz, Österreich, teilweise Süddeutschland (IDS-Variantengrammatik)
+   — am 27.09.2026 an der Originalseite korrigiert: Mit Artikel kommt der Dativ nur in der
+   Schweiz, in Liechtenstein und in Westösterreich vor. „D-süd und A“ nennt die Seite als
+   Angabe der Fachliteratur, die sie ausdrücklich nicht bestätigen kann.
    während → Schweiz und Westösterreich, in Zeitungstexten (IDS); sonst umgangssprachlich
    statt → Österreich und Schweiz (IDS); Dativ auch ohne erkennbare Genitivform
    wegen → überall umgangssprachlich, keine regionale Standardvariante
    Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
 const EINORDNUNG = [
-  { was: "trotz", muss: [/Schweiz/, /Österreich/, /[Ss]üddeutschland|Süden Deutschlands/],
+  { was: "trotz", muss: [/Schweiz/, /Liechtenstein/, /Westösterreich/],
+    nicht: [/[Ss]üddeutschland|Süden Deutschlands|[Ii]n Österreich/],
     stellen: [["Fallkarte", "trotz"], ["Übung", "d17"], ["Übung", "m03"],
               ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
   { was: "während", muss: [/umgangssprachlich/, /Schweiz/, /Westösterreich|Österreich/],
@@ -611,10 +656,14 @@ const EINORDNUNG = [
   /* gedenken → Duden-Zweifelsfälle: „standardsprachlich noch nicht anerkannt“, aber in
      Zeitungen verbreitet. zu (Richtung) → „nach Aldi“ ist Ruhrgebiet, nördliches
      Rheinland, Ostfriesland; Duden 2005: auf Norddeutschland beschränkt, nicht
-     standardsprachlich. Beides am 13.09.2026 mit je zwei Suchen belegt. */
+     standardsprachlich. Beides am 13.09.2026 mit je zwei Suchen belegt. Am 27.09.2026 an
+     der Wörterbuchseite nachgelesen: Dort steht „nach“ = „zu … hin“ als „landschaftlich“
+     („nach (zur) Oma gehen“), weder „norddeutsch“ noch „nicht standardsprachlich“ — die
+     App zitiert seitdem die Seite, die man aufschlagen kann, und die Fragen setzen den
+     Rahmen „überregional“. */
   { was: "gedenken", muss: [/nicht anerkannt|nicht standardsprachlich/, /Zeitungen|Presse/],
     stellen: [["Fallkarte", "gedenken"]] },
-  { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /nicht standardsprachlich|norddeutsch/],
+  { was: "zu (Richtung)", muss: [/Ruhrgebiet/, /Rheinland/, /landschaftlich/],
     stellen: [["Fallkarte", "zu (Richtung)"], ["Übung", "n09"], ["Regel", "gram-richtung"]] },
   /* „Sinn machen“ ist keine regionale, sondern eine strittige Einordnung — dieselbe
      Fehlerklasse auf einer anderen Achse. Die App sagte an drei Stellen glatt
@@ -648,8 +697,11 @@ const EINORDNUNG = [
      beide beim IDS-Artikel „ab + Dativ/Akkusativ bei Datums- und Zeitangaben“. */
   /* „auf die Post“ gegen „zur Post“: beides Standard, die Verteilung regional. Der IDS
      führt dafür einen eigenen Artikel („Auf die / zur Post“). Am 15.09.2026 mit zwei
-     Suchen belegt. Die Regel gab bis dahin nur „auf“ an — für Köln die seltenere Form. */
-  { was: "auf die / zur Post", muss: [/[Ss]üden/, /Norden/, /Standard/],
+     Suchen belegt. Die Regel gab bis dahin nur „auf“ an — für Köln die seltenere Form.
+     Am 27.09.2026 an der Originalseite korrigiert: „zur Post“ ist überall mehrheitlich,
+     „auf die Post“ vor allem in der Schweiz gebräuchlich, seltener in A-südost, A-west, D-süd.
+     Die App sagte „im Süden und in Österreich verbreitet, zur Post in der Mitte und im Norden“. */
+  { was: "auf die / zur Post", muss: [/Schweiz/, /überall/, /Standard/],
     stellen: [["Regel", "gram-richtung"], ["Fallkarte", "auf (Richtung)"]] },
   { was: "ab ohne Artikel", muss: [/[Oo]hne Artikel/, /Akkusativ/, /Dativ/],
     stellen: [["Regel", "gram-praepdat"], ["Fallkarte", "ab"]] },
@@ -704,6 +756,8 @@ EINORDNUNG.forEach(e => e.stellen.forEach(([art, id]) => {
   if (t === null) { fehltG.push(art + " " + id); return; }
   const fehlend = e.muss.filter(re => !re.test(t));
   if (fehlend.length) schiefG.push(e.was + " · " + art + " " + id + ": fehlt " + fehlend.map(String).join(", "));
+  const zuviel = (e.nicht || []).filter(re => re.test(t));
+  if (zuviel.length) schiefG.push(e.was + " · " + art + " " + id + ": überholt " + zuviel.map(String).join(", "));
 }));
 P.ok("Alle eingeordneten Stellen gibt es noch", !fehltG.length, fehltG.join(", "));
 P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schiefG.join(" · "));
@@ -711,7 +765,8 @@ P.ok("Dieselbe Variante ist überall gleich eingeordnet", !schiefG.length, schie
    sonst misst sie nichts. Die alte Fassung der Fallkarte trotz nannte nur Österreich. */
 const alteFassung = "Im Plural ohne erkennbare Genitivform weicht man auf den Dativ aus. In Österreich ist „trotz dem“ verbreitet.";
 P.ok("Die Einordnungsprüfung erkennt eine unvollständige Landkarte",
-  EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length === 2,
+  EINORDNUNG[0].muss.filter(re => !re.test(alteFassung)).length >= 2
+    && EINORDNUNG[0].nicht.some(re => re.test(alteFassung)),
   "Positivprobe blieb stumm");
 const alteWegen = "„wegen dem Wetter“ ist umgangssprachlich sehr verbreitet. Bei Pronomen: „meinetwegen“, nicht „wegen mir“.";
 P.ok("… und ein „nicht“, wo woanders „umgangssprachlich“ steht",
@@ -949,7 +1004,6 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   const OFFEN_ERLAUBT = {
     g05: "fragt nach der Varianz selbst („Was gilt für … und …?“)",
     g25: "die Region betrifft „heute Früh“, nicht den Ablenker „heute abend“",
-    t16: "die Region betrifft „nachhause“, nicht den Ablenker „nach hause“",
     z14: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
     x11: "fragt nach der Einordnung von „ich bin gestanden“ selbst",
     d17: "Ablenker „dem Regens“ ist in keiner Region richtig — Artikel und Endung passen nicht zusammen",
@@ -969,6 +1023,10 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     "sitzen — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "hängen (hing) — wo": "die Region betrifft das Perfekt mit „sein“, nicht den Kasus",
     "entlang": "Ablenker im Nominativ („der Fluss“), nicht der schweizerische, seltene Dativ",
+    "zufolge": "Ablenker im Akkusativ („Den Bericht zufolge“); die Region betrifft den vorangestellten Genitiv, nicht den Kasus der Satzform (seit 27.09.2026)",
+    "gedenken": "Ablenker im Akkusativ („die Opfer“), nicht der schweizerisch-umgangssprachliche Dativ (seit 27.09.2026)",
+    "kosten": "der Lückensatz setzt den Rahmen („Überregional heißt es: …“); der Dativ ist in Österreich, Südtirol und Südostdeutschland gebräuchlich (Variantengrammatik)",
+    "sich vergewissern / sich annehmen": "Ablenker im Akkusativ („die Sache“); die Region betrifft „sich um etwas annehmen“, nicht den Kasus",
   };
   /* Bis zum 24.09.2026 blieben Tippaufgaben außen vor. r14 lehnte „ausser“ ab — in der
      Schweiz die Standardschreibung —, und den Rahmen nannte erst die Erklärung. */
@@ -1068,5 +1126,85 @@ P.ok("Die Ablenkerprüfung erkennt „konzedieren“ als Ablenker zu „einräum
   nahAblenker(probeA, [probeA.d, probeB.d], { ans: 0 }).length === 1, "Positivprobe blieb stumm");
 P.ok("… und jede Wortkarte behält genug Ablenker", daten(w, "WORDS.every(a=>WORDS.filter(b=>b.w!==a.w&&!wortNah(a,b)).length>=3)"),
   "eine Karte hat weniger als drei Ablenker");
+
+/* Fehlerklasse „die Form verrät die Antwort“ (28.09.2026): 35 Paarkarten erklären zwei Wörter
+   („implizit = mitgemeint …, explizit = …“), die übrigen eins. Die Ablenker kamen aus beiden
+   Sorten, und auf „Was bedeutet prägnant?“ war jede Paarerklärung falsch, ohne dass man das
+   Wort kennen musste. Einzelkarten ziehen jetzt nur Einzelerklärungen. Paarkarten bleiben
+   gemischt: Ihre richtige Antwort nennt beide Wörter und ist ohnehin erkennbar. */
+const karteZu = o => WORDS.find(b => b.d === o || b.d.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") === o);
+const istPaar = x => x.p === "Paar";
+const paarAblenker = (w0, opts, frage) => opts.filter((o, i) => i !== frage.ans).map(karteZu)
+  .filter(b => b && istPaar(b)).map(b => w0.w + " ← " + b.w);
+const sortenFunde = new Set();
+WORDS.filter(x => !istPaar(x)).forEach(x => {
+  for (let i = 0; i < 10; i++) {
+    const q = daten(w, "wordQuestion(WORDS.find(y=>y.w===" + JSON.stringify(x.w) + "), rng(" + (i * 104729 + 7) + "))");
+    paarAblenker(x, q.opts, q).forEach(f => sortenFunde.add(f));
+  }
+});
+P.ok("Einzelwortkarten bekommen keine Paarerklärung als Ablenker (" + WORDS.filter(istPaar).length + " Paarkarten)",
+  !sortenFunde.size, [...sortenFunde].slice(0, 6).join(" · "));
+const probeP = WORDS.find(x => x.w === "prägnant"), probeQ = WORDS.find(istPaar);
+P.ok("… und die Prüfung erkennt eine Paarerklärung als Ablenker einer Einzelkarte (Positivprobe)",
+  paarAblenker(probeP, [probeP.d, probeQ.d], { ans: 0 }).length === 1, "Positivprobe blieb stumm");
+
+/* Geteilte Paarkarten (28.09.2026): Für die Paare in PAAR_GETEILT fragt die Karte nach einer
+   Seite, und die Bedeutung des Partners ist Ablenker. Jedes Paar dort ist gegen Duden und DWDS
+   geprüft (HANDOVER, 53. Runde). Hier steht, was die Mechanik halten muss: Die richtige Antwort
+   ist die Bedeutung der gefragten Seite, der Partner steht unter den Optionen, die übrigen zwei
+   sind freie Einzelkarten, und über verschiedene Tage kommen beide Seiten dran. */
+const GETEILT = daten(w, "PAAR_GETEILT");
+P.ok("PAAR_GETEILT nennt nur Paarkarten der Form „X = … · Y = …“ (" + GETEILT.length + ")",
+  GETEILT.length > 0 && GETEILT.every(k => daten(w, "(function(){const x=WORDS.find(y=>y.w===" + JSON.stringify(k) +
+    ");return !!x && x.p===\"Paar\" && !!paarHaelften(x)})()")), GETEILT.join(", "));
+const teilFunde = [];
+GETEILT.forEach(k => {
+  const seiten = new Set();
+  for (let i = 0; i < 24; i++) {
+    const q = daten(w, "(function(){const x=WORDS.find(y=>y.w===" + JSON.stringify(k) + ");const q=wordQuestion(x,rng(" + (i * 7717 + 3) +
+      "));return {q:q.q,opts:q.opts,ans:q.ans,h:paarHaelften(x).map(z=>({wort:esc(z.wort),bed:esc(z.bed)})),frei:WORDS.filter(y=>y.p!==\"Paar\"&&!wortNah(x,y)).map(y=>esc(y.d))}})()");
+    const s = q.h.findIndex(z => q.q.includes("<em>" + z.wort + "</em>"));
+    if (s < 0) { teilFunde.push(k + ": Frage nennt keine Seite"); continue; }
+    seiten.add(s);
+    if (q.opts[q.ans] !== q.h[s].bed) teilFunde.push(k + ": richtig ist nicht die Bedeutung der gefragten Seite");
+    if (!q.opts.includes(q.h[1 - s].bed)) teilFunde.push(k + ": der Partner fehlt unter den Optionen");
+    const rest = q.opts.filter(o => o !== q.h[0].bed && o !== q.h[1].bed);
+    if (rest.length !== 2 || !rest.every(o => q.frei.includes(o))) teilFunde.push(k + ": die übrigen Ablenker sind keine freien Einzelkarten");
+    if (new Set(q.opts).size !== 4) teilFunde.push(k + ": doppelte Option");
+  }
+  if (seiten.size !== 2) teilFunde.push(k + ": nur eine Seite kommt dran");
+});
+P.ok("Geteilte Paarkarten fragen eine Seite, der Partner ist Ablenker, beide Seiten kommen dran",
+  !teilFunde.length, [...new Set(teilFunde)].slice(0, 5).join(" · "));
+/* Die übrigen zwei Ablenker einer geteilten Paarkarte dürfen keine Einzelkarte sein, deren
+   Bedeutung auf die gefragte Seite ebenfalls passt. Die Liste unten hat ein Prüfer je Paar über
+   alle 120 Einzelkarten gezogen (28.09.2026) — unabhängig von PAAR_NAH in der App aufgeschrieben,
+   damit ein gestrichener Eintrag dort hier auffällt. */
+const PAAR_NAH_GEPRUEFT = {
+  "tendenziell / tendenziös": ["tendenziös", "suggestiv", "suggerieren", "sukzessive", "mutmaßlich"],
+  "scheuen / scheuern": ["ausklammern", "unterlaufen", "tangieren"],
+  "gewiss / gewisser\u00ADmaßen": ["mutmaßlich", "affirmativ", "evident", "konzedieren", "einräumen", "dezidiert", "plausibel", "rudimentär"],
+  "normativ / deskriptiv": ["verbindlich", "maßgeblich", "tendenziös", "die Maxime", "postulieren", "das Postulat", "das Desiderat", "das Paradigma", "gewichten", "nahelegen", "legitimieren", "dezidiert", "apodiktisch", "konstatieren", "explizieren", "die Empirie", "der Sachverhalt", "veranschaulichen", "exemplifizieren"],
+  "implizit / explizit": ["implizieren", "immanent", "latent", "die Konnotation", "das Konstrukt", "suggerieren", "suggestiv", "nahelegen", "explizieren", "beipflichten", "nuanciert", "elaboriert", "prononciert", "dezidiert", "evident", "eklatant"],
+  "induktiv / deduktiv": ["stringent", "extrapolieren", "subsumieren", "die Empirie", "exemplifizieren", "veranschaulichen", "die Prämisse", "implizieren"],
+  "intrinsisch / extrinsisch": ["immanent", "substanziell", "eklektisch", "marginal"],
+  "Rezeption / Reflexion": ["hinterfragen", "abwägen", "revidieren", "erörtern", "resümieren", "rekurrieren"],
+  "abschließend / anschließend": ["resümieren", "dezidiert", "herausstellen", "verbindlich", "sukzessive"],
+  "verifizieren / falsifizieren": ["affirmativ", "untermauern", "entkräften", "konterkarieren", "hinterfragen", "revidieren"]
+};
+const nahGeteilt = [];
+Object.entries(PAAR_NAH_GEPRUEFT).forEach(([k, verboten]) => {
+  if (!GETEILT.includes(k)) { nahGeteilt.push(k + ": steht nicht in PAAR_GETEILT"); return; }
+  const dVerboten = daten(w, "[" + verboten.map(v => "esc((WORDS.find(y=>y.w===" + JSON.stringify(v) + ")||{d:'?'}).d)").join(",") + "]");
+  for (let i = 0; i < 40; i++) {
+    const q = daten(w, "wordQuestion(WORDS.find(y=>y.w===" + JSON.stringify(k) + "), rng(" + (i * 3301 + 11) + "))");
+    q.opts.forEach(o => { const j = dVerboten.indexOf(o); if (j >= 0) nahGeteilt.push(k + " ← " + verboten[j]); });
+  }
+});
+P.ok("Geteilte Paarkarten ziehen keine nahe Einzelkarte als Ablenker (" + Object.values(PAAR_NAH_GEPRUEFT).flat().length + " geprüfte Paare)",
+  !nahGeteilt.length, [...new Set(nahGeteilt)].slice(0, 6).join(" · "));
+P.ok("… ungeteilte Paarkarten fragen weiter nach beiden Wörtern (Positivprobe)",
+  daten(w, "(function(){const x=WORDS.find(y=>y.p===\"Paar\"&&!PAAR_GETEILT.includes(y.w));const q=wordQuestion(x,rng(5));return q.opts[q.ans]===esc(x.d)})()"));
 
 P.abschluss();

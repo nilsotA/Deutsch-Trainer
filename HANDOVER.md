@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 393 |
+| Übungen | 394 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~900 KB, eine Datei, kein Build |
+| Dateigröße | ~940 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -59,14 +59,282 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
-**Offen, sobald Duden und IDS erreichbar sind (Stand 27.09.2026).** Bisher sperrte die Netzwerkregel der
-Cloud-Umgebung duden.de, grammis.ids-mannheim.de und mediawiki.ids-mannheim.de; Nils hat sie freigegeben, in der
-laufenden Sitzung griff das noch nicht. Erste Aufgabe der nächsten Sitzung: Probeabruf
-(`curl -sS -o /dev/null -w "%{http_code}" https://www.duden.de/`), dann die Belege der Runden 41 und 42 am
-Originaltext gegenlesen — Duden-Sprachratgeber „Bildung des Imperativs“, „Stark oder schwach? Wie manche Wörter die
-Deklination von Adjektiven beeinflussen“, „Deklination von ‚manch‘ und folgendem Adjektiv“, grammis „Wir Deutschen
-lieben Fußball oder Wir Deutsche …“ (fragen/3167), Variantengrammatik „beide“, „solche“, „sämtliche“. Beide Runden
-stützen sich bisher nur auf Suchauszüge.
+**Paarkarten geteilt (28.09.2026, dreiundfünfzigste Runde).** Die richtige Antwort einer Paarkarte nennt beide
+Wörter („implizit = … · explizit = …“) und war daran zu erkennen, ohne die Bedeutung zu kennen. Für zehn Paare
+fragt die Karte jetzt nach einer Seite („Was bedeutet explizit?“); die Bedeutung des Partners ist Ablenker, die
+übrigen zwei kommen aus freien Einzelkarten. Welche Seite drankommt, entscheidet der Seed der Runde. Der Schlüssel
+`w:<Paar>` bleibt, der Lernstand auch — die alte Antwort ist nicht falsch geworden, deshalb kein `NEU_GELERNT`.
+- **Geprüft:** Duden- und DWDS-Einträge aller 56 Wörter abgerufen (`scratchpad/r53/holen.py`, mit dem Kasten
+  „Wussten Sie schon?“), dann ein Workflow mit 59 Agenten: je Paar ein Prüfer (vier Aussagen mit wörtlichem Beleg:
+  beide Bedeutungsangaben richtig, beide Partner sicher falsch), bei Bestehen zwei Gegenprüfer (Wörterbuch;
+  Gebrauch und Sprachratgeber), danach ein Prüfer über alle 120 Einzelkarten für Ablenker, die ebenfalls passen.
+  Die Wörterbuchstellen der zehn haltenden Paare habe ich selbst gelesen.
+- **Geteilt (`PAAR_GETEILT`):** tendenziell/tendenziös, scheuen/scheuern, gewiss/gewissermaßen,
+  normativ/deskriptiv, implizit/explizit, induktiv/deduktiv, intrinsisch/extrinsisch, Rezeption/Reflexion,
+  verifizieren/falsifizieren, abschließend/anschließend. `PAAR_NAH` schließt 77 nahe Einzelkarten als Ablenker aus
+  (streng gezogen, z. B. „untermauern“ bei verifizieren, „immanent“ bei intrinsisch); `wortNah()` liest sie mit.
+- **Nicht geteilt, weil der Partner laut Wörterbuch nicht sicher falsch ist:** scheinbar/anscheinend (Duden:
+  „scheinbar“ Adverb, umgangssprachlich = anscheinend; DWDS: „anscheinend“ selten ugs. = scheinbar),
+  effektiv/effizient, kompliziert/komplex, das Gleiche/dasselbe (beide Wörterbücher: umgangssprachlich synonym),
+  zumindest/mindestens (Duden: mindestens auch „wenigstens, zumindest“), scheinheilig/scheinbar („geheuchelt“),
+  valide/reliabel (Duden: valid „verlässlich“), Ursache/Anlass (DWDS: Anlass „Beweggrund, Ursache“),
+  formal/formell (Duden, „Wussten Sie schon?“: beides, wenn etwas nur der Form nach besteht), rational/rationell,
+  original/originell (Duden: original auch „in seiner Art eigenständig und schöpferisch“), kindlich/kindisch,
+  physisch/physikalisch, psychisch/psychologisch, verständlich/verständig, ideal/ideell (Duden: ideal auch im Sinn
+  von ideell, ohne Markierung), sensibel/sensitiv, geistig/geistlich (IDS-Paronymwörterbuch: „geistiges Oberhaupt“
+  auch religiös). trivial/banal und sechs Karten ohne die Form „X = … · Y = …“ waren gar nicht im Lauf.
+- `tests/inhalt.js`, Abschnitt M: Mechanik (gefragte Seite richtig, Partner unter den Optionen, beide Seiten
+  kommen dran) und die nahen Einzelkarten, als eigene Liste `PAAR_NAH_GEPRUEFT` — beide mit Positivprobe.
+- Nebenbei: `sensibel / sensitiv` führt „fachsprachlich: fein reagierend“ bei sensitiv. Duden und DWDS haben das
+  nicht; der Duden nennt für fein reagierende Instrumente „sensibel“. Die Karte sagt das in ihrem Feld `t` selbst,
+  Openthesaurus führt „Sensitivität“ unter Mathematik als „Trefferquote“. Bleibt so.
+
+**Wortkarten unterwegs (28.09.2026, zweiundfünfzigste Runde).** Alle 712 Sprechtexte der Unterwegs-Karten
+gelesen (Skript `scratchpad/r52/sprech.js`).
+- **Die Form verriet die Antwort:** Einzelwortkarten bekamen Paarerklärungen („implizit = …, explizit = …“)
+  als Ablenker — auf „Was bedeutet prägnant?“ sichtbar falsch, ohne das Wort zu kennen. `wordQuestion()` zieht
+  für Einzelkarten jetzt nur Einzelerklärungen. `tests/inhalt.js`, Abschnitt M, mit Positivprobe.
+- **Dichtere Fassung für sehr lange Antworten:** Übersteigen die vier Antworten zusammen `SEHR_LANG` (320)
+  Zeichen, setzt `renderQ()` unterwegs zusätzlich `sehrlang` (weniger Polsterung, Schrift weiter 16 px).
+  Auf 375×667 brauchen 5 statt 14 Karten Scrollen; `npm run layout` erlaubt jetzt höchstens 8.
+- `sprechFrage()` setzt nach einer Frage, die schon mit Satzzeichen endet, keinen zweiten Punkt mehr.
+- **Nicht geändert:** „+“ in 45 Sprechtexten („an + Dativ“) liest die Stimme als „plus“ — verständlich, bleibt.
+
+**Suche (28.09.2026, einundfünfzigste Runde).** Mehrere Wörter mussten bisher als zusammenhängende
+Zeichenkette vorkommen: „seit seid“ fand nichts, obwohl die Regel beide Wörter im Titel trägt, und bei
+„dass das“ standen Übungen vor der Regel. `drawSearch()` wertet jetzt auch Treffer, in denen alle Wörter
+vorkommen (Titel vor Untertitel vor Text), und gibt Regeln einen Vorsprung. `tests/suite.js`, F2: „seit seid“,
+„dass das“ und „wider wieder“ müssen die Regel zuerst zeigen; mit dem alten Code schlagen alle drei fehl.
+Dieselbe Lücke hatten die vier Suchfelder der Ansichten (Regeln, Wortschatz, Formulierungen, Fälle): Sie
+filtern jetzt über `passtSuche()` — am Stück oder jedes Wort irgendwo —, das Regelfeld zeigt Treffer im Titel
+zuerst und liest den Regeltext über `strip()`, damit ein hervorgehobener Wortteil das Wort nicht zerteilt.
+Geprüft im selben Abschnitt; mit dem alten Code fanden „seit seid“ und „wider wieder“ unter Regeln nichts.
+
+**Unterwegs-Modus im Browser angesehen (28.09.2026, neunundvierzigste Runde).**
+
+Screenshots in Chromium auf 375×667 (Skripte `scratchpad/r49/shots.js`, `fb.js`, `tage.js`, `px.js`).
+- **Erklärung unter der Leiste:** Nach einer falschen Antwort lag die Erklärung oft unter der klebenden Leiste
+  mit „Weiter“; zu sehen war nur ihr oberer Rand. `zeigeRueckmeldung()` hielt das für „im Bild“, weil der
+  klebende Knopf immer im Bild ist und die Oberkante der Rückmeldung auch. Jetzt zählt die Oberkante der
+  `.walkbar` als Rand. Gemessen an jeder fünften Karte: auf 375×667 von 19 auf 0 von 135, auf 390×844 von 5 auf 0.
+  Neue Prüfung mit Gegenprobe in `tests/unterwegs.js`, Abschnitt H; Falle in CLAUDE.md, Abschnitt 6.
+- **`npm run layout` war rot**, schon auf dem Stand vor Runde 46: 51 statt höchstens 50 Karten brauchten auf 375×667
+  Scrollen bis zur letzten Antwort, über 14 Kalendertage konstant (also kein Tagesseed). Am knappsten lagen z03
+  (2 px) und f07 (3 px) — kurze Antworten ohne die kompakte Fassung, eine kürzere Frage änderte nichts. Der Abstand
+  zwischen kurzen Antworten ist jetzt 10 statt 12 px (Tippflächen unverändert 76 px hoch): 49 Karten.
+- **Rundenende versprach zu viel:** „Alles wiederholt — die nächste Runde nimmt neuen Stoff“ stand auch nach einer
+  ersten Runde aus lauter neuen Karten, und „neuen Stoff“ auch, wenn es keinen mehr gab. Jetzt „Heute ist nichts mehr
+  fällig“, und der zweite Halbsatz folgt `unterwegsRunde()`: neuer Stoff, solange Ungesehenes da ist, sonst „die
+  Karten, die am längsten nicht dran waren“. Die Wiederholungskarte sagt „Heute nichts fällig“ statt „Alles
+  wiederholt“. Zwei Prüfungen in `tests/unterwegs.js`, Abschnitt C, am gerenderten Text.
+- **Vorlesen zerlegte Wörter:** `strip()` und `sprechbar()` setzten für jedes Tag ein Leerzeichen — „der gut e
+  Trainer“, „mit dem Kolleg en“, „über SETZ en“ (19 Stellen in vorgelesenen Übungstexten, dazu der Suchindex).
+  Inline-Tags fallen jetzt spurlos weg; eine Klammer um Wörter wird eine Pause (vorher lief „bildet („Das Wetter
+  droht …“)“ ohne Absatz weiter); ein freistehender Schrägstrich heißt „oder“. Prüfung mit Positivprobe in
+  `tests/inhalt.js`, Abschnitt D; Falle in CLAUDE.md.
+- **Gleichheitszeichen und Hörhinweis:** „=“ steht in 144 Sprechtexten und meint überall „heißt“ („zurzeit (=
+  momentan)“, „f. = die folgende Seite“); die Stimme las „gleich“. `sprechbar()` liest jetzt „heißt“, und „=“ steht
+  in der Zeichenliste des Hörbarkeitswächters (Positivprobe erweitert). Endet eine Option ohne Satzzeichen, lief der
+  Hörhinweis ohne Pause an („im Nachhinein Nachhinein groß“); `sprechFrage()` setzt dort ein Komma.
+- **Kartensorte verschwindet, zum dritten Mal:** Die freie Runde der Kartenansicht zog nur Übungen und Wortkarten,
+  die Zusatzrunde nach der Tagesaufgabe nur Übungen — Fallkarten nie. Neue Hilfsfunktion `freieMischung(n, r)` über
+  `alleSchluessel()` und `frageZuSchluessel()`; zwei Prüfungen in `tests/unterwegs.js` (alter Code: 0 Fallkarten in
+  75 bzw. 70 Karten). Dazu zwei Oberflächentexte: „Fach 1 · alle 1 Tage“ → „jeden Tag“, „1 Antworten“ → „1 Antwort“.
+- **Kopfzeile unterwegs ausgeblendet:** Titel, Serie, XP, Suche und Themenschalter nahmen im Unterwegs-Modus
+  rund 55 px. Jetzt `body.walk .head{display:none}`, die `.wrap` übernimmt den Notch-Abstand; `go()` verlässt den
+  Modus bei jedem Ansichtswechsel, dann ist die Kopfzeile zurück. Karten mit Scrollen bis zur letzten Antwort auf
+  375×667: 49 → 14; die Grenze in `tests/layout.js` steht jetzt bei 20.
+- **Textcheck-Kennzahlen:** „2.7 %“ mit Dezimalpunkt, in der App, die den Punkt als englisch lehrt; die Kachel hieß
+  „Wörter auf -ung/-heit/-keit“ und zählte auch -nis und -ion. Beides behoben, Prüfung mit Gegenprobe in
+  `tests/suite.js`, F2. Fehlersuche und Textcheck auf 375×667 sonst ohne Befund (eine korrekte Mail ergab nur den
+  berechtigten Prüfhinweis zu „Mittwoch Nachmittag“).
+- **Offline-Betrieb im Browser geprüft:** `sw.js` wurde bisher nur als Text gelesen. Neuer Lauf `npm run offline`
+  (`tests/offline.js`, eigener Node-Server, liefert „/“ wie Vercel): Start ohne Netz mit Lernstand und laufender
+  Runde, neue Fassung beim nächsten Start, bei einem Server, der die Seite in ~8 s tröpfelt, Start nach ~2,6 s aus
+  dem Cache. Zwei Positivproben (ohne Worker, Worker ohne Frist). Kein Befund in der App. Chromiums Netzdrosselung
+  greift für Anfragen des Workers nicht — deshalb drosselt der Server selbst.
+- **Einstufung wiederholte sich:** `testQuestions()` nahm immer dieselben 30 Aufgaben (pool[0], pool[step],
+  pool[2·step]). Nach der ersten Einstufung stehen die im Lernstand; „Neu einstufen“ maß dann das Gedächtnis für
+  genau diese Karten. Jetzt je Bereich zuerst Ungesehenes, dann das am längsten nicht Beantwortete, möglichst drei
+  verschiedene Regeln, am selben Tag stabil (Tagesseed). Drei Prüfungen in `tests/lernen.js`, A (alter Code: alle 30
+  wiederholt).
+- **Schreibwerkstatt gegengelesen** (ein Prüfer, nur Meldung; jeder Fund von mir nachgelesen, § 54 am Regelwerk 2024):
+  ph06 Satz nach Doppelpunkt groß („Das macht sie nachvollziehbar“); ph19 „beendet das Gespräch, statt es zu führen“;
+  ph44 „Eine Massenmail, erkennbar am …“; ph20 Tipp verlangte einen eigenen Satz, zwei Vorbilder setzen die Zustimmung
+  mit Gedankenstrich ab — Tipp nennt jetzt beides; ph26 Tipp „was und bis wann“ auf übernommene Aufgaben begrenzt
+  („Bin dabei“ ist eine Zusage zum Mitmachen); w03 schloss mit „Vielen Dank für Ihre Rückmeldung“ vor jeder
+  Rückmeldung, gegen pr14 und ph03 — jetzt „Ich freue mich auf Ihre Rückmeldung“. Nicht übernommen: ph37 (Tipp ist eine
+  Empfehlung, keine Behauptung über die Vorbilder), „die beste Übung/Investition“ (steht mit Grund auf der Ausnahmeliste
+  des Rangwächters). Neu im Vorbildkorpus von `tests/suite.js`: die Erklärtexte der Negativbeispiele (Teil nach „—“).
+- Kein Befund: dunkles Thema (Antwort, Rundenende), Startzeit (0,19 s; bei vierfach gedrosselter CPU 0,96 s, fast
+  nur Skript-Einlesen), Tippfeld (autocapitalize/autocorrect aus; `norm()` macht klein, keine der 45 Tippaufgaben hängt
+  an Groß-/Kleinschreibung).
+- Kein Befund: das blasse Rechteck am rechten Rand der Screenshots ist Chromiums Scrollbalken; 3 XP für eine falsche
+  Antwort sind gewollt (`S.xp += ok ? 10 : 3`).
+
+**Zahlenregeln und Fehlersuchtexte am Original (28.09.2026, achtundvierzigste Runde).**
+
+Selbst gelesen, ohne Prüfagenten: die sieben `n-`Regeln samt Übungen und Prüfmustern (Auszug `scratchpad/r48/app-zahlen.txt`)
+gegen die Duden-Rechtschreibregeln „Zahlen und Ziffern“, „Datum“ (D 32), „Punkt“, „Abkürzungen“, die Sprachratgeber
+„Uhrzeitangaben“, „Schreibung von Zahlen bis 12“, „Kommasetzung in mehrteiligen Angaben“, die Wörterbucheinträge „Grad“
+und „Prozent“ und das Regelwerk 2024 (§ 77 E5: schließendes Komma nach dem Datum jetzt Pflicht, 2018 noch freigestellt —
+die App stimmt). Keine richtige Antwort geändert, kein `NEU_GELERNT`.
+- **dem/den 5. Mai:** „dem … üblicher“ in n-datum und q16 ohne Beleg; Duden D 32 und der Ratgeber setzen „dem/den“
+  gleichrangig. Gestrichen.
+- **Gradzeichen:** „Der Duden lässt daneben auch ‚20° C‘ zu“ (n-einheiten, z-schraeg, t05) steht im Duden nicht;
+  der Eintrag „Grad“ führt „3 Grad C oder 3 °C“. Korrigiert.
+- **Geldbeträge:** „Der Duden gliedert auch Geldbeträge mit Leerzeichen“ — so ausdrücklich steht es nirgends; die Regel
+  nimmt sie nur nicht aus. Entsprechend formuliert.
+- Bestätigt: Silbenregel und überholte Buchdruckerregel, Gliederung ab fünf Stellen, Uhrzeit mit Punkt oder Doppelpunkt
+  (DIN zweistellig, volle Stunde einstellig), Abkürzungspunkt als Schlusspunkt, Einheiten ohne Punkt.
+- **Fehlersuchtexte:** alle zwölf Satz für Satz gegen die App-Regeln gelesen (`scratchpad/r48/korrektur.txt`); kein
+  unmarkierter Fehler, keine falsche Markierung. Einzige Rückfrage: „übel nehmen“ in kt08 — Regelwerk 2024 § 34 E5 lässt
+  beide Schreibungen zu.
+- Nicht nachprüfbar, unverändert: DIN 5008 (Punkt nur bei Geldbeträgen), „von 9–11 Uhr“ als Mischform (Duden-Buch).
+
+**Spickzettel und Stil-/Formregeln am Original (27.09.2026, siebenundvierzigste Runde).**
+
+Zwei Prüfer (nur Meldung), jeder Fund von mir am Regelwerk 2024 (`scratchpad/q/rw2024.txt`) oder an der Duden-Seite
+nachgelesen. Keine richtige Antwort geändert, kein `NEU_GELERNT`.
+- **Spickzettel:** 5. Mai 2026 als Montag (ist Dienstag) — der Wochentagswächter in `tests/suite.js` kannte „dem/den“
+  nicht, jetzt schon (Positivprobe erweitert). Kann-Komma nach versuchen/wagen nur, solange beim Verb nichts steht
+  (§ 73 E4: „Sie hat nicht gewagt, ihren Chef zu fragen“ → Komma), auch in `komma-infinitiv`. Partizipgruppe mit den
+  Pflichtfällen (Duden-Ratgeber „Komma bei Partizipien“ stützt die App-Regel), nachgestellte Erläuterung als verkürztes
+  Satzglied (§ 72 E4), Apostroph nur ohne Artikel (§ 80), Auslassung nur formelhaft freigestellt, morgen früh/Früh mit
+  Region, nach Hause/nachhause unter „Beides“, dank (+Dativ) und nahe (+Genitiv), „man“ nur in Absprachen,
+  „zur Anwendung kommen → angewendet werden“, Satzanfang „ausschreiben oder umstellen“, sa24.short auf hängen/erschrecken
+  beschränkt (ohne gewunken-Zusatz, siehe Druckhöhe). Fallkarte kosten: „der Duden führt nur den Akkusativ“ war falsch (Verlust: „dich/dir die Stellung“).
+  sa24 zeigte „winken → hat gewinkt“ als Leitform — jetzt beide Partizipien.
+- **Stil/Form:** form-anrede „nur der höchste Titel“ stand als Duden-Regel da, der Ratgeber sagt nur „Professorentitel
+  ausschreiben“; Komma nach „Hallo“ (Duden: streng genommen Pflicht, Regelwerk § 77: Konvention); Grußformeln nach dem
+  Duden-Ratgeber (Beste Grüße „lockerere Variante“, Liebe Grüße privat) in Regel, f03 und Baustein ph01;
+  „Grundvoraussetzung“ ist kein Pleonasmus (Duden: eigene Bedeutung); „leer“ steht im Duden unter den nicht steigerbaren.
+- Druckhöhe nachgemessen (`scratchpad/r47/druck.js`: Chromium, Druckmedium, 642 px Breite = A4 mit 20 mm Rand, gegen
+  972 px Seitenhöhe): Abschnitt 1 von 607 auf 736 px, Abschnitt 5 bei 947 px wie auf `main`. Eine erste Fassung von
+  sa24.short brachte Abschnitt 5 auf 1003 px — über die Seite; gekürzt. Diese Messart ergibt für Abschnitt 5 947 statt
+  der früher notierten 835 px, die Luft ist also kleiner als gedacht: **wer eine `short`-Zeile verlängert, misst nach.**
+
+**Grammatik- und Satzbauregeln am Original (27.09.2026, sechsundvierzigste Runde).**
+
+Die 24 `gram-` und 13 `satz-`Regeln samt Übungen und Prüfmustern (Auszüge über `scratchpad/q/dump.js`, vier Teile)
+von vier Prüfern gegen grammis, Duden, Variantengrammatik und DWDS gelesen; sie haben nur gemeldet, jeder Fund ist
+von mir an der Originalseite nachgelesen (Rohtext per curl, Hilfsskript `scratchpad/r46/ex.py`). Gehalten:
+- **trotz + Dativ mit Artikel:** VarGra „Trotz“ nennt CH, LIE, A-west; die Angabe „D-süd und A“ aus der Fachliteratur
+  „kann durch die Variantengrammatik nicht bestätigt werden“. Sechs Stellen (m03, d17, x02, kt07, Fallkarte, Regel)
+  angeglichen; `EINORDNUNG` in `tests/inhalt.js` hat dafür ein neues Feld `nicht` (überholte Landkarte meldet rot).
+- **bräuchte:** „der Duden führt sie als standardsprachlich“ war falsch — Duden-Wörterbuch „besonders umgangssprachlich“,
+  GfdS (Sprachdienst 5/2011) „nicht als standardsprachlich“. Regel, Tabelle, z16 (Musterantwort jetzt „brauchte“).
+- **gewinkt/gewunken (x05):** „gewinkt die unauffälligere“ gestrichen, grammis fragen/76: gewunken seit 1980 häufiger,
+  kein Stilunterschied; „Bis 1998 im Duden landschaftlich“ war die Duden-Grammatik 1998 („hochsprachlich nicht
+  korrekt“). Richtige Antwort geändert → `NEU_GELERNT` x05 auf den 27.09.2026.
+- **wegen:** n05 fragte ohne Rahmen („Welche Variante ist standardsprachlich?“) — jetzt Hausarbeit. m16: „wegen mir“
+  heißt laut Duden umgangssprachlich auch „von mir aus“; nur im Standard (VarGra) ist das „meinetwegen“ vorbehalten.
+  x01 Regionenliste an VarGra, „bleibt oft ohne Endung“ → „manchmal“ (Duden).
+- **nach dem Arzt:** Duden-Wörterbuch „landschaftlich“, nicht „norddeutsch und nicht standardsprachlich“; n09 und die
+  Fallkarte „zu (Richtung)“ setzen den Rahmen „überregional“.
+- **auf die / zur Post:** VarGra: zur Post überall mehrheitlich, auf die Post vor allem CH, seltener A-südost, A-west, D-süd.
+- **Doppelter Infinitiv:** nur „haben“ rückt verlässlich vor; bei „werden“ überwiegt in den meisten Regionen die
+  Nachstellung (VarGra „Wortstellung im Verbalkomplex“). satz-nebensatz, satz-modal, z11.
+- **d25 brauchen ohne zu:** VarGra: in Zeitungen aus A, D-süd, D-mittelost, D-nordost gebräuchlich → Rahmen Hausarbeit.
+- Kleineres: Wechselflexion (grammis 44: heute etwa gleich häufig, die Einheits-Regel stammt aus dem Duden 1935),
+  Level/Levels in Duden-Reihenfolge, erinnern transitiv „umgangssprachlich, besonders norddeutsch“, zufolge vorangestellt
+  „schweizerisch und Rechtssprache“, selben nach Demonstrativpronomen, Bauer selten stark, Imperativ-e „laut Duden
+  verbindlich“ (grammis: „meist“), Perfekt mit sein: D-süd bei stehen mehrheitlich haben (VarGra), am-Progressiv mit
+  Objekt nach grammis nicht zulässig (die Regionalangabe war unbelegt).
+- Nicht übernommen: „ab nächsten Montag … fast im ganzen Sprachraum“ — VarGra sagt wörtlich „fast überall“.
+  Unverändert, weil nicht nachprüfbar: gedenken „Duden-Zweifelsfälle: nicht anerkannt“ (Buch, nicht online).
+
+**Fallkarten und Wortkarten am Original (27.09.2026, fünfundvierzigste Runde).**
+
+- **52 Präpositionskarten** maschinell gegen die Grammatikzeile der Duden-Einträge (Skript `scratchpad/q/praep.py`).
+  Alle Satzform-Ablenker bleiben sicher falsch. Sechs Anmerkungen ergänzt, wo der Duden eine Nebenform führt: nahe
+  (+Genitiv), samt (Plural oft Genitiv), entgegen (Plural Genitiv), gemäß und mitsamt (selten Genitiv), außer
+  (+Akkusativ bei Bewegungsverben).
+- **119 Verbkarten** gegen Duden, grammis E-VALBU und Variantengrammatik (ein Prüfer, jeder Fund von mir nachgelesen).
+  gedenken: der Dativ-Ablenker ist laut Duden-Wörterbuch „besonders schweizerisch und umgangssprachlich“ — Ablenker
+  jetzt „die Opfer“. kosten: „kostet mir“ ist laut Variantengrammatik in A, Südtirol und Südostdeutschland
+  gebräuchlich — der Lückensatz setzt jetzt den Rahmen („Überregional heißt es: …“). Anmerkungen angeglichen bei
+  anrufen (Duden: umgangssprachlich), lehren/beibringen (Duden: veraltend; VarGra: in allen drei Ländern belegt),
+  leiden unter Migräne, sich annehmen (+Dativ, österr. „um“). Drei neue Einträge in `FALL_ERLAUBT`.
+- **155 Wortkarten** gegen die Duden-Originalseiten (zwei Prüfer). Geänderte Bedeutung, deshalb in `NEU_GELERNT`:
+  tendenziös, der Duktus, einräumen, nahelegen, insofern / insoweit. Nur Hinweise oder Quellenangaben: maßgeblich
+  („nur maßgeblich … beteiligt“ war falsch — der Duden-Sprachratgeber unterscheidet „maßgeblich beteiligt“ und
+  „maßgebend beteiligt“), durchwegs (nicht süddeutsch), eklektisch (auch neutral), rekurrieren, nivellieren,
+  idiosynkratisch (Duden nur Medizin/Psychologie), sensitiv, per se, prinzipiell, physisch, entkräften.
+- `npm run layout` gelaufen und grün; `npm run kalender` wegen `NEU_GELERNT`.
+
+**Quellen am Original: Regelwerk 2024, Duden, grammis, Variantengrammatik (27.09.2026, vierundvierzigste Runde).**
+
+Erstmals sind alle Primärquellen direkt lesbar. Das Amtliche Regelwerk 2024 liegt als PDF auf rechtschreibrat.com
+(`/DOX/RfdR_Amtliches-Regelwerk_2024.pdf`, Text mit PyMuPDF: `pip install pymupdf`), dazu die Fassung 2016/2018 zum
+Vergleich. Die Variantengrammatik antwortet auf Unterseiten (`mediawiki.ids-mannheim.de/VarGra/index.php/<Titel>`),
+nur die Startseite gibt 403. Vorgehen: Kapitel B, C, D und E des Regelwerks je als Textdatei, die App-Regeln samt
+Übungen und Prüfmustern je Kapitel als Textdatei (Skript `scratchpad/q/dump.js`), vier Prüfer lesen gegeneinander und
+melden nur; jeden Fund habe ich selbst am Regelwerk oder an der Duden-Seite nachgelesen, bevor ich geändert habe.
+Parallel die 39 Regeln mit Quellenangabe gegen die zitierte Seite.
+
+Falsch gelernt hätte man (alle behoben, keine richtige Antwort geändert, kein `NEU_GELERNT`):
+- **Doppelpunkt:** Zusammenfassender Satz klein („…: alles ist verloren“) — das stand 2006/2018 im Regelwerk, 2024 steht
+  es groß (§ 75 E2/E3, § 54). Fünf Stellen inkl. p04, x52, Spickzettel.
+- **Eckige Klammern im Zitat:** „Das Regelwerk verlangt nur die Punkte“ — § 78 E3 und § 76 E3 verlangen eckige Klammern.
+- **Komma vor „und“ + Satzgefüge** („weiter, und als es dunkel wurde, …“): seit 2024 Pflicht (Abschnitt 2.4.3), die App
+  zeigte es freigestellt.
+- **Infinitiv nach versuchen, erlauben, wagen, probieren, beabsichtigen, versprechen, gestatten:** Komma freigestellt
+  (2.5.5; Duden „Kein Komma bei Infinitivgruppen“). k20 benutzte „Er hat versucht(,) pünktlich zu sein“ als Pflichtfall;
+  jetzt „sich bemühen“ (Duden: Komma Pflicht). Derselbe Mustersatz in komma-infinitiv, komma-hauptsatz, y11 und dem
+  Spickzettel getauscht; y11 meldet die Kann-Verben nicht mehr.
+- **nachhause:** als österreichisch-schweizerisch eingeordnet; WV § 39 E3 ohne Einschränkung (siehe FUNDE-offen).
+- **besser gehen / bessergehen:** beides (WV); **Comeback, Countdown** nur zusammen, **Kick-off/Kickoff, Start-up/Startup**
+  beides (§ 45 E2).
+- **„Wir treffen uns Dienstag Abend“:** ohne Begleiter zulässig (WV „Dienstag“, Duden „Dienstagabend“). x43 bleibt hart
+  mit Begleiter („am Dienstag Abend“), ohne stuft `WEICH` auf „Bitte prüfen“ herab. Drei Korpusstellen („bis Freitag
+  Abend“, „von Donnerstag Abend“, „Am Besten wäre Mittwoch Nachmittag“) sind im Korpus als Fehler annotiert; nach dem
+  Regelwerk sind sie zulässig. Der Textcheck findet sie weiter, jetzt als Prüfhinweis — die Quote bleibt.
+- **getrennt-verb:** „Getrennt nur, wenn das Adverb betont ist“ — § 34 E1: bei der Wortgruppe kann es unbetont sein.
+  Das Beispiel „zusammen arbeiten (= gemeinsam)“ widersprach der Duden-Bedeutung von „zusammenarbeiten“; ersetzt
+  durch das Regelwerkbeispiel „nach der Operation wieder sehen“ und die Vorfeldprobe.
+
+Ungenau (behoben): Semikolon nur zwischen gleichartigen Sätzen (§ 74 E3); Apostroph nach Buchstaben s, ss, ß, x, z, ce,
+auch stumm (§ 80, „Dumas’“), Auslassungs-Apostroph nur bei formelhaften Formen frei; Schrägstrich-Leerzeichen regelt
+§ 83, nicht erst die DIN; „nämlich:“ hieß „Häufiger Fehler“ (Rangformel), jetzt „Überflüssig“; z-frage zitierte
+Beispiele der Fassung 2018; wissen/verstehen zu als mehrteiliges Prädikat; „nur um“/„auch um“ (y02 schweigt, wenn
+davor ein Komma steht); enge Apposition mit Artikel; Fragewort allein („Keiner ahnt(,) warum“); Nebensatz + Wortgruppe
+(2.4.2, y13); Farben nach Präposition groß (§ 58 E2); „aufs Beste angewiesen“ nur groß; „völlig recht haben“ nur klein;
+„es ist seine Schuld“; x44 übersah „vergangenen Sonntags“; Bindestrich-Pflicht bei Ziffern und gleichrangigen
+Adjektiven; ß-Ersatz ohne verfügbares ß; „das gleiche“ bei mitgedachtem Substantiv; x19 und p22 zum Ladennamen;
+x15 erklärte „das Wiederstehen“ für richtig und strich es hart an.
+
+Aus den eigenen Quellenabgleichen: `stil-absolut`, s17 und x07 schrieben dem Duden „die optimale, nicht optimalste
+Lösung“ zu — steht so nirgends; der Duden führt „optimal“ ohne Steigerungsformen und nennt es im Sprachratgeber
+„einzigste“ nicht steigerbar. sa08: „misszuleiten“ nach Sprachratgeber, aber das Wörterbuch betont miss**lei**ten und
+führt „zu missleiten“, „missleitet, auch missgeleitet“ — Beispiel gestrichen, Schwankung benannt. sa04: grammis nennt
+nach „ob … oder nicht“, „egal ob“, „wie … auch“ die Außenstellung obligatorisch — die App sagte, Verb direkt dahinter
+„kommt ebenfalls vor“; nur bei „auch wenn/selbst wenn“ geht beides. gram-plural: „die gebräuchlichere zuerst“ war eine
+Häufigkeitsordnung ohne Quelle, jetzt Duden-Reihenfolge (Schemen, Schemata, Schemas). „ab nächsten Montag“: laut
+Variantengrammatik bei Wochentagen fast überall üblich, nicht nur „in Deutschland verbreitet“. Belegt und unverändert:
+gram-kongruenz (Gruppe nur Singular), gram-konjunktiv, sa02, sa10 (grammis: Ersatzinfinitiv Pflicht bei Modalverben und
+brauchen), sa11, n-ziffern, n-gliederung, gram-derselbe, Runde 42 vollständig (auch solche, sämtliche).
+
+Nicht geprüft in dieser Runde: Kapitel A des Regelwerks (Laut-Buchstaben) über die Rechtschreibfallen hinaus, die
+Stil- und Formregeln (keine Quelle zu prüfen), die Wortkarten. `npm run layout` nicht gelaufen (k20 und b08 haben
+kurze Optionen).
+
+**Belege der Runden 41 und 42 am Originaltext gegengelesen (27.09.2026, dreiundvierzigste Runde).**
+
+duden.de, grammis und dwds.de sind jetzt erreichbar (mediawiki.ids-mannheim.de, also die Variantengrammatik,
+weiter 403). Gelesen: Duden-Sprachratgeber „Bildung des Imperativs“, „Stark oder schwach? …“, „manch“, grammis
+„Wir Deutschen lieben Fußball …“ (fragen/3167), dazu die Leseprobe des Duden-Ratgebers „Stolpersteine der
+Grammatik“ (Abschnitt Imperativ, als PDF von shop.duden.de). Ergebnis:
+- **Runde 42 hält.** Alle, sämtliche, mehrere, einige, manche, Genitiv Plural stimmen mit dem Ratgeber überein;
+  „viele gute“ bestätigt Dr. Bopp (LEO, 02.07.2026). Einzige Schärfung: grammis zählt im Referenzkorpus
+  „wir Deutschen“ gut doppelt so oft wie „wir Deutsche“ — h03 und sa13 sagten nur „verbreitet ist auch“, jetzt
+  „häufiger“. Richtige Antwort unverändert, deshalb kein `NEU_GELERNT`.
+- **Runde 41 hält**, die Ausnahme l/r/m/n/h vor m/n steht wörtlich in den „Stolpersteinen“ („Kämm[e] dich!;
+  Qualm[e] nicht so!“). **Lücke:** Bei Verben auf -eln/-ern ist das Endungs-e verbindlich, „handel!, förder!“
+  sind umgangssprachlich. Neu: Absatz in `gram-imperativ` (dazu: kein Apostroph bei fehlendem -e), Übung b08
+  („Sammle“ gegen „Sammel“), Spickzettelzeile ergänzt.
+- Offen bleibt nur die Variantengrammatik (beide, solche, sämtliche); dort stützt sich die App weiter auf
+  Suchauszüge.
 
 **Adjektivendung nach alle, viele, beide, manche, wir (27.09.2026, zweiundvierzigste Runde).**
 
@@ -3370,6 +3638,13 @@ weiter belegst.
 ## Ideenliste
 
 Nach Nutzen sortiert, nichts davon ist angefangen:
+
+0. **Ungeteilte Paarkarten: Überschneidung nennen (notiert 28.09.2026).** Zehn Paare sind geteilt (siehe
+   „Zuletzt geändert“, 53. Runde). Bei den übrigen verzeichnet der Duden die angeblich getrennten Bedeutungen oft
+   auch für das andere Wort — ideal auch im Sinn von ideell, original auch „eigenständig und schöpferisch“,
+   formal/formell „nur der Form nach“ beides. Die Karten sind nicht falsch (die genannte Bedeutung ist jeweils
+   die erste), verschweigen aber die Überschneidung. Kandidat für einen Satz im Feld `t` je Karte, jeweils mit
+   der Duden-Stelle; die Belege aus dem Lauf stehen in der Liste oben.
 
 1. **Restliche Regelgruppen belegen.** Erledigt sind Zeichensetzung, Groß- und
    Kleinschreibung, Getrennt- und Zusammenschreibung und die Rechtschreibfallen.

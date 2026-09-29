@@ -58,6 +58,24 @@ const P = pruefer("A · Erster Start und Einstufung");
   P.ok("zusammen so viele Fragen, wie die App ankündigt",
     einstufung.length === testcats.length * 3, einstufung.length);
   {
+    /* Fehlerklasse „die zweite Einstufung misst die erste“ (28.09.2026): testQuestions()
+       nahm immer dieselben 30 Aufgaben. Nach der ersten Einstufung stehen sie im Lernstand;
+       eine zweite muss andere nehmen, sonst misst sie das Gedächtnis für genau diese Karten. */
+    const w3 = boot(leererStand());
+    const erste = daten(w3, "testQuestions().map(q=>q.key)");
+    w3.eval("(" + JSON.stringify(erste) + ").forEach(k => { S.cards[k] = {b:3, d:addDays(today(), 3), l:addDays(today(), -4), s:3, w:0}; })");
+    const zweite = daten(w3, "testQuestions().map(q=>q.key)");
+    const doppelt = zweite.filter(k => erste.includes(k));
+    P.ok("eine zweite Einstufung nimmt andere Aufgaben als die erste", !doppelt.length, doppelt.join(", "));
+    const regelnJeBereich = daten(w3, `(function(){
+      const z = {}; testQuestions().forEach(q => { (z[q.cat] = z[q.cat] || new Set()).add(q.rule); });
+      return Object.values(z).map(s => s.size); })()`);
+    P.ok("… und je Bereich drei verschiedene Regeln, wo der Vorrat sie hat",
+      regelnJeBereich.filter(n => n === 3).length >= 8, JSON.stringify(regelnJeBereich));
+    P.ok("… und am selben Tag stabil (eine unterbrochene Einstufung behält ihre Fragen)",
+      JSON.stringify(daten(w3, "testQuestions().map(q=>q.key)")) === JSON.stringify(zweite));
+  }
+  {
     /* Positivprobe, damit die drei Prüfungen oben nicht stumm grün werden: Schrumpft der
        Vorrat eines Bereichs unter drei, muss es auffallen. Der Vorrat wird dafür in einem
        eigenen Fenster zusammengestrichen, das danach weggeworfen wird. */

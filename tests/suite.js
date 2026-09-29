@@ -417,10 +417,12 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      5. August stand einmal als Dienstag, dreimal als Mittwoch; n-datum zeigte „05.05.2026“
      und daneben „Montag, dem 5. Mai“ — der 5. Mai 2026 ist ein Dienstag. Wer eine Regel über
      genaue Termine lehrt, darf keinen falschen Termin als Vorbild zeigen. Ohne Jahreszahl gilt
-     2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel. */
+     2026, das Jahr der Beispiele. Geprüft wird die ganze Datei, also auch der Spickzettel.
+     Am 27.09.2026 nachgeschärft: Der Spickzettel schrieb „am Montag, dem/den 5. Mai,“ — die
+     Schreibung mit Schrägstrich sah das Muster nicht, und der falsche Wochentag stand weiter da. */
   const TAGE = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
   const MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:den\\s+|dem\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
+  const WD = new RegExp("(" + TAGE.join("|") + "),?\\s+(?:(?:den|dem)(?:\\s*\\/\\s*(?:den|dem))?\\s+)?(\\d{1,2})\\.\\s+(" + MONATE.join("|") + ")(?:\\s+(\\d{4}))?", "g");
   const schief = t => [...String(t).matchAll(WD)].filter(m => {
     const d = new Date(Date.UTC(+(m[4] || 2026), MONATE.indexOf(m[3]), +m[2]));
     return TAGE[d.getUTCDay()] !== m[1];
@@ -429,7 +431,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const wdSchief = [...new Set(schief(html))];
   P.ok("Jeder Wochentag passt zu seinem Datum (ohne Jahr: 2026)", !wdSchief.length, wdSchief.join(" · "));
   P.ok("… und die Prüfung erkennt „Montag, dem 5. Mai“ und „Dienstag, den 5. August“",
-    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025").length === 2,
+    schief("am Montag, dem 5. Mai, · Dienstag, den 5. August · Mittwoch, den 5. August · Montag, 5. Mai 2025 · am Montag, dem/den 5. Mai,").length === 3,
     "Positivprobe blieb stumm");
 }
 
@@ -840,7 +842,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   BESTAND.forEach(x => zaehlSammle(x.sorte, x.id, x.t));
   /* Was zählen darf, steht hier mit Grund. */
   const ZAEHL_ERLAUBT = {
-    "Übung p22": "„Einzige Ausnahme sind Laden- und Firmennamen“ — die Zählung gilt dem Genitiv-s, und dort stimmt sie; der Apostroph vor -sch ist keine Genitivform",
     "Oberfläche Stand der Prüfung Rund": "zitiert „die drei Ausnahmen“ und „Zwei Ausnahmen:“ als Beispiel für den behobenen Fehler — Metasprache, keine Zählung",
   };
   const zaehlNeu = [...zaehlStellen].filter(x => !(x in ZAEHL_ERLAUBT));
@@ -1126,6 +1127,15 @@ PAIRS.forEach(pr => { if (pr.note) beide({ id: "pr:" + pr.id + " (Merksatz)", t:
    30 Feldern schlug danach kein Muster an. */
 PAIRS.forEach(pr => { if (pr.why) beide({ id: "pr:" + pr.id + " (Begründung)", t: strip(pr.why) }); });
 PHRASES.forEach(ph => { if (ph.tip) beide({ id: "ph:" + ph.id + " (Merksatz)", t: strip(ph.tip) }); });
+/* Die Negativbeispiele der Bausteine tragen hinter dem Gedankenstrich eine Erklärung in
+   eigenem Fließtext: „„Das ist doch Quatsch.“ — beendet das Gespräch statt es zu führen.“
+   Das Beispiel davor ist absichtlich schlecht, die Erklärung nicht. Am 28.09.2026 standen
+   dort zwei Kommafehler (ph19, ph44), die kein Wächter sah, weil das ganze Feld draußen
+   blieb. Geprüft wird jetzt nur der Teil nach dem ersten „ — “. */
+PHRASES.forEach(ph => (ph.no || []).forEach(t => {
+  const teil = strip(t).split(" — ").slice(1).join(" — ");
+  if (teil.trim()) beide({ id: "ph:" + ph.id + " (Erklärung zum Negativbeispiel)", t: teil });
+}));
 /* Auch der eigene Fließtext der App: die Situationen der Schreibwerkstatt, die
    Schreibaufträge und die Erläuterungen der Wortkarten sind Text, den Nils als
    korrektes Deutsch vorgesetzt bekommt. */
@@ -1971,12 +1981,20 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       ziel: ["Sie geht früher um pünktlich zu sein.", "Wir treffen uns um den Plan durchzugehen.",
              "Er spart um sich ein Rad zu kaufen.", "Sie kommt vorbei um das Trikot abzuholen."],
       still: ["Sie geht früher, um pünktlich zu sein.", "Um fit zu bleiben, geht er joggen.",
-              "Er bittet um Erlaubnis.", "Wir kümmern uns um den Aufbau, um Zeit zu sparen."] },
+              "Er bittet um Erlaubnis.", "Wir kümmern uns um den Aufbau, um Zeit zu sparen.",
+              /* Regelwerk 2024, § 73 E5 (2) und (3): Das Komma steht vor dem Wort, das zur
+                 Infinitivgruppe gehört. Beide Sätze stehen dort wörtlich. */
+              "Man braucht ein Ingenieursstudium, nur um das Gerät zusammenbauen zu können.",
+              "Sie lernte, auch um die Prüfung zu bestehen."] },
     { id: "y11",
-      ziel: ["Er hat versucht den Ball zu treffen.", "Sie hat beschlossen das Training zu verschieben.",
+      ziel: ["Er hat sich bemüht den Ball zu treffen.", "Sie hat beschlossen das Training zu verschieben.",
              "Er hat angefangen für die Klausur zu lernen.", "Sie plant im Sommer umzuziehen.",
              "Er hat vergessen Milch zu kaufen.", "Sie hat gelernt mit dem Rad zu fahren."],
-      still: ["Er hat versucht, den Ball zu treffen.", "Er hofft zu gewinnen.",
+      still: ["Er hat sich bemüht, den Ball zu treffen.", "Er hofft zu gewinnen.",
+              /* Regelwerk 2024, Abschnitt 2.5.5: nach versuchen, erlauben, wagen … ist das
+                 Komma freigestellt. Der erste Satz steht dort wörtlich. */
+              "Der Minister versuchte das Kabinett zu überzeugen.",
+              "Die Eltern haben ihm erlaubt ein Bier zu trinken.", "Sie hat gewagt den Trainer zu fragen.",
               "Du brauchst nicht zu kommen.", "Sie scheint das Spiel zu gewinnen.",
               "Er hat noch zu arbeiten.", "Das Wetter droht schlecht zu werden.",
               "Er hat es versucht. Den Ball zu treffen ist schwer.",
@@ -2575,7 +2593,10 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
               "Tag 3 im Praktikum\nMorgens habe ich die erste Stunde hospitiert.",
               "Wochenplan\nMontags: Krafttraining\nMittwochs: Lauf",
               "Eines sehr kalten Morgens stand die ganze Klasse vor der verschlossenen Halle.",
-              "Die Stimmung eines schönen, warmen Abends lässt sich schwer beschreiben."] },
+              "Die Stimmung eines schönen, warmen Abends lässt sich schwer beschreiben.",
+              /* Regelwerk 2024, § 55(4): „letzten Endes, guten Mutes“ — Genitiv mit bloßem Adjektiv */
+              "Die Wahlen vergangenen Sonntags brachten eine Überraschung.",
+              "Das Spiel letzten Samstags war hart."] },
     { id: "x44",
       ziel: ["Manches mache ich lieber Abends.",
              "Des weiteren trainiere ich Abends."],
@@ -2758,9 +2779,9 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
       ziel: [],
       still: ["Wir fördern die Kinder, wo immer möglich."] },
     { id: "y11",
-      ziel: ["Er hat versucht pünktlich zu sein.",
+      ziel: ["Er hat sich bemüht pünktlich zu sein.",
              "Wir haben beschlossen morgen früher anzufangen.",
-             "Sie versucht es zu reparieren."],
+             "Sie bemüht sich es zu reparieren."],
       still: ["Morgen versuchen wir zu gewinnen.",
               "Nächste Woche plant er umzuziehen.",
               "Ich hoffe sehr zu gewinnen."] },
@@ -2862,7 +2883,12 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
     ["x28", "Hallo Frau Weber,\n\nJa, Sie haben recht. Seit 2024 bin ich jedesmal zu spät gekommen. Es tut mir Leid.\n\nViele Grüße\nNils", "hart"],
     ["x43", "Protokoll vom Training am Montag\nMorgen besprechen wir die Ergebnisse.", "pruef"],
     ["x43", "Am Montag Morgen-Workout, am Dienstag Pause.", "pruef"],
-    ["x43", "Ich besuche meine Familie Sonntag Abend und komme dann zurück.", "hart"],
+    /* Ohne Begleiter ist getrennt zulässig („wir treffen uns Dienstag [am] Abend“, Wörterverzeichnis
+       des Regelwerks 2024) — deshalb nur noch „Bitte prüfen“, mit Begleiter bleibt es hart. */
+    ["x43", "Ich besuche meine Familie Sonntag Abend und komme dann zurück.", "pruef"],
+    ["x43", "Wir treffen uns Dienstag Abend.", "pruef"],
+    ["x43", "Wir sehen uns am Dienstag Abend.", "hart"],
+    ["x43", "Am ersten Mittwoch Nachmittag waren die Kinder skeptisch.", "hart"],
     ["x56", "Zwei Protokolle liegen im Ordner. Dieses mal ändern, das andere passt.", "pruef"],
     ["x56", "Aufgaben für Freitag:\nDieses mal ausfüllen\nDas andere Formular abheften", "pruef"],
     ["x50", "Am morgen in der Sporthalle stattfindenden Turnier nehmen zwölf Teams teil.", "pruef"],
@@ -3391,6 +3417,46 @@ P.titel("F2 · Suche und Textcheck");
   P.ok("die Markierungen sitzen weiter auf denselben Wörtern",
     JSON.stringify(markiert) === JSON.stringify(danach),
     markiert.join("|") + "  →  " + danach.join("|"));
+
+  /* Fehlerklasse „die App schreibt, was sie verbietet“ (28.09.2026): Die Kennzahlen des
+     Textchecks kamen roh aus JavaScript — „2.7 %“ mit Dezimalpunkt, in der App, die in q07
+     und n-gliederung lehrt, dass der Punkt englisch ist. Der Text ist so gewählt, dass die
+     Quoten nicht ganzzahlig sind. */
+  feld.value = "Die Durchführung der Messung war eigentlich gut. Wir haben die Leistung verglichen und sind zufrieden.";
+  dd.querySelector("#tcGo").click();
+  const kennzahlen = [...dd.querySelectorAll("#tcRes .stat b, #wSub .stat b")].map(b => b.textContent);
+  P.ok("die Kennzahlen des Textchecks tragen ein Dezimalkomma, keinen Punkt",
+    kennzahlen.length >= 5 && kennzahlen.some(t => /\d,\d/.test(t)) && !kennzahlen.some(t => /\d\.\d/.test(t)),
+    kennzahlen.join(" · "));
+
+  /* Fehlerklasse „die Suche kennt nur die ganze Zeichenkette“ (28.09.2026): „seit seid“
+     fand nichts, weil die Regel „seit oder seid?“ heißt, und bei „dass das“ standen zwei
+     Übungsfragen vor der Regel „das oder dass?“. Mehrere Wörter zählen jetzt auch einzeln,
+     und eine Regel liegt bei gleicher Trefferart vorn. */
+  {
+    w.eval("openSearch()");
+    const erster = s => { dd.querySelector("#srchIn").value = s; w.eval("drawSearch()");
+      const b = dd.querySelector("#srchOut .sres"); return b ? b.textContent.replace(/\s+/g, " ").trim() : ""; };
+    for (const [s, erwartet] of [["seit seid", /^Regel\s*seit oder seid/], ["dass das", /^Regel\s*das oder dass/],
+                                 ["wider wieder", /^Regel\s*wider oder wieder/]]) {
+      const e = erster(s);
+      P.ok("die Suche „" + s + "“ führt zuerst zur Regel", erwartet.test(e), e.slice(0, 60));
+    }
+    w.eval("closeSearch()");
+
+    /* Dieselbe Klasse in den Suchfeldern der Ansichten: Sie filtern mit passtSuche(). */
+    w.eval('go("regeln")');
+    const ersteRegel = s => { dd.querySelector("#ruleSearch").value = s; w.eval("drawRules()");
+      const a = dd.querySelector("#ruleHost .acc"); return a ? a.id : "(keine)"; };
+    for (const [s, id] of [["seit seid", "rule-recht-seit"], ["dass das", "rule-recht-dass"], ["wider wieder", "rule-recht-wider"]])
+      P.ok("das Regelfeld „" + s + "“ zeigt zuerst " + id, ersteRegel(s) === id, ersteRegel(s));
+    P.ok("… und „Komma“ findet weiter Regeln (die Titelsortierung verliert keine)",
+      ersteRegel("komma") !== "(keine)" && dd.querySelectorAll("#ruleHost .acc").length > 10);
+    dd.querySelector("#ruleSearch").value = ""; w.eval("drawRules()");
+    P.ok("passtSuche verlangt jedes Wort (Positivprobe)",
+      w.eval('passtSuche("seit oder seid", "seit seid") && !passtSuche("seit oder seid", "seit dass")'));
+    w.eval('go("karten")');
+  }
 
   /* Fehlerklasse „Überlagerung ohne Fessel“: Ein Shift+Tab im Suchfenster landete
      unsichtbar auf der Seite dahinter — und Enter startete dort eine Runde. */
