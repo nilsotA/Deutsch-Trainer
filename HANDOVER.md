@@ -80,8 +80,14 @@ ausprobiert), 15 Stellen der Schreibwerkstatt, 3 Abschnitte des Spickzettels. De
   z-gedankenstrich; „von … bis“ nur, wenn „von“ die Spanne beginnt; Konjunktiv II fällt bei schwachen Verben mit dem
   Präteritum zusammen → „würde“; „derer“ im Genitiv Plural ohne Substantiv (tb07); n-Deklination ungebeugt vor Namen
   („mit Kollege Otten“) und Leutnant stark; relatives „wo“ nach Ort und Zeit standardsprachlich; „mit was“ von
-  „Fällt auf“ in die erste Liste von satz-sprechen (Duden: in Fragen die seltenere geschriebene Form, Variantengrammatik:
-  süddeutsche und Schweizer Zeitungen) — Abschnitt K in `tests/inhalt.js` zieht mit. `NEU_GELERNT`:
+  „Fällt auf“ in die erste Liste von satz-sprechen (Duden: in Fragen die seltenere geschriebene Form) — Abschnitt K in
+  `tests/inhalt.js` zieht mit, d27 fragt jetzt, was die geschriebene Standardsprache vorzieht.
+- **Gegenprüfung der eigenen Korrekturen** (10 Agenten über den Diff): sechs Funde hielten, alle eingearbeitet —
+  „Entfallen kann es“ hieß bei 2.4.2 eine Wahl, wo das Regelwerk „steht nicht“ sagt; „mit Kollege Otten“ als
+  einzige Form, obwohl der Duden „Kollege/Kollegen Otten“ führt und nach „Herrn“ gebeugt häufiger ist; „im Süden
+  auch in Zeitungen“ zu „mit was“ war nicht nachgelesen und machte den Ablenker in d27 unsicher; „gilt durchgängig
+  ss“ klang nach Pflicht, das Regelwerk sagt „kann“; „Stand der Prüfung“ beschrieb kt01 und kt03 noch als dieselbe
+  Stelle. `NEU_GELERNT`:
   w:scheinheilig / scheinbar (scheinbar hieß dort „nur dem Anschein nach“, die Probe für anscheinend).
 - **Textcheck:** f06 traf auch „ihnen“ (Schüler) und die verbesserte Fassung mit Sprechzeiten; jetzt nur die
   Formel bis „zur Verfügung“, dafür auch „Für Rückfragen …“ und „stehe für Rückfragen zur Verfügung“. x19 lässt

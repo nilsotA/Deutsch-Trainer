@@ -906,8 +906,7 @@ const wuerdeDoppelt = [sprechListen[1], spickSpalten && spickSpalten[1]]
 P.ok("Das doppelte „würde“ steht nicht mehr unter „Fällt auf“", !wuerdeDoppelt.length, wuerdeDoppelt.join(" · "));
 /* „mit was“ stand bis zum 29.09.2026 rot unter „Fällt auf“ — mit dem Zusatz „gesprochen
    geläufig“, also nach dem Maßstab der eigenen ersten Liste. Der Duden nennt „Präposition +
-   was“ in Fragen geschrieben die seltenere Form, die Variantengrammatik belegt sie in
-   süddeutschen, Schweizer und österreichischen Zeitungen. Dieselbe Klasse wie beim „würde“. */
+   was“ in Fragen geschrieben die seltenere Form. Dieselbe Klasse wie beim „würde“. */
 const mitWasAuffaellig = [sprechListen[1], spickSpalten && spickSpalten[1]]
   .filter(x => x && x.includes("mit was"));
 P.ok("„mit was“ steht nicht mehr unter „Fällt auf“", !mitWasAuffaellig.length, mitWasAuffaellig.join(" · "));
