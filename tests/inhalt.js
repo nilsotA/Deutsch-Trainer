@@ -630,6 +630,9 @@ P.titel("G · Regionale Varianten");
    Angabe der Fachliteratur, die sie ausdrücklich nicht bestätigen kann.
    während → Schweiz und Westösterreich, in Zeitungstexten (IDS); sonst umgangssprachlich
    statt → Österreich und Schweiz (IDS); Dativ auch ohne erkennbare Genitivform
+   — am 30.09.2026 an der Originalseite korrigiert: Der Dativ Singular ist in Zeitungstexten
+   fast überall neben dem Genitiv gebräuchlich, in Westösterreich überwiegt er, in D-nord
+   und D-mittelwest ist er etwas seltener. Umgangssprachlich nennen ihn weder Duden noch DWDS.
    wegen → überall umgangssprachlich, keine regionale Standardvariante
    Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
 const EINORDNUNG = [
@@ -639,7 +642,7 @@ const EINORDNUNG = [
               ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
   { was: "während", muss: [/umgangssprachlich/, /Schweiz/, /Westösterreich|Österreich/],
     stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
-  { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
+  { was: "statt", muss: [/Zeitungstexten/, /Westösterreich/], nicht: [/umgangssprachlich/],
     stellen: [["Fallkarte", "statt / anstatt"]] },
   /* „wegen“ stand in der Regel als der Fall, bei dem der Dativ „überall“ umgangssprachlich
      sei — abgesetzt von trotz/während/statt, für die dieselbe Quelle zwei Sätze vorher
@@ -1005,7 +1008,8 @@ P.ok("und meldet ein echtes Falschpaar nicht",
    hier mit dem Grund, warum ihr Ablenker trotzdem sicher falsch ist. Für die Fallkarten, die
    keine Frage tragen, dasselbe über ihren Hinweis. */
 {
-  const REGION = /Schweiz|schweizerisch|Österreich|österreichisch|Süddeutschland|süddeutsch|südwestdeutsch|Liechtenstein|Standardvariante/;
+  /* [Öö]sterreich statt Österreich|österreichisch: „Westösterreich“ lief am 30.09.2026 durch. */
+  const REGION = /Schweiz|schweizerisch|[Öö]sterreich|Süddeutschland|süddeutsch|südwestdeutsch|Liechtenstein|Standardvariante/;
   const RAHMEN = /überregional|in Deutschland|Hausarbeit|geschriebenen Text|standardsprachlich|sichere Form/i;
   const OFFEN_ERLAUBT = {
     g05: "fragt nach der Varianz selbst („Was gilt für … und …?“)",
@@ -1018,9 +1022,10 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   };
   const FALL_ERLAUBT = {
     "während": "Ablenker im Akkusativ („den Vortrag“), nicht der regionale Dativ",
+    "dank": "Ablenker im Akkusativ („deine“), nicht der Dativ, den der Hinweis für die Schweiz nennt",
+    "statt / anstatt": "Ablenker im Nominativ („der Vortrag“), nicht der Dativ, den der Hinweis für Westösterreich nennt",
     "trotz": "Ablenker im Akkusativ („den Rückstand“), nicht der regionale Dativ",
     "wegen": "Ablenker im Akkusativ („das schlechte Wetter“), nicht der landschaftliche Dativ",
-    "statt / anstatt": "Ablenker im Nominativ („der Vortrag“) — ein Akkusativ wäre nach der Konjunktion „statt“ womöglich richtig",
     "anrufen": "Der Dativ ist südwestdeutsch umgangssprachlich und schweizerisch; die App trainiert die in Deutschland übliche Form, der Hinweis ordnet ein",
     "nach (Richtung)": "die Region betrifft „nach dem Bäcker“, nicht den Ablenker „zu Italien“",
     "auf (Richtung)": "die Region betrifft „auf die Post / zur Post“, nicht den Ablenker „dem Markt“",
