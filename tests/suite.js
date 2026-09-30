@@ -303,7 +303,7 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
     "gram-praepakk", "gram-derselbe", "satz-wennals", "satz-negation", "gram-plural",
     "satz-nebensatz", "satz-klammer", "satz-modal", "gram-konjunktiv", "gram-kasusfinden", "recht-verwechsel",
     "n-uhrzeit", "n-datum", "z-klammern", "z-auslassung", "satz-frage", "gram-verlauf",
-    "satz-konjunktiv"];
+    "satz-konjunktiv","gram-praepdat","gram-relkasus","satz-perfekt","gram-verbformen","satz-dativakk","z-semikolon"];
   const jeRegel = {};
   daten(w, "ALL.map(e=>e.r)").forEach(r => jeRegel[r] = (jeRegel[r] || 0) + 1);
   const fehlt = KERN_EXTRA.filter(id => !regelKat[id]);

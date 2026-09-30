@@ -1083,8 +1083,19 @@ P.titel("L · Der lange Horizont");
     " von " + zwei.gesamt);
   P.ok("die Tagesaufgabe allein lässt den größeren Teil des Bestands liegen",
     ohne.gesehen < ohne.gesamt / 2, ohne.gesehen + "/" + ohne.gesamt);
-  /* Was nach sechs Monaten noch offen ist, sind gemessen nur Übungen (0 bis 2 von 834, meist
-     Tippaufgaben, die unterwegs nicht vorkommen und nur über „Heute“ kommen). Die Übungen sind
+  /* Tippaufgaben kommen nur über „Heute“ — unterwegs werden sie herausgefiltert. Bis zum
+     30.09.2026 liefen sie dort im Themenwechsel mit, und das Thema „gram“ mit 33 der 45
+     bekam jeden zehnten neuen Platz: Nach sechs Monaten mit zwei Runden waren bis zu 17
+     noch nie drangekommen. buildDaily() gibt jetzt einer neuen Tippaufgabe am Tag den
+     ersten freien Platz. Gemessen wird am Lauf ohne Unterwegs-Runde, weil dort nichts
+     anderes sie hätte bringen können. */
+  const tippIds = daten(boot(leererStand({})), "ALL.filter(e=>e.t==='fill').map(e=>e.id)");
+  const tippOffen = tippIds.filter(id => ohne.offen.includes(id));
+  P.ok("über „Heute“ allein sind nach vier Monaten alle Tippaufgaben drangekommen",
+    tippIds.length > 30 && tippOffen.length === 0, tippOffen.length + " von " + tippIds.length + " offen: " + tippOffen.join(", "));
+  /* Was nach sechs Monaten noch offen war, waren gemessen nur Übungen (0 bis 2 von 834, meist
+     Tippaufgaben, die unterwegs nicht vorkommen und nur über „Heute“ kommen; bei 862 bis zu 17,
+     seit dem reservierten Platz für Tippaufgaben in buildDaily() gemessen keine). Die Übungen sind
      62 % des Bestands, bekommen unterwegs aber 45 % der Plätze — mit jedem neuen Übungsblock
      wird ihr Schwanz länger. Die Prüfung hält deshalb zwei Dinge fest: Wort- und Fallkarten sind
      vollständig durch, und von den Übungen bleibt höchstens ein Prozent des Bestands offen.
