@@ -711,6 +711,9 @@ const EINORDNUNG = [
   { was: "anrufen mit Dativ", muss: [/[Ss]üdwest/, /[Ss]chweiz/],
     stellen: [["Regel", "gram-akkverben"], ["Übung", "n11"], ["Übung", "d03"], ["Übung", "d28"],
               ["Fallkarte", "anrufen"], ["Prüfmuster", "x20"]] },
+  /* 30.09.2026 an der Duden-Seite nachgelesen: „Mündlich standardsprachlich und schriftlich
+     umgangssprachlich auch mit Dativ: … wegen mir (meinetwegen)“ — „führt als umgangssprachlich“
+     unterschlug die gesprochene Einordnung. */
   /* „wegen mir“: Übung m16 und Prüfmuster a11 ordneten es als umgangssprachlich ein, die
      Satzkarte sa17 (Regel gram-genalltag) und die Fallkarte „wegen“ schrieben „meinetwegen, nicht wegen
      mir“ — also als Fehler. Der Duden führt „wegen“ mit Dativ des Personalpronomens als
@@ -719,7 +722,8 @@ const EINORDNUNG = [
      „wegen dem Wetter“ zwei Sätze davor. */
   /* Seit dem 24.09.2026 mit der Einordnung des Dudens UND dem Befund der Variantengrammatik
      (IDS): in Zeitungstexten im ganzen Sprachraum belegt. m16 fragt deshalb nach der Hausarbeit. */
-  { was: "wegen mir", muss: [/[Ww]egen mir“ führt der Duden als umgangssprachlich/, /Zeitungstexten/],
+  { was: "wegen mir", muss: [/[Ww]egen mir“ nennt der Duden gesprochen standardsprachlich, geschrieben umgangssprachlich/, /Zeitungstexten/],
+    nicht: [/[Ww]egen mir“ führt der Duden als umgangssprachlich/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "m16"], ["Prüfmuster", "a11"], ["Regel", "gram-genalltag"]] },
   /* „in 1995“: Seit dem 21.09.2026 steht die Herkunft an drei Stellen als Einordnung des
      Dudens, der Sprachwissenschaftler widersprechen. q17 sagte weiter glatt „ist eine
