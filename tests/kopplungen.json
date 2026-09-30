@@ -8,14 +8,6 @@
   ]
  },
  {
-  "satz": "…, weil ich nicht kommen können habe.",
-  "stellen": [
-   "Regel satz-modal",
-   "Satzkarte sa10",
-   "Übung z11"
-  ]
- },
- {
   "satz": "„ab nächstem Montag“ (Dativ, im Duden zuerst genannt) und „ab nächsten Montag“ (Akkusativ, bei Wochentagen fast im ganzen Sprachraum die übliche Form) sind beide richtig.",
   "stellen": [
    "Fallkarte ab",
@@ -387,6 +379,13 @@
   "stellen": [
    "Prüfmuster y08",
    "Übung g03"
+  ]
+ },
+ {
+  "satz": "Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander:",
+  "stellen": [
+   "Übung c02",
+   "Übung z04"
   ]
  },
  {
@@ -806,10 +805,18 @@
   ]
  },
  {
+  "satz": "Weil ich müde war, bin ich früher gegangen.",
+  "stellen": [
+   "Übung c02",
+   "Übung z04"
+  ]
+ },
+ {
   "satz": "Weil ich müde war, ich bin früher gegangen.",
   "stellen": [
    "Regel satz-nebensatz",
    "Satzkarte sa04",
+   "Übung c02",
    "Übung z04"
   ]
  },
@@ -823,6 +830,7 @@
  {
   "satz": "Welche Fassung gehört in einen geschriebenen Text?",
   "stellen": [
+   "Übung c01",
    "Übung m24",
    "Übung z02"
   ]

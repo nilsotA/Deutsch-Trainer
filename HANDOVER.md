@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 481 |
+| Übungen | 495 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,17 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv (30.09.2026, noch einundsechzigste Runde).** Block
+`c01`–`c14`; der Mindestwächter kennt 28 Kernregeln. Gegenprüfung: c10 „Wenn ich mehr Zeit habe, käme ich …“ ist
+nach grammis („Konditionalgefüge“) eine zulässige Mischform — jetzt mit Rahmen „Du hast gerade keine Zeit“ und
+rein indikativischem Ablenker. **Nebenfund im Bestand:** sa10 (und damit `satz-modal`) und z11 führten
+„…, weil ich nicht kommen können habe“ als falsch. Die Variantengrammatik („Wortstellung im Verbalkomplex“,
+gelesen) belegt die Nachstellung „überall“, 5–15 % je Areal, in Österreich häufiger; die Voranstellung ist
+mehrheitlich. Die Regel nennt sie jetzt als seltener, nicht als Fehler; z11 hat den sicher falschen Ablenker
+„kommen gekonnt habe“ bekommen, die richtige Antwort bleibt, also kein `NEU_GELERNT`. Offen: Die Futur-Aussage
+in sa10 („in den meisten Regionen ist die zweite sogar häufiger“) stammt aus einer älteren Runde und wäre gegen
+dieselbe Seite nachzulesen — die Frequenztabelle dort mischt Perfekt und Futur.
 
 **Vertiefung Präpositionen, derselbe, wenn/als, Negation, Plural (30.09.2026, noch einundsechzigste Runde).**
 Block `l01`–`l14`; der Mindestwächter kennt jetzt 22 Kernregeln. Gegenprüfung ohne falschen Ablenker, sechs

@@ -1539,7 +1539,80 @@ const EX_A = [
  e:"Das Zentrum → die <b>Zentren</b>, wie das Museum → die Museen.",r:"gram-plural"},
 
 {id:"l14",c:"gram",q:"Wie schreibt man den Plural von „Party“?",o:["Partys","Parties"],a:0,
- e:"Englische Substantive auf -y wie Party, Hobby, Baby bekommen im Plural ein -s — <b>Partys</b>, Hobbys, Babys (Regelwerk 2024, § 21). Die englische ie-Schreibung bleibt nur in Zitatwörtern wie „Grand Old Ladies“.",r:"gram-plural"}
+ e:"Englische Substantive auf -y wie Party, Hobby, Baby bekommen im Plural ein -s — <b>Partys</b>, Hobbys, Babys (Regelwerk 2024, § 21). Die englische ie-Schreibung bleibt nur in Zitatwörtern wie „Grand Old Ladies“.",r:"gram-plural"},
+
+/* Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv, Fall bestimmen, Verwechslungen */
+{id:"c01",c:"satz",q:"Welche Fassung gehört in einen geschriebenen Text?",o:[
+ "Ich komme später, weil ich noch einen Termin habe.",
+ "Ich komme später, weil ich habe noch einen Termin."],a:0,
+ e:"Nach <b>weil</b> steht das gebeugte Verb am Ende. Gesprochen hört man oft die Hauptsatzstellung („weil ich hab noch einen Termin“); geschrieben steht das Verb hinten. Wer die Hauptsatzstellung will, nimmt „denn“: „…, denn ich habe noch einen Termin.“",r:"satz-nebensatz"},
+
+{id:"c02",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Weil ich müde war, bin ich früher gegangen.",
+ "Weil ich müde war, ich bin früher gegangen."],a:0,
+ e:"Der vorangestellte weil-Satz füllt Position 1. Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander: „war, bin“. Anders nur mit „dann“ oder „so“ davor, bei je … desto und bei Sätzen wie „ob … oder nicht“.",r:"satz-nebensatz"},
+
+{id:"c03",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Sie fragte, ob das Training heute stattfindet.",
+ "Sie fragte, ob das Training findet heute statt."],a:0,
+ e:"<b>ob</b> leitet einen Nebensatz ein — das Verb steht am Ende, und die Vorsilbe bleibt dran: stattfindet.",r:"satz-nebensatz"},
+
+{id:"c04",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Wir fangen morgen um acht an.",
+ "Wir anfangen morgen um acht."],a:0,
+ e:"Im Hauptsatz wird die Vorsilbe abgetrennt und schließt die Satzklammer hinten: Wir <b>fangen</b> … <b>an</b>. Zusammen bleibt sie im Nebensatz und im Infinitiv: „…, weil wir um acht anfangen.“",r:"satz-klammer"},
+
+{id:"c05",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Kommst du morgen zum Training mit?",
+ "Mitkommst du morgen zum Training?"],a:0,
+ e:"Auch in der Ja/Nein-Frage steht nur der gebeugte Teil vorn, die Vorsilbe schließt den Satz: <b>Kommst</b> du … <b>mit</b>?",r:"satz-klammer"},
+
+{id:"c06",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich habe gestern nicht trainieren können.",
+ "Ich habe gestern nicht trainieren gekonnt."],a:0,
+ e:"Steht beim Modalverb ein zweites Verb, bildet es im Perfekt kein Partizip, sondern einen Infinitiv: <b>trainieren können</b> (doppelter Infinitiv).",r:"satz-modal"},
+
+{id:"c07",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Das habe ich nicht gewollt.",
+ "Das habe ich nicht wollen."],a:0,
+ e:"Steht das Modalverb allein, ohne zweites Verb, bildet es ein ganz normales Partizip: <b>gewollt</b>, gekonnt, gemusst.",r:"satz-modal"},
+
+{id:"c08",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich habe früher gehen müssen.",
+ "Ich habe früher gehen gemusst."],a:0,
+ e:"Mit einem zweiten Verb steht auch „müssen“ im Perfekt als Infinitiv: gehen <b>müssen</b>. Allein heißt es „Ich habe gemusst.“",r:"satz-modal"},
+
+{id:"c09",c:"gram",q:"„Die Trainerin sagte: ‚Das Spiel beginnt um acht.‘“ Wie gibst du das so wieder, dass man die indirekte Rede am Verb erkennt?",o:[
+ "Die Trainerin sagte, das Spiel beginne um acht.",
+ "Die Trainerin sagte, das Spiel begann um acht."],a:0,
+ e:"Der Konjunktiv I <b>beginne</b> zeigt die Wiedergabe am Verb. „begann“ ist Präteritum — es verschiebt die Zeit und zeigt die Wiedergabe nicht am Verb.",r:"gram-konjunktiv"},
+
+{id:"c10",c:"gram",q:"Du hast gerade keine Zeit. Welcher Satz zeigt, dass es nur gedacht ist?",o:[
+ "Wenn ich mehr Zeit hätte, käme ich öfter zum Training.",
+ "Wenn ich mehr Zeit habe, komme ich öfter zum Training."],a:0,
+ e:"Der Konjunktiv II (<b>hätte</b> … <b>käme</b>) zeigt, dass die Bedingung nicht erfüllt ist — gedacht, nicht wirklich. Im Indikativ („habe … komme“) bleibt offen, ob sie eintritt.",r:"gram-konjunktiv"},
+
+{id:"c11",c:"gram",q:"„Ich habe dem Kollegen geholfen.“ Welcher Fall steht hier, und woran erkennst du ihn?",o:[
+ "Dativ — „Ich habe ihm geholfen“ passt",
+ "Akkusativ — „Ich habe ihn geholfen“ passt",
+ "Genitiv — die Frage „wessen?“ passt"],a:0,
+ e:"Der Pronomen-Trick: Setz er / ihn / ihm ein. Nur „ihm“ passt, also Dativ. „helfen“ verlangt den Dativ.",r:"gram-kasusfinden"},
+
+{id:"c12",c:"gram",q:"„Wir warten auf den Bus.“ Was entscheidet hier über den Fall von „den Bus“?",o:[
+ "Die Präposition „auf“, die fest zu „warten“ gehört — Akkusativ",
+ "Das Subjekt „wir“",
+ "Die Stellung am Satzende"],a:0,
+ e:"Steht eine Präposition davor, entscheidet sie — bei fest ans Verb gebundenen Präpositionen das Paar aus Verb und Präposition: <b>warten auf</b> + Akkusativ.",r:"gram-kasusfinden"},
+
+{id:"c13",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Der Artikel ist tendenziös — er stellt nur eine Seite dar.",
+ "Der Artikel ist tendenziell — er stellt nur eine Seite dar."],a:0,
+ e:"<b>tendenziös</b> = parteiisch, einseitig gefärbt. <b>tendenziell</b> = der Tendenz nach: „Die Werte steigen tendenziell.“",r:"recht-verwechsel"},
+
+{id:"c14",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Sie hat dezidiert widersprochen — klar und entschieden.",
+ "Sie hat detailliert widersprochen — klar und entschieden."],a:0,
+ e:"<b>dezidiert</b> = entschieden, mit Nachdruck. <b>detailliert</b> = ausführlich, bis in Einzelheiten.",r:"recht-verwechsel"}
 
 ];
 /* ============================================================
@@ -4355,9 +4428,10 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 <div class="ex"><span class="ok">Ich habe nicht kommen <b>können</b>.</span> · <span class="nope">Ich habe nicht kommen gekonnt.</span></div>
 <p>Steht das Modalverb allein, gibt es doch ein Partizip:</p>
 <div class="ex">Ich habe das nicht <b>gekonnt</b>. · Ich habe nicht <b>gewollt</b>.</div>
-<p><b>Sonderfall Nebensatz:</b> Im Perfekt mit doppeltem Infinitiv rutscht „haben“ ausnahmsweise <b>nach vorn</b>:</p>
+<p><b>Sonderfall Nebensatz:</b> Im Perfekt mit doppeltem Infinitiv rutscht „haben“ in der Regel <b>nach vorn</b>:</p>
 <div class="ex"><span class="ok">…, weil ich nicht <b>habe</b> kommen können.</span><br>
-<span class="nope">…, weil ich nicht kommen können habe.</span></div>
+…, weil ich nicht kommen können habe. — kommt auch vor, aber deutlich seltener</div>
+<p>Die Voranstellung ist überall die übliche Form; die Nachstellung findet die Variantengrammatik des IDS ebenfalls im ganzen Sprachraum, in Österreich etwas häufiger. Ein Fehler ist sie also nicht.</p>
 <p>Beim Futur mit „werden“ gehen beide Stellungen: „…, dass er nicht <b>wird</b> kommen können“ und „…, dass er nicht kommen können <b>wird</b>“ — in den meisten Regionen ist die zweite sogar häufiger (Variantengrammatik des IDS).</p>
 <p>Bei <code>lassen</code> ist der Ersatzinfinitiv die übliche Form: „Ich habe ihn kommen <b>lassen</b>.“ Bei <code>sehen, hören, fühlen, helfen</code> ist der Ersatzinfinitiv dagegen <b>nicht</b> Pflicht, sondern die häufigere von zwei zulässigen Formen: „Ich habe ihn kommen <b>sehen</b>“ und „Ich habe ihn kommen <b>gesehen</b>“ sind beide korrekt — die erste ist gebräuchlicher. Pflicht ist der Ersatzinfinitiv nur bei den Modalverben und bei „brauchen“. Quelle: Duden-Grammatik zum Ersatzinfinitiv.</p>
 <p><b>Fürs Sprechen:</b> Die Nebensatz-Variante klingt für viele fremd. Bau den Satz lieber um: „Ich konnte nicht kommen, deshalb …“</p>`},
@@ -4880,8 +4954,8 @@ const EX_D = [
 
 {id:"z11",c:"satz",q:"Wie lautet der Nebensatz mit doppeltem Infinitiv?",o:[
  "…, weil ich nicht habe kommen können.",
- "…, weil ich nicht kommen können habe."],a:0,
- e:"Ausnahme von der Endstellung: Im Perfekt mit doppeltem Infinitiv rutscht „haben“ <b>nach vorn</b>. Wem das fremd klingt: Bau um — „Ich konnte nicht kommen, deshalb …“",r:"satz-modal"},
+ "…, weil ich nicht kommen gekonnt habe."],a:0,
+ e:"Mit einem zweiten Verb steht das Modalverb im Perfekt als Infinitiv („können“), nicht als Partizip. Und „haben“ rutscht dabei in der Regel <b>nach vorn</b>. Die Nachstellung („kommen können habe“) kommt auch vor, ist aber deutlich seltener. Wem das fremd klingt: Bau um — „Ich konnte nicht kommen, deshalb …“",r:"satz-modal"},
 
 {id:"z12",c:"satz",q:"Ergänze das Hilfsverb fürs Perfekt, „haben“ oder „sein“: „Ich ___ nach Köln gefahren.“",t:"fill",a:["bin"],
  e:"Verben der <b>Ortsveränderung</b> bilden das Perfekt mit „sein“. Aber Achtung: „Ich <b>habe</b> das Auto gefahren“ — steht ein Akkusativobjekt dabei, gilt in der Regel „haben“. Bei sportlichen Leistungen lässt der Duden beides zu: „Ich <b>bin</b> / <b>habe</b> einen neuen Rekord gelaufen.“",r:"satz-perfekt"},
@@ -6596,7 +6670,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 800 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 814 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7602,7 +7676,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 800 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 814 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();

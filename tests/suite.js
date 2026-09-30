@@ -300,7 +300,8 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   const KERN_EXTRA = ["recht-dass", "recht-seit", "recht-sz", "recht-wider", "gram-alswie",
     "gross-sprachen", "gross-mal", "recht-apostroph", "recht-bindestrich", "gram-relativ", "z-doppelpunkt",
     "gram-zeiten", "gram-genalltag", "gram-richtung", "satz-v2", "z-frage", "gram-kongruenz",
-    "gram-praepakk", "gram-derselbe", "satz-wennals", "satz-negation", "gram-plural"];
+    "gram-praepakk", "gram-derselbe", "satz-wennals", "satz-negation", "gram-plural",
+    "satz-nebensatz", "satz-klammer", "satz-modal", "gram-konjunktiv", "gram-kasusfinden", "recht-verwechsel"];
   const jeRegel = {};
   daten(w, "ALL.map(e=>e.r)").forEach(r => jeRegel[r] = (jeRegel[r] || 0) + 1);
   const fehlt = KERN_EXTRA.filter(id => !regelKat[id]);
