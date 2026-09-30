@@ -1473,7 +1473,73 @@ const EX_A = [
 {id:"i15",c:"gram",q:"Welcher Satz ist richtig?",o:[
  "Das Ergebnis der beiden Tests war eindeutig.",
  "Das Ergebnis der beiden Tests waren eindeutig."],a:0,
- e:"Subjektkern ist „das Ergebnis“ — Singular, also „war“. „der beiden Tests“ ist nur ein Genitivattribut.",r:"gram-kongruenz"}
+ e:"Subjektkern ist „das Ergebnis“ — Singular, also „war“. „der beiden Tests“ ist nur ein Genitivattribut.",r:"gram-kongruenz"},
+
+/* Vertiefung Akkusativpräpositionen, derselbe, wenn/als/wann, Negation, Fremdwortplural */
+{id:"l01",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Zum Aufwärmen laufen wir einmal um den Platz.",
+ "Zum Aufwärmen laufen wir einmal um dem Platz."],a:0,
+ e:"<b>um</b> verlangt den Akkusativ, wie durch, für, gegen und ohne: um den Platz.",r:"gram-praepakk"},
+
+{id:"l02",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Ohne meinen Schläger spiele ich nicht.",
+ "Ohne meinem Schläger spiele ich nicht."],a:0,
+ e:"<b>ohne</b> verlangt den Akkusativ: ohne meinen Schläger, ohne mich.",r:"gram-praepakk"},
+
+{id:"l03",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Der Ball prallte gegen den Pfosten.",
+ "Der Ball prallte gegen dem Pfosten."],a:0,
+ e:"<b>gegen</b> verlangt den Akkusativ: gegen den Pfosten, gegen die Wand.",r:"gram-praepakk"},
+
+{id:"l04",c:"gram",q:"Welche Schreibung ist richtig?",o:[
+ "Wir spielen seit Jahren in demselben Verein.",
+ "Wir spielen seit Jahren in dem selben Verein."],a:0,
+ e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, denselben, dasselbe. Getrennt steht „selben“ nach einer verschmolzenen Präposition (im selben Verein) oder nach einem Demonstrativpronomen (an diesem selben Tag).",r:"gram-derselbe"},
+
+{id:"l05",c:"gram",q:"Welche Schreibung ist richtig?",o:[
+ "Er hat zweimal dasselbe erklärt.",
+ "Er hat zweimal das selbe erklärt."],a:0,
+ e:"<b>dasselbe</b> in einem Wort — Duden und Regelwerk führen nur die Zusammenschreibung.",r:"gram-derselbe"},
+
+{id:"l06",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Als ich gestern ankam, war die Halle schon zu.",
+ "Wenn ich gestern ankam, war die Halle schon zu."],a:0,
+ e:"Ein einzelnes, abgeschlossenes Ereignis in der Vergangenheit („gestern“, einmal) → <b>als</b>. „wenn“ stünde für Wiederholtes: „Immer wenn ich ankam, war die Halle zu.“",r:"satz-wennals"},
+
+{id:"l07",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Wenn ich morgen Zeit habe, komme ich zum Training.",
+ "Als ich morgen Zeit habe, komme ich zum Training."],a:0,
+ e:"Für Zukunft und Bedingung steht <b>wenn</b>. „als“ gehört zu einem einmaligen Geschehen in der Vergangenheit („Als ich klein war …“) oder in einer Erzählung.",r:"satz-wennals"},
+
+{id:"l08",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich weiß nicht, wann das Spiel beginnt.",
+ "Ich weiß nicht, wenn das Spiel beginnt."],a:0,
+ e:"<b>wann</b> fragt nach dem Zeitpunkt — auch in der indirekten Frage nach „wissen“, „fragen“, „sagen“. „wenn“ leitet einen Zeit- oder Bedingungssatz ein, keine Frage.",r:"satz-wennals"},
+
+{id:"l09",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Ich habe gestern nicht trainiert.",
+ "Ich habe gestern trainiert nicht."],a:0,
+ e:"Wird der ganze Satz verneint, steht „nicht“ möglichst weit hinten — aber <b>vor</b> dem zweiten Verbteil („trainiert“), nicht dahinter.",r:"satz-negation"},
+
+{id:"l10",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Das Aufwärmen war heute nicht gründlich.",
+ "Das Aufwärmen war heute gründlich nicht."],a:0,
+ e:"Ein Adjektiv als Ergänzung zu „sein“ zieht „nicht“ vor sich, solange es im Mittelfeld steht: nicht gründlich, nicht gut. Vorangestellt bleibt „nicht“ hinten: „Gründlich war es nicht.“",r:"satz-negation"},
+
+{id:"l11",c:"satz",q:"„Ich habe nicht gestern trainiert.“ Was ist gemeint?",o:[
+ "Ich habe trainiert, aber an einem anderen Tag.",
+ "Ich habe gestern überhaupt nichts gemacht.",
+ "Ich trainiere gar nicht mehr."],a:0,
+ e:"Soll nur ein Teil verneint werden, steht „nicht“ direkt davor — hier vor „gestern“: nicht gestern, sondern an einem anderen Tag. Für den ganzen Satz stünde „nicht“ weiter hinten: „Ich habe gestern nicht trainiert.“",r:"satz-negation"},
+
+{id:"l12",c:"gram",q:"Wie lautet der Plural von „Museum“?",o:["Museen","Museums","Musea"],a:0,
+ e:"Das Museum → die <b>Museen</b>, wie das Zentrum → die Zentren. Die Endung -um fällt weg, -en kommt dazu.",r:"gram-plural"},
+
+{id:"l13",c:"gram",q:"Wie lautet der Plural von „Zentrum“?",o:["Zentren","Zentrums","Zentra"],a:0,
+ e:"Das Zentrum → die <b>Zentren</b>, wie das Museum → die Museen.",r:"gram-plural"},
+
+{id:"l14",c:"gram",q:"Wie schreibt man den Plural von „Party“?",o:["Partys","Parties"],a:0,
+ e:"Englische Substantive auf -y wie Party, Hobby, Baby bekommen im Plural ein -s — <b>Partys</b>, Hobbys, Babys (Regelwerk 2024, § 21). Die englische ie-Schreibung bleibt nur in Zitatwörtern wie „Grand Old Ladies“.",r:"gram-plural"}
 
 ];
 /* ============================================================
@@ -1719,7 +1785,7 @@ const EX_B = [
 
 {id:"m26",c:"gram",q:"Welche Schreibung ist richtig?",o:[
  "Wir kommen aus demselben Verein.","Wir kommen aus dem selben Verein."],a:0,
- e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, dasselbe, denselben. Der Duden führt „der selbe“ als Falschschreibung.",r:"gram-derselbe"},
+ e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, dasselbe, denselben. Duden und Regelwerk führen nur die Zusammenschreibung.",r:"gram-derselbe"},
 
 {id:"m27",c:"gram",q:"„selben“ nach einer verschmolzenen Präposition — was gilt?",o:[
  "Beides ist zulässig — „am selben Tag“ und „an demselben Tag“",
@@ -2368,12 +2434,12 @@ das Schema → die Schemen / Schemata / Schemas · der Atlas → die Atlanten / 
 <div class="ex">Wir tragen <b>die gleichen</b> Schuhe. (zwei Paar desselben Modells)<br>
 Wir tragen <b>dieselben</b> Schuhe. (ein Paar, das wir uns teilen)</div>
 <p>Im Alltag verschwimmt die Unterscheidung, in präzisen Texten lohnt sie sich.</p>
-<p><b>Geschrieben wird „derselbe“ zusammen</b> — auch gebeugt: <code>desselben, demselben, denselben, dieselbe, dasselbe</code>. Der Duden führt „der selbe“ als Falschschreibung.</p>
+<p><b>Geschrieben wird „derselbe“ zusammen</b> — auch gebeugt: <code>desselben, demselben, denselben, dieselbe, dasselbe</code>. Duden und Regelwerk führen nur die Zusammenschreibung (Regelwerk 2024, Wörterverzeichnis: „derselbe § 58(4)“).</p>
 <div class="ex">Wir kommen aus <b>demselben</b> Verein. · Er hat nochmal <b>dasselbe</b> erklärt. · Ein und <b>dasselbe</b>.</div>
 <p><b>Getrennt nach einer verschmolzenen Präposition:</b> In <code>am, im, zum, zur, beim, vom</code> steckt der Artikel schon drin, und „selben“ steht für sich. Ebenso nach einem Demonstrativpronomen: <code>an diesem selben Tag</code> (Duden).</p>
 <div class="ex">am selben Tag · im selben Atemzug · zur selben Zeit</div>
 <p>Nicht zu verwechseln mit <b>selber</b> (= selbst): „Ich habe das selber gemacht.“</p>
-<p>Quellen: Duden, Rechtschreibung „derselbe“ und Falschschreibung „der selbe“.</p>`},
+<p>Quellen: Duden, Einträge „derselbe“ und „selbe“; Amtliches Regelwerk 2024, Wörterverzeichnis.</p>`},
 
 {id:"gram-praep",c:"gram",t:"Verben mit fester Präposition",b:`
 <p>Diese Verbindungen sind nicht ableitbar — man muss sie lernen:</p>
@@ -6530,7 +6596,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 786 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 800 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7536,7 +7602,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 786 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 800 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();

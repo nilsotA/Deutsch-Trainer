@@ -310,13 +310,6 @@
   ]
  },
  {
-  "satz": "Der Duden führt „der selbe“ als Falschschreibung.",
-  "stellen": [
-   "Regel gram-derselbe",
-   "Übung m26"
-  ]
- },
- {
   "satz": "Der Fragebogen wurde von den Teilnehmenden ausgefüllt.",
   "stellen": [
    "Regel stil-passiv",
@@ -429,6 +422,13 @@
   "stellen": [
    "Regel form-absagen",
    "Schreibauftrag w12"
+  ]
+ },
+ {
+  "satz": "ein Plan, eine Halle und genug Leute.",
+  "stellen": [
+   "Übung o16",
+   "Übung p05"
   ]
  },
  {

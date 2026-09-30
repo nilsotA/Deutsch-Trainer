@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 467 |
+| Übungen | 481 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~990 KB, eine Datei, kein Build |
+| Dateigröße | ~1010 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,13 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Präpositionen, derselbe, wenn/als, Negation, Plural (30.09.2026, noch einundsechzigste Runde).**
+Block `l01`–`l14`; der Mindestwächter kennt jetzt 22 Kernregeln. Gegenprüfung ohne falschen Ablenker, sechs
+Erklärungen enger gefasst (l11 drehte die Regel um: „steht nicht direkt vor einem Teil, verneint es nur diesen“ —
+in l09 und l10 steht es direkt vor dem Verbteil bzw. Adjektiv und verneint den ganzen Satz). Nebenfund im Bestand:
+`gram-derselbe` und m26 schrieben „Der Duden führt ‚der selbe‘ als Falschschreibung“ — eine solche Duden-Seite gibt
+es nicht (404). Jetzt: „Duden und Regelwerk führen nur die Zusammenschreibung“ (Wörterverzeichnis, § 58(4)).
 
 **Vertiefung Grammatik und Satzbau (30.09.2026, noch einundsechzigste Runde).** Block `i01`–`i15` für
 Zeitenfolge, Genitiv im Alltag, Richtung (nach/zu/in), Verbzweitstellung, Fragezeichen und Kongruenz; der
