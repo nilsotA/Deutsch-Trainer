@@ -1064,21 +1064,22 @@ P.titel("L · Der lange Horizont");
 
   /* Was die Unterwegs-Runde wirklich beiträgt, misst nur der Vergleich mit ihrem Ausbleiben.
      „Heute“ allein bringt in vier Monaten 227 Karten zusammen — zwölf Karten am Tag, davon
-     der größte Teil Wiederholung. Mit zwei Runden ist es in fünf Monaten der ganze Bestand.
+     der größte Teil Wiederholung. Mit zwei Runden ist es in sechs Monaten der ganze Bestand.
      (Zwei Stellen in unterwegsRunde() holen neuen Stoff: Stufe 2 gezielt, Stufe 3 über das
      am längsten nicht Geübte. Abgeklemmt gemessen: jede der beiden schafft die volle
      Abdeckung auch allein, erst ohne beide bleibt es bei 487 von 699.) */
-  /* Seit dem 30.09.2026 fünf statt vier Monate: 42 neue Übungen (u, e) brachten den Bestand
-     auf 755 Karten, und nach 120 Tagen standen gemessen 742 und 745 — der Rest kommt über
-     Stufe 3 nach. Mehr Stoff braucht mehr Zeit; die Prüfung soll ein Liegenbleiben fangen. */
+  /* Seit dem 30.09.2026 sechs statt vier Monate: 87 neue Übungen (u, e, o, i, l) brachten den
+     Bestand auf 800 Karten. Nach 120 Tagen standen gemessen 742 bis 757, nach 150 Tagen einmal
+     791 von 800 (Kalenderversatz 40) — der Rest kommt über Stufe 3 nach. Mehr Stoff braucht
+     mehr Zeit; die Prüfung soll ein Liegenbleiben fangen, keine Frist auf Kante nähen. */
   const ohne = lauf(120, 0, [120]);
-  const zwei = lauf(150, 2, [30, 60, 90, 120, 150]);
+  const zwei = lauf(180, 2, [30, 60, 90, 120, 150, 180]);
   P.info("120 Tage nur „Heute“: " + ohne.gesehen + " Karten · mit zwei Runden: " +
-    [30, 60, 90, 120, 150].map(t => "Tag " + t + ": " + zwei.stand[t]).join(" · ") +
+    [30, 60, 90, 120, 150, 180].map(t => "Tag " + t + ": " + zwei.stand[t]).join(" · ") +
     " von " + zwei.gesamt);
   P.ok("die Tagesaufgabe allein lässt den größeren Teil des Bestands liegen",
     ohne.gesehen < ohne.gesamt / 2, ohne.gesehen + "/" + ohne.gesamt);
-  P.ok("mit zwei Runden am Tag ist der ganze Bestand binnen fünf Monaten durch",
+  P.ok("mit zwei Runden am Tag ist der ganze Bestand binnen sechs Monaten durch",
     zwei.gesehen === zwei.gesamt, zwei.gesehen + "/" + zwei.gesamt);
 }
 

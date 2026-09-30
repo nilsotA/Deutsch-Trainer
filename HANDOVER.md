@@ -65,6 +65,8 @@ Erklärungen enger gefasst (l11 drehte die Regel um: „steht nicht direkt vor e
 in l09 und l10 steht es direkt vor dem Verbteil bzw. Adjektiv und verneint den ganzen Satz). Nebenfund im Bestand:
 `gram-derselbe` und m26 schrieben „Der Duden führt ‚der selbe‘ als Falschschreibung“ — eine solche Duden-Seite gibt
 es nicht (404). Jetzt: „Duden und Regelwerk führen nur die Zusammenschreibung“ (Wörterverzeichnis, § 58(4)).
+Mit 800 Karten wurde die Durchlaufprüfung in `tests/lernen.js` im Kalenderversatz 40 rot (791/800 an Tag 150);
+sie misst jetzt sechs Monate (gemessen Tag 150: 790 und 798, Tag 180: 800).
 
 **Vertiefung Grammatik und Satzbau (30.09.2026, noch einundsechzigste Runde).** Block `i01`–`i15` für
 Zeitenfolge, Genitiv im Alltag, Richtung (nach/zu/in), Verbzweitstellung, Fragezeichen und Kongruenz; der
