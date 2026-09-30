@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 420 |
+| Übungen | 436 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,16 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Rechtschreibpaare (30.09.2026, noch einundsechzigste Runde).** Dasselbe für das/dass,
+seit/seid, ss/ß, wider/wieder und als/wie, die mit einer oder zwei Übungen auskamen: Block `e01`–`e16`, der
+Wächter aus der Kommarunde gilt jetzt auch für diese fünf Regeln. Gegenprüfung ohne falschen Ablenker, aber
+e09 sagte „erst im Plural verdoppelt es sich“ (Duden: „des Ergebnisses“; Regelwerk § 4 (2): erweiterte Form
+mit Vokal), e10 „durchgängig ss“ statt „kann“ (§ 25 E2), und e13 „spiegelt … wieder“ ließ sich als „erneut“
+lesen — jetzt mit dem Infinitiv „wiederspiegeln“. Nebenbefund: „größer wie“ hieß an drei Stellen „regional
+verbreitet“. Die Variantengrammatik findet es in Zeitungstexten überall nur sporadisch, ohne Region; der
+Duden sagt „nicht standardsprachlich“. Jetzt: „kommt besonders gesprochen vor“. `tests/lernen.js`: Mit 755
+Karten ist der Bestand bei zwei Runden am Tag nach 150 statt 120 Tagen durch (gemessen 742–748 an Tag 120).
 
 **Vertiefung Komma (30.09.2026, einundsechzigste Runde).** Nils will vor allem Regeln und Komma lernen, den
 Textcheck nutzt er kaum. Gezählt: komma-partizip hatte eine Übung, komma-vergleich und komma-adjektive je zwei —
