@@ -59,6 +59,32 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Der Rest des Bestands gelesen (30.09.2026, sechzigste Runde).** 24 Satzbaukarten, 10 Tabellen, 12
+Fehlersuchtexte, die Hinweise aller 126 Textcheck-Muster und die ganze Schreibwerkstatt, fünf Prüfer, Quellen in
+`scratchpad/r59/tmp-a…e`. Damit ist jeder Bestand der App mindestens einmal vollständig gelesen. Alle Tabellenzellen
+stimmen mit dem Paradigma. Funde:
+- **Textcheck, harte Fehlalarme auf richtigen Sätzen:** t06 („Strecken von 5–8 km“), x04 („was besser
+  funktioniert und wie wir das messen“, „mehr wie ein Spiel als wie eine Prüfung“), x21 („wie interessiert ihm die
+  Kinder zugehört haben“), x38 („Lies dieses mal, wenn du Zeit hast“), x45 („der zweite, seit dem ich …“), x49
+  („Weis sie in die Schranken“). x04 schließt den angeschlossenen Fragesatz still aus, die übrigen stehen über
+  `WEICH` auf „Bitte prüfen“, der echte Fehler daneben bleibt hart — beides in `STUFE` bzw. `GEGEN` festgehalten.
+  Mein erster Entwurf für x45 hätte „Ich trainiere, seit dem ich zwölf bin“ mit herabgestuft; die Regel greift jetzt
+  nur nach Bezugswörtern wie „der zweite“, „jenes davor“. Auf beiden Korpora änderte sich nur ein Treffer: s05 meldet
+  „nicht unserem“ nicht mehr (Possessiv, keine Litotes).
+- **Duden-Einordnung:** „wegen mir“ nennt der Duden gesprochen standardsprachlich, geschrieben umgangssprachlich —
+  vier Stellen sagten nur „umgangssprachlich“ (`EINORDNUNG` nachgezogen). „wegen dem“ vor einem Relativpronomen ist
+  auch geschrieben standardsprachlich (x01 sagt es jetzt). Zitate in x22, x24, t05 wörtlich.
+- **Kurzformeln im Spickzettel:** sa07, sa13, sa11, sa23 ließen Ausnahmen weg, die die Karte nennt — dieselbe
+  Klasse wie am 29.09.; sa02 sagte, nach „und/aber“ bleibe es beim Hauptsatz (zwischen zwei Nebensätzen nicht).
+- **Fehlersuche:** kt11 markierte „Ich freue mich über das nächste Treffen“ als Fehler, obwohl „über“ dort lesbar
+  ist; mit „schon“ ist jetzt nur „auf“ richtig.
+- **Wächter:** Der Rangwächter kannte nur „der/die/das“ vor dem Superlativ — sc09 („mit dem stärksten möglichen
+  Argument“) kam durch; jetzt auch „dem/den/des“, mit Positivprobe.
+Offen gelassen: x50 („wenig zu Essen vor dem Wettkampf“ bleibt hart — die Regex trennt Präposition und
+Infinitivpartikel nicht, und die Präpositionslesart ist selten); x04 meldet „schneller wie ihre Schwester“ nicht
+(Lücke schon vorher, nicht angefasst); x25 bleibt hart, obwohl das Regelwerk die Grußformel eine Konvention nennt;
+x07 bleibt hart (Duden zählt „optimal“ zu den Adjektiven ohne Steigerung, DWDS führt sie als selten).
+
 **Alle Wort- und Fallkarten gelesen (30.09.2026, neunundfünfzigste Runde).** 155 Wortkarten und 182 Fallkarten,
 fünf Prüfer, Quellen in `scratchpad/r58/tmp-a…e`. Keine richtige Antwort war falsch. Ein Ablenker war nicht sicher
 falsch: „Das bedarf ___“ mit „keine Erklärung“ — der Duden führt den Akkusativ bei „bedürfen“ als seltene Variante;

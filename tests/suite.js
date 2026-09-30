@@ -2250,6 +2250,14 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
      Zitate aus Texten vor 1996. Jede Zeile hält beide Richtungen fest: Der richtige Satz
      bleibt still, der echte Fehler daneben wird weiter gefunden. */
   const GEGEN = [
+    /* 30.09.2026: „wie“ leitet einen angeschlossenen Fragesatz ein, keinen Vergleich; „nicht unser“ ist keine Litotes. */
+    { id: "x04",
+      ziel: ["Er ist größer wie ich.", "Sie ist schneller wie Anna."],
+      still: ["Die Frage ist, was besser funktioniert und wie wir das messen.",
+              "Ich frage mich, ob Laufen gesünder ist oder wie das beim Schwimmen aussieht."] },
+    { id: "s05",
+      ziel: ["Das Ergebnis ist nicht unüberzeugend."],
+      still: ["Das ist nicht unsere Aufgabe.", "Das ist nicht unbedingt nötig.", "Er reagierte nicht unmittelbar."] },
     /* x58 (27.09.2026): Ohne „ich“ ist „Gebe Ihnen morgen Bescheid“ ein Aussagesatz, kein Imperativ —
        deshalb kennt das Muster nur die e-losen Formen ohne Endung. */
     { id: "x58",
@@ -3043,6 +3051,20 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
     ["t17", "Wir gehen an's Ende.", "hart"],
     ["t17", "Der Fahrradladen „Rund um's Rad“ hat montags zu.", "pruef"],
     ["t17", "Wir gehen in's Kino.", "hart"],
+    /* 30.09.2026, Durchsicht aller Prüfmuster: richtige Sätze, die hart gemeldet wurden, stehen jetzt
+       auf „Bitte prüfen“ — der echte Fehler daneben bleibt hart. */
+    ["t06", "Wir laufen Strecken von 5–8 km.", "pruef"],
+    ["t06", "Das Turnier dauert von 10–12 Uhr.", "hart"],
+    ["x04", "Das Training war mehr wie ein Spiel als wie eine Prüfung.", "pruef"],
+    ["x04", "Er ist größer wie ich.", "hart"],
+    ["x21", "Ich habe gesehen, wie interessiert ihm die Kinder zugehört haben.", "pruef"],
+    ["x21", "Das interessiert mir nicht.", "hart"],
+    ["x38", "Lies dieses mal, wenn du Zeit hast.", "pruef"],
+    ["x38", "Dieses mal, wenn wir spielen, gewinnen wir.", "hart"],
+    ["x45", "Der Sturz war der zweite, seit dem ich nicht mehr richtig laufen kann.", "pruef"],
+    ["x45", "Ich trainiere, seit dem ich zwölf bin.", "hart"],
+    ["x49", "Weis sie in die Schranken.", "pruef"],
+    ["x49", "Weis sie, wo der Schlüssel ist?", "hart"],
   ];
   const stufeFalsch = STUFE.filter(([id, satz, sev]) =>
     daten(w, "analyse(" + JSON.stringify(satz) + ").finds.filter(f=>f.c.id===" + JSON.stringify(id) + ").map(f=>f.c.sev).join()") !== sev)
