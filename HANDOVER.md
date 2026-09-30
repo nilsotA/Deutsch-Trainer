@@ -59,6 +59,24 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Spickzettel vollständig gelesen (30.09.2026, sechsundfünfzigste Runde).** Die zweite Stichprobe fand die meisten
+Funde je Zeile in den Kurzfassungen. Die neun noch nicht geprüften Abschnitte (1, 3, 4, 7–12) haben drei Prüfer
+gegen Regelwerk 2024, Duden, DWDS und die ausführlichen Regeln der App gelesen; jeden Fund habe ich an der
+abgelegten Quelle nachgelesen (`scratchpad/r56/tmp-a…c`). Keiner lehrte Falsches, 18 Stellen waren strenger als ihre
+Regel, eine davon nah daran:
+- **Kann-Komma nach versuchen, wagen & Co.:** „frei, solange beim Verb nichts weiter steht“ übersah das Perfekt. Steht
+  das Verb am Satzende, folgt die Gruppe hinter der Satzklammer, und der Duden verlangt das Komma („Sie hat versucht,
+  das Team zu überzeugen“, D 125). Regel komma-infinitiv, ihr Merksatz, Spickzettel und der Hinweis von y11 ziehen mit.
+- **ss/ß:** betonter kurzer Vokal (Regelwerk § 2), dazu „Kloster“, „Haus – Häuser“, „aus“ und die Endungen -nis, -us
+  (§ 5(2): Ergebnis – Ergebnisse); die Endungen fehlten auch in recht-sz.
+- Weiter: Paarformel-Kommas mit dem richtigen Merkmal (gehört die Formel zum übergeordneten Satz?), „lehren (auch
+  jmdm.)“, kosten und anrufen mit ihrer regionalen Einordnung, be-Faustregel „oft“ statt „fast immer“, scheinbar im
+  Alltag, „siehe“ als Verweis, sammle/sammele, „weil“ im formellen Rahmen, „genaues Verb“ statt „starkes Verb“
+  (Fachbegriff für Ablaut), Grußformel „Mit freundlichen Grüßen trägt immer“, Füllwörter „oft“, maximal/total
+  „selten“, Kritik-Schritt 3 optional, Zahlengliederung erst ab fünf Stellen.
+- „Gesichtsmimik“ ist aus den Pleonasmus-Listen (Regel, s04, Spickzettel, Muster s03) gestrichen: Duden und DWDS
+  zählen die Gebärden zur Mimik, „Gesichts-“ grenzt also ein und doppelt nicht sicher.
+
 **Zweite Stichprobe (29.09.2026, fünfundfünfzigste Runde).** 116 weitere Elemente, keines aus der ersten
 Stichprobe, Seed `hash("stichprobe2|2026-09-29")` (`scratchpad/r55/stichprobe.js`): 41 Übungen, 15 Wortkarten, 15
 Fallkarten, 8 Regeln — und zum ersten Mal Bestände, die noch nie so geprüft waren: 5 Satzbaukarten, 3 Tabellen, 3
