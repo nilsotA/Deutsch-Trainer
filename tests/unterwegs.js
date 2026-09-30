@@ -652,7 +652,7 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     /* Fehlerklasse „Kartensorte verschwindet“, zum dritten Mal (28.09.2026): Die freie Runde
        der Kartenansicht baute ihre Liste aus ALL und WORDS selbst, statt über
        frageZuSchluessel() zu gehen — Fallkarten kamen dort nie vor. Fünf Runden à 15 Karten
-       aus 713: Fehlt eine Sorte in allen fünf, ist das kein Zufall mehr. */
+       aus 739: Fehlt eine Sorte in allen fünf, ist das kein Zufall mehr. */
     const w = boot(leererStand({ auto: false }));
     const d = w.document;
     const gesehen = { Aufgabe: 0, Wort: 0, Fall: 0 };
