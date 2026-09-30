@@ -67,6 +67,12 @@ und DIN 5008 — v06 führte „Beides ist zulässig“ ohne Rahmen als falsch. 
 5008“, die richtige Antwort bleibt. vs04 fragt die Stellung des Schrägstrichs in Worten, weil ein Leerzeichen am
 Schrägstrich vorgelesen nicht hörbar ist. vs06 nannte „mit dem Kollege“ wörtlich in der richtigen Antwort —
 der Wächter „keine harte Meldung auf korrektem Material“ schlug an; die Optionen beschreiben den Fehler jetzt.
+Die Durchlaufprüfung in `tests/lernen.js` wurde im Kalenderversatz 0 wieder rot (832/834 nach 180 Tagen). Gemessen:
+Offen bleiben **nur Übungen**, meist Tippaufgaben (sie kommen unterwegs nicht vor, nur über „Heute“). Die Übungen
+sind 62 % des Bestands, bekommen unterwegs aber 45 % der Plätze (`quotenMix`) — jeder neue Übungsblock verlängert
+ihren Schwanz. Die Prüfung verlangt jetzt: Wort- und Fallkarten vollständig, Übungen höchstens 1 % des Bestands
+offen, und nennt die offenen. **Offen für Nils:** Ob die Quote 45/25/30 zu den gewachsenen Übungen passt, ist
+eine Entscheidung über die Lernlogik — nicht ohne ihn ändern.
 
 **Vertiefung Uhrzeit, Datum, Klammern, Auslassung, Fragen, Verlaufsform (30.09.2026, nach dem Merge von PR #6).**
 Block `ve01`–`ve13`; der Mindestwächter kennt 34 Kernregeln. Präfix mit zwei Buchstaben: Jeder einzelne Buchstabe
