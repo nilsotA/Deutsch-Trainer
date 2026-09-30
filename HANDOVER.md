@@ -59,6 +59,21 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Übungen einzeln gelesen (30.09.2026, siebenundfünfzigste Runde).** 239 Übungen aus Komma, Groß-/Kleinschreibung,
+Getrennt, Rechtschreibung, Grammatik, Zeichen und Zahlen, sechs Prüfer, Quellen in `scratchpad/r56/tmp-i…m`; jeden
+übernommenen Fund habe ich an der abgelegten Seite nachgelesen. 24 Stellen nachgeschärft, keine richtige Antwort
+geändert. Die gewichtigsten: Die Grußformel bleibt laut Regelwerk 2024 „meist“ ohne Satzzeichen und ist dort als
+Konvention beschrieben — die App sagte an zehn Stellen „kein Satzzeichen“ ohne Einschränkung (k15, f04,
+komma-brief, form-grussformel, ph03, x25, vier Fehlersuchtexte; ein neuer Wächter in `tests/suite.js` fand die zehnte); `q02` und `n-ziffern` führten „8 Uhr“ unter „in aller
+Regel Ziffern“, der Duden schreibt „acht Uhr“; `n20` belegte seelisches Leiden mit „an unglücklicher Liebe leiden“, das
+beim DWDS unter der Krankheitsbedeutung steht; `n33` lehnte „an welche“ ab; `m02` nannte den Dativ nach „während“
+nicht, der im Plural ohne erkennbaren Genitiv standardsprachlich ist; `n01` ließ bei „ab“ den Akkusativ weg („ab
+kommenden Montag“). Kleinere: k20 begründet das Pflichtkomma jetzt mit der Stellung, t08 empfiehlt das seltene
+„nichtsdestominder“ nicht mehr, t15 nennt „irgend so etwas“, t16 „Ich bin Zuhause“, t20 die Duden-Empfehlung, p21
+behauptet nicht mehr, Leerzeichen um den Schrägstrich seien üblich (das Regelwerk lässt beides gleichrangig zu).
+Nicht umgesetzt: m07 und n16 fragen fast dasselbe — eine Änderung würde Lernstand verschieben, der Gewinn ist klein.
+Noch nicht gelesen: die 37 Stil- und Formregeln und die 50 Stil- und Formübungen.
+
 **38 Regeln einzeln gelesen (30.09.2026, noch sechsundfünfzigste Runde).** Nach dem Spickzettel die Regeln, die
 keine Stichprobe erreicht hatte: gross-*, getrennt-praep/-verb, recht-*, 14 gram-*, z-* außer Komma und
 Gedankenstrich, n-*. Fünf Prüfer, Quellen abgelegt in `scratchpad/r56/tmp-d…h`, jeder übernommene Fund von mir an der

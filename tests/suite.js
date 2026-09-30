@@ -322,6 +322,18 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   P.ok("… und die Prüfung erkennt die alte Erklärung von kt08",
     !/Schweiz/.test("ß nach langem Vokal — und nach der Grußformel kein Komma."), "Positivprobe blieb stumm");
 
+  /* Die Grußformel bleibt laut Regelwerk 2024 „meist“ ohne Satzzeichen, im Hinweis zu den
+     Konventionen bei Anrede und Gruß. Die App sagte das an zehn Stellen ohne Einschränkung
+     (gefunden am 30.09.2026). Jede Stelle, die das Satzzeichen nach der Grußformel verneint,
+     trägt jetzt „üblicherweise“, „in der Regel“ oder „meist“. */
+  const grussAbsolut = s => [...strip(s).matchAll(/(?:[^.]*)nach (?:der Grußformel|„Mit freundlichen Grüßen“) (?:steht )?kein[^.]*/gi)]
+    .map(m => m[0]).filter(x => !/üblicherweise|in der Regel|meist/.test(x));
+  const grussHtml = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
+  const grussFunde = grussAbsolut(grussHtml);
+  P.ok("Kein Satz verneint das Satzzeichen nach der Grußformel ohne Einschränkung", !grussFunde.length, grussFunde.slice(0, 3).join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Fassung von k15",
+    grussAbsolut("Nach der Grußformel steht kein Komma.").length === 1, "Positivprobe blieb stumm");
+
   /* Eine Stelle aus mehreren Wörtern (siehe kt04 weiter unten) gibt es auch dort, wo die
      Korrektur zwei Wörter ändert oder zusammenzieht: „dem Zeitplan“ → „des Zeitplans“,
      „das Selbe“ → „dasselbe“. Markiert war jeweils nur ein Wort, ein Klick auf das andere

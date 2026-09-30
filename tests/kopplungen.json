@@ -577,13 +577,6 @@
   ]
  },
  {
-  "satz": "Nach „Mit freundlichen Grüßen“ steht kein Satzzeichen .",
-  "stellen": [
-   "Prüfmuster x25",
-   "Übung f04"
-  ]
- },
- {
   "satz": "Nach dem Anredekomma geht es klein weiter — die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab:",
   "stellen": [
    "Fehlersuche kt1",
@@ -596,6 +589,13 @@
    "Regel form-anrede",
    "Übung f05",
    "Übung k14"
+  ]
+ },
+ {
+  "satz": "Nach der Grußformel steht üblicherweise kein Komma.",
+  "stellen": [
+   "Fehlersuche kt3",
+   "Fehlersuche kt8"
   ]
  },
  {
