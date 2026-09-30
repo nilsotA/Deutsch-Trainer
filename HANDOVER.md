@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 508 |
+| Übungen | 515 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Konjunktiv II, Schrägstrich, Mittelfeld, Sprechen (30.09.2026).** Block `vs01`–`vs07`; der
+Mindestwächter kennt 35 Kernregeln (`z-schraeg` bleibt mit drei Übungen draußen). Gegenprüfung: Die geplante
+Prozent-Übung entfiel, weil q08 und v06 dasselbe schon fragen. Nebenfund dort: „20 %“ mit Leerzeichen ist keine
+amtliche Rechtschreibregel (Regelwerk 2024, Abschnitt Sonderzeichen: typografische Konvention), sondern Duden
+und DIN 5008 — v06 führte „Beides ist zulässig“ ohne Rahmen als falsch. Beide fragen jetzt „nach Duden und DIN
+5008“, die richtige Antwort bleibt. vs04 fragt die Stellung des Schrägstrichs in Worten, weil ein Leerzeichen am
+Schrägstrich vorgelesen nicht hörbar ist. vs06 nannte „mit dem Kollege“ wörtlich in der richtigen Antwort —
+der Wächter „keine harte Meldung auf korrektem Material“ schlug an; die Optionen beschreiben den Fehler jetzt.
 
 **Vertiefung Uhrzeit, Datum, Klammern, Auslassung, Fragen, Verlaufsform (30.09.2026, nach dem Merge von PR #6).**
 Block `ve01`–`ve13`; der Mindestwächter kennt 34 Kernregeln. Präfix mit zwei Buchstaben: Jeder einzelne Buchstabe
