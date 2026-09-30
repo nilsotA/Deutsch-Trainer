@@ -59,6 +59,19 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**38 Regeln einzeln gelesen (30.09.2026, noch sechsundfünfzigste Runde).** Nach dem Spickzettel die Regeln, die
+keine Stichprobe erreicht hatte: gross-*, getrennt-praep/-verb, recht-*, 14 gram-*, z-* außer Komma und
+Gedankenstrich, n-*. Fünf Prüfer, Quellen abgelegt in `scratchpad/r56/tmp-d…h`, jeder übernommene Fund von mir an der
+Datei nachgelesen. **Drei lehrten Falsches:** „laut“ stand unter den Genitivpräpositionen (Duden: „mit Dativ, selten
+mit Genitiv“); gram-genitiv sagte, mit Adjektiv bleibe es beim Genitiv — bei trotz ist ohne Artikel der Dativ laut
+Duden sogar häufiger („trotz heftigem Regen“), wie m03 und d17 schon sagten; z-doppelpunkt markierte „nämlich:“ rot,
+das Regelwerk schreibt selbst „zum Beispiel: Geysir“. Dazu rund 30 Ungenauigkeiten, unter anderem: dass-Sätze als
+Wunsch („Dass mir keine Klagen kommen!“), ’ne/’nen mit Apostroph (Duden D 14), ẞ zuerst (§ 25 E3), „anders als“,
+außer mit Genitiv und Akkusativ, dank/laut/binnen gewichtet, kosten regional, Datum ohne führende Null (DIN
+verlangt sie), „in 1995“ nicht als Fehler, sondern als nicht standardsprachlich, g16 fragt jetzt nach dem Duden (das
+Regelwerk erlaubt „zum Einen“ zur Betonung, § 58 E4). Nicht nachprüfbar: die Variantengrammatik war nicht
+erreichbar; ihre Angaben in gram-genitiv stehen weiter, jetzt neben dem Duden.
+
 **Spickzettel vollständig gelesen (30.09.2026, sechsundfünfzigste Runde).** Die zweite Stichprobe fand die meisten
 Funde je Zeile in den Kurzfassungen. Die neun noch nicht geprüften Abschnitte (1, 3, 4, 7–12) haben drei Prüfer
 gegen Regelwerk 2024, Duden, DWDS und die ausführlichen Regeln der App gelesen; jeden Fund habe ich an der
