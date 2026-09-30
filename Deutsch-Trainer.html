@@ -1717,7 +1717,151 @@ const EX_A = [
  "Neu ansetzen: „Ich fange nochmal an: …“",
  "Weiterreden und den Satz anders beenden, als er begonnen hat",
  "Mit „ähm, also“ Zeit gewinnen und weiterreden"],a:0,
- e:"Ein offener Neuansatz fällt weniger auf als ein Satz, der als eine Konstruktion beginnt und als eine andere endet. Eine kurze Pause wirkt dabei ruhiger als ein Füllwort.",r:"satz-reden"}
+ e:"Ein offener Neuansatz fällt weniger auf als ein Satz, der als eine Konstruktion beginnt und als eine andere endet. Eine kurze Pause wirkt dabei ruhiger als ein Füllwort.",r:"satz-reden"},
+
+/* Vertiefung (Präfix vk): Komma bei Partizipgruppen, Adjektiven, Vergleichen, zwischen Hauptsätzen; Semikolon */
+{id:"vk01",c:"komma",q:"„Vom Regen durchnässt(,) kamen wir in der Halle an.“",o:[
+ "Komma freigestellt",
+ "Komma nötig",
+ "Kein Komma erlaubt"],a:0,
+ e:"Eine Partizipgruppe am Satzanfang kann mit oder ohne Komma stehen. Das Regelwerk 2024 führt genau diesen Fall: „Vom Blitz getroffen(,) fiel er zu Boden.“ Mit Komma liest es sich oft leichter.",r:"komma-partizip"},
+
+{id:"vk02",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Vom Regen durchnässt, so kamen wir in der Halle an.",
+ "Vom Regen durchnässt so kamen wir in der Halle an."],a:0,
+ e:"Nimmt ein hinweisendes Wort wie „so“ die Partizipgruppe wieder auf, steht das Komma. Das Regelwerk 2024 führt dazu „Aus vollem Halse lachend, so kam sie auf mich zu.“",r:"komma-partizip"},
+
+{id:"vk03",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Sie saß, in eine Decke gehüllt, auf der Bank.",
+ "Sie saß, in eine Decke gehüllt auf der Bank."],a:0,
+ e:"Mitten im Satz ist das Komma bei einer Partizipgruppe frei, aber dann auf beiden Seiten oder gar nicht. „Sie saß in eine Decke gehüllt auf der Bank“ ist also auch richtig, ein einzelnes Komma nicht.",r:"komma-partizip"},
+
+{id:"vk04",c:"komma",q:"Gemeint ist: Es ist das letzte Training vor dem Spiel, und dieses Training ist verkürzt. Welche Schreibung sagt genau das?",o:[
+ "das letzte, verkürzte Training",
+ "das letzte verkürzte Training"],a:0,
+ e:"Mit Komma stehen beide Adjektive gleichrangig nebeneinander: das letzte Training, und es ist verkürzt. Ohne Komma heißt es: das letzte unter den verkürzten Trainings — danach kann noch ein normales kommen. Das Regelwerk 2024 zeigt dasselbe Paar an „die letzte, revidierte Auflage“ (§ 70 E2).",r:"komma-adjektive"},
+
+{id:"vk05",c:"komma",q:"Gemeint ist: Unter den spanischen Trainern ist er ein bekannter. Welcher Satz sagt das?",o:[
+ "Ein bekannter spanischer Trainer leitet das Camp.",
+ "Ein bekannter, spanischer Trainer leitet das Camp."],a:0,
+ e:"Herkunftsadjektive bilden mit dem Substantiv oft eine Einheit: „spanischer Trainer“. „bekannt“ bestimmt diese Einheit näher, deshalb steht kein Komma. Mit Komma wären beide Eigenschaften gleichrangig: bekannt und spanisch.",r:"komma-adjektive"},
+
+{id:"vk06",c:"komma",q:"Gemeint ist einfach: Es kamen viele gute Spielerinnen. Welcher Satz ist richtig?",o:[
+ "Zum Probetraining kamen viele gute Spielerinnen.",
+ "Zum Probetraining kamen viele, gute Spielerinnen."],a:0,
+ e:"Nach Zahlwörtern und Wörtern wie „viele“, „alle“, „beide“ steht in der Regel kein Komma: „gute Spielerinnen“ ist die Einheit, „viele“ zählt sie.",r:"komma-adjektive"},
+
+{id:"vk07",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Sie ist genauso schnell wie ihre Schwester.",
+ "Sie ist genauso schnell, wie ihre Schwester."],a:0,
+ e:"Nach „wie“ folgt nur eine Wortgruppe ohne eigenes Verb, also kein Komma. Mit Verb wird ein Nebensatz daraus, und das Komma steht: „Sie ist genauso schnell, wie ihre Schwester es früher war.“",r:"komma-vergleich"},
+
+{id:"vk08",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Das Spiel dauerte länger, als der Plan vorsah.",
+ "Das Spiel dauerte länger als der Plan vorsah."],a:0,
+ e:"Hinter „als“ steht ein gebeugtes Verb („vorsah“), es folgt also ein Nebensatz — dann steht das Komma. Ohne Verb bliebe es weg: „länger als geplant“.",r:"komma-vergleich"},
+
+{id:"vk09",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Wir gewannen, wie im letzten Jahr, das Turnier.",
+ "Wir gewannen, wie im letzten Jahr das Turnier."],a:0,
+ e:"Einen Vergleich ohne Verb kannst du als Einschub kennzeichnen, dann mit Komma auf beiden Seiten. Ganz ohne Komma ist es auch richtig: „Wir gewannen wie im letzten Jahr das Turnier.“ Ein einzelnes Komma geht nicht.",r:"komma-vergleich"},
+
+{id:"vk10",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Die Halle war belegt, außerdem fehlte der Schlüssel.",
+ "Die Halle war belegt außerdem fehlte der Schlüssel."],a:0,
+ e:"„außerdem“ ist ein Adverb, keine Konjunktion — direkt danach folgt das Verb. Zwei Hauptsätze ohne Konjunktion brauchen ein Zeichen dazwischen: Komma, Semikolon oder Punkt.",r:"komma-hauptsatz"},
+
+{id:"vk11",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Wir wollten draußen laufen, aber es regnete.",
+ "Wir wollten draußen laufen aber es regnete."],a:0,
+ e:"Vor „aber“, „doch“, „jedoch“ und „sondern“ als Konjunktion steht das Komma. Sie drücken einen Gegensatz aus und verbinden nur zwei Teile (Regelwerk 2024, § 71 E2).",r:"komma-hauptsatz"},
+
+{id:"vk12",c:"komma",q:"„Entweder wir trainieren heute(,) oder wir verschieben auf Donnerstag.“",o:[
+ "Komma freigestellt",
+ "Komma nötig",
+ "Kein Komma erlaubt"],a:0,
+ e:"„entweder … oder“ verbindet wie „und“ und „oder“. Zwischen zwei Sätzen, die auch allein stehen könnten, darfst du das Komma setzen, um die Gliederung zu zeigen (Regelwerk 2024, § 71 E3).",r:"komma-hauptsatz"},
+
+{id:"vk13",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Sie hatte sich vorgenommen, jeden Tag zu laufen, und hielt es drei Wochen durch.",
+ "Sie hatte sich vorgenommen, jeden Tag zu laufen und hielt es drei Wochen durch."],a:0,
+ e:"Die Infinitivgruppe „jeden Tag zu laufen“ ist mit Komma eröffnet, also wird sie auch mit Komma geschlossen — auch wenn danach „und“ folgt. Das Komma gehört zur Infinitivgruppe, nicht zum „und“.",r:"komma-infinitiv"},
+
+{id:"vk14",c:"zeichen",q:"Nur die Leibchen sollen blau sein. Welche Aufzählung zeigt das eindeutig?",o:[
+ "Wir brauchen blaue Leibchen; Hütchen und Stangen; zwei Bälle.",
+ "Wir brauchen blaue Leibchen, Hütchen und Stangen; zwei Bälle."],a:0,
+ e:"Das Semikolon trennt die Gruppen, „blaue“ gehört damit nur zu den Leibchen. Mit Komma kann „blaue“ auch für Hütchen und Stangen gelten — das Regelwerk 2024 zeigt genau diese Mehrdeutigkeit (§ 74 E2).",r:"z-semikolon"},
+
+{id:"vk15",c:"zeichen",q:"Welche Fassung ist richtig?",o:[
+ "Wir müssen uns beeilen. Ist die Halle schon offen?",
+ "Wir müssen uns beeilen; ist die Halle schon offen?"],a:0,
+ e:"Mit Semikolon verbundene Sätze müssen gleichartig sein. Auf eine Aussage folgt deshalb nach dem Semikolon keine Frage, dort steht der Punkt (Regelwerk 2024, § 74 E3).",r:"z-semikolon"},
+
+/* Vertiefung (Präfix vg): Dativpräpositionen, Kasus im Relativsatz, Perfekt mit sein, Verbformen, Stellung im Mittelfeld */
+{id:"vg01",c:"gram",q:"Seit ___ Verletzung trainiert sie weniger.",o:[
+ "ihrer",
+ "ihre"],a:0,
+ e:"„seit“ verlangt den Dativ: seit ihrer Verletzung, seit dem Sommer, seit einem Jahr.",r:"gram-praepdat"},
+
+{id:"vg02",c:"gram",q:"Das Büro liegt gegenüber ___ Sporthalle.",o:[
+ "der",
+ "die"],a:0,
+ e:"„gegenüber“ steht mit dem Dativ: gegenüber der Sporthalle, gegenüber dem Bahnhof. Es darf auch nachgestellt werden: „der Halle gegenüber“.",r:"gram-praepdat"},
+
+{id:"vg03",c:"gram",q:"Sie kommt gerade von ___ Arzt.",o:[
+ "dem",
+ "den"],a:0,
+ e:"„von“ verlangt den Dativ: von dem Arzt, zusammengezogen „vom Arzt“. Dasselbe gilt für aus, bei, mit, nach, seit und zu.",r:"gram-praepdat"},
+
+{id:"vg04",c:"gram",q:"Zu ___ Treffen kamen alle aus der Gruppe.",o:[
+ "dem",
+ "das"],a:0,
+ e:"„zu“ verlangt den Dativ, auch wenn eine Richtung gemeint ist: zu dem Treffen, kurz „zum Treffen“.",r:"gram-praepdat"},
+
+{id:"vg05",c:"gram",q:"Das ist der Spieler, ___ ich den Ball zugeworfen habe.",o:[
+ "dem",
+ "den"],a:0,
+ e:"Den Fall des Relativpronomens bestimmt das Verb im Relativsatz: jemandem etwas zuwerfen — Dativ. „den Ball“ ist schon das Akkusativobjekt.",r:"gram-relkasus"},
+
+{id:"vg06",c:"gram",q:"Die Halle, in ___ wir trainieren, wird renoviert.",o:[
+ "der",
+ "die"],a:0,
+ e:"„in“ fragt hier „wo?“, also Dativ: in der Halle trainieren. Das Relativpronomen übernimmt diesen Fall.",r:"gram-relkasus"},
+
+{id:"vg07",c:"gram",q:"Die Studierenden, ___ ich die Folien geschickt habe, haben geantwortet.",o:[
+ "denen",
+ "den"],a:0,
+ e:"Jemandem etwas schicken: Dativ. Im Plural heißt das Relativpronomen im Dativ „denen“, nicht „den“.",r:"gram-relkasus"},
+
+{id:"vg08",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Der Ball ist ins Tor gerollt.",
+ "Der Ball hat ins Tor gerollt."],a:0,
+ e:"Ein Verb der Ortsveränderung ohne Akkusativobjekt bildet das Perfekt in der Regel mit „sein“, besonders mit Zielangabe wie „ins Tor“. Mit Objekt nimmt „rollen“ „haben“: „Ich habe den Ball ins Tor gerollt.“",r:"satz-perfekt"},
+
+{id:"vg09",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Die Temperatur ist stark gesunken.",
+ "Die Temperatur hat stark gesunken."],a:0,
+ e:"Viele Verben ohne Objekt, die eine Zustandsänderung ausdrücken, bilden das Perfekt mit „sein“: gesunken, gestiegen, eingeschlafen, aufgewacht. Es gibt Ausnahmen, etwa „Sie hat abgenommen.“",r:"satz-perfekt"},
+
+{id:"vg10",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Ich habe gestern lange geschlafen.",
+ "Ich bin gestern lange geschlafen."],a:0,
+ e:"„schlafen“ beschreibt einen Zustand ohne Ortswechsel und bildet das Perfekt mit „haben“. Mit „sein“ geht erst die Veränderung: „Ich bin eingeschlafen.“",r:"satz-perfekt"},
+
+{id:"vg11",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Sie hat mich mit dem Anruf erschreckt.",
+ "Sie hat mich mit dem Anruf erschrocken."],a:0,
+ e:"Mit Objekt (jemanden erschrecken) wird das Verb schwach gebeugt: erschreckte, hat erschreckt. Ohne Objekt stark: „Ich bin erschrocken.“",r:"gram-verbformen"},
+
+{id:"vg12",c:"gram",q:"Das Plakat hat lange an der Wand ___.",o:[
+ "gehangen",
+ "gehängt"],a:0,
+ e:"Ohne Objekt (etwas hängt irgendwo) heißt das Partizip „gehangen“. Mit Objekt (jemand hängt etwas auf) „gehängt“: „Ich habe das Plakat an die Wand gehängt.“",r:"gram-verbformen"},
+
+{id:"vg13",c:"satz",q:"Welche Stellung ist die übliche?",o:[
+ "Ich gebe ihn dem Trainer.",
+ "Ich gebe dem Trainer ihn."],a:0,
+ e:"Ein unbetontes Personalpronomen steht vor einem Substantiv, auch wenn es der Akkusativ ist: „Ich gebe ihn dem Trainer.“ Die Tendenz „Dativ vor Akkusativ“ gilt für zwei Substantive.",r:"satz-dativakk"}
 
 ];
 /* ============================================================
@@ -6775,7 +6919,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 834 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 862 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7781,7 +7925,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 834 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 862 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();

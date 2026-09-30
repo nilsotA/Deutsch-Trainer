@@ -583,6 +583,14 @@
   ]
  },
  {
+  "satz": "Komma freigestellt · Komma nötig · Kein Komma erlaubt",
+  "stellen": [
+   "Übung u13",
+   "Übung vk01",
+   "Übung vk12"
+  ]
+ },
+ {
   "satz": "Konkretes Angebot mit Opt-out statt vages Angebot mit Opt-in.",
   "stellen": [
    "Vorher/Nachher pr17",

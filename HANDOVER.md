@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 515 |
+| Übungen | 543 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~1010 KB, eine Datei, kein Build |
+| Dateigröße | ~1035 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,18 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Komma und Grammatik (30.09.2026).** Block `vk01`–`vk15` (Partizipgruppen, Adjektive, Vergleiche,
+Hauptsätze, Semikolon) und `vg01`–`vg13` (Dativpräpositionen, Kasus im Relativsatz, Perfekt mit sein, erschrecken
+und hängen, Pronomen vor Substantiv). Jede Kommaaussage ist am Text des Regelwerks 2024 belegt (§ 70 E2, § 71 E2/E3,
+§ 72 E3, § 74 E2/E3). Die Gegenprüfung hielt keine Antwort und keinen Ablenker für falsch, aber fünf Erklärungen:
+„das letzte verkürzte Training“ grenzte die Lesarten falsch ab (der Unterschied liegt *nach* dem Training), „Perfekt
+mit sein“ bei Ortsveränderung und Zustandsänderung stand absolut (schwimmen geht auch mit haben, abnehmen nur mit
+haben), und „Pronomen vor Substantiv“ gilt fürs unbetonte Pronomen. Beim Nachlesen aufgefallen, **offen**: Das Regelwerk
+führt „Er hatte sofort unterschrieben ohne jede Kenntnis des Vertragsinhalts“ als Satzglied ohne Komma am Satzende —
+`komma-partizip` nennt das Komma bei einer nachgetragenen Gruppe Pflicht. Für Partizipgruppen nicht nachgeprüft, deshalb
+keine Übung dazu. Die Durchlaufprüfung „mehr als die Hälfte nach drei Monaten“ wurde im Versatz 7 rot (415/834): Die
+Schranke wuchs mit dem Bestand, der Durchsatz nicht. Sie ist jetzt eine feste Untergrenze von 380.
 
 **Vertiefung Konjunktiv II, Schrägstrich, Mittelfeld, Sprechen (30.09.2026).** Block `vs01`–`vs07`; der
 Mindestwächter kennt 35 Kernregeln (`z-schraeg` bleibt mit drei Übungen draußen). Gegenprüfung: Die geplante
