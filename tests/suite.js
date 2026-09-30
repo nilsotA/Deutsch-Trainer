@@ -290,6 +290,27 @@ KORREKTUR.forEach(t => t.errs.forEach(e => {
 P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   markSchief.slice(0, 5).join(" · "));
 
+/* Eine Regel mit nur einer Übung lehrt einen Satz, nicht die Regel: Wer ihn zweimal
+   gesehen hat, erkennt die Antwort wieder, ohne die Regel anzuwenden. Bis zum 30.09.2026
+   hatte komma-partizip eine Übung, komma-vergleich und komma-adjektive je zwei — beim
+   Komma, um das es Nils am meisten geht. Für die Kommaregeln gilt deshalb ein Minimum,
+   ebenso für die Rechtschreibpaare, die bis dahin mit einer oder zwei Übungen auskamen. */
+{
+  const MIN_KERN = 4;
+  const KERN_EXTRA = ["recht-dass", "recht-seit", "recht-sz", "recht-wider", "gram-alswie",
+    "gross-sprachen", "gross-mal", "recht-apostroph", "recht-bindestrich", "gram-relativ", "z-doppelpunkt",
+    "gram-zeiten", "gram-genalltag", "gram-richtung", "satz-v2", "z-frage", "gram-kongruenz",
+    "gram-praepakk", "gram-derselbe", "satz-wennals", "satz-negation", "gram-plural",
+    "satz-nebensatz", "satz-klammer", "satz-modal", "gram-konjunktiv", "gram-kasusfinden", "recht-verwechsel"];
+  const jeRegel = {};
+  daten(w, "ALL.map(e=>e.r)").forEach(r => jeRegel[r] = (jeRegel[r] || 0) + 1);
+  const fehlt = KERN_EXTRA.filter(id => !regelKat[id]);
+  const duenn = Object.keys(regelKat).filter(id => (regelKat[id] === "komma" || KERN_EXTRA.includes(id)) &&
+    (jeRegel[id] || 0) < MIN_KERN).map(id => id + ": " + (jeRegel[id] || 0));
+  P.ok("Jede Kommaregel und jede Kernregel hat mindestens " + MIN_KERN + " Übungen",
+    !duenn.length && !fehlt.length, duenn.concat(fehlt.map(id => id + " gibt es nicht")).join(" · "));
+}
+
 /* Grundsatz 4, auf die Fehlersuche angewandt: Derselbe Fehler muss überall gleich
    eingeordnet sein. „vorraus“ → „Voraus“ ist in zwei Texten markiert; kt01 und das
    Prüfmuster x14 schickten Nils nach gross-subst, kt03 nach form-danken — einer Regel

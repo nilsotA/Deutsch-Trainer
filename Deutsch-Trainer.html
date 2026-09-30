@@ -917,7 +917,7 @@ const EX_A = [
  "Nur mit Komma ist richtig",
  "Beides ist zulässig",
  "Nur ohne Komma ist richtig"],a:1,
- e:"Bei Partizipgruppen ist das Komma seit der Reform von 1996 <b>freigestellt</b>, auch nach dem Regelwerk von 2024 — am Satzanfang wie mitten im Satz: „Sie brach(,) von der Hitze erschöpft(,) das Training ab.“ Pflicht wird es, wenn die Gruppe als Zusatz direkt hinter dem Subjekt steht („Die Spielerin, von der Hitze erschöpft, brach ab“), wenn sie am Satzende nachgetragen wird („Sie brach ab, völlig erschöpft“) oder wenn ein hinweisendes Wort sie ankündigt oder wieder aufnimmt („Von der Hitze erschöpft, so brach sie ab“).",r:"komma-partizip"},
+ e:"Bei Partizipgruppen ist das Komma seit der Reform von 1996 <b>freigestellt</b>, auch nach dem Regelwerk von 2024 — am Satzanfang wie mitten im Satz: „Sie brach(,) von der Hitze erschöpft(,) das Training ab.“ Pflicht wird es, wenn die Gruppe als Zusatz direkt hinter einem Substantiv oder Pronomen steht („Die Spielerin, von der Hitze erschöpft, brach ab“), wenn sie am Satzende nachgetragen wird („Sie brach ab, völlig erschöpft“) oder wenn ein hinweisendes Wort sie ankündigt oder wieder aufnimmt („Von der Hitze erschöpft, so brach sie ab“).",r:"komma-partizip"},
 
 {id:"k30",c:"komma",q:"„Es war ein guter(,) wenn auch anstrengender Tag.“",o:[
  "Komma nötig","Kein Komma"],a:0,
@@ -1099,7 +1099,520 @@ const EX_A = [
 {id:"j05",c:"komma",q:"Welche Variante ist richtig?",o:[
  "Er war froh, das Training geschafft zu haben.",
  "Er war froh das Training geschafft zu haben."],a:0,
- e:"Erweiterte Infinitivgruppe, abhängig vom Adjektiv „froh“. Das Regelwerk von 2024 nennt die Abhängigkeit von einem Adjektiv ausdrücklich als Kommafall — und erweitert ist die Gruppe ohnehin.",r:"komma-infinitiv"}
+ e:"Erweiterte Infinitivgruppe, abhängig vom Adjektiv „froh“. Das Regelwerk von 2024 nennt die Abhängigkeit von einem Adjektiv ausdrücklich als Kommafall — und erweitert ist die Gruppe ohnehin.",r:"komma-infinitiv"},
+
+/* Vertiefung Komma: mehrere Übungen je Regel, damit die Regel sitzt und nicht der eine Beispielsatz */
+{id:"u01",c:"komma",q:"In welchem Satz ist das Komma Pflicht?",o:[
+ "Die Spielerin, vom Trainer gelobt, ging in die Kabine.",
+ "Vom Trainer gelobt, ging die Spielerin in die Kabine.",
+ "Die Spielerin ging, vom Trainer gelobt, in die Kabine."],a:0,
+ e:"Steht die Partizipgruppe als Zusatz <b>direkt hinter einem Substantiv</b> oder Pronomen, sind beide Kommas Pflicht. Am Satzanfang und nach dem Verb ist das Komma bei Partizipgruppen freigestellt — die beiden anderen Sätze sind also auch richtig, nur eben nicht Pflicht.",r:"komma-partizip"},
+
+{id:"u02",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Die Läuferin, vom Anstieg erschöpft, setzte sich auf die Bank.",
+ "Die Läuferin, vom Anstieg erschöpft setzte sich auf die Bank.",
+ "Die Läuferin vom Anstieg erschöpft, setzte sich auf die Bank."],a:0,
+ e:"Die Partizipgruppe steht als Zusatz direkt hinter dem Substantiv „Läuferin“ — dann ist sie auf <b>beiden</b> Seiten abgetrennt. Was du aufmachst, musst du schließen.",r:"komma-partizip"},
+
+{id:"u03",c:"komma",q:"Was gilt seit dem Regelwerk 2024 für das Komma?",o:[
+ "Erweiterte Infinitivgruppe: in der Regel Pflicht · Partizipgruppe: meist freigestellt",
+ "Beide: freigestellt",
+ "Beide: in der Regel Pflicht"],a:0,
+ e:"2024 wurde das Komma bei der <b>Infinitivgruppe</b> verschärft: erweitert heißt in der Regel Pflicht. Bei der <b>Partizipgruppe</b> blieb es frei — Pflicht nur als Zusatz hinter einem Substantiv oder Pronomen, als Nachtrag am Satzende oder mit hinweisendem Wort („Vom Training erschöpft, so kam sie heim“).",r:"komma-partizip"},
+
+{id:"u04",c:"komma",q:"„Sie sprang weiter(,) als sie im Training gesprungen war.“",o:[
+ "Komma nötig","Kein Komma"],a:0,
+ e:"Nach „als“ folgt ein ganzer Nebensatz mit gebeugtem Verb („gesprungen war“) — dann steht ein Komma. Ohne Verb bliebe es ohne: „Sie sprang weiter als im Training.“",r:"komma-vergleich"},
+
+{id:"u05",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Die Halle war kleiner als gedacht.",
+ "Die Halle war kleiner, als gedacht."],a:0,
+ e:"Hinter „als“ steht nur ein Partizip, kein gebeugtes Verb — kein Komma. Genauso „größer als erwartet“, „schneller als geplant“. Mit Nebensatz käme es: „kleiner, als wir gedacht hatten“.",r:"komma-vergleich"},
+
+{id:"u06",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Ihr blieb nichts anderes übrig, als zu warten.",
+ "Ihr blieb nichts anderes übrig als zu warten."],a:0,
+ e:"„als“ gehört zu den Einleitewörtern einer Infinitivgruppe wie um, ohne, statt, anstatt und außer. Vor ihnen steht das Komma — auch wenn nur „zu warten“ folgt.",r:"komma-vergleich"},
+
+{id:"u07",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Sie trainiert so oft, wie es ihr Stundenplan erlaubt.",
+ "Sie trainiert so oft wie es ihr Stundenplan erlaubt."],a:0,
+ e:"Nach „wie“ folgt ein ganzer Nebensatz mit gebeugtem Verb („erlaubt“) — Komma. Ohne Verb bliebe es ohne: „so oft wie möglich“.",r:"komma-vergleich"},
+
+{id:"u08",c:"komma",q:"Welche Probe zeigt, dass zwischen zwei Adjektiven ein Komma steht?",o:[
+ "„und“ lässt sich einsetzen, ohne dass sich der Sinn ändert",
+ "Beide Adjektive haben dieselbe Endung",
+ "Das erste Adjektiv ist das längere"],a:0,
+ e:"Gleichrangige Adjektive beschreiben das Substantiv unabhängig voneinander: „ein langer, anstrengender Lauf“ = lang <b>und</b> anstrengend. Zweite Probe: Die Adjektive lassen sich vertauschen. Bei „das neue rote Trikot“ geht beides nicht — „rotes Trikot“ ist eine Einheit, kein Komma.",r:"komma-adjektive"},
+
+{id:"u09",c:"komma",q:"„Die Zahlen stammen aus anderen zuverlässigen Quellen.“ Was sagt der Satz ohne Komma?",o:[
+ "Auch die zuerst genannten Quellen waren zuverlässig.",
+ "Die zuerst genannten Quellen waren nicht zuverlässig.",
+ "Nichts Bestimmtes — ohne Komma nach „anderen“ ist der Satz falsch."],a:0,
+ e:"Ohne Komma bildet „zuverlässige Quellen“ eine Einheit, und „andere“ wählt daraus aus: andere unter den zuverlässigen Quellen — die ersten waren es also auch. So erklärt das Regelwerk „die letzte revidierte Auflage“: die letzte unter den revidierten. Mit Komma („aus anderen, zuverlässigen Quellen“) sagt der Satz das nicht; oft ist dann ein Gegensatz gemeint. Beide Schreibungen sind richtig und meinen Verschiedenes.",r:"komma-adjektive"},
+
+{id:"u10",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Das Training fiel aus, deshalb gingen wir laufen.",
+ "Das Training fiel aus deshalb gingen wir laufen."],a:0,
+ e:"Zwei Hauptsätze ohne Konjunktion brauchen ein Satzzeichen. „deshalb“ ist ein Adverb — erkennbar daran, dass direkt das Verb folgt („deshalb gingen“) — und ersetzt das Komma nicht. Ein Semikolon oder ein Punkt ginge auch.",r:"komma-hauptsatz"},
+
+{id:"u11",c:"komma",q:"„Ich bleibe heute in der Halle(,) denn draußen ist es glatt.“",o:[
+ "Komma nötig","Kein Komma","Komma freigestellt"],a:0,
+ e:"Vor <b>denn</b>, <b>aber</b>, <b>doch</b> und <b>sondern</b> zwischen zwei Sätzen ist das Komma Pflicht. Frei ist es bei den anreihenden wie und, oder, sowie.",r:"komma-hauptsatz"},
+
+{id:"u12",c:"komma",q:"Welcher Satz ist nach dem Regelwerk 2024 richtig?",o:[
+ "Wir liefen noch eine Runde, und als es dunkel wurde, gingen wir in die Halle.",
+ "Wir liefen noch eine Runde und als es dunkel wurde, gingen wir in die Halle."],a:0,
+ e:"Beginnt der zweite Hauptsatz nach „und“ mit einem Nebensatz, ist das Komma vor „und“ seit 2024 Pflicht (Abschnitt 2.4.3). Direkt nach „und“ steht keins.",r:"komma-hauptsatz"},
+
+{id:"u13",c:"komma",q:"„Sie packte die Tasche(,) und er holte die Bälle.“",o:[
+ "Komma freigestellt","Komma nötig","Kein Komma erlaubt"],a:0,
+ e:"Zwischen zwei vollständigen Hauptsätzen, die „und“ verbindet, ist das Komma freigestellt. Setz es, wenn die Sätze lang sind oder man sich sonst verliest.",r:"komma-hauptsatz"},
+
+{id:"u14",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Ich glaube, wir schaffen das.",
+ "Ich glaube wir schaffen das."],a:0,
+ e:"„wir schaffen das“ ist ein Nebensatz <b>ohne Einleitewort</b> — er sieht aus wie ein Hauptsatz, hängt aber von „glaube“ ab. Das Komma steht trotzdem, genau wie bei „Ich glaube, dass wir das schaffen.“",r:"komma-nebensatz"},
+
+{id:"u15",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Weißt du, wann das Training beginnt?",
+ "Weißt du wann das Training beginnt?"],a:0,
+ e:"„wann das Training beginnt“ ist eine indirekte Frage, also ein Nebensatz: Das Verb steht am Ende, ein Fragewort leitet ein. Komma davor, auch wenn der ganze Satz eine Frage ist.",r:"komma-nebensatz"},
+
+{id:"u16",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Während des Spiels regnete es.",
+ "Während des Spiels, regnete es."],a:0,
+ e:"Hier ist „während“ eine Präposition mit Genitiv — „während des Spiels“ ist ein Satzteil, kein Nebensatz. Kein Komma. Anders als Konjunktion mit eigenem Verb: „Während wir spielten, regnete es.“",r:"komma-nebensatz"},
+
+{id:"u17",c:"komma",q:"„Er sagte, dass die Halle frei ist(,) und dass wir früher anfangen.“",o:[
+ "Kein Komma vor „und“","Komma nötig","Komma freigestellt"],a:0,
+ e:"Zwei gleichrangige Nebensätze, die „und“ verbindet, stehen wie eine Aufzählung — ohne Komma dazwischen. Das Komma vor „dass“ am Anfang bleibt Pflicht.",r:"komma-nebensatz"},
+
+{id:"u18",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Frau Weber, unsere Sportlehrerin, leitet die AG.",
+ "Frau Weber, unsere Sportlehrerin leitet die AG.",
+ "Frau Weber unsere Sportlehrerin, leitet die AG."],a:0,
+ e:"„unsere Sportlehrerin“ ist eine Apposition, ein nachgestellter Zusatz zum Namen. Geht der Satz weiter, wird sie auf <b>beiden</b> Seiten abgetrennt.",r:"komma-einschub"},
+
+{id:"u19",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Trainer Müller hat zugesagt.",
+ "Trainer, Müller, hat zugesagt."],a:0,
+ e:"Steht eine Berufsbezeichnung ohne Artikel <b>vor</b> dem Namen, bildet sie mit ihm eine Einheit — kein Komma. Nachgestellt kommen die Kommas: „Müller, Trainer des Vereins, hat zugesagt.“",r:"komma-einschub"},
+
+{id:"u20",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Sie hat gewonnen, und zwar deutlich.",
+ "Sie hat gewonnen und zwar deutlich."],a:0,
+ e:"„und zwar“ hängt einen Nachtrag an. Davor steht ein Komma, wie bei „das heißt“, „nämlich“ und „zum Beispiel“ als nachgestellte Erläuterung.",r:"komma-einschub"},
+
+{id:"u21",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Kannst du mir, Lea, kurz beim Aufbau helfen?",
+ "Kannst du mir Lea kurz beim Aufbau helfen?"],a:0,
+ e:"Eine Anrede wird abgetrennt, auch mitten im Satz — dann auf beiden Seiten. Ohne Kommas liest man „mir Lea“ als Satzteil.",r:"komma-einschub"},
+
+{id:"u22",c:"komma",q:"„Diese Hinweise bitten wir zu beachten.“ Komma nach „wir“?",o:[
+ "Nein — die Infinitivgruppe ist mit dem Satz verschränkt",
+ "Ja — erweiterte Infinitivgruppen stehen seit 2024 mit Komma"],a:0,
+ e:"„diese Hinweise“ gehört zur Infinitivgruppe („diese Hinweise zu beachten“), steht aber vorn im Hauptsatz. Die Gruppe ist mit dem Satz <b>verschränkt</b> — dann steht kein Komma, auch seit 2024 nicht. Ohne Verschränkung schon: „Wir bitten, diese Hinweise zu beachten.“",r:"komma-infinitiv"},
+
+{id:"u23",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Aufzugeben, daran dachte sie nicht.",
+ "Aufzugeben daran dachte sie nicht."],a:0,
+ e:"Die Infinitivgruppe steht vorn, und das hinweisende „daran“ nimmt sie wieder auf. Dann ist das Komma Pflicht — auch beim bloßen „aufzugeben“ (Duden). Steht die bloße Gruppe hinten, ist es frei: „Sie dachte nicht daran(,) aufzugeben.“ Erweitert ist es dort Pflicht: „Sie dachte nicht daran, jetzt schon aufzugeben.“",r:"komma-infinitiv"},
+
+{id:"u24",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Nicht der Aufschlag war das Problem, sondern die Annahme.",
+ "Nicht der Aufschlag war das Problem sondern die Annahme."],a:0,
+ e:"Vor <b>sondern</b> steht ein Komma, auch wenn nur ein Satzteil folgt — ebenso vor aber, doch, jedoch, wenn sie Gegensätze verbinden.",r:"komma-aufzaehlung"},
+
+{id:"u25",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Wir brauchen Bälle, Leibchen und Hütchen.",
+ "Wir brauchen Bälle, Leibchen, und Hütchen."],a:0,
+ e:"In einer reinen Aufzählung steht vor dem abschließenden „und“ kein Komma — ein „Oxford-Komma“ wie im Englischen kennt das Deutsche nicht. Ein Komma steht dort nur, wenn davor ein Einschub endet: „Mein Bruder, ein Läufer, und seine Freundin kommen mit.“",r:"komma-aufzaehlung"},
+
+{id:"u26",c:"komma",q:"Welcher Satz ist richtig?",o:[
+ "Er hatte weder Zeit noch Lust.",
+ "Er hatte weder Zeit, noch Lust."],a:0,
+ e:"<b>weder … noch</b> verbindet zwei Satzteile wie „und“ — ohne Komma. Genauso „sowohl … als auch“ und „entweder … oder“.",r:"komma-aufzaehlung"},
+
+/* Vertiefung Rechtschreibung und als/wie: mehrere Übungen je Regel */
+{id:"e01",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Das Trikot, das ich gestern gekauft habe, ist zu klein.",
+ "Das Trikot, dass ich gestern gekauft habe, ist zu klein."],a:0,
+ e:"Ersatzprobe: „das Trikot, <b>welches</b> ich gestern gekauft habe“ passt — also das Relativpronomen <b>das</b> mit einem s.",r:"recht-dass"},
+
+{id:"e02",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Es ist wichtig, dass ihr euch vorher aufwärmt.",
+ "Es ist wichtig, das ihr euch vorher aufwärmt."],a:0,
+ e:"Ersatzprobe: „es ist wichtig, <b>welches</b> ihr euch aufwärmt“ ergibt keinen Sinn — also die Konjunktion <b>dass</b>.",r:"recht-dass"},
+
+{id:"e03",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Wir treffen uns morgen, das heißt am Dienstag.",
+ "Wir treffen uns morgen, dass heißt am Dienstag."],a:0,
+ e:"<b>das heißt</b> (d. h.) schreibt man mit einem s — „dies heißt“ passt. Hier leitet es keinen Nebensatz ein.",r:"recht-dass"},
+
+{id:"e04",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Er trainierte weiter, ohne dass ihn jemand drängte.",
+ "Er trainierte weiter, ohne das ihn jemand drängte."],a:0,
+ e:"In <b>ohne dass</b>, <b>anstatt dass</b>, <b>sodass</b> (auch: so dass) leitet „dass“ einen Nebensatz ein — Konjunktion, also mit Doppel-s. „welches“ passt nicht.",r:"recht-dass"},
+
+{id:"e05",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Seit dem Umzug trainiert sie in Köln.",
+ "Seid dem Umzug trainiert sie in Köln."],a:0,
+ e:"Das Wort antwortet auf „seit wann?“ — Zeitangabe, also <b>seit</b>. Eselsbrücke: Zei<b>t</b> → sei<b>t</b>.",r:"recht-seit"},
+
+{id:"e06",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Seid bitte um acht in der Halle.",
+ "Seit bitte um acht in der Halle."],a:0,
+ e:"Eine Aufforderung an mehrere ist eine Form von „sein“: <b>seid</b> — wie „ihr seid“.",r:"recht-seit"},
+
+{id:"e07",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Seit ihr zusammen trainiert, seid ihr schneller geworden.",
+ "Seid ihr zusammen trainiert, seit ihr schneller geworden.",
+ "Seit ihr zusammen trainiert, seit ihr schneller geworden."],a:0,
+ e:"Das erste Wort antwortet auf „seit wann?“ — <b>seit</b>, auch wenn „ihr“ folgt. Das zweite gehört zu „sein“ (ihr seid geworden) — <b>seid</b>.",r:"recht-seit"},
+
+{id:"e08",c:"recht",q:"Welche Schreibung ist richtig?",o:[
+ "Nach dem Training ging sie zum Fluss.",
+ "Nach dem Training ging sie zum Fluß."],a:0,
+ e:"Kurzer betonter Vokal → <b>ss</b>: Fluss, muss, Schluss. „Fluß“ ist die Schreibung von vor 1996.",r:"recht-sz"},
+
+{id:"e09",c:"recht",q:"Welche Schreibung ist richtig?",o:[
+ "Das Ergebnis war knapp.",
+ "Das Ergebniss war knapp."],a:0,
+ e:"Die unbetonte Endung <b>-nis</b> hat nur ein s: Ergebnis, Zeugnis. Folgt in einer erweiterten Form ein Vokal, verdoppelt es sich: des Ergebnisses, die Ergebnisse.",r:"recht-sz"},
+
+{id:"e10",c:"recht",q:"Welche Schreibung gilt in Deutschland und Österreich?",o:[
+ "Wir sehen uns draußen auf dem Platz.",
+ "Wir sehen uns draussen auf dem Platz."],a:0,
+ e:"Nach dem Diphthong „au“ steht für das scharfe s <b>ß</b>: draußen, außer, beißen. In der Schweiz und in Liechtenstein kann durchgängig ss stehen — dort ist „draussen“ richtig. Anderswo nur, wenn gar kein ß zur Verfügung steht (Regelwerk 2024, § 25 E2).",r:"recht-sz"},
+
+{id:"e11",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Die Trainerin widersprach ihm deutlich.",
+ "Die Trainerin wiedersprach ihm deutlich."],a:0,
+ e:"<b>wider</b> = gegen: widersprechen heißt „dagegen sprechen“. Ohne e.",r:"recht-wider"},
+
+{id:"e12",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Wir wiederholen die Übung morgen.",
+ "Wir widerholen die Übung morgen."],a:0,
+ e:"<b>wieder</b> = erneut, noch einmal: wiederholen, wiedersehen, wiederkommen. Mit ie.",r:"recht-wider"},
+
+{id:"e13",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Das Ergebnis soll den Trainingsstand widerspiegeln.",
+ "Das Ergebnis soll den Trainingsstand wiederspiegeln."],a:0,
+ e:"<b>widerspiegeln</b> steht ohne e, obwohl es „zurückwerfen“ heißt und nicht „gegen“ — wie Widerhall und Widerschein. Die Bedeutung „zurück“ allein verrät die Schreibung nicht: wiedergeben steht mit ie.",r:"recht-wider"},
+
+{id:"e14",c:"gram",q:"Was ist standardsprachlich?",o:[
+ "Das Spiel lief anders als geplant.",
+ "Das Spiel lief anders wie geplant."],a:0,
+ e:"Nach <b>anders</b> und <b>andere</b> steht wie nach dem Komparativ <b>als</b>. „wie“ steht beim Vergleich gleicher Größen: „so gut wie geplant“.",r:"gram-alswie"},
+
+{id:"e15",c:"gram",q:"Was ist standardsprachlich?",o:[
+ "Wir brauchten mehr Zeit als gedacht.",
+ "Wir brauchten mehr Zeit wie gedacht."],a:0,
+ e:"„mehr“ ist ein Komparativ (von viel) — danach steht <b>als</b>.",r:"gram-alswie"},
+
+{id:"e16",c:"gram",q:"Was ist standardsprachlich?",o:[
+ "Heute machen wir andere Übungen als gestern.",
+ "Heute machen wir andere Übungen wie gestern."],a:0,
+ e:"Nach <b>andere</b> steht <b>als</b>, wie nach anders und nach dem Komparativ. „wie“ steht beim Vergleich gleicher Größen: „dieselben Übungen wie gestern“.",r:"gram-alswie"},
+
+/* Vertiefung Groß/Klein, Apostroph, Bindestrich, dessen/deren, Doppelpunkt: mehrere Übungen je Regel */
+{id:"o01",c:"gross",q:"Welcher Satz ist richtig?",o:[
+ "Sie unterrichtet die Fächer Sport und Deutsch.",
+ "Sie unterrichtet die Fächer Sport und deutsch."],a:0,
+ e:"Das Schulfach ist ein Substantiv — <b>Deutsch</b> groß, wie Sport. Klein steht das Adjektiv („die deutsche Grammatik“) und die Antwort auf „wie?“: „Sie unterrichtet deutsch“ heißt „in deutscher Sprache“.",r:"gross-sprachen"},
+
+{id:"o02",c:"gross",q:"Welcher Satz ist richtig?",o:[
+ "Kannst du das noch einmal auf Deutsch erklären?",
+ "Kannst du das noch einmal auf deutsch erklären?"],a:0,
+ e:"Nach „auf“ steht die Sprache selbst — ein Substantiv, also groß: <b>auf Deutsch</b>, auf Englisch. Dasselbe ohne Präposition: „Sie spricht gut Deutsch“ (was?) — klein nur auf die Frage „wie?“: „Sie hat deutsch gesprochen, nicht englisch.“",r:"gross-sprachen"},
+
+{id:"o03",c:"gross",q:"Welcher Satz ist richtig?",o:[
+ "In der Hausarbeit gilt die deutsche Rechtschreibung.",
+ "In der Hausarbeit gilt die Deutsche Rechtschreibung."],a:0,
+ e:"Hier ist „deutsch“ ein Adjektiv vor dem Substantiv — klein. Groß wird es nur als Teil eines Namens: „Deutsche Sporthochschule Köln“.",r:"gross-sprachen"},
+
+{id:"o04",c:"gross",q:"Welcher Satz ist richtig?",o:[
+ "Beim nächsten Mal bringe ich die Bälle mit.",
+ "Beim nächsten mal bringe ich die Bälle mit."],a:0,
+ e:"„das nächste Mal“ meint die Zähleinheit — ein Substantiv, erkennbar an Artikel und Adjektiv davor. Also groß: beim nächsten <b>Mal</b>, jedes Mal, zum ersten Mal.",r:"gross-mal"},
+
+{id:"o05",c:"gross",q:"Welcher Satz ist richtig?",o:[
+ "Sag mal, hast du Freitag Zeit?",
+ "Sag Mal, hast du Freitag Zeit?"],a:0,
+ e:"Hier ist „mal“ die Kurzform von „einmal“ — ein Wörtchen, das den Satz weicher macht. Klein, wie in „Komm mal her“.",r:"gross-mal"},
+
+{id:"o06",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Nach dem Spiel bestellen wir drei Pizzas.",
+ "Nach dem Spiel bestellen wir drei Pizza's."],a:0,
+ e:"Der Plural bekommt keinen Apostroph: Pizzas (auch: Pizzen), Fotos, DVDs.",r:"recht-apostroph"},
+
+{id:"o07",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Das ist Lenas Trinkflasche.",
+ "Das ist Lena's Trinkflasche."],a:0,
+ e:"Das Genitiv-s steht im laufenden Text ohne Apostroph: Lenas, Peters. Ein Apostroph steht, wenn der Name auf s, ss, ß, x, z oder ce endet und ohne Artikel steht (Nils’ Plan). In Laden- und Firmennamen ist er erlaubt, aber nicht nötig: Evas Blumenladen oder Eva’s Blumenladen.",r:"recht-apostroph"},
+
+{id:"o08",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Wir trainieren montags und donnerstags.",
+ "Wir trainieren montag's und donnerstag's."],a:0,
+ e:"Das s in montags, abends, morgens gehört zum Adverb — kein Apostroph, und klein.",r:"recht-apostroph"},
+
+{id:"o09",c:"recht",q:"Welche Schreibung ist richtig?",o:[
+ "Schick mir bitte deine E-Mail-Adresse.",
+ "Schick mir bitte deine E-Mail Adresse."],a:0,
+ e:"Steckt ein Bindestrichwort in einer Zusammensetzung, bekommt jede Fuge einen Bindestrich — durchgekoppelt: <b>E-Mail-Adresse</b>. Ein Leerzeichen im Wort ist falsch.",r:"recht-bindestrich"},
+
+{id:"o10",c:"recht",q:"Welche Schreibung ist richtig?",o:[
+ "Er startet morgen im 100-Meter-Lauf.",
+ "Er startet morgen im 100 Meter-Lauf."],a:0,
+ e:"Steht eine Ziffer in einer mehrteiligen Zusammensetzung, bekommt jede Fuge einen Bindestrich: <b>100-Meter-Lauf</b> (auch 100-m-Lauf, Hundertmeterlauf), 8-Stunden-Tag. Ein Leerzeichen im Wort ist falsch.",r:"recht-bindestrich"},
+
+{id:"o11",c:"recht",q:"Welche Schreibung ist richtig?",o:[
+ "Für das Praktikum brauche ich einen Erste-Hilfe-Kurs.",
+ "Für das Praktikum brauche ich einen Erste Hilfe Kurs."],a:0,
+ e:"„Erste Hilfe“ ist eine Wortgruppe; wird sie Teil einer Zusammensetzung, stehen Bindestriche an allen Fugen: <b>Erste-Hilfe-Kurs</b>, Kopf-an-Kopf-Rennen.",r:"recht-bindestrich"},
+
+{id:"o12",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Die Trainerin, deren Team gewonnen hat, gibt ein Interview.",
+ "Die Trainerin, dessen Team gewonnen hat, gibt ein Interview."],a:0,
+ e:"Der Genitiv des Relativpronomens richtet sich nach dem <b>Bezugswort</b> „die Trainerin“ (feminin) — also <b>deren</b>. Dass „Team“ ein Neutrum ist, spielt keine Rolle.",r:"gram-relativ"},
+
+{id:"o13",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Der Verein, dessen Halle saniert wird, trainiert draußen.",
+ "Der Verein, deren Halle saniert wird, trainiert draußen."],a:0,
+ e:"Bezugswort ist „der Verein“ (maskulin) — also <b>dessen</b>, auch wenn danach das feminine „Halle“ folgt.",r:"gram-relativ"},
+
+{id:"o14",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Die Spieler, deren Trikots fehlen, warten in der Kabine.",
+ "Die Spieler, dessen Trikots fehlen, warten in der Kabine."],a:0,
+ e:"Bei einem Bezugswort im Plural steht vor dem Substantiv <b>deren</b> — egal welches Geschlecht.",r:"gram-relativ"},
+
+{id:"o15",c:"zeichen",q:"Welcher Satz ist richtig?",o:[
+ "Das Ergebnis ist eindeutig: Die Methode funktioniert.",
+ "Das Ergebnis ist eindeutig: die Methode funktioniert."],a:0,
+ e:"Nach dem Doppelpunkt folgt ein ganzer Satz — dann groß. Klein bleibt es bei einer Aufzählung oder Wortgruppe: „Uns fehlte alles: ein Plan, eine Halle …“.",r:"z-doppelpunkt"},
+
+{id:"o16",c:"zeichen",q:"Welcher Satz ist richtig?",o:[
+ "Uns fehlte alles: ein Plan, eine Halle und genug Leute.",
+ "Uns fehlte alles: Ein Plan, eine Halle und genug Leute."],a:0,
+ e:"Nach dem Doppelpunkt folgt nur eine Aufzählung, kein ganzer Satz — dann klein. Substantive bleiben natürlich groß.",r:"z-doppelpunkt"},
+
+/* Vertiefung Grammatik und Satzbau: Zeitenfolge, Genitiv, Richtung, Verbzweitstellung, Fragezeichen, Kongruenz */
+{id:"i01",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nachdem wir uns aufgewärmt hatten, begann das Spiel.",
+ "Nachdem wir uns aufwärmen, begann das Spiel."],a:0,
+ e:"„nachdem“ verlangt, dass das Ereignis im Nebensatz <b>vorher</b> abgeschlossen ist. Steht der Hauptsatz im Präteritum („begann“), rückt es eine Stufe zurück: <b>Plusquamperfekt</b> („aufgewärmt hatten“). Zum Präsens gehört das Perfekt: „Nachdem wir uns aufgewärmt haben, beginnt das Spiel.“",r:"gram-zeiten"},
+
+{id:"i02",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nachdem er sich aufgewärmt hat, beginnt er mit dem Sprint.",
+ "Nachdem er sich aufgewärmt hatte, beginnt er mit dem Sprint."],a:0,
+ e:"Der Hauptsatz steht im Präsens („beginnt“) — das frühere Ereignis steht dann im <b>Perfekt</b>. Das Plusquamperfekt gehört zu einem Hauptsatz in der Vergangenheit, im Präteritum oder Perfekt.",r:"gram-zeiten"},
+
+{id:"i03",c:"gram",q:"In welcher Zeitform beschreibst du in einer Hausarbeit dein eigenes Vorgehen?",o:[
+ "Präteritum oder Perfekt — innerhalb eines Abschnitts einheitlich",
+ "Nur im Präteritum, das Perfekt ist dort falsch",
+ "Beliebig, auch von Satz zu Satz wechselnd"],a:0,
+ e:"„Wir befragten 40 Sportstudierende“ und „Wir haben 40 Sportstudierende befragt“ gehen beide. Worauf es ankommt: bei den Vollverben nicht grundlos wechseln. Bei sein, haben und den Modalverben steht auch im Perfekt-Text meist das Präteritum („Die Teilnahme war freiwillig“) — das zählt nicht als Wechsel.",r:"gram-zeiten"},
+
+{id:"i04",c:"gram",q:"Was ist in einer Hausarbeit die bessere Wahl?",o:[
+ "die Trainingsmethode meines Betreuers",
+ "die Trainingsmethode von meinem Betreuer"],a:0,
+ e:"Wo der Genitiv erkennbar ist, steht er im geschriebenen Text: „meines Betreuers“. Die Umschreibung mit „von“ ist gesprochen üblich, klingt im geschriebenen Text aber mündlich. Nötig ist „von“ dort, wo man den Genitiv nicht sieht: „die Wirkung von Koffein“.",r:"gram-genalltag"},
+
+{id:"i05",c:"gram",q:"Was ist geschrieben standardsprachlich?",o:[
+ "Aufgrund des Regens fiel das Training aus.",
+ "Aufgrund dem Regen fiel das Training aus."],a:0,
+ e:"<b>aufgrund</b> steht mit dem Genitiv, wie innerhalb, anhand und hinsichtlich: aufgrund des Regens. Ohne Artikel weicht man meist auf „aufgrund von“ aus: „aufgrund von Regen“.",r:"gram-genalltag"},
+
+{id:"i06",c:"gram",q:"Wie steht der Genitiv bei einem Namen ohne Artikel üblicherweise?",o:[
+ "Vorn: „Lenas Trainingsplan“ — nachgestellt klingt es gehoben, ist aber nicht falsch",
+ "Hinten: „der Trainingsplan Lenas“ — vorangestellt ist umgangssprachlich",
+ "Nur mit „von“: „der Trainingsplan von Lena“ — der Genitiv ist hier falsch"],a:0,
+ e:"Bei Eigennamen ohne Artikel steht der Genitiv normalerweise vorn: Lenas Rad, Beethovens Werk. „das Werk Beethovens“ ist nicht falsch, klingt aber gehoben. Die Umschreibung mit „von“ ist gesprochen üblich.",r:"gram-genalltag"},
+
+{id:"i07",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nach dem Training fahre ich nach Hause.",
+ "Nach dem Training fahre ich zu Hause."],a:0,
+ e:"Wohin? → <b>nach Hause</b>. Wo? → <b>zu Hause</b>: „Ich bin zu Hause.“ Die Richtung fragt nach dem Ziel.",r:"gram-richtung"},
+
+{id:"i08",c:"gram",q:"„Wohin fahrt ihr im Sommer?“ Welche Antwort passt?",o:[
+ "Wir fahren nach Italien.",
+ "Wir fahren in Italien."],a:0,
+ e:"Länder ohne Artikel bekommen bei der Richtung <b>nach</b>: nach Italien, nach Spanien. „in Italien“ sagt, wo man ist. Länder mit Artikel gehen mit „in“ + Akkusativ: in die Türkei, in die USA.",r:"gram-richtung"},
+
+{id:"i09",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Morgen gehe ich ins Training.",
+ "Morgen ich gehe ins Training."],a:0,
+ e:"Im Aussagesatz steht das gebeugte Verb an <b>zweiter Stelle</b>. Steht „morgen“ vorn, rutscht das Subjekt hinter das Verb: morgen <b>gehe</b> ich.",r:"satz-v2"},
+
+{id:"i10",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Nach dem Spiel haben wir noch lange geredet.",
+ "Nach dem Spiel wir haben noch lange geredet."],a:0,
+ e:"„Nach dem Spiel“ ist ein Satzglied und besetzt Position 1. Direkt danach kommt das gebeugte Verb („haben“), dann das Subjekt.",r:"satz-v2"},
+
+{id:"i11",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Aber morgen komme ich mit.",
+ "Aber morgen ich komme mit."],a:0,
+ e:"<b>aber</b>, und, oder, denn, sondern zählen nicht mit — sie stehen vor Position 1. „morgen“ ist das eine Satzglied davor, also folgt direkt das Verb.",r:"satz-v2"},
+
+{id:"i12",c:"zeichen",q:"Welcher Satz ist als Bericht richtig?",o:[
+ "Er fragte, wann das Training beginnt.",
+ "Er fragte, wann das Training beginnt?"],a:0,
+ e:"Der ganze Satz ist eine Aussage — er berichtet, was jemand gefragt hat. Das Schlusszeichen richtet sich nach dem ganzen Satz: Punkt, kein Fragezeichen.",r:"z-frage"},
+
+{id:"i13",c:"zeichen",q:"Welcher Satz ist richtig?",o:[
+ "Weißt du, wann das Training beginnt?",
+ "Weißt du, wann das Training beginnt."],a:0,
+ e:"Hier ist der ganze Satz eine Frage („Weißt du …“) — also Fragezeichen, auch wenn der Nebensatz selbst nur eine indirekte Frage ist.",r:"z-frage"},
+
+{id:"i14",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Die Leistung der Spielerinnen hat sich verbessert.",
+ "Die Leistung der Spielerinnen haben sich verbessert."],a:0,
+ e:"Das Verb richtet sich nach dem Subjektkern „die Leistung“ (Singular), nicht nach dem nächststehenden „Spielerinnen“.",r:"gram-kongruenz"},
+
+{id:"i15",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Das Ergebnis der beiden Tests war eindeutig.",
+ "Das Ergebnis der beiden Tests waren eindeutig."],a:0,
+ e:"Subjektkern ist „das Ergebnis“ — Singular, also „war“. „der beiden Tests“ ist nur ein Genitivattribut.",r:"gram-kongruenz"},
+
+/* Vertiefung Akkusativpräpositionen, derselbe, wenn/als/wann, Negation, Fremdwortplural */
+{id:"l01",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Zum Aufwärmen laufen wir einmal um den Platz.",
+ "Zum Aufwärmen laufen wir einmal um dem Platz."],a:0,
+ e:"<b>um</b> verlangt den Akkusativ, wie durch, für, gegen und ohne: um den Platz.",r:"gram-praepakk"},
+
+{id:"l02",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Ohne meinen Schläger spiele ich nicht.",
+ "Ohne meinem Schläger spiele ich nicht."],a:0,
+ e:"<b>ohne</b> verlangt den Akkusativ: ohne meinen Schläger, ohne mich.",r:"gram-praepakk"},
+
+{id:"l03",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Der Ball prallte gegen den Pfosten.",
+ "Der Ball prallte gegen dem Pfosten."],a:0,
+ e:"<b>gegen</b> verlangt den Akkusativ: gegen den Pfosten, gegen die Wand.",r:"gram-praepakk"},
+
+{id:"l04",c:"gram",q:"Welche Schreibung ist richtig?",o:[
+ "Wir spielen seit Jahren in demselben Verein.",
+ "Wir spielen seit Jahren in dem selben Verein."],a:0,
+ e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, denselben, dasselbe. Getrennt steht „selben“ nach einer verschmolzenen Präposition (im selben Verein) oder nach einem Demonstrativpronomen (an diesem selben Tag).",r:"gram-derselbe"},
+
+{id:"l05",c:"gram",q:"Welche Schreibung ist richtig?",o:[
+ "Er hat zweimal dasselbe erklärt.",
+ "Er hat zweimal das selbe erklärt."],a:0,
+ e:"<b>dasselbe</b> in einem Wort — Duden und Regelwerk führen nur die Zusammenschreibung.",r:"gram-derselbe"},
+
+{id:"l06",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Als ich gestern ankam, war die Halle schon zu.",
+ "Wenn ich gestern ankam, war die Halle schon zu."],a:0,
+ e:"Ein einzelnes, abgeschlossenes Ereignis in der Vergangenheit („gestern“, einmal) → <b>als</b>. „wenn“ stünde für Wiederholtes: „Immer wenn ich ankam, war die Halle zu.“",r:"satz-wennals"},
+
+{id:"l07",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Wenn ich morgen Zeit habe, komme ich zum Training.",
+ "Als ich morgen Zeit habe, komme ich zum Training."],a:0,
+ e:"Für Zukunft und Bedingung steht <b>wenn</b>. „als“ gehört zu einem einmaligen Geschehen in der Vergangenheit („Als ich klein war …“) oder in einer Erzählung.",r:"satz-wennals"},
+
+{id:"l08",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich weiß nicht, wann das Spiel beginnt.",
+ "Ich weiß nicht, wenn das Spiel beginnt."],a:0,
+ e:"<b>wann</b> fragt nach dem Zeitpunkt — auch in der indirekten Frage nach „wissen“, „fragen“, „sagen“. „wenn“ leitet einen Zeit- oder Bedingungssatz ein, keine Frage.",r:"satz-wennals"},
+
+{id:"l09",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Ich habe gestern nicht trainiert.",
+ "Ich habe gestern trainiert nicht."],a:0,
+ e:"Wird der ganze Satz verneint, steht „nicht“ möglichst weit hinten — aber <b>vor</b> dem zweiten Verbteil („trainiert“), nicht dahinter.",r:"satz-negation"},
+
+{id:"l10",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Das Aufwärmen war heute nicht gründlich.",
+ "Das Aufwärmen war heute gründlich nicht."],a:0,
+ e:"Ein Adjektiv als Ergänzung zu „sein“ zieht „nicht“ vor sich, solange es im Mittelfeld steht: nicht gründlich, nicht gut. Vorangestellt bleibt „nicht“ hinten: „Gründlich war es nicht.“",r:"satz-negation"},
+
+{id:"l11",c:"satz",q:"„Ich habe nicht gestern trainiert.“ Was ist gemeint?",o:[
+ "Ich habe trainiert, aber an einem anderen Tag.",
+ "Ich habe gestern überhaupt nichts gemacht.",
+ "Ich trainiere gar nicht mehr."],a:0,
+ e:"Soll nur ein Teil verneint werden, steht „nicht“ direkt davor — hier vor „gestern“: nicht gestern, sondern an einem anderen Tag. Für den ganzen Satz stünde „nicht“ weiter hinten: „Ich habe gestern nicht trainiert.“",r:"satz-negation"},
+
+{id:"l12",c:"gram",q:"Wie lautet der Plural von „Museum“?",o:["Museen","Museums","Musea"],a:0,
+ e:"Das Museum → die <b>Museen</b>, wie das Zentrum → die Zentren. Die Endung -um fällt weg, -en kommt dazu.",r:"gram-plural"},
+
+{id:"l13",c:"gram",q:"Wie lautet der Plural von „Zentrum“?",o:["Zentren","Zentrums","Zentra"],a:0,
+ e:"Das Zentrum → die <b>Zentren</b>, wie das Museum → die Museen.",r:"gram-plural"},
+
+{id:"l14",c:"gram",q:"Wie schreibt man den Plural von „Party“?",o:["Partys","Parties"],a:0,
+ e:"Englische Substantive auf -y wie Party, Hobby, Baby bekommen im Plural ein -s — <b>Partys</b>, Hobbys, Babys (Regelwerk 2024, § 21). Die englische ie-Schreibung bleibt nur in Zitatwörtern wie „Grand Old Ladies“.",r:"gram-plural"},
+
+/* Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv, Fall bestimmen, Verwechslungen */
+{id:"c01",c:"satz",q:"Welche Fassung gehört in einen geschriebenen Text?",o:[
+ "Ich komme später, weil ich noch einen Termin habe.",
+ "Ich komme später, weil ich habe noch einen Termin."],a:0,
+ e:"Nach <b>weil</b> steht das gebeugte Verb am Ende. Gesprochen hört man oft die Hauptsatzstellung („weil ich hab noch einen Termin“); geschrieben steht das Verb hinten. Wer die Hauptsatzstellung will, nimmt „denn“: „…, denn ich habe noch einen Termin.“",r:"satz-nebensatz"},
+
+{id:"c02",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Weil ich müde war, bin ich früher gegangen.",
+ "Weil ich müde war, ich bin früher gegangen."],a:0,
+ e:"Der vorangestellte weil-Satz füllt Position 1. Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander: „war, bin“. Anders nur mit „dann“ oder „so“ davor, bei je … desto und bei Sätzen wie „ob … oder nicht“.",r:"satz-nebensatz"},
+
+{id:"c03",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Sie fragte, ob das Training heute stattfindet.",
+ "Sie fragte, ob das Training findet heute statt."],a:0,
+ e:"<b>ob</b> leitet einen Nebensatz ein — das Verb steht am Ende, und die Vorsilbe bleibt dran: stattfindet.",r:"satz-nebensatz"},
+
+{id:"c04",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Wir fangen morgen um acht an.",
+ "Wir anfangen morgen um acht."],a:0,
+ e:"Im Hauptsatz wird die Vorsilbe abgetrennt und schließt die Satzklammer hinten: Wir <b>fangen</b> … <b>an</b>. Zusammen bleibt sie im Nebensatz und im Infinitiv: „…, weil wir um acht anfangen.“",r:"satz-klammer"},
+
+{id:"c05",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Kommst du morgen zum Training mit?",
+ "Mitkommst du morgen zum Training?"],a:0,
+ e:"Auch in der Ja/Nein-Frage steht nur der gebeugte Teil vorn, die Vorsilbe schließt den Satz: <b>Kommst</b> du … <b>mit</b>?",r:"satz-klammer"},
+
+{id:"c06",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich habe gestern nicht trainieren können.",
+ "Ich habe gestern nicht trainieren gekonnt."],a:0,
+ e:"Steht beim Modalverb ein zweites Verb, bildet es im Perfekt kein Partizip, sondern einen Infinitiv: <b>trainieren können</b> (doppelter Infinitiv).",r:"satz-modal"},
+
+{id:"c07",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Das habe ich nicht gewollt.",
+ "Das habe ich nicht wollen."],a:0,
+ e:"Steht das Modalverb allein, ohne zweites Verb, bildet es ein ganz normales Partizip: <b>gewollt</b>, gekonnt, gemusst.",r:"satz-modal"},
+
+{id:"c08",c:"satz",q:"Was ist standardsprachlich?",o:[
+ "Ich habe früher gehen müssen.",
+ "Ich habe früher gehen gemusst."],a:0,
+ e:"Mit einem zweiten Verb steht auch „müssen“ im Perfekt als Infinitiv: gehen <b>müssen</b>. Allein heißt es „Ich habe gemusst.“",r:"satz-modal"},
+
+{id:"c09",c:"gram",q:"„Die Trainerin sagte: ‚Das Spiel beginnt um acht.‘“ Wie gibst du das so wieder, dass man die indirekte Rede am Verb erkennt?",o:[
+ "Die Trainerin sagte, das Spiel beginne um acht.",
+ "Die Trainerin sagte, das Spiel begann um acht."],a:0,
+ e:"Der Konjunktiv I <b>beginne</b> zeigt die Wiedergabe am Verb. „begann“ ist Präteritum — es verschiebt die Zeit und zeigt die Wiedergabe nicht am Verb.",r:"gram-konjunktiv"},
+
+{id:"c10",c:"gram",q:"Du hast gerade keine Zeit. Welcher Satz zeigt, dass es nur gedacht ist?",o:[
+ "Wenn ich mehr Zeit hätte, käme ich öfter zum Training.",
+ "Wenn ich mehr Zeit habe, komme ich öfter zum Training."],a:0,
+ e:"Der Konjunktiv II (<b>hätte</b> … <b>käme</b>) zeigt, dass die Bedingung nicht erfüllt ist — gedacht, nicht wirklich. Im Indikativ („habe … komme“) bleibt offen, ob sie eintritt.",r:"gram-konjunktiv"},
+
+{id:"c11",c:"gram",q:"„Ich habe dem Kollegen geholfen.“ Welcher Fall steht hier, und woran erkennst du ihn?",o:[
+ "Dativ — „Ich habe ihm geholfen“ passt",
+ "Akkusativ — „Ich habe ihn geholfen“ passt",
+ "Genitiv — die Frage „wessen?“ passt"],a:0,
+ e:"Der Pronomen-Trick: Setz er / ihn / ihm ein. Nur „ihm“ passt, also Dativ. „helfen“ verlangt den Dativ.",r:"gram-kasusfinden"},
+
+{id:"c12",c:"gram",q:"„Wir warten auf den Bus.“ Was entscheidet hier über den Fall von „den Bus“?",o:[
+ "Die Präposition „auf“, die fest zu „warten“ gehört — Akkusativ",
+ "Das Subjekt „wir“",
+ "Die Stellung am Satzende"],a:0,
+ e:"Steht eine Präposition davor, entscheidet sie — bei fest ans Verb gebundenen Präpositionen das Paar aus Verb und Präposition: <b>warten auf</b> + Akkusativ.",r:"gram-kasusfinden"},
+
+{id:"c13",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Der Artikel ist tendenziös — er stellt nur eine Seite dar.",
+ "Der Artikel ist tendenziell — er stellt nur eine Seite dar."],a:0,
+ e:"<b>tendenziös</b> = parteiisch, einseitig gefärbt. <b>tendenziell</b> = der Tendenz nach: „Die Werte steigen tendenziell.“",r:"recht-verwechsel"},
+
+{id:"c14",c:"recht",q:"Welcher Satz ist richtig?",o:[
+ "Sie hat dezidiert widersprochen — klar und entschieden.",
+ "Sie hat detailliert widersprochen — klar und entschieden."],a:0,
+ e:"<b>dezidiert</b> = entschieden, mit Nachdruck. <b>detailliert</b> = ausführlich, bis in Einzelheiten.",r:"recht-verwechsel"}
 
 ];
 /* ============================================================
@@ -1345,7 +1858,7 @@ const EX_B = [
 
 {id:"m26",c:"gram",q:"Welche Schreibung ist richtig?",o:[
  "Wir kommen aus demselben Verein.","Wir kommen aus dem selben Verein."],a:0,
- e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, dasselbe, denselben. Der Duden führt „der selbe“ als Falschschreibung.",r:"gram-derselbe"},
+ e:"<b>derselbe</b> wird zusammengeschrieben, auch gebeugt: demselben, dasselbe, denselben. Duden und Regelwerk führen nur die Zusammenschreibung.",r:"gram-derselbe"},
 
 {id:"m27",c:"gram",q:"„selben“ nach einer verschmolzenen Präposition — was gilt?",o:[
  "Beides ist zulässig — „am selben Tag“ und „an demselben Tag“",
@@ -1727,7 +2240,7 @@ const RULES = [
 <div class="ex">ein langer<span class="ok">,</span> anstrengender Lauf → „lang und anstrengend“ ✓<br>
 die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjacke“ ist die Einheit, „neu“ bestimmt sie näher</div>
 <p><b>Solche Einheiten</b> bilden vor allem Adjektive für <b>Farbe, Material, Herkunft und Zugehörigkeit</b>: das neue rote Trikot, der alte hölzerne Barren, ein bekannter spanischer Trainer, die aktuelle amtliche Prüfungsordnung. In der Regel auch nach <b>Zahlwörtern und unbestimmten Fürwörtern</b>: viele gute Spieler, alle anderen Gruppen, die beiden neuen Trainer — außer, das Komma soll etwas abgrenzen (siehe unten: „aus anderen, zuverlässigen Quellen“).</p>
-<p><b>Das Komma kann die Bedeutung verschieben.</b> Dann sind beide Schreibungen richtig und meinen etwas anderes: „neue<span class="ok">,</span> umweltfreundliche Verfahren“ sind neu und umweltfreundlich; „neue umweltfreundliche Verfahren“ sind die neuen unter den umweltfreundlichen (Beispiel aus dem Regelwerk). Genauso „aus anderen<span class="ok">,</span> zuverlässigen Quellen“ — die ersten waren es nicht.</p>
+<p><b>Das Komma kann die Bedeutung verschieben.</b> Dann sind beide Schreibungen richtig und meinen etwas anderes: „neue<span class="ok">,</span> umweltfreundliche Verfahren“ sind neu und umweltfreundlich; „neue umweltfreundliche Verfahren“ sind die neuen unter den umweltfreundlichen (Beispiel aus dem Regelwerk). Genauso „aus anderen zuverlässigen Quellen“: Ohne Komma waren auch die zuerst genannten zuverlässig. Mit Komma („aus anderen<span class="ok">,</span> zuverlässigen Quellen“) sagt der Satz das nicht — oft ist ein Gegensatz gemeint.</p>
 <p class="tiny muted">Quellen: Amtliches Regelwerk 2024, Abschnitt Komma bei Reihungen; Duden, Sprachratgeber „Komma zwischen Adjektiven“.</p>`},
 
 {id:"komma-partizip",c:"komma",t:"Partizipgruppen",b:`
@@ -1735,7 +2248,7 @@ die neue<span class="nope">,</span> rote Trainingsjacke → „rote Trainingsjac
 <div class="ex">Von der Hitze erschöpft<span class="ok">(,)</span> brach sie das Training ab.</div>
 <p><b>Pflicht</b> wird es, wenn die Gruppe …</p>
 <ul>
-<li>… als Zusatz direkt hinter dem Subjekt steht: „Die Spielerin, von der Hitze erschöpft, brach ab.“ — auch hinter einem Pronomen: „Sie, von der Hitze erschöpft, brach ab.“</li>
+<li>… als Zusatz direkt hinter einem Substantiv steht: „Die Spielerin, von der Hitze erschöpft, brach ab.“ — auch hinter einem Pronomen: „Sie, von der Hitze erschöpft, brach ab.“</li>
 <li>… am Satzende nachgetragen wird: „Sie brach ab, völlig erschöpft.“</li>
 <li>… durch ein hinweisendes Wort angekündigt oder wieder aufgenommen wird: „Von der Hitze erschöpft, so brach sie ab.“</li>
 </ul>
@@ -1994,12 +2507,12 @@ das Schema → die Schemen / Schemata / Schemas · der Atlas → die Atlanten / 
 <div class="ex">Wir tragen <b>die gleichen</b> Schuhe. (zwei Paar desselben Modells)<br>
 Wir tragen <b>dieselben</b> Schuhe. (ein Paar, das wir uns teilen)</div>
 <p>Im Alltag verschwimmt die Unterscheidung, in präzisen Texten lohnt sie sich.</p>
-<p><b>Geschrieben wird „derselbe“ zusammen</b> — auch gebeugt: <code>desselben, demselben, denselben, dieselbe, dasselbe</code>. Der Duden führt „der selbe“ als Falschschreibung.</p>
+<p><b>Geschrieben wird „derselbe“ zusammen</b> — auch gebeugt: <code>desselben, demselben, denselben, dieselbe, dasselbe</code>. Duden und Regelwerk führen nur die Zusammenschreibung (Regelwerk 2024, Wörterverzeichnis: „derselbe § 58(4)“).</p>
 <div class="ex">Wir kommen aus <b>demselben</b> Verein. · Er hat nochmal <b>dasselbe</b> erklärt. · Ein und <b>dasselbe</b>.</div>
 <p><b>Getrennt nach einer verschmolzenen Präposition:</b> In <code>am, im, zum, zur, beim, vom</code> steckt der Artikel schon drin, und „selben“ steht für sich. Ebenso nach einem Demonstrativpronomen: <code>an diesem selben Tag</code> (Duden).</p>
 <div class="ex">am selben Tag · im selben Atemzug · zur selben Zeit</div>
 <p>Nicht zu verwechseln mit <b>selber</b> (= selbst): „Ich habe das selber gemacht.“</p>
-<p>Quellen: Duden, Rechtschreibung „derselbe“ und Falschschreibung „der selbe“.</p>`},
+<p>Quellen: Duden, Einträge „derselbe“ und „selbe“; Amtliches Regelwerk 2024, Wörterverzeichnis.</p>`},
 
 {id:"gram-praep",c:"gram",t:"Verben mit fester Präposition",b:`
 <p>Diese Verbindungen sind nicht ableitbar — man muss sie lernen:</p>
@@ -2047,7 +2560,7 @@ sich freuen <b>auf</b> (Vorfreude) / <b>über</b> (Anlass) · halten <b>von</b> 
 {id:"gram-alswie",c:"gram",t:"als oder wie?",b:`
 <p><b>als</b> beim Vergleich <b>ungleicher</b> Größen (Komparativ): „schneller <b>als</b> ich“, „mehr <b>als</b> erwartet“ — ebenso nach <b>anders</b> und <b>andere</b>: „anders <b>als</b> geplant“, „andere Übungen <b>als</b> gestern“</p>
 <p><b>wie</b> beim Vergleich <b>gleicher</b> Größen: „so schnell <b>wie</b> ich“, „genauso gut <b>wie</b> gestern“</p>
-<p>„größer wie“ und „anders wie“ sind regional verbreitet, gelten aber als nicht standardsprachlich.</p>`},
+<p>„größer wie“ und „anders wie“ kommen vor, besonders gesprochen, gelten aber als nicht standardsprachlich (Duden). Geschrieben sind sie selten: Die Variantengrammatik des IDS findet sie in Zeitungstexten überall nur sporadisch, in keiner Region als Standard.</p>`},
 
 {id:"gram-imperativ",c:"gram",t:"Imperativ: gib, nimm, lies",b:`
 <p>Verben, die in der 2. und 3. Person Singular von <b>e</b> zu <b>i</b> oder <b>ie</b> wechseln (du gibst, sie liest), bilden auch den Imperativ mit i oder ie — und <b>ohne</b> Endungs-e:</p>
@@ -3915,9 +4428,10 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 <div class="ex"><span class="ok">Ich habe nicht kommen <b>können</b>.</span> · <span class="nope">Ich habe nicht kommen gekonnt.</span></div>
 <p>Steht das Modalverb allein, gibt es doch ein Partizip:</p>
 <div class="ex">Ich habe das nicht <b>gekonnt</b>. · Ich habe nicht <b>gewollt</b>.</div>
-<p><b>Sonderfall Nebensatz:</b> Im Perfekt mit doppeltem Infinitiv rutscht „haben“ ausnahmsweise <b>nach vorn</b>:</p>
+<p><b>Sonderfall Nebensatz:</b> Im Perfekt mit doppeltem Infinitiv rutscht „haben“ in der Regel <b>nach vorn</b>:</p>
 <div class="ex"><span class="ok">…, weil ich nicht <b>habe</b> kommen können.</span><br>
 <span class="nope">…, weil ich nicht kommen können habe.</span></div>
+<p>Bei „haben“ findet die Variantengrammatik des IDS die Voranstellung im ganzen Sprachraum „ganz überwiegend oder sogar fast ausschließlich“, die Nachstellung „nur äußerst sporadisch“. In Österreich kommt daneben die Zwischenstellung vor („…, dass er es besitzen hätte dürfen“).</p>
 <p>Beim Futur mit „werden“ gehen beide Stellungen: „…, dass er nicht <b>wird</b> kommen können“ und „…, dass er nicht kommen können <b>wird</b>“ — in den meisten Regionen ist die zweite sogar häufiger (Variantengrammatik des IDS).</p>
 <p>Bei <code>lassen</code> ist der Ersatzinfinitiv die übliche Form: „Ich habe ihn kommen <b>lassen</b>.“ Bei <code>sehen, hören, fühlen, helfen</code> ist der Ersatzinfinitiv dagegen <b>nicht</b> Pflicht, sondern die häufigere von zwei zulässigen Formen: „Ich habe ihn kommen <b>sehen</b>“ und „Ich habe ihn kommen <b>gesehen</b>“ sind beide korrekt — die erste ist gebräuchlicher. Pflicht ist der Ersatzinfinitiv nur bei den Modalverben und bei „brauchen“. Quelle: Duden-Grammatik zum Ersatzinfinitiv.</p>
 <p><b>Fürs Sprechen:</b> Die Nebensatz-Variante klingt für viele fremd. Bau den Satz lieber um: „Ich konnte nicht kommen, deshalb …“</p>`},
@@ -4069,7 +4583,7 @@ Ich laufe <b>in die</b> Halle. (von draußen hinein)</div>
 <div class="ex">größer <b>als</b> ich · mehr <b>als</b> erwartet · anders <b>als</b> gedacht</div>
 <p><b>wie</b> bei Gleichheit:</p>
 <div class="ex">so groß <b>wie</b> ich · genauso gut <b>wie</b> gestern · doppelt so schnell <b>wie</b> vorher</div>
-<p><span class="nope">„größer wie“</span> ist regional weit verbreitet, gilt aber nicht als standardsprachlich — und wird von vielen sofort gehört. <span class="nope">„als wie“</span> ebenfalls nicht.</p>
+<p><span class="nope">„größer wie“</span> kommt besonders gesprochen vor, gilt aber nicht als standardsprachlich — und wird von vielen sofort gehört. <span class="nope">„als wie“</span> ebenfalls nicht.</p>
 <hr class="sep">
 <p><b>Steigerungsfallen:</b></p>
 <ul>
@@ -4440,8 +4954,8 @@ const EX_D = [
 
 {id:"z11",c:"satz",q:"Wie lautet der Nebensatz mit doppeltem Infinitiv?",o:[
  "…, weil ich nicht habe kommen können.",
- "…, weil ich nicht kommen können habe."],a:0,
- e:"Ausnahme von der Endstellung: Im Perfekt mit doppeltem Infinitiv rutscht „haben“ <b>nach vorn</b>. Wem das fremd klingt: Bau um — „Ich konnte nicht kommen, deshalb …“",r:"satz-modal"},
+ "…, weil ich nicht kommen gekonnt habe."],a:0,
+ e:"Mit einem zweiten Verb steht das Modalverb im Perfekt als Infinitiv („können“), nicht als Partizip. Und „haben“ rutscht dabei <b>nach vorn</b>; die Nachstellung („kommen können habe“) findet sich nur ganz vereinzelt. Wem das fremd klingt: Bau um — „Ich konnte nicht kommen, deshalb …“",r:"satz-modal"},
 
 {id:"z12",c:"satz",q:"Ergänze das Hilfsverb fürs Perfekt, „haben“ oder „sein“: „Ich ___ nach Köln gefahren.“",t:"fill",a:["bin"],
  e:"Verben der <b>Ortsveränderung</b> bilden das Perfekt mit „sein“. Aber Achtung: „Ich <b>habe</b> das Auto gefahren“ — steht ein Akkusativobjekt dabei, gilt in der Regel „haben“. Bei sportlichen Leistungen lässt der Duden beides zu: „Ich <b>bin</b> / <b>habe</b> einen neuen Rekord gelaufen.“",r:"satz-perfekt"},
@@ -6156,7 +6670,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 713 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 814 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7162,7 +7676,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 713 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 814 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();
@@ -8702,7 +9216,7 @@ const CHECKS = [
 {id:"x03",sev:"pruef",re:/\bwährend\s+(dem|den|einem|diesem|diesen|jedem|meinem|deinem|seinem|ihrem|unserem|eurem)\b/gi,t:"während + Genitiv",
  k:"Als Präposition verlangt „während“ standardsprachlich den Genitiv: <b>während der Vorlesung</b>. Der Dativ ist umgangssprachlich verbreitet; in der Schweiz und in Westösterreich steht er auch in Zeitungstexten — für Schule und Uni in Deutschland bleibt der Genitiv die sichere Wahl. Prüf außerdem, ob hier die Konjunktion steht — die leitet einen Nebensatz ein, und dann richtet sich der Fall nach dem Nebensatz, meist nach seinem Verb: „Während dem Kollegen die Zeit fehlte, haben wir weitergemacht“ (fehlen: Dativ), „Während den Trainer vor allem die Technik interessierte, …“ (interessieren: Akkusativ). Und prüf, ob das Artikelwort überhaupt zu „während“ gehört: In „während dem Alter entsprechender Pausen“ hängt der Dativ an dem Partizip dahinter, und der Genitiv steht erst danach — dann stimmt der Satz.",r:"gram-genitiv"},
 {id:"x04",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?:(?<!(?<![Nn]icht\s)[Mm]ehr oder )(?<![Mm]ehr und )(?:[Gg]rößer|[Kk]leiner|[Bb]esser|[Ss]chlechter|[Ss]chneller|[Ll]angsamer|[Ww]eniger|[Kk]ürzer|[Ää]lter|[Jj]ünger|[Hh]öher|[Tt]iefer|[Ss]tärker|[Ss]chwächer|[Öö]fter|[Ss]chwieriger|[Ll]eichter|[Ee]infacher|[Hh]äufiger|[Ss]eltener|[Ff]airer|[Ee]ffektiver|[Ii]ntensiver|[Ww]irkungsvoller|[Pp]rofessioneller|[Ss]innvoller|[Ww]ichtiger|[Tt]eurer|[Bb]illiger|[Gg]ünstiger|[Aa]nstrengender|[Rr]uhiger|[Ss]icherer|[Gg]enauer|[Ss]chwerer|[Ss]pannender|[Ii]nteressanter|[Ee]rfolgreicher|[Gg]esünder|[Ww]ärmer|[Kk]älter)|(?<![Nn]icht )(?<![Nn]ie )(?<![Kk]aum )(?<![Nn]ichts )(?<![Mm]ehr und )(?:(?!(?<=(?<![\wäöüßÄÖÜ])(?:[Kk]ein\w*|[Nn]iemand\w*|[Nn]irgend\w*|[Nn]iemals)\s+(?:[^\s.,;:!?]+\s+){0,2})[Mm]ehr(?!\s+(?:[^\s.,;:!?]+\s+){0,2}wie\s+(?:\d+|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|vierzig|fünfzig|hundert|tausend)(?![\wäöüßÄÖÜ])))(?!(?<=[Ii]mmer )[Mm]ehr\s+wie(?![\wäöüßÄÖÜ])(?!\s+(?:\d+|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|vierzig|fünfzig|hundert|tausend)(?![\wäöüßÄÖÜ])))[Mm]ehr(?!\s+(?:und\s+mehr|oder\s+(?:weniger|minder))\s)|[Ll]änger))\s+(?!(?:(?!wie\s)[^\s.,;:!?]+\s+){0,2}(?:so|genauso|ebenso|geradeso|ähnlich|gleich|gleichermaßen)\s)(?:(?:[^\s.,;:!?]+\s+){0,2}[a-zäöüß][^\s.,;:!?]*\s+)?(?<![Ss]o )(?<![Gg]enauso )(?<![Ee]benso )(?<![Gg]eradeso )(?<![Uu]nd )(?<![Oo]der )(?<![Ss]owie )wie\b(?!\s+(?:geplant|besprochen|vereinbart|abgesprochen|verabredet|angekündigt|gewohnt|gehabt|folgt|immer|üblich|bisher|zuvor|oben|unten|erwartet|beschrieben|gesagt|erwähnt|versprochen|ausgewechselt|verwandelt|du|ihr|Sie|man))/g,
- t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“. „größer wie“ ist regional verbreitet, gilt aber nicht als standardsprachlich — im geschriebenen Text also <b>als</b>.",r:"gram-alswie"},
+ t:"Komparativ mit „als“",k:"Beim Vergleich ungleicher Größen steht <b>als</b>: „schneller als ich“. „wie“ nur bei Gleichheit: „so schnell wie ich“. „größer wie“ kommt besonders gesprochen vor, gilt aber nicht als standardsprachlich — im geschriebenen Text also <b>als</b>.",r:"gram-alswie"},
 {id:"x05",sev:"hart",re:/(?<![\wäöüßÄÖÜ])(?<!(?:^|[.!?:]\s+|\n\s*)(?=A))als\s+wie(?![\wäöüßÄÖÜ])(?<!(?<![\wäöüßÄÖÜ])(?:eher|mehr|weniger|lieber|vielmehr|minder|so\s+sehr)\s+(?:[^\s.,;:!?]+\s+){0,2}wie\s[^.,;:!?]{1,60}(?:,\s*)?als\s+wie)(?!\s+(?!(?:ich|du|er|sie|es|wir|ihr|man|die|der|das|den|dem|des|diese\w*|ein\w*|mein\w*|dein\w*|sein\w*|ihre?\w*|unser\w*|euer\w*|eure\w*|Sie)\s)(?!(?:in|im|an|am|auf|aus|bei|beim|mit|nach|vor|vom|von|zu|zum|zur|für|über|unter|seit|gegen|ohne|durch|um|sonst|möglich)\s)(?:sehr\s+)?[a-zäöüß]+(?:\s+[a-zäöüß]+)?\s+(?:ich|du|er|sie|es|wir|ihr|man|die|der|das|den|dem|des|diese\w*|ein\w*|mein\w*|dein\w*|sein\w*|ihre?\w*|unser\w*|euer\w*|eure\w*|Sie)(?![\wäöüßÄÖÜ]))/gi,t:"„als wie“",
  k:"Nach einem Komparativ nicht standardsprachlich: „größer als wie ich“ → „größer als ich“. Es heißt entweder <b>als</b> (ungleich) oder <b>wie</b> (gleich). Richtig ist „als wie“, wo beide Wörter eine eigene Aufgabe haben, etwa bei zwei gegenübergestellten Vergleichen („eher wie ein Spiel als wie eine Prüfung“), bei einer Frage nach dem Grad („als wie anstrengend sie den Lauf empfanden“) oder wenn „als“ einen Zeitsatz einleitet („Als wie geplant alle da waren, ging es los“).",r:"gram-alswie"},
 {id:"x06",sev:"hart",re:/\beinzigste[nrsm]?\b/gi,t:"„einzigste“",
@@ -9577,7 +10091,7 @@ function cheatHTML(){
   'erweiterte Infinitivgruppe, seit 2024 auch ohne Einleitewort („Er hat sich bemüht, pünktlich zu sein“) · zwei Hauptsätze ohne Konjunktion (Komma, Semikolon oder Punkt — nur nichts geht nicht) · zwischen gleichrangigen Adjektiven, Und-Probe („ein langer, anstrengender Lauf“), nicht wenn das letzte Adjektiv zum Substantiv gehört („die neue rote Jacke“)</td></tr>'+
   '<tr><th>Nie</th><td>vor <i>und, oder, sowie, bzw.</i> in Aufzählungen — außer, davor schließt ein Einschub oder Nebensatz · zwischen zwei Nebensätzen, die <i>und</i> verbindet · <i>sowohl … als auch</i>, <i>weder … noch</i>, '+
   '<i>entweder … oder</i> zwischen gleichrangigen Satzteilen — verbinden die Paarformeln zwei Hauptsätze, ist das Komma freigestellt, gehört die Paarformel zum übergeordneten Satz und folgt jedem Teil ein Nebensatz, sind die Kommas Pflicht („Er bemerkte sowohl, dass …, als auch, dass …“); steht sie mit dem Einleitewort vor den Nebensätzen, steht davor keins („…, sowohl dass … als auch dass …“) · Vergleich ohne eigenes Verb („größer als ich“, „so gut wie du“), aber Komma vor <i>als/wie</i> + zu-Infinitiv („nichts anderes übrig, als aufzugeben“) · Infinitiv als Teil eines mehrteiligen Prädikats — etwa mit <i>sein, haben, brauchen, pflegen, scheinen</i>, <i>es gilt</i>, <i>wissen</i> und <i>verstehen</i> (= können) und übertragenem <i>drohen, versprechen</i>, auch bei erweiterter Gruppe („Du brauchst nicht zu kommen“, „Das Wetter droht schlecht zu werden“) · nach der Grußformel</td></tr>'+
-  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen (Pflicht, wenn davor ein Nebensatz, Einschub oder eine erweiterte Infinitivgruppe schließt oder wenn danach ein Nebensatz beginnt: „…, und als es dunkel wurde, …“) · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Infinitivgruppe nach <i>versuchen, erlauben, wagen, probieren, beabsichtigen, versprechen, gestatten</i> („Sie versuchte(,) das Team zu überzeugen“), solange das Verb allein steht — hat es etwas bei sich oder steht es am Satzende, steht das Komma („Sie wagte nicht, ihn zu fragen“, „Sie hat versucht, das Team zu überzeugen“) · Partizipgruppe (Pflicht als Nachtrag, hinter dem Subjekt oder mit hinweisendem Wort) · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · eingeschobener Vergleich ohne Verb („wie letztes Jahr“) · vor <i>wie zum Beispiel</i> · Komma in „vorausgesetzt(,) dass“</td></tr>'+
+  '<tr><th>Wahlfrei</th><td><i>und/oder</i> zwischen zwei Hauptsätzen (Pflicht, wenn davor ein Nebensatz, Einschub oder eine erweiterte Infinitivgruppe schließt oder wenn danach ein Nebensatz beginnt: „…, und als es dunkel wurde, …“) · bloßer Infinitiv, nur „zu“ + Verb („Er hofft(,) zu gewinnen“) · Infinitivgruppe nach <i>versuchen, erlauben, wagen, probieren, beabsichtigen, versprechen, gestatten</i> („Sie versuchte(,) das Team zu überzeugen“), solange das Verb allein steht — hat es etwas bei sich oder steht es am Satzende, steht das Komma („Sie wagte nicht, ihn zu fragen“, „Sie hat versucht, das Team zu überzeugen“) · Partizipgruppe (Pflicht als Nachtrag, als Zusatz hinter einem Substantiv oder mit hinweisendem Wort) · kurze Formel („wie besprochen(,)“, „wenn möglich(,)“) · eingeschobener Vergleich ohne Verb („wie letztes Jahr“) · vor <i>wie zum Beispiel</i> · Komma in „vorausgesetzt(,) dass“</td></tr>'+
   '</tbody></table>'+
   '<p class="ch-n"><b>Merksatz für die Infinitive:</b> erweitert → Komma · nur „zu“ + Verb → frei · nach versuchen, erlauben, wagen und Verwandten → frei, solange das Verb allein steht (nicht bei „wagte nicht, …“ oder „hat versucht, …“) · mehrteiliges Prädikat mit sein, haben, brauchen, pflegen, scheinen, wissen, verstehen und übertragenem drohen, versprechen → keins, auch bei erweiterter Gruppe; ebenso, wenn die Gruppe mit dem Satz verschränkt ist („das Problem zu verstehen versuchen“). Vor um, ohne, statt, anstatt, außer, als war es auch vor 2024 schon Pflicht. '+
   '<b>Merksatz für Einschübe:</b> Was du aufmachst, musst du schließen.</p></section>'+

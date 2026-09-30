@@ -31,14 +31,14 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 394 |
+| Übungen | 495 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~960 KB, eine Datei, kein Build |
+| Dateigröße | ~1010 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,69 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv (30.09.2026, noch einundsechzigste Runde).** Block
+`c01`–`c14`; der Mindestwächter kennt 28 Kernregeln. Gegenprüfung: c10 „Wenn ich mehr Zeit habe, käme ich …“ ist
+nach grammis („Konditionalgefüge“) eine zulässige Mischform — jetzt mit Rahmen „Du hast gerade keine Zeit“ und
+rein indikativischem Ablenker. **Ein Fund, der keiner war:** Der Prüfer meldete, sa10 und z11 führten „…, weil ich nicht kommen können
+habe“ zu Unrecht als falsch — die Variantengrammatik belege die Nachstellung „überall“. Das stand im Abschnitt
+über alle Hilfsverben zusammen. Der Abschnitt „Finites Hilfsverb haben“ derselben Seite sagt: Voranstellung
+„ganz überwiegend oder sogar fast ausschließlich“, Nachstellung „nur äußerst sporadisch“, ohne Areal. Ich hatte
+die Regel schon umgeschrieben und habe sie zurückgenommen; sie nennt jetzt die Zahlen dieses Abschnitts. z11
+behält den neuen Ablenker „kommen gekonnt habe“ (sicher falsch, richtige Antwort unverändert). Die Futur-Aussage
+in sa10 („in den meisten Regionen ist die zweite sogar häufiger“) deckt der Abschnitt „werden“: Nachstellung
+„in fast allen übrigen Regionen … bevorzugt“. **Eine Quelle mit Unterabschnitten liest man bis zum passenden
+Unterabschnitt** — die Gesamtaussage kann für den Einzelfall falsch sein.
+
+**Vertiefung Präpositionen, derselbe, wenn/als, Negation, Plural (30.09.2026, noch einundsechzigste Runde).**
+Block `l01`–`l14`; der Mindestwächter kennt jetzt 22 Kernregeln. Gegenprüfung ohne falschen Ablenker, sechs
+Erklärungen enger gefasst (l11 drehte die Regel um: „steht nicht direkt vor einem Teil, verneint es nur diesen“ —
+in l09 und l10 steht es direkt vor dem Verbteil bzw. Adjektiv und verneint den ganzen Satz). Nebenfund im Bestand:
+`gram-derselbe` und m26 schrieben „Der Duden führt ‚der selbe‘ als Falschschreibung“ — eine solche Duden-Seite gibt
+es nicht (404). Jetzt: „Duden und Regelwerk führen nur die Zusammenschreibung“ (Wörterverzeichnis, § 58(4)).
+Mit 800 Karten wurde die Durchlaufprüfung in `tests/lernen.js` im Kalenderversatz 40 rot (791/800 an Tag 150);
+sie misst jetzt sechs Monate (gemessen Tag 150: 790 und 798, Tag 180: 800).
+
+**Vertiefung Grammatik und Satzbau (30.09.2026, noch einundsechzigste Runde).** Block `i01`–`i15` für
+Zeitenfolge, Genitiv im Alltag, Richtung (nach/zu/in), Verbzweitstellung, Fragezeichen und Kongruenz; der
+Mindestwächter kennt jetzt 17 Kernregeln. Gegenprüfung vor dem Einbau: i08 „Im Sommer fahren wir in Italien“
+war als Ortsangabe richtig (fahren = umherfahren) — jetzt mit der Frage „Wohin fahrt ihr?“. i01 fragte „nachdem“
++ Perfekt neben Präteritum als nicht standardsprachlich ab; dafür fand der Prüfer nur Lernseiten, keinen
+Duden-Beleg — jetzt mit einem sicher falschen Präsens. Offen: Belegt die Duden-Grammatik die Tempusfolge bei
+„nachdem“ ausdrücklich? Dann könnte `gram-zeiten` die Quelle nennen.
+
+**Vertiefung Groß/Klein und Zeichen (30.09.2026, noch einundsechzigste Runde).** Block `o01`–`o16` für
+Sprachbezeichnungen, Mal/mal, Apostroph, Bindestrich, dessen/deren und Groß/Klein nach dem Doppelpunkt (je zwei
+bis drei Übungen vorher); der Wächter kennt jetzt elf Kernregeln außer den Kommaregeln. Die Gegenprüfung (gegen
+das Regelwerk 2024 als Text, Wörterverzeichnis und §§ 40–44, 54, 57, 58, 75, 80) fand keinen falschen Ablenker, aber
+vier zu weite Erklärungen: o01 „Sport und deutsch“ ist in der Lesart „auf Deutsch unterrichten“ zulässig (§ 57 E2)
+— jetzt „die Fächer Sport und Deutsch“; o07 nannte den Apostroph in Ladennamen Pflicht (§ 80 E1: möglich); o10
+„die Zahl bekommt ihren Bindestrich“ gilt nicht vor Suffixen (§ 40(3): 100%ig); o02 „klein nur, wenn …“ ohne Beleg.
+Offen, weil nicht belegt: das Beispiel „auf deutsch besetztem Gebiet“ in `gross-sprachen`.
+
+**Vertiefung Rechtschreibpaare (30.09.2026, noch einundsechzigste Runde).** Dasselbe für das/dass,
+seit/seid, ss/ß, wider/wieder und als/wie, die mit einer oder zwei Übungen auskamen: Block `e01`–`e16`, der
+Wächter aus der Kommarunde gilt jetzt auch für diese fünf Regeln. Gegenprüfung ohne falschen Ablenker, aber
+e09 sagte „erst im Plural verdoppelt es sich“ (Duden: „des Ergebnisses“; Regelwerk § 4 (2): erweiterte Form
+mit Vokal), e10 „durchgängig ss“ statt „kann“ (§ 25 E2), und e13 „spiegelt … wieder“ ließ sich als „erneut“
+lesen — jetzt mit dem Infinitiv „wiederspiegeln“. Nebenbefund: „größer wie“ hieß an drei Stellen „regional
+verbreitet“. Die Variantengrammatik findet es in Zeitungstexten überall nur sporadisch, ohne Region; der
+Duden sagt „nicht standardsprachlich“. Jetzt: „kommt besonders gesprochen vor“. `tests/lernen.js`: Mit 755
+Karten ist der Bestand bei zwei Runden am Tag nach 150 statt 120 Tagen durch (gemessen 742–748 an Tag 120).
+
+**Vertiefung Komma (30.09.2026, einundsechzigste Runde).** Nils will vor allem Regeln und Komma lernen, den
+Textcheck nutzt er kaum. Gezählt: komma-partizip hatte eine Übung, komma-vergleich und komma-adjektive je zwei —
+so lernt man den Beispielsatz, nicht die Regel. Neuer Block `u01`–`u26`, zwei bis drei Übungen je Kommaregel,
+jede am Wortlaut der Regel in der App gebaut. Ein Gegenprüfer hat alle 26 gegen das Regelwerk 2024 (S. 113–132)
+und Duden D 100–128 gelesen und einen harten Fund gemacht: u23 „Sie dachte nicht daran(,) aufzugeben“ — der
+Ablenker ohne Komma ist richtig (Duden D 124 „Iris dachte nicht daran[,] mitzufahren“; Regelwerk 2024 § 73 E2).
+Pflicht ist das Komma beim bloßen Infinitiv nur, wenn das hinweisende Wort die vorangestellte Gruppe wieder
+aufnimmt („Aufzugeben, daran dachte sie nicht“); so fragt u23 jetzt. Dazu: Die Regel `komma-adjektive` sagte über
+„aus anderen, zuverlässigen Quellen“ „die ersten waren es nicht“ — belegt ist nur die Lesart ohne Komma (§ 70 E2,
+„die letzte unter den revidierten Auflagen“); Regel und u09 sagen jetzt nur das. „Pflicht als Zusatz hinter dem
+Subjekt“ bei Partizipgruppen war zu eng (Duden D 127: hinter einem Substantiv oder Pronomen) — Regel, k29 und
+Spickzettel angepasst. Neuer Wächter in `tests/suite.js`: jede Kommaregel mindestens vier Übungen. Die neuen
+Übungen waren nie auf `main`, deshalb kein Eintrag in `NEU_GELERNT`.
 
 **Der Rest des Bestands gelesen (30.09.2026, sechzigste Runde).** 24 Satzbaukarten, 10 Tabellen, 12
 Fehlersuchtexte, die Hinweise aller 126 Textcheck-Muster und die ganze Schreibwerkstatt, fünf Prüfer, Quellen in

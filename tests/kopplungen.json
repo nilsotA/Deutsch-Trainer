@@ -8,14 +8,6 @@
   ]
  },
  {
-  "satz": "…, weil ich nicht kommen können habe.",
-  "stellen": [
-   "Regel satz-modal",
-   "Satzkarte sa10",
-   "Übung z11"
-  ]
- },
- {
   "satz": "„ab nächstem Montag“ (Dativ, im Duden zuerst genannt) und „ab nächsten Montag“ (Akkusativ, bei Wochentagen fast im ganzen Sprachraum die übliche Form) sind beide richtig.",
   "stellen": [
    "Fallkarte ab",
@@ -310,13 +302,6 @@
   ]
  },
  {
-  "satz": "Der Duden führt „der selbe“ als Falschschreibung.",
-  "stellen": [
-   "Regel gram-derselbe",
-   "Übung m26"
-  ]
- },
- {
   "satz": "Der Fragebogen wurde von den Teilnehmenden ausgefüllt.",
   "stellen": [
    "Regel stil-passiv",
@@ -397,6 +382,13 @@
   ]
  },
  {
+  "satz": "Direkt danach folgt das Verb des Hauptsatzes — die beiden Verben stoßen am Komma aneinander:",
+  "stellen": [
+   "Übung c02",
+   "Übung z04"
+  ]
+ },
+ {
   "satz": "Ein Anruf von der Schule löst bei vielen Eltern sofort Alarm aus.",
   "stellen": [
    "Regel form-eltern",
@@ -429,6 +421,13 @@
   "stellen": [
    "Regel form-absagen",
    "Schreibauftrag w12"
+  ]
+ },
+ {
+  "satz": "ein Plan, eine Halle und genug Leute.",
+  "stellen": [
+   "Übung o16",
+   "Übung p05"
   ]
  },
  {
@@ -806,10 +805,18 @@
   ]
  },
  {
+  "satz": "Weil ich müde war, bin ich früher gegangen.",
+  "stellen": [
+   "Übung c02",
+   "Übung z04"
+  ]
+ },
+ {
   "satz": "Weil ich müde war, ich bin früher gegangen.",
   "stellen": [
    "Regel satz-nebensatz",
    "Satzkarte sa04",
+   "Übung c02",
    "Übung z04"
   ]
  },
@@ -823,6 +830,7 @@
  {
   "satz": "Welche Fassung gehört in einen geschriebenen Text?",
   "stellen": [
+   "Übung c01",
    "Übung m24",
    "Übung z02"
   ]
@@ -885,6 +893,13 @@
   "stellen": [
    "Übung g20",
    "Übung q15"
+  ]
+ },
+ {
+  "satz": "Wir treffen uns morgen, das heißt am Dienstag.",
+  "stellen": [
+   "Übung e03",
+   "Übung k13"
   ]
  },
  {
