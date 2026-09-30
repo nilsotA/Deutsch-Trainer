@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 495 |
+| Übungen | 508 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Uhrzeit, Datum, Klammern, Auslassung, Fragen, Verlaufsform (30.09.2026, nach dem Merge von PR #6).**
+Block `ve01`–`ve13`; der Mindestwächter kennt 34 Kernregeln. Präfix mit zwei Buchstaben: Jeder einzelne Buchstabe
+trägt inzwischen irgendwo IDs — a, w und y bei Prüfmustern und Schreibaufträgen. Technisch stießen sie sich nicht
+(`frageZuSchluessel` sucht nur in `ALL`), aber Verweise wie „a02“ wären mehrdeutig geworden. Gegenprüfung ohne
+falschen Ablenker, zwei Erklärungen enger gefasst. Die Frage, ob `n-uhrzeit` „von 9–11 Uhr“ erlaubt und `n-datum`
+es verbietet, war ein Lesefehler beim Strippen: dort steht es als `nope`. Die Einordnung der Verlaufsform als
+umgangssprachlich deckt der heutige Duden-Eintrag „am“ („Gebrauch umgangssprachlich“, gelesen), obwohl grammis
+den Duden seit 1998 anders zitiert.
 
 **Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv (30.09.2026, noch einundsechzigste Runde).** Block
 `c01`–`c14`; der Mindestwächter kennt 28 Kernregeln. Gegenprüfung: c10 „Wenn ich mehr Zeit habe, käme ich …“ ist

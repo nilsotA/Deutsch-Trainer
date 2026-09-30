@@ -1612,7 +1612,76 @@ const EX_A = [
 {id:"c14",c:"recht",q:"Welcher Satz ist richtig?",o:[
  "Sie hat dezidiert widersprochen — klar und entschieden.",
  "Sie hat detailliert widersprochen — klar und entschieden."],a:0,
- e:"<b>dezidiert</b> = entschieden, mit Nachdruck. <b>detailliert</b> = ausführlich, bis in Einzelheiten.",r:"recht-verwechsel"}
+ e:"<b>dezidiert</b> = entschieden, mit Nachdruck. <b>detailliert</b> = ausführlich, bis in Einzelheiten.",r:"recht-verwechsel"},
+
+/* Vertiefung (Präfix ve, weil a, w und y schon Prüfmuster und Schreibaufträge tragen): Uhrzeit, Datum, Klammern, Auslassungspunkte, Fragen, Verlaufsform, Mittelfeld */
+{id:"ve01",c:"zahlen",q:"Welche Zeitangabe sagt dasselbe zweimal?",o:[
+ "um 20 Uhr abends",
+ "um 8 Uhr abends",
+ "um 20 Uhr"],a:0,
+ e:"Die 24-Stunden-Angabe sagt schon, dass es abends ist. Also entweder <b>um 20 Uhr</b> oder <b>um 8 Uhr abends</b> — nicht beides.",r:"n-uhrzeit"},
+
+{id:"ve02",c:"zahlen",q:"Tabelle nach DIN 5008: Wie steht dort halb neun morgens?",o:[
+ "08:30","8,30 Uhr"],a:0,
+ e:"DIN 5008 verlangt den Doppelpunkt und zwei Stellen für Stunden und Minuten: <b>08:30</b>. Im Fließtext lässt der Duden auch „8.30 Uhr“ zu. Ein Komma zwischen Stunden und Minuten sehen weder Duden noch DIN 5008 vor.",r:"n-uhrzeit"},
+
+{id:"ve03",c:"zahlen",q:"Was ist standardsprachlich?",o:[
+ "Die Studie erschien 2019.",
+ "Die Studie erschien in 2019."],a:0,
+ e:"Jahreszahlen stehen ohne Präposition oder mit „im Jahr“: 2019, im Jahr 2019. „in 2019“ kommt aus dem Englischen und gilt laut Duden nicht als standardsprachlich.",r:"n-datum"},
+
+{id:"ve04",c:"zahlen",q:"Welcher Satz ist richtig?",o:[
+ "Am Montag, dem 5. Oktober, beginnt das Semester.",
+ "Am Montag, dem 5. Oktober beginnt das Semester."],a:0,
+ e:"Bei einer mehrteiligen Datumsangabe im Satz ist das schließende Komma seit dem Regelwerk 2024 Pflicht: „am Montag, dem 5. Oktober, beginnt …“. Statt „dem“ ist auch „den“ richtig.",r:"n-datum"},
+
+{id:"ve05",c:"zeichen",q:"Wo steht das Komma bei einem Klammereinschub?",o:[
+ "Dort, wo es ohne die Klammer stünde — nicht in der Klammer",
+ "Innerhalb der Klammer, vor der schließenden Klammer",
+ "Vor der öffnenden Klammer, egal wo es sonst stünde"],a:0,
+ e:"Die Probe: Klammer streichen — der Rest muss richtig gesetzt sein. „Sie sagte (und senkte die Stimme), dass …“: Das Komma gehört vor „dass“ und folgt deshalb der Klammer.",r:"z-klammern"},
+
+{id:"ve06",c:"zeichen",q:"„Er hat das Tor (wer hätte das gedacht?) in der Nachspielzeit geschossen.“ Ist das Fragezeichen in der Klammer richtig?",o:[
+ "Ja — Frage- und Ausrufezeichen des Einschubs bleiben in der Klammer",
+ "Nein — in einer Klammer steht kein Satzzeichen",
+ "Nein — das Fragezeichen gehört ans Satzende"],a:0,
+ e:"Ein Einschub in Klammern behält sein Frage- oder Ausrufezeichen. Nur den Schlusspunkt bekommt er nicht, wenn er mitten im Satz steht (Regelwerk 2024, § 76).",r:"z-klammern"},
+
+{id:"ve07",c:"zeichen",q:"Die Auslassungspunkte stehen am Satzende. Wie viele Punkte stehen dort insgesamt?",o:[
+ "Drei — sie ersetzen den Schlusspunkt",
+ "Vier — drei Auslassungspunkte und der Schlusspunkt"],a:0,
+ e:"Am Satzende ersetzen die Auslassungspunkte den Schlusspunkt. Ein Frage- oder Ausrufezeichen bleibt dagegen stehen: „Und dann …?“",r:"z-auslassung"},
+
+{id:"ve08",c:"zeichen",q:"Wie schließen die Auslassungspunkte an, wenn ein ganzes Wort fehlt?",o:[
+ "Mit Leerzeichen davor",
+ "Direkt am vorigen Wort, ohne Leerzeichen"],a:0,
+ e:"Fehlt ein ganzes Wort, steht ein Leerzeichen davor: „Er wollte noch sagen, dass …“. Direkt angeschlossen wird nur, wenn ein Wortteil fehlt: „Verdammt noch m…!“",r:"z-auslassung"},
+
+{id:"ve09",c:"satz",q:"Welche Frage ist richtig?",o:[
+ "Mit wem hast du nach dem Training gesprochen?",
+ "Mit wen hast du nach dem Training gesprochen?"],a:0,
+ e:"Steht eine Präposition vor dem Fragewort, bestimmt sie den Fall mit: <b>mit</b> + Dativ → mit wem.",r:"satz-frage"},
+
+{id:"ve10",c:"satz",q:"Welche Frage ist richtig?",o:[
+ "Wen hast du nach dem Weg gefragt?",
+ "Wem hast du nach dem Weg gefragt?"],a:0,
+ e:"<b>fragen</b> verlangt den Akkusativ — „Ich habe ihn gefragt“, also <b>wen</b>. Das Verb bestimmt den Fall, nicht das Gefühl.",r:"satz-frage"},
+
+{id:"ve11",c:"gross",q:"Wie schreibt man es?",o:[
+ "Wir sind gerade beim Aufwärmen.",
+ "Wir sind gerade beim aufwärmen."],a:0,
+ e:"Nach „beim“ (= bei dem) ist das Verb ein Substantiv und steht groß — wie „am Trainieren“.",r:"gram-verlauf"},
+
+{id:"ve12",c:"gram",q:"Welche Fassung ist in einer Mail an die Dozentin die sichere Wahl?",o:[
+ "Ich überarbeite gerade die Gliederung.",
+ "Ich bin die Gliederung am Überarbeiten."],a:0,
+ e:"Die Verlaufsform mit „am“ ist gesprochen verbreitet, mit Objekt davor („die Gliederung am Überarbeiten“) fällt sie überregional auch gesprochen stärker auf — im Rheinland ist sie gesprochen geläufig. Geschrieben: „Ich überarbeite gerade …“ oder „Ich bin dabei, die Gliederung zu überarbeiten.“",r:"gram-verlauf"},
+
+{id:"ve13",c:"satz",q:"Wo steht eine Richtungsangabe (wohin?) im Mittelfeld in der Regel?",o:[
+ "Hinten — direkt vor dem Verbteil am Satzende",
+ "Vorn — direkt nach dem gebeugten Verb",
+ "Die Stellung ist völlig beliebig"],a:0,
+ e:"„Ich bin gestern mit dem Zug <b>nach Berlin</b> gefahren.“ Die Richtung steht in der Regel ganz hinten im Mittelfeld. An den Satzanfang darf sie trotzdem: „Nach Berlin fahre ich morgen.“",r:"satz-tekamolo"}
 
 ];
 /* ============================================================
@@ -6670,7 +6739,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 814 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 827 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7676,7 +7745,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 814 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 827 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();
