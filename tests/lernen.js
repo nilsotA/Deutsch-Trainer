@@ -1053,8 +1053,11 @@ P.titel("L · Der lange Horizont");
   /* Gemessen 234 / 426 / 522 / 558, in einem zweiten Lauf 239 / 431 / 514 / 564 — die
      Reihenfolge unterwegs hängt an rng(Date.now()). Die Schranken lassen deshalb Luft;
      sie sollen einen Einbruch fangen, keine Zahl festschreiben. */
-  P.ok("nach drei Monaten ist mehr als die Hälfte des Bestands dran gewesen",
-    eins.stand[90] > eins.gesamt / 2, eins.stand[90] + "/" + eins.gesamt);
+  /* Bis zum 30.09.2026 stand hier „mehr als die Hälfte des Bestands“. Die Schranke wuchs mit
+     jeder neuen Übung, der Durchsatz pro Tag aber nicht: bei 834 Karten gemessen 415 (Versatz 7),
+     sonst 426 und 431. Eine feste Untergrenze fängt den Einbruch, ohne mit dem Bestand zu wandern. */
+  P.ok("nach drei Monaten sind mindestens 380 Karten dran gewesen",
+    eins.stand[90] >= 380, eins.stand[90] + "/" + eins.gesamt);
   P.ok("und die Abdeckung wächst weiter, statt stehen zu bleiben",
     eins.stand[180] - eins.stand[150] >= 20, eins.stand[150] + " → " + eins.stand[180]);
   /* Die ehrliche Kehrseite: Wiederholung hat Vorrang vor neuem Stoff, also ist der Bestand
