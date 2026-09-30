@@ -256,19 +256,21 @@ KORREKTUR.forEach(t => {
     if (idx < 0) fehlmark++;
     if (belegt[idx]) dopmark++;
     belegt[idx] = 1;
-    /* Die weiteren Wörter einer Stelle (mit) sucht korrErrIdx() ab dem Wort in w. Steht
-       eins nicht dahinter, ist es unanklickbar — und ein Klick darauf zählt als unnötig. */
+    /* Die weiteren Wörter einer Stelle (mit) sucht korrErrIdx() am nächstgelegenen
+       Vorkommen, davor oder dahinter. Fehlt eins im Text, ist es unanklickbar — und ein
+       Klick darauf zählt als unnötig. Und es darf höchstens acht Wörter entfernt stehen:
+       Weiter weg gehört es kaum zur selben Stelle, eher zu einem gleichen Wort anderswo. */
     if (idx >= 0) (e.mit || []).forEach(m => {
       let j = -1;
-      for (let i = idx + 1; i < tk.length; i++) if (tk[i] === m && !belegt[i]) { j = i; break; }
-      if (j < 0) mitFehlt.push(t.id + ": „" + m + "“ nach „" + e.w + "“");
+      tk.forEach((x, i) => { if (x === m && !belegt[i] && (j < 0 || Math.abs(i - idx) < Math.abs(j - idx))) j = i; });
+      if (j < 0 || Math.abs(j - idx) > 8) mitFehlt.push(t.id + ": „" + m + "“ nahe „" + e.w + "“");
       else belegt[j] = 1;
     });
   });
 });
 P.ok("Korrekturmarkierungen auffindbar (" + KORREKTUR.reduce((a, t) => a + t.errs.length, 0) + ")",
   fehlmark === 0 && dopmark === 0, fehlmark + " nicht gefunden / " + dopmark + " doppelt");
-P.ok("Jedes weitere Wort einer mehrteiligen Stelle steht hinter ihrem ersten Wort",
+P.ok("Jedes weitere Wort einer mehrteiligen Stelle steht nahe bei ihrem ersten Wort",
   !mitFehlt.length, mitFehlt.join(" · "));
 
 /* Jede Markierung ist antippbar und führt in die Regel. Zeigt ihr Verweis ins Leere,
@@ -294,7 +296,10 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
    übers Danken, die zur Schreibung nichts sagt. Im Fehlerjournal sortierte sich derselbe
    Rechtschreibfehler damit einmal unter Großschreibung und einmal unter Wirkung und Ton. */
 {
-  const wortKern = x => String(x).toLowerCase().replace(/[^a-zäöüß]/g, "");
+  /* Groß- und Kleinschreibung zählt mit: „vorraus“ in kt01 sind zwei Fehler (r und klein),
+     „Vorraus“ in kt03 nur einer (r). Bis zum 29.09.2026 galten beide als derselbe Fehler,
+     und die Prüfung zwang kt03 die Kategorie „gross“ auf. */
+  const wortKern = x => String(x).replace(/[^A-Za-zÄÖÜäöüß]/g, "");
   const gleiche = {};
   KORREKTUR.forEach(t => t.errs.forEach(e => {
     const schl = wortKern(e.w) + "→" + wortKern(e.ok);
@@ -305,6 +310,63 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   P.ok("Derselbe Fehler ist in jedem Fehlersuchtext gleich eingeordnet",
     !uneins.length,
     uneins.map(v => "„" + v[0].w + "“: " + v.map(x => x.id + "→" + x.r + "/" + x.c).join(" gegen ")).join(" · "));
+  /* Das Regelwerk lässt in der Schweiz und in Liechtenstein durchgängig ss zu (§ 25 E2),
+     und die App behandelt das in recht-sz, x26 und r14 als regionale Standardform. Die
+     Fehlersuche markierte „Grüsse“, „draussen“, „weiss“ ohne diesen Rahmen — für Nils in
+     Köln richtig, aber anders eingeordnet als überall sonst (Grundsatz 4). */
+  const ssOhneRahmen = [];
+  KORREKTUR.forEach(t => t.errs.forEach(e => {
+    if (e.r === "recht-sz" && /ss/.test(e.w) && !/Schweiz/.test(e.k)) ssOhneRahmen.push(t.id + ": „" + e.w + "“");
+  }));
+  P.ok("Jede ss-Markierung nennt den Schweizer Rahmen", !ssOhneRahmen.length, ssOhneRahmen.join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Erklärung von kt08",
+    !/Schweiz/.test("ß nach langem Vokal — und nach der Grußformel kein Komma."), "Positivprobe blieb stumm");
+
+  /* Eine Stelle aus mehreren Wörtern (siehe kt04 weiter unten) gibt es auch dort, wo die
+     Korrektur zwei Wörter ändert oder zusammenzieht: „dem Zeitplan“ → „des Zeitplans“,
+     „das Selbe“ → „dasselbe“. Markiert war jeweils nur ein Wort, ein Klick auf das andere
+     galt als Fehlalarm (gefunden am 29.09.2026 in kt01, kt02, kt03, kt07, kt12). Stil-, Form-
+     und Satzstellen tragen Umschreibungen im ok-Feld und bleiben außen vor. */
+  const nackt = x => String(x).replace(/[^A-Za-zÄÖÜäöüß]/g, "");
+  const ungedeckt = (t, e) => {
+    if (/^(stil|form|satz)$/.test(e.c)) return [];
+    const ok = String(e.ok).replace(/\s*\([^)]*\)/g, "").trim();
+    if (!ok || /^[(…]/.test(ok)) return [];
+    const toks = t.txt.split(/\s+/);
+    let c = 0, idx = -1;
+    for (let i = 0; i < toks.length; i++) if (toks[i] === e.w && ++c === (e.nth || 1)) { idx = i; break; }
+    if (idx < 0) return [];
+    const markiert = new Set([e.w].concat(e.mit || []));
+    const O = ok.split(/\s+/).map(nackt).filter(Boolean);
+    const fehlt = [];
+    O.forEach(o => [[idx - 1, idx], [idx, idx + 1]].forEach(([a, b]) => {
+      if (a >= 0 && b < toks.length && nackt(toks[a]) && nackt(toks[b]) &&
+          (nackt(toks[a]) + nackt(toks[b])).toLowerCase() === o.toLowerCase())
+        [a, b].forEach(i => { if (!markiert.has(toks[i])) fehlt.push(toks[i]); });
+    }));
+    if (O.length > 1) {
+      let best = null;
+      for (let j = 0; j < O.length; j++) {
+        const s = idx - j;
+        if (s < 0 || s + O.length > toks.length) continue;
+        const diff = O.map((o, k) => nackt(toks[s + k]) === o ? -1 : s + k).filter(i => i >= 0);
+        if (!best || diff.length < best.length) best = diff;
+      }
+      (best || []).forEach(i => { if (!markiert.has(toks[i])) fehlt.push(toks[i]); });
+    }
+    return fehlt;
+  };
+  const halbMarkiert = [];
+  KORREKTUR.forEach(t => t.errs.forEach(e => {
+    const f = ungedeckt(t, e);
+    if (f.length) halbMarkiert.push(t.id + ": „" + e.w + "“ ohne " + f.join(", "));
+  }));
+  P.ok("Ändert eine Korrektur mehrere Wörter, gehören alle zur Stelle", !halbMarkiert.length, halbMarkiert.join(" · "));
+  const kt01 = KORREKTUR.find(t => t.id === "kt01"), kt12 = KORREKTUR.find(t => t.id === "kt12");
+  P.ok("… und die Prüfung erkennt die alten Stellen in kt01 und kt12",
+    ungedeckt(kt01, { w: "dem", nth: 1, ok: "des Zeitplans", c: "gram" }).join() === "Zeitplan" &&
+    ungedeckt(kt12, { w: "Selbe", ok: "dasselbe", c: "gram" }).join() === "das", "Positivprobe blieb stumm");
+
   /* Positivprobe an der Fassung vom 21.09.2026. */
   const probePaar = [{ id: "kt01", r: "gross-subst", c: "gross" }, { id: "kt03", r: "form-danken", c: "form" }];
   P.ok("Die Einordnungsprüfung erkennt zwei verschiedene Zuordnungen",
@@ -549,6 +611,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   const RANG_OHNE_ARTIKEL = /(?:^|[^\wäöüßÄÖÜ])(?:Häufigst|Größt|Schlimmst|Wichtigst|Verbreitetst|Typischst)(?:er|e|es)\s+[A-ZÄÖÜ][a-zäöüß]/;
   const ERLAUBT = {
     "Regel gross-subst":    "„das Beste“ und „die meisten“ sind dort die Beispielwörter der Regel",
+    "Übung g06": "„der schnellste der drei Sprinter“ ist das Beispiel für die Kleinschreibung nach § 58(1): Superlativ mit Artikel, bezogen auf ein Substantiv",
     "Regel komma-einschub": "„Die schnellste Läuferin im Kader, Lea Otten,“ ist das Beispiel für die spezifische Charakterisierung nach § 72 E2 — dessen eigene Beispiele sind alle Superlative",
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
     "Regel form-anrede":    "Ratgebertext: „Die wichtigste Regel: spiegeln“ ist ein Rat, kein Befund",
@@ -2172,9 +2235,13 @@ P.ok("Kein Prüfmuster hat eine nach oben offene Wiederholung über einer vernei
               "Bitte gib mir Bescheid.", "Sieh dir das Video an.", "Wir geben dir Bescheid.", "Ich nehme dich mit."] },
     { id: "a01",
       ziel: ["Hallo zusammen,\nVielen Dank für eure Nachricht.",
-             "Sehr geehrte Frau Weber,\nIch schreibe Ihnen wegen der Hausarbeit."],
+             "Sehr geehrte Frau Weber,\nIch schreibe Ihnen wegen der Hausarbeit.",
+             "Hallo zusammen,\nÜbermorgen fällt das Training aus."],
+      /* Bis zum 29.09.2026 stand „Übermorgen fällt das Training aus“ hier als richtiger Satz —
+         „übermorgen“ ist ein Adverb und steht nach dem Anredekomma klein. Die Grenzprüfung
+         für „Über“ am Wortanfang leistet ein Substantiv, das auch dort groß bleibt. */
       still: ["Hallo zusammen,\nZurückgabe der Klausuren ist am Donnerstag um 10 Uhr in Raum 12.",
-              "Hallo zusammen,\nÜbermorgen fällt das Training aus."] },
+              "Hallo zusammen,\nÜberstunden werden ab Montag erfasst."] },
     { id: "a01",
       ziel: ["Sehr geehrte Frau Weber,\nDaß ich mich erst jetzt melde, tut mir leid.",
              "Sehr geehrte Frau Weber,\nDass ich mich erst jetzt melde, tut mir leid."],

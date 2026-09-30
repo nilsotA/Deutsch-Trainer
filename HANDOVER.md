@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~940 KB, eine Datei, kein Build |
+| Dateigröße | ~960 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,50 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Zweite Stichprobe (29.09.2026, fünfundfünfzigste Runde).** 116 weitere Elemente, keines aus der ersten
+Stichprobe, Seed `hash("stichprobe2|2026-09-29")` (`scratchpad/r55/stichprobe.js`): 41 Übungen, 15 Wortkarten, 15
+Fallkarten, 8 Regeln — und zum ersten Mal Bestände, die noch nie so geprüft waren: 5 Satzbaukarten, 3 Tabellen, 3
+Fehlersuchtexte samt aller unmarkierten Sätze, 10 Textcheck-Muster (Hinweis, Stufe und Regex an richtigen Sätzen
+ausprobiert), 15 Stellen der Schreibwerkstatt, 3 Abschnitte des Spickzettels. Derselbe Workflow wie in Runde 54
+(193 Agenten, nach einem Neustart des Containers aus dem Journal fortgesetzt). 72 Funde, 70 hielten, 1 strittig, 1 fiel.
+- **Ergebnis je Element:** 70 ohne haltenden Fund (60 %), **2 lehrten Falsches**, 38 ungenau, 6 kosmetisch. Die
+  beiden: ein fehlendes Komma im Kondolenz-Baustein ph36 („Es tut mir sehr leid zu hören, dass …“ — erweiterte
+  Infinitivgruppe mit Korrelat, § 73 E1) und die Spickzeile zu sa06 („Personalpronomen: Akkusativ zuerst“ — die Karte
+  selbst sagt: ein Pronomen steht vorn, auch als Dativ; nur bei zwei Pronomen der Akkusativ zuerst). Beide Stichproben
+  zusammen: 228 Elemente, 3 lehrten Falsches (rund 1,3 %), 71 ungenau, 12 kosmetisch.
+- **Wo es sich häufte:** In den Kurzfassungen. Der Spickzettel-Abschnitt mit den Satzbau-Kurzformeln hatte sechs
+  Funde — jede Kurzformel sagte absoluter, was die Karte mit Ausnahmen sagt. Alle 24 Kurzformeln (`short`) gegen ihre
+  Karten gelesen, sieben umgeschrieben (sa02, sa03, sa04, sa05, sa06, sa07, sa23; sa04 und sa06 auch im Titel).
+  Daneben: Übungserklärungen mit „immer“ und „→ groß“ ohne die Ausnahme, die die verlinkte Regel selbst nennt (k01,
+  g06, g15, n28, n30, b05).
+- **Eingearbeitet, alle 70 haltenden Funde und der strittige** (sa13: Duden führt „beide junge“ als veraltend).
+  Auswahl: Streckenstrich und Strich für „gegen“ (Spielpaarung, beidseitig Leerzeichen) als eigene Zeilen in
+  z-gedankenstrich; „von … bis“ nur, wenn „von“ die Spanne beginnt; Konjunktiv II fällt bei schwachen Verben mit dem
+  Präteritum zusammen → „würde“; „derer“ im Genitiv Plural ohne Substantiv (tb07); n-Deklination ungebeugt vor Namen
+  („mit Kollege Otten“) und Leutnant stark; relatives „wo“ nach Ort und Zeit standardsprachlich; „mit was“ von
+  „Fällt auf“ in die erste Liste von satz-sprechen (Duden: in Fragen die seltenere geschriebene Form) — Abschnitt K in
+  `tests/inhalt.js` zieht mit, d27 fragt jetzt, was die geschriebene Standardsprache vorzieht.
+- **Gegenprüfung der eigenen Korrekturen** (10 Agenten über den Diff): sechs Funde hielten, alle eingearbeitet —
+  „Entfallen kann es“ hieß bei 2.4.2 eine Wahl, wo das Regelwerk „steht nicht“ sagt; „mit Kollege Otten“ als
+  einzige Form, obwohl der Duden „Kollege/Kollegen Otten“ führt und nach „Herrn“ gebeugt häufiger ist; „im Süden
+  auch in Zeitungen“ zu „mit was“ war nicht nachgelesen und machte den Ablenker in d27 unsicher; „gilt durchgängig
+  ss“ klang nach Pflicht, das Regelwerk sagt „kann“; „Stand der Prüfung“ beschrieb kt01 und kt03 noch als dieselbe
+  Stelle. `NEU_GELERNT`:
+  w:scheinheilig / scheinbar (scheinbar hieß dort „nur dem Anschein nach“, die Probe für anscheinend).
+- **Textcheck:** f06 traf auch „ihnen“ (Schüler) und die verbesserte Fassung mit Sprechzeiten; jetzt nur die
+  Formel bis „zur Verfügung“, dafür auch „Für Rückfragen …“ und „stehe für Rückfragen zur Verfügung“. x19 lässt
+  Verschmelzungen (Für’s, Auf’s) an t17. a01 kennt „Morgen/Übermorgen“; in `GEGEN` stand „Übermorgen fällt das Training
+  aus“ als richtiger Satz — nach der eigenen Regel falsch. a07, a10, t03: Hinweis nennt seine Bedingung.
+- **Zwei Fehlerklassen mit Prüfung** (`tests/suite.js`): (1) Eine Korrektur ändert zwei Wörter, markiert ist eins
+  („dem Zeitplan“ → „des Zeitplans“, „das Selbe“ → „dasselbe“, „Wie bereits mehrfach erwähnt“) — fünf Texte.
+  `korrErrIdx()` sucht `mit`-Wörter jetzt am nächstgelegenen Vorkommen, auch davor; Journal-Schlüssel bleiben. (2)
+  Jede ss-Markierung der Fehlersuche nennt den Schweizer Rahmen (§ 25 E2), wie recht-sz, x26 und r14. Dazu zählt
+  die Einheitlichkeitsprüfung Groß- und Kleinschreibung mit („vorraus“ in kt01 sind zwei Fehler, „Vorraus“ in kt03
+  einer, jetzt unter recht-klassiker).
+- **Offen:** Kein Wächter liest Übungserklärungen auf „immer“ — dort meint es oft eine feste Rektion, die Liste würde
+  zum Katalog (siehe CLAUDE.md, „Der Wächter las wieder nicht alles“). Die Kurzformeln der Satzkarten prüft keine
+  Maschine gegen ihre Karte; das bleibt Lesearbeit.
 
 **Fehlerquote gemessen (29.09.2026, vierundfünfzigste Runde).** Nils fragte, ob er mit der App falsche Regeln lernt.
 Statt einer Schätzung eine Messung: 112 Elemente mit festem Seed gezogen (`scratchpad/r54/stichprobe.js`,

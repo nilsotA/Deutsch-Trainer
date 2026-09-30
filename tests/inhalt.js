@@ -63,7 +63,7 @@ const SOLL = {
      tb09 ist keine Formentabelle, sondern ein Beispielwort (Kollege) durchdekliniert. */
   tb02: [["Nominativ", "ein —", "ein —", "eine", "keine / meine"],
          ["Akkusativ", "einen", "ein —", "eine", "keine / meine"],
-         ["Dativ", "einem", "einem", "einer", "keinen / meinen"],
+         ["Dativ", "einem", "einem", "einer", "keinen / meinen + n"],
          ["Genitiv", "eines + s", "eines + s", "einer", "keiner / meiner"]],
   tb05: [["Nominativ", "guter Kaffee", "gutes Wetter", "gute Laune", "gute Ideen"],
          ["Akkusativ", "guten Kaffee", "gutes Wetter", "gute Laune", "gute Ideen"],
@@ -897,13 +897,19 @@ const spickSpalten = (() => {
    würde-Form im irrealen Bedingungsgefüge gesprochen die vorherrschende — auffällig ist
    dort eher die eigene Form. Sie steht jetzt in der ersten Liste, mit dem Rat fürs Schreiben. */
 const SPRECH_STICH = [
-  ["wegen dem Wetter", "Perfekt", "weil", "hab", "gestanden", "brauchen", "gehabt", "würde"],
-  ["rufe dir an", "größer wie", "mit was", "Kollege", "Relativpronomen", "Satzabbruch", "Satzklammer"],
+  ["wegen dem Wetter", "Perfekt", "weil", "hab", "gestanden", "brauchen", "gehabt", "würde", "mit was"],
+  ["rufe dir an", "größer wie", "Kollege", "Relativpronomen", "Satzabbruch", "Satzklammer"],
 ];
 /* Und es steht nicht in beiden: Die Stichwortprüfung sucht nur, ob etwas da ist. */
 const wuerdeDoppelt = [sprechListen[1], spickSpalten && spickSpalten[1]]
   .filter(x => x && x.includes("würde"));
 P.ok("Das doppelte „würde“ steht nicht mehr unter „Fällt auf“", !wuerdeDoppelt.length, wuerdeDoppelt.join(" · "));
+/* „mit was“ stand bis zum 29.09.2026 rot unter „Fällt auf“ — mit dem Zusatz „gesprochen
+   geläufig“, also nach dem Maßstab der eigenen ersten Liste. Der Duden nennt „Präposition +
+   was“ in Fragen geschrieben die seltenere Form. Dieselbe Klasse wie beim „würde“. */
+const mitWasAuffaellig = [sprechListen[1], spickSpalten && spickSpalten[1]]
+  .filter(x => x && x.includes("mit was"));
+P.ok("„mit was“ steht nicht mehr unter „Fällt auf“", !mitWasAuffaellig.length, mitWasAuffaellig.join(" · "));
 const sprechSchief = [];
 if (!spickSpalten || spickSpalten.length !== 2 || sprechListen.length !== 2) {
   sprechSchief.push("Listen nicht gefunden: Regel " + sprechListen.length + ", Spickzettel " +
@@ -932,7 +938,7 @@ const alteRegelListe = "„Ich rufe dir an“ statt „dich“ · „größer wi
 const alteSpickSpalte = "„Ich rufe dir an“ statt dich · „größer wie“ statt als · „mit was“ statt womit · " +
   "„mit dem Kollege“ — n-Deklination · doppeltes „würde“ · falsches Relativpronomen · " +
   "Satzabbruch mitten im Gedanken · verlorene Satzklammer bei langen Sätzen";
-const probeFehlt = probeVergleich(alteRegelListe, alteSpickSpalte, SPRECH_STICH[1]);
+const probeFehlt = probeVergleich(alteRegelListe, alteSpickSpalte, ["rufe dir an", "größer wie", "mit was", "Kollege"]);
 P.ok("Die Listenprüfung erkennt einen Punkt, der nur auf einer Seite steht",
   probeFehlt.length === 1 && probeFehlt[0] === "Regel: mit was", probeFehlt.join(", ") || "blieb stumm");
 
@@ -1026,6 +1032,7 @@ P.ok("und meldet ein echtes Falschpaar nicht",
     "zufolge": "Ablenker im Akkusativ („Den Bericht zufolge“); die Region betrifft den vorangestellten Genitiv, nicht den Kasus der Satzform (seit 27.09.2026)",
     "gedenken": "Ablenker im Akkusativ („die Opfer“), nicht der schweizerisch-umgangssprachliche Dativ (seit 27.09.2026)",
     "kosten": "der Lückensatz setzt den Rahmen („Überregional heißt es: …“); der Dativ ist in Österreich, Südtirol und Südostdeutschland gebräuchlich (Variantengrammatik)",
+    "zuhören / zusehen / zuschauen": "die Region betrifft das Wort „zuschauen“, nicht den Kasus — der Dativ gilt für alle drei, abgefragt wird „zuhören“ (seit 29.09.2026)",
     "sich vergewissern / sich annehmen": "Ablenker im Akkusativ („die Sache“); die Region betrifft „sich um etwas annehmen“, nicht den Kasus",
   };
   /* Bis zum 24.09.2026 blieben Tippaufgaben außen vor. r14 lehnte „ausser“ ab — in der
