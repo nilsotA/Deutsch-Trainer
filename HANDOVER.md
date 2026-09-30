@@ -59,6 +59,19 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Alle Wort- und Fallkarten gelesen (30.09.2026, neunundfünfzigste Runde).** 155 Wortkarten und 182 Fallkarten,
+fünf Prüfer, Quellen in `scratchpad/r58/tmp-a…e`. Keine richtige Antwort war falsch. Ein Ablenker war nicht sicher
+falsch: „Das bedarf ___“ mit „keine Erklärung“ — der Duden führt den Akkusativ bei „bedürfen“ als seltene Variante;
+die Karte fragt jetzt „keines Kommentars / keinem Kommentar“. Eine richtige Antwort ist genauer geworden: diffizil
+(Duden: auch „von Menschen: schwer zu behandeln“; „Feingefühl“ steht in keiner Quelle) — `w:diffizil` stand schon
+mit dem 21.09. in `NEU_GELERNT`, das Datum ist jetzt der 30.09. (kein zweiter Eintrag). Die übrigen gut 20 Funde
+betreffen Anmerkungen: dank, statt und laut waren anders gewichtet, als Duden und Variantengrammatik es tun (statt
++ Dativ ist in Zeitungstexten fast überall gebräuchlich, nicht „umgangssprachlich“; `EINORDNUNG` in
+`tests/inhalt.js` ist nachgezogen), sieben Stellen gaben ein Duden-Zitat sinngemäß oder falsch wieder
+(idiosynkratisch, trivial, ideal, aufweisen, physisch, dasselbe, erinnern), und „leiden an/unter“ belegte
+seelisches Leiden zum zweiten Mal mit dem DWDS-Beispiel aus der Krankheitsbedeutung. Neue Lücke im Wächter: Die
+Regionalprüfung in `tests/inhalt.js` kannte „Österreich“, aber nicht „Westösterreich“ — `[Öö]sterreich` jetzt.
+
 **Stil und Form gelesen (30.09.2026, achtundfünfzigste Runde).** 43 Regeln (17 stil-, 26 form-) und 70 Übungen
 (s01–s20, f01–f50), fünf Prüfer, Quellen in `scratchpad/r57/tmp-a…e`. Keine richtige Antwort war falsch, kein
 Ablenker sicher gleichwertig. Rund 50 Stellen nachgeschärft, meist ein Rat, der mehr sagte als sein Rahmen:
