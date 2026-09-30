@@ -59,6 +59,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Tippaufgaben über „Heute“ (30.09.2026, mit Nils abgestimmt).** Die Kalenderläufe zum Block vk/vg zeigten nach
+sechs Monaten mit zwei Runden bis zu 17 nie gesehene Übungen, fast alle Tippaufgaben. Ursache: Unterwegs werden
+sie herausgefiltert, und in „Heute“ liefen sie im Themenwechsel mit — „gram“ trägt 33 der 45 und bekam jeden
+zehnten neuen Platz. Nur mit „Heute“ waren nach vier Monaten **43 von 45** nie drangekommen. `buildDaily()` gibt
+jetzt einer neuen Tippaufgabe am Tag den ersten freien Platz; danach 0 von 45 offen, und im Lauf mit zwei Runden
+bleibt in allen geprüften Versätzen nichts offen. Eine Sortierung nur innerhalb des Themas ließ noch 9 offen.
+Neue Prüfung in `tests/lernen.js`, Abschnitt L, mit Positivprobe gegen die alte Logik. Die Quote unterwegs
+(45/25/30) ist unverändert.
+
 **Vertiefung Komma und Grammatik (30.09.2026).** Block `vk01`–`vk15` (Partizipgruppen, Adjektive, Vergleiche,
 Hauptsätze, Semikolon) und `vg01`–`vg13` (Dativpräpositionen, Kasus im Relativsatz, Perfekt mit sein, erschrecken
 und hängen, Pronomen vor Substantiv). Jede Kommaaussage ist am Text des Regelwerks 2024 belegt (§ 70 E2, § 71 E2/E3,

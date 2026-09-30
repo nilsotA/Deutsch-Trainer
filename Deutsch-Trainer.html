@@ -6910,6 +6910,16 @@ function buildDaily(){
   const rest = shuffle(ALL.filter(i=>!used.has(i.id) && !S.cards[i.id]), r);
   const byCat = {};
   rest.forEach(i => (byCat[i.c] = byCat[i.c] || []).push(i));
+  /* Eine neue Tippaufgabe am Tag bekommt den ersten freien Platz. Unterwegs werden
+     Tippaufgaben herausgefiltert, „Heute“ ist ihr einziger Weg in den Lernstand — und
+     dort bekam das Thema „gram“, in dem 33 der 45 stehen, im Themenwechsel nur jeden
+     zehnten neuen Platz. Nach einem halben Jahr mit zwei Runden am Tag waren gemessen
+     bis zu 17 noch nie drangekommen; eine Sortierung innerhalb des Themas ließ noch 9
+     offen. Die übrigen neuen Plätze laufen wie bisher im Themenwechsel. */
+  if(!neuEx.some(i=>i.t==="fill")){
+    const tipp = rest.find(i=>i.t==="fill");
+    if(tipp){ neuEx.push(tipp); byCat[tipp.c].splice(byCat[tipp.c].indexOf(tipp), 1); }
+  }
   const order = shuffle(Object.keys(byCat), r);
   let idx = 0;
   while(neuEx.length < SLOTS && order.some(c=>byCat[c].length)){

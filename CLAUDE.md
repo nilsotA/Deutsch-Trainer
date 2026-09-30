@@ -173,6 +173,10 @@ Beispielsätze und darf sie nicht kennen, sonst gilt ein Subjekt als Objektform.
   entscheidet der Tagesseed. Ohne diese Reservierung füllten die Übungen alle zwölf Plätze,
   und weil eine Karte erst nach der ersten Antwort fällig werden kann, blieben 320 Karten
   über „Heute“ dauerhaft unerreichbar. Geprüft in `tests/lernen.js`, Abschnitt H.
+  **Eine neue Tippaufgabe am Tag bekommt den ersten freien Platz.** Unterwegs werden
+  Tippaufgaben herausgefiltert, „Heute“ ist ihr einziger Weg; im Themenwechsel bekam „gram“
+  (33 der 45) nur jeden zehnten neuen Platz, und wer nur „Heute“ nutzte, hatte nach vier
+  Monaten 43 von 45 nie gesehen. Geprüft in `tests/lernen.js`, Abschnitt L.
 - `unterwegsRunde()` füllt in drei Stufen — fällig → neu → am längsten nicht geübt —
   und zieht auf jeder Stufe über `quotenMix()` im Verhältnis **45 % Aufgaben / 25 % Wörter /
   30 % Fälle**. Läuft ein Lernplan, kommt neuer Stoff bevorzugt aus dem Wochenschwerpunkt.
