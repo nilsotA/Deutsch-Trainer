@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 436 |
+| Übungen | 452 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Groß/Klein und Zeichen (30.09.2026, noch einundsechzigste Runde).** Block `o01`–`o16` für
+Sprachbezeichnungen, Mal/mal, Apostroph, Bindestrich, dessen/deren und Groß/Klein nach dem Doppelpunkt (je zwei
+bis drei Übungen vorher); der Wächter kennt jetzt elf Kernregeln außer den Kommaregeln. Die Gegenprüfung (gegen
+das Regelwerk 2024 als Text, Wörterverzeichnis und §§ 40–44, 54, 57, 58, 75, 80) fand keinen falschen Ablenker, aber
+vier zu weite Erklärungen: o01 „Sport und deutsch“ ist in der Lesart „auf Deutsch unterrichten“ zulässig (§ 57 E2)
+— jetzt „die Fächer Sport und Deutsch“; o07 nannte den Apostroph in Ladennamen Pflicht (§ 80 E1: möglich); o10
+„die Zahl bekommt ihren Bindestrich“ gilt nicht vor Suffixen (§ 40(3): 100%ig); o02 „klein nur, wenn …“ ohne Beleg.
+Offen, weil nicht belegt: das Beispiel „auf deutsch besetztem Gebiet“ in `gross-sprachen`.
 
 **Vertiefung Rechtschreibpaare (30.09.2026, noch einundsechzigste Runde).** Dasselbe für das/dass,
 seit/seid, ss/ß, wider/wieder und als/wie, die mit einer oder zwei Übungen auskamen: Block `e01`–`e16`, der
