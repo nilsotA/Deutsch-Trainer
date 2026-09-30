@@ -1395,7 +1395,85 @@ const EX_A = [
 {id:"o16",c:"zeichen",q:"Welcher Satz ist richtig?",o:[
  "Uns fehlte alles: ein Plan, eine Halle und genug Leute.",
  "Uns fehlte alles: Ein Plan, eine Halle und genug Leute."],a:0,
- e:"Nach dem Doppelpunkt folgt nur eine Aufzählung, kein ganzer Satz — dann klein. Substantive bleiben natürlich groß.",r:"z-doppelpunkt"}
+ e:"Nach dem Doppelpunkt folgt nur eine Aufzählung, kein ganzer Satz — dann klein. Substantive bleiben natürlich groß.",r:"z-doppelpunkt"},
+
+/* Vertiefung Grammatik und Satzbau: Zeitenfolge, Genitiv, Richtung, Verbzweitstellung, Fragezeichen, Kongruenz */
+{id:"i01",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nachdem wir uns aufgewärmt hatten, begann das Spiel.",
+ "Nachdem wir uns aufwärmen, begann das Spiel."],a:0,
+ e:"„nachdem“ verlangt, dass das Ereignis im Nebensatz <b>vorher</b> abgeschlossen ist. Steht der Hauptsatz im Präteritum („begann“), rückt es eine Stufe zurück: <b>Plusquamperfekt</b> („aufgewärmt hatten“). Zum Präsens gehört das Perfekt: „Nachdem wir uns aufgewärmt haben, beginnt das Spiel.“",r:"gram-zeiten"},
+
+{id:"i02",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nachdem er sich aufgewärmt hat, beginnt er mit dem Sprint.",
+ "Nachdem er sich aufgewärmt hatte, beginnt er mit dem Sprint."],a:0,
+ e:"Der Hauptsatz steht im Präsens („beginnt“) — das frühere Ereignis steht dann im <b>Perfekt</b>. Das Plusquamperfekt gehört zu einem Hauptsatz in der Vergangenheit, im Präteritum oder Perfekt.",r:"gram-zeiten"},
+
+{id:"i03",c:"gram",q:"In welcher Zeitform beschreibst du in einer Hausarbeit dein eigenes Vorgehen?",o:[
+ "Präteritum oder Perfekt — innerhalb eines Abschnitts einheitlich",
+ "Nur im Präteritum, das Perfekt ist dort falsch",
+ "Beliebig, auch von Satz zu Satz wechselnd"],a:0,
+ e:"„Wir befragten 40 Sportstudierende“ und „Wir haben 40 Sportstudierende befragt“ gehen beide. Worauf es ankommt: bei den Vollverben nicht grundlos wechseln. Bei sein, haben und den Modalverben steht auch im Perfekt-Text meist das Präteritum („Die Teilnahme war freiwillig“) — das zählt nicht als Wechsel.",r:"gram-zeiten"},
+
+{id:"i04",c:"gram",q:"Was ist in einer Hausarbeit die bessere Wahl?",o:[
+ "die Trainingsmethode meines Betreuers",
+ "die Trainingsmethode von meinem Betreuer"],a:0,
+ e:"Wo der Genitiv erkennbar ist, steht er im geschriebenen Text: „meines Betreuers“. Die Umschreibung mit „von“ ist gesprochen üblich, klingt im geschriebenen Text aber mündlich. Nötig ist „von“ dort, wo man den Genitiv nicht sieht: „die Wirkung von Koffein“.",r:"gram-genalltag"},
+
+{id:"i05",c:"gram",q:"Was ist geschrieben standardsprachlich?",o:[
+ "Aufgrund des Regens fiel das Training aus.",
+ "Aufgrund dem Regen fiel das Training aus."],a:0,
+ e:"<b>aufgrund</b> steht mit dem Genitiv, wie innerhalb, anhand und hinsichtlich: aufgrund des Regens. Ohne Artikel weicht man meist auf „aufgrund von“ aus: „aufgrund von Regen“.",r:"gram-genalltag"},
+
+{id:"i06",c:"gram",q:"Wie steht der Genitiv bei einem Namen ohne Artikel üblicherweise?",o:[
+ "Vorn: „Lenas Trainingsplan“ — nachgestellt klingt es gehoben, ist aber nicht falsch",
+ "Hinten: „der Trainingsplan Lenas“ — vorangestellt ist umgangssprachlich",
+ "Nur mit „von“: „der Trainingsplan von Lena“ — der Genitiv ist hier falsch"],a:0,
+ e:"Bei Eigennamen ohne Artikel steht der Genitiv normalerweise vorn: Lenas Rad, Beethovens Werk. „das Werk Beethovens“ ist nicht falsch, klingt aber gehoben. Die Umschreibung mit „von“ ist gesprochen üblich.",r:"gram-genalltag"},
+
+{id:"i07",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Nach dem Training fahre ich nach Hause.",
+ "Nach dem Training fahre ich zu Hause."],a:0,
+ e:"Wohin? → <b>nach Hause</b>. Wo? → <b>zu Hause</b>: „Ich bin zu Hause.“ Die Richtung fragt nach dem Ziel.",r:"gram-richtung"},
+
+{id:"i08",c:"gram",q:"„Wohin fahrt ihr im Sommer?“ Welche Antwort passt?",o:[
+ "Wir fahren nach Italien.",
+ "Wir fahren in Italien."],a:0,
+ e:"Länder ohne Artikel bekommen bei der Richtung <b>nach</b>: nach Italien, nach Spanien. „in Italien“ sagt, wo man ist. Länder mit Artikel gehen mit „in“ + Akkusativ: in die Türkei, in die USA.",r:"gram-richtung"},
+
+{id:"i09",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Morgen gehe ich ins Training.",
+ "Morgen ich gehe ins Training."],a:0,
+ e:"Im Aussagesatz steht das gebeugte Verb an <b>zweiter Stelle</b>. Steht „morgen“ vorn, rutscht das Subjekt hinter das Verb: morgen <b>gehe</b> ich.",r:"satz-v2"},
+
+{id:"i10",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Nach dem Spiel haben wir noch lange geredet.",
+ "Nach dem Spiel wir haben noch lange geredet."],a:0,
+ e:"„Nach dem Spiel“ ist ein Satzglied und besetzt Position 1. Direkt danach kommt das gebeugte Verb („haben“), dann das Subjekt.",r:"satz-v2"},
+
+{id:"i11",c:"satz",q:"Welcher Satz ist richtig?",o:[
+ "Aber morgen komme ich mit.",
+ "Aber morgen ich komme mit."],a:0,
+ e:"<b>aber</b>, und, oder, denn, sondern zählen nicht mit — sie stehen vor Position 1. „morgen“ ist das eine Satzglied davor, also folgt direkt das Verb.",r:"satz-v2"},
+
+{id:"i12",c:"zeichen",q:"Welcher Satz ist als Bericht richtig?",o:[
+ "Er fragte, wann das Training beginnt.",
+ "Er fragte, wann das Training beginnt?"],a:0,
+ e:"Der ganze Satz ist eine Aussage — er berichtet, was jemand gefragt hat. Das Schlusszeichen richtet sich nach dem ganzen Satz: Punkt, kein Fragezeichen.",r:"z-frage"},
+
+{id:"i13",c:"zeichen",q:"Welcher Satz ist richtig?",o:[
+ "Weißt du, wann das Training beginnt?",
+ "Weißt du, wann das Training beginnt."],a:0,
+ e:"Hier ist der ganze Satz eine Frage („Weißt du …“) — also Fragezeichen, auch wenn der Nebensatz selbst nur eine indirekte Frage ist.",r:"z-frage"},
+
+{id:"i14",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Die Leistung der Spielerinnen hat sich verbessert.",
+ "Die Leistung der Spielerinnen haben sich verbessert."],a:0,
+ e:"Das Verb richtet sich nach dem Subjektkern „die Leistung“ (Singular), nicht nach dem nächststehenden „Spielerinnen“.",r:"gram-kongruenz"},
+
+{id:"i15",c:"gram",q:"Welcher Satz ist richtig?",o:[
+ "Das Ergebnis der beiden Tests war eindeutig.",
+ "Das Ergebnis der beiden Tests waren eindeutig."],a:0,
+ e:"Subjektkern ist „das Ergebnis“ — Singular, also „war“. „der beiden Tests“ ist nur ein Genitivattribut.",r:"gram-kongruenz"}
 
 ];
 /* ============================================================
@@ -6452,7 +6530,7 @@ function buildDaily(){
   /* Wortkarten und Fallkarten brauchen einen reservierten Platz. Vorher füllten die
      Übungen erst alle Plätze und der Wortschatzblock kam danach nie an die Reihe; einen
      Block für neue Fallkarten gab es gar nicht. Weil eine Karte erst fällig werden kann,
-     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 771 Karten dauerhaft
+     nachdem sie einmal dran war, waren über „Heute“ allein 320 der 786 Karten dauerhaft
      unerreichbar — 30 Tage Tagesaufgabe ergaben 360 Übungen und sonst nichts.
      Höchstens die Hälfte des neuen Stoffs geht an die beiden Sorten, damit die
      Tagesaufgabe von Übungen getragen bleibt. Reicht der Rest nur für eine der beiden,
@@ -7458,7 +7536,7 @@ function renderHeute(keepQuiz){
   if(keepQuiz) return;
 
   const heuteA = (d && d.a) || 0;
-  /* countDue() geht über alle 771 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
+  /* countDue() geht über alle 786 Karten (gemessen 0,9 ms) und lief dreimal je Aufbau
      dieser Ansicht — einmal reicht, der Wert ändert sich innerhalb eines Durchgangs
      nicht. */
   const faellig = countDue();

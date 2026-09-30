@@ -31,7 +31,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 
 | | |
 |---|---|
-| Übungen | 452 |
+| Übungen | 467 |
 | Regeln | 120 |
 | Wortkarten | 155 |
 | Fallkarten | 182, davon 163 in Satzform (172 Fassungen), 18 nur zum Nachschlagen |
@@ -58,6 +58,14 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Vertiefung Grammatik und Satzbau (30.09.2026, noch einundsechzigste Runde).** Block `i01`–`i15` für
+Zeitenfolge, Genitiv im Alltag, Richtung (nach/zu/in), Verbzweitstellung, Fragezeichen und Kongruenz; der
+Mindestwächter kennt jetzt 17 Kernregeln. Gegenprüfung vor dem Einbau: i08 „Im Sommer fahren wir in Italien“
+war als Ortsangabe richtig (fahren = umherfahren) — jetzt mit der Frage „Wohin fahrt ihr?“. i01 fragte „nachdem“
++ Perfekt neben Präteritum als nicht standardsprachlich ab; dafür fand der Prüfer nur Lernseiten, keinen
+Duden-Beleg — jetzt mit einem sicher falschen Präsens. Offen: Belegt die Duden-Grammatik die Tempusfolge bei
+„nachdem“ ausdrücklich? Dann könnte `gram-zeiten` die Quelle nennen.
 
 **Vertiefung Groß/Klein und Zeichen (30.09.2026, noch einundsechzigste Runde).** Block `o01`–`o16` für
 Sprachbezeichnungen, Mal/mal, Apostroph, Bindestrich, dessen/deren und Groß/Klein nach dem Doppelpunkt (je zwei

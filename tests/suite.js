@@ -298,13 +298,14 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
 {
   const MIN_KERN = 4;
   const KERN_EXTRA = ["recht-dass", "recht-seit", "recht-sz", "recht-wider", "gram-alswie",
-    "gross-sprachen", "gross-mal", "recht-apostroph", "recht-bindestrich", "gram-relativ", "z-doppelpunkt"];
+    "gross-sprachen", "gross-mal", "recht-apostroph", "recht-bindestrich", "gram-relativ", "z-doppelpunkt",
+    "gram-zeiten", "gram-genalltag", "gram-richtung", "satz-v2", "z-frage", "gram-kongruenz"];
   const jeRegel = {};
   daten(w, "ALL.map(e=>e.r)").forEach(r => jeRegel[r] = (jeRegel[r] || 0) + 1);
   const fehlt = KERN_EXTRA.filter(id => !regelKat[id]);
   const duenn = Object.keys(regelKat).filter(id => (regelKat[id] === "komma" || KERN_EXTRA.includes(id)) &&
     (jeRegel[id] || 0) < MIN_KERN).map(id => id + ": " + (jeRegel[id] || 0));
-  P.ok("Jede Kommaregel und jede Kernregel der Rechtschreibung hat mindestens " + MIN_KERN + " Übungen",
+  P.ok("Jede Kommaregel und jede Kernregel hat mindestens " + MIN_KERN + " Übungen",
     !duenn.length && !fehlt.length, duenn.concat(fehlt.map(id => id + " gibt es nicht")).join(" · "));
 }
 
