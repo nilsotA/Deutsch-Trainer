@@ -59,6 +59,20 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Vertiefung Komma (30.09.2026, einundsechzigste Runde).** Nils will vor allem Regeln und Komma lernen, den
+Textcheck nutzt er kaum. Gezählt: komma-partizip hatte eine Übung, komma-vergleich und komma-adjektive je zwei —
+so lernt man den Beispielsatz, nicht die Regel. Neuer Block `u01`–`u26`, zwei bis drei Übungen je Kommaregel,
+jede am Wortlaut der Regel in der App gebaut. Ein Gegenprüfer hat alle 26 gegen das Regelwerk 2024 (S. 113–132)
+und Duden D 100–128 gelesen und einen harten Fund gemacht: u23 „Sie dachte nicht daran(,) aufzugeben“ — der
+Ablenker ohne Komma ist richtig (Duden D 124 „Iris dachte nicht daran[,] mitzufahren“; Regelwerk 2024 § 73 E2).
+Pflicht ist das Komma beim bloßen Infinitiv nur, wenn das hinweisende Wort die vorangestellte Gruppe wieder
+aufnimmt („Aufzugeben, daran dachte sie nicht“); so fragt u23 jetzt. Dazu: Die Regel `komma-adjektive` sagte über
+„aus anderen, zuverlässigen Quellen“ „die ersten waren es nicht“ — belegt ist nur die Lesart ohne Komma (§ 70 E2,
+„die letzte unter den revidierten Auflagen“); Regel und u09 sagen jetzt nur das. „Pflicht als Zusatz hinter dem
+Subjekt“ bei Partizipgruppen war zu eng (Duden D 127: hinter einem Substantiv oder Pronomen) — Regel, k29 und
+Spickzettel angepasst. Neuer Wächter in `tests/suite.js`: jede Kommaregel mindestens vier Übungen. Die neuen
+Übungen waren nie auf `main`, deshalb kein Eintrag in `NEU_GELERNT`.
+
 **Der Rest des Bestands gelesen (30.09.2026, sechzigste Runde).** 24 Satzbaukarten, 10 Tabellen, 12
 Fehlersuchtexte, die Hinweise aller 126 Textcheck-Muster und die ganze Schreibwerkstatt, fünf Prüfer, Quellen in
 `scratchpad/r59/tmp-a…e`. Damit ist jeder Bestand der App mindestens einmal vollständig gelesen. Alle Tabellenzellen

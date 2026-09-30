@@ -290,6 +290,19 @@ KORREKTUR.forEach(t => t.errs.forEach(e => {
 P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   markSchief.slice(0, 5).join(" · "));
 
+/* Eine Regel mit nur einer Übung lehrt einen Satz, nicht die Regel: Wer ihn zweimal
+   gesehen hat, erkennt die Antwort wieder, ohne die Regel anzuwenden. Bis zum 30.09.2026
+   hatte komma-partizip eine Übung, komma-vergleich und komma-adjektive je zwei — beim
+   Komma, um das es Nils am meisten geht. Für die Kommaregeln gilt deshalb ein Minimum. */
+{
+  const MIN_KOMMA = 4;
+  const jeRegel = {};
+  daten(w, "ALL.map(e=>e.r)").forEach(r => jeRegel[r] = (jeRegel[r] || 0) + 1);
+  const duenn = Object.keys(regelKat).filter(id => regelKat[id] === "komma" && (jeRegel[id] || 0) < MIN_KOMMA)
+    .map(id => id + ": " + (jeRegel[id] || 0));
+  P.ok("Jede Kommaregel hat mindestens " + MIN_KOMMA + " Übungen", !duenn.length, duenn.join(" · "));
+}
+
 /* Grundsatz 4, auf die Fehlersuche angewandt: Derselbe Fehler muss überall gleich
    eingeordnet sein. „vorraus“ → „Voraus“ ist in zwei Texten markiert; kt01 und das
    Prüfmuster x14 schickten Nils nach gross-subst, kt03 nach form-danken — einer Regel
