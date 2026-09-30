@@ -191,6 +191,13 @@
   ]
  },
  {
+  "satz": "Am Satzende ersetzen die Auslassungspunkte den Schlusspunkt.",
+  "stellen": [
+   "Prüfmuster t08",
+   "Übung ve07"
+  ]
+ },
+ {
   "satz": "Bedauern über die Wirkung ist keine Schuldübernahme.",
   "stellen": [
    "Baustein ph18",
@@ -566,6 +573,13 @@
    "Regel satz-nebensatz",
    "Satzkarte sa04",
    "Satzkarte sa20"
+  ]
+ },
+ {
+  "satz": "Klammer streichen — der Rest muss richtig gesetzt sein.",
+  "stellen": [
+   "Regel z-klammern",
+   "Übung ve05"
   ]
  },
  {
