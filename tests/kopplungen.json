@@ -58,6 +58,13 @@
   ]
  },
  {
+  "satz": "„Falls ich etwas falsch notiert habe, korrigieren Sie mich gern.“",
+  "stellen": [
+   "Regel form-absprachen",
+   "Übung f50"
+  ]
+ },
+ {
   "satz": "„Ich habe es dir gesagt“ klingt richtig, „Ich habe dir es gesagt“ nicht.",
   "stellen": [
    "Regel satz-dativakk",
@@ -345,6 +352,13 @@
   ]
  },
  {
+  "satz": "Die Daten deuten auf einen Zusammenhang hin.",
+  "stellen": [
+   "Regel stil-hedging",
+   "Übung s18"
+  ]
+ },
+ {
   "satz": "Die Duden-Grammatik von 1998 schrieb noch, „gewunken“ gelte „hochsprachlich nicht als korrekt“, seit 2005 steht es dort ohne Kommentar neben „gewinkt“ — daher hält sich der Ruf, es sei ein Fehler.",
   "stellen": [
    "Regel gram-verbformen",
@@ -403,11 +417,17 @@
   ]
  },
  {
+  "satz": "Ein klares Ja oder Nein ist respektvoller als ein weiches Vielleicht.",
+  "stellen": [
+   "Prüfmuster f07",
+   "Übung f12"
+  ]
+ },
+ {
   "satz": "Ein klares Nein ist respektvoller als ein weiches Vielleicht.",
   "stellen": [
    "Regel form-absagen",
-   "Schreibauftrag w12",
-   "Übung f12"
+   "Schreibauftrag w12"
   ]
  },
  {
@@ -463,7 +483,7 @@
   ]
  },
  {
-  "satz": "Grenzen werden nicht durch Ansage etabliert, sondern durch Verhalten .",
+  "satz": "Grenzen werden nicht durch die Ansage allein etabliert, sondern erst durch Verhalten .",
   "stellen": [
    "Baustein ph31",
    "Regel form-grenzen"
@@ -577,13 +597,6 @@
   ]
  },
  {
-  "satz": "Nach „Mit freundlichen Grüßen“ steht kein Satzzeichen .",
-  "stellen": [
-   "Prüfmuster x25",
-   "Übung f04"
-  ]
- },
- {
   "satz": "Nach dem Anredekomma geht es klein weiter — die Anrede gehört zum ersten Satz, das Komma trennt sie nur ab:",
   "stellen": [
    "Fehlersuche kt1",
@@ -596,6 +609,13 @@
    "Regel form-anrede",
    "Übung f05",
    "Übung k14"
+  ]
+ },
+ {
+  "satz": "Nach der Grußformel steht üblicherweise kein Komma.",
+  "stellen": [
+   "Fehlersuche kt3",
+   "Fehlersuche kt8"
   ]
  },
  {
@@ -618,6 +638,13 @@
   "stellen": [
    "Baustein ph44",
    "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "Nennt die Bitte den Termin schon, reicht ein klares Ja:",
+  "stellen": [
+   "Regel form-zusagen",
+   "Übung f31"
   ]
  },
  {
@@ -817,7 +844,7 @@
   ]
  },
  {
-  "satz": "Wer eine Aufgabe übernimmt, nennt was und bis wann .",
+  "satz": "Wer eine Aufgabe übernimmt, nennt was und bis wann , sofern die Bitte es nicht schon festlegt.",
   "stellen": [
    "Baustein ph26",
    "Regel form-zusagen"

@@ -59,6 +59,69 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Stil und Form gelesen (30.09.2026, achtundfünfzigste Runde).** 43 Regeln (17 stil-, 26 form-) und 70 Übungen
+(s01–s20, f01–f50), fünf Prüfer, Quellen in `scratchpad/r57/tmp-a…e`. Keine richtige Antwort war falsch, kein
+Ablenker sicher gleichwertig. Rund 50 Stellen nachgeschärft, meist ein Rat, der mehr sagte als sein Rahmen:
+f36 empfahl die Priorisierungsfrage ohne zu sagen, dass sie nur gegenüber jemandem passt, der über die Aufgaben
+entscheidet (so steht es in form-grenzen); f13 verlangte einen Ersatztermin, den form-absagen „optional“ nennt;
+f31 führte „Eine Einschränkung“ als Ablenker, obwohl form-zusagen einen Vorbehalt empfiehlt; f42 „Entschuldigung —
+Nachricht — Erklärung“, obwohl die Werkstatt genau so absagt; f15 riet nach mehreren Erinnerungen zur Ausstiegstür,
+die form-nachhaken fürs erste Nachfassen vorsieht. Quellen: „Viele Grüße“ steht nicht auf der Duden-Seite zur
+Grußformel (nur „Beste Grüße“, und nur unter einer Voraussetzung); dass der Doktortitel neben dem ausgeschriebenen
+Professorentitel wegfällt, sagt die Duden-Seite nicht (jetzt „üblicherweise“); form-anrede verwies auf § 77 (der
+Gedankenstrich) statt auf den Hinweis zu § 72; Goethes „einzigstes Mädchen“ stammt aus einem Brief; das DWDS
+verzeichnet „am optimalsten“ als selten (x07 bleibt hart, weil der Duden „optimal“ zu den Adjektiven ohne
+Steigerungsform zählt). Absolutwörter: „Nie in der Tür“, „helfen nicht“, „fast nie wahr“ (an fünf Stellen) — der
+Absolutwort-Wächter in `tests/suite.js` liest jetzt auch die Stil- und Formregeln, vier Stellen stehen mit Grund
+auf seiner Liste. Nicht umgesetzt: die Ok-Felder in kt09 („diese Woche dreimal“, „über Samstag“) erfinden Zahl und
+Tag, sind aber als Musterformulierung lesbar; Ablenker in f44 bleiben kürzer als die richtige Antwort.
+
+**Übungen einzeln gelesen (30.09.2026, siebenundfünfzigste Runde).** 239 Übungen aus Komma, Groß-/Kleinschreibung,
+Getrennt, Rechtschreibung, Grammatik, Zeichen und Zahlen, sechs Prüfer, Quellen in `scratchpad/r56/tmp-i…m`; jeden
+übernommenen Fund habe ich an der abgelegten Seite nachgelesen. 24 Stellen nachgeschärft, keine richtige Antwort
+geändert. Die gewichtigsten: Die Grußformel bleibt laut Regelwerk 2024 „meist“ ohne Satzzeichen und ist dort als
+Konvention beschrieben — die App sagte an zehn Stellen „kein Satzzeichen“ ohne Einschränkung (k15, f04,
+komma-brief, form-grussformel, ph03, x25, vier Fehlersuchtexte; ein neuer Wächter in `tests/suite.js` fand die zehnte); `q02` und `n-ziffern` führten „8 Uhr“ unter „in aller
+Regel Ziffern“, der Duden schreibt „acht Uhr“; `n20` belegte seelisches Leiden mit „an unglücklicher Liebe leiden“, das
+beim DWDS unter der Krankheitsbedeutung steht; `n33` lehnte „an welche“ ab; `m02` nannte den Dativ nach „während“
+nicht, der im Plural ohne erkennbaren Genitiv standardsprachlich ist; `n01` ließ bei „ab“ den Akkusativ weg („ab
+kommenden Montag“). Kleinere: k20 begründet das Pflichtkomma jetzt mit der Stellung, t08 empfiehlt das seltene
+„nichtsdestominder“ nicht mehr, t15 nennt „irgend so etwas“, t16 „Ich bin Zuhause“, t20 die Duden-Empfehlung, p21
+behauptet nicht mehr, Leerzeichen um den Schrägstrich seien üblich (das Regelwerk lässt beides gleichrangig zu).
+Nicht umgesetzt: m07 und n16 fragen fast dasselbe — eine Änderung würde Lernstand verschieben, der Gewinn ist klein.
+Noch nicht gelesen: die 37 Stil- und Formregeln und die 50 Stil- und Formübungen.
+
+**38 Regeln einzeln gelesen (30.09.2026, noch sechsundfünfzigste Runde).** Nach dem Spickzettel die Regeln, die
+keine Stichprobe erreicht hatte: gross-*, getrennt-praep/-verb, recht-*, 14 gram-*, z-* außer Komma und
+Gedankenstrich, n-*. Fünf Prüfer, Quellen abgelegt in `scratchpad/r56/tmp-d…h`, jeder übernommene Fund von mir an der
+Datei nachgelesen. **Drei lehrten Falsches:** „laut“ stand unter den Genitivpräpositionen (Duden: „mit Dativ, selten
+mit Genitiv“); gram-genitiv sagte, mit Adjektiv bleibe es beim Genitiv — bei trotz ist ohne Artikel der Dativ laut
+Duden sogar häufiger („trotz heftigem Regen“), wie m03 und d17 schon sagten; z-doppelpunkt markierte „nämlich:“ rot,
+das Regelwerk schreibt selbst „zum Beispiel: Geysir“. Dazu rund 30 Ungenauigkeiten, unter anderem: dass-Sätze als
+Wunsch („Dass mir keine Klagen kommen!“), ’ne/’nen mit Apostroph (Duden D 14), ẞ zuerst (§ 25 E3), „anders als“,
+außer mit Genitiv und Akkusativ, dank/laut/binnen gewichtet, kosten regional, Datum ohne führende Null (DIN
+verlangt sie), „in 1995“ nicht als Fehler, sondern als nicht standardsprachlich, g16 fragt jetzt nach dem Duden (das
+Regelwerk erlaubt „zum Einen“ zur Betonung, § 58 E4). Nicht nachprüfbar: die Variantengrammatik war nicht
+erreichbar; ihre Angaben in gram-genitiv stehen weiter, jetzt neben dem Duden.
+
+**Spickzettel vollständig gelesen (30.09.2026, sechsundfünfzigste Runde).** Die zweite Stichprobe fand die meisten
+Funde je Zeile in den Kurzfassungen. Die neun noch nicht geprüften Abschnitte (1, 3, 4, 7–12) haben drei Prüfer
+gegen Regelwerk 2024, Duden, DWDS und die ausführlichen Regeln der App gelesen; jeden Fund habe ich an der
+abgelegten Quelle nachgelesen (`scratchpad/r56/tmp-a…c`). Keiner lehrte Falsches, 18 Stellen waren strenger als ihre
+Regel, eine davon nah daran:
+- **Kann-Komma nach versuchen, wagen & Co.:** „frei, solange beim Verb nichts weiter steht“ übersah das Perfekt. Steht
+  das Verb am Satzende, folgt die Gruppe hinter der Satzklammer, und der Duden verlangt das Komma („Sie hat versucht,
+  das Team zu überzeugen“, D 125). Regel komma-infinitiv, ihr Merksatz, Spickzettel und der Hinweis von y11 ziehen mit.
+- **ss/ß:** betonter kurzer Vokal (Regelwerk § 2), dazu „Kloster“, „Haus – Häuser“, „aus“ und die Endungen -nis, -us
+  (§ 5(2): Ergebnis – Ergebnisse); die Endungen fehlten auch in recht-sz.
+- Weiter: Paarformel-Kommas mit dem richtigen Merkmal (gehört die Formel zum übergeordneten Satz?), „lehren (auch
+  jmdm.)“, kosten und anrufen mit ihrer regionalen Einordnung, be-Faustregel „oft“ statt „fast immer“, scheinbar im
+  Alltag, „siehe“ als Verweis, sammle/sammele, „weil“ im formellen Rahmen, „genaues Verb“ statt „starkes Verb“
+  (Fachbegriff für Ablaut), Grußformel „Mit freundlichen Grüßen trägt immer“, Füllwörter „oft“, maximal/total
+  „selten“, Kritik-Schritt 3 optional, Zahlengliederung erst ab fünf Stellen.
+- „Gesichtsmimik“ ist aus den Pleonasmus-Listen (Regel, s04, Spickzettel, Muster s03) gestrichen: Duden und DWDS
+  zählen die Gebärden zur Mimik, „Gesichts-“ grenzt also ein und doppelt nicht sicher.
+
 **Zweite Stichprobe (29.09.2026, fünfundfünfzigste Runde).** 116 weitere Elemente, keines aus der ersten
 Stichprobe, Seed `hash("stichprobe2|2026-09-29")` (`scratchpad/r55/stichprobe.js`): 41 Übungen, 15 Wortkarten, 15
 Fallkarten, 8 Regeln — und zum ersten Mal Bestände, die noch nie so geprüft waren: 5 Satzbaukarten, 3 Tabellen, 3

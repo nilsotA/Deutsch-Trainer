@@ -322,6 +322,18 @@ P.ok("Jede Fehlermarkierung führt in eine passende Regel", !markSchief.length,
   P.ok("… und die Prüfung erkennt die alte Erklärung von kt08",
     !/Schweiz/.test("ß nach langem Vokal — und nach der Grußformel kein Komma."), "Positivprobe blieb stumm");
 
+  /* Die Grußformel bleibt laut Regelwerk 2024 „meist“ ohne Satzzeichen, im Hinweis zu den
+     Konventionen bei Anrede und Gruß. Die App sagte das an zehn Stellen ohne Einschränkung
+     (gefunden am 30.09.2026). Jede Stelle, die das Satzzeichen nach der Grußformel verneint,
+     trägt jetzt „üblicherweise“, „in der Regel“ oder „meist“. */
+  const grussAbsolut = s => [...strip(s).matchAll(/(?:[^.]*)nach (?:der Grußformel|„Mit freundlichen Grüßen“) (?:steht )?kein[^.]*/gi)]
+    .map(m => m[0]).filter(x => !/üblicherweise|in der Regel|meist/.test(x));
+  const grussHtml = fs.readFileSync(path.join(__dirname, "..", "Deutsch-Trainer.html"), "utf8");
+  const grussFunde = grussAbsolut(grussHtml);
+  P.ok("Kein Satz verneint das Satzzeichen nach der Grußformel ohne Einschränkung", !grussFunde.length, grussFunde.slice(0, 3).join(" · "));
+  P.ok("… und die Prüfung erkennt die alte Fassung von k15",
+    grussAbsolut("Nach der Grußformel steht kein Komma.").length === 1, "Positivprobe blieb stumm");
+
   /* Eine Stelle aus mehreren Wörtern (siehe kt04 weiter unten) gibt es auch dort, wo die
      Korrektur zwei Wörter ändert oder zusammenzieht: „dem Zeitplan“ → „des Zeitplans“,
      „das Selbe“ → „dasselbe“. Markiert war jeweils nur ein Wort, ein Klick auf das andere
@@ -813,12 +825,16 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Schreibauftrag w11": "„Wörter, die er sonst nie benutzt“ — Aussage über den Schreibenden, nicht über die Sprache",
     "Baustein ph14":      "zitierte Falschform: „Immer weiter im gleichen Ton nachfassen“ steht in der Liste dessen, was nicht geht",
     "Baustein ph15":      "zitierte Falschform: „Immer muss ich hinterherlaufen“",
-    "Baustein ph22":      "zitierte Falschform: „Du bist immer unpünktlich“ — und der Satz daneben sagt selbst, „immer“ sei fast nie wahr",
+    "Baustein ph22":      "zitierte Falschform: „Du bist immer unpünktlich“ — und der Satz daneben sagt selbst, „immer“ sei als Vorwurf selten wörtlich wahr",
     "Baustein ph25":      "zitierte Falschform: „Das habe ich nie gesagt“",
     "Baustein ph39":      "Ratgebersatz („Nenn immer das Thema“), kein Befund über die Sprache",
     "Baustein ph48":      "Ratgebersatz („beim Ausstieg immer einen Grund nennen“), kein Befund über die Sprache",
     "Vorher/Nachher pr03": "zitierte Falschform: „Bereits mehrfach“ und „noch immer“ sind der Gegenstand des Eintrags",
-    "Vorher/Nachher pr04": "„„Immer“ ist fast nie wahr“ — das Wort ist selbst der Gegenstand",
+    "Vorher/Nachher pr04": "„„Immer“ ist als Vorwurf selten wörtlich wahr“ — das Wort ist selbst der Gegenstand",
+    "Regel stil-pleonasmus": "„nie und nimmer“ steht als Beispiel einer Tautologie im Zitat",
+    "Regel form-kritik":  "„„Immer“ und „nie“ verschärfen einen Konflikt“ — die beiden Wörter sind der Gegenstand",
+    "Regel form-kritikannehmen": "zitierte Falschform: „Das habe ich nie gesagt“ als Sofortdementi",
+    "Regel form-absprachen": "„Nie „wie besprochen“ schreiben, wenn es nicht besprochen wurde“ — eine Aussage über Ehrlichkeit mit eigener Bedingung, keine über Sprache",
     "Vorher/Nachher pr29": "„„Nie“ und „immer“ verschärfen fast jeden Konflikt“ — die beiden Wörter sind der Gegenstand des Eintrags",
   };
   const nurText = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
@@ -832,6 +848,10 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     });
   };
   RA.filter(r => r.c === "gram" || r.c === "satz").forEach(r => absSammle("Regel", r.id, r.b));
+  /* Seit dem 30.09.2026 auch die Stil- und Formregeln: Sie raten in der Stimme der App wie die
+     Werkstatt, und die Durchsicht fand dort „Nie in der Tür“ (form-konflikt) neben „Formeln,
+     die den Verlust umdeuten, helfen nicht“ — beides Ratschläge, die als Gesetz dastanden. */
+  RA.filter(r => r.c === "stil" || r.c === "form").forEach(r => absSammle("Regel", r.id, r.b));
   SATZ.forEach(x => absSammle("Satzkarte", x.id, x.b));
   /* Dazu die beiden Sorten, die in der Stimme der App raten: die Hinweise des Textchecks
      und die Tipps der Schreibwerkstatt. Genau dort stand die Fassung, die niemand sah.

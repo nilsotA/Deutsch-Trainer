@@ -471,7 +471,7 @@ const TIPP = [
   { id: "n07", muss: ["den", "einen", "unseren", "meinen", "seinen"], nicht: ["dem", "des", "seinem"] },
   { id: "n31", muss: ["dem", "welchem"], nicht: ["den", "der", "welchen"] },
   { id: "n32", muss: ["den", "welchen"], nicht: ["dem", "welchem"] },
-  { id: "n33", muss: ["denen", "welchen", "an die"], nicht: ["den", "die"] },
+  { id: "n33", muss: ["denen", "welchen", "an die", "an welche"], nicht: ["den", "die"] },
   { id: "z22", muss: ["übersetze", "übersetzte"], nicht: ["setze über"] },
   { id: "n11", muss: ["dich", "ihn", "sie", "euch", "es"], nicht: ["dir", "ihm", "ihnen"] },
   { id: "r02", muss: ["das das", "das welches"], nicht: ["dass das", "das dass"] },
