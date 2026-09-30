@@ -59,6 +59,23 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Stil und Form gelesen (30.09.2026, achtundfünfzigste Runde).** 43 Regeln (17 stil-, 26 form-) und 70 Übungen
+(s01–s20, f01–f50), fünf Prüfer, Quellen in `scratchpad/r57/tmp-a…e`. Keine richtige Antwort war falsch, kein
+Ablenker sicher gleichwertig. Rund 50 Stellen nachgeschärft, meist ein Rat, der mehr sagte als sein Rahmen:
+f36 empfahl die Priorisierungsfrage ohne zu sagen, dass sie nur gegenüber jemandem passt, der über die Aufgaben
+entscheidet (so steht es in form-grenzen); f13 verlangte einen Ersatztermin, den form-absagen „optional“ nennt;
+f31 führte „Eine Einschränkung“ als Ablenker, obwohl form-zusagen einen Vorbehalt empfiehlt; f42 „Entschuldigung —
+Nachricht — Erklärung“, obwohl die Werkstatt genau so absagt; f15 riet nach mehreren Erinnerungen zur Ausstiegstür,
+die form-nachhaken fürs erste Nachfassen vorsieht. Quellen: „Viele Grüße“ steht nicht auf der Duden-Seite zur
+Grußformel (nur „Beste Grüße“, und nur unter einer Voraussetzung); dass der Doktortitel neben dem ausgeschriebenen
+Professorentitel wegfällt, sagt die Duden-Seite nicht (jetzt „üblicherweise“); form-anrede verwies auf § 77 (der
+Gedankenstrich) statt auf den Hinweis zu § 72; Goethes „einzigstes Mädchen“ stammt aus einem Brief; das DWDS
+verzeichnet „am optimalsten“ als selten (x07 bleibt hart, weil der Duden „optimal“ zu den Adjektiven ohne
+Steigerungsform zählt). Absolutwörter: „Nie in der Tür“, „helfen nicht“, „fast nie wahr“ (an fünf Stellen) — der
+Absolutwort-Wächter in `tests/suite.js` liest jetzt auch die Stil- und Formregeln, vier Stellen stehen mit Grund
+auf seiner Liste. Nicht umgesetzt: die Ok-Felder in kt09 („diese Woche dreimal“, „über Samstag“) erfinden Zahl und
+Tag, sind aber als Musterformulierung lesbar; Ablenker in f44 bleiben kürzer als die richtige Antwort.
+
 **Übungen einzeln gelesen (30.09.2026, siebenundfünfzigste Runde).** 239 Übungen aus Komma, Groß-/Kleinschreibung,
 Getrennt, Rechtschreibung, Grammatik, Zeichen und Zahlen, sechs Prüfer, Quellen in `scratchpad/r56/tmp-i…m`; jeden
 übernommenen Fund habe ich an der abgelegten Seite nachgelesen. 24 Stellen nachgeschärft, keine richtige Antwort

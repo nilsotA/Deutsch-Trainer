@@ -352,6 +352,13 @@
   ]
  },
  {
+  "satz": "Die Daten deuten auf einen Zusammenhang hin.",
+  "stellen": [
+   "Regel stil-hedging",
+   "Übung s18"
+  ]
+ },
+ {
   "satz": "Die Duden-Grammatik von 1998 schrieb noch, „gewunken“ gelte „hochsprachlich nicht als korrekt“, seit 2005 steht es dort ohne Kommentar neben „gewinkt“ — daher hält sich der Ruf, es sei ein Fehler.",
   "stellen": [
    "Regel gram-verbformen",
@@ -410,11 +417,17 @@
   ]
  },
  {
+  "satz": "Ein klares Ja oder Nein ist respektvoller als ein weiches Vielleicht.",
+  "stellen": [
+   "Prüfmuster f07",
+   "Übung f12"
+  ]
+ },
+ {
   "satz": "Ein klares Nein ist respektvoller als ein weiches Vielleicht.",
   "stellen": [
    "Regel form-absagen",
-   "Schreibauftrag w12",
-   "Übung f12"
+   "Schreibauftrag w12"
   ]
  },
  {
@@ -470,7 +483,7 @@
   ]
  },
  {
-  "satz": "Grenzen werden nicht durch Ansage etabliert, sondern durch Verhalten .",
+  "satz": "Grenzen werden nicht durch die Ansage allein etabliert, sondern erst durch Verhalten .",
   "stellen": [
    "Baustein ph31",
    "Regel form-grenzen"
@@ -625,6 +638,13 @@
   "stellen": [
    "Baustein ph44",
    "Regel form-bewerbung"
+  ]
+ },
+ {
+  "satz": "Nennt die Bitte den Termin schon, reicht ein klares Ja:",
+  "stellen": [
+   "Regel form-zusagen",
+   "Übung f31"
   ]
  },
  {
@@ -824,7 +844,7 @@
   ]
  },
  {
-  "satz": "Wer eine Aufgabe übernimmt, nennt was und bis wann .",
+  "satz": "Wer eine Aufgabe übernimmt, nennt was und bis wann , sofern die Bitte es nicht schon festlegt.",
   "stellen": [
    "Baustein ph26",
    "Regel form-zusagen"
