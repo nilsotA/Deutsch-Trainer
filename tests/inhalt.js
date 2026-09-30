@@ -630,6 +630,9 @@ P.titel("G · Regionale Varianten");
    Angabe der Fachliteratur, die sie ausdrücklich nicht bestätigen kann.
    während → Schweiz und Westösterreich, in Zeitungstexten (IDS); sonst umgangssprachlich
    statt → Österreich und Schweiz (IDS); Dativ auch ohne erkennbare Genitivform
+   — am 30.09.2026 an der Originalseite korrigiert: Der Dativ Singular ist in Zeitungstexten
+   fast überall neben dem Genitiv gebräuchlich, in Westösterreich überwiegt er, in D-nord
+   und D-mittelwest ist er etwas seltener. Umgangssprachlich nennen ihn weder Duden noch DWDS.
    wegen → überall umgangssprachlich, keine regionale Standardvariante
    Wer die Aussage ändert, ändert sie hier mit — und belegt sie neu. */
 const EINORDNUNG = [
@@ -639,7 +642,7 @@ const EINORDNUNG = [
               ["Prüfmuster", "x02"], ["Fehlersuche", "kt07:dem"]] },
   { was: "während", muss: [/umgangssprachlich/, /Schweiz/, /Westösterreich|Österreich/],
     stellen: [["Fallkarte", "während"], ["Übung", "d18"]] },
-  { was: "statt", muss: [/umgangssprachlich/, /Österreich/, /Schweiz/],
+  { was: "statt", muss: [/Zeitungstexten/, /Westösterreich/], nicht: [/umgangssprachlich/],
     stellen: [["Fallkarte", "statt / anstatt"]] },
   /* „wegen“ stand in der Regel als der Fall, bei dem der Dativ „überall“ umgangssprachlich
      sei — abgesetzt von trotz/während/statt, für die dieselbe Quelle zwei Sätze vorher
@@ -708,6 +711,9 @@ const EINORDNUNG = [
   { was: "anrufen mit Dativ", muss: [/[Ss]üdwest/, /[Ss]chweiz/],
     stellen: [["Regel", "gram-akkverben"], ["Übung", "n11"], ["Übung", "d03"], ["Übung", "d28"],
               ["Fallkarte", "anrufen"], ["Prüfmuster", "x20"]] },
+  /* 30.09.2026 an der Duden-Seite nachgelesen: „Mündlich standardsprachlich und schriftlich
+     umgangssprachlich auch mit Dativ: … wegen mir (meinetwegen)“ — „führt als umgangssprachlich“
+     unterschlug die gesprochene Einordnung. */
   /* „wegen mir“: Übung m16 und Prüfmuster a11 ordneten es als umgangssprachlich ein, die
      Satzkarte sa17 (Regel gram-genalltag) und die Fallkarte „wegen“ schrieben „meinetwegen, nicht wegen
      mir“ — also als Fehler. Der Duden führt „wegen“ mit Dativ des Personalpronomens als
@@ -716,7 +722,8 @@ const EINORDNUNG = [
      „wegen dem Wetter“ zwei Sätze davor. */
   /* Seit dem 24.09.2026 mit der Einordnung des Dudens UND dem Befund der Variantengrammatik
      (IDS): in Zeitungstexten im ganzen Sprachraum belegt. m16 fragt deshalb nach der Hausarbeit. */
-  { was: "wegen mir", muss: [/[Ww]egen mir“ führt der Duden als umgangssprachlich/, /Zeitungstexten/],
+  { was: "wegen mir", muss: [/[Ww]egen mir“ nennt der Duden gesprochen standardsprachlich, geschrieben umgangssprachlich/, /Zeitungstexten/],
+    nicht: [/[Ww]egen mir“ führt der Duden als umgangssprachlich/],
     stellen: [["Fallkarte", "wegen"], ["Übung", "m16"], ["Prüfmuster", "a11"], ["Regel", "gram-genalltag"]] },
   /* „in 1995“: Seit dem 21.09.2026 steht die Herkunft an drei Stellen als Einordnung des
      Dudens, der Sprachwissenschaftler widersprechen. q17 sagte weiter glatt „ist eine
@@ -1005,7 +1012,8 @@ P.ok("und meldet ein echtes Falschpaar nicht",
    hier mit dem Grund, warum ihr Ablenker trotzdem sicher falsch ist. Für die Fallkarten, die
    keine Frage tragen, dasselbe über ihren Hinweis. */
 {
-  const REGION = /Schweiz|schweizerisch|Österreich|österreichisch|Süddeutschland|süddeutsch|südwestdeutsch|Liechtenstein|Standardvariante/;
+  /* [Öö]sterreich statt Österreich|österreichisch: „Westösterreich“ lief am 30.09.2026 durch. */
+  const REGION = /Schweiz|schweizerisch|[Öö]sterreich|Süddeutschland|süddeutsch|südwestdeutsch|Liechtenstein|Standardvariante/;
   const RAHMEN = /überregional|in Deutschland|Hausarbeit|geschriebenen Text|standardsprachlich|sichere Form/i;
   const OFFEN_ERLAUBT = {
     g05: "fragt nach der Varianz selbst („Was gilt für … und …?“)",
@@ -1018,9 +1026,10 @@ P.ok("und meldet ein echtes Falschpaar nicht",
   };
   const FALL_ERLAUBT = {
     "während": "Ablenker im Akkusativ („den Vortrag“), nicht der regionale Dativ",
+    "dank": "Ablenker im Akkusativ („deine“), nicht der Dativ, den der Hinweis für die Schweiz nennt",
+    "statt / anstatt": "Ablenker im Nominativ („der Vortrag“), nicht der Dativ, den der Hinweis für Westösterreich nennt",
     "trotz": "Ablenker im Akkusativ („den Rückstand“), nicht der regionale Dativ",
     "wegen": "Ablenker im Akkusativ („das schlechte Wetter“), nicht der landschaftliche Dativ",
-    "statt / anstatt": "Ablenker im Nominativ („der Vortrag“) — ein Akkusativ wäre nach der Konjunktion „statt“ womöglich richtig",
     "anrufen": "Der Dativ ist südwestdeutsch umgangssprachlich und schweizerisch; die App trainiert die in Deutschland übliche Form, der Hinweis ordnet ein",
     "nach (Richtung)": "die Region betrifft „nach dem Bäcker“, nicht den Ablenker „zu Italien“",
     "auf (Richtung)": "die Region betrifft „auf die Post / zur Post“, nicht den Ablenker „dem Markt“",
