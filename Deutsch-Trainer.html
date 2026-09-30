@@ -2571,7 +2571,7 @@ lv:{f:["Gern übernehme ich das. Ich melde mich bis Freitag mit einem ersten Ent
     n:["Mach ich, bis Freitag hast du es.","Klar, gern. Sag mir nur, worauf ich achten soll."],
     l:["Bin dabei.","Klar, mach ich."]},
 no:["„Ich versuche es.“ — klingt wie eine halbe Absage und lässt den anderen im Ungewissen.",
-    "„Ich glaube, das könnte klappen.“ — dreifach abgesichert, praktisch wertlos.",
+    "„Ich glaube, das könnte klappen.“ — doppelt abgesichert („glaube“, „könnte“), praktisch wertlos.",
     "„Eigentlich gern, aber …“ — dann ist es keine Zusage."],
 tip:"Wer eine Aufgabe übernimmt, nennt <b>was</b> und <b>bis wann</b>, sofern die Bitte es nicht schon festlegt. Ohne Termin bleibt es eine Absichtserklärung. Bei einer Einladung oder beim Mitmachen reicht das klare Ja."},
 
@@ -2686,7 +2686,7 @@ lv:{f:["ich würde gern in Ihre Sprechstunde kommen, um die Fragestellung meiner
     l:["—"]},
 no:["„Ich hätte gern einen Termin.“ ohne Thema — die Vorbereitung wird unmöglich.",
     "Mehrere Anläufe in derselben Woche, wenn keine Antwort kommt."],
-tip:"Nenn immer das Thema und bring etwas Schriftliches mit. Damit wird aus einem Termin eine Beratung."},
+tip:"Nenn das Thema und bring, wenn es schon etwas gibt, etwas Schriftliches mit. Damit wird aus einem Termin eine Beratung."},
 
 {id:"ph40",g:"Uni & Studium",f:"Gruppenarbeit koordinieren",ctx:["uni"],
 lv:{f:["ich fasse unsere Aufgabenteilung zusammen, damit wir denselben Stand haben: …"],
@@ -2819,7 +2819,7 @@ const PAIRS = [
 {id:"pr10",ctx:"beruf",bad:"Ihr Sohn ist im Unterricht faul und unmotiviert.",
  why:"Zwei Etiketten. Eltern verteidigen ihr Kind — das ist ihre Aufgabe. Über Etiketten kann man nicht verhandeln, über Verhalten schon.",
  good:"Jonas hat in den letzten vier Wochen dreimal keine Sportsachen dabeigehabt und beteiligt sich in Spielphasen kaum. Ist Ihnen dazu etwas bekannt?",
- note:"Beobachtung, Zeitraum, offene Frage. Damit wird aus einer Anklage eine gemeinsame Suche."},
+ note:"Beobachtung, Zeitraum, eine Frage ohne Unterstellung. Damit wird aus einer Anklage eine gemeinsame Suche."},
 
 {id:"pr11",ctx:"uni",bad:"Ich finde die Bewertung meiner Arbeit nicht gerechtfertigt.",
  why:"Der Einstieg zwingt die andere Seite in die Verteidigung. Danach geht es um Rechtfertigung, nicht mehr um deine Arbeit.",
@@ -2930,13 +2930,13 @@ const SCENES = [
  s:"Du hast im Seminar eine Hausarbeit abgegeben und seit sechs Wochen nichts gehört. Die Note brauchst du für die Anmeldung zum nächsten Modul, deren Frist in zwei Wochen abläuft. Die Dozentin gilt als überlastet, aber freundlich.",
  ask:"Schreib die Nachfrage-Mail — Betreff und Text.",
  model:"<p><b>Betreff:</b> Nachfrage zur Bewertung — Hausarbeit Seminar „Bewegungslehre“ (Matrikelnr. 1234567)</p><p>Sehr geehrte Frau Dr. Weber,</p><p>ich möchte kurz nachfragen, ob die Bewertung meiner Hausarbeit aus dem Seminar „Bewegungslehre“ schon absehbar ist.</p><p>Hintergrund: Für die Anmeldung zum Modul B4 benötige ich den Nachweis bis zum 12. August. Falls es bis dahin nicht zu schaffen ist, sagen Sie mir das gern — dann frage ich beim Prüfungsamt nach einer Übergangslösung.</p><p>Vielen Dank für Ihre Mühe.</p><p>Mit freundlichen Grüßen<br>Nils Otten</p>",
- why:"Drei Dinge machen die Mail wirksam: Der Betreff ist eindeutig zuordenbar. Der Grund für die Nachfrage steht dabei, ist aber sachlich (Frist, nicht Ungeduld). Und der letzte Absatz nimmt den Druck heraus, indem er einen Ausweg anbietet — das erhöht die Wahrscheinlichkeit einer Antwort, statt sie zu senken.",
+ why:"Drei Dinge machen die Mail wirksam: Der Betreff ist eindeutig zuordenbar. Der Grund für die Nachfrage steht dabei, ist aber sachlich (Frist, nicht Ungeduld). Und der Satz mit dem Prüfungsamt nimmt den Druck heraus, indem er einen Ausweg anbietet — das erhöht die Wahrscheinlichkeit einer Antwort, statt sie zu senken.",
  alt:"Kürzer geht auch: „ich frage kurz nach, ob die Bewertung meiner Hausarbeit absehbar ist — ich brauche sie für die Modulanmeldung bis zum 12. August. Vielen Dank!“"},
 
 {id:"sc02",ctx:"beruf",t:"Der Kollege, der die Zuarbeit schuldig bleibt",
  s:"Ihr plant gemeinsam ein Sportfest. Marek sollte bis letzten Freitag die Stationenpläne liefern. Es ist Mittwoch, nichts ist gekommen, und ihr habt euch bisher gut verstanden. Ihr duzt euch.",
  ask:"Schreib die Nachricht.",
- model:"<p>Hallo Marek,</p><p>ich hake kurz wegen der Stationenpläne nach — die waren für Freitag verabredet und ich habe noch nichts gesehen. Gut möglich, dass es bei dir gerade eng ist.</p><p>Ich brauche sie bis Freitag, um die Aufsichten einzuteilen. Wenn du es nicht schaffst, sag mir das einfach — dann mache ich einen Rohentwurf und du korrigierst.</p><p>Viele Grüße<br>Nils</p>",
+ model:"<p>Hallo Marek,</p><p>ich hake kurz wegen der Stationenpläne nach — die waren für letzten Freitag verabredet und ich habe noch nichts gesehen. Gut möglich, dass es bei dir gerade eng ist.</p><p>Ich brauche sie bis Freitag, um die Aufsichten einzuteilen. Wenn du es nicht schaffst, sag mir das einfach — dann mache ich einen Rohentwurf und du korrigierst.</p><p>Viele Grüße<br>Nils</p>",
  why:"Die Nachricht enthält den Vorwurf nicht, obwohl er berechtigt wäre. Stattdessen: Fakt (verabredet war Freitag), Ausstiegstür (kann eng sein), neue Frist mit Begründung, konkretes Angebot. Das Angebot ist der eigentliche Trick — es macht das Eingeständnis billig und beschleunigt fast immer die Antwort.",
  alt:"Beim zweiten Mal darf die Konsequenz dazu: „Wenn ich bis Freitag nichts habe, mache ich die Pläne selbst und wir stimmen sie Montag ab.“ Sachlich, keine Drohung."},
 
@@ -2951,7 +2951,7 @@ const SCENES = [
  s:"Du hast bemerkt, dass eine Schülerin seit Wochen nicht am Schwimmunterricht teilnimmt und immer neue Entschuldigungen mitbringt. Du rufst die Mutter an. Du weißt nicht, ob dahinter Scham, ein Konflikt oder etwas Ernsteres steckt.",
  ask:"Formuliere den Gesprächseinstieg — bis die Mutter zum ersten Mal antwortet.",
  model:"<p>„Guten Tag, Frau Aydin, hier ist Nils Otten, der Sportlehrer von Elif. Ich rufe an, weil mir etwas aufgefallen ist — es ist nichts Schlimmes passiert, ich möchte nur nachfragen.</p><p>Elif war in den letzten fünf Wochen nicht beim Schwimmen. Jedes Mal lag eine Entschuldigung vor, das ist also alles in Ordnung — aber ich habe den Eindruck, dass etwas dahintersteckt, das wir vielleicht lösen könnten.</p><p>Wissen Sie, ob es einen Grund gibt? Und wäre es Ihnen recht, wenn wir gemeinsam überlegen, wie Elif wieder teilnehmen kann?“</p>",
- why:"Der zweite Satz — „es ist nichts Schlimmes passiert“ — trägt das Gespräch, wenn der Anlass kein Vorfall ist. Ein Anruf von der Schule löst bei vielen Eltern sofort Alarm aus; wer ihn nicht entschärft, redet gegen Angst an. Danach: zählbare Beobachtung, ausdrückliche Anerkennung, dass formal alles korrekt war, offene Frage, gemeinsames Ziel. Der Einstieg sagt nur, dass etwas dahintersteckt, und lässt offen, was.",
+ why:"Der zweite Satz — „es ist nichts Schlimmes passiert“ — trägt das Gespräch, wenn der Anlass kein Vorfall ist. Ein Anruf von der Schule löst bei vielen Eltern sofort Alarm aus; wer ihn nicht entschärft, redet gegen Angst an. Danach: zählbare Beobachtung, ausdrückliche Anerkennung, dass formal alles korrekt war, eine Frage ohne Vorwurf, gemeinsames Ziel. Der Einstieg sagt nur, dass etwas dahintersteckt, und lässt offen, was.",
  alt:"Wichtig auch, was <i>nicht</i> gesagt wird: keine Diagnose („Vielleicht schämt sie sich?“), kein Vorwurf, keine Handlungsanweisung an die Mutter."},
 
 {id:"sc05",ctx:"uni",t:"Die Gruppenarbeit, in der du alles machst",
@@ -2985,8 +2985,8 @@ const SCENES = [
 {id:"sc09",ctx:"beruf",t:"Die Anfrage, die du gern annehmen würdest — aber nicht kannst",
  s:"Du wirst gefragt, ob du im kommenden Halbjahr eine AG übernimmst. Du willst es eigentlich, hast aber schon zwei Verpflichtungen und dein Examen vor der Brust.",
  ask:"Formuliere die Antwort.",
- model:"<p>Hallo Frau Braun,</p><p>vielen Dank für die Anfrage — ich hätte die AG wirklich gern übernommen.</p><p>Für dieses Halbjahr muss ich absagen: Neben zwei laufenden Verpflichtungen steht im Frühjahr mein Examen an, und ich möchte nichts zusagen, was ich dann nicht verlässlich halten kann.</p><p>Für das Schuljahr darauf würde ich mich freuen, wenn Sie mich wieder fragen. Und falls Sie jemanden suchen: Tim Reuter hat mir erzählt, dass er genau so etwas sucht — ich frage ihn gern.</p><p>Viele Grüße<br>Nils Otten</p>",
- why:"Das Muster für eine gute Absage: Dank, echtes Bedauern (nur wenn es stimmt), klare Absage, <i>ein</i> Satz Begründung — hier mit dem stärksten möglichen Argument: Verlässlichkeit. Dann zwei Türen offen halten: späterer Zeitpunkt und konkrete Alternative.",
+ model:"<p>Hallo Frau Braun,</p><p>vielen Dank für die Anfrage — ich hätte die AG wirklich gern übernommen.</p><p>Für das kommende Halbjahr muss ich absagen: Neben zwei laufenden Verpflichtungen steht im Frühjahr mein Examen an, und ich möchte nichts zusagen, was ich dann nicht verlässlich halten kann.</p><p>Für das Schuljahr darauf würde ich mich freuen, wenn Sie mich wieder fragen. Und falls Sie jemanden suchen: Tim Reuter hat mir erzählt, dass er genau so etwas sucht — ich frage ihn gern.</p><p>Viele Grüße<br>Nils Otten</p>",
+ why:"Das Muster für eine gute Absage: Dank, echtes Bedauern (nur wenn es stimmt), klare Absage, <i>ein</i> Satz Begründung — hier mit einem Argument, das schwer abzuweisen ist: Verlässlichkeit. Dann zwei Türen offen halten: späterer Zeitpunkt und konkrete Alternative.",
  alt:"„Ich schaue mal, ob ich es einrichten kann“ wäre eine schlechte Antwort: Sie hält alle in der Schwebe und macht dich am Ende zum Unzuverlässigen."},
 
 {id:"sc10",ctx:"privat",t:"Der Text, den du nicht abschicken solltest",
@@ -3808,7 +3808,7 @@ const SATZ = [
 <div class="satz"><span class="rest">Ich gehe früher,</span> <span class="pos">weil</span> <span class="rest">ich morgen einen Termin</span> <span class="pos v">habe</span></div>
 <p><b>Diese Wörter lösen die Endstellung aus:</b></p>
 <div class="ex">weil · dass · ob · wenn · als · damit · obwohl · während · bevor · nachdem · sobald · solange · sofern · falls · indem · sodass · seit · bis · da · wie (indirekt) · alle W-Wörter in indirekten Fragen</div>
-<p><b>Nicht</b> ausgelöst wird sie von den Verbindern <code>und, oder, aber, denn, sondern</code> — nach denen bleibt es beim normalen Hauptsatz.</p>
+<p>Die Verbinder <code>und, oder, aber, denn, sondern</code> lösen sie <b>nicht</b> aus — sie ändern die Stellung nicht: Zwischen zwei Hauptsätzen bleibt es beim Hauptsatz, zwischen zwei Nebensätzen beim Nebensatz („…, weil ich müde bin <b>und</b> keine Zeit habe“). Gesprochen hört man nach „weil“ oft die Hauptsatzstellung („weil ich hab keine Zeit“); geschrieben steht das Verb am Ende.</p>
 <div class="ex"><span class="ok">Ich bleibe zu Hause, denn ich bin müde.</span> (Verb an 2)<br>
 <span class="ok">Ich bleibe zu Hause, weil ich müde bin.</span> (Verb am Ende)</div>
 <p><b>Der irreale Vergleich mit „als“:</b> Steht „als“ hier ohne „ob“, rückt das gebeugte Verb direkt dahinter, und der Konjunktiv ist Pflicht. Mit „als ob“ bleibt es am Ende. Beide Fassungen sind richtig und bedeuten dasselbe:</p>
@@ -3864,7 +3864,7 @@ Wenn du Zeit <b>hast</b>, <b>ruf</b> mich an.</div>
 <p><b>Nicht bei das, etwas, nichts, alles:</b> Die stehen wie ein Substantiv hinter dem Dativ — „Ich zeige dir das.“ · „Ich habe dem Trainer etwas gegeben.“</p>
 <p><b>Selbsttest:</b> „Ich habe es dir gesagt“ klingt richtig, „Ich habe dir es gesagt“ nicht. Genau das ist die Regel.</p>`},
 
-{id:"sa07",t:"Wo steht „nicht“?",short:"Ganzer Satz: möglichst weit hinten · ein Teil: direkt davor",b:`
+{id:"sa07",t:"Wo steht „nicht“?",short:"Ganzer Satz: weit hinten, aber vor Verbteil, Prädikativ, Richtung und Präpositionalobjekt · ein Teil: direkt davor",b:`
 <p><b>Ganzer Satz verneint → „nicht“ steht möglichst weit hinten</b>, aber vor dem zweiten Verbteil:</p>
 <div class="ex">Ich habe gestern <b>nicht</b> trainiert.<br>Ich kann heute <b>nicht</b> kommen.</div>
 <p><b>Nur ein Teil verneint → „nicht“ steht direkt davor:</b></p>
@@ -3893,7 +3893,7 @@ mitkommen → <b>Kommst</b> du <b>mit</b>?<br>
 zumachen → <b>Mach</b> bitte die Tür <b>zu</b>.</div>
 <p><b>Zusammen bleibt sie</b> im Nebensatz, im Infinitiv und im Partizip:</p>
 <div class="ex">…, weil ich um sechs <b>aufstehe</b>.<br>Ich muss um sechs <b>aufstehen</b>.<br>Ich bin um sechs <b>aufgestanden</b>. (das „ge“ rutscht in die Mitte)</div>
-<p><b>Trennbar oder nicht?</b> Bei den Wechselvorsilben <code>durch-, über-, um-, unter-, wider-</code> entscheidet die Betonung. Liegt sie auf der Vorsilbe, ist sie trennbar:</p>
+<p><b>Trennbar oder nicht?</b> Bei den Wechselvorsilben, etwa <code>durch-, über-, um-, unter-, wider-, wieder-, voll-</code>, entscheidet die Betonung. Liegt sie auf der Vorsilbe, ist sie trennbar:</p>
 <div class="ex"><b>ÜBER</b>setzen (mit dem Boot) → Ich setze über. · über<b>SETZ</b>en (in eine Sprache) → Ich übersetze den Text.<br>
 <b>UM</b>fahren (umwerfen) → Ich fahre ihn um. · um<b>FAHR</b>en (herumfahren) → Ich umfahre die Stadt.</div>
 <p><b>Nie trennbar:</b> be-, ge-, er-, ver-, zer-, ent-, emp-, miss-. Bei diesen greift der Betonungstest nicht.</p>
@@ -3922,7 +3922,7 @@ Der Mann, <b>dessen</b> Auto dort steht. → Besitz → Genitiv</div>
 <p>Bei <code>lassen</code> ist der Ersatzinfinitiv die übliche Form: „Ich habe ihn kommen <b>lassen</b>.“ Bei <code>sehen, hören, fühlen, helfen</code> ist der Ersatzinfinitiv dagegen <b>nicht</b> Pflicht, sondern die häufigere von zwei zulässigen Formen: „Ich habe ihn kommen <b>sehen</b>“ und „Ich habe ihn kommen <b>gesehen</b>“ sind beide korrekt — die erste ist gebräuchlicher. Pflicht ist der Ersatzinfinitiv nur bei den Modalverben und bei „brauchen“. Quelle: Duden-Grammatik zum Ersatzinfinitiv.</p>
 <p><b>Fürs Sprechen:</b> Die Nebensatz-Variante klingt für viele fremd. Bau den Satz lieber um: „Ich konnte nicht kommen, deshalb …“</p>`},
 
-{id:"sa11",t:"Perfekt mit haben oder sein?",short:"Ortswechsel und Zustandswechsel → sein",b:`
+{id:"sa11",t:"Perfekt mit haben oder sein?",short:"Orts- und Zustandswechsel ohne Akkusativobjekt, dazu sein, bleiben, passieren → sein",b:`
 <p><b>Mit „sein“</b> stehen:</p>
 <ul>
 <li>Verben der <b>Ortsveränderung</b>: gehen, fahren, laufen, fliegen, kommen, reisen, springen</li>
@@ -3949,7 +3949,7 @@ Länger: Wenn ich Zeit haben würde, würde ich kommen.</div>
 <p><b>Zweimal „würde“ in einem Satzgefüge</b> gilt als unschön — grammatisch falsch ist es nicht. Der Duden rät zum Ausweichen: „Wenn er mich fragen <b>sollte</b>, würde ich sofort zusagen.“</p>
 <p><b>Höflichkeit:</b> „Könnten Sie …“, „Ich hätte gern …“, „Dürfte ich …“ — der Konjunktiv macht eine Bitte höflich, ohne dass du ein einziges Höflichkeitswort brauchst.</p>`},
 
-{id:"sa13",t:"Adjektivendungen — die Ein-Blick-Regel",short:"Signal einmal, dann nur noch -e oder -en",b:`
+{id:"sa13",t:"Adjektivendungen — die Ein-Blick-Regel",short:"Artikel zeigt den Fall → Adjektiv -e/-en · kein Artikel → Adjektiv trägt die Endung (mehrere gleichrangige: jedes)",b:`
 <p>Das <b>Kasussignal</b> (die Endung, die den Fall zeigt) steht <b>einmal</b> im Ausdruck — entweder am Artikel oder am Adjektiv. Die Regel beschreibt das Verhältnis von Artikel und Adjektiv; für mehrere Adjektive nebeneinander gilt sie nicht, siehe unten.</p>
 <p><b>Der Artikel zeigt es schon</b> → das Adjektiv bekommt nur noch <b>-e</b> oder <b>-en</b>:</p>
 <div class="ex"><b>der</b> gut<b>e</b> Trainer · <b>dem</b> gut<b>en</b> Trainer · <b>die</b> gut<b>en</b> Trainer</div>
@@ -4111,7 +4111,7 @@ Sie hat gefragt, <b>ob</b> du Zeit <b>hast</b>. (ohne Fragewort → „ob“)</d
 <p>Auch hier gilt: Das <b>Verb</b> bestimmt den Kasus — nicht das Gefühl. Steht eine Präposition davor, bestimmt sie ihn mit: „<b>Mit wem</b> …?“ — mit + Dativ.</p>
 <p><b>Fragen nach Sachen mit Präposition</b> bildet man in der Regel mit <b>wo(r)-</b>: <code>womit, woran, worauf, wovon, worüber, wofür</code> (bei „wegen“: <b>weswegen</b>). „Mit was hast du das gemacht?“ ist gesprochen geläufig, geschrieben steht meist <b>womit</b>. Bei Personen bleibt es bei Präposition und Fragewort: „<b>Mit wem</b> hast du gesprochen?“</p>`},
 
-{id:"sa23",c:"satz",t:"wenn oder als?",short:"als = einmaliges Geschehen, erzählt · wenn = wiederholt, künftig oder Bedingung · wann = Frage",b:`
+{id:"sa23",c:"satz",t:"wenn oder als?",short:"als = einmaliges Geschehen, erzählt · wenn = wiederholt, künftig oder Bedingung · wann = Frage (und „wann immer“)",b:`
 <p>Beide leiten einen Nebensatz ein, aber sie teilen sich die Zeit anders auf.</p>
 <p><b>als</b> — ein einzelnes, abgeschlossenes Ereignis in der <b>Vergangenheit</b>:</p>
 <div class="ex"><b>Als</b> ich in Köln ankam, regnete es.<br>

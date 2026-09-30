@@ -613,7 +613,9 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
      zu machen, ph33 nannte die Zusammenfassung „die stärkste Nachfrage“. Dazu „am seltensten“,
      dieselbe Rangordnung von unten: „Genau derjenige, der Hilfe braucht, fragt am seltensten
      danach“ stand in form-mitgefuehl, f46 und pr17. */
-  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|schlechteste|wichtigste|beste|schwerste|härteste|schnellste|stärkste|typischste|verbreitetste|wirksamste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|seltensten|verbreitetsten|meisten|wirksamsten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
+  /* „dem/den/des“ seit dem 30.09.2026: sc09 sagte „mit dem stärksten möglichen Argument“, und der
+     Wächter kannte nur „der/die/das“. */
+  const RANG =/(?:^|[^\wäöüßÄÖÜ])(?:der|die|das|dem|den|des)\s+(?:(?:zwei|drei|vier|fünf|beiden)\s+)?(?:häufigste|größte|schlimmste|schlechteste|wichtigste|beste|schwerste|härteste|schnellste|stärkste|typischste|verbreitetste|wirksamste)[nrs]?(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])(?:der|die|das)\s+meist(?!en(?![\wäöüßÄÖÜ]))[a-zäöüß]+(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])am\s+(?:häufigsten|seltensten|verbreitetsten|meisten|wirksamsten)(?![\wäöüßÄÖÜ])|(?:^|[^\wäöüßÄÖÜ])die\s+meisten(?![\wäöüßÄÖÜ])/i;   /* kein g: .test() waere damit zustandsbehaftet, siehe Kommentar unten */
   /* Am 21.09.2026 kam der artikellose Superlativ dazu: z23 nannte den Satzabbruch
      „Häufigster Stolperstein beim freien Sprechen“ — dieselbe Behauptung wie „der
      häufigste“, nur ohne Artikel davor, und der Erkenner oben sah sie nicht. Diese
@@ -626,6 +628,7 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Übung g06": "„der schnellste der drei Sprinter“ ist das Beispiel für die Kleinschreibung nach § 58(1): Superlativ mit Artikel, bezogen auf ein Substantiv",
     "Regel komma-einschub": "„Die schnellste Läuferin im Kader, Lea Otten,“ ist das Beispiel für die spezifische Charakterisierung nach § 72 E2 — dessen eigene Beispiele sind alle Superlative",
     "Regel gram-konjunktiv": "„die meisten Verben sind schwach“ ist eine Aussage über die Formenbildung, keine Fehlerstatistik",
+    "Regel form-grussformel": "„Mit den besten Grüßen“ ist eine zitierte Grußformel, keine Rangbehauptung",
     "Regel form-anrede":    "Ratgebertext: „Die wichtigste Regel: spiegeln“ ist ein Rat, kein Befund",
     "Regel form-eltern":    "Ratgebertext: „Die beste Investition“ ist ein Rat, kein Befund",
     "Übung g07":            "„die meisten wissen das“ ist der Beispielsatz der Aufgabe",
@@ -672,7 +675,9 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
   /* Die Fassung der Tabellenansicht vor dem 22.09.2026 — der Fund, der den Oberflächentexten
      einen Platz in BESTAND verschafft hat. */
   sammle2("Oberfläche", "probe-tabellen", "Zum Nachschlagen im Zweifelsfall. Hervorgehoben sind die Felder, bei denen im Alltag die meisten Fehler passieren.");
-  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 9, "Positivprobe blieb stumm");
+  /* Gebeugter Artikel, wörtlich aus sc09 vom 30.09.2026. */
+  sammle2("Schreibwerkstatt", "probe-sc09", "ein Satz Begründung — hier mit dem stärksten möglichen Argument: Verlässlichkeit.");
+  P.ok("Der Rang-Erkenner schlägt bei einer neuen Behauptung an", probe.size === 10, "Positivprobe blieb stumm");
   const leer = new Set();
   const sammle3 = (art, id, t) => { if (t && rang(t)) leer.add(art + " " + id); };
   sammle3("Regel", "probe-ok", "<p>Ein mehrdeutiger Bezug zwingt zum Zurücklesen.</p>");
@@ -827,7 +832,6 @@ P.ok("Kein Urteil widerspricht sich (hart vs. relativiert)", !streit.length, str
     "Baustein ph15":      "zitierte Falschform: „Immer muss ich hinterherlaufen“",
     "Baustein ph22":      "zitierte Falschform: „Du bist immer unpünktlich“ — und der Satz daneben sagt selbst, „immer“ sei als Vorwurf selten wörtlich wahr",
     "Baustein ph25":      "zitierte Falschform: „Das habe ich nie gesagt“",
-    "Baustein ph39":      "Ratgebersatz („Nenn immer das Thema“), kein Befund über die Sprache",
     "Baustein ph48":      "Ratgebersatz („beim Ausstieg immer einen Grund nennen“), kein Befund über die Sprache",
     "Vorher/Nachher pr03": "zitierte Falschform: „Bereits mehrfach“ und „noch immer“ sind der Gegenstand des Eintrags",
     "Vorher/Nachher pr04": "„„Immer“ ist als Vorwurf selten wörtlich wahr“ — das Wort ist selbst der Gegenstand",
