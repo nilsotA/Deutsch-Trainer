@@ -62,13 +62,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 **Vertiefung Nebensatz, Satzklammer, Modalverben, Konjunktiv (30.09.2026, noch einundsechzigste Runde).** Block
 `c01`–`c14`; der Mindestwächter kennt 28 Kernregeln. Gegenprüfung: c10 „Wenn ich mehr Zeit habe, käme ich …“ ist
 nach grammis („Konditionalgefüge“) eine zulässige Mischform — jetzt mit Rahmen „Du hast gerade keine Zeit“ und
-rein indikativischem Ablenker. **Nebenfund im Bestand:** sa10 (und damit `satz-modal`) und z11 führten
-„…, weil ich nicht kommen können habe“ als falsch. Die Variantengrammatik („Wortstellung im Verbalkomplex“,
-gelesen) belegt die Nachstellung „überall“, 5–15 % je Areal, in Österreich häufiger; die Voranstellung ist
-mehrheitlich. Die Regel nennt sie jetzt als seltener, nicht als Fehler; z11 hat den sicher falschen Ablenker
-„kommen gekonnt habe“ bekommen, die richtige Antwort bleibt, also kein `NEU_GELERNT`. Offen: Die Futur-Aussage
-in sa10 („in den meisten Regionen ist die zweite sogar häufiger“) stammt aus einer älteren Runde und wäre gegen
-dieselbe Seite nachzulesen — die Frequenztabelle dort mischt Perfekt und Futur.
+rein indikativischem Ablenker. **Ein Fund, der keiner war:** Der Prüfer meldete, sa10 und z11 führten „…, weil ich nicht kommen können
+habe“ zu Unrecht als falsch — die Variantengrammatik belege die Nachstellung „überall“. Das stand im Abschnitt
+über alle Hilfsverben zusammen. Der Abschnitt „Finites Hilfsverb haben“ derselben Seite sagt: Voranstellung
+„ganz überwiegend oder sogar fast ausschließlich“, Nachstellung „nur äußerst sporadisch“, ohne Areal. Ich hatte
+die Regel schon umgeschrieben und habe sie zurückgenommen; sie nennt jetzt die Zahlen dieses Abschnitts. z11
+behält den neuen Ablenker „kommen gekonnt habe“ (sicher falsch, richtige Antwort unverändert). Die Futur-Aussage
+in sa10 („in den meisten Regionen ist die zweite sogar häufiger“) deckt der Abschnitt „werden“: Nachstellung
+„in fast allen übrigen Regionen … bevorzugt“. **Eine Quelle mit Unterabschnitten liest man bis zum passenden
+Unterabschnitt** — die Gesamtaussage kann für den Einzelfall falsch sein.
 
 **Vertiefung Präpositionen, derselbe, wenn/als, Negation, Plural (30.09.2026, noch einundsechzigste Runde).**
 Block `l01`–`l14`; der Mindestwächter kennt jetzt 22 Kernregeln. Gegenprüfung ohne falschen Ablenker, sechs
