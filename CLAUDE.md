@@ -233,7 +233,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - **Alle Antworten ohne Scrollen sichtbar.** Ist eine Antwort länger als 40 Zeichen, setzt
   `renderQ()` die Klasse `lang` und der Unterwegs-Modus eine kompaktere Fassung (17 statt
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
-  vierten Antwort. `npm run layout` zeichnet jede der 817 Unterwegs-Karten einzeln in Chromium
+  vierten Antwort. `npm run layout` zeichnet jede der 853 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 8 auf 375×667 (gemessen 5, seit Karten mit sehr langen
   Antworten — mehr als `SEHR_LANG` Zeichen zusammen — die Klasse `sehrlang` bekommen; vorher 14,
   davor 49 und 51), keine auf 390×844. Jede Karte
