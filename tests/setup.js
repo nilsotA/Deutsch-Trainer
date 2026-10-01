@@ -156,7 +156,7 @@ function daten(w, ausdruck) {
 /* Alle Kartenschlüssel der App, nach Sorte getrennt */
 function schluessel(w) {
   return {
-    aufgaben: daten(w, 'ALL.filter(i=>i.t!=="fill").map(i=>i.id)'),
+    aufgaben: daten(w, 'ALL.filter(unterwegsTauglich).map(i=>i.id)'),   // was unterwegs drankommen kann
     woerter: daten(w, 'WORDS.map(x=>"w:"+x.w)'),
     faelle: daten(w, 'drillPool().map(e=>"c:"+e.w)')
   };

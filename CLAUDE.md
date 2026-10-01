@@ -71,7 +71,7 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 543 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 543 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben, dazu `wo:[richtig, falsch …]` (+ `wq`) als Auswahl für unterwegs |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 120 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
@@ -212,7 +212,8 @@ Fälligkeit minus Fachintervall.
 
 Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat Vorrang:
 
-- `startQuiz(list, host, {walk:true})` filtert Tippaufgaben raus, setzt `body.walk`,
+- `startQuiz(list, host, {walk:true})` ersetzt Tippaufgaben mit `wo` durch ihre Auswahlfassung
+  (dieselbe Karte, `unterwegsTauglich()`), filtert die übrigen raus, setzt `body.walk`,
   hält den Bildschirm wach, sichert die Sitzung (36 h fortsetzbar).
 - Vorlesen über `sprechFrage(q)` → `sprechbar()`; nach der Antwort wird auch die Erklärung vorgelesen, und sie läuft durch dieselbe Kette. **`hoerHinweis()` ist Pflicht:**
   Antworten, die sich nur in Schreibung oder Zeichensetzung unterscheiden, klingen gleich
@@ -232,7 +233,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - **Alle Antworten ohne Scrollen sichtbar.** Ist eine Antwort länger als 40 Zeichen, setzt
   `renderQ()` die Klasse `lang` und der Unterwegs-Modus eine kompaktere Fassung (17 statt
   20 px, weniger Polsterung). Vorher brauchte auf 375×667 jede Wortkarte Scrollen bis zur
-  vierten Antwort. `npm run layout` zeichnet jede der 817 Unterwegs-Karten einzeln in Chromium
+  vierten Antwort. `npm run layout` zeichnet jede der 853 Unterwegs-Karten einzeln in Chromium
   und hält die Zahl fest: höchstens 8 auf 375×667 (gemessen 5, seit Karten mit sehr langen
   Antworten — mehr als `SEHR_LANG` Zeichen zusammen — die Klasse `sehrlang` bekommen; vorher 14,
   davor 49 und 51), keine auf 390×844. Jede Karte
