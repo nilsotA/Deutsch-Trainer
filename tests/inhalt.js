@@ -13,6 +13,12 @@ const WORDS = daten(w, "WORDS");
 const RULES_ALL = daten(w, "RULES_ALL.map(r=>({id:r.id,b:r.b}))");
 const CHECKS_ALL = daten(w, "CHECKS_ALL.map(c=>({id:c.id,k:c.k||\"\"}))");
 const KORREKTUR = daten(w, "KORREKTUR");
+/* Alles, was als Auswahlfrage drankommt: die Auswahlaufgaben und seit dem 01.10.2026 die
+   Auswahlfassung der Tippaufgaben (wo), die unterwegs an ihre Stelle tritt. Jede Prüfung
+   auf Optionen läuft über diese Menge — sonst sähe sie die neuen Ablenker nicht. */
+w.eval(`window.__AUSWAHL = ALL.filter(unterwegsTauglich).map(i => i.t !== "fill" ? i :
+  ({ id: i.id, c: i.c, q: i.wq || i.q, o: i.wo, a: 0, e: i.e, r: i.r }));`);
+const MC = daten(w, "__AUSWAHL");
 
 /* Formentabelle: siehe tests/formen.js — von inhalt.js und fallform.js geteilt */
 const { FORM, NAME } = require("./formen");
@@ -149,13 +155,13 @@ P.ok("Jede Wortkarte hat eine Erläuterung", !knapp.length, knapp.join(", "));
 
 /* ---------- D · Länge unterwegs ---------- */
 P.titel("D · Hörbarkeit");
-const langeFragen = ALL.filter(i => i.t !== "fill")
+const langeFragen = MC
   .filter(i => (i.q + " " + i.o.join(" ")).length > 340)
   .map(i => i.id);
 P.ok("Keine überlangen Fragen für unterwegs", !langeFragen.length, langeFragen.join(","));
 
 const restZeichen = new Set();
-ALL.filter(i => i.t !== "fill").forEach(i => {
+MC.forEach(i => {
   const t = w.eval("sprechbar(sprechFrage(" + JSON.stringify({ q: i.q, opts: i.o }) + "))");
   (t.match(/[_§°%→<>&\/\\\[\]{}]/g) || []).forEach(c => restZeichen.add(c));
 });
@@ -171,7 +177,7 @@ P.ok("Keine unlesbaren Sonderzeichen im Sprechtext", restZeichen.size === 0, [..
 const gesprochen = w.eval(`(function(){
   const r = rng(1), out = [];
   const nimm = (id, q) => { out.push({ id, t: sprechbar(sprechFrage(q)) }); out.push({ id: id + " (Erklärung)", t: sprechbar(strip(q.exp || "")) }); };
-  ALL.filter(i => i.t !== "fill").forEach(i => nimm(i.id, exQuestion(i)));
+  __AUSWAHL.forEach(i => nimm(i.id, exQuestion(i)));
   WORDS.forEach(x => nimm("w:" + x.w, wordQuestion(x, r)));
   drillPool().forEach(x => nimm("c:" + x.w, caseQuestion(x)));
   return out; })()`);
@@ -222,7 +228,7 @@ P.ok("… und die Prüfung erkennt die alte Fassung",
    groß“. Zwischen Option und Hinweis muss eine Pause stehen. */
 const ohnePause = w.eval(`(function(){
   const out = [];
-  ALL.filter(i => i.t !== "fill").forEach(i => {
+  __AUSWAHL.forEach(i => {
     const q = exQuestion(i), s = sprechFrage(q);
     q.opts.forEach(x => { const h = hoerHinweis(x, q.opts), t = strip(x);
       if (h && !/[.!?…:,;]\\s*$/.test(t) && s.includes(t + h)) out.push(i.id); });
@@ -252,7 +258,7 @@ const nennt = (h, n) => n instanceof RegExp ? n.test(h) : h.includes(n);
 const flach = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 const stummeZeichen = [];
 let zeichenPaare = 0;
-ALL.filter(i => i.t !== "fill").forEach(i => {
+MC.forEach(i => {
   i.o.forEach((a, k) => i.o.forEach((b, m) => {
     if (m <= k || flach(a) !== flach(b)) return;
     Object.keys(ZEICHEN).forEach(z => {
@@ -278,7 +284,7 @@ const PAARE = daten(w, "Object.keys(KLANGPAAR)");
 const wortliste = t => String(t).toLowerCase().replace(/[^\p{L}]+/gu, " ").trim().split(/\s+/);
 const stummePaare = [];
 let klangPaare = 0;
-ALL.filter(i => i.t !== "fill").forEach(i => {
+MC.forEach(i => {
   i.o.forEach((a, k) => i.o.forEach((b, m) => {
     if (m <= k) return;
     const ohneTags = t => String(t).replace(/<[^>]*>/g, " ");
@@ -314,7 +320,7 @@ P.ok("Die Zifferprobe erkennt das Paar aus q03",
   gleichNachZahl("Vierundzwanzig Personen nahmen teil.", "24 Personen nahmen teil."),
   "Positivprobe blieb stumm");
 const zifferStumm = [];
-ALL.filter(i => i.t !== "fill").forEach(i => {
+MC.forEach(i => {
   i.o.forEach((a, k) => i.o.forEach((b, m) => {
     if (m <= k || !gleichNachZahl(a, b)) return;
     const hinweis = w.eval("hoerHinweis(" + JSON.stringify(a) + "," + JSON.stringify(i.o) + ")");
@@ -355,7 +361,7 @@ w.eval(`window.__reihenPruefen = function(fragen, hin){
 };
 window.__alleFragen = (function(){
   const r = rng(1), out = [];
-  ALL.filter(i => i.t !== "fill").forEach(i => { const q = exQuestion(i); out.push({ id: i.id, o: q.opts, a: q.ans }); });
+  __AUSWAHL.forEach(i => { const q = exQuestion(i); out.push({ id: i.id, o: q.opts, a: q.ans }); });
   WORDS.forEach(x => { const q = wordQuestion(x, r); out.push({ id: "w:" + x.w, o: q.opts, a: q.ans }); });
   drillPool().forEach(x => { const q = caseQuestion(x); out.push({ id: "c:" + x.w, o: q.opts, a: q.ans }); });
   return out;
@@ -616,6 +622,29 @@ P.ok("Die Musterantwort steht bei jeder erweiterten Tippaufgabe vorn", !verrutsc
 
 
 /* ---------- G · Einordnung regionaler Varianten ---------- */
+/* Die Auswahlfassung einer Tippaufgabe (wo, seit dem 01.10.2026) ist dieselbe Karte unter
+   anderer Form. Ihre richtige Option muss deshalb eine sein, die das Tippfeld annimmt, und
+   kein Ablenker darf eine sein — sonst wertet dieselbe Karte unterwegs als falsch, was sie
+   zu Hause als richtig nimmt, oder umgekehrt. */
+{
+  const norm = t => String(t).trim().toLowerCase();
+  const mitWo = ALL.filter(i => i.t === "fill" && i.wo);
+  const pruefeWo = i => {
+    const f = [], acc = i.a.map(norm), o = i.wo.map(norm);
+    if (o.length < 2) f.push(i.id + ": weniger als zwei Optionen");
+    if (new Set(o).size !== o.length) f.push(i.id + ": doppelte Option");
+    if (!acc.includes(o[0])) f.push(i.id + ": „" + i.wo[0] + "“ nimmt das Tippfeld nicht an");
+    o.slice(1).forEach(x => { if (acc.includes(x)) f.push(i.id + ": Ablenker „" + x + "“ nimmt das Tippfeld an"); });
+    return f;
+  };
+  const woFehler = [].concat(...mitWo.map(pruefeWo));
+  P.info(mitWo.length + " von " + ALL.filter(i => i.t === "fill").length + " Tippaufgaben haben eine Auswahl für unterwegs");
+  P.ok("Die Auswahl einer Tippaufgabe passt zu ihrem Tippfeld", !woFehler.length, woFehler.join(" · "));
+  P.ok("… und die Prüfung erkennt einen vertauschten und einen angenommenen Ablenker",
+    pruefeWo({ id: "probe", a: ["dem"], wo: ["den", "dem"] }).length === 2 &&
+    pruefeWo({ id: "probe", a: ["dem", "einem"], wo: ["dem", "einem"] }).length === 1);
+}
+
 P.titel("G · Regionale Varianten");
 /* Fehlerklasse „dieselbe Form, zwei verschiedene Landkarten“: Die Fallkarte „trotz“ sagte
    „In Österreich ist ‚trotz dem‘ verbreitet“, die Übung d17 zur exakt selben Sache „Der
@@ -983,7 +1012,7 @@ const variantenTreffer = (richtig, ablenker) => {
     .map(v => ka + " / " + kb + " — " + v.id);
 };
 const varSchief = [];
-ALL.forEach(i => {
+MC.forEach(i => {
   if (!i.o || i.t === "fill" || i.o.length < 2) return;
   i.o.forEach((opt, k) => {
     if (k === i.a) return;

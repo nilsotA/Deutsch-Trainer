@@ -903,5 +903,28 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     }
   }
 
+  /* Tippaufgaben mit Auswahl (wo, seit dem 01.10.2026): Unterwegs tritt die Auswahlfassung
+     an ihre Stelle, unter derselben Karte; ohne Auswahl fallen sie weiter heraus. Und die
+     Runde zieht sie, statt sie wie früher alle zu übergehen. */
+  P.titel("N · Tippaufgaben unterwegs als Auswahl");
+  {
+    const w = boot(leererStand({ auto: false }));
+    const d = w.document;
+    const mit = daten(w, 'ALL.find(i => i.t === "fill" && i.wo).id');
+    const ohne = daten(w, 'ALL.find(i => i.t === "fill" && !i.wo).id');
+    w.eval('startQuiz(["' + mit + '", "' + ohne + '"].map(id => exQuestion(ALL.find(i => i.id === id))), $("#walkHost"), {walk:true})');
+    const liste = daten(w, "Q.list.map(q => ({ key: q.key, type: q.type, opts: q.opts }))");
+    P.ok("die Tippaufgabe mit Auswahl kommt als Auswahlfrage", liste.length === 1 && liste[0].key === mit && liste[0].type === "mc",
+      JSON.stringify(liste));
+    P.ok("… mit genau ihren Optionen", JSON.stringify([...liste[0].opts].sort()) === JSON.stringify(daten(w, 'ALL.find(i => i.id === "' + mit + '").wo').sort()));
+    P.ok("die ohne Auswahl fällt heraus", !liste.some(q => q.key === ohne));
+    P.ok("es steht kein Tippfeld da", !d.querySelector("#fillIn"));
+    tippe(w, d.querySelectorAll(".opt")[daten(w, "Q.list[0].ans")]);
+    P.ok("die Antwort zählt für dieselbe Karte", !!daten(w, 'S.cards["' + mit + '"]'));
+
+    const taugt = id => daten(w, 'unterwegsTauglich(ALL.find(i => i.id === "' + id + '"))');
+    P.ok("die Runde zieht Tippaufgaben mit Auswahl, die ohne nicht", taugt(mit) === true && taugt(ohne) === false);
+  }
+
   P.abschluss();
 })();

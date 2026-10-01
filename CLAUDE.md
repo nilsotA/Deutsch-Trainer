@@ -71,7 +71,7 @@ also nicht umbenennen.
 
 | Konstante | Inhalt | Schema |
 |---|---|---|
-| `EX_A … EX_E` → `ALL` | 543 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben |
+| `EX_A … EX_E` → `ALL` | 543 Übungen | `{id, c, q, o[], a, e, r}` · `t:"fill"` + `a:[akzeptiert]` für Tippaufgaben, dazu `wo:[richtig, falsch …]` (+ `wq`) als Auswahl für unterwegs |
 | `WORDS` | 155 Wortschatzkarten | `{w, p, d, ex, s, t}` |
 | `RULES`, `RULES_FORM`, `RULES_SATZ`, `RULES_ZEICHEN` → `RULES_ALL` | 120 Regeln | `{id, c, t, b}` — `b` ist HTML |
 | `SATZ` | 24 Satzbaukarten | `{id, t, short, b, c}` — speisen über `SATZ_RULEMAP` die Satzregeln |
@@ -212,7 +212,8 @@ Fälligkeit minus Fachintervall.
 
 Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat Vorrang:
 
-- `startQuiz(list, host, {walk:true})` filtert Tippaufgaben raus, setzt `body.walk`,
+- `startQuiz(list, host, {walk:true})` ersetzt Tippaufgaben mit `wo` durch ihre Auswahlfassung
+  (dieselbe Karte, `unterwegsTauglich()`), filtert die übrigen raus, setzt `body.walk`,
   hält den Bildschirm wach, sichert die Sitzung (36 h fortsetzbar).
 - Vorlesen über `sprechFrage(q)` → `sprechbar()`; nach der Antwort wird auch die Erklärung vorgelesen, und sie läuft durch dieselbe Kette. **`hoerHinweis()` ist Pflicht:**
   Antworten, die sich nur in Schreibung oder Zeichensetzung unterscheiden, klingen gleich

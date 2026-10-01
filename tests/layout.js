@@ -125,7 +125,8 @@ function messen(W) {
       const out = [];
       let lang = 0, kurzMitLang = 0;
       for (const k of alleSchluessel()) {
-        const q = frageZuSchluessel(k, rng(hash(k)));
+        let q = frageZuSchluessel(k, rng(hash(k)));
+        if (q && q.type === "fill" && q.auswahl) q = q.auswahl;   // so zeigt sie startQuiz() unterwegs
         if (!q || q.type !== "mc") continue;
         Q.list = [q]; Q.i = 0; renderQ(); window.scrollTo(0, 0);
         const opts = [...document.querySelectorAll("#walkHost .opt")];

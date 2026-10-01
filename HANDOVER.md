@@ -59,6 +59,15 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Tippaufgaben unterwegs als Auswahl (01.10.2026).** Unterwegs fehlten alle 45 Tippaufgaben — darunter Kernfälle
+wie „mit dem Rad“, „Kannst du mir helfen?“, „Der Kollege, dem ich geholfen habe“. 36 tragen jetzt `wo` (erste Option
+richtig, Ablenker sicher falsch) und kommen unterwegs als Auswahlfrage unter derselben Karte; `wq` ersetzt dort die
+Frage, wo die Lücke mitten im Wort steht („gut___“) oder der Rahmen fehlt (b02: „standardsprachlich“). Ohne `wo`
+blieben: r02 und z05 (zwei Lücken), r14 (ausser/außer, regional), m18 („nachdem … hat“ ist gesprochen verbreitet),
+n06 (Ortslesart nicht sicher), n11 („ruf mir an“ regional), z16 (bräuchte), z17 (nicht/kein), z22 (zwei Formen).
+`tests/inhalt.js` prüft jede Auswahl gegen ihr Tippfeld (richtige Option wird angenommen, kein Ablenker), und alle
+Options-, Hör- und Variantenprüfungen laufen jetzt über `__AUSWAHL` statt nur über die Auswahlaufgaben.
+
 **Tippaufgaben über „Heute“ (30.09.2026, mit Nils abgestimmt).** Die Kalenderläufe zum Block vk/vg zeigten nach
 sechs Monaten mit zwei Runden bis zu 17 nie gesehene Übungen, fast alle Tippaufgaben. Ursache: Unterwegs werden
 sie herausgefiltert, und in „Heute“ liefen sie im Themenwechsel mit — „gram“ trägt 33 der 45 und bekam jeden
