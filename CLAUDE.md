@@ -229,7 +229,7 @@ Nils übt **beim Spazierengehen, einhändig, oft mit Vorlesen**. Alles hier hat 
 - `startQuiz(list, host, {walk:true})` ersetzt Tippaufgaben mit `wo` durch ihre Auswahlfassung
   (dieselbe Karte, `unterwegsTauglich()`), filtert die übrigen raus, setzt `body.walk`,
   hält den Bildschirm wach, sichert die Sitzung (36 h fortsetzbar).
-- Vorlesen über `sprechFrage(q)` → `sprechbar()`; nach der Antwort wird auch die Erklärung vorgelesen, und sie läuft durch dieselbe Kette. **`hoerHinweis()` ist Pflicht:**
+- Vorlesen über `sprechFrage(q)` → `sprechbar()`; nach der Antwort wird auch die Erklärung vorgelesen, und sie läuft durch dieselbe Kette. Nach einer richtigen Antwort nur „Richtig.“ und der erste Satz (`ersterSatz()`; nennt der Rest eine Variante oder Einordnung, alles), 🔊 liest die ganze Erklärung. **`hoerHinweis()` ist Pflicht:**
   Antworten, die sich nur in Schreibung oder Zeichensetzung unterscheiden, klingen gleich
   („des Weiteren“ / „des weiteren“). Der Hinweis benennt den Unterschied
   („Weiteren groß“, „Komma nach größer“, „mit Bindestrich“, „Semikolon nach hell“,

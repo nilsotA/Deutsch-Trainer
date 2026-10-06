@@ -7675,6 +7675,11 @@ function check(input){
      trotzdem weiter. Die Marke ist lokal: Sie gilt nur für diese eine Antwort. */
   let angehalten = false;
   const nochmalText = (ok?"Richtig. ":"Nicht ganz. ")+strip(q.exp);
+  /* Nach einer richtigen Antwort genügt unterwegs der Kern: „Richtig.“ und der erste Satz.
+     Die ganze Erklärung kostete bei langen Regeln zwanzig Sekunden je Karte, für etwas, das
+     Nils schon wusste; 🔊 in der Leiste liest sie weiter ganz vor. Nach einem Fehler bleibt
+     alles, denn dort ist die Erklärung der Lernschritt. */
+  const sprechText = ok ? "Richtig. "+ersterSatz(strip(q.exp)) : nochmalText;
   if(Q.walk){
     try{ if(navigator.vibrate) navigator.vibrate(ok ? 25 : [25,70,25]); }catch(e){}
     const b = qEl("#nextBtn");
@@ -7699,7 +7704,7 @@ function check(input){
        auf der nächsten, noch unbeantworteten Frage, die 600 ms später ungefragt
        übersprungen wurde. */
     const beiFrage = Q.i;
-    const spricht = vorlesen(nochmalText,
+    const spricht = vorlesen(sprechText,
                              ok ? ()=>{ if(!angehalten && Q && !Q.done && Q.walk && Q.i === beiFrage) autoAn(600); } : null);
     if(ok && !spricht) autoAn(2200);
   }
@@ -10145,6 +10150,24 @@ let INDEX = null;
 /* Hervorhebungen mitten im Wort („gut<b>e</b>“, „über<b>SETZ</b>en“) fallen spurlos weg,
    sonst hörte die Sprachausgabe „gut e“ und die Suche fand „gute“ nicht. Blockgrenzen
    (br, p, li, td …) bleiben ein Leerzeichen. Siehe auch sprechbar(). */
+/* Der erste Satz einer Erklärung, für das kurze Vorlesen nach einer richtigen Antwort.
+   Ein Satz endet an . ! ? vor einem Großbuchstaben oder „ — aber nicht nach einer Zahl
+   („am 5. Mai“) und nicht nach einem Wort unter drei Buchstaben („z. B. Die“, „Dr. Weber“).
+   Ist der erste Satz sehr kurz („Genau.“), kommt der nächste dazu. */
+function ersterSatz(t){
+  t = String(t||"").trim();
+  const re = /([A-Za-zÄÖÜäöüß]{3,}|[)“"])[.!?]\)?(?=\s+[A-ZÄÖÜ„(])/g;
+  let m, ende = -1;
+  while((m = re.exec(t))){
+    ende = m.index + m[0].length;
+    if(ende >= 25) break;
+  }
+  if(ende <= 0 || ende >= t.length) return t;
+  /* Nennt der Rest eine Variante oder eine Einordnung, bleibt alles stehen: „wegen + Genitiv.“
+     allein unterschlüge, dass der Dativ gesprochen standardsprachlich ist (Grundsatz 1 und 4). */
+  if(/Variante|regional|landschaftlich|umgangssprachlich|gesprochen|Schweiz|Österreich|auch (?:korrekt|richtig|möglich|zulässig)|beides|ebenfalls/i.test(t.slice(ende))) return t;
+  return t.slice(0, ende);
+}
 function strip(h){
   return String(h).replace(/<\/?(?:b|i|em|strong|u|span|code|mark|small|sup|sub)\b[^>]*>/gi,"")
     .replace(/<[^>]+>/g," ").replace(/\s+/g," ");

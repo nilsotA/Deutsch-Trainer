@@ -176,6 +176,20 @@ const schlaf = ms => new Promise(r => setTimeout(r, ms));
     nochmal.click();
     P.ok("… und liest die Erklärung noch einmal vor", w.__gesagt.length === vorher + 1 &&
       /^Richtig\./.test(w.__gesagt[w.__gesagt.length - 1]), w.__gesagt[w.__gesagt.length - 1]);
+    /* Nach einer richtigen Antwort spricht die App nur den ersten Satz, 🔊 die ganze Erklärung. */
+    const kurz = w.__gesagt[vorher - 1], lang = w.__gesagt[w.__gesagt.length - 1];
+    P.ok("… nach richtiger Antwort kam vorher nur der Kern, 🔊 liest alles", /^Richtig\./.test(kurz) &&
+      kurz.length <= lang.length, kurz + " | " + lang);
+    const es = (t) => w.eval("ersterSatz(" + JSON.stringify(t) + ")");
+    P.ok("ersterSatz schneidet am Satzende, nicht nach Zahl oder Abkürzung",
+      es("Am 5. Mai beginnt das Training, z. B. mit Dr. Weber. Danach folgt mehr.") ===
+        "Am 5. Mai beginnt das Training, z. B. mit Dr. Weber.", es("Am 5. Mai beginnt das Training, z. B. mit Dr. Weber. Danach folgt mehr."));
+    P.ok("… nimmt bei sehr kurzem erstem Satz den zweiten dazu",
+      es("Genau. Hier steht ein Komma vor dem Nebensatz. Mehr dazu später.") ===
+        "Genau. Hier steht ein Komma vor dem Nebensatz.");
+    P.ok("… und kürzt nicht, wenn der Rest eine Variante nennt",
+      es("wegen + Genitiv. Gesprochen gilt der Dativ als standardsprachlich.") ===
+        "wegen + Genitiv. Gesprochen gilt der Dativ als standardsprachlich.");
     w.__sprichZuEnde();
     await schlaf(900);
     P.ok("… ohne danach weiterzuschalten", daten(w, "Q.i") === vor.i, daten(w, "Q.i"));
