@@ -41,8 +41,10 @@ führt Karte für Karte zusammen (jüngere Antwort `l` gewinnt, dann mehr Antwor
 Tage, Fehlerprotokoll und Zähler. Am selben Tag gewinnt bei einer Karte das niedrigere Fach (ein Fehler
 zählt immer); Tagesantworten führt jedes Gerät in `days[t].g[gerät]` und `tagMischen()` addiert sie.
 Vor dem Bau einer Runde (`unterwegsRunde`, Tagesaufgabe) gleicht `nachAbgleich()` ab, wenn der letzte
-Abgleich älter als eine Minute ist (höchstens 4 s Warten). ⇅ in der Kopfzeile zeigt den Stand, ein
-Fehlschlag mit Netz bekommt eine Leiste. Gerätesache bleiben `session`, `speak`, `auto`, `theme`
+Abgleich älter als eine Minute ist (höchstens 4 s Warten). ⇅ in der Kopfzeile zeigt den Stand (⇅ • = Antworten warten auf den Upload), ein
+Fehlschlag mit Netz bekommt eine Leiste. Jede Speicherung zählt `syncStand` hoch und markiert `offen`; kam eine
+Antwort während des Uploads, folgt ein zweiter Abgleich (beim Wegblenden sofort), nach einem Fehler mit Netz einer in
+einer Minute, und das Ereignis `online` holt nach, was ohne Netz geübt wurde. Gerätesache bleiben `session`, `speak`, `auto`, `theme`
 (`SYNC_GERAET`). Der Schlüssel liegt unter `deutschtrainer.sync`, nie im Lernstand und nie in
 einer Sicherungsdatei. Ohne Schlüssel oder Netz ändert sich nichts. Geprüft in `tests/lernen.js`,
 Abschnitt O, mit nachgebautem Gist.

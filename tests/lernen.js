@@ -1333,7 +1333,7 @@ P.titel("N · Rückkehr aus dem Hintergrund");
       if (pfad === "/gists" && m === "POST") { posts++; const id = "g" + naechste++; gists[id] = JSON.parse(opts.body); return antwort(201, { id }); }
       const id = pfad.split("/")[2];
       if (!gists[id]) return antwort(404, {});
-      if (m === "PATCH") { patches++; Object.assign(gists[id].files, JSON.parse(opts.body).files); return antwort(200, {}); }
+      if (m === "PATCH") { patches++; if (w.__beimPatch) { const f = w.__beimPatch; w.__beimPatch = null; f(); } Object.assign(gists[id].files, JSON.parse(opts.body).files); return antwort(200, {}); }
       return antwort(200, { id, files: gists[id].files });
     };
     const geraet = (cards, extra) => {
@@ -1398,6 +1398,42 @@ P.titel("N · Rückkehr aus dem Hintergrund");
       Date.now() - JSON.parse(F.localStorage.getItem("deutschtrainer.sync")).zuletzt < 5000);
     P.ok("… und beim zweiten Anlauf startet sie sofort", F.eval("nachAbgleich(() => __nach())") === false);
     P.ok("ist er frisch, startet sie sofort", F.eval("nachAbgleich(() => __nach())") === false);
+    /* Eine Antwort, die während eines laufenden Abgleichs gespeichert wird, kam für dessen
+       Upload zu spät. Sie bleibt als offen markiert und geht beim Wegblenden sofort raus. */
+    const G = geraet({ k05: { b: 1, d: heute, s: 1, w: 0, l: heute } });
+    await G.eval("abgleichen(true)");
+    P.ok("nach einem Abgleich ohne neue Antworten ist nichts offen",
+      !JSON.parse(G.localStorage.getItem("deutschtrainer.sync")).offen);
+    /* Die Antwort kommt, während der Upload läuft — nach dem Zusammenführen. */
+    G.__beimPatch = () => G.eval("S.cards.k05.s = 9; save()");
+    G.eval("S.cards.k05.s = 2; save()");
+    await G.eval("abgleichen(true)");
+    const gE = JSON.parse(G.localStorage.getItem("deutschtrainer.sync"));
+    P.ok("eine Antwort während des Abgleichs bleibt als offen markiert", gE.offen === true, JSON.stringify(gE));
+    P.ok("… und die Kopfzeile zeigt, dass etwas wartet", G.document.querySelector("#hudSync").textContent === "⇅ •",
+      G.document.querySelector("#hudSync").textContent);
+    Object.defineProperty(G.document, "visibilityState", { configurable: true, get: () => "hidden" });
+    G.document.dispatchEvent(new G.Event("visibilitychange"));
+    await new Promise(r => setTimeout(r, 50));
+    const imGistG = JSON.parse(gists[JSON.parse(G.localStorage.getItem("deutschtrainer.sync")).gist].files["deutschtrainer-lernstand.json"].content);
+    P.ok("… beim Wegblenden geht sie raus", imGistG.cards.k05.s === 9 &&
+      !JSON.parse(G.localStorage.getItem("deutschtrainer.sync")).offen, JSON.stringify(imGistG.cards.k05));
+    /* Ohne Netz geübt: Kommt das Netz zurück, wird abgeglichen. */
+    const H = geraet({ k06: { b: 1, d: heute, s: 1, w: 0, l: heute } });
+    await H.eval("abgleichen(true)");
+    const netz = H.fetch;
+    H.eval("window.fetch = async () => { throw new TypeError('Failed to fetch'); }");
+    H.eval("S.cards.k06.s = 7; save()");
+    await H.eval("abgleichen(true)");
+    const hE = JSON.parse(H.localStorage.getItem("deutschtrainer.sync"));
+    P.ok("ohne Netz bleibt die Antwort offen, ohne Warnleiste", hE.offen === true && hE.fehler === "kein Netz" &&
+      !H.document.querySelector("#syncWarn"), JSON.stringify(hE));
+    H.fetch = netz;
+    H.dispatchEvent(new H.Event("online"));
+    await new Promise(r => setTimeout(r, 50));
+    const hE2 = JSON.parse(H.localStorage.getItem("deutschtrainer.sync"));
+    const imGistH = JSON.parse(gists[hE2.gist].files["deutschtrainer-lernstand.json"].content);
+    P.ok("kommt das Netz zurück, geht sie raus", !hE2.offen && !hE2.fehler && imGistH.cards.k06.s === 7, JSON.stringify(hE2));
   }
 
   P.abschluss();
