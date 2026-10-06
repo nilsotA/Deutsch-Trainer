@@ -59,6 +59,11 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Kürzeres Vorlesen nach richtiger Antwort (06.10.2026).** Unterwegs liest die App nach einer richtigen
+Antwort nur „Richtig.“ und den ersten Satz der Erklärung (`ersterSatz()`): über alle Übungen im Mittel 115 statt
+193 Zeichen. Nennt der Rest eine Variante oder Einordnung (regional, gesprochen, beides …), bleibt alles stehen.
+🔊 liest die ganze Erklärung, nach einem Fehler bleibt sie vollständig. Geprüft in `tests/unterwegs.js`.
+
 **Abgleich zwischen Geräten (06.10.2026).** Auf Nils' Wunsch über ein privates GitHub Gist (keine eigene
 Server-Infrastruktur). Zusammenführen Karte für Karte nach jüngster Antwort; bei Tagen und Themenzählern das
 Maximum, weil ohne gemeinsamen Vorfahren nicht zu erkennen ist, was doppelt gezählt wäre. Bekannte Grenze:
