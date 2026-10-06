@@ -33,6 +33,16 @@ package.json              npm-Skripte für die Prüfläufe
 Die App läuft ohne Server: Datei im Browser öffnen. Kein Netzwerk, keine externen
 Skripte, keine Abhängigkeiten. Alles läuft offline, auch auf dem Handy.
 
+**Abgleich zwischen Geräten (seit 06.10.2026, freiwillig).** Unter Fortschritt → „Geräte
+abgleichen“ trägt Nils einmal je Gerät einen GitHub-Zugangsschlüssel (Recht „gist“) ein. Die App
+hält dann eine Kopie des Lernstands in einem privaten Gist (`deutschtrainer-lernstand.json`) und
+gleicht beim Start, beim Zurückkehren und 20 s nach dem letzten Speichern ab. `standMischen()`
+führt Karte für Karte zusammen (jüngere Antwort `l` gewinnt, dann mehr Antworten `s`), vereinigt
+Tage, Fehlerprotokoll und Zähler. Gerätesache bleiben `session`, `speak`, `auto`, `theme`
+(`SYNC_GERAET`). Der Schlüssel liegt unter `deutschtrainer.sync`, nie im Lernstand und nie in
+einer Sicherungsdatei. Ohne Schlüssel oder Netz ändert sich nichts. Geprüft in `tests/lernen.js`,
+Abschnitt O, mit nachgebautem Gist.
+
 **Deployment.** Die Datei heißt nicht `index.html`, deshalb braucht ein Hoster eine
 Zuordnung für `/` — sonst kommt 404. Für Vercel steht sie in `vercel.json`.
 **Vercel baut `main`**, nicht den Arbeitsbranch: Was nicht auf `main` liegt, ist auch nicht

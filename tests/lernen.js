@@ -1317,5 +1317,67 @@ P.titel("N · Rückkehr aus dem Hintergrund");
   }
 }
 
+  /* ---------- O · Abgleich zwischen Geräten ---------- */
+  P.titel("O · Abgleich zwischen Geräten");
+  {
+    /* Ein nachgebautes Gist: GET /gists (Liste), POST /gists, GET und PATCH /gists/:id. */
+    const gists = {};
+    let naechste = 1, posts = 0, patches = 0;
+    const fakeFetch = w => async (url, opts) => {
+      opts = opts || {};
+      const pfad = url.replace("https://api.github.com", "");
+      const antwort = (status, body) => ({ ok: status < 300, status, json: async () => JSON.parse(JSON.stringify(body)), text: async () => JSON.stringify(body) });
+      if (!(opts.headers && /Bearer geheim/.test(opts.headers.Authorization))) return antwort(401, {});
+      const m = opts.method || "GET";
+      if (pfad.startsWith("/gists?")) return antwort(200, Object.entries(gists).map(([id, g]) => ({ id, files: g.files })));
+      if (pfad === "/gists" && m === "POST") { posts++; const id = "g" + naechste++; gists[id] = JSON.parse(opts.body); return antwort(201, { id }); }
+      const id = pfad.split("/")[2];
+      if (!gists[id]) return antwort(404, {});
+      if (m === "PATCH") { patches++; Object.assign(gists[id].files, JSON.parse(opts.body).files); return antwort(200, {}); }
+      return antwort(200, { id, files: gists[id].files });
+    };
+    const geraet = (cards, extra) => {
+      const w = boot(leererStand(Object.assign({ cards }, extra || {})));
+      w.fetch = fakeFetch(w);
+      w.localStorage.setItem("deutschtrainer.sync", JSON.stringify({ token: "geheim" }));
+      return w;
+    };
+    const heute = tag(0), gestern = tag(-1);
+    const A = geraet({ k01: { b: 3, d: tag(5), s: 3, w: 0, l: heute }, k02: { b: 2, d: tag(2), s: 1, w: 0, l: gestern } },
+                     { theme: "dark", days: { [heute]: { a: 5, c: 4, t: 0, done: false } } });
+    const B = geraet({ k02: { b: 1, d: tag(1), s: 2, w: 1, l: heute }, w01x: { b: 2, d: tag(3), s: 1, w: 0, l: heute } },
+                     { theme: "light", days: { [heute]: { a: 12, c: 10, t: 0, done: true } } });
+
+    const ok1 = await A.eval("abgleichen(true)");
+    P.ok("das erste Gerät legt ein privates Gist an", ok1 === true && posts === 1 &&
+      Object.values(gists)[0].public === false, JSON.stringify({ ok1, posts }));
+    const ok2 = await B.eval("abgleichen(true)");
+    const kB = daten(B, "S.cards");
+    P.ok("das zweite Gerät findet dasselbe Gist und legt kein neues an", ok2 === true && posts === 1);
+    P.ok("es übernimmt die Karte, die nur das andere Gerät kennt", !!kB.k01 && kB.k01.b === 3);
+    P.ok("bei einer Karte auf beiden gewinnt die jüngere Antwort", kB.k02 && kB.k02.l === heute && kB.k02.b === 1, JSON.stringify(kB.k02));
+    P.ok("die eigenen Karten bleiben", !!kB.w01x);
+    P.ok("ein Tag zählt die höhere Zahl und bleibt erledigt", daten(B, "S.days['" + heute + "']").a === 12 && daten(B, "S.days['" + heute + "'].done") === true);
+    P.ok("die Anzeigeart gehört zum Gerät und wird nicht übernommen", daten(B, "S.theme") === "light");
+    P.ok("der Stand landet auch im Speicher des Geräts", JSON.parse(B.localStorage.getItem("deutschtrainer.v1")).cards.k01.b === 3);
+
+    await A.eval("abgleichen(true)");
+    const kA = daten(A, "S.cards");
+    P.ok("zurück auf dem ersten Gerät ist der Stand des zweiten da", !!kA.w01x && kA.k02.l === heute, JSON.stringify(Object.keys(kA)));
+    P.ok("… und die eigene Anzeigeart bleibt", daten(A, "S.theme") === "dark");
+    const imGist = JSON.parse(Object.values(gists)[0].files["deutschtrainer-lernstand.json"].content);
+    P.ok("im Gist steht weder die offene Runde noch die Anzeigeart", !("theme" in imGist) && !("session" in imGist));
+    P.ok("der Schlüssel steht nicht im Lernstand", !/geheim/.test(A.localStorage.getItem("deutschtrainer.v1")));
+
+    const C = boot(leererStand({ cards: { k01: { b: 1, d: heute, s: 1, w: 0, l: heute } } }));
+    C.fetch = fakeFetch(C);
+    C.localStorage.setItem("deutschtrainer.sync", JSON.stringify({ token: "falsch" }));
+    const okC = await C.eval("abgleichen(true)");
+    P.ok("ein falscher Schlüssel bricht ab, ohne den Stand anzurühren",
+      okC === false && daten(C, "S.cards.k01.b") === 1 && /ungültig/.test(JSON.parse(C.localStorage.getItem("deutschtrainer.sync")).fehler || ""));
+    const D = boot(leererStand({}));
+    P.ok("ohne Schlüssel passiert nichts", await D.eval("abgleichen(true)") === false && posts === 1);
+  }
+
   P.abschluss();
 })();
