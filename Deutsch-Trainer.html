@@ -78,6 +78,8 @@ input,textarea,select{font:inherit;color:inherit}
   background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600;white-space:nowrap}
 .pill.flame{background:var(--gold-soft);border-color:transparent;color:var(--gold)}
 .pill.xp{background:var(--acc-soft);border-color:transparent;color:var(--acc-ink)}
+.pill.sync{background:transparent;color:var(--muted)}
+.pill.sync.warn{color:var(--bad);border-color:var(--bad)}
 .iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--card);
   display:grid;place-items:center;font-size:15px}
 @media(hover:hover) and (pointer:fine){.iconbtn:hover{border-color:var(--ink3)}}
@@ -689,6 +691,7 @@ table.ch-t.sm td{padding-right:14px}
     <div class="hud">
       <span class="pill flame" id="hudStreak" title="Serie">🔥 0</span>
       <span class="pill xp" id="hudXp" title="Punkte">0 XP</span>
+      <span class="pill sync" id="hudSync" hidden title="Abgleich">⇅</span>
       <button class="iconbtn" id="searchBtn" title="Suchen (Taste /)" aria-label="Suchen (Taste /)">⌕</button>
       <button class="iconbtn" id="themeBtn" title="Hell / Dunkel" aria-label="Hell oder dunkel">◐</button>
     </div>
@@ -6679,6 +6682,8 @@ function tagesZiel(ok){
   d.a = (d.a||0) + 1;
   d.t = (d.t||0) + 1;
   if(ok) d.c = (d.c||0) + 1;
+  { const id = typeof syncGeraet === "function" ? syncGeraet() : null;
+    if(id){ d.g = d.g || {}; const v = d.g[id] || {a:0, c:0}; v.a++; if(ok) v.c++; d.g[id] = v; } }
   if(!d.done && d.a >= TAGESZIEL){
     d.done = true;
     const y = addDays(t,-1);
@@ -7813,6 +7818,7 @@ function quotenMix(pools, n){
 /* Unterwegs-Runde: erst Fälliges, dann Neues, zuletzt das am längsten
    Ungeübte — auf jeder Stufe gemischt aus Aufgaben, Wörtern und Fällen. */
 function unterwegsRunde(host){
+  if(nachAbgleich(()=>unterwegsRunde(host))) return;
   const r = rng(Date.now());
   const drin = new Set();
   let list = [];
@@ -7994,7 +8000,10 @@ function renderHeute(keepQuiz){
         umzugHinweis()+
         '<div class="row" style="margin-top:16px"><button class="btn" id="startD">Loslegen</button></div>'+
       "</div>";
-    $("#startD").onclick = ()=> startQuiz(qs, host, {title:"Tagesaufgabe", daily:true});
+    $("#startD").onclick = ()=>{
+      if(nachAbgleich(()=>{ renderHeute(); const b = $("#startD"); if(b) b.click(); })) return;
+      startQuiz(qs, host, {title:"Tagesaufgabe", daily:true});
+    };
     const um = $("#umzugLaden");
     if(um) um.onclick = ()=>{ const f = $("#impFile"); if(f) f.click(); };
   }
@@ -10571,6 +10580,12 @@ const SYNC_KEY = "deutschtrainer.sync";
 const SYNC_DATEI = "deutschtrainer-lernstand.json";
 const SYNC_GERAET = ["session","speak","auto","theme"];
 function syncEinst(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || null; }catch(e){ return null; } }
+/* Kennung dieses Geräts für den Tagesanteil — nur, solange der Abgleich verbunden ist. */
+function syncGeraet(){
+  const e = syncEinst(); if(!e) return null;
+  if(!e.geraet){ e.geraet = Math.random().toString(36).slice(2, 10); syncEinstSetzen(e); }
+  return e.geraet;
+}
 function syncEinstSetzen(x){ try{ x ? localStorage.setItem(SYNC_KEY, JSON.stringify(x)) : localStorage.removeItem(SYNC_KEY); }catch(e){} }
 function syncTeil(st){
   const o = {};
@@ -10581,8 +10596,31 @@ function karteNeuer(a, b){
   if(!a) return b; if(!b) return a;
   const la = a.l || "", lb = b.l || "";
   if(la !== lb) return la > lb ? a : b;
+  /* Am selben Tag auf zwei Geräten beantwortet: Ein Fehler setzt auf Fach 1 zurück und
+     zählt immer (grade()) — also gewinnt das niedrigere Fach, und Antworten und Fehler
+     zählen mit dem höheren Stand. */
+  if((a.b||0) !== (b.b||0)){
+    const k = (a.b||0) < (b.b||0) ? a : b;
+    return Object.assign({}, k, {s:Math.max(a.s||0, b.s||0), w:Math.max(a.w||0, b.w||0)});
+  }
   if((a.s||0) !== (b.s||0)) return (a.s||0) > (b.s||0) ? a : b;
   return (a.d||"") >= (b.d||"") ? a : b;
+}
+/* Ein Tag auf zwei Geräten: Jedes Gerät führt in g seinen eigenen Anteil (seit 07.10.2026).
+   Die Anteile werden je Gerät genommen und addiert; was vor g gezählt wurde, zählt einmal. */
+function tagMischen(x, y){
+  const max = (p, q) => Math.max(p||0, q||0);
+  const sum = (g, f) => Object.values(g||{}).reduce((s, v)=>s + (v[f]||0), 0);
+  const g = Object.assign({}, y.g||{});
+  Object.entries(x.g||{}).forEach(([id, v])=>{
+    const w = g[id];
+    g[id] = !w ? v : {a:max(v.a, w.a), c:max(v.c, w.c)};
+  });
+  const teil = f => max((x[f]||0) - sum(x.g, f), (y[f]||0) - sum(y.g, f)) + sum(g, f);
+  const d = {a:Math.max(teil("a"), x.a||0, y.a||0), c:Math.max(teil("c"), x.c||0, y.c||0),
+             t:max(x.t, y.t), done:!!(x.done||y.done)};
+  if(Object.keys(g).length) d.g = g;
+  return d;
 }
 function standMischen(a, b){
   if(!b) return a; if(!a) return b;
@@ -10594,7 +10632,7 @@ function standMischen(a, b){
   m.days = Object.assign({}, b.days||{});
   Object.entries(a.days||{}).forEach(([t, x])=>{
     const y = m.days[t];
-    m.days[t] = !y ? x : {a:max(x.a,y.a), c:max(x.c,y.c), t:max(x.t,y.t), done:!!(x.done||y.done)};
+    m.days[t] = !y ? x : tagMischen(x, y);
   });
   m.cat = Object.assign({}, b.cat||{});
   Object.entries(a.cat||{}).forEach(([k, x])=>{ const y = m.cat[k]; m.cat[k] = !y ? x : {c:max(x.c,y.c), w:max(x.w,y.w)}; });
@@ -10619,7 +10657,7 @@ function standMischen(a, b){
   return m;
 }
 /* var statt let: save() läuft schon beim Laden (regelAenderungen), bevor diese Zeile erreicht ist. */
-var syncLaeuft = false, syncNaechst = null;
+var syncLaeuft = false, syncNaechst = null, syncLaufend = null, syncFrei = false;
 async function syncAnfrage(einst, pfad, opts){
   const r = await fetch("https://api.github.com" + pfad, Object.assign({
     headers:{Authorization:"Bearer " + einst.token, Accept:"application/vnd.github+json",
@@ -10637,7 +10675,12 @@ async function syncGistFinden(einst){
     files:{[SYNC_DATEI]:{content:JSON.stringify(syncTeil(S))}}})});
   return neu.id;
 }
-async function abgleichen(still){
+function abgleichen(still){
+  if(syncLaeuft && syncLaufend) return syncLaufend;
+  syncLaufend = abgleichenJetzt(still);
+  return syncLaufend;
+}
+async function abgleichenJetzt(still){
   const einst = syncEinst();
   if(!einst || !einst.token || typeof fetch !== "function" || syncLaeuft || fremdStand) return false;
   syncLaeuft = true;
@@ -10658,30 +10701,76 @@ async function abgleichen(still){
       save(); regelAenderungen();
       if(!(Q && !Q.done)) renderAll();
     }
-    if(!fern || roh !== JSON.stringify(fern))
-      await syncAnfrage(einst, "/gists/" + einst.gist, {method:"PATCH",
-        body:JSON.stringify({files:{[SYNC_DATEI]:{content:roh}}})});
-    einst.zuletzt = Date.now(); einst.fehler = null; syncEinstSetzen(einst);
+    if(!fern || roh !== JSON.stringify(fern)){
+      const body = JSON.stringify({files:{[SYNC_DATEI]:{content:roh}}});
+      /* keepalive: Beim Wegblenden darf der Browser die Seite einfrieren, bevor die Antwort
+         da ist — so kommt der Stand trotzdem an. Erlaubt ist es nur bis 64 KB. */
+      await syncAnfrage(einst, "/gists/" + einst.gist, {method:"PATCH", body,
+        keepalive: body.length < 60000 && typeof document !== "undefined" && document.visibilityState === "hidden"});
+    }
+    { const x = syncEinst() || einst; x.gist = einst.gist; x.zuletzt = Date.now(); x.fehler = null; syncEinstSetzen(x); }
+    syncWarnungWeg();
     if(!still) toast("Lernstand abgeglichen");
     return true;
   }catch(e){
-    const x = syncEinst(); if(x){ x.fehler = String(e.message || e); syncEinstSetzen(x); }
+    const offline = (typeof navigator !== "undefined" && navigator.onLine === false) || e instanceof TypeError;
+    const x = syncEinst(); if(x){ x.fehler = offline ? "kein Netz" : String(e.message || e); syncEinstSetzen(x); }
+    if(!offline) zeigeSyncWarnung(String(e.message || e));
     if(!still) toast("Abgleich fehlgeschlagen: " + (e.message || e));
     return false;
   }finally{
     syncLaeuft = false;
     const st = $("#syncStatus"); if(st) st.textContent = syncStatusText();
+    syncHud();
   }
 }
 /* Nach dem Üben: 20 s nach der letzten Speicherung abgleichen, nicht nach jeder Antwort. */
+/* Eine Runde soll mit dem neuesten Stand beginnen: Ist der letzte Abgleich älter als eine
+   Minute, wird erst abgeglichen (höchstens 4 s gewartet) und die Runde dann neu gebaut.
+   Sonst kämen Karten dran, die auf dem anderen Gerät schon erledigt sind. */
+function nachAbgleich(fn){
+  if(syncFrei){ syncFrei = false; return false; }
+  const e = syncEinst();
+  if(!e || !e.token || typeof fetch !== "function" || (typeof navigator !== "undefined" && navigator.onLine === false)) return false;
+  if(!syncLaeuft && e.zuletzt && Date.now() - e.zuletzt < 60000) return false;
+  toast("Gleiche Lernstand ab …");
+  Promise.race([abgleichen(true), new Promise(r=>setTimeout(r, 4000))])
+    .then(()=>{ syncFrei = true; fn(); });
+  return true;
+}
 function syncVormerken(){
   if(syncLaeuft || typeof setTimeout !== "function" || !syncEinst()) return;
   clearTimeout(syncNaechst);
   syncNaechst = setTimeout(()=>abgleichen(true), 20000);
 }
+function syncHud(){
+  const h = $("#hudSync"); if(!h) return;
+  const e = syncEinst();
+  h.hidden = !e;
+  if(!e) return;
+  const fehler = e.fehler && e.fehler !== "kein Netz";
+  h.textContent = syncLaeuft ? "⇅ …" : fehler ? "⇅ !" : "⇅";
+  h.classList.toggle("warn", !!fehler);
+  h.title = syncStatusText();
+  h.setAttribute("aria-label", "Abgleich: " + syncStatusText());
+}
+function zeigeSyncWarnung(grund){
+  if($("#syncWarn")) return;
+  const b = document.createElement("div");
+  b.id = "syncWarn";
+  b.className = "savewarn";
+  b.innerHTML = "<b>Der Abgleich mit deinen anderen Geräten hat nicht geklappt</b> (" + esc(grund) + "). "+
+    "Hier geht nichts verloren; unter Fortschritt → Geräte abgleichen kannst du den Schlüssel prüfen. "+
+    '<button class="btn sm" id="syncWarnZu">Ausblenden</button>';
+  const w = document.querySelector(".wrap");
+  if(w) w.insertBefore(b, w.firstChild);
+  const z = $("#syncWarnZu"); if(z) z.onclick = ()=>b.remove();
+}
+function syncWarnungWeg(){ const b = $("#syncWarn"); if(b) b.remove(); }
 function syncStatusText(){
   const e = syncEinst();
   if(!e) return "Nicht verbunden.";
+  if(syncLaeuft) return "Gleicht gerade ab …";
   if(e.fehler) return "Letzter Versuch fehlgeschlagen: " + e.fehler;
   if(!e.zuletzt) return "Verbunden, noch nicht abgeglichen.";
   const d = new Date(e.zuletzt);
@@ -10922,7 +11011,8 @@ window.addEventListener("focus", tagesWechsel);
 (function(){ if(sitzungOffen()){ go("karten"); } })();
 
 /* Abgleich beim Start — kurz verzögert, damit die App zuerst steht. */
-setTimeout(()=>abgleichen(true), 1500);
+syncHud();
+abgleichen(true);
 
 (function(){ if(serieVerfallen()){ updHud(); renderHeute(); } })();
 
