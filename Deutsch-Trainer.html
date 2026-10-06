@@ -6413,6 +6413,7 @@ function save(){
     const roh = JSON.stringify(S);
     localStorage.setItem(KEY, roh);
     zuletztGesehen = roh;
+    if(typeof syncVormerken === "function") syncVormerken();
     if(speicherDefekt){ speicherDefekt = false; const b=$("#saveWarn"); if(b) b.remove(); }
   }catch(e){
     mem = S;
@@ -8482,6 +8483,7 @@ function renderStats(sel){
       '<div class="row"><button class="btn ghost sm" id="exp">Fortschritt sichern</button>'+
       '<button class="btn ghost sm" id="imp">Sicherung laden</button>'+
       '<button class="btn ghost sm" id="rst">Alles zurücksetzen</button></div>'+
+      syncHtml()+
     "</div>";
 
   const dr = $("#drill");
@@ -8495,6 +8497,7 @@ function renderStats(sel){
     startQuiz(list, $("#dailyHost"), {title:CATS[weak.k].n});
   };
   $("#exp").onclick = exportieren;
+  syncUiBinden();
   $("#imp").onclick = ()=>$("#impFile").click();
   $("#rst").onclick = ()=>{
     if(!confirm("Wirklich alles zurücksetzen? Serie, Karten und Entwürfe gehen verloren.")) return;
@@ -10556,6 +10559,163 @@ function updHud(){
   $("#hudStreak").textContent = "🔥 " + S.streak;
   $("#hudXp").textContent = S.xp + " XP";
 }
+/* ---------- Abgleich zwischen Geräten (seit 06.10.2026) ----------
+   Der Lernstand liegt in localStorage und hängt am Gerät. Für den Abgleich legt die App ein
+   privates GitHub Gist an und hält dort eine Kopie. Der Zugangsschlüssel (nur Recht „gist“)
+   steht unter SYNC_KEY, getrennt vom Lernstand — er gerät also nie in eine Sicherungsdatei.
+   Zusammengeführt wird Karte für Karte: Es gewinnt die jüngere Antwort (Feld l), bei
+   gleichem Tag die mit mehr Antworten (s). Tage, Fehlerprotokoll und Themenzähler werden
+   vereinigt. Nicht abgeglichen wird, was zum Gerät gehört: die offene Runde, Vorlesen,
+   Automatik und Anzeigeart. Ohne Netz oder ohne Schlüssel läuft alles wie vorher. */
+const SYNC_KEY = "deutschtrainer.sync";
+const SYNC_DATEI = "deutschtrainer-lernstand.json";
+const SYNC_GERAET = ["session","speak","auto","theme"];
+function syncEinst(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || null; }catch(e){ return null; } }
+function syncEinstSetzen(x){ try{ x ? localStorage.setItem(SYNC_KEY, JSON.stringify(x)) : localStorage.removeItem(SYNC_KEY); }catch(e){} }
+function syncTeil(st){
+  const o = {};
+  Object.keys(st).forEach(k=>{ if(!SYNC_GERAET.includes(k)) o[k] = st[k]; });
+  return o;
+}
+function karteNeuer(a, b){
+  if(!a) return b; if(!b) return a;
+  const la = a.l || "", lb = b.l || "";
+  if(la !== lb) return la > lb ? a : b;
+  if((a.s||0) !== (b.s||0)) return (a.s||0) > (b.s||0) ? a : b;
+  return (a.d||"") >= (b.d||"") ? a : b;
+}
+function standMischen(a, b){
+  if(!b) return a; if(!a) return b;
+  const m = Object.assign({}, b, a);
+  const max = (x, y) => Math.max(x||0, y||0);
+  m.cards = {};
+  new Set([...Object.keys(a.cards||{}), ...Object.keys(b.cards||{})])
+    .forEach(k=>{ m.cards[k] = karteNeuer((a.cards||{})[k], (b.cards||{})[k]); });
+  m.days = Object.assign({}, b.days||{});
+  Object.entries(a.days||{}).forEach(([t, x])=>{
+    const y = m.days[t];
+    m.days[t] = !y ? x : {a:max(x.a,y.a), c:max(x.c,y.c), t:max(x.t,y.t), done:!!(x.done||y.done)};
+  });
+  m.cat = Object.assign({}, b.cat||{});
+  Object.entries(a.cat||{}).forEach(([k, x])=>{ const y = m.cat[k]; m.cat[k] = !y ? x : {c:max(x.c,y.c), w:max(x.w,y.w)}; });
+  const gesehen = new Set(), log = [];
+  [...(b.log||[]), ...(a.log||[])].forEach(e=>{
+    const k = (e && e.t) + "|" + (e && e.i);
+    if(!gesehen.has(k)){ gesehen.add(k); log.push(e); }
+  });
+  m.log = log.sort((x, y)=>(x.t||0) - (y.t||0)).slice(-500);
+  m.writing = Object.assign({}, b.writing||{});
+  Object.entries(a.writing||{}).forEach(([k, x])=>{ const y = m.writing[k]; m.writing[k] = (!y || (x.ts||0) >= (y.ts||0)) ? x : y; });
+  ["scenes","korr","seenW"].forEach(f=>{ m[f] = Object.assign({}, b[f]||{}, a[f]||{}); });
+  m.neu = Object.assign({}, b.neu||{});
+  Object.entries(a.neu||{}).forEach(([k, d])=>{ if(!m.neu[k] || d > m.neu[k]) m.neu[k] = d; });
+  m.xp = max(a.xp, b.xp);
+  m.best = max(a.best, b.best);
+  const jung = (a.last||"") >= (b.last||"") ? a : b;
+  m.last = jung.last; m.streak = jung.streak;
+  if((b.levelDate||"") > (a.levelDate||"")){ m.level = b.level; m.levelDate = b.levelDate; }
+  if(!a.plan && b.plan) m.plan = b.plan;
+  if((b.lastExport||"") > (a.lastExport||"")) m.lastExport = b.lastExport;
+  return m;
+}
+/* var statt let: save() läuft schon beim Laden (regelAenderungen), bevor diese Zeile erreicht ist. */
+var syncLaeuft = false, syncNaechst = null;
+async function syncAnfrage(einst, pfad, opts){
+  const r = await fetch("https://api.github.com" + pfad, Object.assign({
+    headers:{Authorization:"Bearer " + einst.token, Accept:"application/vnd.github+json",
+             "Content-Type":"application/json"}}, opts||{}));
+  if(!r.ok) throw new Error(r.status === 401 ? "Schlüssel ungültig" : "GitHub antwortet mit " + r.status);
+  return r.json();
+}
+/* Sucht das Gist mit der Lernstand-Datei; gibt es keins, legt es ein privates an. */
+async function syncGistFinden(einst){
+  const liste = await syncAnfrage(einst, "/gists?per_page=100");
+  const da = (liste||[]).find(g => g.files && g.files[SYNC_DATEI]);
+  if(da) return da.id;
+  const neu = await syncAnfrage(einst, "/gists", {method:"POST", body:JSON.stringify({
+    description:"Deutsch-Trainer: Lernstand", public:false,
+    files:{[SYNC_DATEI]:{content:JSON.stringify(syncTeil(S))}}})});
+  return neu.id;
+}
+async function abgleichen(still){
+  const einst = syncEinst();
+  if(!einst || !einst.token || typeof fetch !== "function" || syncLaeuft || fremdStand) return false;
+  syncLaeuft = true;
+  try{
+    if(!einst.gist){ einst.gist = await syncGistFinden(einst); syncEinstSetzen(einst); }
+    const g = await syncAnfrage(einst, "/gists/" + einst.gist);
+    const f = g.files && g.files[SYNC_DATEI];
+    let fern = null;
+    if(f){
+      const roh = f.truncated && f.raw_url ? await (await fetch(f.raw_url)).text() : f.content;
+      try{ fern = JSON.parse(roh); }catch(e){ fern = null; }
+    }
+    const lokal = syncTeil(S);
+    const gemischt = standMischen(lokal, fern && typeof fern === "object" && fern.cards ? fern : null);
+    const roh = JSON.stringify(gemischt);
+    if(roh !== JSON.stringify(lokal)){
+      Object.assign(S, gemischt);
+      save(); regelAenderungen();
+      if(!(Q && !Q.done)) renderAll();
+    }
+    if(!fern || roh !== JSON.stringify(fern))
+      await syncAnfrage(einst, "/gists/" + einst.gist, {method:"PATCH",
+        body:JSON.stringify({files:{[SYNC_DATEI]:{content:roh}}})});
+    einst.zuletzt = Date.now(); einst.fehler = null; syncEinstSetzen(einst);
+    if(!still) toast("Lernstand abgeglichen");
+    return true;
+  }catch(e){
+    const x = syncEinst(); if(x){ x.fehler = String(e.message || e); syncEinstSetzen(x); }
+    if(!still) toast("Abgleich fehlgeschlagen: " + (e.message || e));
+    return false;
+  }finally{
+    syncLaeuft = false;
+    const st = $("#syncStatus"); if(st) st.textContent = syncStatusText();
+  }
+}
+/* Nach dem Üben: 20 s nach der letzten Speicherung abgleichen, nicht nach jeder Antwort. */
+function syncVormerken(){
+  if(syncLaeuft || typeof setTimeout !== "function" || !syncEinst()) return;
+  clearTimeout(syncNaechst);
+  syncNaechst = setTimeout(()=>abgleichen(true), 20000);
+}
+function syncStatusText(){
+  const e = syncEinst();
+  if(!e) return "Nicht verbunden.";
+  if(e.fehler) return "Letzter Versuch fehlgeschlagen: " + e.fehler;
+  if(!e.zuletzt) return "Verbunden, noch nicht abgeglichen.";
+  const d = new Date(e.zuletzt);
+  return "Zuletzt abgeglichen: " + d.toLocaleDateString("de-DE") + ", " + d.toLocaleTimeString("de-DE", {hour:"2-digit", minute:"2-digit"}) + " Uhr.";
+}
+function syncUiBinden(){
+  const v = $("#syncVerb"), j = $("#syncJetzt"), t = $("#syncTrenn");
+  if(v) v.onclick = async ()=>{
+    const tok = ($("#syncTok").value || "").trim();
+    if(!tok){ toast("Bitte den Schlüssel einfügen"); return; }
+    syncEinstSetzen({token:tok});
+    if(await abgleichen(false)) renderFortschritt();
+    else { syncEinstSetzen(null); const st = $("#syncStatus"); if(st) st.textContent = "Verbinden fehlgeschlagen — Schlüssel und Netz prüfen."; }
+  };
+  if(j) j.onclick = ()=>abgleichen(false);
+  if(t) t.onclick = ()=>{
+    if(!confirm("Abgleich auf diesem Gerät beenden? Der Lernstand hier und im Gist bleibt erhalten.")) return;
+    syncEinstSetzen(null); renderFortschritt();
+  };
+}
+function syncHtml(){
+  const e = syncEinst();
+  return '<hr class="sep"><div class="eyebrow">Geräte abgleichen</div>'+
+    '<p class="tiny muted" style="margin:8px 0 12px">Hält den Lernstand auf allen deinen Geräten gleich, über ein privates Gist in deinem GitHub-Konto. '+
+    'Dafür brauchst du einmal einen Zugangsschlüssel: auf github.com unter Settings → Developer settings → Personal access tokens → Tokens (classic), nur mit dem Recht „gist“. '+
+    'Gib ihn auf jedem Gerät hier ein. Abgeglichen wird beim Start, beim Zurückkehren in die App und kurz nach dem Üben.</p>'+
+    (e ? '<p class="tiny" id="syncStatus">'+esc(syncStatusText())+'</p>'+
+         '<div class="row"><button class="btn ghost sm" id="syncJetzt">Jetzt abgleichen</button>'+
+         '<button class="btn ghost sm" id="syncTrenn">Trennen</button></div>'
+       : '<div class="row"><input type="password" id="syncTok" autocomplete="off" placeholder="Zugangsschlüssel (ghp_…)" aria-label="GitHub-Zugangsschlüssel" style="flex:1;min-width:0">'+
+         '<button class="btn ghost sm" id="syncVerb">Verbinden</button></div>'+
+         '<p class="tiny muted" id="syncStatus" style="margin-top:6px">Nicht verbunden.</p>');
+}
+
 /* Laden einer Sicherung — gebunden einmal beim Start an das feste #impFile. */
 function sicherungLaden(e){
   const f = e.target.files[0]; if(!f) return;
@@ -10742,7 +10902,12 @@ function zurueckAusDemHintergrund(){
 /* Kommt die App aus dem Hintergrund zurück und läuft noch eine Unterwegs-Runde, muss die
    Bildschirmsperre neu angefordert werden — der Browser hat sie beim Wegblenden freigegeben. */
 document.addEventListener("visibilitychange", ()=>{
-  if(document.visibilityState === "hidden"){ verstecktSeit = Date.now(); return; }
+  if(document.visibilityState === "hidden"){
+    verstecktSeit = Date.now();
+    if(syncNaechst){ clearTimeout(syncNaechst); syncNaechst = null; abgleichen(true); }
+    return;
+  }
+  { const e = syncEinst(); if(e && Date.now() - (e.zuletzt||0) > 60000) abgleichen(true); }
   if(document.visibilityState === "visible" && Q && Q.walk && !Q.done) bildschirmWachhalten(true);
   zurueckAusDemHintergrund();
 });
@@ -10755,6 +10920,9 @@ window.addEventListener("focus", tagesWechsel);
 
 /* Eine unterbrochene Runde nicht verlieren */
 (function(){ if(sitzungOffen()){ go("karten"); } })();
+
+/* Abgleich beim Start — kurz verzögert, damit die App zuerst steht. */
+setTimeout(()=>abgleichen(true), 1500);
 
 (function(){ if(serieVerfallen()){ updHud(); renderHeute(); } })();
 

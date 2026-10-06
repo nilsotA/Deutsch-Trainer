@@ -59,6 +59,12 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Abgleich zwischen Geräten (06.10.2026).** Auf Nils' Wunsch über ein privates GitHub Gist (keine eigene
+Server-Infrastruktur). Zusammenführen Karte für Karte nach jüngster Antwort; bei Tagen und Themenzählern das
+Maximum, weil ohne gemeinsamen Vorfahren nicht zu erkennen ist, was doppelt gezählt wäre. Bekannte Grenze:
+Üben beide Geräte am selben Tag dieselbe Karte, zählt nur eine der beiden Antworten. Am Gerät nicht
+ausprobiert — die Prüfung läuft gegen ein nachgebautes Gist.
+
 **Gegenprüfung aller 543 Übungen (04.–06.10.2026).** 28 Prüfer je 20 Übungen, jeder Fund von drei Gegnern
 (Quelle, Bestand, Lesart) angegriffen. 57 Funde; 21 hielten mit mindestens zwei Bestätigungen, 2 fielen. Bei 34 brach
 die Gegenprüfung am Nutzungslimit ab; die habe ich selbst gelesen und 27 eindeutige übernommen (zu absolute
