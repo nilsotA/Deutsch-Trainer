@@ -10681,6 +10681,10 @@ function standMischen(a, b){
 }
 /* var statt let: save() läuft schon beim Laden (regelAenderungen), bevor diese Zeile erreicht ist. */
 var syncLaeuft = false, syncNaechst = null, syncLaufend = null, syncFrei = false;
+/* syncStand zählt jede Speicherung. Ein Abgleich merkt sich den Zähler, bevor er hochlädt; hat
+   sich der Zähler bis zum Ende bewegt, kam eine Antwort zu spät für diesen Abgleich, und es
+   folgt ein zweiter. Vorher blieb so eine Antwort liegen, bis das Gerät wieder startete. */
+var syncStand = 0;
 async function syncAnfrage(einst, pfad, opts){
   const r = await fetch("https://api.github.com" + pfad, Object.assign({
     headers:{Authorization:"Bearer " + einst.token, Accept:"application/vnd.github+json",
@@ -10707,6 +10711,7 @@ async function abgleichenJetzt(still){
   const einst = syncEinst();
   if(!einst || !einst.token || typeof fetch !== "function" || syncLaeuft || fremdStand) return false;
   syncLaeuft = true;
+  let stand = -1, geklappt = false;
   try{
     if(!einst.gist){ einst.gist = await syncGistFinden(einst); syncEinstSetzen(einst); }
     const g = await syncAnfrage(einst, "/gists/" + einst.gist);
@@ -10724,6 +10729,7 @@ async function abgleichenJetzt(still){
       save(); regelAenderungen();
       if(!(Q && !Q.done)) renderAll();
     }
+    stand = syncStand;
     if(!fern || roh !== JSON.stringify(fern)){
       const body = JSON.stringify({files:{[SYNC_DATEI]:{content:roh}}});
       /* keepalive: Beim Wegblenden darf der Browser die Seite einfrieren, bevor die Antwort
@@ -10731,7 +10737,10 @@ async function abgleichenJetzt(still){
       await syncAnfrage(einst, "/gists/" + einst.gist, {method:"PATCH", body,
         keepalive: body.length < 60000 && typeof document !== "undefined" && document.visibilityState === "hidden"});
     }
-    { const x = syncEinst() || einst; x.gist = einst.gist; x.zuletzt = Date.now(); x.fehler = null; syncEinstSetzen(x); }
+    { const x = syncEinst() || einst; x.gist = einst.gist; x.zuletzt = Date.now(); x.fehler = null;
+      if(syncStand === stand) delete x.offen;
+      syncEinstSetzen(x); }
+    geklappt = true;
     syncWarnungWeg();
     if(!still) toast("Lernstand abgeglichen");
     return true;
@@ -10745,6 +10754,15 @@ async function abgleichenJetzt(still){
     syncLaeuft = false;
     const st = $("#syncStatus"); if(st) st.textContent = syncStatusText();
     syncHud();
+    /* Was noch offen ist, wird nachgeholt: nach einer verspäteten Antwort sofort (beim
+       Wegblenden) oder nach der üblichen Pause, nach einem Fehler mit Netz in einer Minute.
+       Ohne Netz übernimmt der online-Horcher. */
+    const x = syncEinst();
+    if(x && x.offen && x.fehler !== "kein Netz" && x.fehler !== "Schlüssel ungültig"){
+      const versteckt = typeof document !== "undefined" && document.visibilityState === "hidden";
+      if(geklappt && versteckt) setTimeout(()=>abgleichen(true), 0);
+      else { clearTimeout(syncNaechst); syncNaechst = setTimeout(()=>abgleichen(true), geklappt ? 20000 : 60000); }
+    }
   }
 }
 /* Nach dem Üben: 20 s nach der letzten Speicherung abgleichen, nicht nach jeder Antwort. */
@@ -10762,7 +10780,11 @@ function nachAbgleich(fn){
   return true;
 }
 function syncVormerken(){
-  if(syncLaeuft || typeof setTimeout !== "function" || !syncEinst()) return;
+  const e = syncEinst();
+  if(!e) return;
+  syncStand++;
+  if(!e.offen){ e.offen = true; syncEinstSetzen(e); syncHud(); }
+  if(syncLaeuft || typeof setTimeout !== "function") return;
   clearTimeout(syncNaechst);
   syncNaechst = setTimeout(()=>abgleichen(true), 20000);
 }
@@ -10772,7 +10794,7 @@ function syncHud(){
   h.hidden = !e;
   if(!e) return;
   const fehler = e.fehler && e.fehler !== "kein Netz";
-  h.textContent = syncLaeuft ? "⇅ …" : fehler ? "⇅ !" : "⇅";
+  h.textContent = syncLaeuft ? "⇅ …" : fehler ? "⇅ !" : e.offen ? "⇅ •" : "⇅";
   h.classList.toggle("warn", !!fehler);
   h.title = syncStatusText();
   h.setAttribute("aria-label", "Abgleich: " + syncStatusText());
@@ -10794,8 +10816,10 @@ function syncStatusText(){
   const e = syncEinst();
   if(!e) return "Nicht verbunden.";
   if(syncLaeuft) return "Gleicht gerade ab …";
-  if(e.fehler) return "Letzter Versuch fehlgeschlagen: " + e.fehler;
+  if(e.fehler === "kein Netz" && e.offen) return "Kein Netz. Deine letzten Antworten sind hier gespeichert und gehen raus, sobald wieder Netz da ist.";
+  if(e.fehler) return "Letzter Versuch fehlgeschlagen: " + e.fehler + (e.offen ? ". Neue Antworten sind hier gespeichert, der nächste Versuch folgt." : "");
   if(!e.zuletzt) return "Verbunden, noch nicht abgeglichen.";
+  if(e.offen) return "Neue Antworten warten auf den Abgleich (gleich, spätestens beim Wegblenden).";
   const d = new Date(e.zuletzt);
   return "Zuletzt abgeglichen: " + d.toLocaleDateString("de-DE") + ", " + d.toLocaleTimeString("de-DE", {hour:"2-digit", minute:"2-digit"}) + " Uhr.";
 }
@@ -11016,7 +11040,8 @@ function zurueckAusDemHintergrund(){
 document.addEventListener("visibilitychange", ()=>{
   if(document.visibilityState === "hidden"){
     verstecktSeit = Date.now();
-    if(syncNaechst){ clearTimeout(syncNaechst); syncNaechst = null; abgleichen(true); }
+    const e = syncEinst();
+    if(syncNaechst || (e && e.offen)){ clearTimeout(syncNaechst); syncNaechst = null; abgleichen(true); }
     return;
   }
   { const e = syncEinst(); if(e && Date.now() - (e.zuletzt||0) > 60000) abgleichen(true); }
@@ -11033,6 +11058,8 @@ window.addEventListener("focus", tagesWechsel);
 /* Eine unterbrochene Runde nicht verlieren */
 (function(){ if(sitzungOffen()){ go("karten"); } })();
 
+/* Kommt das Netz zurück, geht raus, was ohne Netz geübt wurde. */
+window.addEventListener("online", ()=>{ const e = syncEinst(); if(e && (e.offen || e.fehler)) abgleichen(true); });
 /* Abgleich beim Start — kurz verzögert, damit die App zuerst steht. */
 syncHud();
 abgleichen(true);

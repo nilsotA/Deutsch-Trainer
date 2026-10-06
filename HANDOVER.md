@@ -38,7 +38,7 @@ Die drei zuvor ungetesteten Textänderungen sind nachgeprüft und in der Datei.
 | Satzbaukarten | 24 |
 | Prüfmuster im Textcheck | 126 |
 | Fehlersuchtexte | 12 mit 87 markierten Fehlern |
-| Dateigröße | ~1035 KB, eine Datei, kein Build |
+| Dateigröße | ~1056 KB, eine Datei, kein Build |
 
 Sieben Reiter: Heute, Karten, Sätze, Formulieren, Schreiben, Regeln, Fortschritt.
 Dazu Einstufungstest, Wochen-Lernplan, Fehlerjournal, Textcheck für eigene Texte,
@@ -58,6 +58,12 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 - „Nur Fehler“-Runde für gezieltes Nacharbeiten
 
 ## Zuletzt geändert
+
+**Abgleich: nichts bleibt liegen (06.10.2026).** Eine Antwort, die während eines laufenden Uploads gespeichert
+wurde, blieb bis zum nächsten Start auf dem Gerät: `syncVormerken()` brach bei laufendem Abgleich ab. Jetzt zählt
+`syncStand` jede Speicherung, `offen` im Sync-Eintrag hält fest, was noch nicht oben ist, und der Abgleich holt nach —
+beim Wegblenden sofort, nach einem Fehler mit Netz in einer Minute, ohne Netz beim Ereignis `online`. Die Kopfzeile
+zeigt ⇅ •, solange etwas wartet. Geprüft in `tests/lernen.js`, Abschnitt O.
 
 **Kürzeres Vorlesen nach richtiger Antwort (06.10.2026).** Unterwegs liest die App nach einer richtigen
 Antwort nur „Richtig.“ und den ersten Satz der Erklärung (`ersterSatz()`): über alle Übungen im Mittel 115 statt
