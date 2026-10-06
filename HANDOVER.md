@@ -59,6 +59,14 @@ letzten Runden bestimmt und sollte auch weiter der Maßstab sein:
 
 ## Zuletzt geändert
 
+**Gegenprüfung aller 543 Übungen (04.–06.10.2026).** 28 Prüfer je 20 Übungen, jeder Fund von drei Gegnern
+(Quelle, Bestand, Lesart) angegriffen. 57 Funde; 21 hielten mit mindestens zwei Bestätigungen, 2 fielen. Bei 34 brach
+die Gegenprüfung am Nutzungslimit ab; die habe ich selbst gelesen und 27 eindeutige übernommen (zu absolute
+Erklärungen, fehlende Rahmen: n09, p19, m04, f12, q03; Tippfelder: r14 nimmt „ß“, n02/n03/n07 „unsern“,
+n15 „demselben“; s03 ohne das zweideutige „schon“; u18 ohne Anredelesart). Nicht übernommen: r02 (Ersatzprobe im
+Tippfeld), s02 (Handelnder), p06 („unnötig“), v08 (gekoppelt mit gram-kasusfinden), z24 (Regionalwächter),
+n01/n02 „euerm/euern“ (nicht nachgeschlagen). Keine richtige Antwort war falsch; NEU_GELERNT bleibt unberührt.
+
 **Tippaufgaben unterwegs als Auswahl (01.10.2026).** Unterwegs fehlten alle 45 Tippaufgaben — darunter Kernfälle
 wie „mit dem Rad“, „Kannst du mir helfen?“, „Der Kollege, dem ich geholfen habe“. 36 tragen jetzt `wo` (erste Option
 richtig, Ablenker sicher falsch) und kommen unterwegs als Auswahlfrage unter derselben Karte; `wq` ersetzt dort die
