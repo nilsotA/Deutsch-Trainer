@@ -38,7 +38,11 @@ abgleichen“ trägt Nils einmal je Gerät einen GitHub-Zugangsschlüssel (Recht
 hält dann eine Kopie des Lernstands in einem privaten Gist (`deutschtrainer-lernstand.json`) und
 gleicht beim Start, beim Zurückkehren und 20 s nach dem letzten Speichern ab. `standMischen()`
 führt Karte für Karte zusammen (jüngere Antwort `l` gewinnt, dann mehr Antworten `s`), vereinigt
-Tage, Fehlerprotokoll und Zähler. Gerätesache bleiben `session`, `speak`, `auto`, `theme`
+Tage, Fehlerprotokoll und Zähler. Am selben Tag gewinnt bei einer Karte das niedrigere Fach (ein Fehler
+zählt immer); Tagesantworten führt jedes Gerät in `days[t].g[gerät]` und `tagMischen()` addiert sie.
+Vor dem Bau einer Runde (`unterwegsRunde`, Tagesaufgabe) gleicht `nachAbgleich()` ab, wenn der letzte
+Abgleich älter als eine Minute ist (höchstens 4 s Warten). ⇅ in der Kopfzeile zeigt den Stand, ein
+Fehlschlag mit Netz bekommt eine Leiste. Gerätesache bleiben `session`, `speak`, `auto`, `theme`
 (`SYNC_GERAET`). Der Schlüssel liegt unter `deutschtrainer.sync`, nie im Lernstand und nie in
 einer Sicherungsdatei. Ohne Schlüssel oder Netz ändert sich nichts. Geprüft in `tests/lernen.js`,
 Abschnitt O, mit nachgebautem Gist.

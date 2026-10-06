@@ -1377,6 +1377,27 @@ P.titel("N · Rückkehr aus dem Hintergrund");
       okC === false && daten(C, "S.cards.k01.b") === 1 && /ungültig/.test(JSON.parse(C.localStorage.getItem("deutschtrainer.sync")).fehler || ""));
     const D = boot(leererStand({}));
     P.ok("ohne Schlüssel passiert nichts", await D.eval("abgleichen(true)") === false && posts === 1);
+
+    /* Am selben Tag auf beiden Geräten: Der Fehler (Fach 1) gewinnt, Antworten zählen mit. */
+    const E = boot(leererStand({}));
+    const k = daten(E, `karteNeuer({b:3,d:"${tag(7)}",s:4,w:0,l:"${heute}"}, {b:1,d:"${tag(1)}",s:3,w:2,l:"${heute}"})`);
+    P.ok("am selben Tag gewinnt die Karte mit dem Fehler", k.b === 1 && k.s === 4 && k.w === 2, JSON.stringify(k));
+    /* Tagesanteile je Gerät werden addiert, der Altbestand vor g zählt einmal. */
+    const t = daten(E, `tagMischen({a:9,c:7,t:9,done:false,g:{x:{a:5,c:4}}}, {a:11,c:8,t:11,done:false,g:{y:{a:7,c:5}}})`);
+    P.ok("Antworten zweier Geräte am selben Tag werden addiert", t.a === 16 && t.c === 12, JSON.stringify(t));
+    const t2 = daten(E, `tagMischen({a:5,c:4,g:{x:{a:5,c:4}}}, {a:5,c:4,g:{x:{a:5,c:4}}})`);
+    P.ok("… derselbe Anteil zählt nicht doppelt", t2.a === 5, JSON.stringify(t2));
+    /* Vor einer Runde: veralteter Abgleich → erst abgleichen, dann die Runde bauen. */
+    const F = geraet({});
+    F.localStorage.setItem("deutschtrainer.sync", JSON.stringify({ token: "geheim", zuletzt: 1 }));
+    let gerufen = 0;
+    F.__nach = () => { gerufen++; };
+    const wartet = F.eval("nachAbgleich(() => __nach())");
+    await new Promise(r => setTimeout(r, 50));
+    P.ok("ist der letzte Abgleich alt, wartet die Runde auf ihn", wartet === true && gerufen === 1 &&
+      Date.now() - JSON.parse(F.localStorage.getItem("deutschtrainer.sync")).zuletzt < 5000);
+    P.ok("… und beim zweiten Anlauf startet sie sofort", F.eval("nachAbgleich(() => __nach())") === false);
+    P.ok("ist er frisch, startet sie sofort", F.eval("nachAbgleich(() => __nach())") === false);
   }
 
   P.abschluss();
